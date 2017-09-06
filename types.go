@@ -16,6 +16,7 @@
 package ovirtsdk4
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -42594,11 +42595,19 @@ func (builder *ActionBuilder) Href(href string) *ActionBuilder {
 	builder.action.SetHref(href)
 	return builder
 }
+
 func (builder *ActionBuilder) Build() (*Action, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.action, nil
+}
+
+func (builder *ActionBuilder) MustBuild() *Action {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Action instance, reason: %v", builder.err))
+	}
+	return builder.action
 }
 
 type AffinityGroupBuilder struct {
@@ -42717,11 +42726,19 @@ func (builder *AffinityGroupBuilder) Href(href string) *AffinityGroupBuilder {
 	builder.affinityGroup.SetHref(href)
 	return builder
 }
+
 func (builder *AffinityGroupBuilder) Build() (*AffinityGroup, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.affinityGroup, nil
+}
+
+func (builder *AffinityGroupBuilder) MustBuild() *AffinityGroup {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build AffinityGroup instance, reason: %v", builder.err))
+	}
+	return builder.affinityGroup
 }
 
 type AffinityLabelBuilder struct {
@@ -42804,11 +42821,19 @@ func (builder *AffinityLabelBuilder) Href(href string) *AffinityLabelBuilder {
 	builder.affinityLabel.SetHref(href)
 	return builder
 }
+
 func (builder *AffinityLabelBuilder) Build() (*AffinityLabel, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.affinityLabel, nil
+}
+
+func (builder *AffinityLabelBuilder) MustBuild() *AffinityLabel {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build AffinityLabel instance, reason: %v", builder.err))
+	}
+	return builder.affinityLabel
 }
 
 type AffinityRuleBuilder struct {
@@ -42855,11 +42880,19 @@ func (builder *AffinityRuleBuilder) Href(href string) *AffinityRuleBuilder {
 	builder.affinityRule.SetHref(href)
 	return builder
 }
+
 func (builder *AffinityRuleBuilder) Build() (*AffinityRule, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.affinityRule, nil
+}
+
+func (builder *AffinityRuleBuilder) MustBuild() *AffinityRule {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build AffinityRule instance, reason: %v", builder.err))
+	}
+	return builder.affinityRule
 }
 
 type AgentBuilder struct {
@@ -43005,11 +43038,19 @@ func (builder *AgentBuilder) Href(href string) *AgentBuilder {
 	builder.agent.SetHref(href)
 	return builder
 }
+
 func (builder *AgentBuilder) Build() (*Agent, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.agent, nil
+}
+
+func (builder *AgentBuilder) MustBuild() *Agent {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Agent instance, reason: %v", builder.err))
+	}
+	return builder.agent
 }
 
 type AgentConfigurationBuilder struct {
@@ -43083,11 +43124,19 @@ func (builder *AgentConfigurationBuilder) Href(href string) *AgentConfigurationB
 	builder.agentConfiguration.SetHref(href)
 	return builder
 }
+
 func (builder *AgentConfigurationBuilder) Build() (*AgentConfiguration, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.agentConfiguration, nil
+}
+
+func (builder *AgentConfigurationBuilder) MustBuild() *AgentConfiguration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build AgentConfiguration instance, reason: %v", builder.err))
+	}
+	return builder.agentConfiguration
 }
 
 type ApiBuilder struct {
@@ -43143,11 +43192,19 @@ func (builder *ApiBuilder) Href(href string) *ApiBuilder {
 	builder.api.SetHref(href)
 	return builder
 }
+
 func (builder *ApiBuilder) Build() (*Api, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.api, nil
+}
+
+func (builder *ApiBuilder) MustBuild() *Api {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Api instance, reason: %v", builder.err))
+	}
+	return builder.api
 }
 
 type ApiSummaryBuilder struct {
@@ -43203,11 +43260,19 @@ func (builder *ApiSummaryBuilder) Href(href string) *ApiSummaryBuilder {
 	builder.apiSummary.SetHref(href)
 	return builder
 }
+
 func (builder *ApiSummaryBuilder) Build() (*ApiSummary, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.apiSummary, nil
+}
+
+func (builder *ApiSummaryBuilder) MustBuild() *ApiSummary {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ApiSummary instance, reason: %v", builder.err))
+	}
+	return builder.apiSummary
 }
 
 type ApiSummaryItemBuilder struct {
@@ -43245,11 +43310,19 @@ func (builder *ApiSummaryItemBuilder) Href(href string) *ApiSummaryItemBuilder {
 	builder.apiSummaryItem.SetHref(href)
 	return builder
 }
+
 func (builder *ApiSummaryItemBuilder) Build() (*ApiSummaryItem, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.apiSummaryItem, nil
+}
+
+func (builder *ApiSummaryItemBuilder) MustBuild() *ApiSummaryItem {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ApiSummaryItem instance, reason: %v", builder.err))
+	}
+	return builder.apiSummaryItem
 }
 
 type ApplicationBuilder struct {
@@ -43314,11 +43387,19 @@ func (builder *ApplicationBuilder) Href(href string) *ApplicationBuilder {
 	builder.application.SetHref(href)
 	return builder
 }
+
 func (builder *ApplicationBuilder) Build() (*Application, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.application, nil
+}
+
+func (builder *ApplicationBuilder) MustBuild() *Application {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Application instance, reason: %v", builder.err))
+	}
+	return builder.application
 }
 
 type AuthorizedKeyBuilder struct {
@@ -43392,11 +43473,19 @@ func (builder *AuthorizedKeyBuilder) Href(href string) *AuthorizedKeyBuilder {
 	builder.authorizedKey.SetHref(href)
 	return builder
 }
+
 func (builder *AuthorizedKeyBuilder) Build() (*AuthorizedKey, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.authorizedKey, nil
+}
+
+func (builder *AuthorizedKeyBuilder) MustBuild() *AuthorizedKey {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build AuthorizedKey instance, reason: %v", builder.err))
+	}
+	return builder.authorizedKey
 }
 
 type BalanceBuilder struct {
@@ -43470,11 +43559,19 @@ func (builder *BalanceBuilder) Href(href string) *BalanceBuilder {
 	builder.balance.SetHref(href)
 	return builder
 }
+
 func (builder *BalanceBuilder) Build() (*Balance, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.balance, nil
+}
+
+func (builder *BalanceBuilder) MustBuild() *Balance {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Balance instance, reason: %v", builder.err))
+	}
+	return builder.balance
 }
 
 type BiosBuilder struct {
@@ -43503,11 +43600,19 @@ func (builder *BiosBuilder) Href(href string) *BiosBuilder {
 	builder.bios.SetHref(href)
 	return builder
 }
+
 func (builder *BiosBuilder) Build() (*Bios, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.bios, nil
+}
+
+func (builder *BiosBuilder) MustBuild() *Bios {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Bios instance, reason: %v", builder.err))
+	}
+	return builder.bios
 }
 
 type BlockStatisticBuilder struct {
@@ -43536,11 +43641,19 @@ func (builder *BlockStatisticBuilder) Href(href string) *BlockStatisticBuilder {
 	builder.blockStatistic.SetHref(href)
 	return builder
 }
+
 func (builder *BlockStatisticBuilder) Build() (*BlockStatistic, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.blockStatistic, nil
+}
+
+func (builder *BlockStatisticBuilder) MustBuild() *BlockStatistic {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build BlockStatistic instance, reason: %v", builder.err))
+	}
+	return builder.blockStatistic
 }
 
 type BondingBuilder struct {
@@ -43596,11 +43709,19 @@ func (builder *BondingBuilder) Href(href string) *BondingBuilder {
 	builder.bonding.SetHref(href)
 	return builder
 }
+
 func (builder *BondingBuilder) Build() (*Bonding, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.bonding, nil
+}
+
+func (builder *BondingBuilder) MustBuild() *Bonding {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Bonding instance, reason: %v", builder.err))
+	}
+	return builder.bonding
 }
 
 type BookmarkBuilder struct {
@@ -43665,11 +43786,19 @@ func (builder *BookmarkBuilder) Href(href string) *BookmarkBuilder {
 	builder.bookmark.SetHref(href)
 	return builder
 }
+
 func (builder *BookmarkBuilder) Build() (*Bookmark, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.bookmark, nil
+}
+
+func (builder *BookmarkBuilder) MustBuild() *Bookmark {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Bookmark instance, reason: %v", builder.err))
+	}
+	return builder.bookmark
 }
 
 type BootBuilder struct {
@@ -43698,11 +43827,19 @@ func (builder *BootBuilder) Href(href string) *BootBuilder {
 	builder.boot.SetHref(href)
 	return builder
 }
+
 func (builder *BootBuilder) Build() (*Boot, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.boot, nil
+}
+
+func (builder *BootBuilder) MustBuild() *Boot {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Boot instance, reason: %v", builder.err))
+	}
+	return builder.boot
 }
 
 type BootMenuBuilder struct {
@@ -43731,11 +43868,19 @@ func (builder *BootMenuBuilder) Href(href string) *BootMenuBuilder {
 	builder.bootMenu.SetHref(href)
 	return builder
 }
+
 func (builder *BootMenuBuilder) Build() (*BootMenu, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.bootMenu, nil
+}
+
+func (builder *BootMenuBuilder) MustBuild() *BootMenu {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build BootMenu instance, reason: %v", builder.err))
+	}
+	return builder.bootMenu
 }
 
 type BrickProfileDetailBuilder struct {
@@ -43773,11 +43918,19 @@ func (builder *BrickProfileDetailBuilder) Href(href string) *BrickProfileDetailB
 	builder.brickProfileDetail.SetHref(href)
 	return builder
 }
+
 func (builder *BrickProfileDetailBuilder) Build() (*BrickProfileDetail, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.brickProfileDetail, nil
+}
+
+func (builder *BrickProfileDetailBuilder) MustBuild() *BrickProfileDetail {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build BrickProfileDetail instance, reason: %v", builder.err))
+	}
+	return builder.brickProfileDetail
 }
 
 type CdromBuilder struct {
@@ -43878,11 +44031,19 @@ func (builder *CdromBuilder) Href(href string) *CdromBuilder {
 	builder.cdrom.SetHref(href)
 	return builder
 }
+
 func (builder *CdromBuilder) Build() (*Cdrom, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.cdrom, nil
+}
+
+func (builder *CdromBuilder) MustBuild() *Cdrom {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Cdrom instance, reason: %v", builder.err))
+	}
+	return builder.cdrom
 }
 
 type CertificateBuilder struct {
@@ -43965,11 +44126,19 @@ func (builder *CertificateBuilder) Href(href string) *CertificateBuilder {
 	builder.certificate.SetHref(href)
 	return builder
 }
+
 func (builder *CertificateBuilder) Build() (*Certificate, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.certificate, nil
+}
+
+func (builder *CertificateBuilder) MustBuild() *Certificate {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Certificate instance, reason: %v", builder.err))
+	}
+	return builder.certificate
 }
 
 type CloudInitBuilder struct {
@@ -44052,11 +44221,19 @@ func (builder *CloudInitBuilder) Href(href string) *CloudInitBuilder {
 	builder.cloudInit.SetHref(href)
 	return builder
 }
+
 func (builder *CloudInitBuilder) Build() (*CloudInit, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.cloudInit, nil
+}
+
+func (builder *CloudInitBuilder) MustBuild() *CloudInit {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build CloudInit instance, reason: %v", builder.err))
+	}
+	return builder.cloudInit
 }
 
 type ClusterBuilder struct {
@@ -44418,11 +44595,19 @@ func (builder *ClusterBuilder) Href(href string) *ClusterBuilder {
 	builder.cluster.SetHref(href)
 	return builder
 }
+
 func (builder *ClusterBuilder) Build() (*Cluster, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.cluster, nil
+}
+
+func (builder *ClusterBuilder) MustBuild() *Cluster {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Cluster instance, reason: %v", builder.err))
+	}
+	return builder.cluster
 }
 
 type ClusterLevelBuilder struct {
@@ -44496,11 +44681,19 @@ func (builder *ClusterLevelBuilder) Href(href string) *ClusterLevelBuilder {
 	builder.clusterLevel.SetHref(href)
 	return builder
 }
+
 func (builder *ClusterLevelBuilder) Build() (*ClusterLevel, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.clusterLevel, nil
+}
+
+func (builder *ClusterLevelBuilder) MustBuild() *ClusterLevel {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ClusterLevel instance, reason: %v", builder.err))
+	}
+	return builder.clusterLevel
 }
 
 type ConfigurationBuilder struct {
@@ -44538,11 +44731,19 @@ func (builder *ConfigurationBuilder) Href(href string) *ConfigurationBuilder {
 	builder.configuration.SetHref(href)
 	return builder
 }
+
 func (builder *ConfigurationBuilder) Build() (*Configuration, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.configuration, nil
+}
+
+func (builder *ConfigurationBuilder) MustBuild() *Configuration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Configuration instance, reason: %v", builder.err))
+	}
+	return builder.configuration
 }
 
 type ConsoleBuilder struct {
@@ -44571,11 +44772,19 @@ func (builder *ConsoleBuilder) Href(href string) *ConsoleBuilder {
 	builder.console.SetHref(href)
 	return builder
 }
+
 func (builder *ConsoleBuilder) Build() (*Console, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.console, nil
+}
+
+func (builder *ConsoleBuilder) MustBuild() *Console {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Console instance, reason: %v", builder.err))
+	}
+	return builder.console
 }
 
 type CoreBuilder struct {
@@ -44613,11 +44822,19 @@ func (builder *CoreBuilder) Href(href string) *CoreBuilder {
 	builder.core.SetHref(href)
 	return builder
 }
+
 func (builder *CoreBuilder) Build() (*Core, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.core, nil
+}
+
+func (builder *CoreBuilder) MustBuild() *Core {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Core instance, reason: %v", builder.err))
+	}
+	return builder.core
 }
 
 type CpuBuilder struct {
@@ -44718,11 +44935,19 @@ func (builder *CpuBuilder) Href(href string) *CpuBuilder {
 	builder.cpu.SetHref(href)
 	return builder
 }
+
 func (builder *CpuBuilder) Build() (*Cpu, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.cpu, nil
+}
+
+func (builder *CpuBuilder) MustBuild() *Cpu {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Cpu instance, reason: %v", builder.err))
+	}
+	return builder.cpu
 }
 
 type CpuProfileBuilder struct {
@@ -44805,11 +45030,19 @@ func (builder *CpuProfileBuilder) Href(href string) *CpuProfileBuilder {
 	builder.cpuProfile.SetHref(href)
 	return builder
 }
+
 func (builder *CpuProfileBuilder) Build() (*CpuProfile, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.cpuProfile, nil
+}
+
+func (builder *CpuProfileBuilder) MustBuild() *CpuProfile {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build CpuProfile instance, reason: %v", builder.err))
+	}
+	return builder.cpuProfile
 }
 
 type CpuTopologyBuilder struct {
@@ -44856,11 +45089,19 @@ func (builder *CpuTopologyBuilder) Href(href string) *CpuTopologyBuilder {
 	builder.cpuTopology.SetHref(href)
 	return builder
 }
+
 func (builder *CpuTopologyBuilder) Build() (*CpuTopology, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.cpuTopology, nil
+}
+
+func (builder *CpuTopologyBuilder) MustBuild() *CpuTopology {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build CpuTopology instance, reason: %v", builder.err))
+	}
+	return builder.cpuTopology
 }
 
 type CpuTuneBuilder struct {
@@ -44889,11 +45130,19 @@ func (builder *CpuTuneBuilder) Href(href string) *CpuTuneBuilder {
 	builder.cpuTune.SetHref(href)
 	return builder
 }
+
 func (builder *CpuTuneBuilder) Build() (*CpuTune, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.cpuTune, nil
+}
+
+func (builder *CpuTuneBuilder) MustBuild() *CpuTune {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build CpuTune instance, reason: %v", builder.err))
+	}
+	return builder.cpuTune
 }
 
 type CpuTypeBuilder struct {
@@ -44940,11 +45189,19 @@ func (builder *CpuTypeBuilder) Href(href string) *CpuTypeBuilder {
 	builder.cpuType.SetHref(href)
 	return builder
 }
+
 func (builder *CpuTypeBuilder) Build() (*CpuType, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.cpuType, nil
+}
+
+func (builder *CpuTypeBuilder) MustBuild() *CpuType {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build CpuType instance, reason: %v", builder.err))
+	}
+	return builder.cpuType
 }
 
 type CustomPropertyBuilder struct {
@@ -44991,11 +45248,19 @@ func (builder *CustomPropertyBuilder) Href(href string) *CustomPropertyBuilder {
 	builder.customProperty.SetHref(href)
 	return builder
 }
+
 func (builder *CustomPropertyBuilder) Build() (*CustomProperty, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.customProperty, nil
+}
+
+func (builder *CustomPropertyBuilder) MustBuild() *CustomProperty {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build CustomProperty instance, reason: %v", builder.err))
+	}
+	return builder.customProperty
 }
 
 type DataCenterBuilder struct {
@@ -45177,11 +45442,19 @@ func (builder *DataCenterBuilder) Href(href string) *DataCenterBuilder {
 	builder.dataCenter.SetHref(href)
 	return builder
 }
+
 func (builder *DataCenterBuilder) Build() (*DataCenter, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.dataCenter, nil
+}
+
+func (builder *DataCenterBuilder) MustBuild() *DataCenter {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build DataCenter instance, reason: %v", builder.err))
+	}
+	return builder.dataCenter
 }
 
 type DeviceBuilder struct {
@@ -45273,11 +45546,19 @@ func (builder *DeviceBuilder) Href(href string) *DeviceBuilder {
 	builder.device.SetHref(href)
 	return builder
 }
+
 func (builder *DeviceBuilder) Build() (*Device, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.device, nil
+}
+
+func (builder *DeviceBuilder) MustBuild() *Device {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Device instance, reason: %v", builder.err))
+	}
+	return builder.device
 }
 
 type DiskBuilder struct {
@@ -45630,11 +45911,19 @@ func (builder *DiskBuilder) Href(href string) *DiskBuilder {
 	builder.disk.SetHref(href)
 	return builder
 }
+
 func (builder *DiskBuilder) Build() (*Disk, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.disk, nil
+}
+
+func (builder *DiskBuilder) MustBuild() *Disk {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Disk instance, reason: %v", builder.err))
+	}
+	return builder.disk
 }
 
 type DiskAttachmentBuilder struct {
@@ -45771,11 +46060,19 @@ func (builder *DiskAttachmentBuilder) Href(href string) *DiskAttachmentBuilder {
 	builder.diskAttachment.SetHref(href)
 	return builder
 }
+
 func (builder *DiskAttachmentBuilder) Build() (*DiskAttachment, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.diskAttachment, nil
+}
+
+func (builder *DiskAttachmentBuilder) MustBuild() *DiskAttachment {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build DiskAttachment instance, reason: %v", builder.err))
+	}
+	return builder.diskAttachment
 }
 
 type DiskProfileBuilder struct {
@@ -45858,11 +46155,19 @@ func (builder *DiskProfileBuilder) Href(href string) *DiskProfileBuilder {
 	builder.diskProfile.SetHref(href)
 	return builder
 }
+
 func (builder *DiskProfileBuilder) Build() (*DiskProfile, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.diskProfile, nil
+}
+
+func (builder *DiskProfileBuilder) MustBuild() *DiskProfile {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build DiskProfile instance, reason: %v", builder.err))
+	}
+	return builder.diskProfile
 }
 
 type DiskSnapshotBuilder struct {
@@ -46224,11 +46529,19 @@ func (builder *DiskSnapshotBuilder) Href(href string) *DiskSnapshotBuilder {
 	builder.diskSnapshot.SetHref(href)
 	return builder
 }
+
 func (builder *DiskSnapshotBuilder) Build() (*DiskSnapshot, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.diskSnapshot, nil
+}
+
+func (builder *DiskSnapshotBuilder) MustBuild() *DiskSnapshot {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build DiskSnapshot instance, reason: %v", builder.err))
+	}
+	return builder.diskSnapshot
 }
 
 type DisplayBuilder struct {
@@ -46374,11 +46687,19 @@ func (builder *DisplayBuilder) Href(href string) *DisplayBuilder {
 	builder.display.SetHref(href)
 	return builder
 }
+
 func (builder *DisplayBuilder) Build() (*Display, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.display, nil
+}
+
+func (builder *DisplayBuilder) MustBuild() *Display {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Display instance, reason: %v", builder.err))
+	}
+	return builder.display
 }
 
 type DnsBuilder struct {
@@ -46416,11 +46737,19 @@ func (builder *DnsBuilder) Href(href string) *DnsBuilder {
 	builder.dns.SetHref(href)
 	return builder
 }
+
 func (builder *DnsBuilder) Build() (*Dns, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.dns, nil
+}
+
+func (builder *DnsBuilder) MustBuild() *Dns {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Dns instance, reason: %v", builder.err))
+	}
+	return builder.dns
 }
 
 type DnsResolverConfigurationBuilder struct {
@@ -46449,11 +46778,19 @@ func (builder *DnsResolverConfigurationBuilder) Href(href string) *DnsResolverCo
 	builder.dnsResolverConfiguration.SetHref(href)
 	return builder
 }
+
 func (builder *DnsResolverConfigurationBuilder) Build() (*DnsResolverConfiguration, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.dnsResolverConfiguration, nil
+}
+
+func (builder *DnsResolverConfigurationBuilder) MustBuild() *DnsResolverConfiguration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build DnsResolverConfiguration instance, reason: %v", builder.err))
+	}
+	return builder.dnsResolverConfiguration
 }
 
 type DomainBuilder struct {
@@ -46536,11 +46873,19 @@ func (builder *DomainBuilder) Href(href string) *DomainBuilder {
 	builder.domain.SetHref(href)
 	return builder
 }
+
 func (builder *DomainBuilder) Build() (*Domain, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.domain, nil
+}
+
+func (builder *DomainBuilder) MustBuild() *Domain {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Domain instance, reason: %v", builder.err))
+	}
+	return builder.domain
 }
 
 type EntityProfileDetailBuilder struct {
@@ -46569,11 +46914,19 @@ func (builder *EntityProfileDetailBuilder) Href(href string) *EntityProfileDetai
 	builder.entityProfileDetail.SetHref(href)
 	return builder
 }
+
 func (builder *EntityProfileDetailBuilder) Build() (*EntityProfileDetail, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.entityProfileDetail, nil
+}
+
+func (builder *EntityProfileDetailBuilder) MustBuild() *EntityProfileDetail {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build EntityProfileDetail instance, reason: %v", builder.err))
+	}
+	return builder.entityProfileDetail
 }
 
 type ErrorHandlingBuilder struct {
@@ -46602,11 +46955,19 @@ func (builder *ErrorHandlingBuilder) Href(href string) *ErrorHandlingBuilder {
 	builder.errorHandling.SetHref(href)
 	return builder
 }
+
 func (builder *ErrorHandlingBuilder) Build() (*ErrorHandling, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.errorHandling, nil
+}
+
+func (builder *ErrorHandlingBuilder) MustBuild() *ErrorHandling {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ErrorHandling instance, reason: %v", builder.err))
+	}
+	return builder.errorHandling
 }
 
 type EventBuilder struct {
@@ -46797,11 +47158,19 @@ func (builder *EventBuilder) Href(href string) *EventBuilder {
 	builder.event.SetHref(href)
 	return builder
 }
+
 func (builder *EventBuilder) Build() (*Event, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.event, nil
+}
+
+func (builder *EventBuilder) MustBuild() *Event {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Event instance, reason: %v", builder.err))
+	}
+	return builder.event
 }
 
 type ExternalComputeResourceBuilder struct {
@@ -46893,11 +47262,19 @@ func (builder *ExternalComputeResourceBuilder) Href(href string) *ExternalComput
 	builder.externalComputeResource.SetHref(href)
 	return builder
 }
+
 func (builder *ExternalComputeResourceBuilder) Build() (*ExternalComputeResource, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.externalComputeResource, nil
+}
+
+func (builder *ExternalComputeResourceBuilder) MustBuild() *ExternalComputeResource {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalComputeResource instance, reason: %v", builder.err))
+	}
+	return builder.externalComputeResource
 }
 
 type ExternalDiscoveredHostBuilder struct {
@@ -46998,11 +47375,19 @@ func (builder *ExternalDiscoveredHostBuilder) Href(href string) *ExternalDiscove
 	builder.externalDiscoveredHost.SetHref(href)
 	return builder
 }
+
 func (builder *ExternalDiscoveredHostBuilder) Build() (*ExternalDiscoveredHost, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.externalDiscoveredHost, nil
+}
+
+func (builder *ExternalDiscoveredHostBuilder) MustBuild() *ExternalDiscoveredHost {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalDiscoveredHost instance, reason: %v", builder.err))
+	}
+	return builder.externalDiscoveredHost
 }
 
 type ExternalHostBuilder struct {
@@ -47076,11 +47461,19 @@ func (builder *ExternalHostBuilder) Href(href string) *ExternalHostBuilder {
 	builder.externalHost.SetHref(href)
 	return builder
 }
+
 func (builder *ExternalHostBuilder) Build() (*ExternalHost, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.externalHost, nil
+}
+
+func (builder *ExternalHostBuilder) MustBuild() *ExternalHost {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalHost instance, reason: %v", builder.err))
+	}
+	return builder.externalHost
 }
 
 type ExternalHostGroupBuilder struct {
@@ -47181,11 +47574,19 @@ func (builder *ExternalHostGroupBuilder) Href(href string) *ExternalHostGroupBui
 	builder.externalHostGroup.SetHref(href)
 	return builder
 }
+
 func (builder *ExternalHostGroupBuilder) Build() (*ExternalHostGroup, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.externalHostGroup, nil
+}
+
+func (builder *ExternalHostGroupBuilder) MustBuild() *ExternalHostGroup {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalHostGroup instance, reason: %v", builder.err))
+	}
+	return builder.externalHostGroup
 }
 
 type ExternalHostProviderBuilder struct {
@@ -47340,11 +47741,19 @@ func (builder *ExternalHostProviderBuilder) Href(href string) *ExternalHostProvi
 	builder.externalHostProvider.SetHref(href)
 	return builder
 }
+
 func (builder *ExternalHostProviderBuilder) Build() (*ExternalHostProvider, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.externalHostProvider, nil
+}
+
+func (builder *ExternalHostProviderBuilder) MustBuild() *ExternalHostProvider {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalHostProvider instance, reason: %v", builder.err))
+	}
+	return builder.externalHostProvider
 }
 
 type ExternalProviderBuilder struct {
@@ -47454,11 +47863,19 @@ func (builder *ExternalProviderBuilder) Href(href string) *ExternalProviderBuild
 	builder.externalProvider.SetHref(href)
 	return builder
 }
+
 func (builder *ExternalProviderBuilder) Build() (*ExternalProvider, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.externalProvider, nil
+}
+
+func (builder *ExternalProviderBuilder) MustBuild() *ExternalProvider {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalProvider instance, reason: %v", builder.err))
+	}
+	return builder.externalProvider
 }
 
 type ExternalVmImportBuilder struct {
@@ -47595,11 +48012,19 @@ func (builder *ExternalVmImportBuilder) Href(href string) *ExternalVmImportBuild
 	builder.externalVmImport.SetHref(href)
 	return builder
 }
+
 func (builder *ExternalVmImportBuilder) Build() (*ExternalVmImport, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.externalVmImport, nil
+}
+
+func (builder *ExternalVmImportBuilder) MustBuild() *ExternalVmImport {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalVmImport instance, reason: %v", builder.err))
+	}
+	return builder.externalVmImport
 }
 
 type FaultBuilder struct {
@@ -47637,11 +48062,19 @@ func (builder *FaultBuilder) Href(href string) *FaultBuilder {
 	builder.fault.SetHref(href)
 	return builder
 }
+
 func (builder *FaultBuilder) Build() (*Fault, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.fault, nil
+}
+
+func (builder *FaultBuilder) MustBuild() *Fault {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Fault instance, reason: %v", builder.err))
+	}
+	return builder.fault
 }
 
 type FencingPolicyBuilder struct {
@@ -47706,11 +48139,19 @@ func (builder *FencingPolicyBuilder) Href(href string) *FencingPolicyBuilder {
 	builder.fencingPolicy.SetHref(href)
 	return builder
 }
+
 func (builder *FencingPolicyBuilder) Build() (*FencingPolicy, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.fencingPolicy, nil
+}
+
+func (builder *FencingPolicyBuilder) MustBuild() *FencingPolicy {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build FencingPolicy instance, reason: %v", builder.err))
+	}
+	return builder.fencingPolicy
 }
 
 type FileBuilder struct {
@@ -47793,11 +48234,19 @@ func (builder *FileBuilder) Href(href string) *FileBuilder {
 	builder.file.SetHref(href)
 	return builder
 }
+
 func (builder *FileBuilder) Build() (*File, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.file, nil
+}
+
+func (builder *FileBuilder) MustBuild() *File {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build File instance, reason: %v", builder.err))
+	}
+	return builder.file
 }
 
 type FilterBuilder struct {
@@ -47871,11 +48320,19 @@ func (builder *FilterBuilder) Href(href string) *FilterBuilder {
 	builder.filter.SetHref(href)
 	return builder
 }
+
 func (builder *FilterBuilder) Build() (*Filter, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.filter, nil
+}
+
+func (builder *FilterBuilder) MustBuild() *Filter {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Filter instance, reason: %v", builder.err))
+	}
+	return builder.filter
 }
 
 type FloppyBuilder struct {
@@ -47976,11 +48433,19 @@ func (builder *FloppyBuilder) Href(href string) *FloppyBuilder {
 	builder.floppy.SetHref(href)
 	return builder
 }
+
 func (builder *FloppyBuilder) Build() (*Floppy, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.floppy, nil
+}
+
+func (builder *FloppyBuilder) MustBuild() *Floppy {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Floppy instance, reason: %v", builder.err))
+	}
+	return builder.floppy
 }
 
 type FopStatisticBuilder struct {
@@ -48018,11 +48483,19 @@ func (builder *FopStatisticBuilder) Href(href string) *FopStatisticBuilder {
 	builder.fopStatistic.SetHref(href)
 	return builder
 }
+
 func (builder *FopStatisticBuilder) Build() (*FopStatistic, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.fopStatistic, nil
+}
+
+func (builder *FopStatisticBuilder) MustBuild() *FopStatistic {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build FopStatistic instance, reason: %v", builder.err))
+	}
+	return builder.fopStatistic
 }
 
 type GlusterBrickBuilder struct {
@@ -48222,11 +48695,19 @@ func (builder *GlusterBrickBuilder) Href(href string) *GlusterBrickBuilder {
 	builder.glusterBrick.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterBrickBuilder) Build() (*GlusterBrick, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterBrick, nil
+}
+
+func (builder *GlusterBrickBuilder) MustBuild() *GlusterBrick {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterBrick instance, reason: %v", builder.err))
+	}
+	return builder.glusterBrick
 }
 
 type GlusterBrickAdvancedDetailsBuilder struct {
@@ -48381,11 +48862,19 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) Href(href string) *GlusterBri
 	builder.glusterBrickAdvancedDetails.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterBrickAdvancedDetailsBuilder) Build() (*GlusterBrickAdvancedDetails, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterBrickAdvancedDetails, nil
+}
+
+func (builder *GlusterBrickAdvancedDetailsBuilder) MustBuild() *GlusterBrickAdvancedDetails {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterBrickAdvancedDetails instance, reason: %v", builder.err))
+	}
+	return builder.glusterBrickAdvancedDetails
 }
 
 type GlusterBrickMemoryInfoBuilder struct {
@@ -48414,11 +48903,19 @@ func (builder *GlusterBrickMemoryInfoBuilder) Href(href string) *GlusterBrickMem
 	builder.glusterBrickMemoryInfo.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterBrickMemoryInfoBuilder) Build() (*GlusterBrickMemoryInfo, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterBrickMemoryInfo, nil
+}
+
+func (builder *GlusterBrickMemoryInfoBuilder) MustBuild() *GlusterBrickMemoryInfo {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterBrickMemoryInfo instance, reason: %v", builder.err))
+	}
+	return builder.glusterBrickMemoryInfo
 }
 
 type GlusterClientBuilder struct {
@@ -48474,11 +48971,19 @@ func (builder *GlusterClientBuilder) Href(href string) *GlusterClientBuilder {
 	builder.glusterClient.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterClientBuilder) Build() (*GlusterClient, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterClient, nil
+}
+
+func (builder *GlusterClientBuilder) MustBuild() *GlusterClient {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterClient instance, reason: %v", builder.err))
+	}
+	return builder.glusterClient
 }
 
 type GlusterHookBuilder struct {
@@ -48624,11 +49129,19 @@ func (builder *GlusterHookBuilder) Href(href string) *GlusterHookBuilder {
 	builder.glusterHook.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterHookBuilder) Build() (*GlusterHook, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterHook, nil
+}
+
+func (builder *GlusterHookBuilder) MustBuild() *GlusterHook {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterHook instance, reason: %v", builder.err))
+	}
+	return builder.glusterHook
 }
 
 type GlusterMemoryPoolBuilder struct {
@@ -48756,11 +49269,19 @@ func (builder *GlusterMemoryPoolBuilder) Href(href string) *GlusterMemoryPoolBui
 	builder.glusterMemoryPool.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterMemoryPoolBuilder) Build() (*GlusterMemoryPool, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterMemoryPool, nil
+}
+
+func (builder *GlusterMemoryPoolBuilder) MustBuild() *GlusterMemoryPool {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterMemoryPool instance, reason: %v", builder.err))
+	}
+	return builder.glusterMemoryPool
 }
 
 type GlusterServerHookBuilder struct {
@@ -48852,11 +49373,19 @@ func (builder *GlusterServerHookBuilder) Href(href string) *GlusterServerHookBui
 	builder.glusterServerHook.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterServerHookBuilder) Build() (*GlusterServerHook, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterServerHook, nil
+}
+
+func (builder *GlusterServerHookBuilder) MustBuild() *GlusterServerHook {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterServerHook instance, reason: %v", builder.err))
+	}
+	return builder.glusterServerHook
 }
 
 type GlusterVolumeBuilder struct {
@@ -49011,11 +49540,19 @@ func (builder *GlusterVolumeBuilder) Href(href string) *GlusterVolumeBuilder {
 	builder.glusterVolume.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterVolumeBuilder) Build() (*GlusterVolume, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterVolume, nil
+}
+
+func (builder *GlusterVolumeBuilder) MustBuild() *GlusterVolume {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterVolume instance, reason: %v", builder.err))
+	}
+	return builder.glusterVolume
 }
 
 type GlusterVolumeProfileDetailsBuilder struct {
@@ -49089,11 +49626,19 @@ func (builder *GlusterVolumeProfileDetailsBuilder) Href(href string) *GlusterVol
 	builder.glusterVolumeProfileDetails.SetHref(href)
 	return builder
 }
+
 func (builder *GlusterVolumeProfileDetailsBuilder) Build() (*GlusterVolumeProfileDetails, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.glusterVolumeProfileDetails, nil
+}
+
+func (builder *GlusterVolumeProfileDetailsBuilder) MustBuild() *GlusterVolumeProfileDetails {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GlusterVolumeProfileDetails instance, reason: %v", builder.err))
+	}
+	return builder.glusterVolumeProfileDetails
 }
 
 type GracePeriodBuilder struct {
@@ -49122,11 +49667,19 @@ func (builder *GracePeriodBuilder) Href(href string) *GracePeriodBuilder {
 	builder.gracePeriod.SetHref(href)
 	return builder
 }
+
 func (builder *GracePeriodBuilder) Build() (*GracePeriod, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.gracePeriod, nil
+}
+
+func (builder *GracePeriodBuilder) MustBuild() *GracePeriod {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GracePeriod instance, reason: %v", builder.err))
+	}
+	return builder.gracePeriod
 }
 
 type GraphicsConsoleBuilder struct {
@@ -49245,11 +49798,19 @@ func (builder *GraphicsConsoleBuilder) Href(href string) *GraphicsConsoleBuilder
 	builder.graphicsConsole.SetHref(href)
 	return builder
 }
+
 func (builder *GraphicsConsoleBuilder) Build() (*GraphicsConsole, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.graphicsConsole, nil
+}
+
+func (builder *GraphicsConsoleBuilder) MustBuild() *GraphicsConsole {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GraphicsConsole instance, reason: %v", builder.err))
+	}
+	return builder.graphicsConsole
 }
 
 type GroupBuilder struct {
@@ -49359,11 +49920,19 @@ func (builder *GroupBuilder) Href(href string) *GroupBuilder {
 	builder.group.SetHref(href)
 	return builder
 }
+
 func (builder *GroupBuilder) Build() (*Group, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.group, nil
+}
+
+func (builder *GroupBuilder) MustBuild() *Group {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Group instance, reason: %v", builder.err))
+	}
+	return builder.group
 }
 
 type GuestOperatingSystemBuilder struct {
@@ -49437,11 +50006,19 @@ func (builder *GuestOperatingSystemBuilder) Href(href string) *GuestOperatingSys
 	builder.guestOperatingSystem.SetHref(href)
 	return builder
 }
+
 func (builder *GuestOperatingSystemBuilder) Build() (*GuestOperatingSystem, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.guestOperatingSystem, nil
+}
+
+func (builder *GuestOperatingSystemBuilder) MustBuild() *GuestOperatingSystem {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build GuestOperatingSystem instance, reason: %v", builder.err))
+	}
+	return builder.guestOperatingSystem
 }
 
 type HardwareInformationBuilder struct {
@@ -49524,11 +50101,19 @@ func (builder *HardwareInformationBuilder) Href(href string) *HardwareInformatio
 	builder.hardwareInformation.SetHref(href)
 	return builder
 }
+
 func (builder *HardwareInformationBuilder) Build() (*HardwareInformation, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.hardwareInformation, nil
+}
+
+func (builder *HardwareInformationBuilder) MustBuild() *HardwareInformation {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build HardwareInformation instance, reason: %v", builder.err))
+	}
+	return builder.hardwareInformation
 }
 
 type HighAvailabilityBuilder struct {
@@ -49566,11 +50151,19 @@ func (builder *HighAvailabilityBuilder) Href(href string) *HighAvailabilityBuild
 	builder.highAvailability.SetHref(href)
 	return builder
 }
+
 func (builder *HighAvailabilityBuilder) Build() (*HighAvailability, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.highAvailability, nil
+}
+
+func (builder *HighAvailabilityBuilder) MustBuild() *HighAvailability {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build HighAvailability instance, reason: %v", builder.err))
+	}
+	return builder.highAvailability
 }
 
 type HookBuilder struct {
@@ -49653,11 +50246,19 @@ func (builder *HookBuilder) Href(href string) *HookBuilder {
 	builder.hook.SetHref(href)
 	return builder
 }
+
 func (builder *HookBuilder) Build() (*Hook, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.hook, nil
+}
+
+func (builder *HookBuilder) MustBuild() *Hook {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Hook instance, reason: %v", builder.err))
+	}
+	return builder.hook
 }
 
 type HostBuilder struct {
@@ -50145,11 +50746,19 @@ func (builder *HostBuilder) Href(href string) *HostBuilder {
 	builder.host.SetHref(href)
 	return builder
 }
+
 func (builder *HostBuilder) Build() (*Host, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.host, nil
+}
+
+func (builder *HostBuilder) MustBuild() *Host {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Host instance, reason: %v", builder.err))
+	}
+	return builder.host
 }
 
 type HostDeviceBuilder struct {
@@ -50295,11 +50904,19 @@ func (builder *HostDeviceBuilder) Href(href string) *HostDeviceBuilder {
 	builder.hostDevice.SetHref(href)
 	return builder
 }
+
 func (builder *HostDeviceBuilder) Build() (*HostDevice, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.hostDevice, nil
+}
+
+func (builder *HostDeviceBuilder) MustBuild() *HostDevice {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build HostDevice instance, reason: %v", builder.err))
+	}
+	return builder.hostDevice
 }
 
 type HostDevicePassthroughBuilder struct {
@@ -50328,11 +50945,19 @@ func (builder *HostDevicePassthroughBuilder) Href(href string) *HostDevicePassth
 	builder.hostDevicePassthrough.SetHref(href)
 	return builder
 }
+
 func (builder *HostDevicePassthroughBuilder) Build() (*HostDevicePassthrough, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.hostDevicePassthrough, nil
+}
+
+func (builder *HostDevicePassthroughBuilder) MustBuild() *HostDevicePassthrough {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build HostDevicePassthrough instance, reason: %v", builder.err))
+	}
+	return builder.hostDevicePassthrough
 }
 
 type HostNicBuilder struct {
@@ -50604,11 +51229,19 @@ func (builder *HostNicBuilder) Href(href string) *HostNicBuilder {
 	builder.hostNic.SetHref(href)
 	return builder
 }
+
 func (builder *HostNicBuilder) Build() (*HostNic, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.hostNic, nil
+}
+
+func (builder *HostNicBuilder) MustBuild() *HostNic {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build HostNic instance, reason: %v", builder.err))
+	}
+	return builder.hostNic
 }
 
 type HostNicVirtualFunctionsConfigurationBuilder struct {
@@ -50655,11 +51288,19 @@ func (builder *HostNicVirtualFunctionsConfigurationBuilder) Href(href string) *H
 	builder.hostNicVirtualFunctionsConfiguration.SetHref(href)
 	return builder
 }
+
 func (builder *HostNicVirtualFunctionsConfigurationBuilder) Build() (*HostNicVirtualFunctionsConfiguration, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.hostNicVirtualFunctionsConfiguration, nil
+}
+
+func (builder *HostNicVirtualFunctionsConfigurationBuilder) MustBuild() *HostNicVirtualFunctionsConfiguration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build HostNicVirtualFunctionsConfiguration instance, reason: %v", builder.err))
+	}
+	return builder.hostNicVirtualFunctionsConfiguration
 }
 
 type HostStorageBuilder struct {
@@ -50868,11 +51509,19 @@ func (builder *HostStorageBuilder) Href(href string) *HostStorageBuilder {
 	builder.hostStorage.SetHref(href)
 	return builder
 }
+
 func (builder *HostStorageBuilder) Build() (*HostStorage, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.hostStorage, nil
+}
+
+func (builder *HostStorageBuilder) MustBuild() *HostStorage {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build HostStorage instance, reason: %v", builder.err))
+	}
+	return builder.hostStorage
 }
 
 type HostedEngineBuilder struct {
@@ -50937,11 +51586,19 @@ func (builder *HostedEngineBuilder) Href(href string) *HostedEngineBuilder {
 	builder.hostedEngine.SetHref(href)
 	return builder
 }
+
 func (builder *HostedEngineBuilder) Build() (*HostedEngine, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.hostedEngine, nil
+}
+
+func (builder *HostedEngineBuilder) MustBuild() *HostedEngine {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build HostedEngine instance, reason: %v", builder.err))
+	}
+	return builder.hostedEngine
 }
 
 type IconBuilder struct {
@@ -51015,11 +51672,19 @@ func (builder *IconBuilder) Href(href string) *IconBuilder {
 	builder.icon.SetHref(href)
 	return builder
 }
+
 func (builder *IconBuilder) Build() (*Icon, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.icon, nil
+}
+
+func (builder *IconBuilder) MustBuild() *Icon {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Icon instance, reason: %v", builder.err))
+	}
+	return builder.icon
 }
 
 type IdentifiedBuilder struct {
@@ -51075,11 +51740,19 @@ func (builder *IdentifiedBuilder) Href(href string) *IdentifiedBuilder {
 	builder.identified.SetHref(href)
 	return builder
 }
+
 func (builder *IdentifiedBuilder) Build() (*Identified, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.identified, nil
+}
+
+func (builder *IdentifiedBuilder) MustBuild() *Identified {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Identified instance, reason: %v", builder.err))
+	}
+	return builder.identified
 }
 
 type ImageBuilder struct {
@@ -51144,11 +51817,19 @@ func (builder *ImageBuilder) Href(href string) *ImageBuilder {
 	builder.image.SetHref(href)
 	return builder
 }
+
 func (builder *ImageBuilder) Build() (*Image, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.image, nil
+}
+
+func (builder *ImageBuilder) MustBuild() *Image {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Image instance, reason: %v", builder.err))
+	}
+	return builder.image
 }
 
 type ImageTransferBuilder struct {
@@ -51258,11 +51939,19 @@ func (builder *ImageTransferBuilder) Href(href string) *ImageTransferBuilder {
 	builder.imageTransfer.SetHref(href)
 	return builder
 }
+
 func (builder *ImageTransferBuilder) Build() (*ImageTransfer, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.imageTransfer, nil
+}
+
+func (builder *ImageTransferBuilder) MustBuild() *ImageTransfer {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ImageTransfer instance, reason: %v", builder.err))
+	}
+	return builder.imageTransfer
 }
 
 type InitializationBuilder struct {
@@ -51471,11 +52160,19 @@ func (builder *InitializationBuilder) Href(href string) *InitializationBuilder {
 	builder.initialization.SetHref(href)
 	return builder
 }
+
 func (builder *InitializationBuilder) Build() (*Initialization, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.initialization, nil
+}
+
+func (builder *InitializationBuilder) MustBuild() *Initialization {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Initialization instance, reason: %v", builder.err))
+	}
+	return builder.initialization
 }
 
 type InstanceTypeBuilder struct {
@@ -51972,11 +52669,19 @@ func (builder *InstanceTypeBuilder) Href(href string) *InstanceTypeBuilder {
 	builder.instanceType.SetHref(href)
 	return builder
 }
+
 func (builder *InstanceTypeBuilder) Build() (*InstanceType, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.instanceType, nil
+}
+
+func (builder *InstanceTypeBuilder) MustBuild() *InstanceType {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build InstanceType instance, reason: %v", builder.err))
+	}
+	return builder.instanceType
 }
 
 type IoBuilder struct {
@@ -52005,11 +52710,19 @@ func (builder *IoBuilder) Href(href string) *IoBuilder {
 	builder.io.SetHref(href)
 	return builder
 }
+
 func (builder *IoBuilder) Build() (*Io, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.io, nil
+}
+
+func (builder *IoBuilder) MustBuild() *Io {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Io instance, reason: %v", builder.err))
+	}
+	return builder.io
 }
 
 type IpBuilder struct {
@@ -52065,11 +52778,19 @@ func (builder *IpBuilder) Href(href string) *IpBuilder {
 	builder.ip.SetHref(href)
 	return builder
 }
+
 func (builder *IpBuilder) Build() (*Ip, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.ip, nil
+}
+
+func (builder *IpBuilder) MustBuild() *Ip {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Ip instance, reason: %v", builder.err))
+	}
+	return builder.ip
 }
 
 type IpAddressAssignmentBuilder struct {
@@ -52107,11 +52828,19 @@ func (builder *IpAddressAssignmentBuilder) Href(href string) *IpAddressAssignmen
 	builder.ipAddressAssignment.SetHref(href)
 	return builder
 }
+
 func (builder *IpAddressAssignmentBuilder) Build() (*IpAddressAssignment, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.ipAddressAssignment, nil
+}
+
+func (builder *IpAddressAssignmentBuilder) MustBuild() *IpAddressAssignment {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build IpAddressAssignment instance, reason: %v", builder.err))
+	}
+	return builder.ipAddressAssignment
 }
 
 type IscsiBondBuilder struct {
@@ -52194,11 +52923,19 @@ func (builder *IscsiBondBuilder) Href(href string) *IscsiBondBuilder {
 	builder.iscsiBond.SetHref(href)
 	return builder
 }
+
 func (builder *IscsiBondBuilder) Build() (*IscsiBond, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.iscsiBond, nil
+}
+
+func (builder *IscsiBondBuilder) MustBuild() *IscsiBond {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build IscsiBond instance, reason: %v", builder.err))
+	}
+	return builder.iscsiBond
 }
 
 type IscsiDetailsBuilder struct {
@@ -52371,11 +53108,19 @@ func (builder *IscsiDetailsBuilder) Href(href string) *IscsiDetailsBuilder {
 	builder.iscsiDetails.SetHref(href)
 	return builder
 }
+
 func (builder *IscsiDetailsBuilder) Build() (*IscsiDetails, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.iscsiDetails, nil
+}
+
+func (builder *IscsiDetailsBuilder) MustBuild() *IscsiDetails {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build IscsiDetails instance, reason: %v", builder.err))
+	}
+	return builder.iscsiDetails
 }
 
 type JobBuilder struct {
@@ -52503,11 +53248,19 @@ func (builder *JobBuilder) Href(href string) *JobBuilder {
 	builder.job.SetHref(href)
 	return builder
 }
+
 func (builder *JobBuilder) Build() (*Job, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.job, nil
+}
+
+func (builder *JobBuilder) MustBuild() *Job {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Job instance, reason: %v", builder.err))
+	}
+	return builder.job
 }
 
 type KatelloErratumBuilder struct {
@@ -52644,11 +53397,19 @@ func (builder *KatelloErratumBuilder) Href(href string) *KatelloErratumBuilder {
 	builder.katelloErratum.SetHref(href)
 	return builder
 }
+
 func (builder *KatelloErratumBuilder) Build() (*KatelloErratum, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.katelloErratum, nil
+}
+
+func (builder *KatelloErratumBuilder) MustBuild() *KatelloErratum {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build KatelloErratum instance, reason: %v", builder.err))
+	}
+	return builder.katelloErratum
 }
 
 type KernelBuilder struct {
@@ -52677,11 +53438,19 @@ func (builder *KernelBuilder) Href(href string) *KernelBuilder {
 	builder.kernel.SetHref(href)
 	return builder
 }
+
 func (builder *KernelBuilder) Build() (*Kernel, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.kernel, nil
+}
+
+func (builder *KernelBuilder) MustBuild() *Kernel {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Kernel instance, reason: %v", builder.err))
+	}
+	return builder.kernel
 }
 
 type KsmBuilder struct {
@@ -52719,11 +53488,19 @@ func (builder *KsmBuilder) Href(href string) *KsmBuilder {
 	builder.ksm.SetHref(href)
 	return builder
 }
+
 func (builder *KsmBuilder) Build() (*Ksm, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.ksm, nil
+}
+
+func (builder *KsmBuilder) MustBuild() *Ksm {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Ksm instance, reason: %v", builder.err))
+	}
+	return builder.ksm
 }
 
 type LogicalUnitBuilder struct {
@@ -52914,11 +53691,19 @@ func (builder *LogicalUnitBuilder) Href(href string) *LogicalUnitBuilder {
 	builder.logicalUnit.SetHref(href)
 	return builder
 }
+
 func (builder *LogicalUnitBuilder) Build() (*LogicalUnit, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.logicalUnit, nil
+}
+
+func (builder *LogicalUnitBuilder) MustBuild() *LogicalUnit {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build LogicalUnit instance, reason: %v", builder.err))
+	}
+	return builder.logicalUnit
 }
 
 type MacBuilder struct {
@@ -52947,11 +53732,19 @@ func (builder *MacBuilder) Href(href string) *MacBuilder {
 	builder.mac.SetHref(href)
 	return builder
 }
+
 func (builder *MacBuilder) Build() (*Mac, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.mac, nil
+}
+
+func (builder *MacBuilder) MustBuild() *Mac {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Mac instance, reason: %v", builder.err))
+	}
+	return builder.mac
 }
 
 type MacPoolBuilder struct {
@@ -53034,11 +53827,19 @@ func (builder *MacPoolBuilder) Href(href string) *MacPoolBuilder {
 	builder.macPool.SetHref(href)
 	return builder
 }
+
 func (builder *MacPoolBuilder) Build() (*MacPool, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.macPool, nil
+}
+
+func (builder *MacPoolBuilder) MustBuild() *MacPool {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build MacPool instance, reason: %v", builder.err))
+	}
+	return builder.macPool
 }
 
 type MemoryOverCommitBuilder struct {
@@ -53067,11 +53868,19 @@ func (builder *MemoryOverCommitBuilder) Href(href string) *MemoryOverCommitBuild
 	builder.memoryOverCommit.SetHref(href)
 	return builder
 }
+
 func (builder *MemoryOverCommitBuilder) Build() (*MemoryOverCommit, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.memoryOverCommit, nil
+}
+
+func (builder *MemoryOverCommitBuilder) MustBuild() *MemoryOverCommit {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build MemoryOverCommit instance, reason: %v", builder.err))
+	}
+	return builder.memoryOverCommit
 }
 
 type MemoryPolicyBuilder struct {
@@ -53136,11 +53945,19 @@ func (builder *MemoryPolicyBuilder) Href(href string) *MemoryPolicyBuilder {
 	builder.memoryPolicy.SetHref(href)
 	return builder
 }
+
 func (builder *MemoryPolicyBuilder) Build() (*MemoryPolicy, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.memoryPolicy, nil
+}
+
+func (builder *MemoryPolicyBuilder) MustBuild() *MemoryPolicy {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build MemoryPolicy instance, reason: %v", builder.err))
+	}
+	return builder.memoryPolicy
 }
 
 type MethodBuilder struct {
@@ -53169,11 +53986,19 @@ func (builder *MethodBuilder) Href(href string) *MethodBuilder {
 	builder.method.SetHref(href)
 	return builder
 }
+
 func (builder *MethodBuilder) Build() (*Method, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.method, nil
+}
+
+func (builder *MethodBuilder) MustBuild() *Method {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Method instance, reason: %v", builder.err))
+	}
+	return builder.method
 }
 
 type MigrationBandwidthBuilder struct {
@@ -53211,11 +54036,19 @@ func (builder *MigrationBandwidthBuilder) Href(href string) *MigrationBandwidthB
 	builder.migrationBandwidth.SetHref(href)
 	return builder
 }
+
 func (builder *MigrationBandwidthBuilder) Build() (*MigrationBandwidth, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.migrationBandwidth, nil
+}
+
+func (builder *MigrationBandwidthBuilder) MustBuild() *MigrationBandwidth {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build MigrationBandwidth instance, reason: %v", builder.err))
+	}
+	return builder.migrationBandwidth
 }
 
 type MigrationOptionsBuilder struct {
@@ -53271,11 +54104,19 @@ func (builder *MigrationOptionsBuilder) Href(href string) *MigrationOptionsBuild
 	builder.migrationOptions.SetHref(href)
 	return builder
 }
+
 func (builder *MigrationOptionsBuilder) Build() (*MigrationOptions, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.migrationOptions, nil
+}
+
+func (builder *MigrationOptionsBuilder) MustBuild() *MigrationOptions {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build MigrationOptions instance, reason: %v", builder.err))
+	}
+	return builder.migrationOptions
 }
 
 type MigrationPolicyBuilder struct {
@@ -53331,11 +54172,19 @@ func (builder *MigrationPolicyBuilder) Href(href string) *MigrationPolicyBuilder
 	builder.migrationPolicy.SetHref(href)
 	return builder
 }
+
 func (builder *MigrationPolicyBuilder) Build() (*MigrationPolicy, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.migrationPolicy, nil
+}
+
+func (builder *MigrationPolicyBuilder) MustBuild() *MigrationPolicy {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build MigrationPolicy instance, reason: %v", builder.err))
+	}
+	return builder.migrationPolicy
 }
 
 type NetworkBuilder struct {
@@ -53535,11 +54384,19 @@ func (builder *NetworkBuilder) Href(href string) *NetworkBuilder {
 	builder.network.SetHref(href)
 	return builder
 }
+
 func (builder *NetworkBuilder) Build() (*Network, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.network, nil
+}
+
+func (builder *NetworkBuilder) MustBuild() *Network {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Network instance, reason: %v", builder.err))
+	}
+	return builder.network
 }
 
 type NetworkAttachmentBuilder struct {
@@ -53676,11 +54533,19 @@ func (builder *NetworkAttachmentBuilder) Href(href string) *NetworkAttachmentBui
 	builder.networkAttachment.SetHref(href)
 	return builder
 }
+
 func (builder *NetworkAttachmentBuilder) Build() (*NetworkAttachment, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.networkAttachment, nil
+}
+
+func (builder *NetworkAttachmentBuilder) MustBuild() *NetworkAttachment {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NetworkAttachment instance, reason: %v", builder.err))
+	}
+	return builder.networkAttachment
 }
 
 type NetworkConfigurationBuilder struct {
@@ -53718,11 +54583,19 @@ func (builder *NetworkConfigurationBuilder) Href(href string) *NetworkConfigurat
 	builder.networkConfiguration.SetHref(href)
 	return builder
 }
+
 func (builder *NetworkConfigurationBuilder) Build() (*NetworkConfiguration, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.networkConfiguration, nil
+}
+
+func (builder *NetworkConfigurationBuilder) MustBuild() *NetworkConfiguration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NetworkConfiguration instance, reason: %v", builder.err))
+	}
+	return builder.networkConfiguration
 }
 
 type NetworkFilterBuilder struct {
@@ -53787,11 +54660,19 @@ func (builder *NetworkFilterBuilder) Href(href string) *NetworkFilterBuilder {
 	builder.networkFilter.SetHref(href)
 	return builder
 }
+
 func (builder *NetworkFilterBuilder) Build() (*NetworkFilter, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.networkFilter, nil
+}
+
+func (builder *NetworkFilterBuilder) MustBuild() *NetworkFilter {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NetworkFilter instance, reason: %v", builder.err))
+	}
+	return builder.networkFilter
 }
 
 type NetworkFilterParameterBuilder struct {
@@ -53856,11 +54737,19 @@ func (builder *NetworkFilterParameterBuilder) Href(href string) *NetworkFilterPa
 	builder.networkFilterParameter.SetHref(href)
 	return builder
 }
+
 func (builder *NetworkFilterParameterBuilder) Build() (*NetworkFilterParameter, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.networkFilterParameter, nil
+}
+
+func (builder *NetworkFilterParameterBuilder) MustBuild() *NetworkFilterParameter {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NetworkFilterParameter instance, reason: %v", builder.err))
+	}
+	return builder.networkFilterParameter
 }
 
 type NetworkLabelBuilder struct {
@@ -53934,11 +54823,19 @@ func (builder *NetworkLabelBuilder) Href(href string) *NetworkLabelBuilder {
 	builder.networkLabel.SetHref(href)
 	return builder
 }
+
 func (builder *NetworkLabelBuilder) Build() (*NetworkLabel, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.networkLabel, nil
+}
+
+func (builder *NetworkLabelBuilder) MustBuild() *NetworkLabel {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NetworkLabel instance, reason: %v", builder.err))
+	}
+	return builder.networkLabel
 }
 
 type NfsProfileDetailBuilder struct {
@@ -53976,11 +54873,19 @@ func (builder *NfsProfileDetailBuilder) Href(href string) *NfsProfileDetailBuild
 	builder.nfsProfileDetail.SetHref(href)
 	return builder
 }
+
 func (builder *NfsProfileDetailBuilder) Build() (*NfsProfileDetail, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.nfsProfileDetail, nil
+}
+
+func (builder *NfsProfileDetailBuilder) MustBuild() *NfsProfileDetail {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NfsProfileDetail instance, reason: %v", builder.err))
+	}
+	return builder.nfsProfileDetail
 }
 
 type NicBuilder struct {
@@ -54207,11 +55112,19 @@ func (builder *NicBuilder) Href(href string) *NicBuilder {
 	builder.nic.SetHref(href)
 	return builder
 }
+
 func (builder *NicBuilder) Build() (*Nic, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.nic, nil
+}
+
+func (builder *NicBuilder) MustBuild() *Nic {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Nic instance, reason: %v", builder.err))
+	}
+	return builder.nic
 }
 
 type NicConfigurationBuilder struct {
@@ -54285,11 +55198,19 @@ func (builder *NicConfigurationBuilder) Href(href string) *NicConfigurationBuild
 	builder.nicConfiguration.SetHref(href)
 	return builder
 }
+
 func (builder *NicConfigurationBuilder) Build() (*NicConfiguration, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.nicConfiguration, nil
+}
+
+func (builder *NicConfigurationBuilder) MustBuild() *NicConfiguration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NicConfiguration instance, reason: %v", builder.err))
+	}
+	return builder.nicConfiguration
 }
 
 type NumaNodeBuilder struct {
@@ -54399,11 +55320,19 @@ func (builder *NumaNodeBuilder) Href(href string) *NumaNodeBuilder {
 	builder.numaNode.SetHref(href)
 	return builder
 }
+
 func (builder *NumaNodeBuilder) Build() (*NumaNode, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.numaNode, nil
+}
+
+func (builder *NumaNodeBuilder) MustBuild() *NumaNode {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NumaNode instance, reason: %v", builder.err))
+	}
+	return builder.numaNode
 }
 
 type NumaNodePinBuilder struct {
@@ -54450,11 +55379,19 @@ func (builder *NumaNodePinBuilder) Href(href string) *NumaNodePinBuilder {
 	builder.numaNodePin.SetHref(href)
 	return builder
 }
+
 func (builder *NumaNodePinBuilder) Build() (*NumaNodePin, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.numaNodePin, nil
+}
+
+func (builder *NumaNodePinBuilder) MustBuild() *NumaNodePin {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build NumaNodePin instance, reason: %v", builder.err))
+	}
+	return builder.numaNodePin
 }
 
 type OpenStackImageBuilder struct {
@@ -54519,11 +55456,19 @@ func (builder *OpenStackImageBuilder) Href(href string) *OpenStackImageBuilder {
 	builder.openStackImage.SetHref(href)
 	return builder
 }
+
 func (builder *OpenStackImageBuilder) Build() (*OpenStackImage, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openStackImage, nil
+}
+
+func (builder *OpenStackImageBuilder) MustBuild() *OpenStackImage {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenStackImage instance, reason: %v", builder.err))
+	}
+	return builder.openStackImage
 }
 
 type OpenStackImageProviderBuilder struct {
@@ -54660,11 +55605,19 @@ func (builder *OpenStackImageProviderBuilder) Href(href string) *OpenStackImageP
 	builder.openStackImageProvider.SetHref(href)
 	return builder
 }
+
 func (builder *OpenStackImageProviderBuilder) Build() (*OpenStackImageProvider, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openStackImageProvider, nil
+}
+
+func (builder *OpenStackImageProviderBuilder) MustBuild() *OpenStackImageProvider {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenStackImageProvider instance, reason: %v", builder.err))
+	}
+	return builder.openStackImageProvider
 }
 
 type OpenStackNetworkBuilder struct {
@@ -54729,11 +55682,19 @@ func (builder *OpenStackNetworkBuilder) Href(href string) *OpenStackNetworkBuild
 	builder.openStackNetwork.SetHref(href)
 	return builder
 }
+
 func (builder *OpenStackNetworkBuilder) Build() (*OpenStackNetwork, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openStackNetwork, nil
+}
+
+func (builder *OpenStackNetworkBuilder) MustBuild() *OpenStackNetwork {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenStackNetwork instance, reason: %v", builder.err))
+	}
+	return builder.openStackNetwork
 }
 
 type OpenStackNetworkProviderBuilder struct {
@@ -54915,11 +55876,19 @@ func (builder *OpenStackNetworkProviderBuilder) Href(href string) *OpenStackNetw
 	builder.openStackNetworkProvider.SetHref(href)
 	return builder
 }
+
 func (builder *OpenStackNetworkProviderBuilder) Build() (*OpenStackNetworkProvider, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openStackNetworkProvider, nil
+}
+
+func (builder *OpenStackNetworkProviderBuilder) MustBuild() *OpenStackNetworkProvider {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenStackNetworkProvider instance, reason: %v", builder.err))
+	}
+	return builder.openStackNetworkProvider
 }
 
 type OpenStackProviderBuilder struct {
@@ -55038,11 +56007,19 @@ func (builder *OpenStackProviderBuilder) Href(href string) *OpenStackProviderBui
 	builder.openStackProvider.SetHref(href)
 	return builder
 }
+
 func (builder *OpenStackProviderBuilder) Build() (*OpenStackProvider, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openStackProvider, nil
+}
+
+func (builder *OpenStackProviderBuilder) MustBuild() *OpenStackProvider {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenStackProvider instance, reason: %v", builder.err))
+	}
+	return builder.openStackProvider
 }
 
 type OpenStackSubnetBuilder struct {
@@ -55143,11 +56120,19 @@ func (builder *OpenStackSubnetBuilder) Href(href string) *OpenStackSubnetBuilder
 	builder.openStackSubnet.SetHref(href)
 	return builder
 }
+
 func (builder *OpenStackSubnetBuilder) Build() (*OpenStackSubnet, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openStackSubnet, nil
+}
+
+func (builder *OpenStackSubnetBuilder) MustBuild() *OpenStackSubnet {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenStackSubnet instance, reason: %v", builder.err))
+	}
+	return builder.openStackSubnet
 }
 
 type OpenStackVolumeProviderBuilder struct {
@@ -55302,11 +56287,19 @@ func (builder *OpenStackVolumeProviderBuilder) Href(href string) *OpenStackVolum
 	builder.openStackVolumeProvider.SetHref(href)
 	return builder
 }
+
 func (builder *OpenStackVolumeProviderBuilder) Build() (*OpenStackVolumeProvider, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openStackVolumeProvider, nil
+}
+
+func (builder *OpenStackVolumeProviderBuilder) MustBuild() *OpenStackVolumeProvider {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenStackVolumeProvider instance, reason: %v", builder.err))
+	}
+	return builder.openStackVolumeProvider
 }
 
 type OpenStackVolumeTypeBuilder struct {
@@ -55380,11 +56373,19 @@ func (builder *OpenStackVolumeTypeBuilder) Href(href string) *OpenStackVolumeTyp
 	builder.openStackVolumeType.SetHref(href)
 	return builder
 }
+
 func (builder *OpenStackVolumeTypeBuilder) Build() (*OpenStackVolumeType, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openStackVolumeType, nil
+}
+
+func (builder *OpenStackVolumeTypeBuilder) MustBuild() *OpenStackVolumeType {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenStackVolumeType instance, reason: %v", builder.err))
+	}
+	return builder.openStackVolumeType
 }
 
 type OpenstackVolumeAuthenticationKeyBuilder struct {
@@ -55485,11 +56486,19 @@ func (builder *OpenstackVolumeAuthenticationKeyBuilder) Href(href string) *Opens
 	builder.openstackVolumeAuthenticationKey.SetHref(href)
 	return builder
 }
+
 func (builder *OpenstackVolumeAuthenticationKeyBuilder) Build() (*OpenstackVolumeAuthenticationKey, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.openstackVolumeAuthenticationKey, nil
+}
+
+func (builder *OpenstackVolumeAuthenticationKeyBuilder) MustBuild() *OpenstackVolumeAuthenticationKey {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OpenstackVolumeAuthenticationKey instance, reason: %v", builder.err))
+	}
+	return builder.openstackVolumeAuthenticationKey
 }
 
 type OperatingSystemBuilder struct {
@@ -55581,11 +56590,19 @@ func (builder *OperatingSystemBuilder) Href(href string) *OperatingSystemBuilder
 	builder.operatingSystem.SetHref(href)
 	return builder
 }
+
 func (builder *OperatingSystemBuilder) Build() (*OperatingSystem, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.operatingSystem, nil
+}
+
+func (builder *OperatingSystemBuilder) MustBuild() *OperatingSystem {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OperatingSystem instance, reason: %v", builder.err))
+	}
+	return builder.operatingSystem
 }
 
 type OperatingSystemInfoBuilder struct {
@@ -55659,11 +56676,19 @@ func (builder *OperatingSystemInfoBuilder) Href(href string) *OperatingSystemInf
 	builder.operatingSystemInfo.SetHref(href)
 	return builder
 }
+
 func (builder *OperatingSystemInfoBuilder) Build() (*OperatingSystemInfo, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.operatingSystemInfo, nil
+}
+
+func (builder *OperatingSystemInfoBuilder) MustBuild() *OperatingSystemInfo {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build OperatingSystemInfo instance, reason: %v", builder.err))
+	}
+	return builder.operatingSystemInfo
 }
 
 type OptionBuilder struct {
@@ -55710,11 +56735,19 @@ func (builder *OptionBuilder) Href(href string) *OptionBuilder {
 	builder.option.SetHref(href)
 	return builder
 }
+
 func (builder *OptionBuilder) Build() (*Option, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.option, nil
+}
+
+func (builder *OptionBuilder) MustBuild() *Option {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Option instance, reason: %v", builder.err))
+	}
+	return builder.option
 }
 
 type PackageBuilder struct {
@@ -55743,11 +56776,19 @@ func (builder *PackageBuilder) Href(href string) *PackageBuilder {
 	builder.package_.SetHref(href)
 	return builder
 }
+
 func (builder *PackageBuilder) Build() (*Package, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.package_, nil
+}
+
+func (builder *PackageBuilder) MustBuild() *Package {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Package instance, reason: %v", builder.err))
+	}
+	return builder.package_
 }
 
 type PayloadBuilder struct {
@@ -55794,11 +56835,19 @@ func (builder *PayloadBuilder) Href(href string) *PayloadBuilder {
 	builder.payload.SetHref(href)
 	return builder
 }
+
 func (builder *PayloadBuilder) Build() (*Payload, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.payload, nil
+}
+
+func (builder *PayloadBuilder) MustBuild() *Payload {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Payload instance, reason: %v", builder.err))
+	}
+	return builder.payload
 }
 
 type PermissionBuilder struct {
@@ -55953,11 +57002,19 @@ func (builder *PermissionBuilder) Href(href string) *PermissionBuilder {
 	builder.permission.SetHref(href)
 	return builder
 }
+
 func (builder *PermissionBuilder) Build() (*Permission, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.permission, nil
+}
+
+func (builder *PermissionBuilder) MustBuild() *Permission {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Permission instance, reason: %v", builder.err))
+	}
+	return builder.permission
 }
 
 type PermitBuilder struct {
@@ -56031,11 +57088,19 @@ func (builder *PermitBuilder) Href(href string) *PermitBuilder {
 	builder.permit.SetHref(href)
 	return builder
 }
+
 func (builder *PermitBuilder) Build() (*Permit, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.permit, nil
+}
+
+func (builder *PermitBuilder) MustBuild() *Permit {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Permit instance, reason: %v", builder.err))
+	}
+	return builder.permit
 }
 
 type PmProxyBuilder struct {
@@ -56064,11 +57129,19 @@ func (builder *PmProxyBuilder) Href(href string) *PmProxyBuilder {
 	builder.pmProxy.SetHref(href)
 	return builder
 }
+
 func (builder *PmProxyBuilder) Build() (*PmProxy, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.pmProxy, nil
+}
+
+func (builder *PmProxyBuilder) MustBuild() *PmProxy {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build PmProxy instance, reason: %v", builder.err))
+	}
+	return builder.pmProxy
 }
 
 type PortMirroringBuilder struct {
@@ -56088,11 +57161,19 @@ func (builder *PortMirroringBuilder) Href(href string) *PortMirroringBuilder {
 	builder.portMirroring.SetHref(href)
 	return builder
 }
+
 func (builder *PortMirroringBuilder) Build() (*PortMirroring, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.portMirroring, nil
+}
+
+func (builder *PortMirroringBuilder) MustBuild() *PortMirroring {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build PortMirroring instance, reason: %v", builder.err))
+	}
+	return builder.portMirroring
 }
 
 type PowerManagementBuilder struct {
@@ -56211,11 +57292,19 @@ func (builder *PowerManagementBuilder) Href(href string) *PowerManagementBuilder
 	builder.powerManagement.SetHref(href)
 	return builder
 }
+
 func (builder *PowerManagementBuilder) Build() (*PowerManagement, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.powerManagement, nil
+}
+
+func (builder *PowerManagementBuilder) MustBuild() *PowerManagement {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build PowerManagement instance, reason: %v", builder.err))
+	}
+	return builder.powerManagement
 }
 
 type ProductBuilder struct {
@@ -56271,11 +57360,19 @@ func (builder *ProductBuilder) Href(href string) *ProductBuilder {
 	builder.product.SetHref(href)
 	return builder
 }
+
 func (builder *ProductBuilder) Build() (*Product, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.product, nil
+}
+
+func (builder *ProductBuilder) MustBuild() *Product {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Product instance, reason: %v", builder.err))
+	}
+	return builder.product
 }
 
 type ProductInfoBuilder struct {
@@ -56322,11 +57419,19 @@ func (builder *ProductInfoBuilder) Href(href string) *ProductInfoBuilder {
 	builder.productInfo.SetHref(href)
 	return builder
 }
+
 func (builder *ProductInfoBuilder) Build() (*ProductInfo, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.productInfo, nil
+}
+
+func (builder *ProductInfoBuilder) MustBuild() *ProductInfo {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ProductInfo instance, reason: %v", builder.err))
+	}
+	return builder.productInfo
 }
 
 type ProfileDetailBuilder struct {
@@ -56391,11 +57496,19 @@ func (builder *ProfileDetailBuilder) Href(href string) *ProfileDetailBuilder {
 	builder.profileDetail.SetHref(href)
 	return builder
 }
+
 func (builder *ProfileDetailBuilder) Build() (*ProfileDetail, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.profileDetail, nil
+}
+
+func (builder *ProfileDetailBuilder) MustBuild() *ProfileDetail {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ProfileDetail instance, reason: %v", builder.err))
+	}
+	return builder.profileDetail
 }
 
 type PropertyBuilder struct {
@@ -56433,11 +57546,19 @@ func (builder *PropertyBuilder) Href(href string) *PropertyBuilder {
 	builder.property.SetHref(href)
 	return builder
 }
+
 func (builder *PropertyBuilder) Build() (*Property, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.property, nil
+}
+
+func (builder *PropertyBuilder) MustBuild() *Property {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Property instance, reason: %v", builder.err))
+	}
+	return builder.property
 }
 
 type ProxyTicketBuilder struct {
@@ -56466,11 +57587,19 @@ func (builder *ProxyTicketBuilder) Href(href string) *ProxyTicketBuilder {
 	builder.proxyTicket.SetHref(href)
 	return builder
 }
+
 func (builder *ProxyTicketBuilder) Build() (*ProxyTicket, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.proxyTicket, nil
+}
+
+func (builder *ProxyTicketBuilder) MustBuild() *ProxyTicket {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ProxyTicket instance, reason: %v", builder.err))
+	}
+	return builder.proxyTicket
 }
 
 type QosBuilder struct {
@@ -56688,11 +57817,19 @@ func (builder *QosBuilder) Href(href string) *QosBuilder {
 	builder.qos.SetHref(href)
 	return builder
 }
+
 func (builder *QosBuilder) Build() (*Qos, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.qos, nil
+}
+
+func (builder *QosBuilder) MustBuild() *Qos {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Qos instance, reason: %v", builder.err))
+	}
+	return builder.qos
 }
 
 type QuotaBuilder struct {
@@ -56847,11 +57984,19 @@ func (builder *QuotaBuilder) Href(href string) *QuotaBuilder {
 	builder.quota.SetHref(href)
 	return builder
 }
+
 func (builder *QuotaBuilder) Build() (*Quota, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.quota, nil
+}
+
+func (builder *QuotaBuilder) MustBuild() *Quota {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Quota instance, reason: %v", builder.err))
+	}
+	return builder.quota
 }
 
 type QuotaClusterLimitBuilder struct {
@@ -56961,11 +58106,19 @@ func (builder *QuotaClusterLimitBuilder) Href(href string) *QuotaClusterLimitBui
 	builder.quotaClusterLimit.SetHref(href)
 	return builder
 }
+
 func (builder *QuotaClusterLimitBuilder) Build() (*QuotaClusterLimit, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.quotaClusterLimit, nil
+}
+
+func (builder *QuotaClusterLimitBuilder) MustBuild() *QuotaClusterLimit {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build QuotaClusterLimit instance, reason: %v", builder.err))
+	}
+	return builder.quotaClusterLimit
 }
 
 type QuotaStorageLimitBuilder struct {
@@ -57057,11 +58210,19 @@ func (builder *QuotaStorageLimitBuilder) Href(href string) *QuotaStorageLimitBui
 	builder.quotaStorageLimit.SetHref(href)
 	return builder
 }
+
 func (builder *QuotaStorageLimitBuilder) Build() (*QuotaStorageLimit, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.quotaStorageLimit, nil
+}
+
+func (builder *QuotaStorageLimitBuilder) MustBuild() *QuotaStorageLimit {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build QuotaStorageLimit instance, reason: %v", builder.err))
+	}
+	return builder.quotaStorageLimit
 }
 
 type RangeBuilder struct {
@@ -57099,11 +58260,19 @@ func (builder *RangeBuilder) Href(href string) *RangeBuilder {
 	builder.range_.SetHref(href)
 	return builder
 }
+
 func (builder *RangeBuilder) Build() (*Range, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.range_, nil
+}
+
+func (builder *RangeBuilder) MustBuild() *Range {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Range instance, reason: %v", builder.err))
+	}
+	return builder.range_
 }
 
 type RateBuilder struct {
@@ -57141,11 +58310,19 @@ func (builder *RateBuilder) Href(href string) *RateBuilder {
 	builder.rate.SetHref(href)
 	return builder
 }
+
 func (builder *RateBuilder) Build() (*Rate, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.rate, nil
+}
+
+func (builder *RateBuilder) MustBuild() *Rate {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Rate instance, reason: %v", builder.err))
+	}
+	return builder.rate
 }
 
 type ReportedConfigurationBuilder struct {
@@ -57201,11 +58378,19 @@ func (builder *ReportedConfigurationBuilder) Href(href string) *ReportedConfigur
 	builder.reportedConfiguration.SetHref(href)
 	return builder
 }
+
 func (builder *ReportedConfigurationBuilder) Build() (*ReportedConfiguration, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.reportedConfiguration, nil
+}
+
+func (builder *ReportedConfigurationBuilder) MustBuild() *ReportedConfiguration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ReportedConfiguration instance, reason: %v", builder.err))
+	}
+	return builder.reportedConfiguration
 }
 
 type ReportedDeviceBuilder struct {
@@ -57297,11 +58482,19 @@ func (builder *ReportedDeviceBuilder) Href(href string) *ReportedDeviceBuilder {
 	builder.reportedDevice.SetHref(href)
 	return builder
 }
+
 func (builder *ReportedDeviceBuilder) Build() (*ReportedDevice, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.reportedDevice, nil
+}
+
+func (builder *ReportedDeviceBuilder) MustBuild() *ReportedDevice {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ReportedDevice instance, reason: %v", builder.err))
+	}
+	return builder.reportedDevice
 }
 
 type RngDeviceBuilder struct {
@@ -57339,11 +58532,19 @@ func (builder *RngDeviceBuilder) Href(href string) *RngDeviceBuilder {
 	builder.rngDevice.SetHref(href)
 	return builder
 }
+
 func (builder *RngDeviceBuilder) Build() (*RngDevice, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.rngDevice, nil
+}
+
+func (builder *RngDeviceBuilder) MustBuild() *RngDevice {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RngDevice instance, reason: %v", builder.err))
+	}
+	return builder.rngDevice
 }
 
 type RoleBuilder struct {
@@ -57435,11 +58636,19 @@ func (builder *RoleBuilder) Href(href string) *RoleBuilder {
 	builder.role.SetHref(href)
 	return builder
 }
+
 func (builder *RoleBuilder) Build() (*Role, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.role, nil
+}
+
+func (builder *RoleBuilder) MustBuild() *Role {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Role instance, reason: %v", builder.err))
+	}
+	return builder.role
 }
 
 type SchedulingPolicyBuilder struct {
@@ -57549,11 +58758,19 @@ func (builder *SchedulingPolicyBuilder) Href(href string) *SchedulingPolicyBuild
 	builder.schedulingPolicy.SetHref(href)
 	return builder
 }
+
 func (builder *SchedulingPolicyBuilder) Build() (*SchedulingPolicy, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.schedulingPolicy, nil
+}
+
+func (builder *SchedulingPolicyBuilder) MustBuild() *SchedulingPolicy {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SchedulingPolicy instance, reason: %v", builder.err))
+	}
+	return builder.schedulingPolicy
 }
 
 type SchedulingPolicyUnitBuilder struct {
@@ -57645,11 +58862,19 @@ func (builder *SchedulingPolicyUnitBuilder) Href(href string) *SchedulingPolicyU
 	builder.schedulingPolicyUnit.SetHref(href)
 	return builder
 }
+
 func (builder *SchedulingPolicyUnitBuilder) Build() (*SchedulingPolicyUnit, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.schedulingPolicyUnit, nil
+}
+
+func (builder *SchedulingPolicyUnitBuilder) MustBuild() *SchedulingPolicyUnit {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SchedulingPolicyUnit instance, reason: %v", builder.err))
+	}
+	return builder.schedulingPolicyUnit
 }
 
 type SeLinuxBuilder struct {
@@ -57678,11 +58903,19 @@ func (builder *SeLinuxBuilder) Href(href string) *SeLinuxBuilder {
 	builder.seLinux.SetHref(href)
 	return builder
 }
+
 func (builder *SeLinuxBuilder) Build() (*SeLinux, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.seLinux, nil
+}
+
+func (builder *SeLinuxBuilder) MustBuild() *SeLinux {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SeLinux instance, reason: %v", builder.err))
+	}
+	return builder.seLinux
 }
 
 type SerialNumberBuilder struct {
@@ -57720,11 +58953,19 @@ func (builder *SerialNumberBuilder) Href(href string) *SerialNumberBuilder {
 	builder.serialNumber.SetHref(href)
 	return builder
 }
+
 func (builder *SerialNumberBuilder) Build() (*SerialNumber, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.serialNumber, nil
+}
+
+func (builder *SerialNumberBuilder) MustBuild() *SerialNumber {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SerialNumber instance, reason: %v", builder.err))
+	}
+	return builder.serialNumber
 }
 
 type SessionBuilder struct {
@@ -57825,11 +59066,19 @@ func (builder *SessionBuilder) Href(href string) *SessionBuilder {
 	builder.session.SetHref(href)
 	return builder
 }
+
 func (builder *SessionBuilder) Build() (*Session, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.session, nil
+}
+
+func (builder *SessionBuilder) MustBuild() *Session {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Session instance, reason: %v", builder.err))
+	}
+	return builder.session
 }
 
 type SkipIfConnectivityBrokenBuilder struct {
@@ -57867,11 +59116,19 @@ func (builder *SkipIfConnectivityBrokenBuilder) Href(href string) *SkipIfConnect
 	builder.skipIfConnectivityBroken.SetHref(href)
 	return builder
 }
+
 func (builder *SkipIfConnectivityBrokenBuilder) Build() (*SkipIfConnectivityBroken, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.skipIfConnectivityBroken, nil
+}
+
+func (builder *SkipIfConnectivityBrokenBuilder) MustBuild() *SkipIfConnectivityBroken {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SkipIfConnectivityBroken instance, reason: %v", builder.err))
+	}
+	return builder.skipIfConnectivityBroken
 }
 
 type SkipIfSdActiveBuilder struct {
@@ -57900,11 +59157,19 @@ func (builder *SkipIfSdActiveBuilder) Href(href string) *SkipIfSdActiveBuilder {
 	builder.skipIfSdActive.SetHref(href)
 	return builder
 }
+
 func (builder *SkipIfSdActiveBuilder) Build() (*SkipIfSdActive, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.skipIfSdActive, nil
+}
+
+func (builder *SkipIfSdActiveBuilder) MustBuild() *SkipIfSdActive {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SkipIfSdActive instance, reason: %v", builder.err))
+	}
+	return builder.skipIfSdActive
 }
 
 type SnapshotBuilder struct {
@@ -58689,11 +59954,19 @@ func (builder *SnapshotBuilder) Href(href string) *SnapshotBuilder {
 	builder.snapshot.SetHref(href)
 	return builder
 }
+
 func (builder *SnapshotBuilder) Build() (*Snapshot, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.snapshot, nil
+}
+
+func (builder *SnapshotBuilder) MustBuild() *Snapshot {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Snapshot instance, reason: %v", builder.err))
+	}
+	return builder.snapshot
 }
 
 type SpecialObjectsBuilder struct {
@@ -58731,11 +60004,19 @@ func (builder *SpecialObjectsBuilder) Href(href string) *SpecialObjectsBuilder {
 	builder.specialObjects.SetHref(href)
 	return builder
 }
+
 func (builder *SpecialObjectsBuilder) Build() (*SpecialObjects, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.specialObjects, nil
+}
+
+func (builder *SpecialObjectsBuilder) MustBuild() *SpecialObjects {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SpecialObjects instance, reason: %v", builder.err))
+	}
+	return builder.specialObjects
 }
 
 type SpmBuilder struct {
@@ -58773,11 +60054,19 @@ func (builder *SpmBuilder) Href(href string) *SpmBuilder {
 	builder.spm.SetHref(href)
 	return builder
 }
+
 func (builder *SpmBuilder) Build() (*Spm, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.spm, nil
+}
+
+func (builder *SpmBuilder) MustBuild() *Spm {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Spm instance, reason: %v", builder.err))
+	}
+	return builder.spm
 }
 
 type SshBuilder struct {
@@ -58869,11 +60158,19 @@ func (builder *SshBuilder) Href(href string) *SshBuilder {
 	builder.ssh.SetHref(href)
 	return builder
 }
+
 func (builder *SshBuilder) Build() (*Ssh, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.ssh, nil
+}
+
+func (builder *SshBuilder) MustBuild() *Ssh {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Ssh instance, reason: %v", builder.err))
+	}
+	return builder.ssh
 }
 
 type SshPublicKeyBuilder struct {
@@ -58947,11 +60244,19 @@ func (builder *SshPublicKeyBuilder) Href(href string) *SshPublicKeyBuilder {
 	builder.sshPublicKey.SetHref(href)
 	return builder
 }
+
 func (builder *SshPublicKeyBuilder) Build() (*SshPublicKey, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.sshPublicKey, nil
+}
+
+func (builder *SshPublicKeyBuilder) MustBuild() *SshPublicKey {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SshPublicKey instance, reason: %v", builder.err))
+	}
+	return builder.sshPublicKey
 }
 
 type SsoBuilder struct {
@@ -58980,11 +60285,19 @@ func (builder *SsoBuilder) Href(href string) *SsoBuilder {
 	builder.sso.SetHref(href)
 	return builder
 }
+
 func (builder *SsoBuilder) Build() (*Sso, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.sso, nil
+}
+
+func (builder *SsoBuilder) MustBuild() *Sso {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Sso instance, reason: %v", builder.err))
+	}
+	return builder.sso
 }
 
 type StatisticBuilder struct {
@@ -59157,11 +60470,19 @@ func (builder *StatisticBuilder) Href(href string) *StatisticBuilder {
 	builder.statistic.SetHref(href)
 	return builder
 }
+
 func (builder *StatisticBuilder) Build() (*Statistic, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.statistic, nil
+}
+
+func (builder *StatisticBuilder) MustBuild() *Statistic {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Statistic instance, reason: %v", builder.err))
+	}
+	return builder.statistic
 }
 
 type StepBuilder struct {
@@ -59325,11 +60646,19 @@ func (builder *StepBuilder) Href(href string) *StepBuilder {
 	builder.step.SetHref(href)
 	return builder
 }
+
 func (builder *StepBuilder) Build() (*Step, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.step, nil
+}
+
+func (builder *StepBuilder) MustBuild() *Step {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Step instance, reason: %v", builder.err))
+	}
+	return builder.step
 }
 
 type StorageConnectionBuilder struct {
@@ -59511,11 +60840,19 @@ func (builder *StorageConnectionBuilder) Href(href string) *StorageConnectionBui
 	builder.storageConnection.SetHref(href)
 	return builder
 }
+
 func (builder *StorageConnectionBuilder) Build() (*StorageConnection, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.storageConnection, nil
+}
+
+func (builder *StorageConnectionBuilder) MustBuild() *StorageConnection {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build StorageConnection instance, reason: %v", builder.err))
+	}
+	return builder.storageConnection
 }
 
 type StorageConnectionExtensionBuilder struct {
@@ -59607,11 +60944,19 @@ func (builder *StorageConnectionExtensionBuilder) Href(href string) *StorageConn
 	builder.storageConnectionExtension.SetHref(href)
 	return builder
 }
+
 func (builder *StorageConnectionExtensionBuilder) Build() (*StorageConnectionExtension, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.storageConnectionExtension, nil
+}
+
+func (builder *StorageConnectionExtensionBuilder) MustBuild() *StorageConnectionExtension {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build StorageConnectionExtension instance, reason: %v", builder.err))
+	}
+	return builder.storageConnectionExtension
 }
 
 type StorageDomainBuilder struct {
@@ -59919,11 +61264,19 @@ func (builder *StorageDomainBuilder) Href(href string) *StorageDomainBuilder {
 	builder.storageDomain.SetHref(href)
 	return builder
 }
+
 func (builder *StorageDomainBuilder) Build() (*StorageDomain, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.storageDomain, nil
+}
+
+func (builder *StorageDomainBuilder) MustBuild() *StorageDomain {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build StorageDomain instance, reason: %v", builder.err))
+	}
+	return builder.storageDomain
 }
 
 type StorageDomainLeaseBuilder struct {
@@ -59952,11 +61305,19 @@ func (builder *StorageDomainLeaseBuilder) Href(href string) *StorageDomainLeaseB
 	builder.storageDomainLease.SetHref(href)
 	return builder
 }
+
 func (builder *StorageDomainLeaseBuilder) Build() (*StorageDomainLease, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.storageDomainLease, nil
+}
+
+func (builder *StorageDomainLeaseBuilder) MustBuild() *StorageDomainLease {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build StorageDomainLease instance, reason: %v", builder.err))
+	}
+	return builder.storageDomainLease
 }
 
 type TagBuilder struct {
@@ -60066,11 +61427,19 @@ func (builder *TagBuilder) Href(href string) *TagBuilder {
 	builder.tag.SetHref(href)
 	return builder
 }
+
 func (builder *TagBuilder) Build() (*Tag, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.tag, nil
+}
+
+func (builder *TagBuilder) MustBuild() *Tag {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Tag instance, reason: %v", builder.err))
+	}
+	return builder.tag
 }
 
 type TemplateBuilder struct {
@@ -60567,11 +61936,19 @@ func (builder *TemplateBuilder) Href(href string) *TemplateBuilder {
 	builder.template.SetHref(href)
 	return builder
 }
+
 func (builder *TemplateBuilder) Build() (*Template, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.template, nil
+}
+
+func (builder *TemplateBuilder) MustBuild() *Template {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Template instance, reason: %v", builder.err))
+	}
+	return builder.template
 }
 
 type TemplateVersionBuilder struct {
@@ -60618,11 +61995,19 @@ func (builder *TemplateVersionBuilder) Href(href string) *TemplateVersionBuilder
 	builder.templateVersion.SetHref(href)
 	return builder
 }
+
 func (builder *TemplateVersionBuilder) Build() (*TemplateVersion, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.templateVersion, nil
+}
+
+func (builder *TemplateVersionBuilder) MustBuild() *TemplateVersion {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build TemplateVersion instance, reason: %v", builder.err))
+	}
+	return builder.templateVersion
 }
 
 type TicketBuilder struct {
@@ -60660,11 +62045,19 @@ func (builder *TicketBuilder) Href(href string) *TicketBuilder {
 	builder.ticket.SetHref(href)
 	return builder
 }
+
 func (builder *TicketBuilder) Build() (*Ticket, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.ticket, nil
+}
+
+func (builder *TicketBuilder) MustBuild() *Ticket {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Ticket instance, reason: %v", builder.err))
+	}
+	return builder.ticket
 }
 
 type TimeZoneBuilder struct {
@@ -60702,11 +62095,19 @@ func (builder *TimeZoneBuilder) Href(href string) *TimeZoneBuilder {
 	builder.timeZone.SetHref(href)
 	return builder
 }
+
 func (builder *TimeZoneBuilder) Build() (*TimeZone, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.timeZone, nil
+}
+
+func (builder *TimeZoneBuilder) MustBuild() *TimeZone {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build TimeZone instance, reason: %v", builder.err))
+	}
+	return builder.timeZone
 }
 
 type TransparentHugePagesBuilder struct {
@@ -60735,11 +62136,19 @@ func (builder *TransparentHugePagesBuilder) Href(href string) *TransparentHugePa
 	builder.transparentHugePages.SetHref(href)
 	return builder
 }
+
 func (builder *TransparentHugePagesBuilder) Build() (*TransparentHugePages, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.transparentHugePages, nil
+}
+
+func (builder *TransparentHugePagesBuilder) MustBuild() *TransparentHugePages {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build TransparentHugePages instance, reason: %v", builder.err))
+	}
+	return builder.transparentHugePages
 }
 
 type UnmanagedNetworkBuilder struct {
@@ -60813,11 +62222,19 @@ func (builder *UnmanagedNetworkBuilder) Href(href string) *UnmanagedNetworkBuild
 	builder.unmanagedNetwork.SetHref(href)
 	return builder
 }
+
 func (builder *UnmanagedNetworkBuilder) Build() (*UnmanagedNetwork, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.unmanagedNetwork, nil
+}
+
+func (builder *UnmanagedNetworkBuilder) MustBuild() *UnmanagedNetwork {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build UnmanagedNetwork instance, reason: %v", builder.err))
+	}
+	return builder.unmanagedNetwork
 }
 
 type UsbBuilder struct {
@@ -60855,11 +62272,19 @@ func (builder *UsbBuilder) Href(href string) *UsbBuilder {
 	builder.usb.SetHref(href)
 	return builder
 }
+
 func (builder *UsbBuilder) Build() (*Usb, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.usb, nil
+}
+
+func (builder *UsbBuilder) MustBuild() *Usb {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Usb instance, reason: %v", builder.err))
+	}
+	return builder.usb
 }
 
 type UserBuilder struct {
@@ -61050,11 +62475,19 @@ func (builder *UserBuilder) Href(href string) *UserBuilder {
 	builder.user.SetHref(href)
 	return builder
 }
+
 func (builder *UserBuilder) Build() (*User, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.user, nil
+}
+
+func (builder *UserBuilder) MustBuild() *User {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build User instance, reason: %v", builder.err))
+	}
+	return builder.user
 }
 
 type ValueBuilder struct {
@@ -61092,11 +62525,19 @@ func (builder *ValueBuilder) Href(href string) *ValueBuilder {
 	builder.value.SetHref(href)
 	return builder
 }
+
 func (builder *ValueBuilder) Build() (*Value, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.value, nil
+}
+
+func (builder *ValueBuilder) MustBuild() *Value {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Value instance, reason: %v", builder.err))
+	}
+	return builder.value
 }
 
 type VcpuPinBuilder struct {
@@ -61134,11 +62575,19 @@ func (builder *VcpuPinBuilder) Href(href string) *VcpuPinBuilder {
 	builder.vcpuPin.SetHref(href)
 	return builder
 }
+
 func (builder *VcpuPinBuilder) Build() (*VcpuPin, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vcpuPin, nil
+}
+
+func (builder *VcpuPinBuilder) MustBuild() *VcpuPin {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VcpuPin instance, reason: %v", builder.err))
+	}
+	return builder.vcpuPin
 }
 
 type VendorBuilder struct {
@@ -61194,11 +62643,19 @@ func (builder *VendorBuilder) Href(href string) *VendorBuilder {
 	builder.vendor.SetHref(href)
 	return builder
 }
+
 func (builder *VendorBuilder) Build() (*Vendor, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vendor, nil
+}
+
+func (builder *VendorBuilder) MustBuild() *Vendor {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Vendor instance, reason: %v", builder.err))
+	}
+	return builder.vendor
 }
 
 type VersionBuilder struct {
@@ -61299,11 +62756,19 @@ func (builder *VersionBuilder) Href(href string) *VersionBuilder {
 	builder.version.SetHref(href)
 	return builder
 }
+
 func (builder *VersionBuilder) Build() (*Version, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.version, nil
+}
+
+func (builder *VersionBuilder) MustBuild() *Version {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Version instance, reason: %v", builder.err))
+	}
+	return builder.version
 }
 
 type VirtioScsiBuilder struct {
@@ -61332,11 +62797,19 @@ func (builder *VirtioScsiBuilder) Href(href string) *VirtioScsiBuilder {
 	builder.virtioScsi.SetHref(href)
 	return builder
 }
+
 func (builder *VirtioScsiBuilder) Build() (*VirtioScsi, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.virtioScsi, nil
+}
+
+func (builder *VirtioScsiBuilder) MustBuild() *VirtioScsi {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VirtioScsi instance, reason: %v", builder.err))
+	}
+	return builder.virtioScsi
 }
 
 type VirtualNumaNodeBuilder struct {
@@ -61464,11 +62937,19 @@ func (builder *VirtualNumaNodeBuilder) Href(href string) *VirtualNumaNodeBuilder
 	builder.virtualNumaNode.SetHref(href)
 	return builder
 }
+
 func (builder *VirtualNumaNodeBuilder) Build() (*VirtualNumaNode, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.virtualNumaNode, nil
+}
+
+func (builder *VirtualNumaNodeBuilder) MustBuild() *VirtualNumaNode {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VirtualNumaNode instance, reason: %v", builder.err))
+	}
+	return builder.virtualNumaNode
 }
 
 type VlanBuilder struct {
@@ -61497,11 +62978,19 @@ func (builder *VlanBuilder) Href(href string) *VlanBuilder {
 	builder.vlan.SetHref(href)
 	return builder
 }
+
 func (builder *VlanBuilder) Build() (*Vlan, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vlan, nil
+}
+
+func (builder *VlanBuilder) MustBuild() *Vlan {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Vlan instance, reason: %v", builder.err))
+	}
+	return builder.vlan
 }
 
 type VmBuilder struct {
@@ -62241,11 +63730,19 @@ func (builder *VmBuilder) Href(href string) *VmBuilder {
 	builder.vm.SetHref(href)
 	return builder
 }
+
 func (builder *VmBuilder) Build() (*Vm, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vm, nil
+}
+
+func (builder *VmBuilder) MustBuild() *Vm {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Vm instance, reason: %v", builder.err))
+	}
+	return builder.vm
 }
 
 type VmBaseBuilder struct {
@@ -62652,11 +64149,19 @@ func (builder *VmBaseBuilder) Href(href string) *VmBaseBuilder {
 	builder.vmBase.SetHref(href)
 	return builder
 }
+
 func (builder *VmBaseBuilder) Build() (*VmBase, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vmBase, nil
+}
+
+func (builder *VmBaseBuilder) MustBuild() *VmBase {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VmBase instance, reason: %v", builder.err))
+	}
+	return builder.vmBase
 }
 
 type VmPlacementPolicyBuilder struct {
@@ -62694,11 +64199,19 @@ func (builder *VmPlacementPolicyBuilder) Href(href string) *VmPlacementPolicyBui
 	builder.vmPlacementPolicy.SetHref(href)
 	return builder
 }
+
 func (builder *VmPlacementPolicyBuilder) Build() (*VmPlacementPolicy, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vmPlacementPolicy, nil
+}
+
+func (builder *VmPlacementPolicyBuilder) MustBuild() *VmPlacementPolicy {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VmPlacementPolicy instance, reason: %v", builder.err))
+	}
+	return builder.vmPlacementPolicy
 }
 
 type VmPoolBuilder struct {
@@ -62889,11 +64402,19 @@ func (builder *VmPoolBuilder) Href(href string) *VmPoolBuilder {
 	builder.vmPool.SetHref(href)
 	return builder
 }
+
 func (builder *VmPoolBuilder) Build() (*VmPool, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vmPool, nil
+}
+
+func (builder *VmPoolBuilder) MustBuild() *VmPool {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VmPool instance, reason: %v", builder.err))
+	}
+	return builder.vmPool
 }
 
 type VmSummaryBuilder struct {
@@ -62940,11 +64461,19 @@ func (builder *VmSummaryBuilder) Href(href string) *VmSummaryBuilder {
 	builder.vmSummary.SetHref(href)
 	return builder
 }
+
 func (builder *VmSummaryBuilder) Build() (*VmSummary, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vmSummary, nil
+}
+
+func (builder *VmSummaryBuilder) MustBuild() *VmSummary {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VmSummary instance, reason: %v", builder.err))
+	}
+	return builder.vmSummary
 }
 
 type VnicPassThroughBuilder struct {
@@ -62973,11 +64502,19 @@ func (builder *VnicPassThroughBuilder) Href(href string) *VnicPassThroughBuilder
 	builder.vnicPassThrough.SetHref(href)
 	return builder
 }
+
 func (builder *VnicPassThroughBuilder) Build() (*VnicPassThrough, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vnicPassThrough, nil
+}
+
+func (builder *VnicPassThroughBuilder) MustBuild() *VnicPassThrough {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VnicPassThrough instance, reason: %v", builder.err))
+	}
+	return builder.vnicPassThrough
 }
 
 type VnicProfileBuilder struct {
@@ -63105,11 +64642,19 @@ func (builder *VnicProfileBuilder) Href(href string) *VnicProfileBuilder {
 	builder.vnicProfile.SetHref(href)
 	return builder
 }
+
 func (builder *VnicProfileBuilder) Build() (*VnicProfile, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vnicProfile, nil
+}
+
+func (builder *VnicProfileBuilder) MustBuild() *VnicProfile {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VnicProfile instance, reason: %v", builder.err))
+	}
+	return builder.vnicProfile
 }
 
 type VnicProfileMappingBuilder struct {
@@ -63156,11 +64701,19 @@ func (builder *VnicProfileMappingBuilder) Href(href string) *VnicProfileMappingB
 	builder.vnicProfileMapping.SetHref(href)
 	return builder
 }
+
 func (builder *VnicProfileMappingBuilder) Build() (*VnicProfileMapping, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.vnicProfileMapping, nil
+}
+
+func (builder *VnicProfileMappingBuilder) MustBuild() *VnicProfileMapping {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VnicProfileMapping instance, reason: %v", builder.err))
+	}
+	return builder.vnicProfileMapping
 }
 
 type VolumeGroupBuilder struct {
@@ -63207,11 +64760,19 @@ func (builder *VolumeGroupBuilder) Href(href string) *VolumeGroupBuilder {
 	builder.volumeGroup.SetHref(href)
 	return builder
 }
+
 func (builder *VolumeGroupBuilder) Build() (*VolumeGroup, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.volumeGroup, nil
+}
+
+func (builder *VolumeGroupBuilder) MustBuild() *VolumeGroup {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build VolumeGroup instance, reason: %v", builder.err))
+	}
+	return builder.volumeGroup
 }
 
 type WatchdogBuilder struct {
@@ -63321,11 +64882,19 @@ func (builder *WatchdogBuilder) Href(href string) *WatchdogBuilder {
 	builder.watchdog.SetHref(href)
 	return builder
 }
+
 func (builder *WatchdogBuilder) Build() (*Watchdog, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.watchdog, nil
+}
+
+func (builder *WatchdogBuilder) MustBuild() *Watchdog {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Watchdog instance, reason: %v", builder.err))
+	}
+	return builder.watchdog
 }
 
 type WeightBuilder struct {
@@ -63408,11 +64977,19 @@ func (builder *WeightBuilder) Href(href string) *WeightBuilder {
 	builder.weight.SetHref(href)
 	return builder
 }
+
 func (builder *WeightBuilder) Build() (*Weight, error) {
 	if builder.err != nil {
 		return nil, builder.err
 	}
 	return builder.weight, nil
+}
+
+func (builder *WeightBuilder) MustBuild() *Weight {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Weight instance, reason: %v", builder.err))
+	}
+	return builder.weight
 }
 
 type AccessProtocol string
