@@ -28,6 +28,9 @@ func XMLLogicalUnitWriteOne(writer *XMLWriter, object *LogicalUnit, tag string) 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -284,6 +287,9 @@ func XMLWatchdogWriteOne(writer *XMLWriter, object *Watchdog, tag string) error 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -342,6 +348,9 @@ func XMLBookmarkWriteOne(writer *XMLWriter, object *Bookmark, tag string) error 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -385,6 +394,9 @@ func XMLStorageConnectionExtensionWriteOne(writer *XMLWriter, object *StorageCon
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -506,6 +518,9 @@ func XMLAgentWriteOne(writer *XMLWriter, object *Agent, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -576,6 +591,9 @@ func XMLGlusterVolumeWriteOne(writer *XMLWriter, object *GlusterVolume, tag stri
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -649,6 +667,9 @@ func XMLIconWriteOne(writer *XMLWriter, object *Icon, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -695,6 +716,9 @@ func XMLOpenStackVolumeTypeWriteOne(writer *XMLWriter, object *OpenStackVolumeTy
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -741,6 +765,9 @@ func XMLDiskAttachmentWriteOne(writer *XMLWriter, object *DiskAttachment, tag st
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -808,6 +835,9 @@ func XMLOpenStackImageProviderWriteOne(writer *XMLWriter, object *OpenStackImage
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -875,6 +905,9 @@ func XMLOpenStackNetworkWriteOne(writer *XMLWriter, object *OpenStackNetwork, ta
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -951,6 +984,9 @@ func XMLOpenStackSubnetWriteOne(writer *XMLWriter, object *OpenStackSubnet, tag 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1039,6 +1075,9 @@ func XMLUserWriteOne(writer *XMLWriter, object *User, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1124,6 +1163,9 @@ func XMLNumaNodeWriteOne(writer *XMLWriter, object *NumaNode, tag string) error 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1254,6 +1296,9 @@ func XMLImageWriteOne(writer *XMLWriter, object *Image, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1297,6 +1342,9 @@ func XMLMacPoolWriteOne(writer *XMLWriter, object *MacPool, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1346,6 +1394,9 @@ func XMLAffinityLabelWriteOne(writer *XMLWriter, object *AffinityLabel, tag stri
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1395,6 +1446,9 @@ func XMLSchedulingPolicyWriteOne(writer *XMLWriter, object *SchedulingPolicy, ta
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1453,6 +1507,9 @@ func XMLOpenstackVolumeAuthenticationKeyWriteOne(writer *XMLWriter, object *Open
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1541,6 +1598,9 @@ func XMLPermissionWriteOne(writer *XMLWriter, object *Permission, tag string) er
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1677,6 +1737,9 @@ func XMLSshPublicKeyWriteOne(writer *XMLWriter, object *SshPublicKey, tag string
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1723,6 +1786,9 @@ func XMLVirtualNumaNodeWriteOne(writer *XMLWriter, object *VirtualNumaNode, tag 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1787,6 +1853,9 @@ func XMLStatisticWriteOne(writer *XMLWriter, object *Statistic, tag string) erro
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -1932,6 +2001,9 @@ func XMLVolumeGroupWriteOne(writer *XMLWriter, object *VolumeGroup, tag string) 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -2239,6 +2311,9 @@ func XMLDeviceWriteOne(writer *XMLWriter, object *Device, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -2450,6 +2525,9 @@ func XMLExternalHostGroupWriteOne(writer *XMLWriter, object *ExternalHostGroup, 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -2670,6 +2748,9 @@ func XMLOpenStackProviderWriteOne(writer *XMLWriter, object *OpenStackProvider, 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -2731,6 +2812,9 @@ func XMLMethodWriteOne(writer *XMLWriter, object *Method, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = string(r)
 	}
 	writer.WriteStart("", tag, attrs)
@@ -2762,6 +2846,9 @@ func XMLHostNicWriteOne(writer *XMLWriter, object *HostNic, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -2874,6 +2961,9 @@ func XMLOperatingSystemInfoWriteOne(writer *XMLWriter, object *OperatingSystemIn
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -2920,6 +3010,9 @@ func XMLJobWriteOne(writer *XMLWriter, object *Job, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3020,6 +3113,9 @@ func XMLWeightWriteOne(writer *XMLWriter, object *Weight, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3069,6 +3165,9 @@ func XMLOpenStackNetworkProviderWriteOne(writer *XMLWriter, object *OpenStackNet
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3151,6 +3250,9 @@ func XMLReportedDeviceWriteOne(writer *XMLWriter, object *ReportedDevice, tag st
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3203,6 +3305,9 @@ func XMLQuotaClusterLimitWriteOne(writer *XMLWriter, object *QuotaClusterLimit, 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3261,6 +3366,9 @@ func XMLRoleWriteOne(writer *XMLWriter, object *Role, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3313,6 +3421,9 @@ func XMLNetworkAttachmentWriteOne(writer *XMLWriter, object *NetworkAttachment, 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3380,6 +3491,9 @@ func XMLGlusterBrickAdvancedDetailsWriteOne(writer *XMLWriter, object *GlusterBr
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3453,6 +3567,9 @@ func XMLPermitWriteOne(writer *XMLWriter, object *Permit, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3499,6 +3616,9 @@ func XMLSshWriteOne(writer *XMLWriter, object *Ssh, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3551,6 +3671,9 @@ func XMLFloppyWriteOne(writer *XMLWriter, object *Floppy, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3606,6 +3729,9 @@ func XMLExternalHostWriteOne(writer *XMLWriter, object *ExternalHost, tag string
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -3652,6 +3778,9 @@ func XMLVmWriteOne(writer *XMLWriter, object *Vm, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4094,6 +4223,9 @@ func XMLSnapshotWriteOne(writer *XMLWriter, object *Snapshot, tag string) error 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4377,6 +4509,9 @@ func XMLGlusterMemoryPoolWriteOne(writer *XMLWriter, object *GlusterMemoryPool, 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4441,6 +4576,9 @@ func XMLQuotaStorageLimitWriteOne(writer *XMLWriter, object *QuotaStorageLimit, 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4493,6 +4631,9 @@ func XMLGlusterBrickWriteOne(writer *XMLWriter, object *GlusterBrick, tag string
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4581,6 +4722,9 @@ func XMLCpuProfileWriteOne(writer *XMLWriter, object *CpuProfile, tag string) er
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4630,6 +4774,9 @@ func XMLNetworkFilterWriteOne(writer *XMLWriter, object *NetworkFilter, tag stri
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4673,6 +4820,9 @@ func XMLInstanceTypeWriteOne(writer *XMLWriter, object *InstanceType, tag string
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4860,6 +5010,9 @@ func XMLDiskProfileWriteOne(writer *XMLWriter, object *DiskProfile, tag string) 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -4939,6 +5092,9 @@ func XMLOpenStackVolumeProviderWriteOne(writer *XMLWriter, object *OpenStackVolu
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5012,6 +5168,9 @@ func XMLTemplateWriteOne(writer *XMLWriter, object *Template, tag string) error 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5199,6 +5358,9 @@ func XMLExternalDiscoveredHostWriteOne(writer *XMLWriter, object *ExternalDiscov
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5254,6 +5416,9 @@ func XMLKatelloErratumWriteOne(writer *XMLWriter, object *KatelloErratum, tag st
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5321,6 +5486,9 @@ func XMLSchedulingPolicyUnitWriteOne(writer *XMLWriter, object *SchedulingPolicy
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5373,6 +5541,9 @@ func XMLNetworkFilterParameterWriteOne(writer *XMLWriter, object *NetworkFilterP
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5590,6 +5761,9 @@ func XMLFileWriteOne(writer *XMLWriter, object *File, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5639,6 +5813,9 @@ func XMLProductWriteOne(writer *XMLWriter, object *Product, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5709,6 +5886,9 @@ func XMLSessionWriteOne(writer *XMLWriter, object *Session, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -5764,6 +5944,9 @@ func XMLVmBaseWriteOne(writer *XMLWriter, object *VmBase, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -6134,6 +6317,9 @@ func XMLClusterLevelWriteOne(writer *XMLWriter, object *ClusterLevel, tag string
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -6447,6 +6633,9 @@ func XMLDiskWriteOne(writer *XMLWriter, object *Disk, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -6586,6 +6775,9 @@ func XMLCertificateWriteOne(writer *XMLWriter, object *Certificate, tag string) 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -6635,6 +6827,9 @@ func XMLVlanWriteOne(writer *XMLWriter, object *Vlan, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = writer.FormatInt64(r)
 	}
 	writer.WriteStart("", tag, attrs)
@@ -6666,6 +6861,9 @@ func XMLVersionWriteOne(writer *XMLWriter, object *Version, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -6784,6 +6982,9 @@ func XMLHostStorageWriteOne(writer *XMLWriter, object *HostStorage, tag string) 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -7088,6 +7289,9 @@ func XMLGraphicsConsoleWriteOne(writer *XMLWriter, object *GraphicsConsole, tag 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -7149,6 +7353,9 @@ func XMLQuotaWriteOne(writer *XMLWriter, object *Quota, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -7222,6 +7429,9 @@ func XMLQosWriteOne(writer *XMLWriter, object *Qos, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -7430,6 +7640,9 @@ func XMLApplicationWriteOne(writer *XMLWriter, object *Application, tag string) 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -7500,6 +7713,9 @@ func XMLCdromWriteOne(writer *XMLWriter, object *Cdrom, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -7606,6 +7822,9 @@ func XMLHookWriteOne(writer *XMLWriter, object *Hook, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -7721,6 +7940,9 @@ func XMLDiskSnapshotWriteOne(writer *XMLWriter, object *DiskSnapshot, tag string
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -7938,6 +8160,9 @@ func XMLDataCenterWriteOne(writer *XMLWriter, object *DataCenter, tag string) er
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8050,6 +8275,9 @@ func XMLUnmanagedNetworkWriteOne(writer *XMLWriter, object *UnmanagedNetwork, ta
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8096,6 +8324,9 @@ func XMLHostDeviceWriteOne(writer *XMLWriter, object *HostDevice, tag string) er
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8166,6 +8397,9 @@ func XMLBalanceWriteOne(writer *XMLWriter, object *Balance, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8275,6 +8509,9 @@ func XMLExternalProviderWriteOne(writer *XMLWriter, object *ExternalProvider, ta
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8381,6 +8618,9 @@ func XMLAffinityGroupWriteOne(writer *XMLWriter, object *AffinityGroup, tag stri
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8442,6 +8682,9 @@ func XMLDomainWriteOne(writer *XMLWriter, object *Domain, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8491,6 +8734,9 @@ func XMLExternalComputeResourceWriteOne(writer *XMLWriter, object *ExternalCompu
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8573,6 +8819,9 @@ func XMLExternalHostProviderWriteOne(writer *XMLWriter, object *ExternalHostProv
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8685,6 +8934,9 @@ func XMLStorageDomainWriteOne(writer *XMLWriter, object *StorageDomain, tag stri
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8809,6 +9061,9 @@ func XMLVnicProfileWriteOne(writer *XMLWriter, object *VnicProfile, tag string) 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8873,6 +9128,9 @@ func XMLGlusterVolumeProfileDetailsWriteOne(writer *XMLWriter, object *GlusterVo
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -8952,6 +9210,9 @@ func XMLEventWriteOne(writer *XMLWriter, object *Event, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9037,6 +9298,9 @@ func XMLTagWriteOne(writer *XMLWriter, object *Tag, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9134,6 +9398,9 @@ func XMLGlusterServerHookWriteOne(writer *XMLWriter, object *GlusterServerHook, 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9186,6 +9453,9 @@ func XMLIdentifiedWriteOne(writer *XMLWriter, object *Identified, tag string) er
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9280,6 +9550,9 @@ func XMLOpenStackImageWriteOne(writer *XMLWriter, object *OpenStackImage, tag st
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9323,6 +9596,9 @@ func XMLVmPoolWriteOne(writer *XMLWriter, object *VmPool, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9447,6 +9723,9 @@ func XMLAuthorizedKeyWriteOne(writer *XMLWriter, object *AuthorizedKey, tag stri
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9493,6 +9772,9 @@ func XMLGroupWriteOne(writer *XMLWriter, object *Group, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9587,6 +9869,9 @@ func XMLHostWriteOne(writer *XMLWriter, object *Host, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9771,6 +10056,9 @@ func XMLNetworkWriteOne(writer *XMLWriter, object *Network, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9859,6 +10147,9 @@ func XMLFilterWriteOne(writer *XMLWriter, object *Filter, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9905,6 +10196,9 @@ func XMLStepWriteOne(writer *XMLWriter, object *Step, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -9981,6 +10275,9 @@ func XMLImageTransferWriteOne(writer *XMLWriter, object *ImageTransfer, tag stri
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10039,6 +10336,9 @@ func XMLGlusterHookWriteOne(writer *XMLWriter, object *GlusterHook, tag string) 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10175,6 +10475,9 @@ func XMLNetworkLabelWriteOne(writer *XMLWriter, object *NetworkLabel, tag string
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10221,6 +10524,9 @@ func XMLMigrationPolicyWriteOne(writer *XMLWriter, object *MigrationPolicy, tag 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10324,6 +10630,9 @@ func XMLClusterWriteOne(writer *XMLWriter, object *Cluster, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10466,6 +10775,9 @@ func XMLIscsiBondWriteOne(writer *XMLWriter, object *IscsiBond, tag string) erro
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10515,6 +10827,9 @@ func XMLStorageConnectionWriteOne(writer *XMLWriter, object *StorageConnection, 
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10597,6 +10912,9 @@ func XMLVendorWriteOne(writer *XMLWriter, object *Vendor, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10637,6 +10955,9 @@ func XMLNicWriteOne(writer *XMLWriter, object *Nic, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
@@ -10797,6 +11118,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	}
 	var attrs map[string]string
 	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
