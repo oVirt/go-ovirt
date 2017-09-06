@@ -39,27 +39,29 @@ func main() {
 	}
 	defer conn.Close()
 
-	// Get the reference to the "vms" service:
-	vmsService := conn.SystemService().VmsService()
-
-	// Use the "list" method of the "vms" service to list all the virtual machines
-	vmsResponse, err := vmsService.List().Send()
-
+	tagsService := conn.SystemService().TagsService()
+	var tagID string
+	resp, err := tagsService.List().Send()
 	if err != nil {
-		fmt.Printf("Failed to get vm list, reason: %v\n", err)
+		fmt.Printf("Failed to get tag list, reason: %v\n", err)
 		return
 	}
-	if vms, ok := vmsResponse.Vms(); ok {
-		// Print the virtual machine names and identifiers:
-		for _, vm := range vms.Slice() {
-			fmt.Print("VM: (")
-			if vmName, ok := vm.Name(); ok {
-				fmt.Printf(" name: %v", vmName)
-			}
-			if vmID, ok := vm.Id(); ok {
-				fmt.Printf(" id: %v", vmID)
-			}
-			fmt.Println(")")
+	for _, tag := range resp.MustTags().Slice() {
+		if tag.MustName() == "mytag" {
+			tagID = tag.MustId()
+			break
 		}
 	}
+	if tagID == "" {
+		fmt.Printf("Tag (mytag) not found\n")
+		return
+	}
+
+	tagService := tagsService.TagService(tagID)
+	_, err = tagService.Remove().Send()
+	if err != nil {
+		fmt.Printf("Failed to remove tag, reason: %v", err)
+		return
+	}
+	fmt.Printf("Remove tag (mytag) successfully\n")
 }

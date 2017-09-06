@@ -39,27 +39,30 @@ func main() {
 	}
 	defer conn.Close()
 
-	// Get the reference to the "vms" service:
-	vmsService := conn.SystemService().VmsService()
+	tagService := conn.SystemService().TagsService()
 
-	// Use the "list" method of the "vms" service to list all the virtual machines
-	vmsResponse, err := vmsService.List().Send()
-
+	newTag, err := ovirtsdk4.NewTagBuilder().
+		Name("mytag").
+		Description("mytag desc").
+		Build()
 	if err != nil {
-		fmt.Printf("Failed to get vm list, reason: %v\n", err)
+		fmt.Printf("Construct a new tag failed, reason: %v\n", err)
+	}
+
+	resp, err := tagService.Add().Tag(newTag).Send()
+	if err != nil {
+		fmt.Printf("Failed to create a tag, reason: %v\n", err)
 		return
 	}
-	if vms, ok := vmsResponse.Vms(); ok {
-		// Print the virtual machine names and identifiers:
-		for _, vm := range vms.Slice() {
-			fmt.Print("VM: (")
-			if vmName, ok := vm.Name(); ok {
-				fmt.Printf(" name: %v", vmName)
-			}
-			if vmID, ok := vm.Id(); ok {
-				fmt.Printf(" id: %v", vmID)
-			}
-			fmt.Println(")")
-		}
-	}
+	tagAdded := resp.MustTag()
+	fmt.Printf("Tag with name-(%v) and desc-(%v) added successfuly\n",
+		tagAdded.MustName(), tagAdded.MustDescription())
+
+	// If tag added successfuly, print out:
+	// 		`Tag with name-(mytag) and desc-(mytag desc) added successfuly`
+	// If failed due to duplicate name, print out:
+	// 		`Failed to create a tag, reason: Fault reason is "Operation Failed".
+	// 		Fault detail is "[The specified Tag name already exists.]".
+	//		HTTP response code is "409". HTTP response message is "409 Conflict".`
+
 }

@@ -25,7 +25,7 @@ import (
 
 func main() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
-
+	// Create the connection to the server:
 	conn, err := ovirtsdk4.NewConnectionBuilder().
 		URL(inputRawURL).
 		Username("admin@internal").
@@ -42,24 +42,35 @@ func main() {
 	// Get the reference to the "vms" service:
 	vmsService := conn.SystemService().VmsService()
 
-	// Use the "list" method of the "vms" service to list all the virtual machines
-	vmsResponse, err := vmsService.List().Send()
+	// Use the "List" method of the "vms" service to search the virtual machines:
+	vmsResponse, err := vmsService.List().Search("name=test4joey").CaseSensitive(false).Send()
 
 	if err != nil {
 		fmt.Printf("Failed to get vm list, reason: %v\n", err)
 		return
 	}
-	if vms, ok := vmsResponse.Vms(); ok {
-		// Print the virtual machine names and identifiers:
-		for _, vm := range vms.Slice() {
-			fmt.Print("VM: (")
-			if vmName, ok := vm.Name(); ok {
-				fmt.Printf(" name: %v", vmName)
-			}
-			if vmID, ok := vm.Id(); ok {
-				fmt.Printf(" id: %v", vmID)
-			}
-			fmt.Println(")")
-		}
+	// Find the vm:
+	vm := vmsResponse.MustVms().Slice()[0]
+
+	// Find the service that manages the vm:
+	vmService := vmsService.VmService(vm.MustId())
+
+	// Locate the service that manages the tags of the vm:
+	assignedTagsService := vmService.TagsService()
+
+	tag, _ := ovirtsdk4.NewTagBuilder().Name("mytag").Build()
+	_, err = assignedTagsService.Add().Tag(tag).Send()
+	if err != nil {
+		// If the assigned tag not exists, print out:
+		// 		`Failed to assigne tag to vm, reason: Fault reason is "Operation Failed".
+		//		 Fault detail is "Entity not found: tagnotexits". HTTP response code is "404".
+		//		 HTTP response message is "404 Not Found".`
+		fmt.Printf("Failed to assigne tag to vm, reason: %v\n", err)
+		return
+	}
+
+	listResp, err := assignedTagsService.List().Send()
+	for _, tag := range listResp.MustTags().Slice() {
+		fmt.Printf("Assigned tag name is %v\n", tag.MustName())
 	}
 }
