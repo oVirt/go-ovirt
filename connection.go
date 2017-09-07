@@ -28,6 +28,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -206,6 +207,8 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 	connBuilder.conn.client = &http.Client{
 		Timeout: connBuilder.conn.timeout,
 		Transport: &http.Transport{
+			// Close the http connection after calling resp.Body.Close()
+			DisableKeepAlives:  true,
 			DisableCompression: !connBuilder.conn.compress,
 			TLSClientConfig:    tlsConfig,
 		},
@@ -219,15 +222,40 @@ func (c *Connection) Test() error {
 	return nil
 }
 
-// IsLink indicates if the given object is a link. An object is a link if it has an `href` attribute.
-func (c *Connection) IsLink(object string) bool {
-	// TODO: implement
-	return false
+func (c *Connection) getHref(object Href) (string, bool) {
+	return object.Href()
+}
+
+// IsLink indicates if the given object is a link.
+// An object is a link if it has an `href` attribute.
+func (c *Connection) IsLink(object Href) bool {
+	_, ok := c.getHref(object)
+	return ok
 }
 
 // FollowLink follows the `href` attribute of the given object, retrieves the target object and returns it.
-func (c *Connection) FollowLink(object string) error {
-	// TODO: implement
+func (c *Connection) FollowLink(object Href) error {
+	if !c.IsLink(object) {
+		return errors.New("Can't follow link because object don't have any")
+	}
+	href, ok := c.getHref(object)
+	if !ok {
+		return errors.New("Can't follow link because the 'href' attribute does't have a value")
+	}
+	useURL, err := url.Parse(c.URL())
+	if err != nil {
+		return errors.New("Failed to parse connection url")
+	}
+	prefix := useURL.Path
+	if !strings.HasSuffix(prefix, "/") {
+		prefix = prefix + "/"
+	}
+	if !strings.HasSuffix(href, prefix) {
+		return fmt.Errorf("The URL '%v' isn't compatible with the base URL of the connection", href)
+	}
+	path := href[len(prefix):]
+	NewSystemService(c, "").Service(path)
+	// TODO: handle calling get/list@service methods to retrieve structs
 	return nil
 }
 

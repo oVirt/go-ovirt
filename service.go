@@ -24,11 +24,25 @@ import (
 	"net/http"
 )
 
+// Service is the interface of all type services.
+type Service interface {
+	Connection() *Connection
+	Path() string
+}
+
 // baseService represents the base for all the services of the SDK. It contains the
 // utility methods used by all of them.
 type baseService struct {
-	Connection *Connection
-	Path       string
+	connection *Connection
+	path       string
+}
+
+func (service *baseService) Connection() *Connection {
+	return service.connection
+}
+
+func (service *baseService) Path() string {
+	return service.path
 }
 
 // CheckFault procoesses error parsing and returns it back

@@ -16,6 +16,10 @@
 
 package ovirtsdk4
 
+type Href interface {
+	Href() (string, bool)
+}
+
 // Link represents struct of href and rel attributes
 type Link struct {
 	href *string
