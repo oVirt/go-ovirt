@@ -70,7 +70,8 @@ func main() {
 	}
 
 	listResp, err := assignedTagsService.List().Send()
-	for _, tag := range listResp.MustTags().Slice() {
+	tags, _ := listResp.Tags()
+	for _, tag := range tags.Slice() {
 		fmt.Printf("Assigned tag name is %v\n", tag.MustName())
 	}
 }

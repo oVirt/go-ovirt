@@ -28,6 +28,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"reflect"
 	"strings"
 	"time"
 )
@@ -234,29 +235,50 @@ func (c *Connection) IsLink(object Href) bool {
 }
 
 // FollowLink follows the `href` attribute of the given object, retrieves the target object and returns it.
-func (c *Connection) FollowLink(object Href) error {
+func (c *Connection) FollowLink(object Href) (interface{}, error) {
 	if !c.IsLink(object) {
-		return errors.New("Can't follow link because object don't have any")
+		return nil, errors.New("Can't follow link because object don't have any")
 	}
 	href, ok := c.getHref(object)
 	if !ok {
-		return errors.New("Can't follow link because the 'href' attribute does't have a value")
+		return nil, errors.New("Can't follow link because the 'href' attribute does't have a value")
 	}
 	useURL, err := url.Parse(c.URL())
 	if err != nil {
-		return errors.New("Failed to parse connection url")
+		return nil, errors.New("Failed to parse connection url")
 	}
 	prefix := useURL.Path
 	if !strings.HasSuffix(prefix, "/") {
 		prefix = prefix + "/"
 	}
-	if !strings.HasSuffix(href, prefix) {
-		return fmt.Errorf("The URL '%v' isn't compatible with the base URL of the connection", href)
+	if !strings.HasPrefix(href, prefix) {
+		return nil, fmt.Errorf("The URL '%v' isn't compatible with the base URL of the connection", href)
 	}
 	path := href[len(prefix):]
-	NewSystemService(c, "").Service(path)
-	// TODO: handle calling get/list@service methods to retrieve structs
-	return nil
+	service, err := NewSystemService(c, "").Service(path)
+	if err != nil {
+		return nil, err
+	}
+
+	serviceValue := reflect.ValueOf(service)
+	// `object` is ptr, so use Elem() to get struct value
+	hrefObjectValue := reflect.ValueOf(object).Elem()
+	var requestCaller reflect.Value
+	// If it's TypeStructSlice (list)
+	if hrefObjectValue.FieldByName("slice").IsValid() {
+		// Call List() method
+		requestCaller = serviceValue.MethodByName("List").Call([]reflect.Value{})[0]
+	} else {
+		requestCaller = serviceValue.MethodByName("Get").Call([]reflect.Value{})[0]
+	}
+	callerResponse := requestCaller.MethodByName("Send").Call([]reflect.Value{})[0]
+	// Method 0 could retrieve the data
+	returnedValues := callerResponse.Method(0).Call([]reflect.Value{})
+	result, ok := returnedValues[0].Interface(), returnedValues[1].Bool()
+	if !ok {
+		return nil, errors.New("The data retrieved not exists")
+	}
+	return result, nil
 }
 
 // Close releases the resources used by this connection.

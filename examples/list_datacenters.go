@@ -56,8 +56,8 @@ func main() {
 			if dcName, ok := dc.Name(); ok {
 				fmt.Printf(" name: %v", dcName)
 			}
-			if dcId, ok := dc.Id(); ok {
-				fmt.Printf(" id: %v", dcId)
+			if dcID, ok := dc.Id(); ok {
+				fmt.Printf(" id: %v", dcID)
 			}
 			fmt.Printf("  Supported versions are: ")
 			if svs, ok := dc.SupportedVersions(); ok {

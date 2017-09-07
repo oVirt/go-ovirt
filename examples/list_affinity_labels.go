@@ -47,7 +47,8 @@ func main() {
 		fmt.Printf("Failed to get affinity label list, reason: %v\n", err)
 		return
 	}
-	for _, label := range resp.MustLabels().Slice() {
+	labels, _ := resp.Labels()
+	for _, label := range labels.Slice() {
 		fmt.Printf("Affinity labels (")
 		if name, ok := label.Name(); ok {
 			fmt.Printf(" name: %v", name)
@@ -56,6 +57,30 @@ func main() {
 			fmt.Printf(" desc: %v", desc)
 		}
 		fmt.Println(")")
+
+		// Print all affinity labels names and virtual machines
+		// which has assigned that affinity label
+		if vmSlice, ok := label.Vms(); ok {
+			vms, err := conn.FollowLink(vmSlice)
+			if err != nil {
+				if href, ok := vmSlice.Href(); ok {
+					fmt.Printf("Failed to follow vms link: %v, reason: %v\n", href, err)
+					return
+				}
+			}
+			if vms, ok := vms.(*ovirtsdk4.VmSlice); ok {
+				for _, vmLink := range vms.Slice() {
+					vm, err := conn.FollowLink(&vmLink)
+					if err != nil {
+						fmt.Printf("Failed to follow vm link: %v, reason: %v\n", vmLink.MustHref(), err)
+						return
+					}
+					if vm, ok := vm.(*ovirtsdk4.Vm); ok {
+						fmt.Printf("**** attached VM (%+v)\n", vm.MustName())
+					}
+				}
+			}
+		}
 	}
 
 }

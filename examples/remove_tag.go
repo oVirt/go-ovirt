@@ -46,7 +46,8 @@ func main() {
 		fmt.Printf("Failed to get tag list, reason: %v\n", err)
 		return
 	}
-	for _, tag := range resp.MustTags().Slice() {
+	tags, _ := resp.Tags()
+	for _, tag := range tags.Slice() {
 		if tag.MustName() == "mytag" {
 			tagID = tag.MustId()
 			break

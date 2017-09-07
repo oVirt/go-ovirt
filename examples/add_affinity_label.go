@@ -51,6 +51,6 @@ func main() {
 		fmt.Printf("Failed to create a affinity label, reason: %v\n", err)
 		return
 	}
-	addedLabel := resp.MustLabel()
+	addedLabel, _ := resp.Label()
 	fmt.Printf("Affinity label with name (%v) added successfuly\n", addedLabel.MustName())
 }

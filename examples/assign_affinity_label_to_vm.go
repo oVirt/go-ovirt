@@ -61,7 +61,8 @@ func main() {
 	if err != nil {
 		fmt.Printf("Failed to get affinity label list, reason: %v\n", err)
 	}
-	for _, label := range resp.MustLabels().Slice() {
+	labels, _ := resp.Labels()
+	for _, label := range labels.Slice() {
 		if label.MustName() == "myaffinitylabel" {
 			affinityLabelID = label.MustId()
 			break

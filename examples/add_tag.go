@@ -54,7 +54,7 @@ func main() {
 		fmt.Printf("Failed to create a tag, reason: %v\n", err)
 		return
 	}
-	tagAdded := resp.MustTag()
+	tagAdded, _ := resp.Tag()
 	fmt.Printf("Tag with name-(%v) and desc-(%v) added successfuly\n",
 		tagAdded.MustName(), tagAdded.MustDescription())
 

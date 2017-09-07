@@ -173,10 +173,6 @@ func (p *vnicProfilesServiceAddResponse) Profile() (*VnicProfile, bool) {
 	return nil, false
 }
 
-func (p *vnicProfilesServiceAddResponse) MustProfile() *VnicProfile {
-	return p.profile
-}
-
 func (p *vnicProfilesService) Add() *vnicProfilesServiceAddRequest {
 	return &vnicProfilesServiceAddRequest{vnicProfilesService: p}
 }
@@ -273,10 +269,6 @@ func (p *vnicProfilesServiceListResponse) Profiles() (*VnicProfileSlice, bool) {
 		return p.profiles, true
 	}
 	return nil, false
-}
-
-func (p *vnicProfilesServiceListResponse) MustProfiles() *VnicProfileSlice {
-	return p.profiles
 }
 
 func (p *vnicProfilesService) List() *vnicProfilesServiceListRequest {
@@ -412,10 +404,6 @@ func (p *schedulingPolicyUnitServiceGetResponse) Unit() (*SchedulingPolicyUnit, 
 		return p.unit, true
 	}
 	return nil, false
-}
-
-func (p *schedulingPolicyUnitServiceGetResponse) MustUnit() *SchedulingPolicyUnit {
-	return p.unit
 }
 
 func (p *schedulingPolicyUnitService) Get() *schedulingPolicyUnitServiceGetRequest {
@@ -616,10 +604,6 @@ func (p *virtualFunctionAllowedNetworkServiceGetResponse) Network() (*Network, b
 		return p.network, true
 	}
 	return nil, false
-}
-
-func (p *virtualFunctionAllowedNetworkServiceGetResponse) MustNetwork() *Network {
-	return p.network
 }
 
 func (p *virtualFunctionAllowedNetworkService) Get() *virtualFunctionAllowedNetworkServiceGetRequest {
@@ -835,10 +819,6 @@ func (p *templateNicsServiceAddResponse) Nic() (*Nic, bool) {
 	return nil, false
 }
 
-func (p *templateNicsServiceAddResponse) MustNic() *Nic {
-	return p.nic
-}
-
 func (p *templateNicsService) Add() *templateNicsServiceAddRequest {
 	return &templateNicsServiceAddRequest{templateNicsService: p}
 }
@@ -935,10 +915,6 @@ func (p *templateNicsServiceListResponse) Nics() (*NicSlice, bool) {
 		return p.nics, true
 	}
 	return nil, false
-}
-
-func (p *templateNicsServiceListResponse) MustNics() *NicSlice {
-	return p.nics
 }
 
 func (p *templateNicsService) List() *templateNicsServiceListRequest {
@@ -1065,10 +1041,6 @@ func (p *affinityLabelServiceGetResponse) Label() (*AffinityLabel, bool) {
 		return p.label, true
 	}
 	return nil, false
-}
-
-func (p *affinityLabelServiceGetResponse) MustLabel() *AffinityLabel {
-	return p.label
 }
 
 func (p *affinityLabelService) Get() *affinityLabelServiceGetRequest {
@@ -1247,10 +1219,6 @@ func (p *affinityLabelServiceUpdateResponse) Label() (*AffinityLabel, bool) {
 	return nil, false
 }
 
-func (p *affinityLabelServiceUpdateResponse) MustLabel() *AffinityLabel {
-	return p.label
-}
-
 func (p *affinityLabelService) Update() *affinityLabelServiceUpdateRequest {
 	return &affinityLabelServiceUpdateRequest{affinityLabelService: p}
 }
@@ -1406,10 +1374,6 @@ func (p *bookmarksServiceAddResponse) Bookmark() (*Bookmark, bool) {
 	return nil, false
 }
 
-func (p *bookmarksServiceAddResponse) MustBookmark() *Bookmark {
-	return p.bookmark
-}
-
 func (p *bookmarksService) Add() *bookmarksServiceAddRequest {
 	return &bookmarksServiceAddRequest{bookmarksService: p}
 }
@@ -1506,10 +1470,6 @@ func (p *bookmarksServiceListResponse) Bookmarks() (*BookmarkSlice, bool) {
 		return p.bookmarks, true
 	}
 	return nil, false
-}
-
-func (p *bookmarksServiceListResponse) MustBookmarks() *BookmarkSlice {
-	return p.bookmarks
 }
 
 func (p *bookmarksService) List() *bookmarksServiceListRequest {
@@ -1651,10 +1611,6 @@ func (p *networkAttachmentsServiceAddResponse) Attachment() (*NetworkAttachment,
 	return nil, false
 }
 
-func (p *networkAttachmentsServiceAddResponse) MustAttachment() *NetworkAttachment {
-	return p.attachment
-}
-
 func (p *networkAttachmentsService) Add() *networkAttachmentsServiceAddRequest {
 	return &networkAttachmentsServiceAddRequest{networkAttachmentsService: p}
 }
@@ -1751,10 +1707,6 @@ func (p *networkAttachmentsServiceListResponse) Attachments() (*NetworkAttachmen
 		return p.attachments, true
 	}
 	return nil, false
-}
-
-func (p *networkAttachmentsServiceListResponse) MustAttachments() *NetworkAttachmentSlice {
-	return p.attachments
 }
 
 func (p *networkAttachmentsService) List() *networkAttachmentsServiceListRequest {
@@ -1882,10 +1834,6 @@ func (p *operatingSystemServiceGetResponse) OperatingSystem() (*OperatingSystemI
 	return nil, false
 }
 
-func (p *operatingSystemServiceGetResponse) MustOperatingSystem() *OperatingSystemInfo {
-	return p.operatingSystem
-}
-
 func (p *operatingSystemService) Get() *operatingSystemServiceGetRequest {
 	return &operatingSystemServiceGetRequest{operatingSystemService: p}
 }
@@ -2009,10 +1957,6 @@ func (p *templateDisksServiceListResponse) Disks() (*DiskSlice, bool) {
 		return p.disks, true
 	}
 	return nil, false
-}
-
-func (p *templateDisksServiceListResponse) MustDisks() *DiskSlice {
-	return p.disks
 }
 
 func (p *templateDisksService) List() *templateDisksServiceListRequest {
@@ -2155,10 +2099,6 @@ func (p *systemPermissionsServiceAddResponse) Permission() (*Permission, bool) {
 	return nil, false
 }
 
-func (p *systemPermissionsServiceAddResponse) MustPermission() *Permission {
-	return p.permission
-}
-
 func (p *systemPermissionsService) Add() *systemPermissionsServiceAddRequest {
 	return &systemPermissionsServiceAddRequest{systemPermissionsService: p}
 }
@@ -2245,10 +2185,6 @@ func (p *systemPermissionsServiceListResponse) Permissions() (*PermissionSlice, 
 		return p.permissions, true
 	}
 	return nil, false
-}
-
-func (p *systemPermissionsServiceListResponse) MustPermissions() *PermissionSlice {
-	return p.permissions
 }
 
 func (p *systemPermissionsService) List() *systemPermissionsServiceListRequest {
@@ -2378,10 +2314,6 @@ func (p *vmReportedDeviceServiceGetResponse) ReportedDevice() (*ReportedDevice, 
 	return nil, false
 }
 
-func (p *vmReportedDeviceServiceGetResponse) MustReportedDevice() *ReportedDevice {
-	return p.reportedDevice
-}
-
 func (p *vmReportedDeviceService) Get() *vmReportedDeviceServiceGetRequest {
 	return &vmReportedDeviceServiceGetRequest{vmReportedDeviceService: p}
 }
@@ -2505,10 +2437,6 @@ func (p *snapshotNicsServiceListResponse) Nics() (*NicSlice, bool) {
 		return p.nics, true
 	}
 	return nil, false
-}
-
-func (p *snapshotNicsServiceListResponse) MustNics() *NicSlice {
-	return p.nics
 }
 
 func (p *snapshotNicsService) List() *snapshotNicsServiceListRequest {
@@ -2649,10 +2577,6 @@ func (p *assignedVnicProfilesServiceAddResponse) Profile() (*VnicProfile, bool) 
 	return nil, false
 }
 
-func (p *assignedVnicProfilesServiceAddResponse) MustProfile() *VnicProfile {
-	return p.profile
-}
-
 func (p *assignedVnicProfilesService) Add() *assignedVnicProfilesServiceAddRequest {
 	return &assignedVnicProfilesServiceAddRequest{assignedVnicProfilesService: p}
 }
@@ -2749,10 +2673,6 @@ func (p *assignedVnicProfilesServiceListResponse) Profiles() (*VnicProfileSlice,
 		return p.profiles, true
 	}
 	return nil, false
-}
-
-func (p *assignedVnicProfilesServiceListResponse) MustProfiles() *VnicProfileSlice {
-	return p.profiles
 }
 
 func (p *assignedVnicProfilesService) List() *assignedVnicProfilesServiceListRequest {
@@ -2893,10 +2813,6 @@ func (p *quotaClusterLimitsServiceAddResponse) Limit() (*QuotaClusterLimit, bool
 	return nil, false
 }
 
-func (p *quotaClusterLimitsServiceAddResponse) MustLimit() *QuotaClusterLimit {
-	return p.limit
-}
-
 func (p *quotaClusterLimitsService) Add() *quotaClusterLimitsServiceAddRequest {
 	return &quotaClusterLimitsServiceAddRequest{quotaClusterLimitsService: p}
 }
@@ -2993,10 +2909,6 @@ func (p *quotaClusterLimitsServiceListResponse) Limits() (*QuotaClusterLimitSlic
 		return p.limits, true
 	}
 	return nil, false
-}
-
-func (p *quotaClusterLimitsServiceListResponse) MustLimits() *QuotaClusterLimitSlice {
-	return p.limits
 }
 
 func (p *quotaClusterLimitsService) List() *quotaClusterLimitsServiceListRequest {
@@ -3141,10 +3053,6 @@ func (p *networksServiceAddResponse) Network() (*Network, bool) {
 	return nil, false
 }
 
-func (p *networksServiceAddResponse) MustNetwork() *Network {
-	return p.network
-}
-
 func (p *networksService) Add() *networksServiceAddRequest {
 	return &networksServiceAddRequest{networksService: p}
 }
@@ -3261,10 +3169,6 @@ func (p *networksServiceListResponse) Networks() (*NetworkSlice, bool) {
 		return p.networks, true
 	}
 	return nil, false
-}
-
-func (p *networksServiceListResponse) MustNetworks() *NetworkSlice {
-	return p.networks
 }
 
 func (p *networksService) List() *networksServiceListRequest {
@@ -3407,10 +3311,6 @@ func (p *affinityGroupsServiceAddResponse) Group() (*AffinityGroup, bool) {
 	return nil, false
 }
 
-func (p *affinityGroupsServiceAddResponse) MustGroup() *AffinityGroup {
-	return p.group
-}
-
 func (p *affinityGroupsService) Add() *affinityGroupsServiceAddRequest {
 	return &affinityGroupsServiceAddRequest{affinityGroupsService: p}
 }
@@ -3507,10 +3407,6 @@ func (p *affinityGroupsServiceListResponse) Groups() (*AffinityGroupSlice, bool)
 		return p.groups, true
 	}
 	return nil, false
-}
-
-func (p *affinityGroupsServiceListResponse) MustGroups() *AffinityGroupSlice {
-	return p.groups
 }
 
 func (p *affinityGroupsService) List() *affinityGroupsServiceListRequest {
@@ -3637,10 +3533,6 @@ func (p *diskSnapshotServiceGetResponse) Snapshot() (*DiskSnapshot, bool) {
 		return p.snapshot, true
 	}
 	return nil, false
-}
-
-func (p *diskSnapshotServiceGetResponse) MustSnapshot() *DiskSnapshot {
-	return p.snapshot
 }
 
 func (p *diskSnapshotService) Get() *diskSnapshotServiceGetRequest {
@@ -3853,10 +3745,6 @@ func (p *schedulingPolicyServiceGetResponse) Policy() (*SchedulingPolicy, bool) 
 	return nil, false
 }
 
-func (p *schedulingPolicyServiceGetResponse) MustPolicy() *SchedulingPolicy {
-	return p.policy
-}
-
 func (p *schedulingPolicyService) Get() *schedulingPolicyServiceGetRequest {
 	return &schedulingPolicyServiceGetRequest{schedulingPolicyService: p}
 }
@@ -4053,10 +3941,6 @@ func (p *schedulingPolicyServiceUpdateResponse) Policy() (*SchedulingPolicy, boo
 	return nil, false
 }
 
-func (p *schedulingPolicyServiceUpdateResponse) MustPolicy() *SchedulingPolicy {
-	return p.policy
-}
-
 func (p *schedulingPolicyService) Update() *schedulingPolicyServiceUpdateRequest {
 	return &schedulingPolicyServiceUpdateRequest{schedulingPolicyService: p}
 }
@@ -4206,10 +4090,6 @@ func (p *networkAttachmentServiceGetResponse) Attachment() (*NetworkAttachment, 
 		return p.attachment, true
 	}
 	return nil, false
-}
-
-func (p *networkAttachmentServiceGetResponse) MustAttachment() *NetworkAttachment {
-	return p.attachment
 }
 
 func (p *networkAttachmentService) Get() *networkAttachmentServiceGetRequest {
@@ -4408,10 +4288,6 @@ func (p *networkAttachmentServiceUpdateResponse) Attachment() (*NetworkAttachmen
 	return nil, false
 }
 
-func (p *networkAttachmentServiceUpdateResponse) MustAttachment() *NetworkAttachment {
-	return p.attachment
-}
-
 func (p *networkAttachmentService) Update() *networkAttachmentServiceUpdateRequest {
 	return &networkAttachmentServiceUpdateRequest{networkAttachmentService: p}
 }
@@ -4540,10 +4416,6 @@ func (p *diskProfilesServiceAddResponse) Profile() (*DiskProfile, bool) {
 	return nil, false
 }
 
-func (p *diskProfilesServiceAddResponse) MustProfile() *DiskProfile {
-	return p.profile
-}
-
 func (p *diskProfilesService) Add() *diskProfilesServiceAddRequest {
 	return &diskProfilesServiceAddRequest{diskProfilesService: p}
 }
@@ -4640,10 +4512,6 @@ func (p *diskProfilesServiceListResponse) Profile() (*DiskProfileSlice, bool) {
 		return p.profile, true
 	}
 	return nil, false
-}
-
-func (p *diskProfilesServiceListResponse) MustProfile() *DiskProfileSlice {
-	return p.profile
 }
 
 func (p *diskProfilesService) List() *diskProfilesServiceListRequest {
@@ -4772,10 +4640,6 @@ func (p *iconServiceGetResponse) Icon() (*Icon, bool) {
 	return nil, false
 }
 
-func (p *iconServiceGetResponse) MustIcon() *Icon {
-	return p.icon
-}
-
 func (p *iconService) Get() *iconServiceGetRequest {
 	return &iconServiceGetRequest{iconService: p}
 }
@@ -4891,10 +4755,6 @@ func (p *assignedAffinityLabelServiceGetResponse) Label() (*AffinityLabel, bool)
 		return p.label, true
 	}
 	return nil, false
-}
-
-func (p *assignedAffinityLabelServiceGetResponse) MustLabel() *AffinityLabel {
-	return p.label
 }
 
 func (p *assignedAffinityLabelService) Get() *assignedAffinityLabelServiceGetRequest {
@@ -5100,10 +4960,6 @@ func (p *cpuProfilesServiceAddResponse) Profile() (*CpuProfile, bool) {
 	return nil, false
 }
 
-func (p *cpuProfilesServiceAddResponse) MustProfile() *CpuProfile {
-	return p.profile
-}
-
 func (p *cpuProfilesService) Add() *cpuProfilesServiceAddRequest {
 	return &cpuProfilesServiceAddRequest{cpuProfilesService: p}
 }
@@ -5200,10 +5056,6 @@ func (p *cpuProfilesServiceListResponse) Profile() (*CpuProfileSlice, bool) {
 		return p.profile, true
 	}
 	return nil, false
-}
-
-func (p *cpuProfilesServiceListResponse) MustProfile() *CpuProfileSlice {
-	return p.profile
 }
 
 func (p *cpuProfilesService) List() *cpuProfilesServiceListRequest {
@@ -5344,10 +5196,6 @@ func (p *macPoolsServiceAddResponse) Pool() (*MacPool, bool) {
 	return nil, false
 }
 
-func (p *macPoolsServiceAddResponse) MustPool() *MacPool {
-	return p.pool
-}
-
 func (p *macPoolsService) Add() *macPoolsServiceAddRequest {
 	return &macPoolsServiceAddRequest{macPoolsService: p}
 }
@@ -5444,10 +5292,6 @@ func (p *macPoolsServiceListResponse) Pools() (*MacPoolSlice, bool) {
 		return p.pools, true
 	}
 	return nil, false
-}
-
-func (p *macPoolsServiceListResponse) MustPools() *MacPoolSlice {
-	return p.pools
 }
 
 func (p *macPoolsService) List() *macPoolsServiceListRequest {
@@ -5589,10 +5433,6 @@ func (p *affinityGroupVmsServiceAddResponse) Vm() (*Vm, bool) {
 	return nil, false
 }
 
-func (p *affinityGroupVmsServiceAddResponse) MustVm() *Vm {
-	return p.vm
-}
-
 func (p *affinityGroupVmsService) Add() *affinityGroupVmsServiceAddRequest {
 	return &affinityGroupVmsServiceAddRequest{affinityGroupVmsService: p}
 }
@@ -5689,10 +5529,6 @@ func (p *affinityGroupVmsServiceListResponse) Vms() (*VmSlice, bool) {
 		return p.vms, true
 	}
 	return nil, false
-}
-
-func (p *affinityGroupVmsServiceListResponse) MustVms() *VmSlice {
-	return p.vms
 }
 
 func (p *affinityGroupVmsService) List() *affinityGroupVmsServiceListRequest {
@@ -5819,10 +5655,6 @@ func (p *qosServiceGetResponse) Qos() (*Qos, bool) {
 		return p.qos, true
 	}
 	return nil, false
-}
-
-func (p *qosServiceGetResponse) MustQos() *Qos {
-	return p.qos
 }
 
 func (p *qosService) Get() *qosServiceGetRequest {
@@ -6021,10 +5853,6 @@ func (p *qosServiceUpdateResponse) Qos() (*Qos, bool) {
 	return nil, false
 }
 
-func (p *qosServiceUpdateResponse) MustQos() *Qos {
-	return p.qos
-}
-
 func (p *qosService) Update() *qosServiceUpdateRequest {
 	return &qosServiceUpdateRequest{qosService: p}
 }
@@ -6154,10 +5982,6 @@ func (p *tagsServiceAddResponse) Tag() (*Tag, bool) {
 	return nil, false
 }
 
-func (p *tagsServiceAddResponse) MustTag() *Tag {
-	return p.tag
-}
-
 func (p *tagsService) Add() *tagsServiceAddRequest {
 	return &tagsServiceAddRequest{tagsService: p}
 }
@@ -6254,10 +6078,6 @@ func (p *tagsServiceListResponse) Tags() (*TagSlice, bool) {
 		return p.tags, true
 	}
 	return nil, false
-}
-
-func (p *tagsServiceListResponse) MustTags() *TagSlice {
-	return p.tags
 }
 
 func (p *tagsService) List() *tagsServiceListRequest {
@@ -6384,10 +6204,6 @@ func (p *externalProviderCertificateServiceGetResponse) Certificate() (*Certific
 		return p.certificate, true
 	}
 	return nil, false
-}
-
-func (p *externalProviderCertificateServiceGetResponse) MustCertificate() *Certificate {
-	return p.certificate
 }
 
 func (p *externalProviderCertificateService) Get() *externalProviderCertificateServiceGetRequest {
@@ -6519,10 +6335,6 @@ func (p *eventsServiceAddResponse) Event() (*Event, bool) {
 	return nil, false
 }
 
-func (p *eventsServiceAddResponse) MustEvent() *Event {
-	return p.event
-}
-
 func (p *eventsService) Add() *eventsServiceAddRequest {
 	return &eventsServiceAddRequest{eventsService: p}
 }
@@ -6649,10 +6461,6 @@ func (p *eventsServiceListResponse) Events() (*EventSlice, bool) {
 		return p.events, true
 	}
 	return nil, false
-}
-
-func (p *eventsServiceListResponse) MustEvents() *EventSlice {
-	return p.events
 }
 
 func (p *eventsService) List() *eventsServiceListRequest {
@@ -6870,10 +6678,6 @@ func (p *vmWatchdogServiceGetResponse) Watchdog() (*Watchdog, bool) {
 	return nil, false
 }
 
-func (p *vmWatchdogServiceGetResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
-}
-
 func (p *vmWatchdogService) Get() *vmWatchdogServiceGetRequest {
 	return &vmWatchdogServiceGetRequest{vmWatchdogService: p}
 }
@@ -7068,10 +6872,6 @@ func (p *vmWatchdogServiceUpdateResponse) Watchdog() (*Watchdog, bool) {
 		return p.watchdog, true
 	}
 	return nil, false
-}
-
-func (p *vmWatchdogServiceUpdateResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
 }
 
 func (p *vmWatchdogService) Update() *vmWatchdogServiceUpdateRequest {
@@ -7365,10 +7165,6 @@ func (p *attachedStorageDomainServiceGetResponse) StorageDomain() (*StorageDomai
 	return nil, false
 }
 
-func (p *attachedStorageDomainServiceGetResponse) MustStorageDomain() *StorageDomain {
-	return p.storageDomain
-}
-
 func (p *attachedStorageDomainService) Get() *attachedStorageDomainServiceGetRequest {
 	return &attachedStorageDomainServiceGetRequest{attachedStorageDomainService: p}
 }
@@ -7594,10 +7390,6 @@ func (p *attachedStorageDomainsServiceAddResponse) StorageDomain() (*StorageDoma
 	return nil, false
 }
 
-func (p *attachedStorageDomainsServiceAddResponse) MustStorageDomain() *StorageDomain {
-	return p.storageDomain
-}
-
 func (p *attachedStorageDomainsService) Add() *attachedStorageDomainsServiceAddRequest {
 	return &attachedStorageDomainsServiceAddRequest{attachedStorageDomainsService: p}
 }
@@ -7694,10 +7486,6 @@ func (p *attachedStorageDomainsServiceListResponse) StorageDomains() (*StorageDo
 		return p.storageDomains, true
 	}
 	return nil, false
-}
-
-func (p *attachedStorageDomainsServiceListResponse) MustStorageDomains() *StorageDomainSlice {
-	return p.storageDomains
 }
 
 func (p *attachedStorageDomainsService) List() *attachedStorageDomainsServiceListRequest {
@@ -7823,10 +7611,6 @@ func (p *instanceTypeWatchdogServiceGetResponse) Watchdog() (*Watchdog, bool) {
 		return p.watchdog, true
 	}
 	return nil, false
-}
-
-func (p *instanceTypeWatchdogServiceGetResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
 }
 
 func (p *instanceTypeWatchdogService) Get() *instanceTypeWatchdogServiceGetRequest {
@@ -8025,10 +7809,6 @@ func (p *instanceTypeWatchdogServiceUpdateResponse) Watchdog() (*Watchdog, bool)
 	return nil, false
 }
 
-func (p *instanceTypeWatchdogServiceUpdateResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
-}
-
 func (p *instanceTypeWatchdogService) Update() *instanceTypeWatchdogServiceUpdateRequest {
 	return &instanceTypeWatchdogServiceUpdateRequest{instanceTypeWatchdogService: p}
 }
@@ -8142,10 +7922,6 @@ func (p *quotaStorageLimitServiceGetResponse) Limit() (*QuotaStorageLimit, bool)
 		return p.limit, true
 	}
 	return nil, false
-}
-
-func (p *quotaStorageLimitServiceGetResponse) MustLimit() *QuotaStorageLimit {
-	return p.limit
 }
 
 func (p *quotaStorageLimitService) Get() *quotaStorageLimitServiceGetRequest {
@@ -8348,10 +8124,6 @@ func (p *roleServiceGetResponse) Role() (*Role, bool) {
 	return nil, false
 }
 
-func (p *roleServiceGetResponse) MustRole() *Role {
-	return p.role
-}
-
 func (p *roleService) Get() *roleServiceGetRequest {
 	return &roleServiceGetRequest{roleService: p}
 }
@@ -8548,10 +8320,6 @@ func (p *roleServiceUpdateResponse) Role() (*Role, bool) {
 	return nil, false
 }
 
-func (p *roleServiceUpdateResponse) MustRole() *Role {
-	return p.role
-}
-
 func (p *roleService) Update() *roleServiceUpdateRequest {
 	return &roleServiceUpdateRequest{roleService: p}
 }
@@ -8678,10 +8446,6 @@ func (p *assignedNetworkServiceGetResponse) Network() (*Network, bool) {
 		return p.network, true
 	}
 	return nil, false
-}
-
-func (p *assignedNetworkServiceGetResponse) MustNetwork() *Network {
-	return p.network
 }
 
 func (p *assignedNetworkService) Get() *assignedNetworkServiceGetRequest {
@@ -8880,10 +8644,6 @@ func (p *assignedNetworkServiceUpdateResponse) Network() (*Network, bool) {
 	return nil, false
 }
 
-func (p *assignedNetworkServiceUpdateResponse) MustNetwork() *Network {
-	return p.network
-}
-
 func (p *assignedNetworkService) Update() *assignedNetworkServiceUpdateRequest {
 	return &assignedNetworkServiceUpdateRequest{assignedNetworkService: p}
 }
@@ -8998,10 +8758,6 @@ func (p *storageDomainVmDiskAttachmentServiceGetResponse) Attachment() (*DiskAtt
 		return p.attachment, true
 	}
 	return nil, false
-}
-
-func (p *storageDomainVmDiskAttachmentServiceGetResponse) MustAttachment() *DiskAttachment {
-	return p.attachment
 }
 
 func (p *storageDomainVmDiskAttachmentService) Get() *storageDomainVmDiskAttachmentServiceGetRequest {
@@ -9130,10 +8886,6 @@ func (p *hostNicsServiceListResponse) Nics() (*HostNicSlice, bool) {
 	return nil, false
 }
 
-func (p *hostNicsServiceListResponse) MustNics() *HostNicSlice {
-	return p.nics
-}
-
 func (p *hostNicsService) List() *hostNicsServiceListRequest {
 	return &hostNicsServiceListRequest{hostNicsService: p}
 }
@@ -9258,10 +9010,6 @@ func (p *vmNumaNodeServiceGetResponse) Node() (*VirtualNumaNode, bool) {
 		return p.node, true
 	}
 	return nil, false
-}
-
-func (p *vmNumaNodeServiceGetResponse) MustNode() *VirtualNumaNode {
-	return p.node
 }
 
 func (p *vmNumaNodeService) Get() *vmNumaNodeServiceGetRequest {
@@ -9460,10 +9208,6 @@ func (p *vmNumaNodeServiceUpdateResponse) Node() (*VirtualNumaNode, bool) {
 	return nil, false
 }
 
-func (p *vmNumaNodeServiceUpdateResponse) MustNode() *VirtualNumaNode {
-	return p.node
-}
-
 func (p *vmNumaNodeService) Update() *vmNumaNodeServiceUpdateRequest {
 	return &vmNumaNodeServiceUpdateRequest{vmNumaNodeService: p}
 }
@@ -9590,10 +9334,6 @@ func (p *templateCdromsServiceListResponse) Cdroms() (*CdromSlice, bool) {
 	return nil, false
 }
 
-func (p *templateCdromsServiceListResponse) MustCdroms() *CdromSlice {
-	return p.cdroms
-}
-
 func (p *templateCdromsService) List() *templateCdromsServiceListRequest {
 	return &templateCdromsServiceListRequest{templateCdromsService: p}
 }
@@ -9718,10 +9458,6 @@ func (p *snapshotServiceGetResponse) Snapshot() (*Snapshot, bool) {
 		return p.snapshot, true
 	}
 	return nil, false
-}
-
-func (p *snapshotServiceGetResponse) MustSnapshot() *Snapshot {
-	return p.snapshot
 }
 
 func (p *snapshotService) Get() *snapshotServiceGetRequest {
@@ -10085,10 +9821,6 @@ func (p *schedulingPoliciesServiceAddResponse) Policy() (*SchedulingPolicy, bool
 	return nil, false
 }
 
-func (p *schedulingPoliciesServiceAddResponse) MustPolicy() *SchedulingPolicy {
-	return p.policy
-}
-
 func (p *schedulingPoliciesService) Add() *schedulingPoliciesServiceAddRequest {
 	return &schedulingPoliciesServiceAddRequest{schedulingPoliciesService: p}
 }
@@ -10195,10 +9927,6 @@ func (p *schedulingPoliciesServiceListResponse) Policies() (*SchedulingPolicySli
 		return p.policies, true
 	}
 	return nil, false
-}
-
-func (p *schedulingPoliciesServiceListResponse) MustPolicies() *SchedulingPolicySlice {
-	return p.policies
 }
 
 func (p *schedulingPoliciesService) List() *schedulingPoliciesServiceListRequest {
@@ -10339,10 +10067,6 @@ func (p *weightsServiceAddResponse) Weight() (*Weight, bool) {
 	return nil, false
 }
 
-func (p *weightsServiceAddResponse) MustWeight() *Weight {
-	return p.weight
-}
-
 func (p *weightsService) Add() *weightsServiceAddRequest {
 	return &weightsServiceAddRequest{weightsService: p}
 }
@@ -10449,10 +10173,6 @@ func (p *weightsServiceListResponse) Weights() (*WeightSlice, bool) {
 		return p.weights, true
 	}
 	return nil, false
-}
-
-func (p *weightsServiceListResponse) MustWeights() *WeightSlice {
-	return p.weights
 }
 
 func (p *weightsService) List() *weightsServiceListRequest {
@@ -10594,10 +10314,6 @@ func (p *vmHostDevicesServiceAddResponse) Device() (*HostDevice, bool) {
 	return nil, false
 }
 
-func (p *vmHostDevicesServiceAddResponse) MustDevice() *HostDevice {
-	return p.device
-}
-
 func (p *vmHostDevicesService) Add() *vmHostDevicesServiceAddRequest {
 	return &vmHostDevicesServiceAddRequest{vmHostDevicesService: p}
 }
@@ -10694,10 +10410,6 @@ func (p *vmHostDevicesServiceListResponse) Device() (*HostDeviceSlice, bool) {
 		return p.device, true
 	}
 	return nil, false
-}
-
-func (p *vmHostDevicesServiceListResponse) MustDevice() *HostDeviceSlice {
-	return p.device
 }
 
 func (p *vmHostDevicesService) List() *vmHostDevicesServiceListRequest {
@@ -10824,10 +10536,6 @@ func (p *assignedCpuProfileServiceGetResponse) Profile() (*CpuProfile, bool) {
 		return p.profile, true
 	}
 	return nil, false
-}
-
-func (p *assignedCpuProfileServiceGetResponse) MustProfile() *CpuProfile {
-	return p.profile
 }
 
 func (p *assignedCpuProfileService) Get() *assignedCpuProfileServiceGetRequest {
@@ -11030,10 +10738,6 @@ func (p *snapshotNicServiceGetResponse) Nic() (*Nic, bool) {
 	return nil, false
 }
 
-func (p *snapshotNicServiceGetResponse) MustNic() *Nic {
-	return p.nic
-}
-
 func (p *snapshotNicService) Get() *snapshotNicServiceGetRequest {
 	return &snapshotNicServiceGetRequest{snapshotNicService: p}
 }
@@ -11148,10 +10852,6 @@ func (p *hostDeviceServiceGetResponse) Device() (*HostDevice, bool) {
 		return p.device, true
 	}
 	return nil, false
-}
-
-func (p *hostDeviceServiceGetResponse) MustDevice() *HostDevice {
-	return p.device
 }
 
 func (p *hostDeviceService) Get() *hostDeviceServiceGetRequest {
@@ -11285,10 +10985,6 @@ func (p *imageTransfersServiceAddResponse) ImageTransfer() (*ImageTransfer, bool
 	return nil, false
 }
 
-func (p *imageTransfersServiceAddResponse) MustImageTransfer() *ImageTransfer {
-	return p.imageTransfer
-}
-
 func (p *imageTransfersService) Add() *imageTransfersServiceAddRequest {
 	return &imageTransfersServiceAddRequest{imageTransfersService: p}
 }
@@ -11375,10 +11071,6 @@ func (p *imageTransfersServiceListResponse) ImageTransfer() (*ImageTransferSlice
 		return p.imageTransfer, true
 	}
 	return nil, false
-}
-
-func (p *imageTransfersServiceListResponse) MustImageTransfer() *ImageTransferSlice {
-	return p.imageTransfer
 }
 
 func (p *imageTransfersService) List() *imageTransfersServiceListRequest {
@@ -11724,10 +11416,6 @@ func (p *eventServiceGetResponse) Event() (*Event, bool) {
 	return nil, false
 }
 
-func (p *eventServiceGetResponse) MustEvent() *Event {
-	return p.event
-}
-
 func (p *eventService) Get() *eventServiceGetRequest {
 	return &eventServiceGetRequest{eventService: p}
 }
@@ -11979,10 +11667,6 @@ func (p *networkFiltersServiceListResponse) Filters() (*NetworkFilterSlice, bool
 	return nil, false
 }
 
-func (p *networkFiltersServiceListResponse) MustFilters() *NetworkFilterSlice {
-	return p.filters
-}
-
 func (p *networkFiltersService) List() *networkFiltersServiceListRequest {
 	return &networkFiltersServiceListRequest{networkFiltersService: p}
 }
@@ -12114,10 +11798,6 @@ func (p *statisticServiceGetResponse) Statistic() (*Statistic, bool) {
 	return nil, false
 }
 
-func (p *statisticServiceGetResponse) MustStatistic() *Statistic {
-	return p.statistic
-}
-
 func (p *statisticService) Get() *statisticServiceGetRequest {
 	return &statisticServiceGetRequest{statisticService: p}
 }
@@ -12247,10 +11927,6 @@ func (p *externalVmImportsServiceAddResponse) Import() (*ExternalVmImport, bool)
 	return nil, false
 }
 
-func (p *externalVmImportsServiceAddResponse) MustImport() *ExternalVmImport {
-	return p.import_
-}
-
 func (p *externalVmImportsService) Add() *externalVmImportsServiceAddRequest {
 	return &externalVmImportsServiceAddRequest{externalVmImportsService: p}
 }
@@ -12375,10 +12051,6 @@ func (p *assignedRolesServiceListResponse) Roles() (*RoleSlice, bool) {
 		return p.roles, true
 	}
 	return nil, false
-}
-
-func (p *assignedRolesServiceListResponse) MustRoles() *RoleSlice {
-	return p.roles
 }
 
 func (p *assignedRolesService) List() *assignedRolesServiceListRequest {
@@ -12506,10 +12178,6 @@ func (p *networkFilterParameterServiceGetResponse) Parameter() (*NetworkFilterPa
 		return p.parameter, true
 	}
 	return nil, false
-}
-
-func (p *networkFilterParameterServiceGetResponse) MustParameter() *NetworkFilterParameter {
-	return p.parameter
 }
 
 func (p *networkFilterParameterService) Get() *networkFilterParameterServiceGetRequest {
@@ -12688,10 +12356,6 @@ func (p *networkFilterParameterServiceUpdateResponse) Parameter() (*NetworkFilte
 	return nil, false
 }
 
-func (p *networkFilterParameterServiceUpdateResponse) MustParameter() *NetworkFilterParameter {
-	return p.parameter
-}
-
 func (p *networkFilterParameterService) Update() *networkFilterParameterServiceUpdateRequest {
 	return &networkFilterParameterServiceUpdateRequest{networkFilterParameterService: p}
 }
@@ -12805,10 +12469,6 @@ func (p *openstackImageProviderServiceGetResponse) Provider() (*OpenStackImagePr
 		return p.provider, true
 	}
 	return nil, false
-}
-
-func (p *openstackImageProviderServiceGetResponse) MustProvider() *OpenStackImageProvider {
-	return p.provider
 }
 
 func (p *openstackImageProviderService) Get() *openstackImageProviderServiceGetRequest {
@@ -13183,10 +12843,6 @@ func (p *openstackImageProviderServiceUpdateResponse) Provider() (*OpenStackImag
 	return nil, false
 }
 
-func (p *openstackImageProviderServiceUpdateResponse) MustProvider() *OpenStackImageProvider {
-	return p.provider
-}
-
 func (p *openstackImageProviderService) Update() *openstackImageProviderServiceUpdateRequest {
 	return &openstackImageProviderServiceUpdateRequest{openstackImageProviderService: p}
 }
@@ -13324,10 +12980,6 @@ func (p *openstackNetworkServiceGetResponse) Network() (*OpenStackNetwork, bool)
 		return p.network, true
 	}
 	return nil, false
-}
-
-func (p *openstackNetworkServiceGetResponse) MustNetwork() *OpenStackNetwork {
-	return p.network
 }
 
 func (p *openstackNetworkService) Get() *openstackNetworkServiceGetRequest {
@@ -13565,10 +13217,6 @@ func (p *openstackImageProvidersServiceAddResponse) Provider() (*OpenStackImageP
 	return nil, false
 }
 
-func (p *openstackImageProvidersServiceAddResponse) MustProvider() *OpenStackImageProvider {
-	return p.provider
-}
-
 func (p *openstackImageProvidersService) Add() *openstackImageProvidersServiceAddRequest {
 	return &openstackImageProvidersServiceAddRequest{openstackImageProvidersService: p}
 }
@@ -13665,10 +13313,6 @@ func (p *openstackImageProvidersServiceListResponse) Providers() (*OpenStackImag
 		return p.providers, true
 	}
 	return nil, false
-}
-
-func (p *openstackImageProvidersServiceListResponse) MustProviders() *OpenStackImageProviderSlice {
-	return p.providers
 }
 
 func (p *openstackImageProvidersService) List() *openstackImageProvidersServiceListRequest {
@@ -13794,10 +13438,6 @@ func (p *openstackVolumeAuthenticationKeyServiceGetResponse) Key() (*OpenstackVo
 		return p.key, true
 	}
 	return nil, false
-}
-
-func (p *openstackVolumeAuthenticationKeyServiceGetResponse) MustKey() *OpenstackVolumeAuthenticationKey {
-	return p.key
 }
 
 func (p *openstackVolumeAuthenticationKeyService) Get() *openstackVolumeAuthenticationKeyServiceGetRequest {
@@ -13986,10 +13626,6 @@ func (p *openstackVolumeAuthenticationKeyServiceUpdateResponse) Key() (*Openstac
 	return nil, false
 }
 
-func (p *openstackVolumeAuthenticationKeyServiceUpdateResponse) MustKey() *OpenstackVolumeAuthenticationKey {
-	return p.key
-}
-
 func (p *openstackVolumeAuthenticationKeyService) Update() *openstackVolumeAuthenticationKeyServiceUpdateRequest {
 	return &openstackVolumeAuthenticationKeyServiceUpdateRequest{openstackVolumeAuthenticationKeyService: p}
 }
@@ -14113,10 +13749,6 @@ func (p *openstackImagesServiceListResponse) Images() (*OpenStackImageSlice, boo
 		return p.images, true
 	}
 	return nil, false
-}
-
-func (p *openstackImagesServiceListResponse) MustImages() *OpenStackImageSlice {
-	return p.images
 }
 
 func (p *openstackImagesService) List() *openstackImagesServiceListRequest {
@@ -14259,10 +13891,6 @@ func (p *openstackNetworkProvidersServiceAddResponse) Provider() (*OpenStackNetw
 	return nil, false
 }
 
-func (p *openstackNetworkProvidersServiceAddResponse) MustProvider() *OpenStackNetworkProvider {
-	return p.provider
-}
-
 func (p *openstackNetworkProvidersService) Add() *openstackNetworkProvidersServiceAddRequest {
 	return &openstackNetworkProvidersServiceAddRequest{openstackNetworkProvidersService: p}
 }
@@ -14359,10 +13987,6 @@ func (p *openstackNetworkProvidersServiceListResponse) Providers() (*OpenStackNe
 		return p.providers, true
 	}
 	return nil, false
-}
-
-func (p *openstackNetworkProvidersServiceListResponse) MustProviders() *OpenStackNetworkProviderSlice {
-	return p.providers
 }
 
 func (p *openstackNetworkProvidersService) List() *openstackNetworkProvidersServiceListRequest {
@@ -14504,10 +14128,6 @@ func (p *openstackVolumeProvidersServiceAddResponse) Provider() (*OpenStackVolum
 	return nil, false
 }
 
-func (p *openstackVolumeProvidersServiceAddResponse) MustProvider() *OpenStackVolumeProvider {
-	return p.provider
-}
-
 func (p *openstackVolumeProvidersService) Add() *openstackVolumeProvidersServiceAddRequest {
 	return &openstackVolumeProvidersServiceAddRequest{openstackVolumeProvidersService: p}
 }
@@ -14604,10 +14224,6 @@ func (p *openstackVolumeProvidersServiceListResponse) Providers() (*OpenStackVol
 		return p.providers, true
 	}
 	return nil, false
-}
-
-func (p *openstackVolumeProvidersServiceListResponse) MustProviders() *OpenStackVolumeProviderSlice {
-	return p.providers
 }
 
 func (p *openstackVolumeProvidersService) List() *openstackVolumeProvidersServiceListRequest {
@@ -14745,10 +14361,6 @@ func (p *openstackNetworksServiceListResponse) Networks() (*OpenStackNetworkSlic
 	return nil, false
 }
 
-func (p *openstackNetworksServiceListResponse) MustNetworks() *OpenStackNetworkSlice {
-	return p.networks
-}
-
 func (p *openstackNetworksService) List() *openstackNetworksServiceListRequest {
 	return &openstackNetworksServiceListRequest{openstackNetworksService: p}
 }
@@ -14872,10 +14484,6 @@ func (p *openstackVolumeProviderServiceGetResponse) Provider() (*OpenStackVolume
 		return p.provider, true
 	}
 	return nil, false
-}
-
-func (p *openstackVolumeProviderServiceGetResponse) MustProvider() *OpenStackVolumeProvider {
-	return p.provider
 }
 
 func (p *openstackVolumeProviderService) Get() *openstackVolumeProviderServiceGetRequest {
@@ -15250,10 +14858,6 @@ func (p *openstackVolumeProviderServiceUpdateResponse) Provider() (*OpenStackVol
 	return nil, false
 }
 
-func (p *openstackVolumeProviderServiceUpdateResponse) MustProvider() *OpenStackVolumeProvider {
-	return p.provider
-}
-
 func (p *openstackVolumeProviderService) Update() *openstackVolumeProviderServiceUpdateRequest {
 	return &openstackVolumeProviderServiceUpdateRequest{openstackVolumeProviderService: p}
 }
@@ -15415,10 +15019,6 @@ func (p *openstackVolumeTypesServiceListResponse) Types() (*OpenStackVolumeTypeS
 	return nil, false
 }
 
-func (p *openstackVolumeTypesServiceListResponse) MustTypes() *OpenStackVolumeTypeSlice {
-	return p.types
-}
-
 func (p *openstackVolumeTypesService) List() *openstackVolumeTypesServiceListRequest {
 	return &openstackVolumeTypesServiceListRequest{openstackVolumeTypesService: p}
 }
@@ -15557,10 +15157,6 @@ func (p *openstackVolumeAuthenticationKeysServiceAddResponse) Key() (*OpenstackV
 	return nil, false
 }
 
-func (p *openstackVolumeAuthenticationKeysServiceAddResponse) MustKey() *OpenstackVolumeAuthenticationKey {
-	return p.key
-}
-
 func (p *openstackVolumeAuthenticationKeysService) Add() *openstackVolumeAuthenticationKeysServiceAddRequest {
 	return &openstackVolumeAuthenticationKeysServiceAddRequest{openstackVolumeAuthenticationKeysService: p}
 }
@@ -15657,10 +15253,6 @@ func (p *openstackVolumeAuthenticationKeysServiceListResponse) Keys() (*Openstac
 		return p.keys, true
 	}
 	return nil, false
-}
-
-func (p *openstackVolumeAuthenticationKeysServiceListResponse) MustKeys() *OpenstackVolumeAuthenticationKeySlice {
-	return p.keys
 }
 
 func (p *openstackVolumeAuthenticationKeysService) List() *openstackVolumeAuthenticationKeysServiceListRequest {
@@ -15786,10 +15378,6 @@ func (p *openstackImageServiceGetResponse) Image() (*OpenStackImage, bool) {
 		return p.image, true
 	}
 	return nil, false
-}
-
-func (p *openstackImageServiceGetResponse) MustImage() *OpenStackImage {
-	return p.image
 }
 
 func (p *openstackImageService) Get() *openstackImageServiceGetRequest {
@@ -16030,10 +15618,6 @@ func (p *openstackVolumeTypeServiceGetResponse) Type() (*OpenStackVolumeType, bo
 	return nil, false
 }
 
-func (p *openstackVolumeTypeServiceGetResponse) MustType() *OpenStackVolumeType {
-	return p.type_
-}
-
 func (p *openstackVolumeTypeService) Get() *openstackVolumeTypeServiceGetRequest {
 	return &openstackVolumeTypeServiceGetRequest{openstackVolumeTypeService: p}
 }
@@ -16147,10 +15731,6 @@ func (p *openstackSubnetServiceGetResponse) Subnet() (*OpenStackSubnet, bool) {
 		return p.subnet, true
 	}
 	return nil, false
-}
-
-func (p *openstackSubnetServiceGetResponse) MustSubnet() *OpenStackSubnet {
-	return p.subnet
 }
 
 func (p *openstackSubnetService) Get() *openstackSubnetServiceGetRequest {
@@ -16366,10 +15946,6 @@ func (p *openstackSubnetsServiceAddResponse) Subnet() (*OpenStackSubnet, bool) {
 	return nil, false
 }
 
-func (p *openstackSubnetsServiceAddResponse) MustSubnet() *OpenStackSubnet {
-	return p.subnet
-}
-
 func (p *openstackSubnetsService) Add() *openstackSubnetsServiceAddRequest {
 	return &openstackSubnetsServiceAddRequest{openstackSubnetsService: p}
 }
@@ -16466,10 +16042,6 @@ func (p *openstackSubnetsServiceListResponse) Subnets() (*OpenStackSubnetSlice, 
 		return p.subnets, true
 	}
 	return nil, false
-}
-
-func (p *openstackSubnetsServiceListResponse) MustSubnets() *OpenStackSubnetSlice {
-	return p.subnets
 }
 
 func (p *openstackSubnetsService) List() *openstackSubnetsServiceListRequest {
@@ -16596,10 +16168,6 @@ func (p *openstackNetworkProviderServiceGetResponse) Provider() (*OpenStackNetwo
 		return p.provider, true
 	}
 	return nil, false
-}
-
-func (p *openstackNetworkProviderServiceGetResponse) MustProvider() *OpenStackNetworkProvider {
-	return p.provider
 }
 
 func (p *openstackNetworkProviderService) Get() *openstackNetworkProviderServiceGetRequest {
@@ -16974,10 +16542,6 @@ func (p *openstackNetworkProviderServiceUpdateResponse) Provider() (*OpenStackNe
 	return nil, false
 }
 
-func (p *openstackNetworkProviderServiceUpdateResponse) MustProvider() *OpenStackNetworkProvider {
-	return p.provider
-}
-
 func (p *openstackNetworkProviderService) Update() *openstackNetworkProviderServiceUpdateRequest {
 	return &openstackNetworkProviderServiceUpdateRequest{openstackNetworkProviderService: p}
 }
@@ -17222,10 +16786,6 @@ func (p *templateServiceGetResponse) Template() (*Template, bool) {
 		return p.template, true
 	}
 	return nil, false
-}
-
-func (p *templateServiceGetResponse) MustTemplate() *Template {
-	return p.template
 }
 
 func (p *templateService) Get() *templateServiceGetRequest {
@@ -17505,10 +17065,6 @@ func (p *templateServiceUpdateResponse) Template() (*Template, bool) {
 	return nil, false
 }
 
-func (p *templateServiceUpdateResponse) MustTemplate() *Template {
-	return p.template
-}
-
 func (p *templateService) Update() *templateServiceUpdateRequest {
 	return &templateServiceUpdateRequest{templateService: p}
 }
@@ -17730,10 +17286,6 @@ func (p *vmWatchdogsServiceAddResponse) Watchdog() (*Watchdog, bool) {
 	return nil, false
 }
 
-func (p *vmWatchdogsServiceAddResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
-}
-
 func (p *vmWatchdogsService) Add() *vmWatchdogsServiceAddRequest {
 	return &vmWatchdogsServiceAddRequest{vmWatchdogsService: p}
 }
@@ -17830,10 +17382,6 @@ func (p *vmWatchdogsServiceListResponse) Watchdogs() (*WatchdogSlice, bool) {
 		return p.watchdogs, true
 	}
 	return nil, false
-}
-
-func (p *vmWatchdogsServiceListResponse) MustWatchdogs() *WatchdogSlice {
-	return p.watchdogs
 }
 
 func (p *vmWatchdogsService) List() *vmWatchdogsServiceListRequest {
@@ -17963,10 +17511,6 @@ func (p *affinityLabelVmServiceGetResponse) Vm() (*Vm, bool) {
 		return p.vm, true
 	}
 	return nil, false
-}
-
-func (p *affinityLabelVmServiceGetResponse) MustVm() *Vm {
-	return p.vm
 }
 
 func (p *affinityLabelVmService) Get() *affinityLabelVmServiceGetRequest {
@@ -18743,10 +18287,6 @@ func (p *vmServiceGetResponse) Vm() (*Vm, bool) {
 		return p.vm, true
 	}
 	return nil, false
-}
-
-func (p *vmServiceGetResponse) MustVm() *Vm {
-	return p.vm
 }
 
 func (p *vmService) Get() *vmServiceGetRequest {
@@ -20017,10 +19557,6 @@ func (p *vmServiceTicketResponse) Ticket() (*Ticket, bool) {
 	return nil, false
 }
 
-func (p *vmServiceTicketResponse) MustTicket() *Ticket {
-	return p.ticket
-}
-
 func (p *vmService) Ticket() *vmServiceTicketRequest {
 	return &vmServiceTicketRequest{vmService: p}
 }
@@ -20228,10 +19764,6 @@ func (p *vmServiceUpdateResponse) Vm() (*Vm, bool) {
 		return p.vm, true
 	}
 	return nil, false
-}
-
-func (p *vmServiceUpdateResponse) MustVm() *Vm {
-	return p.vm
 }
 
 func (p *vmService) Update() *vmServiceUpdateRequest {
@@ -20559,10 +20091,6 @@ func (p *instanceTypeGraphicsConsolesServiceAddResponse) Console() (*GraphicsCon
 	return nil, false
 }
 
-func (p *instanceTypeGraphicsConsolesServiceAddResponse) MustConsole() *GraphicsConsole {
-	return p.console
-}
-
 func (p *instanceTypeGraphicsConsolesService) Add() *instanceTypeGraphicsConsolesServiceAddRequest {
 	return &instanceTypeGraphicsConsolesServiceAddRequest{instanceTypeGraphicsConsolesService: p}
 }
@@ -20659,10 +20187,6 @@ func (p *instanceTypeGraphicsConsolesServiceListResponse) Consoles() (*GraphicsC
 		return p.consoles, true
 	}
 	return nil, false
-}
-
-func (p *instanceTypeGraphicsConsolesServiceListResponse) MustConsoles() *GraphicsConsoleSlice {
-	return p.consoles
 }
 
 func (p *instanceTypeGraphicsConsolesService) List() *instanceTypeGraphicsConsolesServiceListRequest {
@@ -20789,10 +20313,6 @@ func (p *storageDomainVmServiceGetResponse) Vm() (*Vm, bool) {
 		return p.vm, true
 	}
 	return nil, false
-}
-
-func (p *storageDomainVmServiceGetResponse) MustVm() *Vm {
-	return p.vm
 }
 
 func (p *storageDomainVmService) Get() *storageDomainVmServiceGetRequest {
@@ -21284,10 +20804,6 @@ func (p *clusterServiceGetResponse) Cluster() (*Cluster, bool) {
 	return nil, false
 }
 
-func (p *clusterServiceGetResponse) MustCluster() *Cluster {
-	return p.cluster
-}
-
 func (p *clusterService) Get() *clusterServiceGetRequest {
 	return &clusterServiceGetRequest{clusterService: p}
 }
@@ -21572,10 +21088,6 @@ func (p *clusterServiceUpdateResponse) Cluster() (*Cluster, bool) {
 	return nil, false
 }
 
-func (p *clusterServiceUpdateResponse) MustCluster() *Cluster {
-	return p.cluster
-}
-
 func (p *clusterService) Update() *clusterServiceUpdateRequest {
 	return &clusterServiceUpdateRequest{clusterService: p}
 }
@@ -21792,10 +21304,6 @@ func (p *snapshotDisksServiceListResponse) Disks() (*DiskSlice, bool) {
 	return nil, false
 }
 
-func (p *snapshotDisksServiceListResponse) MustDisks() *DiskSlice {
-	return p.disks
-}
-
 func (p *snapshotDisksService) List() *snapshotDisksServiceListRequest {
 	return &snapshotDisksServiceListRequest{snapshotDisksService: p}
 }
@@ -21934,10 +21442,6 @@ func (p *templateGraphicsConsolesServiceAddResponse) Console() (*GraphicsConsole
 	return nil, false
 }
 
-func (p *templateGraphicsConsolesServiceAddResponse) MustConsole() *GraphicsConsole {
-	return p.console
-}
-
 func (p *templateGraphicsConsolesService) Add() *templateGraphicsConsolesServiceAddRequest {
 	return &templateGraphicsConsolesServiceAddRequest{templateGraphicsConsolesService: p}
 }
@@ -22034,10 +21538,6 @@ func (p *templateGraphicsConsolesServiceListResponse) Consoles() (*GraphicsConso
 		return p.consoles, true
 	}
 	return nil, false
-}
-
-func (p *templateGraphicsConsolesServiceListResponse) MustConsoles() *GraphicsConsoleSlice {
-	return p.consoles
 }
 
 func (p *templateGraphicsConsolesService) List() *templateGraphicsConsolesServiceListRequest {
@@ -22265,10 +21765,6 @@ func (p *vmPoolServiceGetResponse) Pool() (*VmPool, bool) {
 	return nil, false
 }
 
-func (p *vmPoolServiceGetResponse) MustPool() *VmPool {
-	return p.pool
-}
-
 func (p *vmPoolService) Get() *vmPoolServiceGetRequest {
 	return &vmPoolServiceGetRequest{vmPoolService: p}
 }
@@ -22465,10 +21961,6 @@ func (p *vmPoolServiceUpdateResponse) Pool() (*VmPool, bool) {
 	return nil, false
 }
 
-func (p *vmPoolServiceUpdateResponse) MustPool() *VmPool {
-	return p.pool
-}
-
 func (p *vmPoolService) Update() *vmPoolServiceUpdateRequest {
 	return &vmPoolServiceUpdateRequest{vmPoolService: p}
 }
@@ -22610,10 +22102,6 @@ func (p *quotasServiceAddResponse) Quota() (*Quota, bool) {
 	return nil, false
 }
 
-func (p *quotasServiceAddResponse) MustQuota() *Quota {
-	return p.quota
-}
-
 func (p *quotasService) Add() *quotasServiceAddRequest {
 	return &quotasServiceAddRequest{quotasService: p}
 }
@@ -22710,10 +22198,6 @@ func (p *quotasServiceListResponse) Quotas() (*QuotaSlice, bool) {
 		return p.quotas, true
 	}
 	return nil, false
-}
-
-func (p *quotasServiceListResponse) MustQuotas() *QuotaSlice {
-	return p.quotas
 }
 
 func (p *quotasService) List() *quotasServiceListRequest {
@@ -22843,10 +22327,6 @@ func (p *clusterLevelServiceGetResponse) Level() (*ClusterLevel, bool) {
 	return nil, false
 }
 
-func (p *clusterLevelServiceGetResponse) MustLevel() *ClusterLevel {
-	return p.level
-}
-
 func (p *clusterLevelService) Get() *clusterLevelServiceGetRequest {
 	return &clusterLevelServiceGetRequest{clusterLevelService: p}
 }
@@ -22970,10 +22450,6 @@ func (p *storageDomainContentDiskServiceGetResponse) Disk() (*Disk, bool) {
 		return p.disk, true
 	}
 	return nil, false
-}
-
-func (p *storageDomainContentDiskServiceGetResponse) MustDisk() *Disk {
-	return p.disk
 }
 
 func (p *storageDomainContentDiskService) Get() *storageDomainContentDiskServiceGetRequest {
@@ -23110,10 +22586,6 @@ func (p *vmApplicationsServiceListResponse) Applications() (*ApplicationSlice, b
 		return p.applications, true
 	}
 	return nil, false
-}
-
-func (p *vmApplicationsServiceListResponse) MustApplications() *ApplicationSlice {
-	return p.applications
 }
 
 func (p *vmApplicationsService) List() *vmApplicationsServiceListRequest {
@@ -23274,10 +22746,6 @@ func (p *filesServiceListResponse) File() (*FileSlice, bool) {
 		return p.file, true
 	}
 	return nil, false
-}
-
-func (p *filesServiceListResponse) MustFile() *FileSlice {
-	return p.file
 }
 
 func (p *filesService) List() *filesServiceListRequest {
@@ -23531,10 +22999,6 @@ func (p *vmCdromServiceGetResponse) Cdrom() (*Cdrom, bool) {
 	return nil, false
 }
 
-func (p *vmCdromServiceGetResponse) MustCdrom() *Cdrom {
-	return p.cdrom
-}
-
 func (p *vmCdromService) Get() *vmCdromServiceGetRequest {
 	return &vmCdromServiceGetRequest{vmCdromService: p}
 }
@@ -23644,10 +23108,6 @@ func (p *vmCdromServiceUpdateResponse) Cdrom() (*Cdrom, bool) {
 		return p.cdrom, true
 	}
 	return nil, false
-}
-
-func (p *vmCdromServiceUpdateResponse) MustCdrom() *Cdrom {
-	return p.cdrom
 }
 
 func (p *vmCdromService) Update() *vmCdromServiceUpdateRequest {
@@ -23763,10 +23223,6 @@ func (p *quotaClusterLimitServiceGetResponse) Limit() (*QuotaClusterLimit, bool)
 		return p.limit, true
 	}
 	return nil, false
-}
-
-func (p *quotaClusterLimitServiceGetResponse) MustLimit() *QuotaClusterLimit {
-	return p.limit
 }
 
 func (p *quotaClusterLimitService) Get() *quotaClusterLimitServiceGetRequest {
@@ -23970,10 +23426,6 @@ func (p *diskAttachmentServiceGetResponse) Attachment() (*DiskAttachment, bool) 
 	return nil, false
 }
 
-func (p *diskAttachmentServiceGetResponse) MustAttachment() *DiskAttachment {
-	return p.attachment
-}
-
 func (p *diskAttachmentService) Get() *diskAttachmentServiceGetRequest {
 	return &diskAttachmentServiceGetRequest{diskAttachmentService: p}
 }
@@ -24160,10 +23612,6 @@ func (p *diskAttachmentServiceUpdateResponse) DiskAttachment() (*DiskAttachment,
 	return nil, false
 }
 
-func (p *diskAttachmentServiceUpdateResponse) MustDiskAttachment() *DiskAttachment {
-	return p.diskAttachment
-}
-
 func (p *diskAttachmentService) Update() *diskAttachmentServiceUpdateRequest {
 	return &diskAttachmentServiceUpdateRequest{diskAttachmentService: p}
 }
@@ -24278,10 +23726,6 @@ func (p *bookmarkServiceGetResponse) Bookmark() (*Bookmark, bool) {
 		return p.bookmark, true
 	}
 	return nil, false
-}
-
-func (p *bookmarkServiceGetResponse) MustBookmark() *Bookmark {
-	return p.bookmark
 }
 
 func (p *bookmarkService) Get() *bookmarkServiceGetRequest {
@@ -24480,10 +23924,6 @@ func (p *bookmarkServiceUpdateResponse) Bookmark() (*Bookmark, bool) {
 	return nil, false
 }
 
-func (p *bookmarkServiceUpdateResponse) MustBookmark() *Bookmark {
-	return p.bookmark
-}
-
 func (p *bookmarkService) Update() *bookmarkServiceUpdateRequest {
 	return &bookmarkServiceUpdateRequest{bookmarkService: p}
 }
@@ -24597,10 +24037,6 @@ func (p *instanceTypeNicServiceGetResponse) Nic() (*Nic, bool) {
 		return p.nic, true
 	}
 	return nil, false
-}
-
-func (p *instanceTypeNicServiceGetResponse) MustNic() *Nic {
-	return p.nic
 }
 
 func (p *instanceTypeNicService) Get() *instanceTypeNicServiceGetRequest {
@@ -24799,10 +24235,6 @@ func (p *instanceTypeNicServiceUpdateResponse) Nic() (*Nic, bool) {
 	return nil, false
 }
 
-func (p *instanceTypeNicServiceUpdateResponse) MustNic() *Nic {
-	return p.nic
-}
-
 func (p *instanceTypeNicService) Update() *instanceTypeNicServiceUpdateRequest {
 	return &instanceTypeNicServiceUpdateRequest{instanceTypeNicService: p}
 }
@@ -24916,10 +24348,6 @@ func (p *assignedDiskProfileServiceGetResponse) DiskProfile() (*DiskProfile, boo
 		return p.diskProfile, true
 	}
 	return nil, false
-}
-
-func (p *assignedDiskProfileServiceGetResponse) MustDiskProfile() *DiskProfile {
-	return p.diskProfile
 }
 
 func (p *assignedDiskProfileService) Get() *assignedDiskProfileServiceGetRequest {
@@ -25135,10 +24563,6 @@ func (p *networkLabelsServiceAddResponse) Label() (*NetworkLabel, bool) {
 	return nil, false
 }
 
-func (p *networkLabelsServiceAddResponse) MustLabel() *NetworkLabel {
-	return p.label
-}
-
 func (p *networkLabelsService) Add() *networkLabelsServiceAddRequest {
 	return &networkLabelsServiceAddRequest{networkLabelsService: p}
 }
@@ -25235,10 +24659,6 @@ func (p *networkLabelsServiceListResponse) Labels() (*NetworkLabelSlice, bool) {
 		return p.labels, true
 	}
 	return nil, false
-}
-
-func (p *networkLabelsServiceListResponse) MustLabels() *NetworkLabelSlice {
-	return p.labels
 }
 
 func (p *networkLabelsService) List() *networkLabelsServiceListRequest {
@@ -25376,10 +24796,6 @@ func (p *storageDomainServiceGetResponse) StorageDomain() (*StorageDomain, bool)
 	return nil, false
 }
 
-func (p *storageDomainServiceGetResponse) MustStorageDomain() *StorageDomain {
-	return p.storageDomain
-}
-
 func (p *storageDomainService) Get() *storageDomainServiceGetRequest {
 	return &storageDomainServiceGetRequest{storageDomainService: p}
 }
@@ -25483,10 +24899,6 @@ func (p *storageDomainServiceIsAttachedResponse) IsAttached() (bool, bool) {
 	}
 	var zero bool
 	return zero, false
-}
-
-func (p *storageDomainServiceIsAttachedResponse) MustIsAttached() bool {
-	return *p.isAttached
 }
 
 func (p *storageDomainService) IsAttached() *storageDomainServiceIsAttachedRequest {
@@ -25898,10 +25310,6 @@ func (p *storageDomainServiceUpdateResponse) StorageDomain() (*StorageDomain, bo
 	return nil, false
 }
 
-func (p *storageDomainServiceUpdateResponse) MustStorageDomain() *StorageDomain {
-	return p.storageDomain
-}
-
 func (p *storageDomainService) Update() *storageDomainServiceUpdateRequest {
 	return &storageDomainServiceUpdateRequest{storageDomainService: p}
 }
@@ -26230,10 +25638,6 @@ func (p *dataCentersServiceAddResponse) DataCenter() (*DataCenter, bool) {
 	return nil, false
 }
 
-func (p *dataCentersServiceAddResponse) MustDataCenter() *DataCenter {
-	return p.dataCenter
-}
-
 func (p *dataCentersService) Add() *dataCentersServiceAddRequest {
 	return &dataCentersServiceAddRequest{dataCentersService: p}
 }
@@ -26360,10 +25764,6 @@ func (p *dataCentersServiceListResponse) DataCenters() (*DataCenterSlice, bool) 
 		return p.dataCenters, true
 	}
 	return nil, false
-}
-
-func (p *dataCentersServiceListResponse) MustDataCenters() *DataCenterSlice {
-	return p.dataCenters
 }
 
 func (p *dataCentersService) List() *dataCentersServiceListRequest {
@@ -26503,10 +25903,6 @@ func (p *vmApplicationServiceGetResponse) Application() (*Application, bool) {
 	return nil, false
 }
 
-func (p *vmApplicationServiceGetResponse) MustApplication() *Application {
-	return p.application
-}
-
 func (p *vmApplicationService) Get() *vmApplicationServiceGetRequest {
 	return &vmApplicationServiceGetRequest{vmApplicationService: p}
 }
@@ -26635,10 +26031,6 @@ func (p *quotaStorageLimitsServiceAddResponse) Limit() (*QuotaStorageLimit, bool
 	return nil, false
 }
 
-func (p *quotaStorageLimitsServiceAddResponse) MustLimit() *QuotaStorageLimit {
-	return p.limit
-}
-
 func (p *quotaStorageLimitsService) Add() *quotaStorageLimitsServiceAddRequest {
 	return &quotaStorageLimitsServiceAddRequest{quotaStorageLimitsService: p}
 }
@@ -26735,10 +26127,6 @@ func (p *quotaStorageLimitsServiceListResponse) Limits() (*QuotaStorageLimitSlic
 		return p.limits, true
 	}
 	return nil, false
-}
-
-func (p *quotaStorageLimitsServiceListResponse) MustLimits() *QuotaStorageLimitSlice {
-	return p.limits
 }
 
 func (p *quotaStorageLimitsService) List() *quotaStorageLimitsServiceListRequest {
@@ -26864,10 +26252,6 @@ func (p *templateNicServiceGetResponse) Nic() (*Nic, bool) {
 		return p.nic, true
 	}
 	return nil, false
-}
-
-func (p *templateNicServiceGetResponse) MustNic() *Nic {
-	return p.nic
 }
 
 func (p *templateNicService) Get() *templateNicServiceGetRequest {
@@ -27066,10 +26450,6 @@ func (p *templateNicServiceUpdateResponse) Nic() (*Nic, bool) {
 	return nil, false
 }
 
-func (p *templateNicServiceUpdateResponse) MustNic() *Nic {
-	return p.nic
-}
-
 func (p *templateNicService) Update() *templateNicServiceUpdateRequest {
 	return &templateNicServiceUpdateRequest{templateNicService: p}
 }
@@ -27198,10 +26578,6 @@ func (p *vmCdromsServiceListResponse) Cdroms() (*CdromSlice, bool) {
 		return p.cdroms, true
 	}
 	return nil, false
-}
-
-func (p *vmCdromsServiceListResponse) MustCdroms() *CdromSlice {
-	return p.cdroms
 }
 
 func (p *vmCdromsService) List() *vmCdromsServiceListRequest {
@@ -27339,10 +26715,6 @@ func (p *vmSessionsServiceListResponse) Sessions() (*SessionSlice, bool) {
 		return p.sessions, true
 	}
 	return nil, false
-}
-
-func (p *vmSessionsServiceListResponse) MustSessions() *SessionSlice {
-	return p.sessions
 }
 
 func (p *vmSessionsService) List() *vmSessionsServiceListRequest {
@@ -27742,10 +27114,6 @@ func (p *vmDiskServiceGetResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *vmDiskServiceGetResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *vmDiskService) Get() *vmDiskServiceGetRequest {
 	return &vmDiskServiceGetRequest{vmDiskService: p}
 }
@@ -28037,10 +27405,6 @@ func (p *vmDiskServiceUpdateResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *vmDiskServiceUpdateResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *vmDiskService) Update() *vmDiskServiceUpdateRequest {
 	return &vmDiskServiceUpdateRequest{vmDiskService: p}
 }
@@ -28178,10 +27542,6 @@ func (p *storageServerConnectionServiceGetResponse) Conection() (*StorageConnect
 		return p.conection, true
 	}
 	return nil, false
-}
-
-func (p *storageServerConnectionServiceGetResponse) MustConection() *StorageConnection {
-	return p.conection
 }
 
 func (p *storageServerConnectionService) Get() *storageServerConnectionServiceGetRequest {
@@ -28398,10 +27758,6 @@ func (p *storageServerConnectionServiceUpdateResponse) Connection() (*StorageCon
 		return p.connection, true
 	}
 	return nil, false
-}
-
-func (p *storageServerConnectionServiceUpdateResponse) MustConnection() *StorageConnection {
-	return p.connection
 }
 
 func (p *storageServerConnectionService) Update() *storageServerConnectionServiceUpdateRequest {
@@ -28997,10 +28353,6 @@ func (p *hostServiceFenceResponse) PowerManagement() (*PowerManagement, bool) {
 	return nil, false
 }
 
-func (p *hostServiceFenceResponse) MustPowerManagement() *PowerManagement {
-	return p.powerManagement
-}
-
 func (p *hostService) Fence() *hostServiceFenceRequest {
 	return &hostServiceFenceRequest{hostService: p}
 }
@@ -29185,10 +28537,6 @@ func (p *hostServiceGetResponse) Host() (*Host, bool) {
 		return p.host, true
 	}
 	return nil, false
-}
-
-func (p *hostServiceGetResponse) MustHost() *Host {
-	return p.host
 }
 
 func (p *hostService) Get() *hostServiceGetRequest {
@@ -29423,10 +28771,6 @@ func (p *hostServiceIscsiDiscoverResponse) IscsiTargets() ([]string, bool) {
 		return p.iscsiTargets, true
 	}
 	return nil, false
-}
-
-func (p *hostServiceIscsiDiscoverResponse) MustIscsiTargets() []string {
-	return p.iscsiTargets
 }
 
 func (p *hostService) IscsiDiscover() *hostServiceIscsiDiscoverRequest {
@@ -29952,10 +29296,6 @@ func (p *hostServiceUnregisteredStorageDomainsDiscoverResponse) StorageDomains()
 	return nil, false
 }
 
-func (p *hostServiceUnregisteredStorageDomainsDiscoverResponse) MustStorageDomains() *StorageDomainSlice {
-	return p.storageDomains
-}
-
 func (p *hostService) UnregisteredStorageDomainsDiscover() *hostServiceUnregisteredStorageDomainsDiscoverRequest {
 	return &hostServiceUnregisteredStorageDomainsDiscoverRequest{hostService: p}
 }
@@ -30065,10 +29405,6 @@ func (p *hostServiceUpdateResponse) Host() (*Host, bool) {
 		return p.host, true
 	}
 	return nil, false
-}
-
-func (p *hostServiceUpdateResponse) MustHost() *Host {
-	return p.host
 }
 
 func (p *hostService) Update() *hostServiceUpdateRequest {
@@ -30553,10 +29889,6 @@ func (p *externalProviderCertificatesServiceListResponse) Certificates() (*Certi
 	return nil, false
 }
 
-func (p *externalProviderCertificatesServiceListResponse) MustCertificates() *CertificateSlice {
-	return p.certificates
-}
-
 func (p *externalProviderCertificatesService) List() *externalProviderCertificatesServiceListRequest {
 	return &externalProviderCertificatesServiceListRequest{externalProviderCertificatesService: p}
 }
@@ -30681,10 +30013,6 @@ func (p *vmHostDeviceServiceGetResponse) Device() (*HostDevice, bool) {
 		return p.device, true
 	}
 	return nil, false
-}
-
-func (p *vmHostDeviceServiceGetResponse) MustDevice() *HostDevice {
-	return p.device
 }
 
 func (p *vmHostDeviceService) Get() *vmHostDeviceServiceGetRequest {
@@ -30888,10 +30216,6 @@ func (p *tagServiceGetResponse) Tag() (*Tag, bool) {
 	return nil, false
 }
 
-func (p *tagServiceGetResponse) MustTag() *Tag {
-	return p.tag
-}
-
 func (p *tagService) Get() *tagServiceGetRequest {
 	return &tagServiceGetRequest{tagService: p}
 }
@@ -31088,10 +30412,6 @@ func (p *tagServiceUpdateResponse) Tag() (*Tag, bool) {
 	return nil, false
 }
 
-func (p *tagServiceUpdateResponse) MustTag() *Tag {
-	return p.tag
-}
-
 func (p *tagService) Update() *tagServiceUpdateRequest {
 	return &tagServiceUpdateRequest{tagService: p}
 }
@@ -31215,10 +30535,6 @@ func (p *hostNumaNodesServiceListResponse) Nodes() (*NumaNodeSlice, bool) {
 		return p.nodes, true
 	}
 	return nil, false
-}
-
-func (p *hostNumaNodesServiceListResponse) MustNodes() *NumaNodeSlice {
-	return p.nodes
 }
 
 func (p *hostNumaNodesService) List() *hostNumaNodesServiceListRequest {
@@ -31360,10 +30676,6 @@ func (p *assignedTagsServiceAddResponse) Tag() (*Tag, bool) {
 	return nil, false
 }
 
-func (p *assignedTagsServiceAddResponse) MustTag() *Tag {
-	return p.tag
-}
-
 func (p *assignedTagsService) Add() *assignedTagsServiceAddRequest {
 	return &assignedTagsServiceAddRequest{assignedTagsService: p}
 }
@@ -31460,10 +30772,6 @@ func (p *assignedTagsServiceListResponse) Tags() (*TagSlice, bool) {
 		return p.tags, true
 	}
 	return nil, false
-}
-
-func (p *assignedTagsServiceListResponse) MustTags() *TagSlice {
-	return p.tags
 }
 
 func (p *assignedTagsService) List() *assignedTagsServiceListRequest {
@@ -31783,10 +31091,6 @@ func (p *jobServiceGetResponse) Job() (*Job, bool) {
 	return nil, false
 }
 
-func (p *jobServiceGetResponse) MustJob() *Job {
-	return p.job
-}
-
 func (p *jobService) Get() *jobServiceGetRequest {
 	return &jobServiceGetRequest{jobService: p}
 }
@@ -31913,10 +31217,6 @@ func (p *fileServiceGetResponse) File() (*File, bool) {
 		return p.file, true
 	}
 	return nil, false
-}
-
-func (p *fileServiceGetResponse) MustFile() *File {
-	return p.file
 }
 
 func (p *fileService) Get() *fileServiceGetRequest {
@@ -32048,10 +31348,6 @@ func (p *stepsServiceAddResponse) Step() (*Step, bool) {
 	return nil, false
 }
 
-func (p *stepsServiceAddResponse) MustStep() *Step {
-	return p.step
-}
-
 func (p *stepsService) Add() *stepsServiceAddRequest {
 	return &stepsServiceAddRequest{stepsService: p}
 }
@@ -32148,10 +31444,6 @@ func (p *stepsServiceListResponse) Steps() (*StepSlice, bool) {
 		return p.steps, true
 	}
 	return nil, false
-}
-
-func (p *stepsServiceListResponse) MustSteps() *StepSlice {
-	return p.steps
 }
 
 func (p *stepsService) List() *stepsServiceListRequest {
@@ -32278,10 +31570,6 @@ func (p *storageDomainServerConnectionServiceGetResponse) Connection() (*Storage
 		return p.connection, true
 	}
 	return nil, false
-}
-
-func (p *storageDomainServerConnectionServiceGetResponse) MustConnection() *StorageConnection {
-	return p.connection
 }
 
 func (p *storageDomainServerConnectionService) Get() *storageDomainServerConnectionServiceGetRequest {
@@ -32498,10 +31786,6 @@ func (p *rolesServiceAddResponse) Role() (*Role, bool) {
 	return nil, false
 }
 
-func (p *rolesServiceAddResponse) MustRole() *Role {
-	return p.role
-}
-
 func (p *rolesService) Add() *rolesServiceAddRequest {
 	return &rolesServiceAddRequest{rolesService: p}
 }
@@ -32598,10 +31882,6 @@ func (p *rolesServiceListResponse) Roles() (*RoleSlice, bool) {
 		return p.roles, true
 	}
 	return nil, false
-}
-
-func (p *rolesServiceListResponse) MustRoles() *RoleSlice {
-	return p.roles
 }
 
 func (p *rolesService) List() *rolesServiceListRequest {
@@ -33037,10 +32317,6 @@ func (p *imageTransferServiceGetResponse) ImageTransfer() (*ImageTransfer, bool)
 	return nil, false
 }
 
-func (p *imageTransferServiceGetResponse) MustImageTransfer() *ImageTransfer {
-	return p.imageTransfer
-}
-
 func (p *imageTransferService) Get() *imageTransferServiceGetRequest {
 	return &imageTransferServiceGetRequest{imageTransferService: p}
 }
@@ -33318,10 +32594,6 @@ func (p *assignedVnicProfileServiceGetResponse) Profile() (*VnicProfile, bool) {
 	return nil, false
 }
 
-func (p *assignedVnicProfileServiceGetResponse) MustProfile() *VnicProfile {
-	return p.profile
-}
-
 func (p *assignedVnicProfileService) Get() *assignedVnicProfileServiceGetRequest {
 	return &assignedVnicProfileServiceGetRequest{assignedVnicProfileService: p}
 }
@@ -33534,10 +32806,6 @@ func (p *templateWatchdogServiceGetResponse) Watchdog() (*Watchdog, bool) {
 	return nil, false
 }
 
-func (p *templateWatchdogServiceGetResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
-}
-
 func (p *templateWatchdogService) Get() *templateWatchdogServiceGetRequest {
 	return &templateWatchdogServiceGetRequest{templateWatchdogService: p}
 }
@@ -33734,10 +33002,6 @@ func (p *templateWatchdogServiceUpdateResponse) Watchdog() (*Watchdog, bool) {
 	return nil, false
 }
 
-func (p *templateWatchdogServiceUpdateResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
-}
-
 func (p *templateWatchdogService) Update() *templateWatchdogServiceUpdateRequest {
 	return &templateWatchdogServiceUpdateRequest{templateWatchdogService: p}
 }
@@ -33851,10 +33115,6 @@ func (p *vmSessionServiceGetResponse) Session() (*Session, bool) {
 		return p.session, true
 	}
 	return nil, false
-}
-
-func (p *vmSessionServiceGetResponse) MustSession() *Session {
-	return p.session
 }
 
 func (p *vmSessionService) Get() *vmSessionServiceGetRequest {
@@ -34148,10 +33408,6 @@ func (p *vmNicServiceGetResponse) Nic() (*Nic, bool) {
 	return nil, false
 }
 
-func (p *vmNicServiceGetResponse) MustNic() *Nic {
-	return p.nic
-}
-
 func (p *vmNicService) Get() *vmNicServiceGetRequest {
 	return &vmNicServiceGetRequest{vmNicService: p}
 }
@@ -34348,10 +33604,6 @@ func (p *vmNicServiceUpdateResponse) Nic() (*Nic, bool) {
 	return nil, false
 }
 
-func (p *vmNicServiceUpdateResponse) MustNic() *Nic {
-	return p.nic
-}
-
 func (p *vmNicService) Update() *vmNicServiceUpdateRequest {
 	return &vmNicServiceUpdateRequest{vmNicService: p}
 }
@@ -34518,10 +33770,6 @@ func (p *snapshotsServiceAddResponse) Snapshot() (*Snapshot, bool) {
 	return nil, false
 }
 
-func (p *snapshotsServiceAddResponse) MustSnapshot() *Snapshot {
-	return p.snapshot
-}
-
 func (p *snapshotsService) Add() *snapshotsServiceAddRequest {
 	return &snapshotsServiceAddRequest{snapshotsService: p}
 }
@@ -34628,10 +33876,6 @@ func (p *snapshotsServiceListResponse) Snapshots() (*SnapshotSlice, bool) {
 		return p.snapshots, true
 	}
 	return nil, false
-}
-
-func (p *snapshotsServiceListResponse) MustSnapshots() *SnapshotSlice {
-	return p.snapshots
 }
 
 func (p *snapshotsService) List() *snapshotsServiceListRequest {
@@ -34760,10 +34004,6 @@ func (p *storageDomainVmDiskAttachmentsServiceListResponse) Attachments() (*Disk
 	return nil, false
 }
 
-func (p *storageDomainVmDiskAttachmentsServiceListResponse) MustAttachments() *DiskAttachmentSlice {
-	return p.attachments
-}
-
 func (p *storageDomainVmDiskAttachmentsService) List() *storageDomainVmDiskAttachmentsServiceListRequest {
 	return &storageDomainVmDiskAttachmentsServiceListRequest{storageDomainVmDiskAttachmentsService: p}
 }
@@ -34888,10 +34128,6 @@ func (p *imageServiceGetResponse) Image() (*Image, bool) {
 		return p.image, true
 	}
 	return nil, false
-}
-
-func (p *imageServiceGetResponse) MustImage() *Image {
-	return p.image
 }
 
 func (p *imageService) Get() *imageServiceGetRequest {
@@ -35145,10 +34381,6 @@ func (p *instanceTypeNicsServiceAddResponse) Nic() (*Nic, bool) {
 	return nil, false
 }
 
-func (p *instanceTypeNicsServiceAddResponse) MustNic() *Nic {
-	return p.nic
-}
-
 func (p *instanceTypeNicsService) Add() *instanceTypeNicsServiceAddRequest {
 	return &instanceTypeNicsServiceAddRequest{instanceTypeNicsService: p}
 }
@@ -35255,10 +34487,6 @@ func (p *instanceTypeNicsServiceListResponse) Nics() (*NicSlice, bool) {
 		return p.nics, true
 	}
 	return nil, false
-}
-
-func (p *instanceTypeNicsServiceListResponse) MustNics() *NicSlice {
-	return p.nics
 }
 
 func (p *instanceTypeNicsService) List() *instanceTypeNicsServiceListRequest {
@@ -35396,10 +34624,6 @@ func (p *operatingSystemsServiceListResponse) OperatingSystem() (*OperatingSyste
 	return nil, false
 }
 
-func (p *operatingSystemsServiceListResponse) MustOperatingSystem() *OperatingSystemInfoSlice {
-	return p.operatingSystem
-}
-
 func (p *operatingSystemsService) List() *operatingSystemsServiceListRequest {
 	return &operatingSystemsServiceListRequest{operatingSystemsService: p}
 }
@@ -35524,10 +34748,6 @@ func (p *hostNicServiceGetResponse) Nic() (*HostNic, bool) {
 		return p.nic, true
 	}
 	return nil, false
-}
-
-func (p *hostNicServiceGetResponse) MustNic() *HostNic {
-	return p.nic
 }
 
 func (p *hostNicService) Get() *hostNicServiceGetRequest {
@@ -35819,10 +35039,6 @@ func (p *iscsiBondsServiceAddResponse) Bond() (*IscsiBond, bool) {
 	return nil, false
 }
 
-func (p *iscsiBondsServiceAddResponse) MustBond() *IscsiBond {
-	return p.bond
-}
-
 func (p *iscsiBondsService) Add() *iscsiBondsServiceAddRequest {
 	return &iscsiBondsServiceAddRequest{iscsiBondsService: p}
 }
@@ -35919,10 +35135,6 @@ func (p *iscsiBondsServiceListResponse) Bonds() (*IscsiBondSlice, bool) {
 		return p.bonds, true
 	}
 	return nil, false
-}
-
-func (p *iscsiBondsServiceListResponse) MustBonds() *IscsiBondSlice {
-	return p.bonds
 }
 
 func (p *iscsiBondsService) List() *iscsiBondsServiceListRequest {
@@ -36064,10 +35276,6 @@ func (p *usersServiceAddResponse) User() (*User, bool) {
 	return nil, false
 }
 
-func (p *usersServiceAddResponse) MustUser() *User {
-	return p.user
-}
-
 func (p *usersService) Add() *usersServiceAddRequest {
 	return &usersServiceAddRequest{usersService: p}
 }
@@ -36184,10 +35392,6 @@ func (p *usersServiceListResponse) Users() (*UserSlice, bool) {
 		return p.users, true
 	}
 	return nil, false
-}
-
-func (p *usersServiceListResponse) MustUsers() *UserSlice {
-	return p.users
 }
 
 func (p *usersService) List() *usersServiceListRequest {
@@ -36328,10 +35532,6 @@ func (p *groupsServiceAddResponse) Group() (*Group, bool) {
 	return nil, false
 }
 
-func (p *groupsServiceAddResponse) MustGroup() *Group {
-	return p.group
-}
-
 func (p *groupsService) Add() *groupsServiceAddRequest {
 	return &groupsServiceAddRequest{groupsService: p}
 }
@@ -36448,10 +35648,6 @@ func (p *groupsServiceListResponse) Groups() (*GroupSlice, bool) {
 		return p.groups, true
 	}
 	return nil, false
-}
-
-func (p *groupsServiceListResponse) MustGroups() *GroupSlice {
-	return p.groups
 }
 
 func (p *groupsService) List() *groupsServiceListRequest {
@@ -36578,10 +35774,6 @@ func (p *domainServiceGetResponse) Domain() (*Domain, bool) {
 		return p.domain, true
 	}
 	return nil, false
-}
-
-func (p *domainServiceGetResponse) MustDomain() *Domain {
-	return p.domain
 }
 
 func (p *domainService) Get() *domainServiceGetRequest {
@@ -36738,10 +35930,6 @@ func (p *sshPublicKeysServiceAddResponse) Key() (*SshPublicKey, bool) {
 	return nil, false
 }
 
-func (p *sshPublicKeysServiceAddResponse) MustKey() *SshPublicKey {
-	return p.key
-}
-
 func (p *sshPublicKeysService) Add() *sshPublicKeysServiceAddRequest {
 	return &sshPublicKeysServiceAddRequest{sshPublicKeysService: p}
 }
@@ -36838,10 +36026,6 @@ func (p *sshPublicKeysServiceListResponse) Keys() (*SshPublicKeySlice, bool) {
 		return p.keys, true
 	}
 	return nil, false
-}
-
-func (p *sshPublicKeysServiceListResponse) MustKeys() *SshPublicKeySlice {
-	return p.keys
 }
 
 func (p *sshPublicKeysService) List() *sshPublicKeysServiceListRequest {
@@ -36970,10 +36154,6 @@ func (p *domainUserServiceGetResponse) User() (*User, bool) {
 	return nil, false
 }
 
-func (p *domainUserServiceGetResponse) MustUser() *User {
-	return p.user
-}
-
 func (p *domainUserService) Get() *domainUserServiceGetRequest {
 	return &domainUserServiceGetRequest{domainUserService: p}
 }
@@ -37091,10 +36271,6 @@ func (p *userServiceGetResponse) User() (*User, bool) {
 		return p.user, true
 	}
 	return nil, false
-}
-
-func (p *userServiceGetResponse) MustUser() *User {
-	return p.user
 }
 
 func (p *userService) Get() *userServiceGetRequest {
@@ -37356,10 +36532,6 @@ func (p *domainsServiceListResponse) Domains() (*DomainSlice, bool) {
 	return nil, false
 }
 
-func (p *domainsServiceListResponse) MustDomains() *DomainSlice {
-	return p.domains
-}
-
 func (p *domainsService) List() *domainsServiceListRequest {
 	return &domainsServiceListRequest{domainsService: p}
 }
@@ -37515,10 +36687,6 @@ func (p *domainUsersServiceListResponse) Users() (*UserSlice, bool) {
 		return p.users, true
 	}
 	return nil, false
-}
-
-func (p *domainUsersServiceListResponse) MustUsers() *UserSlice {
-	return p.users
 }
 
 func (p *domainUsersService) List() *domainUsersServiceListRequest {
@@ -37677,10 +36845,6 @@ func (p *domainGroupsServiceListResponse) Groups() (*GroupSlice, bool) {
 	return nil, false
 }
 
-func (p *domainGroupsServiceListResponse) MustGroups() *GroupSlice {
-	return p.groups
-}
-
 func (p *domainGroupsService) List() *domainGroupsServiceListRequest {
 	return &domainGroupsServiceListRequest{domainGroupsService: p}
 }
@@ -37804,10 +36968,6 @@ func (p *groupServiceGetResponse) Get() (*Group, bool) {
 		return p.get, true
 	}
 	return nil, false
-}
-
-func (p *groupServiceGetResponse) MustGet() *Group {
-	return p.get
 }
 
 func (p *groupService) Get() *groupServiceGetRequest {
@@ -38046,10 +37206,6 @@ func (p *domainGroupServiceGetResponse) Get() (*Group, bool) {
 	return nil, false
 }
 
-func (p *domainGroupServiceGetResponse) MustGet() *Group {
-	return p.get
-}
-
 func (p *domainGroupService) Get() *domainGroupServiceGetRequest {
 	return &domainGroupServiceGetRequest{domainGroupService: p}
 }
@@ -38163,10 +37319,6 @@ func (p *sshPublicKeyServiceGetResponse) Key() (*SshPublicKey, bool) {
 		return p.key, true
 	}
 	return nil, false
-}
-
-func (p *sshPublicKeyServiceGetResponse) MustKey() *SshPublicKey {
-	return p.key
 }
 
 func (p *sshPublicKeyService) Get() *sshPublicKeyServiceGetRequest {
@@ -38365,10 +37517,6 @@ func (p *sshPublicKeyServiceUpdateResponse) Key() (*SshPublicKey, bool) {
 	return nil, false
 }
 
-func (p *sshPublicKeyServiceUpdateResponse) MustKey() *SshPublicKey {
-	return p.key
-}
-
 func (p *sshPublicKeyService) Update() *sshPublicKeyServiceUpdateRequest {
 	return &sshPublicKeyServiceUpdateRequest{sshPublicKeyService: p}
 }
@@ -38482,10 +37630,6 @@ func (p *fenceAgentServiceGetResponse) Agent() (*Agent, bool) {
 		return p.agent, true
 	}
 	return nil, false
-}
-
-func (p *fenceAgentServiceGetResponse) MustAgent() *Agent {
-	return p.agent
 }
 
 func (p *fenceAgentService) Get() *fenceAgentServiceGetRequest {
@@ -38684,10 +37828,6 @@ func (p *fenceAgentServiceUpdateResponse) Agent() (*Agent, bool) {
 	return nil, false
 }
 
-func (p *fenceAgentServiceUpdateResponse) MustAgent() *Agent {
-	return p.agent
-}
-
 func (p *fenceAgentService) Update() *fenceAgentServiceUpdateRequest {
 	return &fenceAgentServiceUpdateRequest{fenceAgentService: p}
 }
@@ -38801,10 +37941,6 @@ func (p *macPoolServiceGetResponse) Pool() (*MacPool, bool) {
 		return p.pool, true
 	}
 	return nil, false
-}
-
-func (p *macPoolServiceGetResponse) MustPool() *MacPool {
-	return p.pool
 }
 
 func (p *macPoolService) Get() *macPoolServiceGetRequest {
@@ -39003,10 +38139,6 @@ func (p *macPoolServiceUpdateResponse) Pool() (*MacPool, bool) {
 	return nil, false
 }
 
-func (p *macPoolServiceUpdateResponse) MustPool() *MacPool {
-	return p.pool
-}
-
 func (p *macPoolService) Update() *macPoolServiceUpdateRequest {
 	return &macPoolServiceUpdateRequest{macPoolService: p}
 }
@@ -39135,10 +38267,6 @@ func (p *assignedCpuProfilesServiceAddResponse) Profile() (*CpuProfile, bool) {
 	return nil, false
 }
 
-func (p *assignedCpuProfilesServiceAddResponse) MustProfile() *CpuProfile {
-	return p.profile
-}
-
 func (p *assignedCpuProfilesService) Add() *assignedCpuProfilesServiceAddRequest {
 	return &assignedCpuProfilesServiceAddRequest{assignedCpuProfilesService: p}
 }
@@ -39235,10 +38363,6 @@ func (p *assignedCpuProfilesServiceListResponse) Profiles() (*CpuProfileSlice, b
 		return p.profiles, true
 	}
 	return nil, false
-}
-
-func (p *assignedCpuProfilesServiceListResponse) MustProfiles() *CpuProfileSlice {
-	return p.profiles
 }
 
 func (p *assignedCpuProfilesService) List() *assignedCpuProfilesServiceListRequest {
@@ -39379,10 +38503,6 @@ func (p *storageServerConnectionExtensionsServiceAddResponse) Extension() (*Stor
 	return nil, false
 }
 
-func (p *storageServerConnectionExtensionsServiceAddResponse) MustExtension() *StorageConnectionExtension {
-	return p.extension
-}
-
 func (p *storageServerConnectionExtensionsService) Add() *storageServerConnectionExtensionsServiceAddRequest {
 	return &storageServerConnectionExtensionsServiceAddRequest{storageServerConnectionExtensionsService: p}
 }
@@ -39479,10 +38599,6 @@ func (p *storageServerConnectionExtensionsServiceListResponse) Extensions() (*St
 		return p.extensions, true
 	}
 	return nil, false
-}
-
-func (p *storageServerConnectionExtensionsServiceListResponse) MustExtensions() *StorageConnectionExtensionSlice {
-	return p.extensions
 }
 
 func (p *storageServerConnectionExtensionsService) List() *storageServerConnectionExtensionsServiceListRequest {
@@ -39608,10 +38724,6 @@ func (p *permissionServiceGetResponse) Permission() (*Permission, bool) {
 		return p.permission, true
 	}
 	return nil, false
-}
-
-func (p *permissionServiceGetResponse) MustPermission() *Permission {
-	return p.permission
 }
 
 func (p *permissionService) Get() *permissionServiceGetRequest {
@@ -39814,10 +38926,6 @@ func (p *diskProfileServiceGetResponse) Profile() (*DiskProfile, bool) {
 	return nil, false
 }
 
-func (p *diskProfileServiceGetResponse) MustProfile() *DiskProfile {
-	return p.profile
-}
-
 func (p *diskProfileService) Get() *diskProfileServiceGetRequest {
 	return &diskProfileServiceGetRequest{diskProfileService: p}
 }
@@ -40014,10 +39122,6 @@ func (p *diskProfileServiceUpdateResponse) Profile() (*DiskProfile, bool) {
 	return nil, false
 }
 
-func (p *diskProfileServiceUpdateResponse) MustProfile() *DiskProfile {
-	return p.profile
-}
-
 func (p *diskProfileService) Update() *diskProfileServiceUpdateRequest {
 	return &diskProfileServiceUpdateRequest{diskProfileService: p}
 }
@@ -40144,10 +39248,6 @@ func (p *affinityGroupServiceGetResponse) Group() (*AffinityGroup, bool) {
 		return p.group, true
 	}
 	return nil, false
-}
-
-func (p *affinityGroupServiceGetResponse) MustGroup() *AffinityGroup {
-	return p.group
 }
 
 func (p *affinityGroupService) Get() *affinityGroupServiceGetRequest {
@@ -40346,10 +39446,6 @@ func (p *affinityGroupServiceUpdateResponse) Group() (*AffinityGroup, bool) {
 	return nil, false
 }
 
-func (p *affinityGroupServiceUpdateResponse) MustGroup() *AffinityGroup {
-	return p.group
-}
-
 func (p *affinityGroupService) Update() *affinityGroupServiceUpdateRequest {
 	return &affinityGroupServiceUpdateRequest{affinityGroupService: p}
 }
@@ -40488,10 +39584,6 @@ func (p *unmanagedNetworksServiceListResponse) Networks() (*UnmanagedNetworkSlic
 		return p.networks, true
 	}
 	return nil, false
-}
-
-func (p *unmanagedNetworksServiceListResponse) MustNetworks() *UnmanagedNetworkSlice {
-	return p.networks
 }
 
 func (p *unmanagedNetworksService) List() *unmanagedNetworksServiceListRequest {
@@ -40652,10 +39744,6 @@ func (p *vmsServiceAddResponse) Vm() (*Vm, bool) {
 	return nil, false
 }
 
-func (p *vmsServiceAddResponse) MustVm() *Vm {
-	return p.vm
-}
-
 func (p *vmsService) Add() *vmsServiceAddRequest {
 	return &vmsServiceAddRequest{vmsService: p}
 }
@@ -40794,10 +39882,6 @@ func (p *vmsServiceListResponse) Vms() (*VmSlice, bool) {
 	return nil, false
 }
 
-func (p *vmsServiceListResponse) MustVms() *VmSlice {
-	return p.vms
-}
-
 func (p *vmsService) List() *vmsServiceListRequest {
 	return &vmsServiceListRequest{vmsService: p}
 }
@@ -40921,10 +40005,6 @@ func (p *storageDomainTemplateServiceGetResponse) Template() (*Template, bool) {
 		return p.template, true
 	}
 	return nil, false
-}
-
-func (p *storageDomainTemplateServiceGetResponse) MustTemplate() *Template {
-	return p.template
 }
 
 func (p *storageDomainTemplateService) Get() *storageDomainTemplateServiceGetRequest {
@@ -41406,10 +40486,6 @@ func (p *vmPoolsServiceAddResponse) Pool() (*VmPool, bool) {
 	return nil, false
 }
 
-func (p *vmPoolsServiceAddResponse) MustPool() *VmPool {
-	return p.pool
-}
-
 func (p *vmPoolsService) Add() *vmPoolsServiceAddRequest {
 	return &vmPoolsServiceAddRequest{vmPoolsService: p}
 }
@@ -41536,10 +40612,6 @@ func (p *vmPoolsServiceListResponse) Pools() (*VmPoolSlice, bool) {
 		return p.pools, true
 	}
 	return nil, false
-}
-
-func (p *vmPoolsServiceListResponse) MustPools() *VmPoolSlice {
-	return p.pools
 }
 
 func (p *vmPoolsService) List() *vmPoolsServiceListRequest {
@@ -41681,10 +40753,6 @@ func (p *assignedDiskProfilesServiceAddResponse) Profile() (*DiskProfile, bool) 
 	return nil, false
 }
 
-func (p *assignedDiskProfilesServiceAddResponse) MustProfile() *DiskProfile {
-	return p.profile
-}
-
 func (p *assignedDiskProfilesService) Add() *assignedDiskProfilesServiceAddRequest {
 	return &assignedDiskProfilesServiceAddRequest{assignedDiskProfilesService: p}
 }
@@ -41781,10 +40849,6 @@ func (p *assignedDiskProfilesServiceListResponse) Profiles() (*DiskProfileSlice,
 		return p.profiles, true
 	}
 	return nil, false
-}
-
-func (p *assignedDiskProfilesServiceListResponse) MustProfiles() *DiskProfileSlice {
-	return p.profiles
 }
 
 func (p *assignedDiskProfilesService) List() *assignedDiskProfilesServiceListRequest {
@@ -42015,10 +41079,6 @@ func (p *stepServiceGetResponse) Step() (*Step, bool) {
 	return nil, false
 }
 
-func (p *stepServiceGetResponse) MustStep() *Step {
-	return p.step
-}
-
 func (p *stepService) Get() *stepServiceGetRequest {
 	return &stepServiceGetRequest{stepService: p}
 }
@@ -42170,10 +41230,6 @@ func (p *attachedStorageDomainDisksServiceAddResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *attachedStorageDomainDisksServiceAddResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *attachedStorageDomainDisksService) Add() *attachedStorageDomainDisksServiceAddRequest {
 	return &attachedStorageDomainDisksServiceAddRequest{attachedStorageDomainDisksService: p}
 }
@@ -42270,10 +41326,6 @@ func (p *attachedStorageDomainDisksServiceListResponse) Disks() (*DiskSlice, boo
 		return p.disks, true
 	}
 	return nil, false
-}
-
-func (p *attachedStorageDomainDisksServiceListResponse) MustDisks() *DiskSlice {
-	return p.disks
 }
 
 func (p *attachedStorageDomainDisksService) List() *attachedStorageDomainDisksServiceListRequest {
@@ -42416,10 +41468,6 @@ func (p *networkFilterServiceGetResponse) NetworkFilter() (*NetworkFilter, bool)
 	return nil, false
 }
 
-func (p *networkFilterServiceGetResponse) MustNetworkFilter() *NetworkFilter {
-	return p.networkFilter
-}
-
 func (p *networkFilterService) Get() *networkFilterServiceGetRequest {
 	return &networkFilterServiceGetRequest{networkFilterService: p}
 }
@@ -42548,10 +41596,6 @@ func (p *vmDisksServiceAddResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *vmDisksServiceAddResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *vmDisksService) Add() *vmDisksServiceAddRequest {
 	return &vmDisksServiceAddRequest{vmDisksService: p}
 }
@@ -42648,10 +41692,6 @@ func (p *vmDisksServiceListResponse) Disks() (*DiskSlice, bool) {
 		return p.disks, true
 	}
 	return nil, false
-}
-
-func (p *vmDisksServiceListResponse) MustDisks() *DiskSlice {
-	return p.disks
 }
 
 func (p *vmDisksService) List() *vmDisksServiceListRequest {
@@ -42795,10 +41835,6 @@ func (p *diskAttachmentsServiceAddResponse) Attachment() (*DiskAttachment, bool)
 	return nil, false
 }
 
-func (p *diskAttachmentsServiceAddResponse) MustAttachment() *DiskAttachment {
-	return p.attachment
-}
-
 func (p *diskAttachmentsService) Add() *diskAttachmentsServiceAddRequest {
 	return &diskAttachmentsServiceAddRequest{diskAttachmentsService: p}
 }
@@ -42885,10 +41921,6 @@ func (p *diskAttachmentsServiceListResponse) Attachments() (*DiskAttachmentSlice
 		return p.attachments, true
 	}
 	return nil, false
-}
-
-func (p *diskAttachmentsServiceListResponse) MustAttachments() *DiskAttachmentSlice {
-	return p.attachments
 }
 
 func (p *diskAttachmentsService) List() *diskAttachmentsServiceListRequest {
@@ -43203,10 +42235,6 @@ func (p *storageDomainDiskServiceGetResponse) Disk() (*Disk, bool) {
 		return p.disk, true
 	}
 	return nil, false
-}
-
-func (p *storageDomainDiskServiceGetResponse) MustDisk() *Disk {
-	return p.disk
 }
 
 func (p *storageDomainDiskService) Get() *storageDomainDiskServiceGetRequest {
@@ -43568,10 +42596,6 @@ func (p *storageDomainDiskServiceUpdateResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *storageDomainDiskServiceUpdateResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *storageDomainDiskService) Update() *storageDomainDiskServiceUpdateRequest {
 	return &storageDomainDiskServiceUpdateRequest{storageDomainDiskService: p}
 }
@@ -43722,10 +42746,6 @@ func (p *hostHooksServiceListResponse) Hooks() (*HookSlice, bool) {
 	return nil, false
 }
 
-func (p *hostHooksServiceListResponse) MustHooks() *HookSlice {
-	return p.hooks
-}
-
 func (p *hostHooksService) List() *hostHooksServiceListRequest {
 	return &hostHooksServiceListRequest{hostHooksService: p}
 }
@@ -43864,10 +42884,6 @@ func (p *storageDomainsServiceAddResponse) StorageDomain() (*StorageDomain, bool
 	return nil, false
 }
 
-func (p *storageDomainsServiceAddResponse) MustStorageDomain() *StorageDomain {
-	return p.storageDomain
-}
-
 func (p *storageDomainsService) Add() *storageDomainsServiceAddRequest {
 	return &storageDomainsServiceAddRequest{storageDomainsService: p}
 }
@@ -43996,10 +43012,6 @@ func (p *storageDomainsServiceListResponse) StorageDomains() (*StorageDomainSlic
 	return nil, false
 }
 
-func (p *storageDomainsServiceListResponse) MustStorageDomains() *StorageDomainSlice {
-	return p.storageDomains
-}
-
 func (p *storageDomainsService) List() *storageDomainsServiceListRequest {
 	return &storageDomainsServiceListRequest{storageDomainsService: p}
 }
@@ -44123,10 +43135,6 @@ func (p *networkLabelServiceGetResponse) Label() (*NetworkLabel, bool) {
 		return p.label, true
 	}
 	return nil, false
-}
-
-func (p *networkLabelServiceGetResponse) MustLabel() *NetworkLabel {
-	return p.label
 }
 
 func (p *networkLabelService) Get() *networkLabelServiceGetRequest {
@@ -44342,10 +43350,6 @@ func (p *instanceTypesServiceAddResponse) InstanceType() (*InstanceType, bool) {
 	return nil, false
 }
 
-func (p *instanceTypesServiceAddResponse) MustInstanceType() *InstanceType {
-	return p.instanceType
-}
-
 func (p *instanceTypesService) Add() *instanceTypesServiceAddRequest {
 	return &instanceTypesServiceAddRequest{instanceTypesService: p}
 }
@@ -44462,10 +43466,6 @@ func (p *instanceTypesServiceListResponse) InstanceType() (*InstanceTypeSlice, b
 		return p.instanceType, true
 	}
 	return nil, false
-}
-
-func (p *instanceTypesServiceListResponse) MustInstanceType() *InstanceTypeSlice {
-	return p.instanceType
 }
 
 func (p *instanceTypesService) List() *instanceTypesServiceListRequest {
@@ -44606,10 +43606,6 @@ func (p *storageDomainServerConnectionsServiceAddResponse) Connection() (*Storag
 	return nil, false
 }
 
-func (p *storageDomainServerConnectionsServiceAddResponse) MustConnection() *StorageConnection {
-	return p.connection
-}
-
 func (p *storageDomainServerConnectionsService) Add() *storageDomainServerConnectionsServiceAddRequest {
 	return &storageDomainServerConnectionsServiceAddRequest{storageDomainServerConnectionsService: p}
 }
@@ -44706,10 +43702,6 @@ func (p *storageDomainServerConnectionsServiceListResponse) Connections() (*Stor
 		return p.connections, true
 	}
 	return nil, false
-}
-
-func (p *storageDomainServerConnectionsServiceListResponse) MustConnections() *StorageConnectionSlice {
-	return p.connections
 }
 
 func (p *storageDomainServerConnectionsService) List() *storageDomainServerConnectionsServiceListRequest {
@@ -44835,10 +43827,6 @@ func (p *instanceTypeGraphicsConsoleServiceGetResponse) Console() (*GraphicsCons
 		return p.console, true
 	}
 	return nil, false
-}
-
-func (p *instanceTypeGraphicsConsoleServiceGetResponse) MustConsole() *GraphicsConsole {
-	return p.console
 }
 
 func (p *instanceTypeGraphicsConsoleService) Get() *instanceTypeGraphicsConsoleServiceGetRequest {
@@ -45041,10 +44029,6 @@ func (p *iscsiBondServiceGetResponse) Bond() (*IscsiBond, bool) {
 	return nil, false
 }
 
-func (p *iscsiBondServiceGetResponse) MustBond() *IscsiBond {
-	return p.bond
-}
-
 func (p *iscsiBondService) Get() *iscsiBondServiceGetRequest {
 	return &iscsiBondServiceGetRequest{iscsiBondService: p}
 }
@@ -45241,10 +44225,6 @@ func (p *iscsiBondServiceUpdateResponse) Bond() (*IscsiBond, bool) {
 	return nil, false
 }
 
-func (p *iscsiBondServiceUpdateResponse) MustBond() *IscsiBond {
-	return p.bond
-}
-
 func (p *iscsiBondService) Update() *iscsiBondServiceUpdateRequest {
 	return &iscsiBondServiceUpdateRequest{iscsiBondService: p}
 }
@@ -45383,10 +44363,6 @@ func (p *templateDiskAttachmentServiceGetResponse) Attachment() (*DiskAttachment
 		return p.attachment, true
 	}
 	return nil, false
-}
-
-func (p *templateDiskAttachmentServiceGetResponse) MustAttachment() *DiskAttachment {
-	return p.attachment
 }
 
 func (p *templateDiskAttachmentService) Get() *templateDiskAttachmentServiceGetRequest {
@@ -45610,10 +44586,6 @@ func (p *hostStorageServiceListResponse) Storages() (*HostStorageSlice, bool) {
 	return nil, false
 }
 
-func (p *hostStorageServiceListResponse) MustStorages() *HostStorageSlice {
-	return p.storages
-}
-
 func (p *hostStorageService) List() *hostStorageServiceListRequest {
 	return &hostStorageServiceListRequest{hostStorageService: p}
 }
@@ -45748,10 +44720,6 @@ func (p *weightServiceGetResponse) Weight() (*Weight, bool) {
 		return p.weight, true
 	}
 	return nil, false
-}
-
-func (p *weightServiceGetResponse) MustWeight() *Weight {
-	return p.weight
 }
 
 func (p *weightService) Get() *weightServiceGetRequest {
@@ -45967,10 +44935,6 @@ func (p *vmNumaNodesServiceAddResponse) Node() (*VirtualNumaNode, bool) {
 	return nil, false
 }
 
-func (p *vmNumaNodesServiceAddResponse) MustNode() *VirtualNumaNode {
-	return p.node
-}
-
 func (p *vmNumaNodesService) Add() *vmNumaNodesServiceAddRequest {
 	return &vmNumaNodesServiceAddRequest{vmNumaNodesService: p}
 }
@@ -46067,10 +45031,6 @@ func (p *vmNumaNodesServiceListResponse) Nodes() (*VirtualNumaNodeSlice, bool) {
 		return p.nodes, true
 	}
 	return nil, false
-}
-
-func (p *vmNumaNodesServiceListResponse) MustNodes() *VirtualNumaNodeSlice {
-	return p.nodes
 }
 
 func (p *vmNumaNodesService) List() *vmNumaNodesServiceListRequest {
@@ -46211,10 +45171,6 @@ func (p *templateWatchdogsServiceAddResponse) Watchdog() (*Watchdog, bool) {
 	return nil, false
 }
 
-func (p *templateWatchdogsServiceAddResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
-}
-
 func (p *templateWatchdogsService) Add() *templateWatchdogsServiceAddRequest {
 	return &templateWatchdogsServiceAddRequest{templateWatchdogsService: p}
 }
@@ -46311,10 +45267,6 @@ func (p *templateWatchdogsServiceListResponse) Watchdogs() (*WatchdogSlice, bool
 		return p.watchdogs, true
 	}
 	return nil, false
-}
-
-func (p *templateWatchdogsServiceListResponse) MustWatchdogs() *WatchdogSlice {
-	return p.watchdogs
 }
 
 func (p *templateWatchdogsService) List() *templateWatchdogsServiceListRequest {
@@ -46628,10 +45580,6 @@ func (p *attachedStorageDomainDiskServiceGetResponse) Disk() (*Disk, bool) {
 		return p.disk, true
 	}
 	return nil, false
-}
-
-func (p *attachedStorageDomainDiskServiceGetResponse) MustDisk() *Disk {
-	return p.disk
 }
 
 func (p *attachedStorageDomainDiskService) Get() *attachedStorageDomainDiskServiceGetRequest {
@@ -47074,10 +46022,6 @@ func (p *attachedStorageDomainDiskServiceUpdateResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *attachedStorageDomainDiskServiceUpdateResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *attachedStorageDomainDiskService) Update() *attachedStorageDomainDiskServiceUpdateRequest {
 	return &attachedStorageDomainDiskServiceUpdateRequest{attachedStorageDomainDiskService: p}
 }
@@ -47217,10 +46161,6 @@ func (p *vnicProfileServiceGetResponse) Profile() (*VnicProfile, bool) {
 		return p.profile, true
 	}
 	return nil, false
-}
-
-func (p *vnicProfileServiceGetResponse) MustProfile() *VnicProfile {
-	return p.profile
 }
 
 func (p *vnicProfileService) Get() *vnicProfileServiceGetRequest {
@@ -47419,10 +46359,6 @@ func (p *vnicProfileServiceUpdateResponse) Profile() (*VnicProfile, bool) {
 	return nil, false
 }
 
-func (p *vnicProfileServiceUpdateResponse) MustProfile() *VnicProfile {
-	return p.profile
-}
-
 func (p *vnicProfileService) Update() *vnicProfileServiceUpdateRequest {
 	return &vnicProfileServiceUpdateRequest{vnicProfileService: p}
 }
@@ -47563,10 +46499,6 @@ func (p *vmGraphicsConsolesServiceAddResponse) Console() (*GraphicsConsole, bool
 	return nil, false
 }
 
-func (p *vmGraphicsConsolesServiceAddResponse) MustConsole() *GraphicsConsole {
-	return p.console
-}
-
 func (p *vmGraphicsConsolesService) Add() *vmGraphicsConsolesServiceAddRequest {
 	return &vmGraphicsConsolesServiceAddRequest{vmGraphicsConsolesService: p}
 }
@@ -47673,10 +46605,6 @@ func (p *vmGraphicsConsolesServiceListResponse) Consoles() (*GraphicsConsoleSlic
 		return p.consoles, true
 	}
 	return nil, false
-}
-
-func (p *vmGraphicsConsolesServiceListResponse) MustConsoles() *GraphicsConsoleSlice {
-	return p.consoles
 }
 
 func (p *vmGraphicsConsolesService) List() *vmGraphicsConsolesServiceListRequest {
@@ -47804,10 +46732,6 @@ func (p *permitServiceGetResponse) Permit() (*Permit, bool) {
 		return p.permit, true
 	}
 	return nil, false
-}
-
-func (p *permitServiceGetResponse) MustPermit() *Permit {
-	return p.permit
 }
 
 func (p *permitService) Get() *permitServiceGetRequest {
@@ -48021,10 +46945,6 @@ func (p *dataCenterServiceGetResponse) DataCenter() (*DataCenter, bool) {
 	return nil, false
 }
 
-func (p *dataCenterServiceGetResponse) MustDataCenter() *DataCenter {
-	return p.dataCenter
-}
-
 func (p *dataCenterService) Get() *dataCenterServiceGetRequest {
 	return &dataCenterServiceGetRequest{dataCenterService: p}
 }
@@ -48229,10 +47149,6 @@ func (p *dataCenterServiceUpdateResponse) DataCenter() (*DataCenter, bool) {
 		return p.dataCenter, true
 	}
 	return nil, false
-}
-
-func (p *dataCenterServiceUpdateResponse) MustDataCenter() *DataCenter {
-	return p.dataCenter
 }
 
 func (p *dataCenterService) Update() *dataCenterServiceUpdateRequest {
@@ -48467,10 +47383,6 @@ func (p *statisticsServiceListResponse) Statistics() (*StatisticSlice, bool) {
 	return nil, false
 }
 
-func (p *statisticsServiceListResponse) MustStatistics() *StatisticSlice {
-	return p.statistics
-}
-
 func (p *statisticsService) List() *statisticsServiceListRequest {
 	return &statisticsServiceListRequest{statisticsService: p}
 }
@@ -48614,10 +47526,6 @@ func (p *schedulingPolicyUnitsServiceListResponse) Units() (*SchedulingPolicyUni
 		return p.units, true
 	}
 	return nil, false
-}
-
-func (p *schedulingPolicyUnitsServiceListResponse) MustUnits() *SchedulingPolicyUnitSlice {
-	return p.units
 }
 
 func (p *schedulingPolicyUnitsService) List() *schedulingPolicyUnitsServiceListRequest {
@@ -48935,10 +47843,6 @@ func (p *templateDiskServiceGetResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *templateDiskServiceGetResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *templateDiskService) Get() *templateDiskServiceGetRequest {
 	return &templateDiskServiceGetRequest{templateDiskService: p}
 }
@@ -49155,10 +48059,6 @@ func (p *affinityLabelVmsServiceAddResponse) Vm() (*Vm, bool) {
 	return nil, false
 }
 
-func (p *affinityLabelVmsServiceAddResponse) MustVm() *Vm {
-	return p.vm
-}
-
 func (p *affinityLabelVmsService) Add() *affinityLabelVmsServiceAddRequest {
 	return &affinityLabelVmsServiceAddRequest{affinityLabelVmsService: p}
 }
@@ -49245,10 +48145,6 @@ func (p *affinityLabelVmsServiceListResponse) Vms() (*VmSlice, bool) {
 		return p.vms, true
 	}
 	return nil, false
-}
-
-func (p *affinityLabelVmsServiceListResponse) MustVms() *VmSlice {
-	return p.vms
 }
 
 func (p *affinityLabelVmsService) List() *affinityLabelVmsServiceListRequest {
@@ -49507,10 +48403,6 @@ func (p *affinityLabelsServiceAddResponse) Label() (*AffinityLabel, bool) {
 	return nil, false
 }
 
-func (p *affinityLabelsServiceAddResponse) MustLabel() *AffinityLabel {
-	return p.label
-}
-
 func (p *affinityLabelsService) Add() *affinityLabelsServiceAddRequest {
 	return &affinityLabelsServiceAddRequest{affinityLabelsService: p}
 }
@@ -49607,10 +48499,6 @@ func (p *affinityLabelsServiceListResponse) Labels() (*AffinityLabelSlice, bool)
 		return p.labels, true
 	}
 	return nil, false
-}
-
-func (p *affinityLabelsServiceListResponse) MustLabels() *AffinityLabelSlice {
-	return p.labels
 }
 
 func (p *affinityLabelsService) List() *affinityLabelsServiceListRequest {
@@ -49749,10 +48637,6 @@ func (p *vmGraphicsConsoleServiceGetResponse) Console() (*GraphicsConsole, bool)
 	return nil, false
 }
 
-func (p *vmGraphicsConsoleServiceGetResponse) MustConsole() *GraphicsConsole {
-	return p.console
-}
-
 func (p *vmGraphicsConsoleService) Get() *vmGraphicsConsoleServiceGetRequest {
 	return &vmGraphicsConsoleServiceGetRequest{vmGraphicsConsoleService: p}
 }
@@ -49850,10 +48734,6 @@ func (p *vmGraphicsConsoleServiceProxyTicketResponse) ProxyTicket() (*ProxyTicke
 	return nil, false
 }
 
-func (p *vmGraphicsConsoleServiceProxyTicketResponse) MustProxyTicket() *ProxyTicket {
-	return p.proxyTicket
-}
-
 func (p *vmGraphicsConsoleService) ProxyTicket() *vmGraphicsConsoleServiceProxyTicketRequest {
 	return &vmGraphicsConsoleServiceProxyTicketRequest{vmGraphicsConsoleService: p}
 }
@@ -49943,10 +48823,6 @@ func (p *vmGraphicsConsoleServiceRemoteViewerConnectionFileResponse) RemoteViewe
 	}
 	var zero string
 	return zero, false
-}
-
-func (p *vmGraphicsConsoleServiceRemoteViewerConnectionFileResponse) MustRemoteViewerConnectionFile() string {
-	return *p.remoteViewerConnectionFile
 }
 
 func (p *vmGraphicsConsoleService) RemoteViewerConnectionFile() *vmGraphicsConsoleServiceRemoteViewerConnectionFileRequest {
@@ -50131,10 +49007,6 @@ func (p *vmGraphicsConsoleServiceTicketResponse) Ticket() (*Ticket, bool) {
 	return nil, false
 }
 
-func (p *vmGraphicsConsoleServiceTicketResponse) MustTicket() *Ticket {
-	return p.ticket
-}
-
 func (p *vmGraphicsConsoleService) Ticket() *vmGraphicsConsoleServiceTicketRequest {
 	return &vmGraphicsConsoleServiceTicketRequest{vmGraphicsConsoleService: p}
 }
@@ -50251,10 +49123,6 @@ func (p *affinityLabelHostServiceGetResponse) Host() (*Host, bool) {
 		return p.host, true
 	}
 	return nil, false
-}
-
-func (p *affinityLabelHostServiceGetResponse) MustHost() *Host {
-	return p.host
 }
 
 func (p *affinityLabelHostService) Get() *affinityLabelHostServiceGetRequest {
@@ -50446,10 +49314,6 @@ func (p *assignedTagServiceGetResponse) Tag() (*Tag, bool) {
 		return p.tag, true
 	}
 	return nil, false
-}
-
-func (p *assignedTagServiceGetResponse) MustTag() *Tag {
-	return p.tag
 }
 
 func (p *assignedTagService) Get() *assignedTagServiceGetRequest {
@@ -50864,10 +49728,6 @@ func (p *diskServiceGetResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *diskServiceGetResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *diskService) Get() *diskServiceGetRequest {
 	return &diskServiceGetRequest{diskService: p}
 }
@@ -51237,10 +50097,6 @@ func (p *diskServiceUpdateResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *diskServiceUpdateResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *diskService) Update() *diskServiceUpdateRequest {
 	return &diskServiceUpdateRequest{diskService: p}
 }
@@ -51381,10 +50237,6 @@ func (p *templateDiskAttachmentsServiceListResponse) Attachments() (*DiskAttachm
 		return p.attachments, true
 	}
 	return nil, false
-}
-
-func (p *templateDiskAttachmentsServiceListResponse) MustAttachments() *DiskAttachmentSlice {
-	return p.attachments
 }
 
 func (p *templateDiskAttachmentsService) List() *templateDiskAttachmentsServiceListRequest {
@@ -51543,10 +50395,6 @@ func (p *storageDomainContentDisksServiceListResponse) Disks() (*DiskSlice, bool
 	return nil, false
 }
 
-func (p *storageDomainContentDisksServiceListResponse) MustDisks() *DiskSlice {
-	return p.disks
-}
-
 func (p *storageDomainContentDisksService) List() *storageDomainContentDisksServiceListRequest {
 	return &storageDomainContentDisksServiceListRequest{storageDomainContentDisksService: p}
 }
@@ -51681,10 +50529,6 @@ func (p *hostDevicesServiceListResponse) Devices() (*HostDeviceSlice, bool) {
 		return p.devices, true
 	}
 	return nil, false
-}
-
-func (p *hostDevicesServiceListResponse) MustDevices() *HostDeviceSlice {
-	return p.devices
 }
 
 func (p *hostDevicesService) List() *hostDevicesServiceListRequest {
@@ -51826,10 +50670,6 @@ func (p *assignedNetworksServiceAddResponse) Network() (*Network, bool) {
 	return nil, false
 }
 
-func (p *assignedNetworksServiceAddResponse) MustNetwork() *Network {
-	return p.network
-}
-
 func (p *assignedNetworksService) Add() *assignedNetworksServiceAddRequest {
 	return &assignedNetworksServiceAddRequest{assignedNetworksService: p}
 }
@@ -51926,10 +50766,6 @@ func (p *assignedNetworksServiceListResponse) Networks() (*NetworkSlice, bool) {
 		return p.networks, true
 	}
 	return nil, false
-}
-
-func (p *assignedNetworksServiceListResponse) MustNetworks() *NetworkSlice {
-	return p.networks
 }
 
 func (p *assignedNetworksService) List() *assignedNetworksServiceListRequest {
@@ -52067,10 +50903,6 @@ func (p *storageServiceGetResponse) Storage() (*HostStorage, bool) {
 	return nil, false
 }
 
-func (p *storageServiceGetResponse) MustStorage() *HostStorage {
-	return p.storage
-}
-
 func (p *storageService) Get() *storageServiceGetRequest {
 	return &storageServiceGetRequest{storageService: p}
 }
@@ -52184,10 +51016,6 @@ func (p *unmanagedNetworkServiceGetResponse) Network() (*UnmanagedNetwork, bool)
 		return p.network, true
 	}
 	return nil, false
-}
-
-func (p *unmanagedNetworkServiceGetResponse) MustNetwork() *UnmanagedNetwork {
-	return p.network
 }
 
 func (p *unmanagedNetworkService) Get() *unmanagedNetworkServiceGetRequest {
@@ -52390,10 +51218,6 @@ func (p *quotaServiceGetResponse) Quota() (*Quota, bool) {
 	return nil, false
 }
 
-func (p *quotaServiceGetResponse) MustQuota() *Quota {
-	return p.quota
-}
-
 func (p *quotaService) Get() *quotaServiceGetRequest {
 	return &quotaServiceGetRequest{quotaService: p}
 }
@@ -52590,10 +51414,6 @@ func (p *quotaServiceUpdateResponse) Quota() (*Quota, bool) {
 	return nil, false
 }
 
-func (p *quotaServiceUpdateResponse) MustQuota() *Quota {
-	return p.quota
-}
-
 func (p *quotaService) Update() *quotaServiceUpdateRequest {
 	return &quotaServiceUpdateRequest{quotaService: p}
 }
@@ -52745,10 +51565,6 @@ func (p *snapshotDiskServiceGetResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *snapshotDiskServiceGetResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *snapshotDiskService) Get() *snapshotDiskServiceGetRequest {
 	return &snapshotDiskServiceGetRequest{snapshotDiskService: p}
 }
@@ -52877,10 +51693,6 @@ func (p *qossServiceAddResponse) Qos() (*Qos, bool) {
 	return nil, false
 }
 
-func (p *qossServiceAddResponse) MustQos() *Qos {
-	return p.qos
-}
-
 func (p *qossService) Add() *qossServiceAddRequest {
 	return &qossServiceAddRequest{qossService: p}
 }
@@ -52977,10 +51789,6 @@ func (p *qossServiceListResponse) Qoss() (*QosSlice, bool) {
 		return p.qoss, true
 	}
 	return nil, false
-}
-
-func (p *qossServiceListResponse) MustQoss() *QosSlice {
-	return p.qoss
 }
 
 func (p *qossService) List() *qossServiceListRequest {
@@ -53107,10 +51915,6 @@ func (p *networkServiceGetResponse) Network() (*Network, bool) {
 		return p.network, true
 	}
 	return nil, false
-}
-
-func (p *networkServiceGetResponse) MustNetwork() *Network {
-	return p.network
 }
 
 func (p *networkService) Get() *networkServiceGetRequest {
@@ -53309,10 +52113,6 @@ func (p *networkServiceUpdateResponse) Network() (*Network, bool) {
 	return nil, false
 }
 
-func (p *networkServiceUpdateResponse) MustNetwork() *Network {
-	return p.network
-}
-
 func (p *networkService) Update() *networkServiceUpdateRequest {
 	return &networkServiceUpdateRequest{networkService: p}
 }
@@ -53465,10 +52265,6 @@ func (p *instanceTypeServiceGetResponse) InstanceType() (*InstanceType, bool) {
 		return p.instanceType, true
 	}
 	return nil, false
-}
-
-func (p *instanceTypeServiceGetResponse) MustInstanceType() *InstanceType {
-	return p.instanceType
 }
 
 func (p *instanceTypeService) Get() *instanceTypeServiceGetRequest {
@@ -53667,10 +52463,6 @@ func (p *instanceTypeServiceUpdateResponse) InstanceType() (*InstanceType, bool)
 	return nil, false
 }
 
-func (p *instanceTypeServiceUpdateResponse) MustInstanceType() *InstanceType {
-	return p.instanceType
-}
-
 func (p *instanceTypeService) Update() *instanceTypeServiceUpdateRequest {
 	return &instanceTypeServiceUpdateRequest{instanceTypeService: p}
 }
@@ -53839,10 +52631,6 @@ func (p *virtualFunctionAllowedNetworksServiceAddResponse) Network() (*Network, 
 	return nil, false
 }
 
-func (p *virtualFunctionAllowedNetworksServiceAddResponse) MustNetwork() *Network {
-	return p.network
-}
-
 func (p *virtualFunctionAllowedNetworksService) Add() *virtualFunctionAllowedNetworksServiceAddRequest {
 	return &virtualFunctionAllowedNetworksServiceAddRequest{virtualFunctionAllowedNetworksService: p}
 }
@@ -53939,10 +52727,6 @@ func (p *virtualFunctionAllowedNetworksServiceListResponse) Networks() (*Network
 		return p.networks, true
 	}
 	return nil, false
-}
-
-func (p *virtualFunctionAllowedNetworksServiceListResponse) MustNetworks() *NetworkSlice {
-	return p.networks
 }
 
 func (p *virtualFunctionAllowedNetworksService) List() *virtualFunctionAllowedNetworksServiceListRequest {
@@ -54070,10 +52854,6 @@ func (p *hostHookServiceGetResponse) Hook() (*Hook, bool) {
 	return nil, false
 }
 
-func (p *hostHookServiceGetResponse) MustHook() *Hook {
-	return p.hook
-}
-
 func (p *hostHookService) Get() *hostHookServiceGetRequest {
 	return &hostHookServiceGetRequest{hostHookService: p}
 }
@@ -54197,10 +52977,6 @@ func (p *imagesServiceListResponse) Images() (*ImageSlice, bool) {
 		return p.images, true
 	}
 	return nil, false
-}
-
-func (p *imagesServiceListResponse) MustImages() *ImageSlice {
-	return p.images
 }
 
 func (p *imagesService) List() *imagesServiceListRequest {
@@ -54336,10 +53112,6 @@ func (p *snapshotCdromsServiceListResponse) Cdroms() (*CdromSlice, bool) {
 		return p.cdroms, true
 	}
 	return nil, false
-}
-
-func (p *snapshotCdromsServiceListResponse) MustCdroms() *CdromSlice {
-	return p.cdroms
 }
 
 func (p *snapshotCdromsService) List() *snapshotCdromsServiceListRequest {
@@ -54480,10 +53252,6 @@ func (p *balancesServiceAddResponse) Balance() (*Balance, bool) {
 	return nil, false
 }
 
-func (p *balancesServiceAddResponse) MustBalance() *Balance {
-	return p.balance
-}
-
 func (p *balancesService) Add() *balancesServiceAddRequest {
 	return &balancesServiceAddRequest{balancesService: p}
 }
@@ -54590,10 +53358,6 @@ func (p *balancesServiceListResponse) Balances() (*BalanceSlice, bool) {
 		return p.balances, true
 	}
 	return nil, false
-}
-
-func (p *balancesServiceListResponse) MustBalances() *BalanceSlice {
-	return p.balances
 }
 
 func (p *balancesService) List() *balancesServiceListRequest {
@@ -54720,10 +53484,6 @@ func (p *templateCdromServiceGetResponse) Cdrom() (*Cdrom, bool) {
 		return p.cdrom, true
 	}
 	return nil, false
-}
-
-func (p *templateCdromServiceGetResponse) MustCdrom() *Cdrom {
-	return p.cdrom
 }
 
 func (p *templateCdromService) Get() *templateCdromServiceGetRequest {
@@ -54956,10 +53716,6 @@ func (p *cpuProfileServiceGetResponse) Profile() (*CpuProfile, bool) {
 	return nil, false
 }
 
-func (p *cpuProfileServiceGetResponse) MustProfile() *CpuProfile {
-	return p.profile
-}
-
 func (p *cpuProfileService) Get() *cpuProfileServiceGetRequest {
 	return &cpuProfileServiceGetRequest{cpuProfileService: p}
 }
@@ -55156,10 +53912,6 @@ func (p *cpuProfileServiceUpdateResponse) Profile() (*CpuProfile, bool) {
 	return nil, false
 }
 
-func (p *cpuProfileServiceUpdateResponse) MustProfile() *CpuProfile {
-	return p.profile
-}
-
 func (p *cpuProfileService) Update() *cpuProfileServiceUpdateRequest {
 	return &cpuProfileServiceUpdateRequest{cpuProfileService: p}
 }
@@ -55324,10 +54076,6 @@ func (p *storageServerConnectionExtensionServiceGetResponse) Extension() (*Stora
 		return p.extension, true
 	}
 	return nil, false
-}
-
-func (p *storageServerConnectionExtensionServiceGetResponse) MustExtension() *StorageConnectionExtension {
-	return p.extension
 }
 
 func (p *storageServerConnectionExtensionService) Get() *storageServerConnectionExtensionServiceGetRequest {
@@ -55526,10 +54274,6 @@ func (p *storageServerConnectionExtensionServiceUpdateResponse) Extension() (*St
 	return nil, false
 }
 
-func (p *storageServerConnectionExtensionServiceUpdateResponse) MustExtension() *StorageConnectionExtension {
-	return p.extension
-}
-
 func (p *storageServerConnectionExtensionService) Update() *storageServerConnectionExtensionServiceUpdateRequest {
 	return &storageServerConnectionExtensionServiceUpdateRequest{storageServerConnectionExtensionService: p}
 }
@@ -55646,10 +54390,6 @@ func (p *clusterLevelsServiceListResponse) Levels() (*ClusterLevelSlice, bool) {
 		return p.levels, true
 	}
 	return nil, false
-}
-
-func (p *clusterLevelsServiceListResponse) MustLevels() *ClusterLevelSlice {
-	return p.levels
 }
 
 func (p *clusterLevelsService) List() *clusterLevelsServiceListRequest {
@@ -55792,10 +54532,6 @@ func (p *networkFilterParametersServiceAddResponse) Parameter() (*NetworkFilterP
 	return nil, false
 }
 
-func (p *networkFilterParametersServiceAddResponse) MustParameter() *NetworkFilterParameter {
-	return p.parameter
-}
-
 func (p *networkFilterParametersService) Add() *networkFilterParametersServiceAddRequest {
 	return &networkFilterParametersServiceAddRequest{networkFilterParametersService: p}
 }
@@ -55882,10 +54618,6 @@ func (p *networkFilterParametersServiceListResponse) Parameters() (*NetworkFilte
 		return p.parameters, true
 	}
 	return nil, false
-}
-
-func (p *networkFilterParametersServiceListResponse) MustParameters() *NetworkFilterParameterSlice {
-	return p.parameters
 }
 
 func (p *networkFilterParametersService) List() *networkFilterParametersServiceListRequest {
@@ -56027,10 +54759,6 @@ func (p *vmNicsServiceAddResponse) Nic() (*Nic, bool) {
 	return nil, false
 }
 
-func (p *vmNicsServiceAddResponse) MustNic() *Nic {
-	return p.nic
-}
-
 func (p *vmNicsService) Add() *vmNicsServiceAddRequest {
 	return &vmNicsServiceAddRequest{vmNicsService: p}
 }
@@ -56127,10 +54855,6 @@ func (p *vmNicsServiceListResponse) Nics() (*NicSlice, bool) {
 		return p.nics, true
 	}
 	return nil, false
-}
-
-func (p *vmNicsServiceListResponse) MustNics() *NicSlice {
-	return p.nics
 }
 
 func (p *vmNicsService) List() *vmNicsServiceListRequest {
@@ -56268,10 +54992,6 @@ func (p *vmReportedDevicesServiceListResponse) ReportedDevice() (*ReportedDevice
 	return nil, false
 }
 
-func (p *vmReportedDevicesServiceListResponse) MustReportedDevice() *ReportedDeviceSlice {
-	return p.reportedDevice
-}
-
 func (p *vmReportedDevicesService) List() *vmReportedDevicesServiceListRequest {
 	return &vmReportedDevicesServiceListRequest{vmReportedDevicesService: p}
 }
@@ -56405,10 +55125,6 @@ func (p *balanceServiceGetResponse) Balance() (*Balance, bool) {
 		return p.balance, true
 	}
 	return nil, false
-}
-
-func (p *balanceServiceGetResponse) MustBalance() *Balance {
-	return p.balance
 }
 
 func (p *balanceService) Get() *balanceServiceGetRequest {
@@ -56625,10 +55341,6 @@ func (p *permitsServiceAddResponse) Permit() (*Permit, bool) {
 	return nil, false
 }
 
-func (p *permitsServiceAddResponse) MustPermit() *Permit {
-	return p.permit
-}
-
 func (p *permitsService) Add() *permitsServiceAddRequest {
 	return &permitsServiceAddRequest{permitsService: p}
 }
@@ -56725,10 +55437,6 @@ func (p *permitsServiceListResponse) Permits() (*PermitSlice, bool) {
 		return p.permits, true
 	}
 	return nil, false
-}
-
-func (p *permitsServiceListResponse) MustPermits() *PermitSlice {
-	return p.permits
 }
 
 func (p *permitsService) List() *permitsServiceListRequest {
@@ -56867,10 +55575,6 @@ func (p *storageDomainTemplatesServiceListResponse) Templates() (*TemplateSlice,
 	return nil, false
 }
 
-func (p *storageDomainTemplatesServiceListResponse) MustTemplates() *TemplateSlice {
-	return p.templates
-}
-
 func (p *storageDomainTemplatesService) List() *storageDomainTemplatesServiceListRequest {
 	return &storageDomainTemplatesServiceListRequest{storageDomainTemplatesService: p}
 }
@@ -56994,10 +55698,6 @@ func (p *systemServiceGetResponse) Api() (*Api, bool) {
 		return p.api, true
 	}
 	return nil, false
-}
-
-func (p *systemServiceGetResponse) MustApi() *Api {
-	return p.api
 }
 
 func (p *systemService) Get() *systemServiceGetRequest {
@@ -57667,10 +56367,6 @@ func (p *externalHostServiceGetResponse) Host() (*ExternalHost, bool) {
 	return nil, false
 }
 
-func (p *externalHostServiceGetResponse) MustHost() *ExternalHost {
-	return p.host
-}
-
 func (p *externalHostService) Get() *externalHostServiceGetRequest {
 	return &externalHostServiceGetRequest{externalHostService: p}
 }
@@ -57784,10 +56480,6 @@ func (p *externalHostGroupServiceGetResponse) Group() (*ExternalHostGroup, bool)
 		return p.group, true
 	}
 	return nil, false
-}
-
-func (p *externalHostGroupServiceGetResponse) MustGroup() *ExternalHostGroup {
-	return p.group
 }
 
 func (p *externalHostGroupService) Get() *externalHostGroupServiceGetRequest {
@@ -57906,10 +56598,6 @@ func (p *katelloErratumServiceGetResponse) Erratum() (*KatelloErratum, bool) {
 	return nil, false
 }
 
-func (p *katelloErratumServiceGetResponse) MustErratum() *KatelloErratum {
-	return p.erratum
-}
-
 func (p *katelloErratumService) Get() *katelloErratumServiceGetRequest {
 	return &katelloErratumServiceGetRequest{katelloErratumService: p}
 }
@@ -58023,10 +56711,6 @@ func (p *externalDiscoveredHostServiceGetResponse) Host() (*ExternalDiscoveredHo
 		return p.host, true
 	}
 	return nil, false
-}
-
-func (p *externalDiscoveredHostServiceGetResponse) MustHost() *ExternalDiscoveredHost {
-	return p.host
 }
 
 func (p *externalDiscoveredHostService) Get() *externalDiscoveredHostServiceGetRequest {
@@ -58156,10 +56840,6 @@ func (p *engineKatelloErrataServiceListResponse) Errata() (*KatelloErratumSlice,
 	return nil, false
 }
 
-func (p *engineKatelloErrataServiceListResponse) MustErrata() *KatelloErratumSlice {
-	return p.errata
-}
-
 func (p *engineKatelloErrataService) List() *engineKatelloErrataServiceListRequest {
 	return &engineKatelloErrataServiceListRequest{engineKatelloErrataService: p}
 }
@@ -58287,10 +56967,6 @@ func (p *externalComputeResourceServiceGetResponse) Resource() (*ExternalCompute
 	return nil, false
 }
 
-func (p *externalComputeResourceServiceGetResponse) MustResource() *ExternalComputeResource {
-	return p.resource
-}
-
 func (p *externalComputeResourceService) Get() *externalComputeResourceServiceGetRequest {
 	return &externalComputeResourceServiceGetRequest{externalComputeResourceService: p}
 }
@@ -58416,10 +57092,6 @@ func (p *externalHostGroupsServiceListResponse) Groups() (*ExternalHostGroupSlic
 	return nil, false
 }
 
-func (p *externalHostGroupsServiceListResponse) MustGroups() *ExternalHostGroupSlice {
-	return p.groups
-}
-
 func (p *externalHostGroupsService) List() *externalHostGroupsServiceListRequest {
 	return &externalHostGroupsServiceListRequest{externalHostGroupsService: p}
 }
@@ -58543,10 +57215,6 @@ func (p *externalHostProviderServiceGetResponse) Provider() (*ExternalHostProvid
 		return p.provider, true
 	}
 	return nil, false
-}
-
-func (p *externalHostProviderServiceGetResponse) MustProvider() *ExternalHostProvider {
-	return p.provider
 }
 
 func (p *externalHostProviderService) Get() *externalHostProviderServiceGetRequest {
@@ -58921,10 +57589,6 @@ func (p *externalHostProviderServiceUpdateResponse) Provider() (*ExternalHostPro
 	return nil, false
 }
 
-func (p *externalHostProviderServiceUpdateResponse) MustProvider() *ExternalHostProvider {
-	return p.provider
-}
-
 func (p *externalHostProviderService) Update() *externalHostProviderServiceUpdateRequest {
 	return &externalHostProviderServiceUpdateRequest{externalHostProviderService: p}
 }
@@ -59112,10 +57776,6 @@ func (p *katelloErrataServiceListResponse) Errata() (*KatelloErratumSlice, bool)
 	return nil, false
 }
 
-func (p *katelloErrataServiceListResponse) MustErrata() *KatelloErratumSlice {
-	return p.errata
-}
-
 func (p *katelloErrataService) List() *katelloErrataServiceListRequest {
 	return &katelloErrataServiceListRequest{katelloErrataService: p}
 }
@@ -59253,10 +57913,6 @@ func (p *externalDiscoveredHostsServiceListResponse) Hosts() (*ExternalDiscovere
 	return nil, false
 }
 
-func (p *externalDiscoveredHostsServiceListResponse) MustHosts() *ExternalDiscoveredHostSlice {
-	return p.hosts
-}
-
 func (p *externalDiscoveredHostsService) List() *externalDiscoveredHostsServiceListRequest {
 	return &externalDiscoveredHostsServiceListRequest{externalDiscoveredHostsService: p}
 }
@@ -59392,10 +58048,6 @@ func (p *externalHostsServiceListResponse) Hosts() (*ExternalHostSlice, bool) {
 	return nil, false
 }
 
-func (p *externalHostsServiceListResponse) MustHosts() *ExternalHostSlice {
-	return p.hosts
-}
-
 func (p *externalHostsService) List() *externalHostsServiceListRequest {
 	return &externalHostsServiceListRequest{externalHostsService: p}
 }
@@ -59529,10 +58181,6 @@ func (p *externalComputeResourcesServiceListResponse) Resources() (*ExternalComp
 		return p.resources, true
 	}
 	return nil, false
-}
-
-func (p *externalComputeResourcesServiceListResponse) MustResources() *ExternalComputeResourceSlice {
-	return p.resources
 }
 
 func (p *externalComputeResourcesService) List() *externalComputeResourcesServiceListRequest {
@@ -59673,10 +58321,6 @@ func (p *externalHostProvidersServiceAddResponse) Provider() (*ExternalHostProvi
 	return nil, false
 }
 
-func (p *externalHostProvidersServiceAddResponse) MustProvider() *ExternalHostProvider {
-	return p.provider
-}
-
 func (p *externalHostProvidersService) Add() *externalHostProvidersServiceAddRequest {
 	return &externalHostProvidersServiceAddRequest{externalHostProvidersService: p}
 }
@@ -59773,10 +58417,6 @@ func (p *externalHostProvidersServiceListResponse) Providers() (*ExternalHostPro
 		return p.providers, true
 	}
 	return nil, false
-}
-
-func (p *externalHostProvidersServiceListResponse) MustProviders() *ExternalHostProviderSlice {
-	return p.providers
 }
 
 func (p *externalHostProvidersService) List() *externalHostProvidersServiceListRequest {
@@ -59903,10 +58543,6 @@ func (p *glusterBrickServiceGetResponse) Brick() (*GlusterBrick, bool) {
 		return p.brick, true
 	}
 	return nil, false
-}
-
-func (p *glusterBrickServiceGetResponse) MustBrick() *GlusterBrick {
-	return p.brick
 }
 
 func (p *glusterBrickService) Get() *glusterBrickServiceGetRequest {
@@ -60230,10 +58866,6 @@ func (p *glusterVolumesServiceAddResponse) Volume() (*GlusterVolume, bool) {
 	return nil, false
 }
 
-func (p *glusterVolumesServiceAddResponse) MustVolume() *GlusterVolume {
-	return p.volume
-}
-
 func (p *glusterVolumesService) Add() *glusterVolumesServiceAddRequest {
 	return &glusterVolumesServiceAddRequest{glusterVolumesService: p}
 }
@@ -60350,10 +58982,6 @@ func (p *glusterVolumesServiceListResponse) Volumes() (*GlusterVolumeSlice, bool
 		return p.volumes, true
 	}
 	return nil, false
-}
-
-func (p *glusterVolumesServiceListResponse) MustVolumes() *GlusterVolumeSlice {
-	return p.volumes
 }
 
 func (p *glusterVolumesService) List() *glusterVolumesServiceListRequest {
@@ -60483,10 +59111,6 @@ func (p *glusterVolumeServiceGetResponse) Volume() (*GlusterVolume, bool) {
 	return nil, false
 }
 
-func (p *glusterVolumeServiceGetResponse) MustVolume() *GlusterVolume {
-	return p.volume
-}
-
 func (p *glusterVolumeService) Get() *glusterVolumeServiceGetRequest {
 	return &glusterVolumeServiceGetRequest{glusterVolumeService: p}
 }
@@ -60575,10 +59199,6 @@ func (p *glusterVolumeServiceGetProfileStatisticsResponse) Details() (*GlusterVo
 		return p.details, true
 	}
 	return nil, false
-}
-
-func (p *glusterVolumeServiceGetProfileStatisticsResponse) MustDetails() *GlusterVolumeProfileDetails {
-	return p.details
 }
 
 func (p *glusterVolumeService) GetProfileStatistics() *glusterVolumeServiceGetProfileStatisticsRequest {
@@ -61823,10 +60443,6 @@ func (p *glusterHookServiceGetResponse) Hook() (*GlusterHook, bool) {
 	return nil, false
 }
 
-func (p *glusterHookServiceGetResponse) MustHook() *GlusterHook {
-	return p.hook
-}
-
 func (p *glusterHookService) Get() *glusterHookServiceGetRequest {
 	return &glusterHookServiceGetRequest{glusterHookService: p}
 }
@@ -62258,10 +60874,6 @@ func (p *glusterBricksServiceAddResponse) Bricks() (*GlusterBrickSlice, bool) {
 	return nil, false
 }
 
-func (p *glusterBricksServiceAddResponse) MustBricks() *GlusterBrickSlice {
-	return p.bricks
-}
-
 func (p *glusterBricksService) Add() *glusterBricksServiceAddRequest {
 	return &glusterBricksServiceAddRequest{glusterBricksService: p}
 }
@@ -62358,10 +60970,6 @@ func (p *glusterBricksServiceListResponse) Bricks() (*GlusterBrickSlice, bool) {
 		return p.bricks, true
 	}
 	return nil, false
-}
-
-func (p *glusterBricksServiceListResponse) MustBricks() *GlusterBrickSlice {
-	return p.bricks
 }
 
 func (p *glusterBricksService) List() *glusterBricksServiceListRequest {
@@ -62791,10 +61399,6 @@ func (p *glusterHooksServiceListResponse) Hooks() (*GlusterHookSlice, bool) {
 	return nil, false
 }
 
-func (p *glusterHooksServiceListResponse) MustHooks() *GlusterHookSlice {
-	return p.hooks
-}
-
 func (p *glusterHooksService) List() *glusterHooksServiceListRequest {
 	return &glusterHooksServiceListRequest{glusterHooksService: p}
 }
@@ -62934,10 +61538,6 @@ func (p *disksServiceAddResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *disksServiceAddResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *disksService) Add() *disksServiceAddRequest {
 	return &disksServiceAddRequest{disksService: p}
 }
@@ -63054,10 +61654,6 @@ func (p *disksServiceListResponse) Disks() (*DiskSlice, bool) {
 		return p.disks, true
 	}
 	return nil, false
-}
-
-func (p *disksServiceListResponse) MustDisks() *DiskSlice {
-	return p.disks
 }
 
 func (p *disksService) List() *disksServiceListRequest {
@@ -63199,10 +61795,6 @@ func (p *instanceTypeWatchdogsServiceAddResponse) Watchdog() (*Watchdog, bool) {
 	return nil, false
 }
 
-func (p *instanceTypeWatchdogsServiceAddResponse) MustWatchdog() *Watchdog {
-	return p.watchdog
-}
-
 func (p *instanceTypeWatchdogsService) Add() *instanceTypeWatchdogsServiceAddRequest {
 	return &instanceTypeWatchdogsServiceAddRequest{instanceTypeWatchdogsService: p}
 }
@@ -63309,10 +61901,6 @@ func (p *instanceTypeWatchdogsServiceListResponse) Watchdogs() (*WatchdogSlice, 
 		return p.watchdogs, true
 	}
 	return nil, false
-}
-
-func (p *instanceTypeWatchdogsServiceListResponse) MustWatchdogs() *WatchdogSlice {
-	return p.watchdogs
 }
 
 func (p *instanceTypeWatchdogsService) List() *instanceTypeWatchdogsServiceListRequest {
@@ -63454,10 +62042,6 @@ func (p *jobsServiceAddResponse) Job() (*Job, bool) {
 	return nil, false
 }
 
-func (p *jobsServiceAddResponse) MustJob() *Job {
-	return p.job
-}
-
 func (p *jobsService) Add() *jobsServiceAddRequest {
 	return &jobsServiceAddRequest{jobsService: p}
 }
@@ -63554,10 +62138,6 @@ func (p *jobsServiceListResponse) Jobs() (*JobSlice, bool) {
 		return p.jobs, true
 	}
 	return nil, false
-}
-
-func (p *jobsServiceListResponse) MustJobs() *JobSlice {
-	return p.jobs
 }
 
 func (p *jobsService) List() *jobsServiceListRequest {
@@ -63695,10 +62275,6 @@ func (p *iconsServiceListResponse) Icons() (*IconSlice, bool) {
 		return p.icons, true
 	}
 	return nil, false
-}
-
-func (p *iconsServiceListResponse) MustIcons() *IconSlice {
-	return p.icons
 }
 
 func (p *iconsService) List() *iconsServiceListRequest {
@@ -63851,10 +62427,6 @@ func (p *templatesServiceAddResponse) Template() (*Template, bool) {
 	return nil, false
 }
 
-func (p *templatesServiceAddResponse) MustTemplate() *Template {
-	return p.template
-}
-
 func (p *templatesService) Add() *templatesServiceAddRequest {
 	return &templatesServiceAddRequest{templatesService: p}
 }
@@ -63981,10 +62553,6 @@ func (p *templatesServiceListResponse) Templates() (*TemplateSlice, bool) {
 		return p.templates, true
 	}
 	return nil, false
-}
-
-func (p *templatesServiceListResponse) MustTemplates() *TemplateSlice {
-	return p.templates
 }
 
 func (p *templatesService) List() *templatesServiceListRequest {
@@ -64121,10 +62689,6 @@ func (p *filterServiceGetResponse) Result() (*Filter, bool) {
 		return p.result, true
 	}
 	return nil, false
-}
-
-func (p *filterServiceGetResponse) MustResult() *Filter {
-	return p.result
 }
 
 func (p *filterService) Get() *filterServiceGetRequest {
@@ -64342,10 +62906,6 @@ func (p *assignedAffinityLabelsServiceAddResponse) Label() (*AffinityLabel, bool
 	return nil, false
 }
 
-func (p *assignedAffinityLabelsServiceAddResponse) MustLabel() *AffinityLabel {
-	return p.label
-}
-
 func (p *assignedAffinityLabelsService) Add() *assignedAffinityLabelsServiceAddRequest {
 	return &assignedAffinityLabelsServiceAddRequest{assignedAffinityLabelsService: p}
 }
@@ -64432,10 +62992,6 @@ func (p *assignedAffinityLabelsServiceListResponse) Label() (*AffinityLabelSlice
 		return p.label, true
 	}
 	return nil, false
-}
-
-func (p *assignedAffinityLabelsServiceListResponse) MustLabel() *AffinityLabelSlice {
-	return p.label
 }
 
 func (p *assignedAffinityLabelsService) List() *assignedAffinityLabelsServiceListRequest {
@@ -64565,10 +63121,6 @@ func (p *snapshotCdromServiceGetResponse) Cdrom() (*Cdrom, bool) {
 	return nil, false
 }
 
-func (p *snapshotCdromServiceGetResponse) MustCdrom() *Cdrom {
-	return p.cdrom
-}
-
 func (p *snapshotCdromService) Get() *snapshotCdromServiceGetRequest {
 	return &snapshotCdromServiceGetRequest{snapshotCdromService: p}
 }
@@ -64682,10 +63234,6 @@ func (p *hostNumaNodeServiceGetResponse) Node() (*NumaNode, bool) {
 		return p.node, true
 	}
 	return nil, false
-}
-
-func (p *hostNumaNodeServiceGetResponse) MustNode() *NumaNode {
-	return p.node
 }
 
 func (p *hostNumaNodeService) Get() *hostNumaNodeServiceGetRequest {
@@ -64813,10 +63361,6 @@ func (p *templateGraphicsConsoleServiceGetResponse) Console() (*GraphicsConsole,
 		return p.console, true
 	}
 	return nil, false
-}
-
-func (p *templateGraphicsConsoleServiceGetResponse) MustConsole() *GraphicsConsole {
-	return p.console
 }
 
 func (p *templateGraphicsConsoleService) Get() *templateGraphicsConsoleServiceGetRequest {
@@ -65035,10 +63579,6 @@ func (p *affinityLabelHostsServiceAddResponse) Host() (*Host, bool) {
 	return nil, false
 }
 
-func (p *affinityLabelHostsServiceAddResponse) MustHost() *Host {
-	return p.host
-}
-
 func (p *affinityLabelHostsService) Add() *affinityLabelHostsServiceAddRequest {
 	return &affinityLabelHostsServiceAddRequest{affinityLabelHostsService: p}
 }
@@ -65125,10 +63665,6 @@ func (p *affinityLabelHostsServiceListResponse) Hosts() (*HostSlice, bool) {
 		return p.hosts, true
 	}
 	return nil, false
-}
-
-func (p *affinityLabelHostsServiceListResponse) MustHosts() *HostSlice {
-	return p.hosts
 }
 
 func (p *affinityLabelHostsService) List() *affinityLabelHostsServiceListRequest {
@@ -65266,10 +63802,6 @@ func (p *diskSnapshotsServiceListResponse) Snapshots() (*DiskSnapshotSlice, bool
 		return p.snapshots, true
 	}
 	return nil, false
-}
-
-func (p *diskSnapshotsServiceListResponse) MustSnapshots() *DiskSnapshotSlice {
-	return p.snapshots
 }
 
 func (p *diskSnapshotsService) List() *diskSnapshotsServiceListRequest {
@@ -65432,10 +63964,6 @@ func (p *storageDomainVmsServiceListResponse) Vm() (*VmSlice, bool) {
 	return nil, false
 }
 
-func (p *storageDomainVmsServiceListResponse) MustVm() *VmSlice {
-	return p.vm
-}
-
 func (p *storageDomainVmsService) List() *storageDomainVmsServiceListRequest {
 	return &storageDomainVmsServiceListRequest{storageDomainVmsService: p}
 }
@@ -65595,10 +64123,6 @@ func (p *hostsServiceAddResponse) Host() (*Host, bool) {
 	return nil, false
 }
 
-func (p *hostsServiceAddResponse) MustHost() *Host {
-	return p.host
-}
-
 func (p *hostsService) Add() *hostsServiceAddRequest {
 	return &hostsServiceAddRequest{hostsService: p}
 }
@@ -65725,10 +64249,6 @@ func (p *hostsServiceListResponse) Hosts() (*HostSlice, bool) {
 		return p.hosts, true
 	}
 	return nil, false
-}
-
-func (p *hostsServiceListResponse) MustHosts() *HostSlice {
-	return p.hosts
 }
 
 func (p *hostsService) List() *hostsServiceListRequest {
@@ -65881,10 +64401,6 @@ func (p *storageDomainDisksServiceAddResponse) Disk() (*Disk, bool) {
 	return nil, false
 }
 
-func (p *storageDomainDisksServiceAddResponse) MustDisk() *Disk {
-	return p.disk
-}
-
 func (p *storageDomainDisksService) Add() *storageDomainDisksServiceAddRequest {
 	return &storageDomainDisksServiceAddRequest{storageDomainDisksService: p}
 }
@@ -65981,10 +64497,6 @@ func (p *storageDomainDisksServiceListResponse) Disks() (*DiskSlice, bool) {
 		return p.disks, true
 	}
 	return nil, false
-}
-
-func (p *storageDomainDisksServiceListResponse) MustDisks() *DiskSlice {
-	return p.disks
 }
 
 func (p *storageDomainDisksService) List() *storageDomainDisksServiceListRequest {
@@ -66126,10 +64638,6 @@ func (p *filtersServiceAddResponse) Filter() (*Filter, bool) {
 	return nil, false
 }
 
-func (p *filtersServiceAddResponse) MustFilter() *Filter {
-	return p.filter
-}
-
 func (p *filtersService) Add() *filtersServiceAddRequest {
 	return &filtersServiceAddRequest{filtersService: p}
 }
@@ -66236,10 +64744,6 @@ func (p *filtersServiceListResponse) Filters() (*FilterSlice, bool) {
 		return p.filters, true
 	}
 	return nil, false
-}
-
-func (p *filtersServiceListResponse) MustFilters() *FilterSlice {
-	return p.filters
 }
 
 func (p *filtersService) List() *filtersServiceListRequest {
@@ -66380,10 +64884,6 @@ func (p *storageServerConnectionsServiceAddResponse) Connection() (*StorageConne
 	return nil, false
 }
 
-func (p *storageServerConnectionsServiceAddResponse) MustConnection() *StorageConnection {
-	return p.connection
-}
-
 func (p *storageServerConnectionsService) Add() *storageServerConnectionsServiceAddRequest {
 	return &storageServerConnectionsServiceAddRequest{storageServerConnectionsService: p}
 }
@@ -66480,10 +64980,6 @@ func (p *storageServerConnectionsServiceListResponse) Connections() (*StorageCon
 		return p.connections, true
 	}
 	return nil, false
-}
-
-func (p *storageServerConnectionsServiceListResponse) MustConnections() *StorageConnectionSlice {
-	return p.connections
 }
 
 func (p *storageServerConnectionsService) List() *storageServerConnectionsServiceListRequest {
@@ -66624,10 +65120,6 @@ func (p *fenceAgentsServiceAddResponse) Agent() (*Agent, bool) {
 	return nil, false
 }
 
-func (p *fenceAgentsServiceAddResponse) MustAgent() *Agent {
-	return p.agent
-}
-
 func (p *fenceAgentsService) Add() *fenceAgentsServiceAddRequest {
 	return &fenceAgentsServiceAddRequest{fenceAgentsService: p}
 }
@@ -66724,10 +65216,6 @@ func (p *fenceAgentsServiceListResponse) Agents() (*AgentSlice, bool) {
 		return p.agents, true
 	}
 	return nil, false
-}
-
-func (p *fenceAgentsServiceListResponse) MustAgents() *AgentSlice {
-	return p.agents
 }
 
 func (p *fenceAgentsService) List() *fenceAgentsServiceListRequest {
@@ -66869,10 +65357,6 @@ func (p *clustersServiceAddResponse) Cluster() (*Cluster, bool) {
 	return nil, false
 }
 
-func (p *clustersServiceAddResponse) MustCluster() *Cluster {
-	return p.cluster
-}
-
 func (p *clustersService) Add() *clustersServiceAddRequest {
 	return &clustersServiceAddRequest{clustersService: p}
 }
@@ -66999,10 +65483,6 @@ func (p *clustersServiceListResponse) Clusters() (*ClusterSlice, bool) {
 		return p.clusters, true
 	}
 	return nil, false
-}
-
-func (p *clustersServiceListResponse) MustClusters() *ClusterSlice {
-	return p.clusters
 }
 
 func (p *clustersService) List() *clustersServiceListRequest {
@@ -67145,10 +65625,6 @@ func (p *assignedPermissionsServiceAddResponse) Permission() (*Permission, bool)
 	return nil, false
 }
 
-func (p *assignedPermissionsServiceAddResponse) MustPermission() *Permission {
-	return p.permission
-}
-
 func (p *assignedPermissionsService) Add() *assignedPermissionsServiceAddRequest {
 	return &assignedPermissionsServiceAddRequest{assignedPermissionsService: p}
 }
@@ -67235,10 +65711,6 @@ func (p *assignedPermissionsServiceListResponse) Permissions() (*PermissionSlice
 		return p.permissions, true
 	}
 	return nil, false
-}
-
-func (p *assignedPermissionsServiceListResponse) MustPermissions() *PermissionSlice {
-	return p.permissions
 }
 
 func (p *assignedPermissionsService) List() *assignedPermissionsServiceListRequest {
