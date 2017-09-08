@@ -40,38 +40,20 @@ func main() {
 	}
 	defer conn.Close()
 
-	// Get the reference to the "datacenters" service:
-	datacentersService := conn.SystemService().DataCentersService()
-
-	// Use the "list" method of the "datacenters" service to list all the datacenters of the system:
-	datacentersResponse, err := datacentersService.List().Send()
+	dcsService := conn.SystemService().DataCentersService()
+	resp, err := dcsService.Add().
+		DataCenter(
+			ovirtsdk4.NewDataCenterBuilder().
+				Name("mydc").
+				Description("My data center").
+				Local(false).
+				MustBuild()).
+		Send()
 	if err != nil {
-		fmt.Printf("Failed to get datacenter list, reason: %v\n", err)
+		fmt.Printf("Failed to add datacenter, reason: %v\n", err)
 		return
 	}
-
-	// Print the datacenter names and identifiers:
-	if datacenters, ok := datacentersResponse.DataCenters(); ok {
-		for _, dc := range datacenters.Slice() {
-			fmt.Printf("Datacenter: ")
-			if dcName, ok := dc.Name(); ok {
-				fmt.Printf(" name: %v", dcName)
-			}
-			if dcID, ok := dc.Id(); ok {
-				fmt.Printf(" id: %v", dcID)
-			}
-			fmt.Printf("  Supported versions are: ")
-			if svs, ok := dc.SupportedVersions(); ok {
-				for _, sv := range svs.Slice() {
-					if major, ok := sv.Major(); ok {
-						fmt.Printf(" Major: %v", major)
-					}
-					if minor, ok := sv.Minor(); ok {
-						fmt.Printf(" Minor: %v", minor)
-					}
-				}
-			}
-			fmt.Println("")
-		}
+	if dc, ok := resp.DataCenter(); ok {
+		fmt.Printf("Add datacenter (%v) successfully\n", dc.MustName())
 	}
 }

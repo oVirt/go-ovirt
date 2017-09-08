@@ -35,7 +35,8 @@ func main() {
 		Timeout(time.Second * 10).
 		Build()
 	if err != nil {
-		fmt.Printf("Make connection failed, reason: %s\n", err.Error())
+		fmt.Printf("Make connection failed, reason: %v\n", err)
+		return
 	}
 	defer conn.Close()
 
@@ -60,6 +61,7 @@ func main() {
 	resp, err := affinityLabelsService.List().Send()
 	if err != nil {
 		fmt.Printf("Failed to get affinity label list, reason: %v\n", err)
+		return
 	}
 	labels, _ := resp.Labels()
 	for _, label := range labels.Slice() {

@@ -35,7 +35,8 @@ func main() {
 		Timeout(time.Second * 10).
 		Build()
 	if err != nil {
-		fmt.Printf("Make connection failed, reason: %s\n", err.Error())
+		fmt.Printf("Make connection failed, reason: %v\n", err)
+		return
 	}
 	defer conn.Close()
 

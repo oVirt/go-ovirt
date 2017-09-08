@@ -40,38 +40,23 @@ func main() {
 	}
 	defer conn.Close()
 
-	// Get the reference to the "datacenters" service:
-	datacentersService := conn.SystemService().DataCentersService()
+	vmsService := conn.SystemService().VmsService()
 
-	// Use the "list" method of the "datacenters" service to list all the datacenters of the system:
-	datacentersResponse, err := datacentersService.List().Send()
-	if err != nil {
-		fmt.Printf("Failed to get datacenter list, reason: %v\n", err)
-		return
-	}
+	// Error not checked is not recommended
+	resp, _ := vmsService.List().Search("name=test4joey").Send()
+	vmSlice, _ := resp.Vms()
+	vmService := vmsService.VmService(vmSlice.Slice()[0].MustId())
+	dasService := vmService.DiskAttachmentsService()
 
-	// Print the datacenter names and identifiers:
-	if datacenters, ok := datacentersResponse.DataCenters(); ok {
-		for _, dc := range datacenters.Slice() {
-			fmt.Printf("Datacenter: ")
-			if dcName, ok := dc.Name(); ok {
-				fmt.Printf(" name: %v", dcName)
-			}
-			if dcID, ok := dc.Id(); ok {
-				fmt.Printf(" id: %v", dcID)
-			}
-			fmt.Printf("  Supported versions are: ")
-			if svs, ok := dc.SupportedVersions(); ok {
-				for _, sv := range svs.Slice() {
-					if major, ok := sv.Major(); ok {
-						fmt.Printf(" Major: %v", major)
-					}
-					if minor, ok := sv.Minor(); ok {
-						fmt.Printf(" Minor: %v", minor)
-					}
-				}
-			}
-			fmt.Println("")
+	dasResp, _ := dasService.List().Send()
+	das, _ := dasResp.Attachments()
+	for _, da := range das.Slice() {
+		disk, _ := conn.FollowLink(da.MustDisk())
+		if disk, ok := disk.(*ovirtsdk4.Disk); ok {
+			fmt.Printf(" name: %v\n", disk.MustName())
+			fmt.Printf(" id: %v\n", disk.MustId())
+			fmt.Printf(" status: %v\n", disk.MustStatus())
+			fmt.Printf(" provisioned_size: %v\n", disk.MustProvisionedSize())
 		}
 	}
 }

@@ -36,6 +36,7 @@ func main() {
 		Build()
 	if err != nil {
 		fmt.Printf("Make connection failed, reason: %s\n", err.Error())
+		return
 	}
 	defer conn.Close()
 
