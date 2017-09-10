@@ -42011,12 +42011,36 @@ func (builder *ActionBuilder) Bricks(attr *GlusterBrickSlice) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) BricksOfAny(anys ...GlusterBrick) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.bricks == nil {
+		builder.action.bricks = new(GlusterBrickSlice)
+	}
+	builder.action.bricks.slice = append(builder.action.bricks.slice, anys...)
+	return builder
+}
+
 func (builder *ActionBuilder) Certificates(attr *CertificateSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.action.SetCertificates(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) CertificatesOfAny(anys ...Certificate) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.certificates == nil {
+		builder.action.certificates = new(CertificateSlice)
+	}
+	builder.action.certificates.slice = append(builder.action.certificates.slice, anys...)
 	return builder
 }
 
@@ -42134,6 +42158,18 @@ func (builder *ActionBuilder) Disks(attr *DiskSlice) *ActionBuilder {
 	}
 
 	builder.action.SetDisks(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) DisksOfAny(anys ...Disk) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.disks == nil {
+		builder.action.disks = new(DiskSlice)
+	}
+	builder.action.disks.slice = append(builder.action.disks.slice, anys...)
 	return builder
 }
 
@@ -42263,6 +42299,15 @@ func (builder *ActionBuilder) IscsiTargets(attr []string) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) IscsiTargetsOfAny(anys ...string) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.iscsiTargets = append(builder.action.iscsiTargets, anys...)
+	return builder
+}
+
 func (builder *ActionBuilder) Job(attr *Job) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42278,6 +42323,18 @@ func (builder *ActionBuilder) LogicalUnits(attr *LogicalUnitSlice) *ActionBuilde
 	}
 
 	builder.action.SetLogicalUnits(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) LogicalUnitsOfAny(anys ...LogicalUnit) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.logicalUnits == nil {
+		builder.action.logicalUnits = new(LogicalUnitSlice)
+	}
+	builder.action.logicalUnits.slice = append(builder.action.logicalUnits.slice, anys...)
 	return builder
 }
 
@@ -42299,6 +42356,18 @@ func (builder *ActionBuilder) ModifiedBonds(attr *HostNicSlice) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) ModifiedBondsOfAny(anys ...HostNic) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.modifiedBonds == nil {
+		builder.action.modifiedBonds = new(HostNicSlice)
+	}
+	builder.action.modifiedBonds.slice = append(builder.action.modifiedBonds.slice, anys...)
+	return builder
+}
+
 func (builder *ActionBuilder) ModifiedLabels(attr *NetworkLabelSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42308,12 +42377,36 @@ func (builder *ActionBuilder) ModifiedLabels(attr *NetworkLabelSlice) *ActionBui
 	return builder
 }
 
+func (builder *ActionBuilder) ModifiedLabelsOfAny(anys ...NetworkLabel) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.modifiedLabels == nil {
+		builder.action.modifiedLabels = new(NetworkLabelSlice)
+	}
+	builder.action.modifiedLabels.slice = append(builder.action.modifiedLabels.slice, anys...)
+	return builder
+}
+
 func (builder *ActionBuilder) ModifiedNetworkAttachments(attr *NetworkAttachmentSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.action.SetModifiedNetworkAttachments(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) ModifiedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.modifiedNetworkAttachments == nil {
+		builder.action.modifiedNetworkAttachments = new(NetworkAttachmentSlice)
+	}
+	builder.action.modifiedNetworkAttachments.slice = append(builder.action.modifiedNetworkAttachments.slice, anys...)
 	return builder
 }
 
@@ -42398,6 +42491,18 @@ func (builder *ActionBuilder) RemovedBonds(attr *HostNicSlice) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) RemovedBondsOfAny(anys ...HostNic) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.removedBonds == nil {
+		builder.action.removedBonds = new(HostNicSlice)
+	}
+	builder.action.removedBonds.slice = append(builder.action.removedBonds.slice, anys...)
+	return builder
+}
+
 func (builder *ActionBuilder) RemovedLabels(attr *NetworkLabelSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42407,12 +42512,36 @@ func (builder *ActionBuilder) RemovedLabels(attr *NetworkLabelSlice) *ActionBuil
 	return builder
 }
 
+func (builder *ActionBuilder) RemovedLabelsOfAny(anys ...NetworkLabel) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.removedLabels == nil {
+		builder.action.removedLabels = new(NetworkLabelSlice)
+	}
+	builder.action.removedLabels.slice = append(builder.action.removedLabels.slice, anys...)
+	return builder
+}
+
 func (builder *ActionBuilder) RemovedNetworkAttachments(attr *NetworkAttachmentSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.action.SetRemovedNetworkAttachments(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) RemovedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.removedNetworkAttachments == nil {
+		builder.action.removedNetworkAttachments = new(NetworkAttachmentSlice)
+	}
+	builder.action.removedNetworkAttachments.slice = append(builder.action.removedNetworkAttachments.slice, anys...)
 	return builder
 }
 
@@ -42497,6 +42626,18 @@ func (builder *ActionBuilder) StorageDomains(attr *StorageDomainSlice) *ActionBu
 	return builder
 }
 
+func (builder *ActionBuilder) StorageDomainsOfAny(anys ...StorageDomain) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.storageDomains == nil {
+		builder.action.storageDomains = new(StorageDomainSlice)
+	}
+	builder.action.storageDomains.slice = append(builder.action.storageDomains.slice, anys...)
+	return builder
+}
+
 func (builder *ActionBuilder) Succeeded(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42512,6 +42653,18 @@ func (builder *ActionBuilder) SynchronizedNetworkAttachments(attr *NetworkAttach
 	}
 
 	builder.action.SetSynchronizedNetworkAttachments(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) SynchronizedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.synchronizedNetworkAttachments == nil {
+		builder.action.synchronizedNetworkAttachments = new(NetworkAttachmentSlice)
+	}
+	builder.action.synchronizedNetworkAttachments.slice = append(builder.action.synchronizedNetworkAttachments.slice, anys...)
 	return builder
 }
 
@@ -42584,6 +42737,18 @@ func (builder *ActionBuilder) VnicProfileMappings(attr *VnicProfileMappingSlice)
 	}
 
 	builder.action.SetVnicProfileMappings(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) VnicProfileMappingsOfAny(anys ...VnicProfileMapping) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.vnicProfileMappings == nil {
+		builder.action.vnicProfileMappings = new(VnicProfileMappingSlice)
+	}
+	builder.action.vnicProfileMappings.slice = append(builder.action.vnicProfileMappings.slice, anys...)
 	return builder
 }
 
@@ -42664,6 +42829,18 @@ func (builder *AffinityGroupBuilder) Hosts(attr *HostSlice) *AffinityGroupBuilde
 	return builder
 }
 
+func (builder *AffinityGroupBuilder) HostsOfAny(anys ...Host) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.affinityGroup.hosts == nil {
+		builder.affinityGroup.hosts = new(HostSlice)
+	}
+	builder.affinityGroup.hosts.slice = append(builder.affinityGroup.hosts.slice, anys...)
+	return builder
+}
+
 func (builder *AffinityGroupBuilder) HostsRule(attr *AffinityRule) *AffinityGroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -42706,6 +42883,18 @@ func (builder *AffinityGroupBuilder) Vms(attr *VmSlice) *AffinityGroupBuilder {
 	}
 
 	builder.affinityGroup.SetVms(attr)
+	return builder
+}
+
+func (builder *AffinityGroupBuilder) VmsOfAny(anys ...Vm) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.affinityGroup.vms == nil {
+		builder.affinityGroup.vms = new(VmSlice)
+	}
+	builder.affinityGroup.vms.slice = append(builder.affinityGroup.vms.slice, anys...)
 	return builder
 }
 
@@ -42777,6 +42966,18 @@ func (builder *AffinityLabelBuilder) Hosts(attr *HostSlice) *AffinityLabelBuilde
 	return builder
 }
 
+func (builder *AffinityLabelBuilder) HostsOfAny(anys ...Host) *AffinityLabelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.affinityLabel.hosts == nil {
+		builder.affinityLabel.hosts = new(HostSlice)
+	}
+	builder.affinityLabel.hosts.slice = append(builder.affinityLabel.hosts.slice, anys...)
+	return builder
+}
+
 func (builder *AffinityLabelBuilder) Id(attr string) *AffinityLabelBuilder {
 	if builder.err != nil {
 		return builder
@@ -42810,6 +43011,18 @@ func (builder *AffinityLabelBuilder) Vms(attr *VmSlice) *AffinityLabelBuilder {
 	}
 
 	builder.affinityLabel.SetVms(attr)
+	return builder
+}
+
+func (builder *AffinityLabelBuilder) VmsOfAny(anys ...Vm) *AffinityLabelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.affinityLabel.vms == nil {
+		builder.affinityLabel.vms = new(VmSlice)
+	}
+	builder.affinityLabel.vms.slice = append(builder.affinityLabel.vms.slice, anys...)
 	return builder
 }
 
@@ -42982,6 +43195,18 @@ func (builder *AgentBuilder) Options(attr *OptionSlice) *AgentBuilder {
 	}
 
 	builder.agent.SetOptions(attr)
+	return builder
+}
+
+func (builder *AgentBuilder) OptionsOfAny(anys ...Option) *AgentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.agent.options == nil {
+		builder.agent.options = new(OptionSlice)
+	}
+	builder.agent.options.slice = append(builder.agent.options.slice, anys...)
 	return builder
 }
 
@@ -43633,6 +43858,18 @@ func (builder *BlockStatisticBuilder) Statistics(attr *StatisticSlice) *BlockSta
 	return builder
 }
 
+func (builder *BlockStatisticBuilder) StatisticsOfAny(anys ...Statistic) *BlockStatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.blockStatistic.statistics == nil {
+		builder.blockStatistic.statistics = new(StatisticSlice)
+	}
+	builder.blockStatistic.statistics.slice = append(builder.blockStatistic.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *BlockStatisticBuilder) Href(href string) *BlockStatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -43692,12 +43929,36 @@ func (builder *BondingBuilder) Options(attr *OptionSlice) *BondingBuilder {
 	return builder
 }
 
+func (builder *BondingBuilder) OptionsOfAny(anys ...Option) *BondingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.bonding.options == nil {
+		builder.bonding.options = new(OptionSlice)
+	}
+	builder.bonding.options.slice = append(builder.bonding.options.slice, anys...)
+	return builder
+}
+
 func (builder *BondingBuilder) Slaves(attr *HostNicSlice) *BondingBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.bonding.SetSlaves(attr)
+	return builder
+}
+
+func (builder *BondingBuilder) SlavesOfAny(anys ...HostNic) *BondingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.bonding.slaves == nil {
+		builder.bonding.slaves = new(HostNicSlice)
+	}
+	builder.bonding.slaves.slice = append(builder.bonding.slaves.slice, anys...)
 	return builder
 }
 
@@ -43819,6 +44080,15 @@ func (builder *BootBuilder) Devices(attr []BootDevice) *BootBuilder {
 	return builder
 }
 
+func (builder *BootBuilder) DevicesOfAny(anys ...BootDevice) *BootBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.boot.devices = append(builder.boot.devices, anys...)
+	return builder
+}
+
 func (builder *BootBuilder) Href(href string) *BootBuilder {
 	if builder.err != nil {
 		return builder
@@ -43907,6 +44177,18 @@ func (builder *BrickProfileDetailBuilder) ProfileDetails(attr *ProfileDetailSlic
 	}
 
 	builder.brickProfileDetail.SetProfileDetails(attr)
+	return builder
+}
+
+func (builder *BrickProfileDetailBuilder) ProfileDetailsOfAny(anys ...ProfileDetail) *BrickProfileDetailBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.brickProfileDetail.profileDetails == nil {
+		builder.brickProfileDetail.profileDetails = new(ProfileDetailSlice)
+	}
+	builder.brickProfileDetail.profileDetails.slice = append(builder.brickProfileDetail.profileDetails.slice, anys...)
 	return builder
 }
 
@@ -44020,6 +44302,18 @@ func (builder *CdromBuilder) Vms(attr *VmSlice) *CdromBuilder {
 	}
 
 	builder.cdrom.SetVms(attr)
+	return builder
+}
+
+func (builder *CdromBuilder) VmsOfAny(anys ...Vm) *CdromBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cdrom.vms == nil {
+		builder.cdrom.vms = new(VmSlice)
+	}
+	builder.cdrom.vms.slice = append(builder.cdrom.vms.slice, anys...)
 	return builder
 }
 
@@ -44159,12 +44453,36 @@ func (builder *CloudInitBuilder) AuthorizedKeys(attr *AuthorizedKeySlice) *Cloud
 	return builder
 }
 
+func (builder *CloudInitBuilder) AuthorizedKeysOfAny(anys ...AuthorizedKey) *CloudInitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cloudInit.authorizedKeys == nil {
+		builder.cloudInit.authorizedKeys = new(AuthorizedKeySlice)
+	}
+	builder.cloudInit.authorizedKeys.slice = append(builder.cloudInit.authorizedKeys.slice, anys...)
+	return builder
+}
+
 func (builder *CloudInitBuilder) Files(attr *FileSlice) *CloudInitBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.cloudInit.SetFiles(attr)
+	return builder
+}
+
+func (builder *CloudInitBuilder) FilesOfAny(anys ...File) *CloudInitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cloudInit.files == nil {
+		builder.cloudInit.files = new(FileSlice)
+	}
+	builder.cloudInit.files.slice = append(builder.cloudInit.files.slice, anys...)
 	return builder
 }
 
@@ -44213,6 +44531,18 @@ func (builder *CloudInitBuilder) Users(attr *UserSlice) *CloudInitBuilder {
 	return builder
 }
 
+func (builder *CloudInitBuilder) UsersOfAny(anys ...User) *CloudInitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cloudInit.users == nil {
+		builder.cloudInit.users = new(UserSlice)
+	}
+	builder.cloudInit.users.slice = append(builder.cloudInit.users.slice, anys...)
+	return builder
+}
+
 func (builder *CloudInitBuilder) Href(href string) *CloudInitBuilder {
 	if builder.err != nil {
 		return builder
@@ -44254,6 +44584,18 @@ func (builder *ClusterBuilder) AffinityGroups(attr *AffinityGroupSlice) *Cluster
 	return builder
 }
 
+func (builder *ClusterBuilder) AffinityGroupsOfAny(anys ...AffinityGroup) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.affinityGroups == nil {
+		builder.cluster.affinityGroups = new(AffinityGroupSlice)
+	}
+	builder.cluster.affinityGroups.slice = append(builder.cluster.affinityGroups.slice, anys...)
+	return builder
+}
+
 func (builder *ClusterBuilder) BallooningEnabled(attr bool) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -44290,12 +44632,36 @@ func (builder *ClusterBuilder) CpuProfiles(attr *CpuProfileSlice) *ClusterBuilde
 	return builder
 }
 
+func (builder *ClusterBuilder) CpuProfilesOfAny(anys ...CpuProfile) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.cpuProfiles == nil {
+		builder.cluster.cpuProfiles = new(CpuProfileSlice)
+	}
+	builder.cluster.cpuProfiles.slice = append(builder.cluster.cpuProfiles.slice, anys...)
+	return builder
+}
+
 func (builder *ClusterBuilder) CustomSchedulingPolicyProperties(attr *PropertySlice) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.cluster.SetCustomSchedulingPolicyProperties(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) CustomSchedulingPolicyPropertiesOfAny(anys ...Property) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.customSchedulingPolicyProperties == nil {
+		builder.cluster.customSchedulingPolicyProperties = new(PropertySlice)
+	}
+	builder.cluster.customSchedulingPolicyProperties.slice = append(builder.cluster.customSchedulingPolicyProperties.slice, anys...)
 	return builder
 }
 
@@ -44353,6 +44719,18 @@ func (builder *ClusterBuilder) GlusterHooks(attr *GlusterHookSlice) *ClusterBuil
 	return builder
 }
 
+func (builder *ClusterBuilder) GlusterHooksOfAny(anys ...GlusterHook) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.glusterHooks == nil {
+		builder.cluster.glusterHooks = new(GlusterHookSlice)
+	}
+	builder.cluster.glusterHooks.slice = append(builder.cluster.glusterHooks.slice, anys...)
+	return builder
+}
+
 func (builder *ClusterBuilder) GlusterService(attr bool) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -44377,6 +44755,18 @@ func (builder *ClusterBuilder) GlusterVolumes(attr *GlusterVolumeSlice) *Cluster
 	}
 
 	builder.cluster.SetGlusterVolumes(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) GlusterVolumesOfAny(anys ...GlusterVolume) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.glusterVolumes == nil {
+		builder.cluster.glusterVolumes = new(GlusterVolumeSlice)
+	}
+	builder.cluster.glusterVolumes.slice = append(builder.cluster.glusterVolumes.slice, anys...)
 	return builder
 }
 
@@ -44470,12 +44860,36 @@ func (builder *ClusterBuilder) NetworkFilters(attr *NetworkFilterSlice) *Cluster
 	return builder
 }
 
+func (builder *ClusterBuilder) NetworkFiltersOfAny(anys ...NetworkFilter) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.networkFilters == nil {
+		builder.cluster.networkFilters = new(NetworkFilterSlice)
+	}
+	builder.cluster.networkFilters.slice = append(builder.cluster.networkFilters.slice, anys...)
+	return builder
+}
+
 func (builder *ClusterBuilder) Networks(attr *NetworkSlice) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.cluster.SetNetworks(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) NetworksOfAny(anys ...Network) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.networks == nil {
+		builder.cluster.networks = new(NetworkSlice)
+	}
+	builder.cluster.networks.slice = append(builder.cluster.networks.slice, anys...)
 	return builder
 }
 
@@ -44497,12 +44911,33 @@ func (builder *ClusterBuilder) Permissions(attr *PermissionSlice) *ClusterBuilde
 	return builder
 }
 
+func (builder *ClusterBuilder) PermissionsOfAny(anys ...Permission) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.permissions == nil {
+		builder.cluster.permissions = new(PermissionSlice)
+	}
+	builder.cluster.permissions.slice = append(builder.cluster.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *ClusterBuilder) RequiredRngSources(attr []RngSource) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.cluster.SetRequiredRngSources(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) RequiredRngSourcesOfAny(anys ...RngSource) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.cluster.requiredRngSources = append(builder.cluster.requiredRngSources, anys...)
 	return builder
 }
 
@@ -44530,6 +44965,18 @@ func (builder *ClusterBuilder) SupportedVersions(attr *VersionSlice) *ClusterBui
 	}
 
 	builder.cluster.SetSupportedVersions(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) SupportedVersionsOfAny(anys ...Version) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.supportedVersions == nil {
+		builder.cluster.supportedVersions = new(VersionSlice)
+	}
+	builder.cluster.supportedVersions.slice = append(builder.cluster.supportedVersions.slice, anys...)
 	return builder
 }
 
@@ -44637,6 +45084,18 @@ func (builder *ClusterLevelBuilder) CpuTypes(attr *CpuTypeSlice) *ClusterLevelBu
 	return builder
 }
 
+func (builder *ClusterLevelBuilder) CpuTypesOfAny(anys ...CpuType) *ClusterLevelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.clusterLevel.cpuTypes == nil {
+		builder.clusterLevel.cpuTypes = new(CpuTypeSlice)
+	}
+	builder.clusterLevel.cpuTypes.slice = append(builder.clusterLevel.cpuTypes.slice, anys...)
+	return builder
+}
+
 func (builder *ClusterLevelBuilder) Description(attr string) *ClusterLevelBuilder {
 	if builder.err != nil {
 		return builder
@@ -44670,6 +45129,18 @@ func (builder *ClusterLevelBuilder) Permits(attr *PermitSlice) *ClusterLevelBuil
 	}
 
 	builder.clusterLevel.SetPermits(attr)
+	return builder
+}
+
+func (builder *ClusterLevelBuilder) PermitsOfAny(anys ...Permit) *ClusterLevelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.clusterLevel.permits == nil {
+		builder.clusterLevel.permits = new(PermitSlice)
+	}
+	builder.clusterLevel.permits.slice = append(builder.clusterLevel.permits.slice, anys...)
 	return builder
 }
 
@@ -44864,6 +45335,18 @@ func (builder *CpuBuilder) Cores(attr *CoreSlice) *CpuBuilder {
 	return builder
 }
 
+func (builder *CpuBuilder) CoresOfAny(anys ...Core) *CpuBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cpu.cores == nil {
+		builder.cpu.cores = new(CoreSlice)
+	}
+	builder.cpu.cores.slice = append(builder.cpu.cores.slice, anys...)
+	return builder
+}
+
 func (builder *CpuBuilder) CpuTune(attr *CpuTune) *CpuBuilder {
 	if builder.err != nil {
 		return builder
@@ -45013,6 +45496,18 @@ func (builder *CpuProfileBuilder) Permissions(attr *PermissionSlice) *CpuProfile
 	return builder
 }
 
+func (builder *CpuProfileBuilder) PermissionsOfAny(anys ...Permission) *CpuProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cpuProfile.permissions == nil {
+		builder.cpuProfile.permissions = new(PermissionSlice)
+	}
+	builder.cpuProfile.permissions.slice = append(builder.cpuProfile.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *CpuProfileBuilder) Qos(attr *Qos) *CpuProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -45119,6 +45614,18 @@ func (builder *CpuTuneBuilder) VcpuPins(attr *VcpuPinSlice) *CpuTuneBuilder {
 	}
 
 	builder.cpuTune.SetVcpuPins(attr)
+	return builder
+}
+
+func (builder *CpuTuneBuilder) VcpuPinsOfAny(anys ...VcpuPin) *CpuTuneBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cpuTune.vcpuPins == nil {
+		builder.cpuTune.vcpuPins = new(VcpuPinSlice)
+	}
+	builder.cpuTune.vcpuPins.slice = append(builder.cpuTune.vcpuPins.slice, anys...)
 	return builder
 }
 
@@ -45281,6 +45788,18 @@ func (builder *DataCenterBuilder) Clusters(attr *ClusterSlice) *DataCenterBuilde
 	return builder
 }
 
+func (builder *DataCenterBuilder) ClustersOfAny(anys ...Cluster) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dataCenter.clusters == nil {
+		builder.dataCenter.clusters = new(ClusterSlice)
+	}
+	builder.dataCenter.clusters.slice = append(builder.dataCenter.clusters.slice, anys...)
+	return builder
+}
+
 func (builder *DataCenterBuilder) Comment(attr string) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -45314,6 +45833,18 @@ func (builder *DataCenterBuilder) IscsiBonds(attr *IscsiBondSlice) *DataCenterBu
 	}
 
 	builder.dataCenter.SetIscsiBonds(attr)
+	return builder
+}
+
+func (builder *DataCenterBuilder) IscsiBondsOfAny(anys ...IscsiBond) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dataCenter.iscsiBonds == nil {
+		builder.dataCenter.iscsiBonds = new(IscsiBondSlice)
+	}
+	builder.dataCenter.iscsiBonds.slice = append(builder.dataCenter.iscsiBonds.slice, anys...)
 	return builder
 }
 
@@ -45353,6 +45884,18 @@ func (builder *DataCenterBuilder) Networks(attr *NetworkSlice) *DataCenterBuilde
 	return builder
 }
 
+func (builder *DataCenterBuilder) NetworksOfAny(anys ...Network) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dataCenter.networks == nil {
+		builder.dataCenter.networks = new(NetworkSlice)
+	}
+	builder.dataCenter.networks.slice = append(builder.dataCenter.networks.slice, anys...)
+	return builder
+}
+
 func (builder *DataCenterBuilder) Permissions(attr *PermissionSlice) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -45362,12 +45905,36 @@ func (builder *DataCenterBuilder) Permissions(attr *PermissionSlice) *DataCenter
 	return builder
 }
 
+func (builder *DataCenterBuilder) PermissionsOfAny(anys ...Permission) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dataCenter.permissions == nil {
+		builder.dataCenter.permissions = new(PermissionSlice)
+	}
+	builder.dataCenter.permissions.slice = append(builder.dataCenter.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *DataCenterBuilder) Qoss(attr *QosSlice) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.dataCenter.SetQoss(attr)
+	return builder
+}
+
+func (builder *DataCenterBuilder) QossOfAny(anys ...Qos) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dataCenter.qoss == nil {
+		builder.dataCenter.qoss = new(QosSlice)
+	}
+	builder.dataCenter.qoss.slice = append(builder.dataCenter.qoss.slice, anys...)
 	return builder
 }
 
@@ -45389,6 +45956,18 @@ func (builder *DataCenterBuilder) Quotas(attr *QuotaSlice) *DataCenterBuilder {
 	return builder
 }
 
+func (builder *DataCenterBuilder) QuotasOfAny(anys ...Quota) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dataCenter.quotas == nil {
+		builder.dataCenter.quotas = new(QuotaSlice)
+	}
+	builder.dataCenter.quotas.slice = append(builder.dataCenter.quotas.slice, anys...)
+	return builder
+}
+
 func (builder *DataCenterBuilder) Status(attr DataCenterStatus) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -45407,6 +45986,18 @@ func (builder *DataCenterBuilder) StorageDomains(attr *StorageDomainSlice) *Data
 	return builder
 }
 
+func (builder *DataCenterBuilder) StorageDomainsOfAny(anys ...StorageDomain) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dataCenter.storageDomains == nil {
+		builder.dataCenter.storageDomains = new(StorageDomainSlice)
+	}
+	builder.dataCenter.storageDomains.slice = append(builder.dataCenter.storageDomains.slice, anys...)
+	return builder
+}
+
 func (builder *DataCenterBuilder) StorageFormat(attr StorageFormat) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -45422,6 +46013,18 @@ func (builder *DataCenterBuilder) SupportedVersions(attr *VersionSlice) *DataCen
 	}
 
 	builder.dataCenter.SetSupportedVersions(attr)
+	return builder
+}
+
+func (builder *DataCenterBuilder) SupportedVersionsOfAny(anys ...Version) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dataCenter.supportedVersions == nil {
+		builder.dataCenter.supportedVersions = new(VersionSlice)
+	}
+	builder.dataCenter.supportedVersions.slice = append(builder.dataCenter.supportedVersions.slice, anys...)
 	return builder
 }
 
@@ -45535,6 +46138,18 @@ func (builder *DeviceBuilder) Vms(attr *VmSlice) *DeviceBuilder {
 	}
 
 	builder.device.SetVms(attr)
+	return builder
+}
+
+func (builder *DeviceBuilder) VmsOfAny(anys ...Vm) *DeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.device.vms == nil {
+		builder.device.vms = new(VmSlice)
+	}
+	builder.device.vms.slice = append(builder.device.vms.slice, anys...)
 	return builder
 }
 
@@ -45732,6 +46347,18 @@ func (builder *DiskBuilder) Permissions(attr *PermissionSlice) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) PermissionsOfAny(anys ...Permission) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.disk.permissions == nil {
+		builder.disk.permissions = new(PermissionSlice)
+	}
+	builder.disk.permissions.slice = append(builder.disk.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *DiskBuilder) PropagateErrors(attr bool) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -45822,6 +46449,18 @@ func (builder *DiskBuilder) Statistics(attr *StatisticSlice) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) StatisticsOfAny(anys ...Statistic) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.disk.statistics == nil {
+		builder.disk.statistics = new(StatisticSlice)
+	}
+	builder.disk.statistics.slice = append(builder.disk.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *DiskBuilder) Status(attr DiskStatus) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -45846,6 +46485,18 @@ func (builder *DiskBuilder) StorageDomains(attr *StorageDomainSlice) *DiskBuilde
 	}
 
 	builder.disk.SetStorageDomains(attr)
+	return builder
+}
+
+func (builder *DiskBuilder) StorageDomainsOfAny(anys ...StorageDomain) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.disk.storageDomains == nil {
+		builder.disk.storageDomains = new(StorageDomainSlice)
+	}
+	builder.disk.storageDomains.slice = append(builder.disk.storageDomains.slice, anys...)
 	return builder
 }
 
@@ -45891,6 +46542,18 @@ func (builder *DiskBuilder) Vms(attr *VmSlice) *DiskBuilder {
 	}
 
 	builder.disk.SetVms(attr)
+	return builder
+}
+
+func (builder *DiskBuilder) VmsOfAny(anys ...Vm) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.disk.vms == nil {
+		builder.disk.vms = new(VmSlice)
+	}
+	builder.disk.vms.slice = append(builder.disk.vms.slice, anys...)
 	return builder
 }
 
@@ -46129,6 +46792,18 @@ func (builder *DiskProfileBuilder) Permissions(attr *PermissionSlice) *DiskProfi
 	return builder
 }
 
+func (builder *DiskProfileBuilder) PermissionsOfAny(anys ...Permission) *DiskProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.diskProfile.permissions == nil {
+		builder.diskProfile.permissions = new(PermissionSlice)
+	}
+	builder.diskProfile.permissions.slice = append(builder.diskProfile.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *DiskProfileBuilder) Qos(attr *Qos) *DiskProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -46350,6 +47025,18 @@ func (builder *DiskSnapshotBuilder) Permissions(attr *PermissionSlice) *DiskSnap
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) PermissionsOfAny(anys ...Permission) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.diskSnapshot.permissions == nil {
+		builder.diskSnapshot.permissions = new(PermissionSlice)
+	}
+	builder.diskSnapshot.permissions.slice = append(builder.diskSnapshot.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *DiskSnapshotBuilder) PropagateErrors(attr bool) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -46440,6 +47127,18 @@ func (builder *DiskSnapshotBuilder) Statistics(attr *StatisticSlice) *DiskSnapsh
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) StatisticsOfAny(anys ...Statistic) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.diskSnapshot.statistics == nil {
+		builder.diskSnapshot.statistics = new(StatisticSlice)
+	}
+	builder.diskSnapshot.statistics.slice = append(builder.diskSnapshot.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *DiskSnapshotBuilder) Status(attr DiskStatus) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -46464,6 +47163,18 @@ func (builder *DiskSnapshotBuilder) StorageDomains(attr *StorageDomainSlice) *Di
 	}
 
 	builder.diskSnapshot.SetStorageDomains(attr)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) StorageDomainsOfAny(anys ...StorageDomain) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.diskSnapshot.storageDomains == nil {
+		builder.diskSnapshot.storageDomains = new(StorageDomainSlice)
+	}
+	builder.diskSnapshot.storageDomains.slice = append(builder.diskSnapshot.storageDomains.slice, anys...)
 	return builder
 }
 
@@ -46509,6 +47220,18 @@ func (builder *DiskSnapshotBuilder) Vms(attr *VmSlice) *DiskSnapshotBuilder {
 	}
 
 	builder.diskSnapshot.SetVms(attr)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) VmsOfAny(anys ...Vm) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.diskSnapshot.vms == nil {
+		builder.diskSnapshot.vms = new(VmSlice)
+	}
+	builder.diskSnapshot.vms.slice = append(builder.diskSnapshot.vms.slice, anys...)
 	return builder
 }
 
@@ -46720,12 +47443,36 @@ func (builder *DnsBuilder) SearchDomains(attr *HostSlice) *DnsBuilder {
 	return builder
 }
 
+func (builder *DnsBuilder) SearchDomainsOfAny(anys ...Host) *DnsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dns.searchDomains == nil {
+		builder.dns.searchDomains = new(HostSlice)
+	}
+	builder.dns.searchDomains.slice = append(builder.dns.searchDomains.slice, anys...)
+	return builder
+}
+
 func (builder *DnsBuilder) Servers(attr *HostSlice) *DnsBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.dns.SetServers(attr)
+	return builder
+}
+
+func (builder *DnsBuilder) ServersOfAny(anys ...Host) *DnsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.dns.servers == nil {
+		builder.dns.servers = new(HostSlice)
+	}
+	builder.dns.servers.slice = append(builder.dns.servers.slice, anys...)
 	return builder
 }
 
@@ -46767,6 +47514,15 @@ func (builder *DnsResolverConfigurationBuilder) NameServers(attr []string) *DnsR
 	}
 
 	builder.dnsResolverConfiguration.SetNameServers(attr)
+	return builder
+}
+
+func (builder *DnsResolverConfigurationBuilder) NameServersOfAny(anys ...string) *DnsResolverConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.dnsResolverConfiguration.nameServers = append(builder.dnsResolverConfiguration.nameServers, anys...)
 	return builder
 }
 
@@ -46829,6 +47585,18 @@ func (builder *DomainBuilder) Groups(attr *GroupSlice) *DomainBuilder {
 	return builder
 }
 
+func (builder *DomainBuilder) GroupsOfAny(anys ...Group) *DomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.domain.groups == nil {
+		builder.domain.groups = new(GroupSlice)
+	}
+	builder.domain.groups.slice = append(builder.domain.groups.slice, anys...)
+	return builder
+}
+
 func (builder *DomainBuilder) Id(attr string) *DomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -46862,6 +47630,18 @@ func (builder *DomainBuilder) Users(attr *UserSlice) *DomainBuilder {
 	}
 
 	builder.domain.SetUsers(attr)
+	return builder
+}
+
+func (builder *DomainBuilder) UsersOfAny(anys ...User) *DomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.domain.users == nil {
+		builder.domain.users = new(UserSlice)
+	}
+	builder.domain.users.slice = append(builder.domain.users.slice, anys...)
 	return builder
 }
 
@@ -46903,6 +47683,18 @@ func (builder *EntityProfileDetailBuilder) ProfileDetails(attr *ProfileDetailSli
 	}
 
 	builder.entityProfileDetail.SetProfileDetails(attr)
+	return builder
+}
+
+func (builder *EntityProfileDetailBuilder) ProfileDetailsOfAny(anys ...ProfileDetail) *EntityProfileDetailBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.entityProfileDetail.profileDetails == nil {
+		builder.entityProfileDetail.profileDetails = new(ProfileDetailSlice)
+	}
+	builder.entityProfileDetail.profileDetails.slice = append(builder.entityProfileDetail.profileDetails.slice, anys...)
 	return builder
 }
 
@@ -47616,6 +48408,18 @@ func (builder *ExternalHostProviderBuilder) Certificates(attr *CertificateSlice)
 	return builder
 }
 
+func (builder *ExternalHostProviderBuilder) CertificatesOfAny(anys ...Certificate) *ExternalHostProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.externalHostProvider.certificates == nil {
+		builder.externalHostProvider.certificates = new(CertificateSlice)
+	}
+	builder.externalHostProvider.certificates.slice = append(builder.externalHostProvider.certificates.slice, anys...)
+	return builder
+}
+
 func (builder *ExternalHostProviderBuilder) Comment(attr string) *ExternalHostProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -47631,6 +48435,18 @@ func (builder *ExternalHostProviderBuilder) ComputeResources(attr *ExternalCompu
 	}
 
 	builder.externalHostProvider.SetComputeResources(attr)
+	return builder
+}
+
+func (builder *ExternalHostProviderBuilder) ComputeResourcesOfAny(anys ...ExternalComputeResource) *ExternalHostProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.externalHostProvider.computeResources == nil {
+		builder.externalHostProvider.computeResources = new(ExternalComputeResourceSlice)
+	}
+	builder.externalHostProvider.computeResources.slice = append(builder.externalHostProvider.computeResources.slice, anys...)
 	return builder
 }
 
@@ -47652,6 +48468,18 @@ func (builder *ExternalHostProviderBuilder) DiscoveredHosts(attr *ExternalDiscov
 	return builder
 }
 
+func (builder *ExternalHostProviderBuilder) DiscoveredHostsOfAny(anys ...ExternalDiscoveredHost) *ExternalHostProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.externalHostProvider.discoveredHosts == nil {
+		builder.externalHostProvider.discoveredHosts = new(ExternalDiscoveredHostSlice)
+	}
+	builder.externalHostProvider.discoveredHosts.slice = append(builder.externalHostProvider.discoveredHosts.slice, anys...)
+	return builder
+}
+
 func (builder *ExternalHostProviderBuilder) HostGroups(attr *ExternalHostGroupSlice) *ExternalHostProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -47661,12 +48489,36 @@ func (builder *ExternalHostProviderBuilder) HostGroups(attr *ExternalHostGroupSl
 	return builder
 }
 
+func (builder *ExternalHostProviderBuilder) HostGroupsOfAny(anys ...ExternalHostGroup) *ExternalHostProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.externalHostProvider.hostGroups == nil {
+		builder.externalHostProvider.hostGroups = new(ExternalHostGroupSlice)
+	}
+	builder.externalHostProvider.hostGroups.slice = append(builder.externalHostProvider.hostGroups.slice, anys...)
+	return builder
+}
+
 func (builder *ExternalHostProviderBuilder) Hosts(attr *HostSlice) *ExternalHostProviderBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.externalHostProvider.SetHosts(attr)
+	return builder
+}
+
+func (builder *ExternalHostProviderBuilder) HostsOfAny(anys ...Host) *ExternalHostProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.externalHostProvider.hosts == nil {
+		builder.externalHostProvider.hosts = new(HostSlice)
+	}
+	builder.externalHostProvider.hosts.slice = append(builder.externalHostProvider.hosts.slice, anys...)
 	return builder
 }
 
@@ -47703,6 +48555,18 @@ func (builder *ExternalHostProviderBuilder) Properties(attr *PropertySlice) *Ext
 	}
 
 	builder.externalHostProvider.SetProperties(attr)
+	return builder
+}
+
+func (builder *ExternalHostProviderBuilder) PropertiesOfAny(anys ...Property) *ExternalHostProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.externalHostProvider.properties == nil {
+		builder.externalHostProvider.properties = new(PropertySlice)
+	}
+	builder.externalHostProvider.properties.slice = append(builder.externalHostProvider.properties.slice, anys...)
 	return builder
 }
 
@@ -47825,6 +48689,18 @@ func (builder *ExternalProviderBuilder) Properties(attr *PropertySlice) *Externa
 	}
 
 	builder.externalProvider.SetProperties(attr)
+	return builder
+}
+
+func (builder *ExternalProviderBuilder) PropertiesOfAny(anys ...Property) *ExternalProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.externalProvider.properties == nil {
+		builder.externalProvider.properties = new(PropertySlice)
+	}
+	builder.externalProvider.properties.slice = append(builder.externalProvider.properties.slice, anys...)
 	return builder
 }
 
@@ -48425,6 +49301,18 @@ func (builder *FloppyBuilder) Vms(attr *VmSlice) *FloppyBuilder {
 	return builder
 }
 
+func (builder *FloppyBuilder) VmsOfAny(anys ...Vm) *FloppyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.floppy.vms == nil {
+		builder.floppy.vms = new(VmSlice)
+	}
+	builder.floppy.vms.slice = append(builder.floppy.vms.slice, anys...)
+	return builder
+}
+
 func (builder *FloppyBuilder) Href(href string) *FloppyBuilder {
 	if builder.err != nil {
 		return builder
@@ -48472,6 +49360,18 @@ func (builder *FopStatisticBuilder) Statistics(attr *StatisticSlice) *FopStatist
 	}
 
 	builder.fopStatistic.SetStatistics(attr)
+	return builder
+}
+
+func (builder *FopStatisticBuilder) StatisticsOfAny(anys ...Statistic) *FopStatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.fopStatistic.statistics == nil {
+		builder.fopStatistic.statistics = new(StatisticSlice)
+	}
+	builder.fopStatistic.statistics.slice = append(builder.fopStatistic.statistics.slice, anys...)
 	return builder
 }
 
@@ -48561,6 +49461,18 @@ func (builder *GlusterBrickBuilder) GlusterClients(attr *GlusterClientSlice) *Gl
 	return builder
 }
 
+func (builder *GlusterBrickBuilder) GlusterClientsOfAny(anys ...GlusterClient) *GlusterBrickBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterBrick.glusterClients == nil {
+		builder.glusterBrick.glusterClients = new(GlusterClientSlice)
+	}
+	builder.glusterBrick.glusterClients.slice = append(builder.glusterBrick.glusterClients.slice, anys...)
+	return builder
+}
+
 func (builder *GlusterBrickBuilder) GlusterVolume(attr *GlusterVolume) *GlusterBrickBuilder {
 	if builder.err != nil {
 		return builder
@@ -48594,6 +49506,18 @@ func (builder *GlusterBrickBuilder) MemoryPools(attr *GlusterMemoryPoolSlice) *G
 	}
 
 	builder.glusterBrick.SetMemoryPools(attr)
+	return builder
+}
+
+func (builder *GlusterBrickBuilder) MemoryPoolsOfAny(anys ...GlusterMemoryPool) *GlusterBrickBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterBrick.memoryPools == nil {
+		builder.glusterBrick.memoryPools = new(GlusterMemoryPoolSlice)
+	}
+	builder.glusterBrick.memoryPools.slice = append(builder.glusterBrick.memoryPools.slice, anys...)
 	return builder
 }
 
@@ -48651,6 +49575,18 @@ func (builder *GlusterBrickBuilder) Statistics(attr *StatisticSlice) *GlusterBri
 	return builder
 }
 
+func (builder *GlusterBrickBuilder) StatisticsOfAny(anys ...Statistic) *GlusterBrickBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterBrick.statistics == nil {
+		builder.glusterBrick.statistics = new(StatisticSlice)
+	}
+	builder.glusterBrick.statistics.slice = append(builder.glusterBrick.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *GlusterBrickBuilder) Status(attr GlusterBrickStatus) *GlusterBrickBuilder {
 	if builder.err != nil {
 		return builder
@@ -48684,6 +49620,18 @@ func (builder *GlusterBrickBuilder) Vms(attr *VmSlice) *GlusterBrickBuilder {
 	}
 
 	builder.glusterBrick.SetVms(attr)
+	return builder
+}
+
+func (builder *GlusterBrickBuilder) VmsOfAny(anys ...Vm) *GlusterBrickBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterBrick.vms == nil {
+		builder.glusterBrick.vms = new(VmSlice)
+	}
+	builder.glusterBrick.vms.slice = append(builder.glusterBrick.vms.slice, anys...)
 	return builder
 }
 
@@ -48764,6 +49712,18 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) GlusterClients(attr *GlusterC
 	return builder
 }
 
+func (builder *GlusterBrickAdvancedDetailsBuilder) GlusterClientsOfAny(anys ...GlusterClient) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterBrickAdvancedDetails.glusterClients == nil {
+		builder.glusterBrickAdvancedDetails.glusterClients = new(GlusterClientSlice)
+	}
+	builder.glusterBrickAdvancedDetails.glusterClients.slice = append(builder.glusterBrickAdvancedDetails.glusterClients.slice, anys...)
+	return builder
+}
+
 func (builder *GlusterBrickAdvancedDetailsBuilder) Id(attr string) *GlusterBrickAdvancedDetailsBuilder {
 	if builder.err != nil {
 		return builder
@@ -48788,6 +49748,18 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) MemoryPools(attr *GlusterMemo
 	}
 
 	builder.glusterBrickAdvancedDetails.SetMemoryPools(attr)
+	return builder
+}
+
+func (builder *GlusterBrickAdvancedDetailsBuilder) MemoryPoolsOfAny(anys ...GlusterMemoryPool) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterBrickAdvancedDetails.memoryPools == nil {
+		builder.glusterBrickAdvancedDetails.memoryPools = new(GlusterMemoryPoolSlice)
+	}
+	builder.glusterBrickAdvancedDetails.memoryPools.slice = append(builder.glusterBrickAdvancedDetails.memoryPools.slice, anys...)
 	return builder
 }
 
@@ -48854,6 +49826,18 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) Vms(attr *VmSlice) *GlusterBr
 	return builder
 }
 
+func (builder *GlusterBrickAdvancedDetailsBuilder) VmsOfAny(anys ...Vm) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterBrickAdvancedDetails.vms == nil {
+		builder.glusterBrickAdvancedDetails.vms = new(VmSlice)
+	}
+	builder.glusterBrickAdvancedDetails.vms.slice = append(builder.glusterBrickAdvancedDetails.vms.slice, anys...)
+	return builder
+}
+
 func (builder *GlusterBrickAdvancedDetailsBuilder) Href(href string) *GlusterBrickAdvancedDetailsBuilder {
 	if builder.err != nil {
 		return builder
@@ -48892,6 +49876,18 @@ func (builder *GlusterBrickMemoryInfoBuilder) MemoryPools(attr *GlusterMemoryPoo
 	}
 
 	builder.glusterBrickMemoryInfo.SetMemoryPools(attr)
+	return builder
+}
+
+func (builder *GlusterBrickMemoryInfoBuilder) MemoryPoolsOfAny(anys ...GlusterMemoryPool) *GlusterBrickMemoryInfoBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterBrickMemoryInfo.memoryPools == nil {
+		builder.glusterBrickMemoryInfo.memoryPools = new(GlusterMemoryPoolSlice)
+	}
+	builder.glusterBrickMemoryInfo.memoryPools.slice = append(builder.glusterBrickMemoryInfo.memoryPools.slice, anys...)
 	return builder
 }
 
@@ -49100,6 +50096,18 @@ func (builder *GlusterHookBuilder) ServerHooks(attr *GlusterServerHookSlice) *Gl
 	}
 
 	builder.glusterHook.SetServerHooks(attr)
+	return builder
+}
+
+func (builder *GlusterHookBuilder) ServerHooksOfAny(anys ...GlusterServerHook) *GlusterHookBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterHook.serverHooks == nil {
+		builder.glusterHook.serverHooks = new(GlusterServerHookSlice)
+	}
+	builder.glusterHook.serverHooks.slice = append(builder.glusterHook.serverHooks.slice, anys...)
 	return builder
 }
 
@@ -49406,6 +50414,18 @@ func (builder *GlusterVolumeBuilder) Bricks(attr *GlusterBrickSlice) *GlusterVol
 	return builder
 }
 
+func (builder *GlusterVolumeBuilder) BricksOfAny(anys ...GlusterBrick) *GlusterVolumeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterVolume.bricks == nil {
+		builder.glusterVolume.bricks = new(GlusterBrickSlice)
+	}
+	builder.glusterVolume.bricks.slice = append(builder.glusterVolume.bricks.slice, anys...)
+	return builder
+}
+
 func (builder *GlusterVolumeBuilder) Cluster(attr *Cluster) *GlusterVolumeBuilder {
 	if builder.err != nil {
 		return builder
@@ -49469,6 +50489,18 @@ func (builder *GlusterVolumeBuilder) Options(attr *OptionSlice) *GlusterVolumeBu
 	return builder
 }
 
+func (builder *GlusterVolumeBuilder) OptionsOfAny(anys ...Option) *GlusterVolumeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterVolume.options == nil {
+		builder.glusterVolume.options = new(OptionSlice)
+	}
+	builder.glusterVolume.options.slice = append(builder.glusterVolume.options.slice, anys...)
+	return builder
+}
+
 func (builder *GlusterVolumeBuilder) RedundancyCount(attr int64) *GlusterVolumeBuilder {
 	if builder.err != nil {
 		return builder
@@ -49496,6 +50528,18 @@ func (builder *GlusterVolumeBuilder) Statistics(attr *StatisticSlice) *GlusterVo
 	return builder
 }
 
+func (builder *GlusterVolumeBuilder) StatisticsOfAny(anys ...Statistic) *GlusterVolumeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterVolume.statistics == nil {
+		builder.glusterVolume.statistics = new(StatisticSlice)
+	}
+	builder.glusterVolume.statistics.slice = append(builder.glusterVolume.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *GlusterVolumeBuilder) Status(attr GlusterVolumeStatus) *GlusterVolumeBuilder {
 	if builder.err != nil {
 		return builder
@@ -49520,6 +50564,15 @@ func (builder *GlusterVolumeBuilder) TransportTypes(attr []TransportType) *Glust
 	}
 
 	builder.glusterVolume.SetTransportTypes(attr)
+	return builder
+}
+
+func (builder *GlusterVolumeBuilder) TransportTypesOfAny(anys ...TransportType) *GlusterVolumeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.glusterVolume.transportTypes = append(builder.glusterVolume.transportTypes, anys...)
 	return builder
 }
 
@@ -49573,6 +50626,18 @@ func (builder *GlusterVolumeProfileDetailsBuilder) BrickProfileDetails(attr *Bri
 	return builder
 }
 
+func (builder *GlusterVolumeProfileDetailsBuilder) BrickProfileDetailsOfAny(anys ...BrickProfileDetail) *GlusterVolumeProfileDetailsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterVolumeProfileDetails.brickProfileDetails == nil {
+		builder.glusterVolumeProfileDetails.brickProfileDetails = new(BrickProfileDetailSlice)
+	}
+	builder.glusterVolumeProfileDetails.brickProfileDetails.slice = append(builder.glusterVolumeProfileDetails.brickProfileDetails.slice, anys...)
+	return builder
+}
+
 func (builder *GlusterVolumeProfileDetailsBuilder) Comment(attr string) *GlusterVolumeProfileDetailsBuilder {
 	if builder.err != nil {
 		return builder
@@ -49615,6 +50680,18 @@ func (builder *GlusterVolumeProfileDetailsBuilder) NfsProfileDetails(attr *NfsPr
 	}
 
 	builder.glusterVolumeProfileDetails.SetNfsProfileDetails(attr)
+	return builder
+}
+
+func (builder *GlusterVolumeProfileDetailsBuilder) NfsProfileDetailsOfAny(anys ...NfsProfileDetail) *GlusterVolumeProfileDetailsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.glusterVolumeProfileDetails.nfsProfileDetails == nil {
+		builder.glusterVolumeProfileDetails.nfsProfileDetails = new(NfsProfileDetailSlice)
+	}
+	builder.glusterVolumeProfileDetails.nfsProfileDetails.slice = append(builder.glusterVolumeProfileDetails.nfsProfileDetails.slice, anys...)
 	return builder
 }
 
@@ -49894,6 +50971,18 @@ func (builder *GroupBuilder) Permissions(attr *PermissionSlice) *GroupBuilder {
 	return builder
 }
 
+func (builder *GroupBuilder) PermissionsOfAny(anys ...Permission) *GroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.group.permissions == nil {
+		builder.group.permissions = new(PermissionSlice)
+	}
+	builder.group.permissions.slice = append(builder.group.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *GroupBuilder) Roles(attr *RoleSlice) *GroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -49903,12 +50992,36 @@ func (builder *GroupBuilder) Roles(attr *RoleSlice) *GroupBuilder {
 	return builder
 }
 
+func (builder *GroupBuilder) RolesOfAny(anys ...Role) *GroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.group.roles == nil {
+		builder.group.roles = new(RoleSlice)
+	}
+	builder.group.roles.slice = append(builder.group.roles.slice, anys...)
+	return builder
+}
+
 func (builder *GroupBuilder) Tags(attr *TagSlice) *GroupBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.group.SetTags(attr)
+	return builder
+}
+
+func (builder *GroupBuilder) TagsOfAny(anys ...Tag) *GroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.group.tags == nil {
+		builder.group.tags = new(TagSlice)
+	}
+	builder.group.tags.slice = append(builder.group.tags.slice, anys...)
 	return builder
 }
 
@@ -50072,6 +51185,15 @@ func (builder *HardwareInformationBuilder) SupportedRngSources(attr []RngSource)
 	}
 
 	builder.hardwareInformation.SetSupportedRngSources(attr)
+	return builder
+}
+
+func (builder *HardwareInformationBuilder) SupportedRngSourcesOfAny(anys ...RngSource) *HardwareInformationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.hardwareInformation.supportedRngSources = append(builder.hardwareInformation.supportedRngSources, anys...)
 	return builder
 }
 
@@ -50288,12 +51410,36 @@ func (builder *HostBuilder) AffinityLabels(attr *AffinityLabelSlice) *HostBuilde
 	return builder
 }
 
+func (builder *HostBuilder) AffinityLabelsOfAny(anys ...AffinityLabel) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.affinityLabels == nil {
+		builder.host.affinityLabels = new(AffinityLabelSlice)
+	}
+	builder.host.affinityLabels.slice = append(builder.host.affinityLabels.slice, anys...)
+	return builder
+}
+
 func (builder *HostBuilder) Agents(attr *AgentSlice) *HostBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.host.SetAgents(attr)
+	return builder
+}
+
+func (builder *HostBuilder) AgentsOfAny(anys ...Agent) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.agents == nil {
+		builder.host.agents = new(AgentSlice)
+	}
+	builder.host.agents.slice = append(builder.host.agents.slice, anys...)
 	return builder
 }
 
@@ -50369,6 +51515,18 @@ func (builder *HostBuilder) Devices(attr *DeviceSlice) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) DevicesOfAny(anys ...Device) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.devices == nil {
+		builder.host.devices = new(DeviceSlice)
+	}
+	builder.host.devices.slice = append(builder.host.devices.slice, anys...)
+	return builder
+}
+
 func (builder *HostBuilder) Display(attr *Display) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -50414,6 +51572,18 @@ func (builder *HostBuilder) Hooks(attr *HookSlice) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) HooksOfAny(anys ...Hook) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.hooks == nil {
+		builder.host.hooks = new(HookSlice)
+	}
+	builder.host.hooks.slice = append(builder.host.hooks.slice, anys...)
+	return builder
+}
+
 func (builder *HostBuilder) HostedEngine(attr *HostedEngine) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -50447,6 +51617,18 @@ func (builder *HostBuilder) KatelloErrata(attr *KatelloErratumSlice) *HostBuilde
 	}
 
 	builder.host.SetKatelloErrata(attr)
+	return builder
+}
+
+func (builder *HostBuilder) KatelloErrataOfAny(anys ...KatelloErratum) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.katelloErrata == nil {
+		builder.host.katelloErrata = new(KatelloErratumSlice)
+	}
+	builder.host.katelloErrata.slice = append(builder.host.katelloErrata.slice, anys...)
 	return builder
 }
 
@@ -50513,6 +51695,18 @@ func (builder *HostBuilder) NetworkAttachments(attr *NetworkAttachmentSlice) *Ho
 	return builder
 }
 
+func (builder *HostBuilder) NetworkAttachmentsOfAny(anys ...NetworkAttachment) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.networkAttachments == nil {
+		builder.host.networkAttachments = new(NetworkAttachmentSlice)
+	}
+	builder.host.networkAttachments.slice = append(builder.host.networkAttachments.slice, anys...)
+	return builder
+}
+
 func (builder *HostBuilder) Nics(attr *NicSlice) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -50522,12 +51716,36 @@ func (builder *HostBuilder) Nics(attr *NicSlice) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) NicsOfAny(anys ...Nic) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.nics == nil {
+		builder.host.nics = new(NicSlice)
+	}
+	builder.host.nics.slice = append(builder.host.nics.slice, anys...)
+	return builder
+}
+
 func (builder *HostBuilder) NumaNodes(attr *NumaNodeSlice) *HostBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.host.SetNumaNodes(attr)
+	return builder
+}
+
+func (builder *HostBuilder) NumaNodesOfAny(anys ...NumaNode) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.numaNodes == nil {
+		builder.host.numaNodes = new(NumaNodeSlice)
+	}
+	builder.host.numaNodes.slice = append(builder.host.numaNodes.slice, anys...)
 	return builder
 }
 
@@ -50564,6 +51782,18 @@ func (builder *HostBuilder) Permissions(attr *PermissionSlice) *HostBuilder {
 	}
 
 	builder.host.SetPermissions(attr)
+	return builder
+}
+
+func (builder *HostBuilder) PermissionsOfAny(anys ...Permission) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.permissions == nil {
+		builder.host.permissions = new(PermissionSlice)
+	}
+	builder.host.permissions.slice = append(builder.host.permissions.slice, anys...)
 	return builder
 }
 
@@ -50639,6 +51869,18 @@ func (builder *HostBuilder) Statistics(attr *StatisticSlice) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) StatisticsOfAny(anys ...Statistic) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.statistics == nil {
+		builder.host.statistics = new(StatisticSlice)
+	}
+	builder.host.statistics.slice = append(builder.host.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *HostBuilder) Status(attr HostStatus) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -50666,12 +51908,36 @@ func (builder *HostBuilder) StorageConnectionExtensions(attr *StorageConnectionE
 	return builder
 }
 
+func (builder *HostBuilder) StorageConnectionExtensionsOfAny(anys ...StorageConnectionExtension) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.storageConnectionExtensions == nil {
+		builder.host.storageConnectionExtensions = new(StorageConnectionExtensionSlice)
+	}
+	builder.host.storageConnectionExtensions.slice = append(builder.host.storageConnectionExtensions.slice, anys...)
+	return builder
+}
+
 func (builder *HostBuilder) Storages(attr *HostStorageSlice) *HostBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.host.SetStorages(attr)
+	return builder
+}
+
+func (builder *HostBuilder) StoragesOfAny(anys ...HostStorage) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.storages == nil {
+		builder.host.storages = new(HostStorageSlice)
+	}
+	builder.host.storages.slice = append(builder.host.storages.slice, anys...)
 	return builder
 }
 
@@ -50690,6 +51956,18 @@ func (builder *HostBuilder) Tags(attr *TagSlice) *HostBuilder {
 	}
 
 	builder.host.SetTags(attr)
+	return builder
+}
+
+func (builder *HostBuilder) TagsOfAny(anys ...Tag) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.tags == nil {
+		builder.host.tags = new(TagSlice)
+	}
+	builder.host.tags.slice = append(builder.host.tags.slice, anys...)
 	return builder
 }
 
@@ -50717,6 +51995,18 @@ func (builder *HostBuilder) UnmanagedNetworks(attr *UnmanagedNetworkSlice) *Host
 	}
 
 	builder.host.SetUnmanagedNetworks(attr)
+	return builder
+}
+
+func (builder *HostBuilder) UnmanagedNetworksOfAny(anys ...UnmanagedNetwork) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.unmanagedNetworks == nil {
+		builder.host.unmanagedNetworks = new(UnmanagedNetworkSlice)
+	}
+	builder.host.unmanagedNetworks.slice = append(builder.host.unmanagedNetworks.slice, anys...)
 	return builder
 }
 
@@ -51140,6 +52430,18 @@ func (builder *HostNicBuilder) NetworkLabels(attr *NetworkLabelSlice) *HostNicBu
 	return builder
 }
 
+func (builder *HostNicBuilder) NetworkLabelsOfAny(anys ...NetworkLabel) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.hostNic.networkLabels == nil {
+		builder.hostNic.networkLabels = new(NetworkLabelSlice)
+	}
+	builder.hostNic.networkLabels.slice = append(builder.hostNic.networkLabels.slice, anys...)
+	return builder
+}
+
 func (builder *HostNicBuilder) OverrideConfiguration(attr bool) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -51167,6 +52469,18 @@ func (builder *HostNicBuilder) Properties(attr *PropertySlice) *HostNicBuilder {
 	return builder
 }
 
+func (builder *HostNicBuilder) PropertiesOfAny(anys ...Property) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.hostNic.properties == nil {
+		builder.hostNic.properties = new(PropertySlice)
+	}
+	builder.hostNic.properties.slice = append(builder.hostNic.properties.slice, anys...)
+	return builder
+}
+
 func (builder *HostNicBuilder) Qos(attr *Qos) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -51191,6 +52505,18 @@ func (builder *HostNicBuilder) Statistics(attr *StatisticSlice) *HostNicBuilder 
 	}
 
 	builder.hostNic.SetStatistics(attr)
+	return builder
+}
+
+func (builder *HostNicBuilder) StatisticsOfAny(anys ...Statistic) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.hostNic.statistics == nil {
+		builder.hostNic.statistics = new(StatisticSlice)
+	}
+	builder.hostNic.statistics.slice = append(builder.hostNic.statistics.slice, anys...)
 	return builder
 }
 
@@ -51363,6 +52689,18 @@ func (builder *HostStorageBuilder) LogicalUnits(attr *LogicalUnitSlice) *HostSto
 	}
 
 	builder.hostStorage.SetLogicalUnits(attr)
+	return builder
+}
+
+func (builder *HostStorageBuilder) LogicalUnitsOfAny(anys ...LogicalUnit) *HostStorageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.hostStorage.logicalUnits == nil {
+		builder.hostStorage.logicalUnits = new(LogicalUnitSlice)
+	}
+	builder.hostStorage.logicalUnits.slice = append(builder.hostStorage.logicalUnits.slice, anys...)
 	return builder
 }
 
@@ -52062,6 +53400,18 @@ func (builder *InitializationBuilder) NicConfigurations(attr *NicConfigurationSl
 	return builder
 }
 
+func (builder *InitializationBuilder) NicConfigurationsOfAny(anys ...NicConfiguration) *InitializationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.initialization.nicConfigurations == nil {
+		builder.initialization.nicConfigurations = new(NicConfigurationSlice)
+	}
+	builder.initialization.nicConfigurations.slice = append(builder.initialization.nicConfigurations.slice, anys...)
+	return builder
+}
+
 func (builder *InitializationBuilder) OrgName(attr string) *InitializationBuilder {
 	if builder.err != nil {
 		return builder
@@ -52202,6 +53552,18 @@ func (builder *InstanceTypeBuilder) Cdroms(attr *CdromSlice) *InstanceTypeBuilde
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) CdromsOfAny(anys ...Cdrom) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.instanceType.cdroms == nil {
+		builder.instanceType.cdroms = new(CdromSlice)
+	}
+	builder.instanceType.cdroms.slice = append(builder.instanceType.cdroms.slice, anys...)
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) Cluster(attr *Cluster) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -52301,6 +53663,18 @@ func (builder *InstanceTypeBuilder) CustomProperties(attr *CustomPropertySlice) 
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.instanceType.customProperties == nil {
+		builder.instanceType.customProperties = new(CustomPropertySlice)
+	}
+	builder.instanceType.customProperties.slice = append(builder.instanceType.customProperties.slice, anys...)
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) DeleteProtected(attr bool) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -52328,6 +53702,18 @@ func (builder *InstanceTypeBuilder) DiskAttachments(attr *DiskAttachmentSlice) *
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) DiskAttachmentsOfAny(anys ...DiskAttachment) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.instanceType.diskAttachments == nil {
+		builder.instanceType.diskAttachments = new(DiskAttachmentSlice)
+	}
+	builder.instanceType.diskAttachments.slice = append(builder.instanceType.diskAttachments.slice, anys...)
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) Display(attr *Display) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -52352,6 +53738,18 @@ func (builder *InstanceTypeBuilder) GraphicsConsoles(attr *GraphicsConsoleSlice)
 	}
 
 	builder.instanceType.SetGraphicsConsoles(attr)
+	return builder
+}
+
+func (builder *InstanceTypeBuilder) GraphicsConsolesOfAny(anys ...GraphicsConsole) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.instanceType.graphicsConsoles == nil {
+		builder.instanceType.graphicsConsoles = new(GraphicsConsoleSlice)
+	}
+	builder.instanceType.graphicsConsoles.slice = append(builder.instanceType.graphicsConsoles.slice, anys...)
 	return builder
 }
 
@@ -52463,6 +53861,18 @@ func (builder *InstanceTypeBuilder) Nics(attr *NicSlice) *InstanceTypeBuilder {
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) NicsOfAny(anys ...Nic) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.instanceType.nics == nil {
+		builder.instanceType.nics = new(NicSlice)
+	}
+	builder.instanceType.nics.slice = append(builder.instanceType.nics.slice, anys...)
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) Origin(attr string) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -52487,6 +53897,18 @@ func (builder *InstanceTypeBuilder) Permissions(attr *PermissionSlice) *Instance
 	}
 
 	builder.instanceType.SetPermissions(attr)
+	return builder
+}
+
+func (builder *InstanceTypeBuilder) PermissionsOfAny(anys ...Permission) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.instanceType.permissions == nil {
+		builder.instanceType.permissions = new(PermissionSlice)
+	}
+	builder.instanceType.permissions.slice = append(builder.instanceType.permissions.slice, anys...)
 	return builder
 }
 
@@ -52589,6 +54011,18 @@ func (builder *InstanceTypeBuilder) Tags(attr *TagSlice) *InstanceTypeBuilder {
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) TagsOfAny(anys ...Tag) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.instanceType.tags == nil {
+		builder.instanceType.tags = new(TagSlice)
+	}
+	builder.instanceType.tags.slice = append(builder.instanceType.tags.slice, anys...)
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) TimeZone(attr *TimeZone) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -52658,6 +54092,18 @@ func (builder *InstanceTypeBuilder) Watchdogs(attr *WatchdogSlice) *InstanceType
 	}
 
 	builder.instanceType.SetWatchdogs(attr)
+	return builder
+}
+
+func (builder *InstanceTypeBuilder) WatchdogsOfAny(anys ...Watchdog) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.instanceType.watchdogs == nil {
+		builder.instanceType.watchdogs = new(WatchdogSlice)
+	}
+	builder.instanceType.watchdogs.slice = append(builder.instanceType.watchdogs.slice, anys...)
 	return builder
 }
 
@@ -52906,12 +54352,36 @@ func (builder *IscsiBondBuilder) Networks(attr *NetworkSlice) *IscsiBondBuilder 
 	return builder
 }
 
+func (builder *IscsiBondBuilder) NetworksOfAny(anys ...Network) *IscsiBondBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.iscsiBond.networks == nil {
+		builder.iscsiBond.networks = new(NetworkSlice)
+	}
+	builder.iscsiBond.networks.slice = append(builder.iscsiBond.networks.slice, anys...)
+	return builder
+}
+
 func (builder *IscsiBondBuilder) StorageConnections(attr *StorageConnectionSlice) *IscsiBondBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.iscsiBond.SetStorageConnections(attr)
+	return builder
+}
+
+func (builder *IscsiBondBuilder) StorageConnectionsOfAny(anys ...StorageConnection) *IscsiBondBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.iscsiBond.storageConnections == nil {
+		builder.iscsiBond.storageConnections = new(StorageConnectionSlice)
+	}
+	builder.iscsiBond.storageConnections.slice = append(builder.iscsiBond.storageConnections.slice, anys...)
 	return builder
 }
 
@@ -53240,6 +54710,18 @@ func (builder *JobBuilder) Steps(attr *StepSlice) *JobBuilder {
 	return builder
 }
 
+func (builder *JobBuilder) StepsOfAny(anys ...Step) *JobBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.job.steps == nil {
+		builder.job.steps = new(StepSlice)
+	}
+	builder.job.steps.slice = append(builder.job.steps.slice, anys...)
+	return builder
+}
+
 func (builder *JobBuilder) Href(href string) *JobBuilder {
 	if builder.err != nil {
 		return builder
@@ -53332,6 +54814,18 @@ func (builder *KatelloErratumBuilder) Packages(attr *PackageSlice) *KatelloErrat
 	}
 
 	builder.katelloErratum.SetPackages(attr)
+	return builder
+}
+
+func (builder *KatelloErratumBuilder) PackagesOfAny(anys ...Package) *KatelloErratumBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.katelloErratum.packages == nil {
+		builder.katelloErratum.packages = new(PackageSlice)
+	}
+	builder.katelloErratum.packages.slice = append(builder.katelloErratum.packages.slice, anys...)
 	return builder
 }
 
@@ -53819,6 +55313,18 @@ func (builder *MacPoolBuilder) Ranges(attr *RangeSlice) *MacPoolBuilder {
 	return builder
 }
 
+func (builder *MacPoolBuilder) RangesOfAny(anys ...Range) *MacPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.macPool.ranges == nil {
+		builder.macPool.ranges = new(RangeSlice)
+	}
+	builder.macPool.ranges.slice = append(builder.macPool.ranges.slice, anys...)
+	return builder
+}
+
 func (builder *MacPoolBuilder) Href(href string) *MacPoolBuilder {
 	if builder.err != nil {
 		return builder
@@ -54295,12 +55801,36 @@ func (builder *NetworkBuilder) NetworkLabels(attr *NetworkLabelSlice) *NetworkBu
 	return builder
 }
 
+func (builder *NetworkBuilder) NetworkLabelsOfAny(anys ...NetworkLabel) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.network.networkLabels == nil {
+		builder.network.networkLabels = new(NetworkLabelSlice)
+	}
+	builder.network.networkLabels.slice = append(builder.network.networkLabels.slice, anys...)
+	return builder
+}
+
 func (builder *NetworkBuilder) Permissions(attr *PermissionSlice) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.network.SetPermissions(attr)
+	return builder
+}
+
+func (builder *NetworkBuilder) PermissionsOfAny(anys ...Permission) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.network.permissions == nil {
+		builder.network.permissions = new(PermissionSlice)
+	}
+	builder.network.permissions.slice = append(builder.network.permissions.slice, anys...)
 	return builder
 }
 
@@ -54358,6 +55888,15 @@ func (builder *NetworkBuilder) Usages(attr []NetworkUsage) *NetworkBuilder {
 	return builder
 }
 
+func (builder *NetworkBuilder) UsagesOfAny(anys ...NetworkUsage) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.network.usages = append(builder.network.usages, anys...)
+	return builder
+}
+
 func (builder *NetworkBuilder) Vlan(attr *Vlan) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -54373,6 +55912,18 @@ func (builder *NetworkBuilder) VnicProfiles(attr *VnicProfileSlice) *NetworkBuil
 	}
 
 	builder.network.SetVnicProfiles(attr)
+	return builder
+}
+
+func (builder *NetworkBuilder) VnicProfilesOfAny(anys ...VnicProfile) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.network.vnicProfiles == nil {
+		builder.network.vnicProfiles = new(VnicProfileSlice)
+	}
+	builder.network.vnicProfiles.slice = append(builder.network.vnicProfiles.slice, anys...)
 	return builder
 }
 
@@ -54480,6 +56031,18 @@ func (builder *NetworkAttachmentBuilder) IpAddressAssignments(attr *IpAddressAss
 	return builder
 }
 
+func (builder *NetworkAttachmentBuilder) IpAddressAssignmentsOfAny(anys ...IpAddressAssignment) *NetworkAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.networkAttachment.ipAddressAssignments == nil {
+		builder.networkAttachment.ipAddressAssignments = new(IpAddressAssignmentSlice)
+	}
+	builder.networkAttachment.ipAddressAssignments.slice = append(builder.networkAttachment.ipAddressAssignments.slice, anys...)
+	return builder
+}
+
 func (builder *NetworkAttachmentBuilder) Name(attr string) *NetworkAttachmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -54507,6 +56070,18 @@ func (builder *NetworkAttachmentBuilder) Properties(attr *PropertySlice) *Networ
 	return builder
 }
 
+func (builder *NetworkAttachmentBuilder) PropertiesOfAny(anys ...Property) *NetworkAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.networkAttachment.properties == nil {
+		builder.networkAttachment.properties = new(PropertySlice)
+	}
+	builder.networkAttachment.properties.slice = append(builder.networkAttachment.properties.slice, anys...)
+	return builder
+}
+
 func (builder *NetworkAttachmentBuilder) Qos(attr *Qos) *NetworkAttachmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -54522,6 +56097,18 @@ func (builder *NetworkAttachmentBuilder) ReportedConfigurations(attr *ReportedCo
 	}
 
 	builder.networkAttachment.SetReportedConfigurations(attr)
+	return builder
+}
+
+func (builder *NetworkAttachmentBuilder) ReportedConfigurationsOfAny(anys ...ReportedConfiguration) *NetworkAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.networkAttachment.reportedConfigurations == nil {
+		builder.networkAttachment.reportedConfigurations = new(ReportedConfigurationSlice)
+	}
+	builder.networkAttachment.reportedConfigurations.slice = append(builder.networkAttachment.reportedConfigurations.slice, anys...)
 	return builder
 }
 
@@ -54572,6 +56159,18 @@ func (builder *NetworkConfigurationBuilder) Nics(attr *NicSlice) *NetworkConfigu
 	}
 
 	builder.networkConfiguration.SetNics(attr)
+	return builder
+}
+
+func (builder *NetworkConfigurationBuilder) NicsOfAny(anys ...Nic) *NetworkConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.networkConfiguration.nics == nil {
+		builder.networkConfiguration.nics = new(NicSlice)
+	}
+	builder.networkConfiguration.nics.slice = append(builder.networkConfiguration.nics.slice, anys...)
 	return builder
 }
 
@@ -54865,6 +56464,18 @@ func (builder *NfsProfileDetailBuilder) ProfileDetails(attr *ProfileDetailSlice)
 	return builder
 }
 
+func (builder *NfsProfileDetailBuilder) ProfileDetailsOfAny(anys ...ProfileDetail) *NfsProfileDetailBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nfsProfileDetail.profileDetails == nil {
+		builder.nfsProfileDetail.profileDetails = new(ProfileDetailSlice)
+	}
+	builder.nfsProfileDetail.profileDetails.slice = append(builder.nfsProfileDetail.profileDetails.slice, anys...)
+	return builder
+}
+
 func (builder *NfsProfileDetailBuilder) Href(href string) *NfsProfileDetailBuilder {
 	if builder.err != nil {
 		return builder
@@ -54996,6 +56607,18 @@ func (builder *NicBuilder) NetworkAttachments(attr *NetworkAttachmentSlice) *Nic
 	return builder
 }
 
+func (builder *NicBuilder) NetworkAttachmentsOfAny(anys ...NetworkAttachment) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nic.networkAttachments == nil {
+		builder.nic.networkAttachments = new(NetworkAttachmentSlice)
+	}
+	builder.nic.networkAttachments.slice = append(builder.nic.networkAttachments.slice, anys...)
+	return builder
+}
+
 func (builder *NicBuilder) NetworkFilterParameters(attr *NetworkFilterParameterSlice) *NicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55005,12 +56628,36 @@ func (builder *NicBuilder) NetworkFilterParameters(attr *NetworkFilterParameterS
 	return builder
 }
 
+func (builder *NicBuilder) NetworkFilterParametersOfAny(anys ...NetworkFilterParameter) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nic.networkFilterParameters == nil {
+		builder.nic.networkFilterParameters = new(NetworkFilterParameterSlice)
+	}
+	builder.nic.networkFilterParameters.slice = append(builder.nic.networkFilterParameters.slice, anys...)
+	return builder
+}
+
 func (builder *NicBuilder) NetworkLabels(attr *NetworkLabelSlice) *NicBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.nic.SetNetworkLabels(attr)
+	return builder
+}
+
+func (builder *NicBuilder) NetworkLabelsOfAny(anys ...NetworkLabel) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nic.networkLabels == nil {
+		builder.nic.networkLabels = new(NetworkLabelSlice)
+	}
+	builder.nic.networkLabels.slice = append(builder.nic.networkLabels.slice, anys...)
 	return builder
 }
 
@@ -55041,12 +56688,36 @@ func (builder *NicBuilder) ReportedDevices(attr *ReportedDeviceSlice) *NicBuilde
 	return builder
 }
 
+func (builder *NicBuilder) ReportedDevicesOfAny(anys ...ReportedDevice) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nic.reportedDevices == nil {
+		builder.nic.reportedDevices = new(ReportedDeviceSlice)
+	}
+	builder.nic.reportedDevices.slice = append(builder.nic.reportedDevices.slice, anys...)
+	return builder
+}
+
 func (builder *NicBuilder) Statistics(attr *StatisticSlice) *NicBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.nic.SetStatistics(attr)
+	return builder
+}
+
+func (builder *NicBuilder) StatisticsOfAny(anys ...Statistic) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nic.statistics == nil {
+		builder.nic.statistics = new(StatisticSlice)
+	}
+	builder.nic.statistics.slice = append(builder.nic.statistics.slice, anys...)
 	return builder
 }
 
@@ -55068,12 +56739,36 @@ func (builder *NicBuilder) VirtualFunctionAllowedLabels(attr *NetworkLabelSlice)
 	return builder
 }
 
+func (builder *NicBuilder) VirtualFunctionAllowedLabelsOfAny(anys ...NetworkLabel) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nic.virtualFunctionAllowedLabels == nil {
+		builder.nic.virtualFunctionAllowedLabels = new(NetworkLabelSlice)
+	}
+	builder.nic.virtualFunctionAllowedLabels.slice = append(builder.nic.virtualFunctionAllowedLabels.slice, anys...)
+	return builder
+}
+
 func (builder *NicBuilder) VirtualFunctionAllowedNetworks(attr *NetworkSlice) *NicBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.nic.SetVirtualFunctionAllowedNetworks(attr)
+	return builder
+}
+
+func (builder *NicBuilder) VirtualFunctionAllowedNetworksOfAny(anys ...Network) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nic.virtualFunctionAllowedNetworks == nil {
+		builder.nic.virtualFunctionAllowedNetworks = new(NetworkSlice)
+	}
+	builder.nic.virtualFunctionAllowedNetworks.slice = append(builder.nic.virtualFunctionAllowedNetworks.slice, anys...)
 	return builder
 }
 
@@ -55092,6 +56787,18 @@ func (builder *NicBuilder) Vms(attr *VmSlice) *NicBuilder {
 	}
 
 	builder.nic.SetVms(attr)
+	return builder
+}
+
+func (builder *NicBuilder) VmsOfAny(anys ...Vm) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.nic.vms == nil {
+		builder.nic.vms = new(VmSlice)
+	}
+	builder.nic.vms.slice = append(builder.nic.vms.slice, anys...)
 	return builder
 }
 
@@ -55312,6 +57019,18 @@ func (builder *NumaNodeBuilder) Statistics(attr *StatisticSlice) *NumaNodeBuilde
 	return builder
 }
 
+func (builder *NumaNodeBuilder) StatisticsOfAny(anys ...Statistic) *NumaNodeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.numaNode.statistics == nil {
+		builder.numaNode.statistics = new(StatisticSlice)
+	}
+	builder.numaNode.statistics.slice = append(builder.numaNode.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *NumaNodeBuilder) Href(href string) *NumaNodeBuilder {
 	if builder.err != nil {
 		return builder
@@ -55498,6 +57217,18 @@ func (builder *OpenStackImageProviderBuilder) Certificates(attr *CertificateSlic
 	return builder
 }
 
+func (builder *OpenStackImageProviderBuilder) CertificatesOfAny(anys ...Certificate) *OpenStackImageProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackImageProvider.certificates == nil {
+		builder.openStackImageProvider.certificates = new(CertificateSlice)
+	}
+	builder.openStackImageProvider.certificates.slice = append(builder.openStackImageProvider.certificates.slice, anys...)
+	return builder
+}
+
 func (builder *OpenStackImageProviderBuilder) Comment(attr string) *OpenStackImageProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -55534,6 +57265,18 @@ func (builder *OpenStackImageProviderBuilder) Images(attr *OpenStackImageSlice) 
 	return builder
 }
 
+func (builder *OpenStackImageProviderBuilder) ImagesOfAny(anys ...OpenStackImage) *OpenStackImageProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackImageProvider.images == nil {
+		builder.openStackImageProvider.images = new(OpenStackImageSlice)
+	}
+	builder.openStackImageProvider.images.slice = append(builder.openStackImageProvider.images.slice, anys...)
+	return builder
+}
+
 func (builder *OpenStackImageProviderBuilder) Name(attr string) *OpenStackImageProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -55558,6 +57301,18 @@ func (builder *OpenStackImageProviderBuilder) Properties(attr *PropertySlice) *O
 	}
 
 	builder.openStackImageProvider.SetProperties(attr)
+	return builder
+}
+
+func (builder *OpenStackImageProviderBuilder) PropertiesOfAny(anys ...Property) *OpenStackImageProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackImageProvider.properties == nil {
+		builder.openStackImageProvider.properties = new(PropertySlice)
+	}
+	builder.openStackImageProvider.properties.slice = append(builder.openStackImageProvider.properties.slice, anys...)
 	return builder
 }
 
@@ -55733,6 +57488,18 @@ func (builder *OpenStackNetworkProviderBuilder) Certificates(attr *CertificateSl
 	return builder
 }
 
+func (builder *OpenStackNetworkProviderBuilder) CertificatesOfAny(anys ...Certificate) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackNetworkProvider.certificates == nil {
+		builder.openStackNetworkProvider.certificates = new(CertificateSlice)
+	}
+	builder.openStackNetworkProvider.certificates.slice = append(builder.openStackNetworkProvider.certificates.slice, anys...)
+	return builder
+}
+
 func (builder *OpenStackNetworkProviderBuilder) Comment(attr string) *OpenStackNetworkProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -55778,6 +57545,18 @@ func (builder *OpenStackNetworkProviderBuilder) Networks(attr *OpenStackNetworkS
 	return builder
 }
 
+func (builder *OpenStackNetworkProviderBuilder) NetworksOfAny(anys ...OpenStackNetwork) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackNetworkProvider.networks == nil {
+		builder.openStackNetworkProvider.networks = new(OpenStackNetworkSlice)
+	}
+	builder.openStackNetworkProvider.networks.slice = append(builder.openStackNetworkProvider.networks.slice, anys...)
+	return builder
+}
+
 func (builder *OpenStackNetworkProviderBuilder) Password(attr string) *OpenStackNetworkProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -55805,6 +57584,18 @@ func (builder *OpenStackNetworkProviderBuilder) Properties(attr *PropertySlice) 
 	return builder
 }
 
+func (builder *OpenStackNetworkProviderBuilder) PropertiesOfAny(anys ...Property) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackNetworkProvider.properties == nil {
+		builder.openStackNetworkProvider.properties = new(PropertySlice)
+	}
+	builder.openStackNetworkProvider.properties.slice = append(builder.openStackNetworkProvider.properties.slice, anys...)
+	return builder
+}
+
 func (builder *OpenStackNetworkProviderBuilder) ReadOnly(attr bool) *OpenStackNetworkProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -55829,6 +57620,18 @@ func (builder *OpenStackNetworkProviderBuilder) Subnets(attr *OpenStackSubnetSli
 	}
 
 	builder.openStackNetworkProvider.SetSubnets(attr)
+	return builder
+}
+
+func (builder *OpenStackNetworkProviderBuilder) SubnetsOfAny(anys ...OpenStackSubnet) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackNetworkProvider.subnets == nil {
+		builder.openStackNetworkProvider.subnets = new(OpenStackSubnetSlice)
+	}
+	builder.openStackNetworkProvider.subnets.slice = append(builder.openStackNetworkProvider.subnets.slice, anys...)
 	return builder
 }
 
@@ -55963,6 +57766,18 @@ func (builder *OpenStackProviderBuilder) Properties(attr *PropertySlice) *OpenSt
 	return builder
 }
 
+func (builder *OpenStackProviderBuilder) PropertiesOfAny(anys ...Property) *OpenStackProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackProvider.properties == nil {
+		builder.openStackProvider.properties = new(PropertySlice)
+	}
+	builder.openStackProvider.properties.slice = append(builder.openStackProvider.properties.slice, anys...)
+	return builder
+}
+
 func (builder *OpenStackProviderBuilder) RequiresAuthentication(attr bool) *OpenStackProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -56067,6 +57882,15 @@ func (builder *OpenStackSubnetBuilder) DnsServers(attr []string) *OpenStackSubne
 	return builder
 }
 
+func (builder *OpenStackSubnetBuilder) DnsServersOfAny(anys ...string) *OpenStackSubnetBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.openStackSubnet.dnsServers = append(builder.openStackSubnet.dnsServers, anys...)
+	return builder
+}
+
 func (builder *OpenStackSubnetBuilder) Gateway(attr string) *OpenStackSubnetBuilder {
 	if builder.err != nil {
 		return builder
@@ -56153,6 +57977,18 @@ func (builder *OpenStackVolumeProviderBuilder) AuthenticationKeys(attr *Openstac
 	return builder
 }
 
+func (builder *OpenStackVolumeProviderBuilder) AuthenticationKeysOfAny(anys ...OpenstackVolumeAuthenticationKey) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackVolumeProvider.authenticationKeys == nil {
+		builder.openStackVolumeProvider.authenticationKeys = new(OpenstackVolumeAuthenticationKeySlice)
+	}
+	builder.openStackVolumeProvider.authenticationKeys.slice = append(builder.openStackVolumeProvider.authenticationKeys.slice, anys...)
+	return builder
+}
+
 func (builder *OpenStackVolumeProviderBuilder) AuthenticationUrl(attr string) *OpenStackVolumeProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -56168,6 +58004,18 @@ func (builder *OpenStackVolumeProviderBuilder) Certificates(attr *CertificateSli
 	}
 
 	builder.openStackVolumeProvider.SetCertificates(attr)
+	return builder
+}
+
+func (builder *OpenStackVolumeProviderBuilder) CertificatesOfAny(anys ...Certificate) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackVolumeProvider.certificates == nil {
+		builder.openStackVolumeProvider.certificates = new(CertificateSlice)
+	}
+	builder.openStackVolumeProvider.certificates.slice = append(builder.openStackVolumeProvider.certificates.slice, anys...)
 	return builder
 }
 
@@ -56234,6 +58082,18 @@ func (builder *OpenStackVolumeProviderBuilder) Properties(attr *PropertySlice) *
 	return builder
 }
 
+func (builder *OpenStackVolumeProviderBuilder) PropertiesOfAny(anys ...Property) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackVolumeProvider.properties == nil {
+		builder.openStackVolumeProvider.properties = new(PropertySlice)
+	}
+	builder.openStackVolumeProvider.properties.slice = append(builder.openStackVolumeProvider.properties.slice, anys...)
+	return builder
+}
+
 func (builder *OpenStackVolumeProviderBuilder) RequiresAuthentication(attr bool) *OpenStackVolumeProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -56276,6 +58136,18 @@ func (builder *OpenStackVolumeProviderBuilder) VolumeTypes(attr *OpenStackVolume
 	}
 
 	builder.openStackVolumeProvider.SetVolumeTypes(attr)
+	return builder
+}
+
+func (builder *OpenStackVolumeProviderBuilder) VolumeTypesOfAny(anys ...OpenStackVolumeType) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackVolumeProvider.volumeTypes == nil {
+		builder.openStackVolumeProvider.volumeTypes = new(OpenStackVolumeTypeSlice)
+	}
+	builder.openStackVolumeProvider.volumeTypes.slice = append(builder.openStackVolumeProvider.volumeTypes.slice, anys...)
 	return builder
 }
 
@@ -56362,6 +58234,18 @@ func (builder *OpenStackVolumeTypeBuilder) Properties(attr *PropertySlice) *Open
 	}
 
 	builder.openStackVolumeType.SetProperties(attr)
+	return builder
+}
+
+func (builder *OpenStackVolumeTypeBuilder) PropertiesOfAny(anys ...Property) *OpenStackVolumeTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.openStackVolumeType.properties == nil {
+		builder.openStackVolumeType.properties = new(PropertySlice)
+	}
+	builder.openStackVolumeType.properties.slice = append(builder.openStackVolumeType.properties.slice, anys...)
 	return builder
 }
 
@@ -56809,6 +58693,18 @@ func (builder *PayloadBuilder) Files(attr *FileSlice) *PayloadBuilder {
 	return builder
 }
 
+func (builder *PayloadBuilder) FilesOfAny(anys ...File) *PayloadBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.payload.files == nil {
+		builder.payload.files = new(FileSlice)
+	}
+	builder.payload.files.slice = append(builder.payload.files.slice, anys...)
+	return builder
+}
+
 func (builder *PayloadBuilder) Type(attr VmDeviceType) *PayloadBuilder {
 	if builder.err != nil {
 		return builder
@@ -57203,6 +59099,18 @@ func (builder *PowerManagementBuilder) Agents(attr *AgentSlice) *PowerManagement
 	return builder
 }
 
+func (builder *PowerManagementBuilder) AgentsOfAny(anys ...Agent) *PowerManagementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.powerManagement.agents == nil {
+		builder.powerManagement.agents = new(AgentSlice)
+	}
+	builder.powerManagement.agents.slice = append(builder.powerManagement.agents.slice, anys...)
+	return builder
+}
+
 func (builder *PowerManagementBuilder) AutomaticPmEnabled(attr bool) *PowerManagementBuilder {
 	if builder.err != nil {
 		return builder
@@ -57239,6 +59147,18 @@ func (builder *PowerManagementBuilder) Options(attr *OptionSlice) *PowerManageme
 	return builder
 }
 
+func (builder *PowerManagementBuilder) OptionsOfAny(anys ...Option) *PowerManagementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.powerManagement.options == nil {
+		builder.powerManagement.options = new(OptionSlice)
+	}
+	builder.powerManagement.options.slice = append(builder.powerManagement.options.slice, anys...)
+	return builder
+}
+
 func (builder *PowerManagementBuilder) Password(attr string) *PowerManagementBuilder {
 	if builder.err != nil {
 		return builder
@@ -57254,6 +59174,18 @@ func (builder *PowerManagementBuilder) PmProxies(attr *PmProxySlice) *PowerManag
 	}
 
 	builder.powerManagement.SetPmProxies(attr)
+	return builder
+}
+
+func (builder *PowerManagementBuilder) PmProxiesOfAny(anys ...PmProxy) *PowerManagementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.powerManagement.pmProxies == nil {
+		builder.powerManagement.pmProxies = new(PmProxySlice)
+	}
+	builder.powerManagement.pmProxies.slice = append(builder.powerManagement.pmProxies.slice, anys...)
 	return builder
 }
 
@@ -57452,6 +59384,18 @@ func (builder *ProfileDetailBuilder) BlockStatistics(attr *BlockStatisticSlice) 
 	return builder
 }
 
+func (builder *ProfileDetailBuilder) BlockStatisticsOfAny(anys ...BlockStatistic) *ProfileDetailBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.profileDetail.blockStatistics == nil {
+		builder.profileDetail.blockStatistics = new(BlockStatisticSlice)
+	}
+	builder.profileDetail.blockStatistics.slice = append(builder.profileDetail.blockStatistics.slice, anys...)
+	return builder
+}
+
 func (builder *ProfileDetailBuilder) Duration(attr int64) *ProfileDetailBuilder {
 	if builder.err != nil {
 		return builder
@@ -57470,6 +59414,18 @@ func (builder *ProfileDetailBuilder) FopStatistics(attr *FopStatisticSlice) *Pro
 	return builder
 }
 
+func (builder *ProfileDetailBuilder) FopStatisticsOfAny(anys ...FopStatistic) *ProfileDetailBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.profileDetail.fopStatistics == nil {
+		builder.profileDetail.fopStatistics = new(FopStatisticSlice)
+	}
+	builder.profileDetail.fopStatistics.slice = append(builder.profileDetail.fopStatistics.slice, anys...)
+	return builder
+}
+
 func (builder *ProfileDetailBuilder) ProfileType(attr string) *ProfileDetailBuilder {
 	if builder.err != nil {
 		return builder
@@ -57485,6 +59441,18 @@ func (builder *ProfileDetailBuilder) Statistics(attr *StatisticSlice) *ProfileDe
 	}
 
 	builder.profileDetail.SetStatistics(attr)
+	return builder
+}
+
+func (builder *ProfileDetailBuilder) StatisticsOfAny(anys ...Statistic) *ProfileDetailBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.profileDetail.statistics == nil {
+		builder.profileDetail.statistics = new(StatisticSlice)
+	}
+	builder.profileDetail.statistics.slice = append(builder.profileDetail.statistics.slice, anys...)
 	return builder
 }
 
@@ -57895,6 +59863,18 @@ func (builder *QuotaBuilder) Disks(attr *DiskSlice) *QuotaBuilder {
 	return builder
 }
 
+func (builder *QuotaBuilder) DisksOfAny(anys ...Disk) *QuotaBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.quota.disks == nil {
+		builder.quota.disks = new(DiskSlice)
+	}
+	builder.quota.disks.slice = append(builder.quota.disks.slice, anys...)
+	return builder
+}
+
 func (builder *QuotaBuilder) Id(attr string) *QuotaBuilder {
 	if builder.err != nil {
 		return builder
@@ -57922,6 +59902,18 @@ func (builder *QuotaBuilder) Permissions(attr *PermissionSlice) *QuotaBuilder {
 	return builder
 }
 
+func (builder *QuotaBuilder) PermissionsOfAny(anys ...Permission) *QuotaBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.quota.permissions == nil {
+		builder.quota.permissions = new(PermissionSlice)
+	}
+	builder.quota.permissions.slice = append(builder.quota.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *QuotaBuilder) QuotaClusterLimits(attr *QuotaClusterLimitSlice) *QuotaBuilder {
 	if builder.err != nil {
 		return builder
@@ -57931,12 +59923,36 @@ func (builder *QuotaBuilder) QuotaClusterLimits(attr *QuotaClusterLimitSlice) *Q
 	return builder
 }
 
+func (builder *QuotaBuilder) QuotaClusterLimitsOfAny(anys ...QuotaClusterLimit) *QuotaBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.quota.quotaClusterLimits == nil {
+		builder.quota.quotaClusterLimits = new(QuotaClusterLimitSlice)
+	}
+	builder.quota.quotaClusterLimits.slice = append(builder.quota.quotaClusterLimits.slice, anys...)
+	return builder
+}
+
 func (builder *QuotaBuilder) QuotaStorageLimits(attr *QuotaStorageLimitSlice) *QuotaBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.quota.SetQuotaStorageLimits(attr)
+	return builder
+}
+
+func (builder *QuotaBuilder) QuotaStorageLimitsOfAny(anys ...QuotaStorageLimit) *QuotaBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.quota.quotaStorageLimits == nil {
+		builder.quota.quotaStorageLimits = new(QuotaStorageLimitSlice)
+	}
+	builder.quota.quotaStorageLimits.slice = append(builder.quota.quotaStorageLimits.slice, anys...)
 	return builder
 }
 
@@ -57967,12 +59983,36 @@ func (builder *QuotaBuilder) Users(attr *UserSlice) *QuotaBuilder {
 	return builder
 }
 
+func (builder *QuotaBuilder) UsersOfAny(anys ...User) *QuotaBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.quota.users == nil {
+		builder.quota.users = new(UserSlice)
+	}
+	builder.quota.users.slice = append(builder.quota.users.slice, anys...)
+	return builder
+}
+
 func (builder *QuotaBuilder) Vms(attr *VmSlice) *QuotaBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.quota.SetVms(attr)
+	return builder
+}
+
+func (builder *QuotaBuilder) VmsOfAny(anys ...Vm) *QuotaBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.quota.vms == nil {
+		builder.quota.vms = new(VmSlice)
+	}
+	builder.quota.vms.slice = append(builder.quota.vms.slice, anys...)
 	return builder
 }
 
@@ -58438,6 +60478,18 @@ func (builder *ReportedDeviceBuilder) Ips(attr *IpSlice) *ReportedDeviceBuilder 
 	return builder
 }
 
+func (builder *ReportedDeviceBuilder) IpsOfAny(anys ...Ip) *ReportedDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.reportedDevice.ips == nil {
+		builder.reportedDevice.ips = new(IpSlice)
+	}
+	builder.reportedDevice.ips.slice = append(builder.reportedDevice.ips.slice, anys...)
+	return builder
+}
+
 func (builder *ReportedDeviceBuilder) Mac(attr *Mac) *ReportedDeviceBuilder {
 	if builder.err != nil {
 		return builder
@@ -58619,6 +60671,18 @@ func (builder *RoleBuilder) Permits(attr *PermitSlice) *RoleBuilder {
 	return builder
 }
 
+func (builder *RoleBuilder) PermitsOfAny(anys ...Permit) *RoleBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.role.permits == nil {
+		builder.role.permits = new(PermitSlice)
+	}
+	builder.role.permits.slice = append(builder.role.permits.slice, anys...)
+	return builder
+}
+
 func (builder *RoleBuilder) User(attr *User) *RoleBuilder {
 	if builder.err != nil {
 		return builder
@@ -58669,6 +60733,18 @@ func (builder *SchedulingPolicyBuilder) Balances(attr *BalanceSlice) *Scheduling
 	return builder
 }
 
+func (builder *SchedulingPolicyBuilder) BalancesOfAny(anys ...Balance) *SchedulingPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.schedulingPolicy.balances == nil {
+		builder.schedulingPolicy.balances = new(BalanceSlice)
+	}
+	builder.schedulingPolicy.balances.slice = append(builder.schedulingPolicy.balances.slice, anys...)
+	return builder
+}
+
 func (builder *SchedulingPolicyBuilder) Comment(attr string) *SchedulingPolicyBuilder {
 	if builder.err != nil {
 		return builder
@@ -58702,6 +60778,18 @@ func (builder *SchedulingPolicyBuilder) Filters(attr *FilterSlice) *SchedulingPo
 	}
 
 	builder.schedulingPolicy.SetFilters(attr)
+	return builder
+}
+
+func (builder *SchedulingPolicyBuilder) FiltersOfAny(anys ...Filter) *SchedulingPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.schedulingPolicy.filters == nil {
+		builder.schedulingPolicy.filters = new(FilterSlice)
+	}
+	builder.schedulingPolicy.filters.slice = append(builder.schedulingPolicy.filters.slice, anys...)
 	return builder
 }
 
@@ -58741,12 +60829,36 @@ func (builder *SchedulingPolicyBuilder) Properties(attr *PropertySlice) *Schedul
 	return builder
 }
 
+func (builder *SchedulingPolicyBuilder) PropertiesOfAny(anys ...Property) *SchedulingPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.schedulingPolicy.properties == nil {
+		builder.schedulingPolicy.properties = new(PropertySlice)
+	}
+	builder.schedulingPolicy.properties.slice = append(builder.schedulingPolicy.properties.slice, anys...)
+	return builder
+}
+
 func (builder *SchedulingPolicyBuilder) Weight(attr *WeightSlice) *SchedulingPolicyBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.schedulingPolicy.SetWeight(attr)
+	return builder
+}
+
+func (builder *SchedulingPolicyBuilder) WeightOfAny(anys ...Weight) *SchedulingPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.schedulingPolicy.weight == nil {
+		builder.schedulingPolicy.weight = new(WeightSlice)
+	}
+	builder.schedulingPolicy.weight.slice = append(builder.schedulingPolicy.weight.slice, anys...)
 	return builder
 }
 
@@ -58842,6 +60954,18 @@ func (builder *SchedulingPolicyUnitBuilder) Properties(attr *PropertySlice) *Sch
 	}
 
 	builder.schedulingPolicyUnit.SetProperties(attr)
+	return builder
+}
+
+func (builder *SchedulingPolicyUnitBuilder) PropertiesOfAny(anys ...Property) *SchedulingPolicyUnitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.schedulingPolicyUnit.properties == nil {
+		builder.schedulingPolicyUnit.properties = new(PropertySlice)
+	}
+	builder.schedulingPolicyUnit.properties.slice = append(builder.schedulingPolicyUnit.properties.slice, anys...)
 	return builder
 }
 
@@ -59190,12 +61314,36 @@ func (builder *SnapshotBuilder) AffinityLabels(attr *AffinityLabelSlice) *Snapsh
 	return builder
 }
 
+func (builder *SnapshotBuilder) AffinityLabelsOfAny(anys ...AffinityLabel) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.affinityLabels == nil {
+		builder.snapshot.affinityLabels = new(AffinityLabelSlice)
+	}
+	builder.snapshot.affinityLabels.slice = append(builder.snapshot.affinityLabels.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) Applications(attr *ApplicationSlice) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.snapshot.SetApplications(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) ApplicationsOfAny(anys ...Application) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.applications == nil {
+		builder.snapshot.applications = new(ApplicationSlice)
+	}
+	builder.snapshot.applications.slice = append(builder.snapshot.applications.slice, anys...)
 	return builder
 }
 
@@ -59214,6 +61362,18 @@ func (builder *SnapshotBuilder) Cdroms(attr *CdromSlice) *SnapshotBuilder {
 	}
 
 	builder.snapshot.SetCdroms(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) CdromsOfAny(anys ...Cdrom) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.cdroms == nil {
+		builder.snapshot.cdroms = new(CdromSlice)
+	}
+	builder.snapshot.cdroms.slice = append(builder.snapshot.cdroms.slice, anys...)
 	return builder
 }
 
@@ -59316,6 +61476,18 @@ func (builder *SnapshotBuilder) CustomProperties(attr *CustomPropertySlice) *Sna
 	return builder
 }
 
+func (builder *SnapshotBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.customProperties == nil {
+		builder.snapshot.customProperties = new(CustomPropertySlice)
+	}
+	builder.snapshot.customProperties.slice = append(builder.snapshot.customProperties.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) Date(attr time.Time) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -59349,6 +61521,18 @@ func (builder *SnapshotBuilder) DiskAttachments(attr *DiskAttachmentSlice) *Snap
 	}
 
 	builder.snapshot.SetDiskAttachments(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) DiskAttachmentsOfAny(anys ...DiskAttachment) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.diskAttachments == nil {
+		builder.snapshot.diskAttachments = new(DiskAttachmentSlice)
+	}
+	builder.snapshot.diskAttachments.slice = append(builder.snapshot.diskAttachments.slice, anys...)
 	return builder
 }
 
@@ -59388,6 +61572,18 @@ func (builder *SnapshotBuilder) Floppies(attr *FloppySlice) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) FloppiesOfAny(anys ...Floppy) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.floppies == nil {
+		builder.snapshot.floppies = new(FloppySlice)
+	}
+	builder.snapshot.floppies.slice = append(builder.snapshot.floppies.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) Fqdn(attr string) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -59403,6 +61599,18 @@ func (builder *SnapshotBuilder) GraphicsConsoles(attr *GraphicsConsoleSlice) *Sn
 	}
 
 	builder.snapshot.SetGraphicsConsoles(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) GraphicsConsolesOfAny(anys ...GraphicsConsole) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.graphicsConsoles == nil {
+		builder.snapshot.graphicsConsoles = new(GraphicsConsoleSlice)
+	}
+	builder.snapshot.graphicsConsoles.slice = append(builder.snapshot.graphicsConsoles.slice, anys...)
 	return builder
 }
 
@@ -59451,6 +61659,18 @@ func (builder *SnapshotBuilder) HostDevices(attr *HostDeviceSlice) *SnapshotBuil
 	return builder
 }
 
+func (builder *SnapshotBuilder) HostDevicesOfAny(anys ...HostDevice) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.hostDevices == nil {
+		builder.snapshot.hostDevices = new(HostDeviceSlice)
+	}
+	builder.snapshot.hostDevices.slice = append(builder.snapshot.hostDevices.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) Id(attr string) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -59493,6 +61713,18 @@ func (builder *SnapshotBuilder) KatelloErrata(attr *KatelloErratumSlice) *Snapsh
 	}
 
 	builder.snapshot.SetKatelloErrata(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) KatelloErrataOfAny(anys ...KatelloErratum) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.katelloErrata == nil {
+		builder.snapshot.katelloErrata = new(KatelloErratumSlice)
+	}
+	builder.snapshot.katelloErrata.slice = append(builder.snapshot.katelloErrata.slice, anys...)
 	return builder
 }
 
@@ -59577,12 +61809,36 @@ func (builder *SnapshotBuilder) Nics(attr *NicSlice) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) NicsOfAny(anys ...Nic) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.nics == nil {
+		builder.snapshot.nics = new(NicSlice)
+	}
+	builder.snapshot.nics.slice = append(builder.snapshot.nics.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) NumaNodes(attr *NumaNodeSlice) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.snapshot.SetNumaNodes(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) NumaNodesOfAny(anys ...NumaNode) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.numaNodes == nil {
+		builder.snapshot.numaNodes = new(NumaNodeSlice)
+	}
+	builder.snapshot.numaNodes.slice = append(builder.snapshot.numaNodes.slice, anys...)
 	return builder
 }
 
@@ -59631,12 +61887,36 @@ func (builder *SnapshotBuilder) Payloads(attr *PayloadSlice) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) PayloadsOfAny(anys ...Payload) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.payloads == nil {
+		builder.snapshot.payloads = new(PayloadSlice)
+	}
+	builder.snapshot.payloads.slice = append(builder.snapshot.payloads.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) Permissions(attr *PermissionSlice) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.snapshot.SetPermissions(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) PermissionsOfAny(anys ...Permission) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.permissions == nil {
+		builder.snapshot.permissions = new(PermissionSlice)
+	}
+	builder.snapshot.permissions.slice = append(builder.snapshot.permissions.slice, anys...)
 	return builder
 }
 
@@ -59676,6 +61956,18 @@ func (builder *SnapshotBuilder) ReportedDevices(attr *ReportedDeviceSlice) *Snap
 	return builder
 }
 
+func (builder *SnapshotBuilder) ReportedDevicesOfAny(anys ...ReportedDevice) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.reportedDevices == nil {
+		builder.snapshot.reportedDevices = new(ReportedDeviceSlice)
+	}
+	builder.snapshot.reportedDevices.slice = append(builder.snapshot.reportedDevices.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) RngDevice(attr *RngDevice) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -59712,6 +62004,18 @@ func (builder *SnapshotBuilder) Sessions(attr *SessionSlice) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) SessionsOfAny(anys ...Session) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.sessions == nil {
+		builder.snapshot.sessions = new(SessionSlice)
+	}
+	builder.snapshot.sessions.slice = append(builder.snapshot.sessions.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) SmallIcon(attr *Icon) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -59745,6 +62049,18 @@ func (builder *SnapshotBuilder) Snapshots(attr *SnapshotSlice) *SnapshotBuilder 
 	}
 
 	builder.snapshot.SetSnapshots(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) SnapshotsOfAny(anys ...Snapshot) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.snapshots == nil {
+		builder.snapshot.snapshots = new(SnapshotSlice)
+	}
+	builder.snapshot.snapshots.slice = append(builder.snapshot.snapshots.slice, anys...)
 	return builder
 }
 
@@ -59802,6 +62118,18 @@ func (builder *SnapshotBuilder) Statistics(attr *StatisticSlice) *SnapshotBuilde
 	return builder
 }
 
+func (builder *SnapshotBuilder) StatisticsOfAny(anys ...Statistic) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.statistics == nil {
+		builder.snapshot.statistics = new(StatisticSlice)
+	}
+	builder.snapshot.statistics.slice = append(builder.snapshot.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *SnapshotBuilder) Status(attr VmStatus) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -59853,6 +62181,18 @@ func (builder *SnapshotBuilder) Tags(attr *TagSlice) *SnapshotBuilder {
 	}
 
 	builder.snapshot.SetTags(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) TagsOfAny(anys ...Tag) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.tags == nil {
+		builder.snapshot.tags = new(TagSlice)
+	}
+	builder.snapshot.tags.slice = append(builder.snapshot.tags.slice, anys...)
 	return builder
 }
 
@@ -59943,6 +62283,18 @@ func (builder *SnapshotBuilder) Watchdogs(attr *WatchdogSlice) *SnapshotBuilder 
 	}
 
 	builder.snapshot.SetWatchdogs(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) WatchdogsOfAny(anys ...Watchdog) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.watchdogs == nil {
+		builder.snapshot.watchdogs = new(WatchdogSlice)
+	}
+	builder.snapshot.watchdogs.slice = append(builder.snapshot.watchdogs.slice, anys...)
 	return builder
 }
 
@@ -60277,6 +62629,18 @@ func (builder *SsoBuilder) Methods(attr *MethodSlice) *SsoBuilder {
 	return builder
 }
 
+func (builder *SsoBuilder) MethodsOfAny(anys ...Method) *SsoBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.sso.methods == nil {
+		builder.sso.methods = new(MethodSlice)
+	}
+	builder.sso.methods.slice = append(builder.sso.methods.slice, anys...)
+	return builder
+}
+
 func (builder *SsoBuilder) Href(href string) *SsoBuilder {
 	if builder.err != nil {
 		return builder
@@ -60453,6 +62817,18 @@ func (builder *StatisticBuilder) Values(attr *ValueSlice) *StatisticBuilder {
 	return builder
 }
 
+func (builder *StatisticBuilder) ValuesOfAny(anys ...Value) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.statistic.values == nil {
+		builder.statistic.values = new(ValueSlice)
+	}
+	builder.statistic.values.slice = append(builder.statistic.values.slice, anys...)
+	return builder
+}
+
 func (builder *StatisticBuilder) Vm(attr *Vm) *StatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -60617,6 +62993,18 @@ func (builder *StepBuilder) Statistics(attr *StatisticSlice) *StepBuilder {
 	}
 
 	builder.step.SetStatistics(attr)
+	return builder
+}
+
+func (builder *StepBuilder) StatisticsOfAny(anys ...Statistic) *StepBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.step.statistics == nil {
+		builder.step.statistics = new(StatisticSlice)
+	}
+	builder.step.statistics.slice = append(builder.step.statistics.slice, anys...)
 	return builder
 }
 
@@ -61022,6 +63410,18 @@ func (builder *StorageDomainBuilder) DataCenters(attr *DataCenterSlice) *Storage
 	return builder
 }
 
+func (builder *StorageDomainBuilder) DataCentersOfAny(anys ...DataCenter) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.dataCenters == nil {
+		builder.storageDomain.dataCenters = new(DataCenterSlice)
+	}
+	builder.storageDomain.dataCenters.slice = append(builder.storageDomain.dataCenters.slice, anys...)
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Description(attr string) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -61049,6 +63449,18 @@ func (builder *StorageDomainBuilder) DiskProfiles(attr *DiskProfileSlice) *Stora
 	return builder
 }
 
+func (builder *StorageDomainBuilder) DiskProfilesOfAny(anys ...DiskProfile) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.diskProfiles == nil {
+		builder.storageDomain.diskProfiles = new(DiskProfileSlice)
+	}
+	builder.storageDomain.diskProfiles.slice = append(builder.storageDomain.diskProfiles.slice, anys...)
+	return builder
+}
+
 func (builder *StorageDomainBuilder) DiskSnapshots(attr *DiskSnapshotSlice) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -61058,12 +63470,36 @@ func (builder *StorageDomainBuilder) DiskSnapshots(attr *DiskSnapshotSlice) *Sto
 	return builder
 }
 
+func (builder *StorageDomainBuilder) DiskSnapshotsOfAny(anys ...DiskSnapshot) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.diskSnapshots == nil {
+		builder.storageDomain.diskSnapshots = new(DiskSnapshotSlice)
+	}
+	builder.storageDomain.diskSnapshots.slice = append(builder.storageDomain.diskSnapshots.slice, anys...)
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Disks(attr *DiskSlice) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.storageDomain.SetDisks(attr)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) DisksOfAny(anys ...Disk) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.disks == nil {
+		builder.storageDomain.disks = new(DiskSlice)
+	}
+	builder.storageDomain.disks.slice = append(builder.storageDomain.disks.slice, anys...)
 	return builder
 }
 
@@ -61082,6 +63518,18 @@ func (builder *StorageDomainBuilder) Files(attr *FileSlice) *StorageDomainBuilde
 	}
 
 	builder.storageDomain.SetFiles(attr)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) FilesOfAny(anys ...File) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.files == nil {
+		builder.storageDomain.files = new(FileSlice)
+	}
+	builder.storageDomain.files.slice = append(builder.storageDomain.files.slice, anys...)
 	return builder
 }
 
@@ -61109,6 +63557,18 @@ func (builder *StorageDomainBuilder) Images(attr *ImageSlice) *StorageDomainBuil
 	}
 
 	builder.storageDomain.SetImages(attr)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) ImagesOfAny(anys ...Image) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.images == nil {
+		builder.storageDomain.images = new(ImageSlice)
+	}
+	builder.storageDomain.images.slice = append(builder.storageDomain.images.slice, anys...)
 	return builder
 }
 
@@ -61148,6 +63608,18 @@ func (builder *StorageDomainBuilder) Permissions(attr *PermissionSlice) *Storage
 	return builder
 }
 
+func (builder *StorageDomainBuilder) PermissionsOfAny(anys ...Permission) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.permissions == nil {
+		builder.storageDomain.permissions = new(PermissionSlice)
+	}
+	builder.storageDomain.permissions.slice = append(builder.storageDomain.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Status(attr StorageDomainStatus) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -61172,6 +63644,18 @@ func (builder *StorageDomainBuilder) StorageConnections(attr *StorageConnectionS
 	}
 
 	builder.storageDomain.SetStorageConnections(attr)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) StorageConnectionsOfAny(anys ...StorageConnection) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.storageConnections == nil {
+		builder.storageDomain.storageConnections = new(StorageConnectionSlice)
+	}
+	builder.storageDomain.storageConnections.slice = append(builder.storageDomain.storageConnections.slice, anys...)
 	return builder
 }
 
@@ -61211,6 +63695,18 @@ func (builder *StorageDomainBuilder) Templates(attr *TemplateSlice) *StorageDoma
 	return builder
 }
 
+func (builder *StorageDomainBuilder) TemplatesOfAny(anys ...Template) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.templates == nil {
+		builder.storageDomain.templates = new(TemplateSlice)
+	}
+	builder.storageDomain.templates.slice = append(builder.storageDomain.templates.slice, anys...)
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Type(attr StorageDomainType) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -61235,6 +63731,18 @@ func (builder *StorageDomainBuilder) Vms(attr *VmSlice) *StorageDomainBuilder {
 	}
 
 	builder.storageDomain.SetVms(attr)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) VmsOfAny(anys ...Vm) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.storageDomain.vms == nil {
+		builder.storageDomain.vms = new(VmSlice)
+	}
+	builder.storageDomain.vms.slice = append(builder.storageDomain.vms.slice, anys...)
 	return builder
 }
 
@@ -61469,6 +63977,18 @@ func (builder *TemplateBuilder) Cdroms(attr *CdromSlice) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) CdromsOfAny(anys ...Cdrom) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.template.cdroms == nil {
+		builder.template.cdroms = new(CdromSlice)
+	}
+	builder.template.cdroms.slice = append(builder.template.cdroms.slice, anys...)
+	return builder
+}
+
 func (builder *TemplateBuilder) Cluster(attr *Cluster) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -61568,6 +64088,18 @@ func (builder *TemplateBuilder) CustomProperties(attr *CustomPropertySlice) *Tem
 	return builder
 }
 
+func (builder *TemplateBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.template.customProperties == nil {
+		builder.template.customProperties = new(CustomPropertySlice)
+	}
+	builder.template.customProperties.slice = append(builder.template.customProperties.slice, anys...)
+	return builder
+}
+
 func (builder *TemplateBuilder) DeleteProtected(attr bool) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -61595,6 +64127,18 @@ func (builder *TemplateBuilder) DiskAttachments(attr *DiskAttachmentSlice) *Temp
 	return builder
 }
 
+func (builder *TemplateBuilder) DiskAttachmentsOfAny(anys ...DiskAttachment) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.template.diskAttachments == nil {
+		builder.template.diskAttachments = new(DiskAttachmentSlice)
+	}
+	builder.template.diskAttachments.slice = append(builder.template.diskAttachments.slice, anys...)
+	return builder
+}
+
 func (builder *TemplateBuilder) Display(attr *Display) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -61619,6 +64163,18 @@ func (builder *TemplateBuilder) GraphicsConsoles(attr *GraphicsConsoleSlice) *Te
 	}
 
 	builder.template.SetGraphicsConsoles(attr)
+	return builder
+}
+
+func (builder *TemplateBuilder) GraphicsConsolesOfAny(anys ...GraphicsConsole) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.template.graphicsConsoles == nil {
+		builder.template.graphicsConsoles = new(GraphicsConsoleSlice)
+	}
+	builder.template.graphicsConsoles.slice = append(builder.template.graphicsConsoles.slice, anys...)
 	return builder
 }
 
@@ -61730,6 +64286,18 @@ func (builder *TemplateBuilder) Nics(attr *NicSlice) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) NicsOfAny(anys ...Nic) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.template.nics == nil {
+		builder.template.nics = new(NicSlice)
+	}
+	builder.template.nics.slice = append(builder.template.nics.slice, anys...)
+	return builder
+}
+
 func (builder *TemplateBuilder) Origin(attr string) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -61754,6 +64322,18 @@ func (builder *TemplateBuilder) Permissions(attr *PermissionSlice) *TemplateBuil
 	}
 
 	builder.template.SetPermissions(attr)
+	return builder
+}
+
+func (builder *TemplateBuilder) PermissionsOfAny(anys ...Permission) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.template.permissions == nil {
+		builder.template.permissions = new(PermissionSlice)
+	}
+	builder.template.permissions.slice = append(builder.template.permissions.slice, anys...)
 	return builder
 }
 
@@ -61856,6 +64436,18 @@ func (builder *TemplateBuilder) Tags(attr *TagSlice) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) TagsOfAny(anys ...Tag) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.template.tags == nil {
+		builder.template.tags = new(TagSlice)
+	}
+	builder.template.tags.slice = append(builder.template.tags.slice, anys...)
+	return builder
+}
+
 func (builder *TemplateBuilder) TimeZone(attr *TimeZone) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -61925,6 +64517,18 @@ func (builder *TemplateBuilder) Watchdogs(attr *WatchdogSlice) *TemplateBuilder 
 	}
 
 	builder.template.SetWatchdogs(attr)
+	return builder
+}
+
+func (builder *TemplateBuilder) WatchdogsOfAny(anys ...Watchdog) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.template.watchdogs == nil {
+		builder.template.watchdogs = new(WatchdogSlice)
+	}
+	builder.template.watchdogs.slice = append(builder.template.watchdogs.slice, anys...)
 	return builder
 }
 
@@ -62359,6 +64963,18 @@ func (builder *UserBuilder) Groups(attr *GroupSlice) *UserBuilder {
 	return builder
 }
 
+func (builder *UserBuilder) GroupsOfAny(anys ...Group) *UserBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.user.groups == nil {
+		builder.user.groups = new(GroupSlice)
+	}
+	builder.user.groups.slice = append(builder.user.groups.slice, anys...)
+	return builder
+}
+
 func (builder *UserBuilder) Id(attr string) *UserBuilder {
 	if builder.err != nil {
 		return builder
@@ -62422,6 +65038,18 @@ func (builder *UserBuilder) Permissions(attr *PermissionSlice) *UserBuilder {
 	return builder
 }
 
+func (builder *UserBuilder) PermissionsOfAny(anys ...Permission) *UserBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.user.permissions == nil {
+		builder.user.permissions = new(PermissionSlice)
+	}
+	builder.user.permissions.slice = append(builder.user.permissions.slice, anys...)
+	return builder
+}
+
 func (builder *UserBuilder) Principal(attr string) *UserBuilder {
 	if builder.err != nil {
 		return builder
@@ -62440,6 +65068,18 @@ func (builder *UserBuilder) Roles(attr *RoleSlice) *UserBuilder {
 	return builder
 }
 
+func (builder *UserBuilder) RolesOfAny(anys ...Role) *UserBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.user.roles == nil {
+		builder.user.roles = new(RoleSlice)
+	}
+	builder.user.roles.slice = append(builder.user.roles.slice, anys...)
+	return builder
+}
+
 func (builder *UserBuilder) SshPublicKeys(attr *SshPublicKeySlice) *UserBuilder {
 	if builder.err != nil {
 		return builder
@@ -62449,12 +65089,36 @@ func (builder *UserBuilder) SshPublicKeys(attr *SshPublicKeySlice) *UserBuilder 
 	return builder
 }
 
+func (builder *UserBuilder) SshPublicKeysOfAny(anys ...SshPublicKey) *UserBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.user.sshPublicKeys == nil {
+		builder.user.sshPublicKeys = new(SshPublicKeySlice)
+	}
+	builder.user.sshPublicKeys.slice = append(builder.user.sshPublicKeys.slice, anys...)
+	return builder
+}
+
 func (builder *UserBuilder) Tags(attr *TagSlice) *UserBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.user.SetTags(attr)
+	return builder
+}
+
+func (builder *UserBuilder) TagsOfAny(anys ...Tag) *UserBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.user.tags == nil {
+		builder.user.tags = new(TagSlice)
+	}
+	builder.user.tags.slice = append(builder.user.tags.slice, anys...)
 	return builder
 }
 
@@ -62911,12 +65575,36 @@ func (builder *VirtualNumaNodeBuilder) NumaNodePins(attr *NumaNodePinSlice) *Vir
 	return builder
 }
 
+func (builder *VirtualNumaNodeBuilder) NumaNodePinsOfAny(anys ...NumaNodePin) *VirtualNumaNodeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.virtualNumaNode.numaNodePins == nil {
+		builder.virtualNumaNode.numaNodePins = new(NumaNodePinSlice)
+	}
+	builder.virtualNumaNode.numaNodePins.slice = append(builder.virtualNumaNode.numaNodePins.slice, anys...)
+	return builder
+}
+
 func (builder *VirtualNumaNodeBuilder) Statistics(attr *StatisticSlice) *VirtualNumaNodeBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.virtualNumaNode.SetStatistics(attr)
+	return builder
+}
+
+func (builder *VirtualNumaNodeBuilder) StatisticsOfAny(anys ...Statistic) *VirtualNumaNodeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.virtualNumaNode.statistics == nil {
+		builder.virtualNumaNode.statistics = new(StatisticSlice)
+	}
+	builder.virtualNumaNode.statistics.slice = append(builder.virtualNumaNode.statistics.slice, anys...)
 	return builder
 }
 
@@ -63011,12 +65699,36 @@ func (builder *VmBuilder) AffinityLabels(attr *AffinityLabelSlice) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) AffinityLabelsOfAny(anys ...AffinityLabel) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.affinityLabels == nil {
+		builder.vm.affinityLabels = new(AffinityLabelSlice)
+	}
+	builder.vm.affinityLabels.slice = append(builder.vm.affinityLabels.slice, anys...)
+	return builder
+}
+
 func (builder *VmBuilder) Applications(attr *ApplicationSlice) *VmBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.vm.SetApplications(attr)
+	return builder
+}
+
+func (builder *VmBuilder) ApplicationsOfAny(anys ...Application) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.applications == nil {
+		builder.vm.applications = new(ApplicationSlice)
+	}
+	builder.vm.applications.slice = append(builder.vm.applications.slice, anys...)
 	return builder
 }
 
@@ -63035,6 +65747,18 @@ func (builder *VmBuilder) Cdroms(attr *CdromSlice) *VmBuilder {
 	}
 
 	builder.vm.SetCdroms(attr)
+	return builder
+}
+
+func (builder *VmBuilder) CdromsOfAny(anys ...Cdrom) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.cdroms == nil {
+		builder.vm.cdroms = new(CdromSlice)
+	}
+	builder.vm.cdroms.slice = append(builder.vm.cdroms.slice, anys...)
 	return builder
 }
 
@@ -63137,6 +65861,18 @@ func (builder *VmBuilder) CustomProperties(attr *CustomPropertySlice) *VmBuilder
 	return builder
 }
 
+func (builder *VmBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.customProperties == nil {
+		builder.vm.customProperties = new(CustomPropertySlice)
+	}
+	builder.vm.customProperties.slice = append(builder.vm.customProperties.slice, anys...)
+	return builder
+}
+
 func (builder *VmBuilder) DeleteProtected(attr bool) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -63161,6 +65897,18 @@ func (builder *VmBuilder) DiskAttachments(attr *DiskAttachmentSlice) *VmBuilder 
 	}
 
 	builder.vm.SetDiskAttachments(attr)
+	return builder
+}
+
+func (builder *VmBuilder) DiskAttachmentsOfAny(anys ...DiskAttachment) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.diskAttachments == nil {
+		builder.vm.diskAttachments = new(DiskAttachmentSlice)
+	}
+	builder.vm.diskAttachments.slice = append(builder.vm.diskAttachments.slice, anys...)
 	return builder
 }
 
@@ -63200,6 +65948,18 @@ func (builder *VmBuilder) Floppies(attr *FloppySlice) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) FloppiesOfAny(anys ...Floppy) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.floppies == nil {
+		builder.vm.floppies = new(FloppySlice)
+	}
+	builder.vm.floppies.slice = append(builder.vm.floppies.slice, anys...)
+	return builder
+}
+
 func (builder *VmBuilder) Fqdn(attr string) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -63215,6 +65975,18 @@ func (builder *VmBuilder) GraphicsConsoles(attr *GraphicsConsoleSlice) *VmBuilde
 	}
 
 	builder.vm.SetGraphicsConsoles(attr)
+	return builder
+}
+
+func (builder *VmBuilder) GraphicsConsolesOfAny(anys ...GraphicsConsole) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.graphicsConsoles == nil {
+		builder.vm.graphicsConsoles = new(GraphicsConsoleSlice)
+	}
+	builder.vm.graphicsConsoles.slice = append(builder.vm.graphicsConsoles.slice, anys...)
 	return builder
 }
 
@@ -63263,6 +66035,18 @@ func (builder *VmBuilder) HostDevices(attr *HostDeviceSlice) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) HostDevicesOfAny(anys ...HostDevice) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.hostDevices == nil {
+		builder.vm.hostDevices = new(HostDeviceSlice)
+	}
+	builder.vm.hostDevices.slice = append(builder.vm.hostDevices.slice, anys...)
+	return builder
+}
+
 func (builder *VmBuilder) Id(attr string) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -63305,6 +66089,18 @@ func (builder *VmBuilder) KatelloErrata(attr *KatelloErratumSlice) *VmBuilder {
 	}
 
 	builder.vm.SetKatelloErrata(attr)
+	return builder
+}
+
+func (builder *VmBuilder) KatelloErrataOfAny(anys ...KatelloErratum) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.katelloErrata == nil {
+		builder.vm.katelloErrata = new(KatelloErratumSlice)
+	}
+	builder.vm.katelloErrata.slice = append(builder.vm.katelloErrata.slice, anys...)
 	return builder
 }
 
@@ -63389,12 +66185,36 @@ func (builder *VmBuilder) Nics(attr *NicSlice) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) NicsOfAny(anys ...Nic) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.nics == nil {
+		builder.vm.nics = new(NicSlice)
+	}
+	builder.vm.nics.slice = append(builder.vm.nics.slice, anys...)
+	return builder
+}
+
 func (builder *VmBuilder) NumaNodes(attr *NumaNodeSlice) *VmBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.vm.SetNumaNodes(attr)
+	return builder
+}
+
+func (builder *VmBuilder) NumaNodesOfAny(anys ...NumaNode) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.numaNodes == nil {
+		builder.vm.numaNodes = new(NumaNodeSlice)
+	}
+	builder.vm.numaNodes.slice = append(builder.vm.numaNodes.slice, anys...)
 	return builder
 }
 
@@ -63443,12 +66263,36 @@ func (builder *VmBuilder) Payloads(attr *PayloadSlice) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) PayloadsOfAny(anys ...Payload) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.payloads == nil {
+		builder.vm.payloads = new(PayloadSlice)
+	}
+	builder.vm.payloads.slice = append(builder.vm.payloads.slice, anys...)
+	return builder
+}
+
 func (builder *VmBuilder) Permissions(attr *PermissionSlice) *VmBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.vm.SetPermissions(attr)
+	return builder
+}
+
+func (builder *VmBuilder) PermissionsOfAny(anys ...Permission) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.permissions == nil {
+		builder.vm.permissions = new(PermissionSlice)
+	}
+	builder.vm.permissions.slice = append(builder.vm.permissions.slice, anys...)
 	return builder
 }
 
@@ -63476,6 +66320,18 @@ func (builder *VmBuilder) ReportedDevices(attr *ReportedDeviceSlice) *VmBuilder 
 	}
 
 	builder.vm.SetReportedDevices(attr)
+	return builder
+}
+
+func (builder *VmBuilder) ReportedDevicesOfAny(anys ...ReportedDevice) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.reportedDevices == nil {
+		builder.vm.reportedDevices = new(ReportedDeviceSlice)
+	}
+	builder.vm.reportedDevices.slice = append(builder.vm.reportedDevices.slice, anys...)
 	return builder
 }
 
@@ -63515,6 +66371,18 @@ func (builder *VmBuilder) Sessions(attr *SessionSlice) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) SessionsOfAny(anys ...Session) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.sessions == nil {
+		builder.vm.sessions = new(SessionSlice)
+	}
+	builder.vm.sessions.slice = append(builder.vm.sessions.slice, anys...)
+	return builder
+}
+
 func (builder *VmBuilder) SmallIcon(attr *Icon) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -63530,6 +66398,18 @@ func (builder *VmBuilder) Snapshots(attr *SnapshotSlice) *VmBuilder {
 	}
 
 	builder.vm.SetSnapshots(attr)
+	return builder
+}
+
+func (builder *VmBuilder) SnapshotsOfAny(anys ...Snapshot) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.snapshots == nil {
+		builder.vm.snapshots = new(SnapshotSlice)
+	}
+	builder.vm.snapshots.slice = append(builder.vm.snapshots.slice, anys...)
 	return builder
 }
 
@@ -63587,6 +66467,18 @@ func (builder *VmBuilder) Statistics(attr *StatisticSlice) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) StatisticsOfAny(anys ...Statistic) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.statistics == nil {
+		builder.vm.statistics = new(StatisticSlice)
+	}
+	builder.vm.statistics.slice = append(builder.vm.statistics.slice, anys...)
+	return builder
+}
+
 func (builder *VmBuilder) Status(attr VmStatus) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -63638,6 +66530,18 @@ func (builder *VmBuilder) Tags(attr *TagSlice) *VmBuilder {
 	}
 
 	builder.vm.SetTags(attr)
+	return builder
+}
+
+func (builder *VmBuilder) TagsOfAny(anys ...Tag) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.tags == nil {
+		builder.vm.tags = new(TagSlice)
+	}
+	builder.vm.tags.slice = append(builder.vm.tags.slice, anys...)
 	return builder
 }
 
@@ -63719,6 +66623,18 @@ func (builder *VmBuilder) Watchdogs(attr *WatchdogSlice) *VmBuilder {
 	}
 
 	builder.vm.SetWatchdogs(attr)
+	return builder
+}
+
+func (builder *VmBuilder) WatchdogsOfAny(anys ...Watchdog) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vm.watchdogs == nil {
+		builder.vm.watchdogs = new(WatchdogSlice)
+	}
+	builder.vm.watchdogs.slice = append(builder.vm.watchdogs.slice, anys...)
 	return builder
 }
 
@@ -63859,6 +66775,18 @@ func (builder *VmBaseBuilder) CustomProperties(attr *CustomPropertySlice) *VmBas
 	}
 
 	builder.vmBase.SetCustomProperties(attr)
+	return builder
+}
+
+func (builder *VmBaseBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vmBase.customProperties == nil {
+		builder.vmBase.customProperties = new(CustomPropertySlice)
+	}
+	builder.vmBase.customProperties.slice = append(builder.vmBase.customProperties.slice, anys...)
 	return builder
 }
 
@@ -64191,6 +67119,18 @@ func (builder *VmPlacementPolicyBuilder) Hosts(attr *HostSlice) *VmPlacementPoli
 	return builder
 }
 
+func (builder *VmPlacementPolicyBuilder) HostsOfAny(anys ...Host) *VmPlacementPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vmPlacementPolicy.hosts == nil {
+		builder.vmPlacementPolicy.hosts = new(HostSlice)
+	}
+	builder.vmPlacementPolicy.hosts.slice = append(builder.vmPlacementPolicy.hosts.slice, anys...)
+	return builder
+}
+
 func (builder *VmPlacementPolicyBuilder) Href(href string) *VmPlacementPolicyBuilder {
 	if builder.err != nil {
 		return builder
@@ -64310,6 +67250,18 @@ func (builder *VmPoolBuilder) Permissions(attr *PermissionSlice) *VmPoolBuilder 
 	}
 
 	builder.vmPool.SetPermissions(attr)
+	return builder
+}
+
+func (builder *VmPoolBuilder) PermissionsOfAny(anys ...Permission) *VmPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vmPool.permissions == nil {
+		builder.vmPool.permissions = new(PermissionSlice)
+	}
+	builder.vmPool.permissions.slice = append(builder.vmPool.permissions.slice, anys...)
 	return builder
 }
 
@@ -64544,6 +67496,18 @@ func (builder *VnicProfileBuilder) CustomProperties(attr *CustomPropertySlice) *
 	return builder
 }
 
+func (builder *VnicProfileBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *VnicProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vnicProfile.customProperties == nil {
+		builder.vnicProfile.customProperties = new(CustomPropertySlice)
+	}
+	builder.vnicProfile.customProperties.slice = append(builder.vnicProfile.customProperties.slice, anys...)
+	return builder
+}
+
 func (builder *VnicProfileBuilder) Description(attr string) *VnicProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -64613,6 +67577,18 @@ func (builder *VnicProfileBuilder) Permissions(attr *PermissionSlice) *VnicProfi
 	}
 
 	builder.vnicProfile.SetPermissions(attr)
+	return builder
+}
+
+func (builder *VnicProfileBuilder) PermissionsOfAny(anys ...Permission) *VnicProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.vnicProfile.permissions == nil {
+		builder.vnicProfile.permissions = new(PermissionSlice)
+	}
+	builder.vnicProfile.permissions.slice = append(builder.vnicProfile.permissions.slice, anys...)
 	return builder
 }
 
@@ -64740,6 +67716,18 @@ func (builder *VolumeGroupBuilder) LogicalUnits(attr *LogicalUnitSlice) *VolumeG
 	}
 
 	builder.volumeGroup.SetLogicalUnits(attr)
+	return builder
+}
+
+func (builder *VolumeGroupBuilder) LogicalUnitsOfAny(anys ...LogicalUnit) *VolumeGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.volumeGroup.logicalUnits == nil {
+		builder.volumeGroup.logicalUnits = new(LogicalUnitSlice)
+	}
+	builder.volumeGroup.logicalUnits.slice = append(builder.volumeGroup.logicalUnits.slice, anys...)
 	return builder
 }
 
@@ -64871,6 +67859,18 @@ func (builder *WatchdogBuilder) Vms(attr *VmSlice) *WatchdogBuilder {
 	}
 
 	builder.watchdog.SetVms(attr)
+	return builder
+}
+
+func (builder *WatchdogBuilder) VmsOfAny(anys ...Vm) *WatchdogBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.watchdog.vms == nil {
+		builder.watchdog.vms = new(VmSlice)
+	}
+	builder.watchdog.vms.slice = append(builder.watchdog.vms.slice, anys...)
 	return builder
 }
 
