@@ -42,7 +42,11 @@ func main() {
 
 	// Locate the virtual machines service and use it to find the virtual machine
 	vmsService := conn.SystemService().VmsService()
-	vmsResp, _ := vmsService.List().Search("name=myvm").Send()
+	vmsResp, err := vmsService.List().Search("name=myvm").Send()
+	if err != nil {
+		fmt.Printf("Failed to search vm list, reason: %v\n", err)
+		return
+	}
 	vmSlice, _ := vmsResp.Vms()
 	vm := vmSlice.Slice()[0]
 
@@ -61,8 +65,10 @@ func main() {
 						Description("My disk description").
 						Format(ovirtsdk4.DISKFORMAT_COW).
 						ProvisionedSize(int64(10) * int64(1<<30)).
-						// TODO: issue #49, append by the vararg way
-						// StorageDomains().
+						StorageDomainsOfAny(
+							*ovirtsdk4.NewStorageDomainBuilder().
+								Name("mydata").
+								MustBuild()).
 						MustBuild()).
 				Interface(ovirtsdk4.DISKINTERFACE_VIRTIO).
 				Bootable(false).
