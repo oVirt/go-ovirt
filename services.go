@@ -17,7 +17,6 @@ package ovirtsdk4
 
 import (
 	"bytes"
-	"encoding/base64"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -137,10 +136,12 @@ func (p *vnicProfilesServiceAddRequest) Send() (*vnicProfilesServiceAddResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vnicProfilesService.connection.username, p.vnicProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vnicProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vnicProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -235,10 +236,12 @@ func (p *vnicProfilesServiceListRequest) Send() (*vnicProfilesServiceListRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vnicProfilesService.connection.username, p.vnicProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vnicProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vnicProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -370,10 +373,12 @@ func (p *schedulingPolicyUnitServiceGetRequest) Send() (*schedulingPolicyUnitSer
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.schedulingPolicyUnitService.connection.username, p.schedulingPolicyUnitService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.schedulingPolicyUnitService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.schedulingPolicyUnitService.connection.client.Do(req)
 	if err != nil {
@@ -468,10 +473,12 @@ func (p *schedulingPolicyUnitServiceRemoveRequest) Send() (*schedulingPolicyUnit
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.schedulingPolicyUnitService.connection.username, p.schedulingPolicyUnitService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.schedulingPolicyUnitService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.schedulingPolicyUnitService.connection.client.Do(req)
 	if err != nil {
@@ -570,10 +577,12 @@ func (p *virtualFunctionAllowedNetworkServiceGetRequest) Send() (*virtualFunctio
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.virtualFunctionAllowedNetworkService.connection.username, p.virtualFunctionAllowedNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.virtualFunctionAllowedNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.virtualFunctionAllowedNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -668,10 +677,12 @@ func (p *virtualFunctionAllowedNetworkServiceRemoveRequest) Send() (*virtualFunc
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.virtualFunctionAllowedNetworkService.connection.username, p.virtualFunctionAllowedNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.virtualFunctionAllowedNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.virtualFunctionAllowedNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -783,10 +794,12 @@ func (p *templateNicsServiceAddRequest) Send() (*templateNicsServiceAddResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateNicsService.connection.username, p.templateNicsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateNicsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateNicsService.connection.client.Do(req)
 	if err != nil {
@@ -881,10 +894,12 @@ func (p *templateNicsServiceListRequest) Send() (*templateNicsServiceListRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateNicsService.connection.username, p.templateNicsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateNicsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateNicsService.connection.client.Do(req)
 	if err != nil {
@@ -1007,10 +1022,12 @@ func (p *affinityLabelServiceGetRequest) Send() (*affinityLabelServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelService.connection.username, p.affinityLabelService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelService.connection.client.Do(req)
 	if err != nil {
@@ -1095,10 +1112,12 @@ func (p *affinityLabelServiceRemoveRequest) Send() (*affinityLabelServiceRemoveR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelService.connection.username, p.affinityLabelService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelService.connection.client.Do(req)
 	if err != nil {
@@ -1183,10 +1202,12 @@ func (p *affinityLabelServiceUpdateRequest) Send() (*affinityLabelServiceUpdateR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelService.connection.username, p.affinityLabelService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelService.connection.client.Do(req)
 	if err != nil {
@@ -1338,10 +1359,12 @@ func (p *bookmarksServiceAddRequest) Send() (*bookmarksServiceAddResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.bookmarksService.connection.username, p.bookmarksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.bookmarksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.bookmarksService.connection.client.Do(req)
 	if err != nil {
@@ -1436,10 +1459,12 @@ func (p *bookmarksServiceListRequest) Send() (*bookmarksServiceListResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.bookmarksService.connection.username, p.bookmarksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.bookmarksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.bookmarksService.connection.client.Do(req)
 	if err != nil {
@@ -1575,10 +1600,12 @@ func (p *networkAttachmentsServiceAddRequest) Send() (*networkAttachmentsService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkAttachmentsService.connection.username, p.networkAttachmentsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkAttachmentsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkAttachmentsService.connection.client.Do(req)
 	if err != nil {
@@ -1673,10 +1700,12 @@ func (p *networkAttachmentsServiceListRequest) Send() (*networkAttachmentsServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkAttachmentsService.connection.username, p.networkAttachmentsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkAttachmentsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkAttachmentsService.connection.client.Do(req)
 	if err != nil {
@@ -1798,10 +1827,12 @@ func (p *operatingSystemServiceGetRequest) Send() (*operatingSystemServiceGetRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.operatingSystemService.connection.username, p.operatingSystemService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.operatingSystemService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.operatingSystemService.connection.client.Do(req)
 	if err != nil {
@@ -1923,10 +1954,12 @@ func (p *templateDisksServiceListRequest) Send() (*templateDisksServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateDisksService.connection.username, p.templateDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateDisksService.connection.client.Do(req)
 	if err != nil {
@@ -2063,10 +2096,12 @@ func (p *systemPermissionsServiceAddRequest) Send() (*systemPermissionsServiceAd
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.systemPermissionsService.connection.username, p.systemPermissionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.systemPermissionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.systemPermissionsService.connection.client.Do(req)
 	if err != nil {
@@ -2151,10 +2186,12 @@ func (p *systemPermissionsServiceListRequest) Send() (*systemPermissionsServiceL
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.systemPermissionsService.connection.username, p.systemPermissionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.systemPermissionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.systemPermissionsService.connection.client.Do(req)
 	if err != nil {
@@ -2278,10 +2315,12 @@ func (p *vmReportedDeviceServiceGetRequest) Send() (*vmReportedDeviceServiceGetR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmReportedDeviceService.connection.username, p.vmReportedDeviceService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmReportedDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmReportedDeviceService.connection.client.Do(req)
 	if err != nil {
@@ -2403,10 +2442,12 @@ func (p *snapshotNicsServiceListRequest) Send() (*snapshotNicsServiceListRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotNicsService.connection.username, p.snapshotNicsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotNicsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotNicsService.connection.client.Do(req)
 	if err != nil {
@@ -2541,10 +2582,12 @@ func (p *assignedVnicProfilesServiceAddRequest) Send() (*assignedVnicProfilesSer
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedVnicProfilesService.connection.username, p.assignedVnicProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedVnicProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedVnicProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -2639,10 +2682,12 @@ func (p *assignedVnicProfilesServiceListRequest) Send() (*assignedVnicProfilesSe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedVnicProfilesService.connection.username, p.assignedVnicProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedVnicProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedVnicProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -2777,10 +2822,12 @@ func (p *quotaClusterLimitsServiceAddRequest) Send() (*quotaClusterLimitsService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaClusterLimitsService.connection.username, p.quotaClusterLimitsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaClusterLimitsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaClusterLimitsService.connection.client.Do(req)
 	if err != nil {
@@ -2875,10 +2922,12 @@ func (p *quotaClusterLimitsServiceListRequest) Send() (*quotaClusterLimitsServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaClusterLimitsService.connection.username, p.quotaClusterLimitsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaClusterLimitsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaClusterLimitsService.connection.client.Do(req)
 	if err != nil {
@@ -3017,10 +3066,12 @@ func (p *networksServiceAddRequest) Send() (*networksServiceAddResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networksService.connection.username, p.networksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networksService.connection.client.Do(req)
 	if err != nil {
@@ -3135,10 +3186,12 @@ func (p *networksServiceListRequest) Send() (*networksServiceListResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networksService.connection.username, p.networksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networksService.connection.client.Do(req)
 	if err != nil {
@@ -3275,10 +3328,12 @@ func (p *affinityGroupsServiceAddRequest) Send() (*affinityGroupsServiceAddRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityGroupsService.connection.username, p.affinityGroupsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityGroupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityGroupsService.connection.client.Do(req)
 	if err != nil {
@@ -3373,10 +3428,12 @@ func (p *affinityGroupsServiceListRequest) Send() (*affinityGroupsServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityGroupsService.connection.username, p.affinityGroupsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityGroupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityGroupsService.connection.client.Do(req)
 	if err != nil {
@@ -3499,10 +3556,12 @@ func (p *diskSnapshotServiceGetRequest) Send() (*diskSnapshotServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskSnapshotService.connection.username, p.diskSnapshotService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskSnapshotService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskSnapshotService.connection.client.Do(req)
 	if err != nil {
@@ -3597,10 +3656,12 @@ func (p *diskSnapshotServiceRemoveRequest) Send() (*diskSnapshotServiceRemoveRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskSnapshotService.connection.username, p.diskSnapshotService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskSnapshotService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskSnapshotService.connection.client.Do(req)
 	if err != nil {
@@ -3709,10 +3770,12 @@ func (p *schedulingPolicyServiceGetRequest) Send() (*schedulingPolicyServiceGetR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.schedulingPolicyService.connection.username, p.schedulingPolicyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.schedulingPolicyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.schedulingPolicyService.connection.client.Do(req)
 	if err != nil {
@@ -3807,10 +3870,12 @@ func (p *schedulingPolicyServiceRemoveRequest) Send() (*schedulingPolicyServiceR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.schedulingPolicyService.connection.username, p.schedulingPolicyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.schedulingPolicyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.schedulingPolicyService.connection.client.Do(req)
 	if err != nil {
@@ -3905,10 +3970,12 @@ func (p *schedulingPolicyServiceUpdateRequest) Send() (*schedulingPolicyServiceU
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.schedulingPolicyService.connection.username, p.schedulingPolicyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.schedulingPolicyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.schedulingPolicyService.connection.client.Do(req)
 	if err != nil {
@@ -4056,10 +4123,12 @@ func (p *networkAttachmentServiceGetRequest) Send() (*networkAttachmentServiceGe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkAttachmentService.connection.username, p.networkAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -4154,10 +4223,12 @@ func (p *networkAttachmentServiceRemoveRequest) Send() (*networkAttachmentServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkAttachmentService.connection.username, p.networkAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -4252,10 +4323,12 @@ func (p *networkAttachmentServiceUpdateRequest) Send() (*networkAttachmentServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkAttachmentService.connection.username, p.networkAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -4380,10 +4453,12 @@ func (p *diskProfilesServiceAddRequest) Send() (*diskProfilesServiceAddResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskProfilesService.connection.username, p.diskProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -4478,10 +4553,12 @@ func (p *diskProfilesServiceListRequest) Send() (*diskProfilesServiceListRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskProfilesService.connection.username, p.diskProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -4604,10 +4681,12 @@ func (p *iconServiceGetRequest) Send() (*iconServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.iconService.connection.username, p.iconService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.iconService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.iconService.connection.client.Do(req)
 	if err != nil {
@@ -4721,10 +4800,12 @@ func (p *assignedAffinityLabelServiceGetRequest) Send() (*assignedAffinityLabelS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedAffinityLabelService.connection.username, p.assignedAffinityLabelService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedAffinityLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedAffinityLabelService.connection.client.Do(req)
 	if err != nil {
@@ -4809,10 +4890,12 @@ func (p *assignedAffinityLabelServiceRemoveRequest) Send() (*assignedAffinityLab
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedAffinityLabelService.connection.username, p.assignedAffinityLabelService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedAffinityLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedAffinityLabelService.connection.client.Do(req)
 	if err != nil {
@@ -4924,10 +5007,12 @@ func (p *cpuProfilesServiceAddRequest) Send() (*cpuProfilesServiceAddResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.cpuProfilesService.connection.username, p.cpuProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.cpuProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.cpuProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -5022,10 +5107,12 @@ func (p *cpuProfilesServiceListRequest) Send() (*cpuProfilesServiceListResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.cpuProfilesService.connection.username, p.cpuProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.cpuProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.cpuProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -5160,10 +5247,12 @@ func (p *macPoolsServiceAddRequest) Send() (*macPoolsServiceAddResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.macPoolsService.connection.username, p.macPoolsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.macPoolsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.macPoolsService.connection.client.Do(req)
 	if err != nil {
@@ -5258,10 +5347,12 @@ func (p *macPoolsServiceListRequest) Send() (*macPoolsServiceListResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.macPoolsService.connection.username, p.macPoolsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.macPoolsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.macPoolsService.connection.client.Do(req)
 	if err != nil {
@@ -5397,10 +5488,12 @@ func (p *affinityGroupVmsServiceAddRequest) Send() (*affinityGroupVmsServiceAddR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityGroupVmsService.connection.username, p.affinityGroupVmsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityGroupVmsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityGroupVmsService.connection.client.Do(req)
 	if err != nil {
@@ -5495,10 +5588,12 @@ func (p *affinityGroupVmsServiceListRequest) Send() (*affinityGroupVmsServiceLis
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityGroupVmsService.connection.username, p.affinityGroupVmsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityGroupVmsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityGroupVmsService.connection.client.Do(req)
 	if err != nil {
@@ -5621,10 +5716,12 @@ func (p *qosServiceGetRequest) Send() (*qosServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.qosService.connection.username, p.qosService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.qosService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.qosService.connection.client.Do(req)
 	if err != nil {
@@ -5719,10 +5816,12 @@ func (p *qosServiceRemoveRequest) Send() (*qosServiceRemoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.qosService.connection.username, p.qosService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.qosService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.qosService.connection.client.Do(req)
 	if err != nil {
@@ -5817,10 +5916,12 @@ func (p *qosServiceUpdateRequest) Send() (*qosServiceUpdateResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.qosService.connection.username, p.qosService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.qosService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.qosService.connection.client.Do(req)
 	if err != nil {
@@ -5946,10 +6047,12 @@ func (p *tagsServiceAddRequest) Send() (*tagsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.tagsService.connection.username, p.tagsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.tagsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.tagsService.connection.client.Do(req)
 	if err != nil {
@@ -6044,10 +6147,12 @@ func (p *tagsServiceListRequest) Send() (*tagsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.tagsService.connection.username, p.tagsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.tagsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.tagsService.connection.client.Do(req)
 	if err != nil {
@@ -6170,10 +6275,12 @@ func (p *externalProviderCertificateServiceGetRequest) Send() (*externalProvider
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalProviderCertificateService.connection.username, p.externalProviderCertificateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalProviderCertificateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalProviderCertificateService.connection.client.Do(req)
 	if err != nil {
@@ -6299,10 +6406,12 @@ func (p *eventsServiceAddRequest) Send() (*eventsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.eventsService.connection.username, p.eventsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.eventsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.eventsService.connection.client.Do(req)
 	if err != nil {
@@ -6427,10 +6536,12 @@ func (p *eventsServiceListRequest) Send() (*eventsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.eventsService.connection.username, p.eventsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.eventsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.eventsService.connection.client.Do(req)
 	if err != nil {
@@ -6531,10 +6642,12 @@ func (p *eventsServiceUndeleteRequest) Send() (*eventsServiceUndeleteResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.eventsService.connection.username, p.eventsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.eventsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.eventsService.connection.client.Do(req)
 	if err != nil {
@@ -6642,10 +6755,12 @@ func (p *vmWatchdogServiceGetRequest) Send() (*vmWatchdogServiceGetResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmWatchdogService.connection.username, p.vmWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -6740,10 +6855,12 @@ func (p *vmWatchdogServiceRemoveRequest) Send() (*vmWatchdogServiceRemoveRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmWatchdogService.connection.username, p.vmWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -6838,10 +6955,12 @@ func (p *vmWatchdogServiceUpdateRequest) Send() (*vmWatchdogServiceUpdateRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmWatchdogService.connection.username, p.vmWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -6969,10 +7088,12 @@ func (p *attachedStorageDomainServiceActivateRequest) Send() (*attachedStorageDo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainService.connection.username, p.attachedStorageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -7057,10 +7178,12 @@ func (p *attachedStorageDomainServiceDeactivateRequest) Send() (*attachedStorage
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainService.connection.username, p.attachedStorageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -7129,10 +7252,12 @@ func (p *attachedStorageDomainServiceGetRequest) Send() (*attachedStorageDomainS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainService.connection.username, p.attachedStorageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -7227,10 +7352,12 @@ func (p *attachedStorageDomainServiceRemoveRequest) Send() (*attachedStorageDoma
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainService.connection.username, p.attachedStorageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -7354,10 +7481,12 @@ func (p *attachedStorageDomainsServiceAddRequest) Send() (*attachedStorageDomain
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainsService.connection.username, p.attachedStorageDomainsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainsService.connection.client.Do(req)
 	if err != nil {
@@ -7452,10 +7581,12 @@ func (p *attachedStorageDomainsServiceListRequest) Send() (*attachedStorageDomai
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainsService.connection.username, p.attachedStorageDomainsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainsService.connection.client.Do(req)
 	if err != nil {
@@ -7577,10 +7708,12 @@ func (p *instanceTypeWatchdogServiceGetRequest) Send() (*instanceTypeWatchdogSer
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeWatchdogService.connection.username, p.instanceTypeWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -7675,10 +7808,12 @@ func (p *instanceTypeWatchdogServiceRemoveRequest) Send() (*instanceTypeWatchdog
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeWatchdogService.connection.username, p.instanceTypeWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -7773,10 +7908,12 @@ func (p *instanceTypeWatchdogServiceUpdateRequest) Send() (*instanceTypeWatchdog
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeWatchdogService.connection.username, p.instanceTypeWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -7888,10 +8025,12 @@ func (p *quotaStorageLimitServiceGetRequest) Send() (*quotaStorageLimitServiceGe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaStorageLimitService.connection.username, p.quotaStorageLimitService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaStorageLimitService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaStorageLimitService.connection.client.Do(req)
 	if err != nil {
@@ -7986,10 +8125,12 @@ func (p *quotaStorageLimitServiceRemoveRequest) Send() (*quotaStorageLimitServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaStorageLimitService.connection.username, p.quotaStorageLimitService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaStorageLimitService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaStorageLimitService.connection.client.Do(req)
 	if err != nil {
@@ -8088,10 +8229,12 @@ func (p *roleServiceGetRequest) Send() (*roleServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.roleService.connection.username, p.roleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.roleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.roleService.connection.client.Do(req)
 	if err != nil {
@@ -8186,10 +8329,12 @@ func (p *roleServiceRemoveRequest) Send() (*roleServiceRemoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.roleService.connection.username, p.roleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.roleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.roleService.connection.client.Do(req)
 	if err != nil {
@@ -8284,10 +8429,12 @@ func (p *roleServiceUpdateRequest) Send() (*roleServiceUpdateResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.roleService.connection.username, p.roleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.roleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.roleService.connection.client.Do(req)
 	if err != nil {
@@ -8412,10 +8559,12 @@ func (p *assignedNetworkServiceGetRequest) Send() (*assignedNetworkServiceGetRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedNetworkService.connection.username, p.assignedNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -8510,10 +8659,12 @@ func (p *assignedNetworkServiceRemoveRequest) Send() (*assignedNetworkServiceRem
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedNetworkService.connection.username, p.assignedNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -8608,10 +8759,12 @@ func (p *assignedNetworkServiceUpdateRequest) Send() (*assignedNetworkServiceUpd
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedNetworkService.connection.username, p.assignedNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -8724,10 +8877,12 @@ func (p *storageDomainVmDiskAttachmentServiceGetRequest) Send() (*storageDomainV
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainVmDiskAttachmentService.connection.username, p.storageDomainVmDiskAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainVmDiskAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainVmDiskAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -8850,10 +9005,12 @@ func (p *hostNicsServiceListRequest) Send() (*hostNicsServiceListResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostNicsService.connection.username, p.hostNicsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostNicsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostNicsService.connection.client.Do(req)
 	if err != nil {
@@ -8976,10 +9133,12 @@ func (p *vmNumaNodeServiceGetRequest) Send() (*vmNumaNodeServiceGetResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNumaNodeService.connection.username, p.vmNumaNodeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNumaNodeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNumaNodeService.connection.client.Do(req)
 	if err != nil {
@@ -9074,10 +9233,12 @@ func (p *vmNumaNodeServiceRemoveRequest) Send() (*vmNumaNodeServiceRemoveRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNumaNodeService.connection.username, p.vmNumaNodeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNumaNodeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNumaNodeService.connection.client.Do(req)
 	if err != nil {
@@ -9172,10 +9333,12 @@ func (p *vmNumaNodeServiceUpdateRequest) Send() (*vmNumaNodeServiceUpdateRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNumaNodeService.connection.username, p.vmNumaNodeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNumaNodeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNumaNodeService.connection.client.Do(req)
 	if err != nil {
@@ -9298,10 +9461,12 @@ func (p *templateCdromsServiceListRequest) Send() (*templateCdromsServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateCdromsService.connection.username, p.templateCdromsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateCdromsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateCdromsService.connection.client.Do(req)
 	if err != nil {
@@ -9424,10 +9589,12 @@ func (p *snapshotServiceGetRequest) Send() (*snapshotServiceGetResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotService.connection.username, p.snapshotService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotService.connection.client.Do(req)
 	if err != nil {
@@ -9532,10 +9699,12 @@ func (p *snapshotServiceRemoveRequest) Send() (*snapshotServiceRemoveResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotService.connection.username, p.snapshotService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotService.connection.client.Do(req)
 	if err != nil {
@@ -9637,10 +9806,12 @@ func (p *snapshotServiceRestoreRequest) Send() (*snapshotServiceRestoreResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotService.connection.username, p.snapshotService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotService.connection.client.Do(req)
 	if err != nil {
@@ -9785,10 +9956,12 @@ func (p *schedulingPoliciesServiceAddRequest) Send() (*schedulingPoliciesService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.schedulingPoliciesService.connection.username, p.schedulingPoliciesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.schedulingPoliciesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.schedulingPoliciesService.connection.client.Do(req)
 	if err != nil {
@@ -9893,10 +10066,12 @@ func (p *schedulingPoliciesServiceListRequest) Send() (*schedulingPoliciesServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.schedulingPoliciesService.connection.username, p.schedulingPoliciesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.schedulingPoliciesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.schedulingPoliciesService.connection.client.Do(req)
 	if err != nil {
@@ -10031,10 +10206,12 @@ func (p *weightsServiceAddRequest) Send() (*weightsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.weightsService.connection.username, p.weightsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.weightsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.weightsService.connection.client.Do(req)
 	if err != nil {
@@ -10139,10 +10316,12 @@ func (p *weightsServiceListRequest) Send() (*weightsServiceListResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.weightsService.connection.username, p.weightsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.weightsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.weightsService.connection.client.Do(req)
 	if err != nil {
@@ -10278,10 +10457,12 @@ func (p *vmHostDevicesServiceAddRequest) Send() (*vmHostDevicesServiceAddRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmHostDevicesService.connection.username, p.vmHostDevicesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmHostDevicesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmHostDevicesService.connection.client.Do(req)
 	if err != nil {
@@ -10376,10 +10557,12 @@ func (p *vmHostDevicesServiceListRequest) Send() (*vmHostDevicesServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmHostDevicesService.connection.username, p.vmHostDevicesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmHostDevicesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmHostDevicesService.connection.client.Do(req)
 	if err != nil {
@@ -10502,10 +10685,12 @@ func (p *assignedCpuProfileServiceGetRequest) Send() (*assignedCpuProfileService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedCpuProfileService.connection.username, p.assignedCpuProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedCpuProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedCpuProfileService.connection.client.Do(req)
 	if err != nil {
@@ -10600,10 +10785,12 @@ func (p *assignedCpuProfileServiceRemoveRequest) Send() (*assignedCpuProfileServ
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedCpuProfileService.connection.username, p.assignedCpuProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedCpuProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedCpuProfileService.connection.client.Do(req)
 	if err != nil {
@@ -10702,10 +10889,12 @@ func (p *snapshotNicServiceGetRequest) Send() (*snapshotNicServiceGetResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotNicService.connection.username, p.snapshotNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotNicService.connection.client.Do(req)
 	if err != nil {
@@ -10818,10 +11007,12 @@ func (p *hostDeviceServiceGetRequest) Send() (*hostDeviceServiceGetResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostDeviceService.connection.username, p.hostDeviceService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostDeviceService.connection.client.Do(req)
 	if err != nil {
@@ -10949,10 +11140,12 @@ func (p *imageTransfersServiceAddRequest) Send() (*imageTransfersServiceAddRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageTransfersService.connection.username, p.imageTransfersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageTransfersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageTransfersService.connection.client.Do(req)
 	if err != nil {
@@ -11037,10 +11230,12 @@ func (p *imageTransfersServiceListRequest) Send() (*imageTransfersServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageTransfersService.connection.username, p.imageTransfersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageTransfersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageTransfersService.connection.client.Do(req)
 	if err != nil {
@@ -11180,10 +11375,12 @@ func (p *externalProviderServiceImportCertificatesRequest) Send() (*externalProv
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalProviderService.connection.username, p.externalProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalProviderService.connection.client.Do(req)
 	if err != nil {
@@ -11268,10 +11465,12 @@ func (p *externalProviderServiceTestConnectivityRequest) Send() (*externalProvid
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalProviderService.connection.username, p.externalProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalProviderService.connection.client.Do(req)
 	if err != nil {
@@ -11380,10 +11579,12 @@ func (p *eventServiceGetRequest) Send() (*eventServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.eventService.connection.username, p.eventService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.eventService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.eventService.connection.client.Do(req)
 	if err != nil {
@@ -11478,10 +11679,12 @@ func (p *eventServiceRemoveRequest) Send() (*eventServiceRemoveResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.eventService.connection.username, p.eventService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.eventService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.eventService.connection.client.Do(req)
 	if err != nil {
@@ -11631,10 +11834,12 @@ func (p *networkFiltersServiceListRequest) Send() (*networkFiltersServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkFiltersService.connection.username, p.networkFiltersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkFiltersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkFiltersService.connection.client.Do(req)
 	if err != nil {
@@ -11762,10 +11967,12 @@ func (p *statisticServiceGetRequest) Send() (*statisticServiceGetResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.statisticService.connection.username, p.statisticService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.statisticService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.statisticService.connection.client.Do(req)
 	if err != nil {
@@ -11891,10 +12098,12 @@ func (p *externalVmImportsServiceAddRequest) Send() (*externalVmImportsServiceAd
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalVmImportsService.connection.username, p.externalVmImportsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalVmImportsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalVmImportsService.connection.client.Do(req)
 	if err != nil {
@@ -12017,10 +12226,12 @@ func (p *assignedRolesServiceListRequest) Send() (*assignedRolesServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedRolesService.connection.username, p.assignedRolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedRolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedRolesService.connection.client.Do(req)
 	if err != nil {
@@ -12144,10 +12355,12 @@ func (p *networkFilterParameterServiceGetRequest) Send() (*networkFilterParamete
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkFilterParameterService.connection.username, p.networkFilterParameterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkFilterParameterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkFilterParameterService.connection.client.Do(req)
 	if err != nil {
@@ -12232,10 +12445,12 @@ func (p *networkFilterParameterServiceRemoveRequest) Send() (*networkFilterParam
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkFilterParameterService.connection.username, p.networkFilterParameterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkFilterParameterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkFilterParameterService.connection.client.Do(req)
 	if err != nil {
@@ -12320,10 +12535,12 @@ func (p *networkFilterParameterServiceUpdateRequest) Send() (*networkFilterParam
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkFilterParameterService.connection.username, p.networkFilterParameterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkFilterParameterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkFilterParameterService.connection.client.Do(req)
 	if err != nil {
@@ -12435,10 +12652,12 @@ func (p *openstackImageProviderServiceGetRequest) Send() (*openstackImageProvide
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageProviderService.connection.username, p.openstackImageProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageProviderService.connection.client.Do(req)
 	if err != nil {
@@ -12539,10 +12758,12 @@ func (p *openstackImageProviderServiceImportCertificatesRequest) Send() (*openst
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageProviderService.connection.username, p.openstackImageProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageProviderService.connection.client.Do(req)
 	if err != nil {
@@ -12621,10 +12842,12 @@ func (p *openstackImageProviderServiceRemoveRequest) Send() (*openstackImageProv
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageProviderService.connection.username, p.openstackImageProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageProviderService.connection.client.Do(req)
 	if err != nil {
@@ -12712,10 +12935,12 @@ func (p *openstackImageProviderServiceTestConnectivityRequest) Send() (*openstac
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageProviderService.connection.username, p.openstackImageProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageProviderService.connection.client.Do(req)
 	if err != nil {
@@ -12807,10 +13032,12 @@ func (p *openstackImageProviderServiceUpdateRequest) Send() (*openstackImageProv
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageProviderService.connection.username, p.openstackImageProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageProviderService.connection.client.Do(req)
 	if err != nil {
@@ -12946,10 +13173,12 @@ func (p *openstackNetworkServiceGetRequest) Send() (*openstackNetworkServiceGetR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkService.connection.username, p.openstackNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -13057,10 +13286,12 @@ func (p *openstackNetworkServiceImportRequest) Send() (*openstackNetworkServiceI
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkService.connection.username, p.openstackNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -13181,10 +13412,12 @@ func (p *openstackImageProvidersServiceAddRequest) Send() (*openstackImageProvid
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageProvidersService.connection.username, p.openstackImageProvidersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageProvidersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageProvidersService.connection.client.Do(req)
 	if err != nil {
@@ -13279,10 +13512,12 @@ func (p *openstackImageProvidersServiceListRequest) Send() (*openstackImageProvi
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageProvidersService.connection.username, p.openstackImageProvidersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageProvidersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageProvidersService.connection.client.Do(req)
 	if err != nil {
@@ -13404,10 +13639,12 @@ func (p *openstackVolumeAuthenticationKeyServiceGetRequest) Send() (*openstackVo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeAuthenticationKeyService.connection.username, p.openstackVolumeAuthenticationKeyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeAuthenticationKeyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeAuthenticationKeyService.connection.client.Do(req)
 	if err != nil {
@@ -13502,10 +13739,12 @@ func (p *openstackVolumeAuthenticationKeyServiceRemoveRequest) Send() (*openstac
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeAuthenticationKeyService.connection.username, p.openstackVolumeAuthenticationKeyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeAuthenticationKeyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeAuthenticationKeyService.connection.client.Do(req)
 	if err != nil {
@@ -13590,10 +13829,12 @@ func (p *openstackVolumeAuthenticationKeyServiceUpdateRequest) Send() (*openstac
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeAuthenticationKeyService.connection.username, p.openstackVolumeAuthenticationKeyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeAuthenticationKeyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeAuthenticationKeyService.connection.client.Do(req)
 	if err != nil {
@@ -13715,10 +13956,12 @@ func (p *openstackImagesServiceListRequest) Send() (*openstackImagesServiceListR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImagesService.connection.username, p.openstackImagesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImagesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImagesService.connection.client.Do(req)
 	if err != nil {
@@ -13855,10 +14098,12 @@ func (p *openstackNetworkProvidersServiceAddRequest) Send() (*openstackNetworkPr
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkProvidersService.connection.username, p.openstackNetworkProvidersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkProvidersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkProvidersService.connection.client.Do(req)
 	if err != nil {
@@ -13953,10 +14198,12 @@ func (p *openstackNetworkProvidersServiceListRequest) Send() (*openstackNetworkP
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkProvidersService.connection.username, p.openstackNetworkProvidersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkProvidersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkProvidersService.connection.client.Do(req)
 	if err != nil {
@@ -14092,10 +14339,12 @@ func (p *openstackVolumeProvidersServiceAddRequest) Send() (*openstackVolumeProv
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeProvidersService.connection.username, p.openstackVolumeProvidersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeProvidersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeProvidersService.connection.client.Do(req)
 	if err != nil {
@@ -14190,10 +14439,12 @@ func (p *openstackVolumeProvidersServiceListRequest) Send() (*openstackVolumePro
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeProvidersService.connection.username, p.openstackVolumeProvidersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeProvidersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeProvidersService.connection.client.Do(req)
 	if err != nil {
@@ -14325,10 +14576,12 @@ func (p *openstackNetworksServiceListRequest) Send() (*openstackNetworksServiceL
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworksService.connection.username, p.openstackNetworksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworksService.connection.client.Do(req)
 	if err != nil {
@@ -14450,10 +14703,12 @@ func (p *openstackVolumeProviderServiceGetRequest) Send() (*openstackVolumeProvi
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeProviderService.connection.username, p.openstackVolumeProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeProviderService.connection.client.Do(req)
 	if err != nil {
@@ -14554,10 +14809,12 @@ func (p *openstackVolumeProviderServiceImportCertificatesRequest) Send() (*opens
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeProviderService.connection.username, p.openstackVolumeProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeProviderService.connection.client.Do(req)
 	if err != nil {
@@ -14636,10 +14893,12 @@ func (p *openstackVolumeProviderServiceRemoveRequest) Send() (*openstackVolumePr
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeProviderService.connection.username, p.openstackVolumeProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeProviderService.connection.client.Do(req)
 	if err != nil {
@@ -14727,10 +14986,12 @@ func (p *openstackVolumeProviderServiceTestConnectivityRequest) Send() (*opensta
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeProviderService.connection.username, p.openstackVolumeProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeProviderService.connection.client.Do(req)
 	if err != nil {
@@ -14822,10 +15083,12 @@ func (p *openstackVolumeProviderServiceUpdateRequest) Send() (*openstackVolumePr
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeProviderService.connection.username, p.openstackVolumeProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeProviderService.connection.client.Do(req)
 	if err != nil {
@@ -14983,10 +15246,12 @@ func (p *openstackVolumeTypesServiceListRequest) Send() (*openstackVolumeTypesSe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeTypesService.connection.username, p.openstackVolumeTypesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeTypesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeTypesService.connection.client.Do(req)
 	if err != nil {
@@ -15121,10 +15386,12 @@ func (p *openstackVolumeAuthenticationKeysServiceAddRequest) Send() (*openstackV
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeAuthenticationKeysService.connection.username, p.openstackVolumeAuthenticationKeysService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeAuthenticationKeysService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeAuthenticationKeysService.connection.client.Do(req)
 	if err != nil {
@@ -15219,10 +15486,12 @@ func (p *openstackVolumeAuthenticationKeysServiceListRequest) Send() (*openstack
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeAuthenticationKeysService.connection.username, p.openstackVolumeAuthenticationKeysService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeAuthenticationKeysService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeAuthenticationKeysService.connection.client.Do(req)
 	if err != nil {
@@ -15344,10 +15613,12 @@ func (p *openstackImageServiceGetRequest) Send() (*openstackImageServiceGetRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageService.connection.username, p.openstackImageService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageService.connection.client.Do(req)
 	if err != nil {
@@ -15483,10 +15754,12 @@ func (p *openstackImageServiceImportRequest) Send() (*openstackImageServiceImpor
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackImageService.connection.username, p.openstackImageService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackImageService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackImageService.connection.client.Do(req)
 	if err != nil {
@@ -15582,10 +15855,12 @@ func (p *openstackVolumeTypeServiceGetRequest) Send() (*openstackVolumeTypeServi
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackVolumeTypeService.connection.username, p.openstackVolumeTypeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackVolumeTypeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackVolumeTypeService.connection.client.Do(req)
 	if err != nil {
@@ -15697,10 +15972,12 @@ func (p *openstackSubnetServiceGetRequest) Send() (*openstackSubnetServiceGetRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackSubnetService.connection.username, p.openstackSubnetService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackSubnetService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackSubnetService.connection.client.Do(req)
 	if err != nil {
@@ -15795,10 +16072,12 @@ func (p *openstackSubnetServiceRemoveRequest) Send() (*openstackSubnetServiceRem
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackSubnetService.connection.username, p.openstackSubnetService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackSubnetService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackSubnetService.connection.client.Do(req)
 	if err != nil {
@@ -15910,10 +16189,12 @@ func (p *openstackSubnetsServiceAddRequest) Send() (*openstackSubnetsServiceAddR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackSubnetsService.connection.username, p.openstackSubnetsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackSubnetsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackSubnetsService.connection.client.Do(req)
 	if err != nil {
@@ -16008,10 +16289,12 @@ func (p *openstackSubnetsServiceListRequest) Send() (*openstackSubnetsServiceLis
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackSubnetsService.connection.username, p.openstackSubnetsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackSubnetsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackSubnetsService.connection.client.Do(req)
 	if err != nil {
@@ -16134,10 +16417,12 @@ func (p *openstackNetworkProviderServiceGetRequest) Send() (*openstackNetworkPro
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkProviderService.connection.username, p.openstackNetworkProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkProviderService.connection.client.Do(req)
 	if err != nil {
@@ -16238,10 +16523,12 @@ func (p *openstackNetworkProviderServiceImportCertificatesRequest) Send() (*open
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkProviderService.connection.username, p.openstackNetworkProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkProviderService.connection.client.Do(req)
 	if err != nil {
@@ -16320,10 +16607,12 @@ func (p *openstackNetworkProviderServiceRemoveRequest) Send() (*openstackNetwork
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkProviderService.connection.username, p.openstackNetworkProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkProviderService.connection.client.Do(req)
 	if err != nil {
@@ -16411,10 +16700,12 @@ func (p *openstackNetworkProviderServiceTestConnectivityRequest) Send() (*openst
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkProviderService.connection.username, p.openstackNetworkProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkProviderService.connection.client.Do(req)
 	if err != nil {
@@ -16506,10 +16797,12 @@ func (p *openstackNetworkProviderServiceUpdateRequest) Send() (*openstackNetwork
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.openstackNetworkProviderService.connection.username, p.openstackNetworkProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.openstackNetworkProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.openstackNetworkProviderService.connection.client.Do(req)
 	if err != nil {
@@ -16670,10 +16963,12 @@ func (p *templateServiceExportRequest) Send() (*templateServiceExportResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateService.connection.username, p.templateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateService.connection.client.Do(req)
 	if err != nil {
@@ -16752,10 +17047,12 @@ func (p *templateServiceGetRequest) Send() (*templateServiceGetResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateService.connection.username, p.templateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateService.connection.client.Do(req)
 	if err != nil {
@@ -16850,10 +17147,12 @@ func (p *templateServiceRemoveRequest) Send() (*templateServiceRemoveResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateService.connection.username, p.templateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateService.connection.client.Do(req)
 	if err != nil {
@@ -16934,10 +17233,12 @@ func (p *templateServiceSealRequest) Send() (*templateServiceSealResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateService.connection.username, p.templateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateService.connection.client.Do(req)
 	if err != nil {
@@ -17029,10 +17330,12 @@ func (p *templateServiceUpdateRequest) Send() (*templateServiceUpdateResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateService.connection.username, p.templateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateService.connection.client.Do(req)
 	if err != nil {
@@ -17250,10 +17553,12 @@ func (p *vmWatchdogsServiceAddRequest) Send() (*vmWatchdogsServiceAddResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmWatchdogsService.connection.username, p.vmWatchdogsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmWatchdogsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmWatchdogsService.connection.client.Do(req)
 	if err != nil {
@@ -17348,10 +17653,12 @@ func (p *vmWatchdogsServiceListRequest) Send() (*vmWatchdogsServiceListResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmWatchdogsService.connection.username, p.vmWatchdogsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmWatchdogsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmWatchdogsService.connection.client.Do(req)
 	if err != nil {
@@ -17477,10 +17784,12 @@ func (p *affinityLabelVmServiceGetRequest) Send() (*affinityLabelVmServiceGetRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelVmService.connection.username, p.affinityLabelVmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelVmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelVmService.connection.client.Do(req)
 	if err != nil {
@@ -17565,10 +17874,12 @@ func (p *affinityLabelVmServiceRemoveRequest) Send() (*affinityLabelVmServiceRem
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelVmService.connection.username, p.affinityLabelVmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelVmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelVmService.connection.client.Do(req)
 	if err != nil {
@@ -17683,10 +17994,12 @@ func (p *vmServiceCancelMigrationRequest) Send() (*vmServiceCancelMigrationRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -17778,10 +18091,12 @@ func (p *vmServiceCloneRequest) Send() (*vmServiceCloneResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -17866,10 +18181,12 @@ func (p *vmServiceCommitSnapshotRequest) Send() (*vmServiceCommitSnapshotRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -17954,10 +18271,12 @@ func (p *vmServiceDetachRequest) Send() (*vmServiceDetachResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18063,10 +18382,12 @@ func (p *vmServiceExportRequest) Send() (*vmServiceExportResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18151,10 +18472,12 @@ func (p *vmServiceFreezeFilesystemsRequest) Send() (*vmServiceFreezeFilesystemsR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18253,10 +18576,12 @@ func (p *vmServiceGetRequest) Send() (*vmServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18357,10 +18682,12 @@ func (p *vmServiceLogonRequest) Send() (*vmServiceLogonResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18452,10 +18779,12 @@ func (p *vmServiceMaintenanceRequest) Send() (*vmServiceMaintenanceResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18561,10 +18890,12 @@ func (p *vmServiceMigrateRequest) Send() (*vmServiceMigrateResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18677,10 +19008,12 @@ func (p *vmServicePreviewSnapshotRequest) Send() (*vmServicePreviewSnapshotRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18765,10 +19098,12 @@ func (p *vmServiceRebootRequest) Send() (*vmServiceRebootResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18867,10 +19202,12 @@ func (p *vmServiceRemoveRequest) Send() (*vmServiceRemoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -18958,10 +19295,12 @@ func (p *vmServiceReorderMacAddressesRequest) Send() (*vmServiceReorderMacAddres
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -19046,10 +19385,12 @@ func (p *vmServiceShutdownRequest) Send() (*vmServiceShutdownResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -19169,10 +19510,12 @@ func (p *vmServiceStartRequest) Send() (*vmServiceStartResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -19257,10 +19600,12 @@ func (p *vmServiceStopRequest) Send() (*vmServiceStopResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -19345,10 +19690,12 @@ func (p *vmServiceSuspendRequest) Send() (*vmServiceSuspendResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -19433,10 +19780,12 @@ func (p *vmServiceThawFilesystemsRequest) Send() (*vmServiceThawFilesystemsRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -19528,10 +19877,12 @@ func (p *vmServiceTicketRequest) Send() (*vmServiceTicketResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -19625,10 +19976,12 @@ func (p *vmServiceUndoSnapshotRequest) Send() (*vmServiceUndoSnapshotResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -19730,10 +20083,12 @@ func (p *vmServiceUpdateRequest) Send() (*vmServiceUpdateResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmService.connection.username, p.vmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmService.connection.client.Do(req)
 	if err != nil {
@@ -20055,10 +20410,12 @@ func (p *instanceTypeGraphicsConsolesServiceAddRequest) Send() (*instanceTypeGra
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeGraphicsConsolesService.connection.username, p.instanceTypeGraphicsConsolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeGraphicsConsolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeGraphicsConsolesService.connection.client.Do(req)
 	if err != nil {
@@ -20153,10 +20510,12 @@ func (p *instanceTypeGraphicsConsolesServiceListRequest) Send() (*instanceTypeGr
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeGraphicsConsolesService.connection.username, p.instanceTypeGraphicsConsolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeGraphicsConsolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeGraphicsConsolesService.connection.client.Do(req)
 	if err != nil {
@@ -20279,10 +20638,12 @@ func (p *storageDomainVmServiceGetRequest) Send() (*storageDomainVmServiceGetRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainVmService.connection.username, p.storageDomainVmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainVmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainVmService.connection.client.Do(req)
 	if err != nil {
@@ -20418,10 +20779,12 @@ func (p *storageDomainVmServiceImportRequest) Send() (*storageDomainVmServiceImp
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainVmService.connection.username, p.storageDomainVmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainVmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainVmService.connection.client.Do(req)
 	if err != nil {
@@ -20548,10 +20911,12 @@ func (p *storageDomainVmServiceRegisterRequest) Send() (*storageDomainVmServiceR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainVmService.connection.username, p.storageDomainVmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainVmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainVmService.connection.client.Do(req)
 	if err != nil {
@@ -20630,10 +20995,12 @@ func (p *storageDomainVmServiceRemoveRequest) Send() (*storageDomainVmServiceRem
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainVmService.connection.username, p.storageDomainVmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainVmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainVmService.connection.client.Do(req)
 	if err != nil {
@@ -20768,10 +21135,12 @@ func (p *clusterServiceGetRequest) Send() (*clusterServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.clusterService.connection.username, p.clusterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.clusterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.clusterService.connection.client.Do(req)
 	if err != nil {
@@ -20866,10 +21235,12 @@ func (p *clusterServiceRemoveRequest) Send() (*clusterServiceRemoveResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.clusterService.connection.username, p.clusterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.clusterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.clusterService.connection.client.Do(req)
 	if err != nil {
@@ -20957,10 +21328,12 @@ func (p *clusterServiceResetEmulatedMachineRequest) Send() (*clusterServiceReset
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.clusterService.connection.username, p.clusterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.clusterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.clusterService.connection.client.Do(req)
 	if err != nil {
@@ -21052,10 +21425,12 @@ func (p *clusterServiceUpdateRequest) Send() (*clusterServiceUpdateResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.clusterService.connection.username, p.clusterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.clusterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.clusterService.connection.client.Do(req)
 	if err != nil {
@@ -21268,10 +21643,12 @@ func (p *snapshotDisksServiceListRequest) Send() (*snapshotDisksServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotDisksService.connection.username, p.snapshotDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotDisksService.connection.client.Do(req)
 	if err != nil {
@@ -21406,10 +21783,12 @@ func (p *templateGraphicsConsolesServiceAddRequest) Send() (*templateGraphicsCon
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateGraphicsConsolesService.connection.username, p.templateGraphicsConsolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateGraphicsConsolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateGraphicsConsolesService.connection.client.Do(req)
 	if err != nil {
@@ -21504,10 +21883,12 @@ func (p *templateGraphicsConsolesServiceListRequest) Send() (*templateGraphicsCo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateGraphicsConsolesService.connection.username, p.templateGraphicsConsolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateGraphicsConsolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateGraphicsConsolesService.connection.client.Do(req)
 	if err != nil {
@@ -21647,10 +22028,12 @@ func (p *vmPoolServiceAllocateVmRequest) Send() (*vmPoolServiceAllocateVmRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmPoolService.connection.username, p.vmPoolService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmPoolService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmPoolService.connection.client.Do(req)
 	if err != nil {
@@ -21729,10 +22112,12 @@ func (p *vmPoolServiceGetRequest) Send() (*vmPoolServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmPoolService.connection.username, p.vmPoolService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmPoolService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmPoolService.connection.client.Do(req)
 	if err != nil {
@@ -21827,10 +22212,12 @@ func (p *vmPoolServiceRemoveRequest) Send() (*vmPoolServiceRemoveResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmPoolService.connection.username, p.vmPoolService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmPoolService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmPoolService.connection.client.Do(req)
 	if err != nil {
@@ -21925,10 +22312,12 @@ func (p *vmPoolServiceUpdateRequest) Send() (*vmPoolServiceUpdateResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmPoolService.connection.username, p.vmPoolService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmPoolService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmPoolService.connection.client.Do(req)
 	if err != nil {
@@ -22066,10 +22455,12 @@ func (p *quotasServiceAddRequest) Send() (*quotasServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotasService.connection.username, p.quotasService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotasService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotasService.connection.client.Do(req)
 	if err != nil {
@@ -22164,10 +22555,12 @@ func (p *quotasServiceListRequest) Send() (*quotasServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotasService.connection.username, p.quotasService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotasService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotasService.connection.client.Do(req)
 	if err != nil {
@@ -22291,10 +22684,12 @@ func (p *clusterLevelServiceGetRequest) Send() (*clusterLevelServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.clusterLevelService.connection.username, p.clusterLevelService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.clusterLevelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.clusterLevelService.connection.client.Do(req)
 	if err != nil {
@@ -22416,10 +22811,12 @@ func (p *storageDomainContentDiskServiceGetRequest) Send() (*storageDomainConten
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainContentDiskService.connection.username, p.storageDomainContentDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainContentDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainContentDiskService.connection.client.Do(req)
 	if err != nil {
@@ -22552,10 +22949,12 @@ func (p *vmApplicationsServiceListRequest) Send() (*vmApplicationsServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmApplicationsService.connection.username, p.vmApplicationsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmApplicationsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmApplicationsService.connection.client.Do(req)
 	if err != nil {
@@ -22712,10 +23111,12 @@ func (p *filesServiceListRequest) Send() (*filesServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.filesService.connection.username, p.filesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.filesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.filesService.connection.client.Do(req)
 	if err != nil {
@@ -22848,10 +23249,12 @@ func (p *affinityGroupVmServiceRemoveRequest) Send() (*affinityGroupVmServiceRem
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityGroupVmService.connection.username, p.affinityGroupVmService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityGroupVmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityGroupVmService.connection.client.Do(req)
 	if err != nil {
@@ -22963,10 +23366,12 @@ func (p *vmCdromServiceGetRequest) Send() (*vmCdromServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmCdromService.connection.username, p.vmCdromService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmCdromService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmCdromService.connection.client.Do(req)
 	if err != nil {
@@ -23074,10 +23479,12 @@ func (p *vmCdromServiceUpdateRequest) Send() (*vmCdromServiceUpdateResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmCdromService.connection.username, p.vmCdromService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmCdromService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmCdromService.connection.client.Do(req)
 	if err != nil {
@@ -23189,10 +23596,12 @@ func (p *quotaClusterLimitServiceGetRequest) Send() (*quotaClusterLimitServiceGe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaClusterLimitService.connection.username, p.quotaClusterLimitService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaClusterLimitService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaClusterLimitService.connection.client.Do(req)
 	if err != nil {
@@ -23287,10 +23696,12 @@ func (p *quotaClusterLimitServiceRemoveRequest) Send() (*quotaClusterLimitServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaClusterLimitService.connection.username, p.quotaClusterLimitService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaClusterLimitService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaClusterLimitService.connection.client.Do(req)
 	if err != nil {
@@ -23390,10 +23801,12 @@ func (p *diskAttachmentServiceGetRequest) Send() (*diskAttachmentServiceGetRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskAttachmentService.connection.username, p.diskAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -23488,10 +23901,12 @@ func (p *diskAttachmentServiceRemoveRequest) Send() (*diskAttachmentServiceRemov
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskAttachmentService.connection.username, p.diskAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -23576,10 +23991,12 @@ func (p *diskAttachmentServiceUpdateRequest) Send() (*diskAttachmentServiceUpdat
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskAttachmentService.connection.username, p.diskAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -23692,10 +24109,12 @@ func (p *bookmarkServiceGetRequest) Send() (*bookmarkServiceGetResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.bookmarkService.connection.username, p.bookmarkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.bookmarkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.bookmarkService.connection.client.Do(req)
 	if err != nil {
@@ -23790,10 +24209,12 @@ func (p *bookmarkServiceRemoveRequest) Send() (*bookmarkServiceRemoveResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.bookmarkService.connection.username, p.bookmarkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.bookmarkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.bookmarkService.connection.client.Do(req)
 	if err != nil {
@@ -23888,10 +24309,12 @@ func (p *bookmarkServiceUpdateRequest) Send() (*bookmarkServiceUpdateResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.bookmarkService.connection.username, p.bookmarkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.bookmarkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.bookmarkService.connection.client.Do(req)
 	if err != nil {
@@ -24003,10 +24426,12 @@ func (p *instanceTypeNicServiceGetRequest) Send() (*instanceTypeNicServiceGetRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeNicService.connection.username, p.instanceTypeNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeNicService.connection.client.Do(req)
 	if err != nil {
@@ -24101,10 +24526,12 @@ func (p *instanceTypeNicServiceRemoveRequest) Send() (*instanceTypeNicServiceRem
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeNicService.connection.username, p.instanceTypeNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeNicService.connection.client.Do(req)
 	if err != nil {
@@ -24199,10 +24626,12 @@ func (p *instanceTypeNicServiceUpdateRequest) Send() (*instanceTypeNicServiceUpd
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeNicService.connection.username, p.instanceTypeNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeNicService.connection.client.Do(req)
 	if err != nil {
@@ -24314,10 +24743,12 @@ func (p *assignedDiskProfileServiceGetRequest) Send() (*assignedDiskProfileServi
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedDiskProfileService.connection.username, p.assignedDiskProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedDiskProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedDiskProfileService.connection.client.Do(req)
 	if err != nil {
@@ -24412,10 +24843,12 @@ func (p *assignedDiskProfileServiceRemoveRequest) Send() (*assignedDiskProfileSe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedDiskProfileService.connection.username, p.assignedDiskProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedDiskProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedDiskProfileService.connection.client.Do(req)
 	if err != nil {
@@ -24527,10 +24960,12 @@ func (p *networkLabelsServiceAddRequest) Send() (*networkLabelsServiceAddRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkLabelsService.connection.username, p.networkLabelsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkLabelsService.connection.client.Do(req)
 	if err != nil {
@@ -24625,10 +25060,12 @@ func (p *networkLabelsServiceListRequest) Send() (*networkLabelsServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkLabelsService.connection.username, p.networkLabelsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkLabelsService.connection.client.Do(req)
 	if err != nil {
@@ -24760,10 +25197,12 @@ func (p *storageDomainServiceGetRequest) Send() (*storageDomainServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainService.connection.username, p.storageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -24871,10 +25310,12 @@ func (p *storageDomainServiceIsAttachedRequest) Send() (*storageDomainServiceIsA
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainService.connection.username, p.storageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -24969,10 +25410,12 @@ func (p *storageDomainServiceReduceLunsRequest) Send() (*storageDomainServiceRed
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainService.connection.username, p.storageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -25064,10 +25507,12 @@ func (p *storageDomainServiceRefreshLunsRequest) Send() (*storageDomainServiceRe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainService.connection.username, p.storageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -25176,10 +25621,12 @@ func (p *storageDomainServiceRemoveRequest) Send() (*storageDomainServiceRemoveR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainService.connection.username, p.storageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -25274,10 +25721,12 @@ func (p *storageDomainServiceUpdateRequest) Send() (*storageDomainServiceUpdateR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainService.connection.username, p.storageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -25378,10 +25827,12 @@ func (p *storageDomainServiceUpdateOvfStoreRequest) Send() (*storageDomainServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainService.connection.username, p.storageDomainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainService.connection.client.Do(req)
 	if err != nil {
@@ -25602,10 +26053,12 @@ func (p *dataCentersServiceAddRequest) Send() (*dataCentersServiceAddResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.dataCentersService.connection.username, p.dataCentersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.dataCentersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.dataCentersService.connection.client.Do(req)
 	if err != nil {
@@ -25730,10 +26183,12 @@ func (p *dataCentersServiceListRequest) Send() (*dataCentersServiceListResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.dataCentersService.connection.username, p.dataCentersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.dataCentersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.dataCentersService.connection.client.Do(req)
 	if err != nil {
@@ -25867,10 +26322,12 @@ func (p *vmApplicationServiceGetRequest) Send() (*vmApplicationServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmApplicationService.connection.username, p.vmApplicationService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmApplicationService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmApplicationService.connection.client.Do(req)
 	if err != nil {
@@ -25995,10 +26452,12 @@ func (p *quotaStorageLimitsServiceAddRequest) Send() (*quotaStorageLimitsService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaStorageLimitsService.connection.username, p.quotaStorageLimitsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaStorageLimitsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaStorageLimitsService.connection.client.Do(req)
 	if err != nil {
@@ -26093,10 +26552,12 @@ func (p *quotaStorageLimitsServiceListRequest) Send() (*quotaStorageLimitsServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaStorageLimitsService.connection.username, p.quotaStorageLimitsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaStorageLimitsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaStorageLimitsService.connection.client.Do(req)
 	if err != nil {
@@ -26218,10 +26679,12 @@ func (p *templateNicServiceGetRequest) Send() (*templateNicServiceGetResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateNicService.connection.username, p.templateNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateNicService.connection.client.Do(req)
 	if err != nil {
@@ -26316,10 +26779,12 @@ func (p *templateNicServiceRemoveRequest) Send() (*templateNicServiceRemoveRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateNicService.connection.username, p.templateNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateNicService.connection.client.Do(req)
 	if err != nil {
@@ -26414,10 +26879,12 @@ func (p *templateNicServiceUpdateRequest) Send() (*templateNicServiceUpdateRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateNicService.connection.username, p.templateNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateNicService.connection.client.Do(req)
 	if err != nil {
@@ -26544,10 +27011,12 @@ func (p *vmCdromsServiceListRequest) Send() (*vmCdromsServiceListResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmCdromsService.connection.username, p.vmCdromsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmCdromsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmCdromsService.connection.client.Do(req)
 	if err != nil {
@@ -26681,10 +27150,12 @@ func (p *vmSessionsServiceListRequest) Send() (*vmSessionsServiceListResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmSessionsService.connection.username, p.vmSessionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmSessionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmSessionsService.connection.client.Do(req)
 	if err != nil {
@@ -26823,10 +27294,12 @@ func (p *vmDiskServiceActivateRequest) Send() (*vmDiskServiceActivateResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDiskService.connection.username, p.vmDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDiskService.connection.client.Do(req)
 	if err != nil {
@@ -26911,10 +27384,12 @@ func (p *vmDiskServiceDeactivateRequest) Send() (*vmDiskServiceDeactivateRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDiskService.connection.username, p.vmDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDiskService.connection.client.Do(req)
 	if err != nil {
@@ -27006,10 +27481,12 @@ func (p *vmDiskServiceExportRequest) Send() (*vmDiskServiceExportResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDiskService.connection.username, p.vmDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDiskService.connection.client.Do(req)
 	if err != nil {
@@ -27078,10 +27555,12 @@ func (p *vmDiskServiceGetRequest) Send() (*vmDiskServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDiskService.connection.username, p.vmDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDiskService.connection.client.Do(req)
 	if err != nil {
@@ -27189,10 +27668,12 @@ func (p *vmDiskServiceMoveRequest) Send() (*vmDiskServiceMoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDiskService.connection.username, p.vmDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDiskService.connection.client.Do(req)
 	if err != nil {
@@ -27271,10 +27752,12 @@ func (p *vmDiskServiceRemoveRequest) Send() (*vmDiskServiceRemoveResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDiskService.connection.username, p.vmDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDiskService.connection.client.Do(req)
 	if err != nil {
@@ -27369,10 +27852,12 @@ func (p *vmDiskServiceUpdateRequest) Send() (*vmDiskServiceUpdateResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDiskService.connection.username, p.vmDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDiskService.connection.client.Do(req)
 	if err != nil {
@@ -27508,10 +27993,12 @@ func (p *storageServerConnectionServiceGetRequest) Send() (*storageServerConnect
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionService.connection.username, p.storageServerConnectionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionService.connection.client.Do(req)
 	if err != nil {
@@ -27616,10 +28103,12 @@ func (p *storageServerConnectionServiceRemoveRequest) Send() (*storageServerConn
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionService.connection.username, p.storageServerConnectionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionService.connection.client.Do(req)
 	if err != nil {
@@ -27724,10 +28213,12 @@ func (p *storageServerConnectionServiceUpdateRequest) Send() (*storageServerConn
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionService.connection.username, p.storageServerConnectionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionService.connection.client.Do(req)
 	if err != nil {
@@ -27856,10 +28347,12 @@ func (p *hostServiceActivateRequest) Send() (*hostServiceActivateResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -27951,10 +28444,12 @@ func (p *hostServiceApproveRequest) Send() (*hostServiceApproveResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28039,10 +28534,12 @@ func (p *hostServiceCommitNetConfigRequest) Send() (*hostServiceCommitNetConfigR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28141,10 +28638,12 @@ func (p *hostServiceDeactivateRequest) Send() (*hostServiceDeactivateResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28229,10 +28728,12 @@ func (p *hostServiceEnrollCertificateRequest) Send() (*hostServiceEnrollCertific
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28324,10 +28825,12 @@ func (p *hostServiceFenceRequest) Send() (*hostServiceFenceResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28421,10 +28924,12 @@ func (p *hostServiceForceSelectSpmRequest) Send() (*hostServiceForceSelectSpmRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28503,10 +29008,12 @@ func (p *hostServiceGetRequest) Send() (*hostServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28649,10 +29156,12 @@ func (p *hostServiceInstallRequest) Send() (*hostServiceInstallResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28744,10 +29253,12 @@ func (p *hostServiceIscsiDiscoverRequest) Send() (*hostServiceIscsiDiscoverRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28848,10 +29359,12 @@ func (p *hostServiceIscsiLoginRequest) Send() (*hostServiceIscsiLoginResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -28936,10 +29449,12 @@ func (p *hostServiceRefreshRequest) Send() (*hostServiceRefreshResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -29018,10 +29533,12 @@ func (p *hostServiceRemoveRequest) Send() (*hostServiceRemoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -29172,10 +29689,12 @@ func (p *hostServiceSetupNetworksRequest) Send() (*hostServiceSetupNetworksRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -29267,10 +29786,12 @@ func (p *hostServiceUnregisteredStorageDomainsDiscoverRequest) Send() (*hostServ
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -29371,10 +29892,12 @@ func (p *hostServiceUpdateRequest) Send() (*hostServiceUpdateResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -29475,10 +29998,12 @@ func (p *hostServiceUpgradeRequest) Send() (*hostServiceUpgradeResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -29556,10 +30081,12 @@ func (p *hostServiceUpgradeCheckRequest) Send() (*hostServiceUpgradeCheckRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostService.connection.username, p.hostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostService.connection.client.Do(req)
 	if err != nil {
@@ -29853,10 +30380,12 @@ func (p *externalProviderCertificatesServiceListRequest) Send() (*externalProvid
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalProviderCertificatesService.connection.username, p.externalProviderCertificatesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalProviderCertificatesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalProviderCertificatesService.connection.client.Do(req)
 	if err != nil {
@@ -29979,10 +30508,12 @@ func (p *vmHostDeviceServiceGetRequest) Send() (*vmHostDeviceServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmHostDeviceService.connection.username, p.vmHostDeviceService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmHostDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmHostDeviceService.connection.client.Do(req)
 	if err != nil {
@@ -30077,10 +30608,12 @@ func (p *vmHostDeviceServiceRemoveRequest) Send() (*vmHostDeviceServiceRemoveRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmHostDeviceService.connection.username, p.vmHostDeviceService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmHostDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmHostDeviceService.connection.client.Do(req)
 	if err != nil {
@@ -30180,10 +30713,12 @@ func (p *tagServiceGetRequest) Send() (*tagServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.tagService.connection.username, p.tagService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.tagService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.tagService.connection.client.Do(req)
 	if err != nil {
@@ -30278,10 +30813,12 @@ func (p *tagServiceRemoveRequest) Send() (*tagServiceRemoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.tagService.connection.username, p.tagService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.tagService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.tagService.connection.client.Do(req)
 	if err != nil {
@@ -30376,10 +30913,12 @@ func (p *tagServiceUpdateRequest) Send() (*tagServiceUpdateResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.tagService.connection.username, p.tagService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.tagService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.tagService.connection.client.Do(req)
 	if err != nil {
@@ -30501,10 +31040,12 @@ func (p *hostNumaNodesServiceListRequest) Send() (*hostNumaNodesServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostNumaNodesService.connection.username, p.hostNumaNodesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostNumaNodesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostNumaNodesService.connection.client.Do(req)
 	if err != nil {
@@ -30640,10 +31181,12 @@ func (p *assignedTagsServiceAddRequest) Send() (*assignedTagsServiceAddResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedTagsService.connection.username, p.assignedTagsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedTagsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedTagsService.connection.client.Do(req)
 	if err != nil {
@@ -30738,10 +31281,12 @@ func (p *assignedTagsServiceListRequest) Send() (*assignedTagsServiceListRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedTagsService.connection.username, p.assignedTagsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedTagsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedTagsService.connection.client.Do(req)
 	if err != nil {
@@ -30881,10 +31426,12 @@ func (p *jobServiceClearRequest) Send() (*jobServiceClearResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.jobService.connection.username, p.jobService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.jobService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.jobService.connection.client.Do(req)
 	if err != nil {
@@ -30983,10 +31530,12 @@ func (p *jobServiceEndRequest) Send() (*jobServiceEndResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.jobService.connection.username, p.jobService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.jobService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.jobService.connection.client.Do(req)
 	if err != nil {
@@ -31055,10 +31604,12 @@ func (p *jobServiceGetRequest) Send() (*jobServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.jobService.connection.username, p.jobService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.jobService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.jobService.connection.client.Do(req)
 	if err != nil {
@@ -31183,10 +31734,12 @@ func (p *fileServiceGetRequest) Send() (*fileServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.fileService.connection.username, p.fileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.fileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.fileService.connection.client.Do(req)
 	if err != nil {
@@ -31312,10 +31865,12 @@ func (p *stepsServiceAddRequest) Send() (*stepsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.stepsService.connection.username, p.stepsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.stepsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.stepsService.connection.client.Do(req)
 	if err != nil {
@@ -31410,10 +31965,12 @@ func (p *stepsServiceListRequest) Send() (*stepsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.stepsService.connection.username, p.stepsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.stepsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.stepsService.connection.client.Do(req)
 	if err != nil {
@@ -31536,10 +32093,12 @@ func (p *storageDomainServerConnectionServiceGetRequest) Send() (*storageDomainS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainServerConnectionService.connection.username, p.storageDomainServerConnectionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainServerConnectionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainServerConnectionService.connection.client.Do(req)
 	if err != nil {
@@ -31634,10 +32193,12 @@ func (p *storageDomainServerConnectionServiceRemoveRequest) Send() (*storageDoma
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainServerConnectionService.connection.username, p.storageDomainServerConnectionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainServerConnectionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainServerConnectionService.connection.client.Do(req)
 	if err != nil {
@@ -31750,10 +32311,12 @@ func (p *rolesServiceAddRequest) Send() (*rolesServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.rolesService.connection.username, p.rolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.rolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.rolesService.connection.client.Do(req)
 	if err != nil {
@@ -31848,10 +32411,12 @@ func (p *rolesServiceListRequest) Send() (*rolesServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.rolesService.connection.username, p.rolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.rolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.rolesService.connection.client.Do(req)
 	if err != nil {
@@ -32128,10 +32693,12 @@ func (p *imageTransferServiceExtendRequest) Send() (*imageTransferServiceExtendR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageTransferService.connection.username, p.imageTransferService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageTransferService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageTransferService.connection.client.Do(req)
 	if err != nil {
@@ -32209,10 +32776,12 @@ func (p *imageTransferServiceFinalizeRequest) Send() (*imageTransferServiceFinal
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageTransferService.connection.username, p.imageTransferService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageTransferService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageTransferService.connection.client.Do(req)
 	if err != nil {
@@ -32281,10 +32850,12 @@ func (p *imageTransferServiceGetRequest) Send() (*imageTransferServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageTransferService.connection.username, p.imageTransferService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageTransferService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageTransferService.connection.client.Do(req)
 	if err != nil {
@@ -32378,10 +32949,12 @@ func (p *imageTransferServicePauseRequest) Send() (*imageTransferServicePauseRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageTransferService.connection.username, p.imageTransferService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageTransferService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageTransferService.connection.client.Do(req)
 	if err != nil {
@@ -32459,10 +33032,12 @@ func (p *imageTransferServiceResumeRequest) Send() (*imageTransferServiceResumeR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageTransferService.connection.username, p.imageTransferService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageTransferService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageTransferService.connection.client.Do(req)
 	if err != nil {
@@ -32558,10 +33133,12 @@ func (p *assignedVnicProfileServiceGetRequest) Send() (*assignedVnicProfileServi
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedVnicProfileService.connection.username, p.assignedVnicProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedVnicProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedVnicProfileService.connection.client.Do(req)
 	if err != nil {
@@ -32656,10 +33233,12 @@ func (p *assignedVnicProfileServiceRemoveRequest) Send() (*assignedVnicProfileSe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedVnicProfileService.connection.username, p.assignedVnicProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedVnicProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedVnicProfileService.connection.client.Do(req)
 	if err != nil {
@@ -32770,10 +33349,12 @@ func (p *templateWatchdogServiceGetRequest) Send() (*templateWatchdogServiceGetR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateWatchdogService.connection.username, p.templateWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -32868,10 +33449,12 @@ func (p *templateWatchdogServiceRemoveRequest) Send() (*templateWatchdogServiceR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateWatchdogService.connection.username, p.templateWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -32966,10 +33549,12 @@ func (p *templateWatchdogServiceUpdateRequest) Send() (*templateWatchdogServiceU
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateWatchdogService.connection.username, p.templateWatchdogService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateWatchdogService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateWatchdogService.connection.client.Do(req)
 	if err != nil {
@@ -33081,10 +33666,12 @@ func (p *vmSessionServiceGetRequest) Send() (*vmSessionServiceGetResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmSessionService.connection.username, p.vmSessionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmSessionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmSessionService.connection.client.Do(req)
 	if err != nil {
@@ -33212,10 +33799,12 @@ func (p *vmNicServiceActivateRequest) Send() (*vmNicServiceActivateResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNicService.connection.username, p.vmNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNicService.connection.client.Do(req)
 	if err != nil {
@@ -33300,10 +33889,12 @@ func (p *vmNicServiceDeactivateRequest) Send() (*vmNicServiceDeactivateResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNicService.connection.username, p.vmNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNicService.connection.client.Do(req)
 	if err != nil {
@@ -33372,10 +33963,12 @@ func (p *vmNicServiceGetRequest) Send() (*vmNicServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNicService.connection.username, p.vmNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNicService.connection.client.Do(req)
 	if err != nil {
@@ -33470,10 +34063,12 @@ func (p *vmNicServiceRemoveRequest) Send() (*vmNicServiceRemoveResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNicService.connection.username, p.vmNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNicService.connection.client.Do(req)
 	if err != nil {
@@ -33568,10 +34163,12 @@ func (p *vmNicServiceUpdateRequest) Send() (*vmNicServiceUpdateResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNicService.connection.username, p.vmNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNicService.connection.client.Do(req)
 	if err != nil {
@@ -33734,10 +34331,12 @@ func (p *snapshotsServiceAddRequest) Send() (*snapshotsServiceAddResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotsService.connection.username, p.snapshotsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotsService.connection.client.Do(req)
 	if err != nil {
@@ -33842,10 +34441,12 @@ func (p *snapshotsServiceListRequest) Send() (*snapshotsServiceListResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotsService.connection.username, p.snapshotsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotsService.connection.client.Do(req)
 	if err != nil {
@@ -33968,10 +34569,12 @@ func (p *storageDomainVmDiskAttachmentsServiceListRequest) Send() (*storageDomai
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainVmDiskAttachmentsService.connection.username, p.storageDomainVmDiskAttachmentsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainVmDiskAttachmentsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainVmDiskAttachmentsService.connection.client.Do(req)
 	if err != nil {
@@ -34094,10 +34697,12 @@ func (p *imageServiceGetRequest) Send() (*imageServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageService.connection.username, p.imageService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageService.connection.client.Do(req)
 	if err != nil {
@@ -34233,10 +34838,12 @@ func (p *imageServiceImportRequest) Send() (*imageServiceImportResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imageService.connection.username, p.imageService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imageService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imageService.connection.client.Do(req)
 	if err != nil {
@@ -34345,10 +34952,12 @@ func (p *instanceTypeNicsServiceAddRequest) Send() (*instanceTypeNicsServiceAddR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeNicsService.connection.username, p.instanceTypeNicsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeNicsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeNicsService.connection.client.Do(req)
 	if err != nil {
@@ -34453,10 +35062,12 @@ func (p *instanceTypeNicsServiceListRequest) Send() (*instanceTypeNicsServiceLis
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeNicsService.connection.username, p.instanceTypeNicsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeNicsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeNicsService.connection.client.Do(req)
 	if err != nil {
@@ -34588,10 +35199,12 @@ func (p *operatingSystemsServiceListRequest) Send() (*operatingSystemsServiceLis
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.operatingSystemsService.connection.username, p.operatingSystemsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.operatingSystemsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.operatingSystemsService.connection.client.Do(req)
 	if err != nil {
@@ -34714,10 +35327,12 @@ func (p *hostNicServiceGetRequest) Send() (*hostNicServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostNicService.connection.username, p.hostNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostNicService.connection.client.Do(req)
 	if err != nil {
@@ -34825,10 +35440,12 @@ func (p *hostNicServiceUpdateVirtualFunctionsConfigurationRequest) Send() (*host
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostNicService.connection.username, p.hostNicService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostNicService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostNicService.connection.client.Do(req)
 	if err != nil {
@@ -35003,10 +35620,12 @@ func (p *iscsiBondsServiceAddRequest) Send() (*iscsiBondsServiceAddResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.iscsiBondsService.connection.username, p.iscsiBondsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.iscsiBondsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.iscsiBondsService.connection.client.Do(req)
 	if err != nil {
@@ -35101,10 +35720,12 @@ func (p *iscsiBondsServiceListRequest) Send() (*iscsiBondsServiceListResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.iscsiBondsService.connection.username, p.iscsiBondsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.iscsiBondsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.iscsiBondsService.connection.client.Do(req)
 	if err != nil {
@@ -35240,10 +35861,12 @@ func (p *usersServiceAddRequest) Send() (*usersServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.usersService.connection.username, p.usersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.usersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.usersService.connection.client.Do(req)
 	if err != nil {
@@ -35358,10 +35981,12 @@ func (p *usersServiceListRequest) Send() (*usersServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.usersService.connection.username, p.usersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.usersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.usersService.connection.client.Do(req)
 	if err != nil {
@@ -35496,10 +36121,12 @@ func (p *groupsServiceAddRequest) Send() (*groupsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.groupsService.connection.username, p.groupsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.groupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.groupsService.connection.client.Do(req)
 	if err != nil {
@@ -35614,10 +36241,12 @@ func (p *groupsServiceListRequest) Send() (*groupsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.groupsService.connection.username, p.groupsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.groupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.groupsService.connection.client.Do(req)
 	if err != nil {
@@ -35740,10 +36369,12 @@ func (p *domainServiceGetRequest) Send() (*domainServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.domainService.connection.username, p.domainService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.domainService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.domainService.connection.client.Do(req)
 	if err != nil {
@@ -35894,10 +36525,12 @@ func (p *sshPublicKeysServiceAddRequest) Send() (*sshPublicKeysServiceAddRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.sshPublicKeysService.connection.username, p.sshPublicKeysService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.sshPublicKeysService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.sshPublicKeysService.connection.client.Do(req)
 	if err != nil {
@@ -35992,10 +36625,12 @@ func (p *sshPublicKeysServiceListRequest) Send() (*sshPublicKeysServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.sshPublicKeysService.connection.username, p.sshPublicKeysService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.sshPublicKeysService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.sshPublicKeysService.connection.client.Do(req)
 	if err != nil {
@@ -36118,10 +36753,12 @@ func (p *domainUserServiceGetRequest) Send() (*domainUserServiceGetResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.domainUserService.connection.username, p.domainUserService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.domainUserService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.domainUserService.connection.client.Do(req)
 	if err != nil {
@@ -36237,10 +36874,12 @@ func (p *userServiceGetRequest) Send() (*userServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.userService.connection.username, p.userService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.userService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.userService.connection.client.Do(req)
 	if err != nil {
@@ -36335,10 +36974,12 @@ func (p *userServiceRemoveRequest) Send() (*userServiceRemoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.userService.connection.username, p.userService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.userService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.userService.connection.client.Do(req)
 	if err != nil {
@@ -36496,10 +37137,12 @@ func (p *domainsServiceListRequest) Send() (*domainsServiceListResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.domainsService.connection.username, p.domainsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.domainsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.domainsService.connection.client.Do(req)
 	if err != nil {
@@ -36653,10 +37296,12 @@ func (p *domainUsersServiceListRequest) Send() (*domainUsersServiceListResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.domainUsersService.connection.username, p.domainUsersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.domainUsersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.domainUsersService.connection.client.Do(req)
 	if err != nil {
@@ -36809,10 +37454,12 @@ func (p *domainGroupsServiceListRequest) Send() (*domainGroupsServiceListRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.domainGroupsService.connection.username, p.domainGroupsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.domainGroupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.domainGroupsService.connection.client.Do(req)
 	if err != nil {
@@ -36934,10 +37581,12 @@ func (p *groupServiceGetRequest) Send() (*groupServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.groupService.connection.username, p.groupService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.groupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.groupService.connection.client.Do(req)
 	if err != nil {
@@ -37032,10 +37681,12 @@ func (p *groupServiceRemoveRequest) Send() (*groupServiceRemoveResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.groupService.connection.username, p.groupService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.groupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.groupService.connection.client.Do(req)
 	if err != nil {
@@ -37170,10 +37821,12 @@ func (p *domainGroupServiceGetRequest) Send() (*domainGroupServiceGetResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.domainGroupService.connection.username, p.domainGroupService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.domainGroupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.domainGroupService.connection.client.Do(req)
 	if err != nil {
@@ -37285,10 +37938,12 @@ func (p *sshPublicKeyServiceGetRequest) Send() (*sshPublicKeyServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.sshPublicKeyService.connection.username, p.sshPublicKeyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.sshPublicKeyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.sshPublicKeyService.connection.client.Do(req)
 	if err != nil {
@@ -37383,10 +38038,12 @@ func (p *sshPublicKeyServiceRemoveRequest) Send() (*sshPublicKeyServiceRemoveRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.sshPublicKeyService.connection.username, p.sshPublicKeyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.sshPublicKeyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.sshPublicKeyService.connection.client.Do(req)
 	if err != nil {
@@ -37481,10 +38138,12 @@ func (p *sshPublicKeyServiceUpdateRequest) Send() (*sshPublicKeyServiceUpdateRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.sshPublicKeyService.connection.username, p.sshPublicKeyService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.sshPublicKeyService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.sshPublicKeyService.connection.client.Do(req)
 	if err != nil {
@@ -37596,10 +38255,12 @@ func (p *fenceAgentServiceGetRequest) Send() (*fenceAgentServiceGetResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.fenceAgentService.connection.username, p.fenceAgentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.fenceAgentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.fenceAgentService.connection.client.Do(req)
 	if err != nil {
@@ -37694,10 +38355,12 @@ func (p *fenceAgentServiceRemoveRequest) Send() (*fenceAgentServiceRemoveRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.fenceAgentService.connection.username, p.fenceAgentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.fenceAgentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.fenceAgentService.connection.client.Do(req)
 	if err != nil {
@@ -37792,10 +38455,12 @@ func (p *fenceAgentServiceUpdateRequest) Send() (*fenceAgentServiceUpdateRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.fenceAgentService.connection.username, p.fenceAgentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.fenceAgentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.fenceAgentService.connection.client.Do(req)
 	if err != nil {
@@ -37907,10 +38572,12 @@ func (p *macPoolServiceGetRequest) Send() (*macPoolServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.macPoolService.connection.username, p.macPoolService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.macPoolService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.macPoolService.connection.client.Do(req)
 	if err != nil {
@@ -38005,10 +38672,12 @@ func (p *macPoolServiceRemoveRequest) Send() (*macPoolServiceRemoveResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.macPoolService.connection.username, p.macPoolService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.macPoolService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.macPoolService.connection.client.Do(req)
 	if err != nil {
@@ -38103,10 +38772,12 @@ func (p *macPoolServiceUpdateRequest) Send() (*macPoolServiceUpdateResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.macPoolService.connection.username, p.macPoolService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.macPoolService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.macPoolService.connection.client.Do(req)
 	if err != nil {
@@ -38231,10 +38902,12 @@ func (p *assignedCpuProfilesServiceAddRequest) Send() (*assignedCpuProfilesServi
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedCpuProfilesService.connection.username, p.assignedCpuProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedCpuProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedCpuProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -38329,10 +39002,12 @@ func (p *assignedCpuProfilesServiceListRequest) Send() (*assignedCpuProfilesServ
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedCpuProfilesService.connection.username, p.assignedCpuProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedCpuProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedCpuProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -38467,10 +39142,12 @@ func (p *storageServerConnectionExtensionsServiceAddRequest) Send() (*storageSer
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionExtensionsService.connection.username, p.storageServerConnectionExtensionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionExtensionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionExtensionsService.connection.client.Do(req)
 	if err != nil {
@@ -38565,10 +39242,12 @@ func (p *storageServerConnectionExtensionsServiceListRequest) Send() (*storageSe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionExtensionsService.connection.username, p.storageServerConnectionExtensionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionExtensionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionExtensionsService.connection.client.Do(req)
 	if err != nil {
@@ -38690,10 +39369,12 @@ func (p *permissionServiceGetRequest) Send() (*permissionServiceGetResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.permissionService.connection.username, p.permissionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.permissionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.permissionService.connection.client.Do(req)
 	if err != nil {
@@ -38788,10 +39469,12 @@ func (p *permissionServiceRemoveRequest) Send() (*permissionServiceRemoveRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.permissionService.connection.username, p.permissionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.permissionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.permissionService.connection.client.Do(req)
 	if err != nil {
@@ -38890,10 +39573,12 @@ func (p *diskProfileServiceGetRequest) Send() (*diskProfileServiceGetResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskProfileService.connection.username, p.diskProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskProfileService.connection.client.Do(req)
 	if err != nil {
@@ -38988,10 +39673,12 @@ func (p *diskProfileServiceRemoveRequest) Send() (*diskProfileServiceRemoveRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskProfileService.connection.username, p.diskProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskProfileService.connection.client.Do(req)
 	if err != nil {
@@ -39086,10 +39773,12 @@ func (p *diskProfileServiceUpdateRequest) Send() (*diskProfileServiceUpdateRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskProfileService.connection.username, p.diskProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskProfileService.connection.client.Do(req)
 	if err != nil {
@@ -39214,10 +39903,12 @@ func (p *affinityGroupServiceGetRequest) Send() (*affinityGroupServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityGroupService.connection.username, p.affinityGroupService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityGroupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityGroupService.connection.client.Do(req)
 	if err != nil {
@@ -39312,10 +40003,12 @@ func (p *affinityGroupServiceRemoveRequest) Send() (*affinityGroupServiceRemoveR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityGroupService.connection.username, p.affinityGroupService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityGroupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityGroupService.connection.client.Do(req)
 	if err != nil {
@@ -39410,10 +40103,12 @@ func (p *affinityGroupServiceUpdateRequest) Send() (*affinityGroupServiceUpdateR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityGroupService.connection.username, p.affinityGroupService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityGroupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityGroupService.connection.client.Do(req)
 	if err != nil {
@@ -39550,10 +40245,12 @@ func (p *unmanagedNetworksServiceListRequest) Send() (*unmanagedNetworksServiceL
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.unmanagedNetworksService.connection.username, p.unmanagedNetworksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.unmanagedNetworksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.unmanagedNetworksService.connection.client.Do(req)
 	if err != nil {
@@ -39708,10 +40405,12 @@ func (p *vmsServiceAddRequest) Send() (*vmsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmsService.connection.username, p.vmsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmsService.connection.client.Do(req)
 	if err != nil {
@@ -39846,10 +40545,12 @@ func (p *vmsServiceListRequest) Send() (*vmsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmsService.connection.username, p.vmsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmsService.connection.client.Do(req)
 	if err != nil {
@@ -39971,10 +40672,12 @@ func (p *storageDomainTemplateServiceGetRequest) Send() (*storageDomainTemplateS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainTemplateService.connection.username, p.storageDomainTemplateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainTemplateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainTemplateService.connection.client.Do(req)
 	if err != nil {
@@ -40117,10 +40820,12 @@ func (p *storageDomainTemplateServiceImportRequest) Send() (*storageDomainTempla
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainTemplateService.connection.username, p.storageDomainTemplateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainTemplateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainTemplateService.connection.client.Do(req)
 	if err != nil {
@@ -40240,10 +40945,12 @@ func (p *storageDomainTemplateServiceRegisterRequest) Send() (*storageDomainTemp
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainTemplateService.connection.username, p.storageDomainTemplateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainTemplateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainTemplateService.connection.client.Do(req)
 	if err != nil {
@@ -40322,10 +41029,12 @@ func (p *storageDomainTemplateServiceRemoveRequest) Send() (*storageDomainTempla
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainTemplateService.connection.username, p.storageDomainTemplateService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainTemplateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainTemplateService.connection.client.Do(req)
 	if err != nil {
@@ -40450,10 +41159,12 @@ func (p *vmPoolsServiceAddRequest) Send() (*vmPoolsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmPoolsService.connection.username, p.vmPoolsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmPoolsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmPoolsService.connection.client.Do(req)
 	if err != nil {
@@ -40578,10 +41289,12 @@ func (p *vmPoolsServiceListRequest) Send() (*vmPoolsServiceListResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmPoolsService.connection.username, p.vmPoolsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmPoolsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmPoolsService.connection.client.Do(req)
 	if err != nil {
@@ -40717,10 +41430,12 @@ func (p *assignedDiskProfilesServiceAddRequest) Send() (*assignedDiskProfilesSer
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedDiskProfilesService.connection.username, p.assignedDiskProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedDiskProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedDiskProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -40815,10 +41530,12 @@ func (p *assignedDiskProfilesServiceListRequest) Send() (*assignedDiskProfilesSe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedDiskProfilesService.connection.username, p.assignedDiskProfilesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedDiskProfilesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedDiskProfilesService.connection.client.Do(req)
 	if err != nil {
@@ -40971,10 +41688,12 @@ func (p *stepServiceEndRequest) Send() (*stepServiceEndResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.stepService.connection.username, p.stepService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.stepService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.stepService.connection.client.Do(req)
 	if err != nil {
@@ -41043,10 +41762,12 @@ func (p *stepServiceGetRequest) Send() (*stepServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.stepService.connection.username, p.stepService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.stepService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.stepService.connection.client.Do(req)
 	if err != nil {
@@ -41194,10 +41915,12 @@ func (p *attachedStorageDomainDisksServiceAddRequest) Send() (*attachedStorageDo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDisksService.connection.username, p.attachedStorageDomainDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDisksService.connection.client.Do(req)
 	if err != nil {
@@ -41292,10 +42015,12 @@ func (p *attachedStorageDomainDisksServiceListRequest) Send() (*attachedStorageD
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDisksService.connection.username, p.attachedStorageDomainDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDisksService.connection.client.Do(req)
 	if err != nil {
@@ -41432,10 +42157,12 @@ func (p *networkFilterServiceGetRequest) Send() (*networkFilterServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkFilterService.connection.username, p.networkFilterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkFilterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkFilterService.connection.client.Do(req)
 	if err != nil {
@@ -41560,10 +42287,12 @@ func (p *vmDisksServiceAddRequest) Send() (*vmDisksServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDisksService.connection.username, p.vmDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDisksService.connection.client.Do(req)
 	if err != nil {
@@ -41658,10 +42387,12 @@ func (p *vmDisksServiceListRequest) Send() (*vmDisksServiceListResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmDisksService.connection.username, p.vmDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmDisksService.connection.client.Do(req)
 	if err != nil {
@@ -41799,10 +42530,12 @@ func (p *diskAttachmentsServiceAddRequest) Send() (*diskAttachmentsServiceAddRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskAttachmentsService.connection.username, p.diskAttachmentsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskAttachmentsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskAttachmentsService.connection.client.Do(req)
 	if err != nil {
@@ -41887,10 +42620,12 @@ func (p *diskAttachmentsServiceListRequest) Send() (*diskAttachmentsServiceListR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskAttachmentsService.connection.username, p.diskAttachmentsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskAttachmentsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskAttachmentsService.connection.client.Do(req)
 	if err != nil {
@@ -42041,10 +42776,12 @@ func (p *storageDomainDiskServiceCopyRequest) Send() (*storageDomainDiskServiceC
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDiskService.connection.username, p.storageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -42129,10 +42866,12 @@ func (p *storageDomainDiskServiceExportRequest) Send() (*storageDomainDiskServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDiskService.connection.username, p.storageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -42201,10 +42940,12 @@ func (p *storageDomainDiskServiceGetRequest) Send() (*storageDomainDiskServiceGe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDiskService.connection.username, p.storageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -42319,10 +43060,12 @@ func (p *storageDomainDiskServiceMoveRequest) Send() (*storageDomainDiskServiceM
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDiskService.connection.username, p.storageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -42391,10 +43134,12 @@ func (p *storageDomainDiskServiceRemoveRequest) Send() (*storageDomainDiskServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDiskService.connection.username, p.storageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -42475,10 +43220,12 @@ func (p *storageDomainDiskServiceSparsifyRequest) Send() (*storageDomainDiskServ
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDiskService.connection.username, p.storageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -42560,10 +43307,12 @@ func (p *storageDomainDiskServiceUpdateRequest) Send() (*storageDomainDiskServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDiskService.connection.username, p.storageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -42710,10 +43459,12 @@ func (p *hostHooksServiceListRequest) Send() (*hostHooksServiceListResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostHooksService.connection.username, p.hostHooksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostHooksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostHooksService.connection.client.Do(req)
 	if err != nil {
@@ -42848,10 +43599,12 @@ func (p *storageDomainsServiceAddRequest) Send() (*storageDomainsServiceAddRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainsService.connection.username, p.storageDomainsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainsService.connection.client.Do(req)
 	if err != nil {
@@ -42976,10 +43729,12 @@ func (p *storageDomainsServiceListRequest) Send() (*storageDomainsServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainsService.connection.username, p.storageDomainsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainsService.connection.client.Do(req)
 	if err != nil {
@@ -43101,10 +43856,12 @@ func (p *networkLabelServiceGetRequest) Send() (*networkLabelServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkLabelService.connection.username, p.networkLabelService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkLabelService.connection.client.Do(req)
 	if err != nil {
@@ -43199,10 +43956,12 @@ func (p *networkLabelServiceRemoveRequest) Send() (*networkLabelServiceRemoveRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkLabelService.connection.username, p.networkLabelService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkLabelService.connection.client.Do(req)
 	if err != nil {
@@ -43314,10 +44073,12 @@ func (p *instanceTypesServiceAddRequest) Send() (*instanceTypesServiceAddRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypesService.connection.username, p.instanceTypesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypesService.connection.client.Do(req)
 	if err != nil {
@@ -43432,10 +44193,12 @@ func (p *instanceTypesServiceListRequest) Send() (*instanceTypesServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypesService.connection.username, p.instanceTypesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypesService.connection.client.Do(req)
 	if err != nil {
@@ -43570,10 +44333,12 @@ func (p *storageDomainServerConnectionsServiceAddRequest) Send() (*storageDomain
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainServerConnectionsService.connection.username, p.storageDomainServerConnectionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainServerConnectionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainServerConnectionsService.connection.client.Do(req)
 	if err != nil {
@@ -43668,10 +44433,12 @@ func (p *storageDomainServerConnectionsServiceListRequest) Send() (*storageDomai
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainServerConnectionsService.connection.username, p.storageDomainServerConnectionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainServerConnectionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainServerConnectionsService.connection.client.Do(req)
 	if err != nil {
@@ -43793,10 +44560,12 @@ func (p *instanceTypeGraphicsConsoleServiceGetRequest) Send() (*instanceTypeGrap
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeGraphicsConsoleService.connection.username, p.instanceTypeGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -43891,10 +44660,12 @@ func (p *instanceTypeGraphicsConsoleServiceRemoveRequest) Send() (*instanceTypeG
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeGraphicsConsoleService.connection.username, p.instanceTypeGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -43993,10 +44764,12 @@ func (p *iscsiBondServiceGetRequest) Send() (*iscsiBondServiceGetResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.iscsiBondService.connection.username, p.iscsiBondService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.iscsiBondService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.iscsiBondService.connection.client.Do(req)
 	if err != nil {
@@ -44091,10 +44864,12 @@ func (p *iscsiBondServiceRemoveRequest) Send() (*iscsiBondServiceRemoveResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.iscsiBondService.connection.username, p.iscsiBondService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.iscsiBondService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.iscsiBondService.connection.client.Do(req)
 	if err != nil {
@@ -44189,10 +44964,12 @@ func (p *iscsiBondServiceUpdateRequest) Send() (*iscsiBondServiceUpdateResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.iscsiBondService.connection.username, p.iscsiBondService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.iscsiBondService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.iscsiBondService.connection.client.Do(req)
 	if err != nil {
@@ -44329,10 +45106,12 @@ func (p *templateDiskAttachmentServiceGetRequest) Send() (*templateDiskAttachmen
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateDiskAttachmentService.connection.username, p.templateDiskAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateDiskAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateDiskAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -44437,10 +45216,12 @@ func (p *templateDiskAttachmentServiceRemoveRequest) Send() (*templateDiskAttach
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateDiskAttachmentService.connection.username, p.templateDiskAttachmentService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateDiskAttachmentService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateDiskAttachmentService.connection.client.Do(req)
 	if err != nil {
@@ -44550,10 +45331,12 @@ func (p *hostStorageServiceListRequest) Send() (*hostStorageServiceListResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostStorageService.connection.username, p.hostStorageService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostStorageService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostStorageService.connection.client.Do(req)
 	if err != nil {
@@ -44686,10 +45469,12 @@ func (p *weightServiceGetRequest) Send() (*weightServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.weightService.connection.username, p.weightService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.weightService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.weightService.connection.client.Do(req)
 	if err != nil {
@@ -44784,10 +45569,12 @@ func (p *weightServiceRemoveRequest) Send() (*weightServiceRemoveResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.weightService.connection.username, p.weightService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.weightService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.weightService.connection.client.Do(req)
 	if err != nil {
@@ -44899,10 +45686,12 @@ func (p *vmNumaNodesServiceAddRequest) Send() (*vmNumaNodesServiceAddResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNumaNodesService.connection.username, p.vmNumaNodesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNumaNodesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNumaNodesService.connection.client.Do(req)
 	if err != nil {
@@ -44997,10 +45786,12 @@ func (p *vmNumaNodesServiceListRequest) Send() (*vmNumaNodesServiceListResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNumaNodesService.connection.username, p.vmNumaNodesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNumaNodesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNumaNodesService.connection.client.Do(req)
 	if err != nil {
@@ -45135,10 +45926,12 @@ func (p *templateWatchdogsServiceAddRequest) Send() (*templateWatchdogsServiceAd
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateWatchdogsService.connection.username, p.templateWatchdogsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateWatchdogsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateWatchdogsService.connection.client.Do(req)
 	if err != nil {
@@ -45233,10 +46026,12 @@ func (p *templateWatchdogsServiceListRequest) Send() (*templateWatchdogsServiceL
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateWatchdogsService.connection.username, p.templateWatchdogsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateWatchdogsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateWatchdogsService.connection.client.Do(req)
 	if err != nil {
@@ -45386,10 +46181,12 @@ func (p *attachedStorageDomainDiskServiceCopyRequest) Send() (*attachedStorageDo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDiskService.connection.username, p.attachedStorageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -45474,10 +46271,12 @@ func (p *attachedStorageDomainDiskServiceExportRequest) Send() (*attachedStorage
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDiskService.connection.username, p.attachedStorageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -45546,10 +46345,12 @@ func (p *attachedStorageDomainDiskServiceGetRequest) Send() (*attachedStorageDom
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDiskService.connection.username, p.attachedStorageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -45664,10 +46465,12 @@ func (p *attachedStorageDomainDiskServiceMoveRequest) Send() (*attachedStorageDo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDiskService.connection.username, p.attachedStorageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -45745,10 +46548,12 @@ func (p *attachedStorageDomainDiskServiceRegisterRequest) Send() (*attachedStora
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDiskService.connection.username, p.attachedStorageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -45817,10 +46622,12 @@ func (p *attachedStorageDomainDiskServiceRemoveRequest) Send() (*attachedStorage
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDiskService.connection.username, p.attachedStorageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -45901,10 +46708,12 @@ func (p *attachedStorageDomainDiskServiceSparsifyRequest) Send() (*attachedStora
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDiskService.connection.username, p.attachedStorageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -45986,10 +46795,12 @@ func (p *attachedStorageDomainDiskServiceUpdateRequest) Send() (*attachedStorage
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.attachedStorageDomainDiskService.connection.username, p.attachedStorageDomainDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.attachedStorageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.attachedStorageDomainDiskService.connection.client.Do(req)
 	if err != nil {
@@ -46127,10 +46938,12 @@ func (p *vnicProfileServiceGetRequest) Send() (*vnicProfileServiceGetResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vnicProfileService.connection.username, p.vnicProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vnicProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vnicProfileService.connection.client.Do(req)
 	if err != nil {
@@ -46225,10 +47038,12 @@ func (p *vnicProfileServiceRemoveRequest) Send() (*vnicProfileServiceRemoveRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vnicProfileService.connection.username, p.vnicProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vnicProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vnicProfileService.connection.client.Do(req)
 	if err != nil {
@@ -46323,10 +47138,12 @@ func (p *vnicProfileServiceUpdateRequest) Send() (*vnicProfileServiceUpdateRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vnicProfileService.connection.username, p.vnicProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vnicProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vnicProfileService.connection.client.Do(req)
 	if err != nil {
@@ -46463,10 +47280,12 @@ func (p *vmGraphicsConsolesServiceAddRequest) Send() (*vmGraphicsConsolesService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmGraphicsConsolesService.connection.username, p.vmGraphicsConsolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmGraphicsConsolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmGraphicsConsolesService.connection.client.Do(req)
 	if err != nil {
@@ -46571,10 +47390,12 @@ func (p *vmGraphicsConsolesServiceListRequest) Send() (*vmGraphicsConsolesServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmGraphicsConsolesService.connection.username, p.vmGraphicsConsolesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmGraphicsConsolesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmGraphicsConsolesService.connection.client.Do(req)
 	if err != nil {
@@ -46698,10 +47519,12 @@ func (p *permitServiceGetRequest) Send() (*permitServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.permitService.connection.username, p.permitService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.permitService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.permitService.connection.client.Do(req)
 	if err != nil {
@@ -46796,10 +47619,12 @@ func (p *permitServiceRemoveRequest) Send() (*permitServiceRemoveResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.permitService.connection.username, p.permitService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.permitService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.permitService.connection.client.Do(req)
 	if err != nil {
@@ -46909,10 +47734,12 @@ func (p *dataCenterServiceGetRequest) Send() (*dataCenterServiceGetResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.dataCenterService.connection.username, p.dataCenterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.dataCenterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.dataCenterService.connection.client.Do(req)
 	if err != nil {
@@ -47017,10 +47844,12 @@ func (p *dataCenterServiceRemoveRequest) Send() (*dataCenterServiceRemoveRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.dataCenterService.connection.username, p.dataCenterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.dataCenterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.dataCenterService.connection.client.Do(req)
 	if err != nil {
@@ -47115,10 +47944,12 @@ func (p *dataCenterServiceUpdateRequest) Send() (*dataCenterServiceUpdateRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.dataCenterService.connection.username, p.dataCenterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.dataCenterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.dataCenterService.connection.client.Do(req)
 	if err != nil {
@@ -47347,10 +48178,12 @@ func (p *statisticsServiceListRequest) Send() (*statisticsServiceListResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.statisticsService.connection.username, p.statisticsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.statisticsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.statisticsService.connection.client.Do(req)
 	if err != nil {
@@ -47492,10 +48325,12 @@ func (p *schedulingPolicyUnitsServiceListRequest) Send() (*schedulingPolicyUnits
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.schedulingPolicyUnitsService.connection.username, p.schedulingPolicyUnitsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.schedulingPolicyUnitsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.schedulingPolicyUnitsService.connection.client.Do(req)
 	if err != nil {
@@ -47640,10 +48475,12 @@ func (p *templateDiskServiceCopyRequest) Send() (*templateDiskServiceCopyRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateDiskService.connection.username, p.templateDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateDiskService.connection.client.Do(req)
 	if err != nil {
@@ -47735,10 +48572,12 @@ func (p *templateDiskServiceExportRequest) Send() (*templateDiskServiceExportRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateDiskService.connection.username, p.templateDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateDiskService.connection.client.Do(req)
 	if err != nil {
@@ -47807,10 +48646,12 @@ func (p *templateDiskServiceGetRequest) Send() (*templateDiskServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateDiskService.connection.username, p.templateDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateDiskService.connection.client.Do(req)
 	if err != nil {
@@ -47905,10 +48746,12 @@ func (p *templateDiskServiceRemoveRequest) Send() (*templateDiskServiceRemoveRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateDiskService.connection.username, p.templateDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateDiskService.connection.client.Do(req)
 	if err != nil {
@@ -48023,10 +48866,12 @@ func (p *affinityLabelVmsServiceAddRequest) Send() (*affinityLabelVmsServiceAddR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelVmsService.connection.username, p.affinityLabelVmsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelVmsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelVmsService.connection.client.Do(req)
 	if err != nil {
@@ -48111,10 +48956,12 @@ func (p *affinityLabelVmsServiceListRequest) Send() (*affinityLabelVmsServiceLis
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelVmsService.connection.username, p.affinityLabelVmsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelVmsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelVmsService.connection.client.Do(req)
 	if err != nil {
@@ -48254,10 +49101,12 @@ func (p *copyableServiceCopyRequest) Send() (*copyableServiceCopyResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.copyableService.connection.username, p.copyableService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.copyableService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.copyableService.connection.client.Do(req)
 	if err != nil {
@@ -48367,10 +49216,12 @@ func (p *affinityLabelsServiceAddRequest) Send() (*affinityLabelsServiceAddRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelsService.connection.username, p.affinityLabelsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelsService.connection.client.Do(req)
 	if err != nil {
@@ -48465,10 +49316,12 @@ func (p *affinityLabelsServiceListRequest) Send() (*affinityLabelsServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelsService.connection.username, p.affinityLabelsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelsService.connection.client.Do(req)
 	if err != nil {
@@ -48601,10 +49454,12 @@ func (p *vmGraphicsConsoleServiceGetRequest) Send() (*vmGraphicsConsoleServiceGe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmGraphicsConsoleService.connection.username, p.vmGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -48705,10 +49560,12 @@ func (p *vmGraphicsConsoleServiceProxyTicketRequest) Send() (*vmGraphicsConsoleS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmGraphicsConsoleService.connection.username, p.vmGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -48795,10 +49652,12 @@ func (p *vmGraphicsConsoleServiceRemoteViewerConnectionFileRequest) Send() (*vmG
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmGraphicsConsoleService.connection.username, p.vmGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -48887,10 +49746,12 @@ func (p *vmGraphicsConsoleServiceRemoveRequest) Send() (*vmGraphicsConsoleServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmGraphicsConsoleService.connection.username, p.vmGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -48978,10 +49839,12 @@ func (p *vmGraphicsConsoleServiceTicketRequest) Send() (*vmGraphicsConsoleServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmGraphicsConsoleService.connection.username, p.vmGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -49089,10 +49952,12 @@ func (p *affinityLabelHostServiceGetRequest) Send() (*affinityLabelHostServiceGe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelHostService.connection.username, p.affinityLabelHostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelHostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelHostService.connection.client.Do(req)
 	if err != nil {
@@ -49177,10 +50042,12 @@ func (p *affinityLabelHostServiceRemoveRequest) Send() (*affinityLabelHostServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelHostService.connection.username, p.affinityLabelHostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelHostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelHostService.connection.client.Do(req)
 	if err != nil {
@@ -49280,10 +50147,12 @@ func (p *assignedTagServiceGetRequest) Send() (*assignedTagServiceGetResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedTagService.connection.username, p.assignedTagService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedTagService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedTagService.connection.client.Do(req)
 	if err != nil {
@@ -49378,10 +50247,12 @@ func (p *assignedTagServiceRemoveRequest) Send() (*assignedTagServiceRemoveRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedTagService.connection.username, p.assignedTagService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedTagService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedTagService.connection.client.Do(req)
 	if err != nil {
@@ -49518,10 +50389,12 @@ func (p *diskServiceCopyRequest) Send() (*diskServiceCopyResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskService.connection.username, p.diskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskService.connection.client.Do(req)
 	if err != nil {
@@ -49620,10 +50493,12 @@ func (p *diskServiceExportRequest) Send() (*diskServiceExportResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskService.connection.username, p.diskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskService.connection.client.Do(req)
 	if err != nil {
@@ -49692,10 +50567,12 @@ func (p *diskServiceGetRequest) Send() (*diskServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskService.connection.username, p.diskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskService.connection.client.Do(req)
 	if err != nil {
@@ -49810,10 +50687,12 @@ func (p *diskServiceMoveRequest) Send() (*diskServiceMoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskService.connection.username, p.diskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskService.connection.client.Do(req)
 	if err != nil {
@@ -49892,10 +50771,12 @@ func (p *diskServiceRemoveRequest) Send() (*diskServiceRemoveResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskService.connection.username, p.diskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskService.connection.client.Do(req)
 	if err != nil {
@@ -49976,10 +50857,12 @@ func (p *diskServiceSparsifyRequest) Send() (*diskServiceSparsifyResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskService.connection.username, p.diskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskService.connection.client.Do(req)
 	if err != nil {
@@ -50061,10 +50944,12 @@ func (p *diskServiceUpdateRequest) Send() (*diskServiceUpdateResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskService.connection.username, p.diskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskService.connection.client.Do(req)
 	if err != nil {
@@ -50203,10 +51088,12 @@ func (p *templateDiskAttachmentsServiceListRequest) Send() (*templateDiskAttachm
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateDiskAttachmentsService.connection.username, p.templateDiskAttachmentsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateDiskAttachmentsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateDiskAttachmentsService.connection.client.Do(req)
 	if err != nil {
@@ -50359,10 +51246,12 @@ func (p *storageDomainContentDisksServiceListRequest) Send() (*storageDomainCont
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainContentDisksService.connection.username, p.storageDomainContentDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainContentDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainContentDisksService.connection.client.Do(req)
 	if err != nil {
@@ -50495,10 +51384,12 @@ func (p *hostDevicesServiceListRequest) Send() (*hostDevicesServiceListResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostDevicesService.connection.username, p.hostDevicesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostDevicesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostDevicesService.connection.client.Do(req)
 	if err != nil {
@@ -50634,10 +51525,12 @@ func (p *assignedNetworksServiceAddRequest) Send() (*assignedNetworksServiceAddR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedNetworksService.connection.username, p.assignedNetworksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedNetworksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedNetworksService.connection.client.Do(req)
 	if err != nil {
@@ -50732,10 +51625,12 @@ func (p *assignedNetworksServiceListRequest) Send() (*assignedNetworksServiceLis
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedNetworksService.connection.username, p.assignedNetworksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedNetworksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedNetworksService.connection.client.Do(req)
 	if err != nil {
@@ -50867,10 +51762,12 @@ func (p *storageServiceGetRequest) Send() (*storageServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageService.connection.username, p.storageService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageService.connection.client.Do(req)
 	if err != nil {
@@ -50982,10 +51879,12 @@ func (p *unmanagedNetworkServiceGetRequest) Send() (*unmanagedNetworkServiceGetR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.unmanagedNetworkService.connection.username, p.unmanagedNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.unmanagedNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.unmanagedNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -51080,10 +51979,12 @@ func (p *unmanagedNetworkServiceRemoveRequest) Send() (*unmanagedNetworkServiceR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.unmanagedNetworkService.connection.username, p.unmanagedNetworkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.unmanagedNetworkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.unmanagedNetworkService.connection.client.Do(req)
 	if err != nil {
@@ -51182,10 +52083,12 @@ func (p *quotaServiceGetRequest) Send() (*quotaServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaService.connection.username, p.quotaService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaService.connection.client.Do(req)
 	if err != nil {
@@ -51280,10 +52183,12 @@ func (p *quotaServiceRemoveRequest) Send() (*quotaServiceRemoveResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaService.connection.username, p.quotaService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaService.connection.client.Do(req)
 	if err != nil {
@@ -51378,10 +52283,12 @@ func (p *quotaServiceUpdateRequest) Send() (*quotaServiceUpdateResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.quotaService.connection.username, p.quotaService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.quotaService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.quotaService.connection.client.Do(req)
 	if err != nil {
@@ -51529,10 +52436,12 @@ func (p *snapshotDiskServiceGetRequest) Send() (*snapshotDiskServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotDiskService.connection.username, p.snapshotDiskService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotDiskService.connection.client.Do(req)
 	if err != nil {
@@ -51657,10 +52566,12 @@ func (p *qossServiceAddRequest) Send() (*qossServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.qossService.connection.username, p.qossService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.qossService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.qossService.connection.client.Do(req)
 	if err != nil {
@@ -51755,10 +52666,12 @@ func (p *qossServiceListRequest) Send() (*qossServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.qossService.connection.username, p.qossService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.qossService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.qossService.connection.client.Do(req)
 	if err != nil {
@@ -51881,10 +52794,12 @@ func (p *networkServiceGetRequest) Send() (*networkServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkService.connection.username, p.networkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkService.connection.client.Do(req)
 	if err != nil {
@@ -51979,10 +52894,12 @@ func (p *networkServiceRemoveRequest) Send() (*networkServiceRemoveResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkService.connection.username, p.networkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkService.connection.client.Do(req)
 	if err != nil {
@@ -52077,10 +52994,12 @@ func (p *networkServiceUpdateRequest) Send() (*networkServiceUpdateResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkService.connection.username, p.networkService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkService.connection.client.Do(req)
 	if err != nil {
@@ -52231,10 +53150,12 @@ func (p *instanceTypeServiceGetRequest) Send() (*instanceTypeServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeService.connection.username, p.instanceTypeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeService.connection.client.Do(req)
 	if err != nil {
@@ -52329,10 +53250,12 @@ func (p *instanceTypeServiceRemoveRequest) Send() (*instanceTypeServiceRemoveRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeService.connection.username, p.instanceTypeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeService.connection.client.Do(req)
 	if err != nil {
@@ -52427,10 +53350,12 @@ func (p *instanceTypeServiceUpdateRequest) Send() (*instanceTypeServiceUpdateRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeService.connection.username, p.instanceTypeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeService.connection.client.Do(req)
 	if err != nil {
@@ -52595,10 +53520,12 @@ func (p *virtualFunctionAllowedNetworksServiceAddRequest) Send() (*virtualFuncti
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.virtualFunctionAllowedNetworksService.connection.username, p.virtualFunctionAllowedNetworksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.virtualFunctionAllowedNetworksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.virtualFunctionAllowedNetworksService.connection.client.Do(req)
 	if err != nil {
@@ -52693,10 +53620,12 @@ func (p *virtualFunctionAllowedNetworksServiceListRequest) Send() (*virtualFunct
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.virtualFunctionAllowedNetworksService.connection.username, p.virtualFunctionAllowedNetworksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.virtualFunctionAllowedNetworksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.virtualFunctionAllowedNetworksService.connection.client.Do(req)
 	if err != nil {
@@ -52818,10 +53747,12 @@ func (p *hostHookServiceGetRequest) Send() (*hostHookServiceGetResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostHookService.connection.username, p.hostHookService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostHookService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostHookService.connection.client.Do(req)
 	if err != nil {
@@ -52943,10 +53874,12 @@ func (p *imagesServiceListRequest) Send() (*imagesServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.imagesService.connection.username, p.imagesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.imagesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.imagesService.connection.client.Do(req)
 	if err != nil {
@@ -53078,10 +54011,12 @@ func (p *snapshotCdromsServiceListRequest) Send() (*snapshotCdromsServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotCdromsService.connection.username, p.snapshotCdromsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotCdromsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotCdromsService.connection.client.Do(req)
 	if err != nil {
@@ -53216,10 +54151,12 @@ func (p *balancesServiceAddRequest) Send() (*balancesServiceAddResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.balancesService.connection.username, p.balancesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.balancesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.balancesService.connection.client.Do(req)
 	if err != nil {
@@ -53324,10 +54261,12 @@ func (p *balancesServiceListRequest) Send() (*balancesServiceListResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.balancesService.connection.username, p.balancesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.balancesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.balancesService.connection.client.Do(req)
 	if err != nil {
@@ -53450,10 +54389,12 @@ func (p *templateCdromServiceGetRequest) Send() (*templateCdromServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateCdromService.connection.username, p.templateCdromService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateCdromService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateCdromService.connection.client.Do(req)
 	if err != nil {
@@ -53581,10 +54522,12 @@ func (p *moveableServiceMoveRequest) Send() (*moveableServiceMoveResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.moveableService.connection.username, p.moveableService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.moveableService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.moveableService.connection.client.Do(req)
 	if err != nil {
@@ -53680,10 +54623,12 @@ func (p *cpuProfileServiceGetRequest) Send() (*cpuProfileServiceGetResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.cpuProfileService.connection.username, p.cpuProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.cpuProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.cpuProfileService.connection.client.Do(req)
 	if err != nil {
@@ -53778,10 +54723,12 @@ func (p *cpuProfileServiceRemoveRequest) Send() (*cpuProfileServiceRemoveRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.cpuProfileService.connection.username, p.cpuProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.cpuProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.cpuProfileService.connection.client.Do(req)
 	if err != nil {
@@ -53876,10 +54823,12 @@ func (p *cpuProfileServiceUpdateRequest) Send() (*cpuProfileServiceUpdateRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.cpuProfileService.connection.username, p.cpuProfileService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.cpuProfileService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.cpuProfileService.connection.client.Do(req)
 	if err != nil {
@@ -54042,10 +54991,12 @@ func (p *storageServerConnectionExtensionServiceGetRequest) Send() (*storageServ
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionExtensionService.connection.username, p.storageServerConnectionExtensionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionExtensionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionExtensionService.connection.client.Do(req)
 	if err != nil {
@@ -54140,10 +55091,12 @@ func (p *storageServerConnectionExtensionServiceRemoveRequest) Send() (*storageS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionExtensionService.connection.username, p.storageServerConnectionExtensionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionExtensionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionExtensionService.connection.client.Do(req)
 	if err != nil {
@@ -54238,10 +55191,12 @@ func (p *storageServerConnectionExtensionServiceUpdateRequest) Send() (*storageS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionExtensionService.connection.username, p.storageServerConnectionExtensionService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionExtensionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionExtensionService.connection.client.Do(req)
 	if err != nil {
@@ -54356,10 +55311,12 @@ func (p *clusterLevelsServiceListRequest) Send() (*clusterLevelsServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.clusterLevelsService.connection.username, p.clusterLevelsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.clusterLevelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.clusterLevelsService.connection.client.Do(req)
 	if err != nil {
@@ -54496,10 +55453,12 @@ func (p *networkFilterParametersServiceAddRequest) Send() (*networkFilterParamet
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkFilterParametersService.connection.username, p.networkFilterParametersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkFilterParametersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkFilterParametersService.connection.client.Do(req)
 	if err != nil {
@@ -54584,10 +55543,12 @@ func (p *networkFilterParametersServiceListRequest) Send() (*networkFilterParame
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.networkFilterParametersService.connection.username, p.networkFilterParametersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.networkFilterParametersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.networkFilterParametersService.connection.client.Do(req)
 	if err != nil {
@@ -54723,10 +55684,12 @@ func (p *vmNicsServiceAddRequest) Send() (*vmNicsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNicsService.connection.username, p.vmNicsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNicsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNicsService.connection.client.Do(req)
 	if err != nil {
@@ -54821,10 +55784,12 @@ func (p *vmNicsServiceListRequest) Send() (*vmNicsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmNicsService.connection.username, p.vmNicsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmNicsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmNicsService.connection.client.Do(req)
 	if err != nil {
@@ -54956,10 +55921,12 @@ func (p *vmReportedDevicesServiceListRequest) Send() (*vmReportedDevicesServiceL
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.vmReportedDevicesService.connection.username, p.vmReportedDevicesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.vmReportedDevicesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.vmReportedDevicesService.connection.client.Do(req)
 	if err != nil {
@@ -55091,10 +56058,12 @@ func (p *balanceServiceGetRequest) Send() (*balanceServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.balanceService.connection.username, p.balanceService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.balanceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.balanceService.connection.client.Do(req)
 	if err != nil {
@@ -55189,10 +56158,12 @@ func (p *balanceServiceRemoveRequest) Send() (*balanceServiceRemoveResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.balanceService.connection.username, p.balanceService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.balanceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.balanceService.connection.client.Do(req)
 	if err != nil {
@@ -55305,10 +56276,12 @@ func (p *permitsServiceAddRequest) Send() (*permitsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.permitsService.connection.username, p.permitsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.permitsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.permitsService.connection.client.Do(req)
 	if err != nil {
@@ -55403,10 +56376,12 @@ func (p *permitsServiceListRequest) Send() (*permitsServiceListResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.permitsService.connection.username, p.permitsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.permitsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.permitsService.connection.client.Do(req)
 	if err != nil {
@@ -55539,10 +56514,12 @@ func (p *storageDomainTemplatesServiceListRequest) Send() (*storageDomainTemplat
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainTemplatesService.connection.username, p.storageDomainTemplatesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainTemplatesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainTemplatesService.connection.client.Do(req)
 	if err != nil {
@@ -55664,10 +56641,12 @@ func (p *systemServiceGetRequest) Send() (*systemServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.systemService.connection.username, p.systemService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.systemService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.systemService.connection.client.Do(req)
 	if err != nil {
@@ -55768,10 +56747,12 @@ func (p *systemServiceReloadConfigurationsRequest) Send() (*systemServiceReloadC
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.systemService.connection.username, p.systemService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.systemService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.systemService.connection.client.Do(req)
 	if err != nil {
@@ -56331,10 +57312,12 @@ func (p *externalHostServiceGetRequest) Send() (*externalHostServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostService.connection.username, p.externalHostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostService.connection.client.Do(req)
 	if err != nil {
@@ -56446,10 +57429,12 @@ func (p *externalHostGroupServiceGetRequest) Send() (*externalHostGroupServiceGe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostGroupService.connection.username, p.externalHostGroupService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostGroupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostGroupService.connection.client.Do(req)
 	if err != nil {
@@ -56562,10 +57547,12 @@ func (p *katelloErratumServiceGetRequest) Send() (*katelloErratumServiceGetRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.katelloErratumService.connection.username, p.katelloErratumService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.katelloErratumService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.katelloErratumService.connection.client.Do(req)
 	if err != nil {
@@ -56677,10 +57664,12 @@ func (p *externalDiscoveredHostServiceGetRequest) Send() (*externalDiscoveredHos
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalDiscoveredHostService.connection.username, p.externalDiscoveredHostService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalDiscoveredHostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalDiscoveredHostService.connection.client.Do(req)
 	if err != nil {
@@ -56804,10 +57793,12 @@ func (p *engineKatelloErrataServiceListRequest) Send() (*engineKatelloErrataServ
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.engineKatelloErrataService.connection.username, p.engineKatelloErrataService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.engineKatelloErrataService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.engineKatelloErrataService.connection.client.Do(req)
 	if err != nil {
@@ -56931,10 +57922,12 @@ func (p *externalComputeResourceServiceGetRequest) Send() (*externalComputeResou
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalComputeResourceService.connection.username, p.externalComputeResourceService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalComputeResourceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalComputeResourceService.connection.client.Do(req)
 	if err != nil {
@@ -57056,10 +58049,12 @@ func (p *externalHostGroupsServiceListRequest) Send() (*externalHostGroupsServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostGroupsService.connection.username, p.externalHostGroupsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostGroupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostGroupsService.connection.client.Do(req)
 	if err != nil {
@@ -57181,10 +58176,12 @@ func (p *externalHostProviderServiceGetRequest) Send() (*externalHostProviderSer
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostProviderService.connection.username, p.externalHostProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostProviderService.connection.client.Do(req)
 	if err != nil {
@@ -57285,10 +58282,12 @@ func (p *externalHostProviderServiceImportCertificatesRequest) Send() (*external
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostProviderService.connection.username, p.externalHostProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostProviderService.connection.client.Do(req)
 	if err != nil {
@@ -57367,10 +58366,12 @@ func (p *externalHostProviderServiceRemoveRequest) Send() (*externalHostProvider
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostProviderService.connection.username, p.externalHostProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostProviderService.connection.client.Do(req)
 	if err != nil {
@@ -57458,10 +58459,12 @@ func (p *externalHostProviderServiceTestConnectivityRequest) Send() (*externalHo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostProviderService.connection.username, p.externalHostProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostProviderService.connection.client.Do(req)
 	if err != nil {
@@ -57553,10 +58556,12 @@ func (p *externalHostProviderServiceUpdateRequest) Send() (*externalHostProvider
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostProviderService.connection.username, p.externalHostProviderService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostProviderService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostProviderService.connection.client.Do(req)
 	if err != nil {
@@ -57740,10 +58745,12 @@ func (p *katelloErrataServiceListRequest) Send() (*katelloErrataServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.katelloErrataService.connection.username, p.katelloErrataService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.katelloErrataService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.katelloErrataService.connection.client.Do(req)
 	if err != nil {
@@ -57877,10 +58884,12 @@ func (p *externalDiscoveredHostsServiceListRequest) Send() (*externalDiscoveredH
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalDiscoveredHostsService.connection.username, p.externalDiscoveredHostsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalDiscoveredHostsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalDiscoveredHostsService.connection.client.Do(req)
 	if err != nil {
@@ -58012,10 +59021,12 @@ func (p *externalHostsServiceListRequest) Send() (*externalHostsServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostsService.connection.username, p.externalHostsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostsService.connection.client.Do(req)
 	if err != nil {
@@ -58147,10 +59158,12 @@ func (p *externalComputeResourcesServiceListRequest) Send() (*externalComputeRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalComputeResourcesService.connection.username, p.externalComputeResourcesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalComputeResourcesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalComputeResourcesService.connection.client.Do(req)
 	if err != nil {
@@ -58285,10 +59298,12 @@ func (p *externalHostProvidersServiceAddRequest) Send() (*externalHostProvidersS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostProvidersService.connection.username, p.externalHostProvidersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostProvidersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostProvidersService.connection.client.Do(req)
 	if err != nil {
@@ -58383,10 +59398,12 @@ func (p *externalHostProvidersServiceListRequest) Send() (*externalHostProviders
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.externalHostProvidersService.connection.username, p.externalHostProvidersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.externalHostProvidersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.externalHostProvidersService.connection.client.Do(req)
 	if err != nil {
@@ -58509,10 +59526,12 @@ func (p *glusterBrickServiceGetRequest) Send() (*glusterBrickServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBrickService.connection.username, p.glusterBrickService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBrickService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBrickService.connection.client.Do(req)
 	if err != nil {
@@ -58607,10 +59626,12 @@ func (p *glusterBrickServiceRemoveRequest) Send() (*glusterBrickServiceRemoveRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBrickService.connection.username, p.glusterBrickService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBrickService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBrickService.connection.client.Do(req)
 	if err != nil {
@@ -58705,10 +59726,12 @@ func (p *glusterBrickServiceReplaceRequest) Send() (*glusterBrickServiceReplaceR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBrickService.connection.username, p.glusterBrickService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBrickService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBrickService.connection.client.Do(req)
 	if err != nil {
@@ -58830,10 +59853,12 @@ func (p *glusterVolumesServiceAddRequest) Send() (*glusterVolumesServiceAddRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumesService.connection.username, p.glusterVolumesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumesService.connection.client.Do(req)
 	if err != nil {
@@ -58948,10 +59973,12 @@ func (p *glusterVolumesServiceListRequest) Send() (*glusterVolumesServiceListRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumesService.connection.username, p.glusterVolumesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumesService.connection.client.Do(req)
 	if err != nil {
@@ -59075,10 +60102,12 @@ func (p *glusterVolumeServiceGetRequest) Send() (*glusterVolumeServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59172,10 +60201,12 @@ func (p *glusterVolumeServiceGetProfileStatisticsRequest) Send() (*glusterVolume
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59283,10 +60314,12 @@ func (p *glusterVolumeServiceRebalanceRequest) Send() (*glusterVolumeServiceReba
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59365,10 +60398,12 @@ func (p *glusterVolumeServiceRemoveRequest) Send() (*glusterVolumeServiceRemoveR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59456,10 +60491,12 @@ func (p *glusterVolumeServiceResetAllOptionsRequest) Send() (*glusterVolumeServi
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59558,10 +60595,12 @@ func (p *glusterVolumeServiceResetOptionRequest) Send() (*glusterVolumeServiceRe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59653,10 +60692,12 @@ func (p *glusterVolumeServiceSetOptionRequest) Send() (*glusterVolumeServiceSetO
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59748,10 +60789,12 @@ func (p *glusterVolumeServiceStartRequest) Send() (*glusterVolumeServiceStartRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59836,10 +60879,12 @@ func (p *glusterVolumeServiceStartProfileRequest) Send() (*glusterVolumeServiceS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -59931,10 +60976,12 @@ func (p *glusterVolumeServiceStopRequest) Send() (*glusterVolumeServiceStopRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -60019,10 +61066,12 @@ func (p *glusterVolumeServiceStopProfileRequest) Send() (*glusterVolumeServiceSt
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -60107,10 +61156,12 @@ func (p *glusterVolumeServiceStopRebalanceRequest) Send() (*glusterVolumeService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterVolumeService.connection.username, p.glusterVolumeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterVolumeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterVolumeService.connection.client.Do(req)
 	if err != nil {
@@ -60247,10 +61298,12 @@ func (p *glusterHookServiceDisableRequest) Send() (*glusterHookServiceDisableRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterHookService.connection.username, p.glusterHookService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterHookService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterHookService.connection.client.Do(req)
 	if err != nil {
@@ -60335,10 +61388,12 @@ func (p *glusterHookServiceEnableRequest) Send() (*glusterHookServiceEnableRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterHookService.connection.username, p.glusterHookService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterHookService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterHookService.connection.client.Do(req)
 	if err != nil {
@@ -60407,10 +61462,12 @@ func (p *glusterHookServiceGetRequest) Send() (*glusterHookServiceGetResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterHookService.connection.username, p.glusterHookService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterHookService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterHookService.connection.client.Do(req)
 	if err != nil {
@@ -60505,10 +61562,12 @@ func (p *glusterHookServiceRemoveRequest) Send() (*glusterHookServiceRemoveRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterHookService.connection.username, p.glusterHookService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterHookService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterHookService.connection.client.Do(req)
 	if err != nil {
@@ -60610,10 +61669,12 @@ func (p *glusterHookServiceResolveRequest) Send() (*glusterHookServiceResolveRes
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterHookService.connection.username, p.glusterHookService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterHookService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterHookService.connection.client.Do(req)
 	if err != nil {
@@ -60733,10 +61794,12 @@ func (p *glusterBricksServiceActivateRequest) Send() (*glusterBricksServiceActiv
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBricksService.connection.username, p.glusterBricksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBricksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBricksService.connection.client.Do(req)
 	if err != nil {
@@ -60838,10 +61901,12 @@ func (p *glusterBricksServiceAddRequest) Send() (*glusterBricksServiceAddRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBricksService.connection.username, p.glusterBricksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBricksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBricksService.connection.client.Do(req)
 	if err != nil {
@@ -60936,10 +62001,12 @@ func (p *glusterBricksServiceListRequest) Send() (*glusterBricksServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBricksService.connection.username, p.glusterBricksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBricksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBricksService.connection.client.Do(req)
 	if err != nil {
@@ -61047,10 +62114,12 @@ func (p *glusterBricksServiceMigrateRequest) Send() (*glusterBricksServiceMigrat
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBricksService.connection.username, p.glusterBricksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBricksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBricksService.connection.client.Do(req)
 	if err != nil {
@@ -61145,10 +62214,12 @@ func (p *glusterBricksServiceRemoveRequest) Send() (*glusterBricksServiceRemoveR
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBricksService.connection.username, p.glusterBricksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBricksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBricksService.connection.client.Do(req)
 	if err != nil {
@@ -61243,10 +62314,12 @@ func (p *glusterBricksServiceStopMigrateRequest) Send() (*glusterBricksServiceSt
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterBricksService.connection.username, p.glusterBricksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterBricksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterBricksService.connection.client.Do(req)
 	if err != nil {
@@ -61363,10 +62436,12 @@ func (p *glusterHooksServiceListRequest) Send() (*glusterHooksServiceListRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.glusterHooksService.connection.username, p.glusterHooksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.glusterHooksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.glusterHooksService.connection.client.Do(req)
 	if err != nil {
@@ -61502,10 +62577,12 @@ func (p *disksServiceAddRequest) Send() (*disksServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.disksService.connection.username, p.disksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.disksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.disksService.connection.client.Do(req)
 	if err != nil {
@@ -61620,10 +62697,12 @@ func (p *disksServiceListRequest) Send() (*disksServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.disksService.connection.username, p.disksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.disksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.disksService.connection.client.Do(req)
 	if err != nil {
@@ -61759,10 +62838,12 @@ func (p *instanceTypeWatchdogsServiceAddRequest) Send() (*instanceTypeWatchdogsS
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeWatchdogsService.connection.username, p.instanceTypeWatchdogsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeWatchdogsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeWatchdogsService.connection.client.Do(req)
 	if err != nil {
@@ -61867,10 +62948,12 @@ func (p *instanceTypeWatchdogsServiceListRequest) Send() (*instanceTypeWatchdogs
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.instanceTypeWatchdogsService.connection.username, p.instanceTypeWatchdogsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.instanceTypeWatchdogsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.instanceTypeWatchdogsService.connection.client.Do(req)
 	if err != nil {
@@ -62006,10 +63089,12 @@ func (p *jobsServiceAddRequest) Send() (*jobsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.jobsService.connection.username, p.jobsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.jobsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.jobsService.connection.client.Do(req)
 	if err != nil {
@@ -62104,10 +63189,12 @@ func (p *jobsServiceListRequest) Send() (*jobsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.jobsService.connection.username, p.jobsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.jobsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.jobsService.connection.client.Do(req)
 	if err != nil {
@@ -62241,10 +63328,12 @@ func (p *iconsServiceListRequest) Send() (*iconsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.iconsService.connection.username, p.iconsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.iconsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.iconsService.connection.client.Do(req)
 	if err != nil {
@@ -62391,10 +63480,12 @@ func (p *templatesServiceAddRequest) Send() (*templatesServiceAddResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templatesService.connection.username, p.templatesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templatesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templatesService.connection.client.Do(req)
 	if err != nil {
@@ -62519,10 +63610,12 @@ func (p *templatesServiceListRequest) Send() (*templatesServiceListResponse, err
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templatesService.connection.username, p.templatesService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templatesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templatesService.connection.client.Do(req)
 	if err != nil {
@@ -62655,10 +63748,12 @@ func (p *filterServiceGetRequest) Send() (*filterServiceGetResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.filterService.connection.username, p.filterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.filterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.filterService.connection.client.Do(req)
 	if err != nil {
@@ -62753,10 +63848,12 @@ func (p *filterServiceRemoveRequest) Send() (*filterServiceRemoveResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.filterService.connection.username, p.filterService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.filterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.filterService.connection.client.Do(req)
 	if err != nil {
@@ -62870,10 +63967,12 @@ func (p *assignedAffinityLabelsServiceAddRequest) Send() (*assignedAffinityLabel
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedAffinityLabelsService.connection.username, p.assignedAffinityLabelsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedAffinityLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedAffinityLabelsService.connection.client.Do(req)
 	if err != nil {
@@ -62958,10 +64057,12 @@ func (p *assignedAffinityLabelsServiceListRequest) Send() (*assignedAffinityLabe
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedAffinityLabelsService.connection.username, p.assignedAffinityLabelsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedAffinityLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedAffinityLabelsService.connection.client.Do(req)
 	if err != nil {
@@ -63085,10 +64186,12 @@ func (p *snapshotCdromServiceGetRequest) Send() (*snapshotCdromServiceGetRespons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.snapshotCdromService.connection.username, p.snapshotCdromService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.snapshotCdromService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.snapshotCdromService.connection.client.Do(req)
 	if err != nil {
@@ -63200,10 +64303,12 @@ func (p *hostNumaNodeServiceGetRequest) Send() (*hostNumaNodeServiceGetResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostNumaNodeService.connection.username, p.hostNumaNodeService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostNumaNodeService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostNumaNodeService.connection.client.Do(req)
 	if err != nil {
@@ -63327,10 +64432,12 @@ func (p *templateGraphicsConsoleServiceGetRequest) Send() (*templateGraphicsCons
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateGraphicsConsoleService.connection.username, p.templateGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -63425,10 +64532,12 @@ func (p *templateGraphicsConsoleServiceRemoveRequest) Send() (*templateGraphicsC
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.templateGraphicsConsoleService.connection.username, p.templateGraphicsConsoleService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.templateGraphicsConsoleService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.templateGraphicsConsoleService.connection.client.Do(req)
 	if err != nil {
@@ -63543,10 +64652,12 @@ func (p *affinityLabelHostsServiceAddRequest) Send() (*affinityLabelHostsService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelHostsService.connection.username, p.affinityLabelHostsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelHostsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelHostsService.connection.client.Do(req)
 	if err != nil {
@@ -63631,10 +64742,12 @@ func (p *affinityLabelHostsServiceListRequest) Send() (*affinityLabelHostsServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.affinityLabelHostsService.connection.username, p.affinityLabelHostsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.affinityLabelHostsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.affinityLabelHostsService.connection.client.Do(req)
 	if err != nil {
@@ -63768,10 +64881,12 @@ func (p *diskSnapshotsServiceListRequest) Send() (*diskSnapshotsServiceListRespo
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.diskSnapshotsService.connection.username, p.diskSnapshotsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.diskSnapshotsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.diskSnapshotsService.connection.client.Do(req)
 	if err != nil {
@@ -63928,10 +65043,12 @@ func (p *storageDomainVmsServiceListRequest) Send() (*storageDomainVmsServiceLis
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainVmsService.connection.username, p.storageDomainVmsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainVmsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainVmsService.connection.client.Do(req)
 	if err != nil {
@@ -64087,10 +65204,12 @@ func (p *hostsServiceAddRequest) Send() (*hostsServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostsService.connection.username, p.hostsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostsService.connection.client.Do(req)
 	if err != nil {
@@ -64215,10 +65334,12 @@ func (p *hostsServiceListRequest) Send() (*hostsServiceListResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.hostsService.connection.username, p.hostsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.hostsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.hostsService.connection.client.Do(req)
 	if err != nil {
@@ -64365,10 +65486,12 @@ func (p *storageDomainDisksServiceAddRequest) Send() (*storageDomainDisksService
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDisksService.connection.username, p.storageDomainDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDisksService.connection.client.Do(req)
 	if err != nil {
@@ -64463,10 +65586,12 @@ func (p *storageDomainDisksServiceListRequest) Send() (*storageDomainDisksServic
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageDomainDisksService.connection.username, p.storageDomainDisksService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageDomainDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageDomainDisksService.connection.client.Do(req)
 	if err != nil {
@@ -64602,10 +65727,12 @@ func (p *filtersServiceAddRequest) Send() (*filtersServiceAddResponse, error) {
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.filtersService.connection.username, p.filtersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.filtersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.filtersService.connection.client.Do(req)
 	if err != nil {
@@ -64710,10 +65837,12 @@ func (p *filtersServiceListRequest) Send() (*filtersServiceListResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.filtersService.connection.username, p.filtersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.filtersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.filtersService.connection.client.Do(req)
 	if err != nil {
@@ -64848,10 +65977,12 @@ func (p *storageServerConnectionsServiceAddRequest) Send() (*storageServerConnec
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionsService.connection.username, p.storageServerConnectionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionsService.connection.client.Do(req)
 	if err != nil {
@@ -64946,10 +66077,12 @@ func (p *storageServerConnectionsServiceListRequest) Send() (*storageServerConne
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.storageServerConnectionsService.connection.username, p.storageServerConnectionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.storageServerConnectionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.storageServerConnectionsService.connection.client.Do(req)
 	if err != nil {
@@ -65084,10 +66217,12 @@ func (p *fenceAgentsServiceAddRequest) Send() (*fenceAgentsServiceAddResponse, e
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.fenceAgentsService.connection.username, p.fenceAgentsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.fenceAgentsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.fenceAgentsService.connection.client.Do(req)
 	if err != nil {
@@ -65182,10 +66317,12 @@ func (p *fenceAgentsServiceListRequest) Send() (*fenceAgentsServiceListResponse,
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.fenceAgentsService.connection.username, p.fenceAgentsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.fenceAgentsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.fenceAgentsService.connection.client.Do(req)
 	if err != nil {
@@ -65321,10 +66458,12 @@ func (p *clustersServiceAddRequest) Send() (*clustersServiceAddResponse, error) 
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.clustersService.connection.username, p.clustersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.clustersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.clustersService.connection.client.Do(req)
 	if err != nil {
@@ -65449,10 +66588,12 @@ func (p *clustersServiceListRequest) Send() (*clustersServiceListResponse, error
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.clustersService.connection.username, p.clustersService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.clustersService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.clustersService.connection.client.Do(req)
 	if err != nil {
@@ -65589,10 +66730,12 @@ func (p *assignedPermissionsServiceAddRequest) Send() (*assignedPermissionsServi
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedPermissionsService.connection.username, p.assignedPermissionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedPermissionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedPermissionsService.connection.client.Do(req)
 	if err != nil {
@@ -65677,10 +66820,12 @@ func (p *assignedPermissionsServiceListRequest) Send() (*assignedPermissionsServ
 	req.Header.Add("Version", "4")
 	req.Header.Add("Content-Type", "application/xml")
 	req.Header.Add("Accept", "application/xml")
-	rawAuthStr := fmt.Sprintf("%s:%s", p.assignedPermissionsService.connection.username, p.assignedPermissionsService.connection.password)
-	// Generate base64(username:password)
-	auth := fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(rawAuthStr)))
-	req.Header.Add("Authorization", auth)
+	// get OAuth access token
+	token, err := p.assignedPermissionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
 	// Send the request and wait for the response
 	resp, err := p.assignedPermissionsService.connection.client.Do(req)
 	if err != nil {
