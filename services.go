@@ -9763,6 +9763,14 @@ func (p *snapshotServiceRestoreRequest) Disks(disks *DiskSlice) *snapshotService
 	return p
 }
 
+func (p *snapshotServiceRestoreRequest) DisksOfAny(anys ...Disk) *snapshotServiceRestoreRequest {
+	if p.disks == nil {
+		p.disks = new(DiskSlice)
+	}
+	p.disks.slice = append(p.disks.slice, anys...)
+	return p
+}
+
 func (p *snapshotServiceRestoreRequest) RestoreMemory(restoreMemory bool) *snapshotServiceRestoreRequest {
 	p.restoreMemory = &restoreMemory
 	return p
@@ -11339,6 +11347,14 @@ func (p *externalProviderServiceImportCertificatesRequest) Certificates(certific
 	return p
 }
 
+func (p *externalProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *externalProviderServiceImportCertificatesRequest {
+	if p.certificates == nil {
+		p.certificates = new(CertificateSlice)
+	}
+	p.certificates.slice = append(p.certificates.slice, anys...)
+	return p
+}
+
 func (p *externalProviderServiceImportCertificatesRequest) Send() (*externalProviderServiceImportCertificatesResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/importcertificates", p.externalProviderService.connection.URL(), p.externalProviderService.path)
 	actionBuilder := NewActionBuilder()
@@ -12719,6 +12735,14 @@ func (p *openstackImageProviderServiceImportCertificatesRequest) Query(key, valu
 
 func (p *openstackImageProviderServiceImportCertificatesRequest) Certificates(certificates *CertificateSlice) *openstackImageProviderServiceImportCertificatesRequest {
 	p.certificates = certificates
+	return p
+}
+
+func (p *openstackImageProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *openstackImageProviderServiceImportCertificatesRequest {
+	if p.certificates == nil {
+		p.certificates = new(CertificateSlice)
+	}
+	p.certificates.slice = append(p.certificates.slice, anys...)
 	return p
 }
 
@@ -14773,6 +14797,14 @@ func (p *openstackVolumeProviderServiceImportCertificatesRequest) Certificates(c
 	return p
 }
 
+func (p *openstackVolumeProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *openstackVolumeProviderServiceImportCertificatesRequest {
+	if p.certificates == nil {
+		p.certificates = new(CertificateSlice)
+	}
+	p.certificates.slice = append(p.certificates.slice, anys...)
+	return p
+}
+
 func (p *openstackVolumeProviderServiceImportCertificatesRequest) Send() (*openstackVolumeProviderServiceImportCertificatesResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/importcertificates", p.openstackVolumeProviderService.connection.URL(), p.openstackVolumeProviderService.path)
 	actionBuilder := NewActionBuilder()
@@ -16484,6 +16516,14 @@ func (p *openstackNetworkProviderServiceImportCertificatesRequest) Query(key, va
 
 func (p *openstackNetworkProviderServiceImportCertificatesRequest) Certificates(certificates *CertificateSlice) *openstackNetworkProviderServiceImportCertificatesRequest {
 	p.certificates = certificates
+	return p
+}
+
+func (p *openstackNetworkProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *openstackNetworkProviderServiceImportCertificatesRequest {
+	if p.certificates == nil {
+		p.certificates = new(CertificateSlice)
+	}
+	p.certificates.slice = append(p.certificates.slice, anys...)
 	return p
 }
 
@@ -18953,6 +18993,14 @@ func (p *vmServicePreviewSnapshotRequest) Disks(disks *DiskSlice) *vmServicePrev
 	return p
 }
 
+func (p *vmServicePreviewSnapshotRequest) DisksOfAny(anys ...Disk) *vmServicePreviewSnapshotRequest {
+	if p.disks == nil {
+		p.disks = new(DiskSlice)
+	}
+	p.disks.slice = append(p.disks.slice, anys...)
+	return p
+}
+
 func (p *vmServicePreviewSnapshotRequest) RestoreMemory(restoreMemory bool) *vmServicePreviewSnapshotRequest {
 	p.restoreMemory = &restoreMemory
 	return p
@@ -20866,6 +20914,14 @@ func (p *storageDomainVmServiceRegisterRequest) Vm(vm *Vm) *storageDomainVmServi
 
 func (p *storageDomainVmServiceRegisterRequest) VnicProfileMappings(vnicProfileMappings *VnicProfileMappingSlice) *storageDomainVmServiceRegisterRequest {
 	p.vnicProfileMappings = vnicProfileMappings
+	return p
+}
+
+func (p *storageDomainVmServiceRegisterRequest) VnicProfileMappingsOfAny(anys ...VnicProfileMapping) *storageDomainVmServiceRegisterRequest {
+	if p.vnicProfileMappings == nil {
+		p.vnicProfileMappings = new(VnicProfileMappingSlice)
+	}
+	p.vnicProfileMappings.slice = append(p.vnicProfileMappings.slice, anys...)
 	return p
 }
 
@@ -25374,6 +25430,14 @@ func (p *storageDomainServiceReduceLunsRequest) LogicalUnits(logicalUnits *Logic
 	return p
 }
 
+func (p *storageDomainServiceReduceLunsRequest) LogicalUnitsOfAny(anys ...LogicalUnit) *storageDomainServiceReduceLunsRequest {
+	if p.logicalUnits == nil {
+		p.logicalUnits = new(LogicalUnitSlice)
+	}
+	p.logicalUnits.slice = append(p.logicalUnits.slice, anys...)
+	return p
+}
+
 func (p *storageDomainServiceReduceLunsRequest) Send() (*storageDomainServiceReduceLunsResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/reduceluns", p.storageDomainService.connection.URL(), p.storageDomainService.path)
 	actionBuilder := NewActionBuilder()
@@ -25467,6 +25531,14 @@ func (p *storageDomainServiceRefreshLunsRequest) Async(async bool) *storageDomai
 
 func (p *storageDomainServiceRefreshLunsRequest) LogicalUnits(logicalUnits *LogicalUnitSlice) *storageDomainServiceRefreshLunsRequest {
 	p.logicalUnits = logicalUnits
+	return p
+}
+
+func (p *storageDomainServiceRefreshLunsRequest) LogicalUnitsOfAny(anys ...LogicalUnit) *storageDomainServiceRefreshLunsRequest {
+	if p.logicalUnits == nil {
+		p.logicalUnits = new(LogicalUnitSlice)
+	}
+	p.logicalUnits.slice = append(p.logicalUnits.slice, anys...)
 	return p
 }
 
@@ -29614,8 +29686,24 @@ func (p *hostServiceSetupNetworksRequest) ModifiedBonds(modifiedBonds *HostNicSl
 	return p
 }
 
+func (p *hostServiceSetupNetworksRequest) ModifiedBondsOfAny(anys ...HostNic) *hostServiceSetupNetworksRequest {
+	if p.modifiedBonds == nil {
+		p.modifiedBonds = new(HostNicSlice)
+	}
+	p.modifiedBonds.slice = append(p.modifiedBonds.slice, anys...)
+	return p
+}
+
 func (p *hostServiceSetupNetworksRequest) ModifiedLabels(modifiedLabels *NetworkLabelSlice) *hostServiceSetupNetworksRequest {
 	p.modifiedLabels = modifiedLabels
+	return p
+}
+
+func (p *hostServiceSetupNetworksRequest) ModifiedLabelsOfAny(anys ...NetworkLabel) *hostServiceSetupNetworksRequest {
+	if p.modifiedLabels == nil {
+		p.modifiedLabels = new(NetworkLabelSlice)
+	}
+	p.modifiedLabels.slice = append(p.modifiedLabels.slice, anys...)
 	return p
 }
 
@@ -29624,8 +29712,24 @@ func (p *hostServiceSetupNetworksRequest) ModifiedNetworkAttachments(modifiedNet
 	return p
 }
 
+func (p *hostServiceSetupNetworksRequest) ModifiedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *hostServiceSetupNetworksRequest {
+	if p.modifiedNetworkAttachments == nil {
+		p.modifiedNetworkAttachments = new(NetworkAttachmentSlice)
+	}
+	p.modifiedNetworkAttachments.slice = append(p.modifiedNetworkAttachments.slice, anys...)
+	return p
+}
+
 func (p *hostServiceSetupNetworksRequest) RemovedBonds(removedBonds *HostNicSlice) *hostServiceSetupNetworksRequest {
 	p.removedBonds = removedBonds
+	return p
+}
+
+func (p *hostServiceSetupNetworksRequest) RemovedBondsOfAny(anys ...HostNic) *hostServiceSetupNetworksRequest {
+	if p.removedBonds == nil {
+		p.removedBonds = new(HostNicSlice)
+	}
+	p.removedBonds.slice = append(p.removedBonds.slice, anys...)
 	return p
 }
 
@@ -29634,13 +29738,37 @@ func (p *hostServiceSetupNetworksRequest) RemovedLabels(removedLabels *NetworkLa
 	return p
 }
 
+func (p *hostServiceSetupNetworksRequest) RemovedLabelsOfAny(anys ...NetworkLabel) *hostServiceSetupNetworksRequest {
+	if p.removedLabels == nil {
+		p.removedLabels = new(NetworkLabelSlice)
+	}
+	p.removedLabels.slice = append(p.removedLabels.slice, anys...)
+	return p
+}
+
 func (p *hostServiceSetupNetworksRequest) RemovedNetworkAttachments(removedNetworkAttachments *NetworkAttachmentSlice) *hostServiceSetupNetworksRequest {
 	p.removedNetworkAttachments = removedNetworkAttachments
 	return p
 }
 
+func (p *hostServiceSetupNetworksRequest) RemovedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *hostServiceSetupNetworksRequest {
+	if p.removedNetworkAttachments == nil {
+		p.removedNetworkAttachments = new(NetworkAttachmentSlice)
+	}
+	p.removedNetworkAttachments.slice = append(p.removedNetworkAttachments.slice, anys...)
+	return p
+}
+
 func (p *hostServiceSetupNetworksRequest) SynchronizedNetworkAttachments(synchronizedNetworkAttachments *NetworkAttachmentSlice) *hostServiceSetupNetworksRequest {
 	p.synchronizedNetworkAttachments = synchronizedNetworkAttachments
+	return p
+}
+
+func (p *hostServiceSetupNetworksRequest) SynchronizedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *hostServiceSetupNetworksRequest {
+	if p.synchronizedNetworkAttachments == nil {
+		p.synchronizedNetworkAttachments = new(NetworkAttachmentSlice)
+	}
+	p.synchronizedNetworkAttachments.slice = append(p.synchronizedNetworkAttachments.slice, anys...)
 	return p
 }
 
@@ -58246,6 +58374,14 @@ func (p *externalHostProviderServiceImportCertificatesRequest) Certificates(cert
 	return p
 }
 
+func (p *externalHostProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *externalHostProviderServiceImportCertificatesRequest {
+	if p.certificates == nil {
+		p.certificates = new(CertificateSlice)
+	}
+	p.certificates.slice = append(p.certificates.slice, anys...)
+	return p
+}
+
 func (p *externalHostProviderServiceImportCertificatesRequest) Send() (*externalHostProviderServiceImportCertificatesResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/importcertificates", p.externalHostProviderService.connection.URL(), p.externalHostProviderService.path)
 	actionBuilder := NewActionBuilder()
@@ -61757,6 +61893,14 @@ func (p *glusterBricksServiceActivateRequest) Bricks(bricks *GlusterBrickSlice) 
 	return p
 }
 
+func (p *glusterBricksServiceActivateRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceActivateRequest {
+	if p.bricks == nil {
+		p.bricks = new(GlusterBrickSlice)
+	}
+	p.bricks.slice = append(p.bricks.slice, anys...)
+	return p
+}
+
 func (p *glusterBricksServiceActivateRequest) Send() (*glusterBricksServiceActivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/activate", p.glusterBricksService.connection.URL(), p.glusterBricksService.path)
 	actionBuilder := NewActionBuilder()
@@ -61847,6 +61991,14 @@ func (p *glusterBricksServiceAddRequest) Query(key, value string) *glusterBricks
 
 func (p *glusterBricksServiceAddRequest) Bricks(bricks *GlusterBrickSlice) *glusterBricksServiceAddRequest {
 	p.bricks = bricks
+	return p
+}
+
+func (p *glusterBricksServiceAddRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceAddRequest {
+	if p.bricks == nil {
+		p.bricks = new(GlusterBrickSlice)
+	}
+	p.bricks.slice = append(p.bricks.slice, anys...)
 	return p
 }
 
@@ -62077,6 +62229,14 @@ func (p *glusterBricksServiceMigrateRequest) Bricks(bricks *GlusterBrickSlice) *
 	return p
 }
 
+func (p *glusterBricksServiceMigrateRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceMigrateRequest {
+	if p.bricks == nil {
+		p.bricks = new(GlusterBrickSlice)
+	}
+	p.bricks.slice = append(p.bricks.slice, anys...)
+	return p
+}
+
 func (p *glusterBricksServiceMigrateRequest) Send() (*glusterBricksServiceMigrateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/migrate", p.glusterBricksService.connection.URL(), p.glusterBricksService.path)
 	actionBuilder := NewActionBuilder()
@@ -62172,6 +62332,14 @@ func (p *glusterBricksServiceRemoveRequest) Async(async bool) *glusterBricksServ
 
 func (p *glusterBricksServiceRemoveRequest) Bricks(bricks *GlusterBrickSlice) *glusterBricksServiceRemoveRequest {
 	p.bricks = bricks
+	return p
+}
+
+func (p *glusterBricksServiceRemoveRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceRemoveRequest {
+	if p.bricks == nil {
+		p.bricks = new(GlusterBrickSlice)
+	}
+	p.bricks.slice = append(p.bricks.slice, anys...)
 	return p
 }
 
@@ -62274,6 +62442,14 @@ func (p *glusterBricksServiceStopMigrateRequest) Async(async bool) *glusterBrick
 
 func (p *glusterBricksServiceStopMigrateRequest) Bricks(bricks *GlusterBrickSlice) *glusterBricksServiceStopMigrateRequest {
 	p.bricks = bricks
+	return p
+}
+
+func (p *glusterBricksServiceStopMigrateRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceStopMigrateRequest {
+	if p.bricks == nil {
+		p.bricks = new(GlusterBrickSlice)
+	}
+	p.bricks.slice = append(p.bricks.slice, anys...)
 	return p
 }
 
