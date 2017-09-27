@@ -41,15 +41,12 @@ func main() {
 	defer conn.Close()
 
 	vmsService := conn.SystemService().VmsService()
-
-	// Error not checked is not recommended
-	resp, _ := vmsService.List().Search("name=test4joey").Send()
-	vmSlice, _ := resp.Vms()
-	vmService := vmsService.VmService(vmSlice.Slice()[0].MustId())
+	// Use Must version methods to make a function call chain
+	vm := vmsService.List().Search("name=test4joey").MustSend().MustVms().Slice()[0]
+	vmService := vmsService.VmService(vm.MustId())
 	dasService := vmService.DiskAttachmentsService()
 
-	dasResp, _ := dasService.List().Send()
-	das, _ := dasResp.Attachments()
+	das := dasService.List().MustSend().MustAttachments()
 	for _, da := range das.Slice() {
 		disk, _ := conn.FollowLink(da.MustDisk())
 		if disk, ok := disk.(*ovirtsdk4.Disk); ok {

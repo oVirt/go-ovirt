@@ -114,8 +114,19 @@ func (c *Connection) FollowLink(object Href) (interface{}, error) {
 		requestCaller = serviceValue.MethodByName("Get").Call([]reflect.Value{})[0]
 	}
 	callerResponse := requestCaller.MethodByName("Send").Call([]reflect.Value{})[0]
-	// Method 0 could retrieve the data
-	returnedValues := callerResponse.Method(0).Call([]reflect.Value{})
+	// Get the method index, which is not the Must version
+	methodIndex := 0
+	callerResponseType := callerResponse.Type()
+	for i := 0; i < callerResponseType.NumMethod(); i++ {
+		if strings.HasPrefix(callerResponseType.Method(i).Name, "Must") {
+			methodIndex = i
+			break
+		}
+	}
+	methodIndex = 1 - methodIndex
+	// Retrieve the data
+	returnedValues := callerResponse.Method(methodIndex).Call([]reflect.Value{})
+
 	result, ok := returnedValues[0].Interface(), returnedValues[1].Bool()
 	if !ok {
 		return nil, errors.New("The data retrieved not exists")
