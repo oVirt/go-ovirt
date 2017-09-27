@@ -52,8 +52,6 @@ type Connection struct {
 	// SSO attributes
 	ssoToken     string
 	ssoTokenName string
-	ssoURL       *url.URL
-	ssoRevokeURL *url.URL
 }
 
 // URL returns the base URL of this connection.
@@ -303,11 +301,11 @@ func (c *Connection) buildSsoAuthRequest() (*url.URL, map[string]string) {
 	}
 
 	// Compute the URL:
-	ssoURL := c.url
+	var ssoURL url.URL = *c.url
 	ssoURL.Path = fmt.Sprintf("/ovirt-engine/sso/oauth/%s", entryPoint)
 
 	// Return the URL and the parameters:
-	return ssoURL, parameters
+	return &ssoURL, parameters
 }
 
 // buildSsoRevokeRequest builds a the URL and parameters to revoke the SSO access token.
@@ -321,11 +319,11 @@ func (c *Connection) buildSsoRevokeRequest() (*url.URL, map[string]string) {
 	}
 
 	// Compute the URL:
-	ssoURL := c.url
-	ssoURL.Path = "/ovirt-engine/services/sso-logout"
+	var ssoRevokeURL url.URL = *c.url
+	ssoRevokeURL.Path = "/ovirt-engine/services/sso-logout"
 
 	// Return the URL and the parameters:
-	return ssoURL, parameters
+	return &ssoRevokeURL, parameters
 }
 
 // SystemService returns a reference to the root of the services tree.

@@ -56,15 +56,15 @@ func CheckFault(response *http.Response) error {
 	fault, err := XMLFaultReadOne(reader, nil, "")
 	if err != nil {
 		// If the XML is not a <fault>, just return nil
-		if _, ok := err.(XMLTagNotMatchError); ok {
-			return nil
+		if err, ok := err.(XMLTagNotMatchError); ok {
+			return err
 		}
 		return err
 	}
 	if fault != nil || response.StatusCode >= 400 {
 		return BuildError(response, fault)
 	}
-	return nil
+	return errors.New("unkonwn error")
 }
 
 // CheckAction checks if response contains an Action instance
