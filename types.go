@@ -20504,6 +20504,7 @@ type NetworkFilterParameter struct {
 	description *string
 	id          *string
 	name        *string
+	nic         *Nic
 	value       *string
 }
 
@@ -20581,6 +20582,24 @@ func (p *NetworkFilterParameter) MustName() string {
 		panic("the name must not be nil, please use Name() function instead")
 	}
 	return *p.name
+}
+
+func (p *NetworkFilterParameter) SetNic(attr *Nic) {
+	p.nic = attr
+}
+
+func (p *NetworkFilterParameter) Nic() (*Nic, bool) {
+	if p.nic != nil {
+		return p.nic, true
+	}
+	return nil, false
+}
+
+func (p *NetworkFilterParameter) MustNic() *Nic {
+	if p.nic == nil {
+		panic("the nic must not be nil, please use Nic() function instead")
+	}
+	return p.nic
 }
 
 func (p *NetworkFilterParameter) SetValue(attr string) {
@@ -56316,6 +56335,15 @@ func (builder *NetworkFilterParameterBuilder) Name(attr string) *NetworkFilterPa
 	}
 
 	builder.networkFilterParameter.SetName(attr)
+	return builder
+}
+
+func (builder *NetworkFilterParameterBuilder) Nic(attr *Nic) *NetworkFilterParameterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.networkFilterParameter.SetNic(attr)
 	return builder
 }
 
