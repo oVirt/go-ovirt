@@ -40,12 +40,19 @@ func main() {
 	}
 	defer conn.Close()
 
+	// To use `Must` methods, you should recover it if panics
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Printf("Panics occurs, try the non-Must methods to find the reason")
+		}
+	}()
+
 	// Find the service that manages the collection of virtual machines
 	vmsService := conn.SystemService().VmsService()
 
 	// Create the virtual machine. Note that no Sysprep stuff is needed here, when creating it, it will be used
 	// later, when starting it
-	addVmResp, _ := vmsService.Add().
+	addVMResp, _ := vmsService.Add().
 		Vm(
 			ovirtsdk4.NewVmBuilder().
 				Name("myvm").
@@ -60,7 +67,7 @@ func main() {
 				MustBuild()).
 		Send()
 
-	vm, _ := addVmResp.Vm()
+	vm, _ := addVMResp.Vm()
 
 	// Find the service that manages the virtual machine
 	vmService := vmsService.VmService(vm.MustId())

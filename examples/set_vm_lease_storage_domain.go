@@ -47,30 +47,42 @@ func main() {
 		}
 	}()
 
-	// Get the reference to the "vms" service
-	vmsService := conn.SystemService().VmsService()
+	// Get the reference to the root of the tree of services
+	systemService := conn.SystemService()
 
-	// Use the "Add" method to create a new virtual machine:
-	resp, err := vmsService.Add().
+	// Find the virtual machine
+	vmsService := systemService.VmsService()
+	vm := vmsService.List().
+		Search("name=myvm").
+		MustSend().
+		MustVms().
+		Slice()[0]
+
+	// Find the storage domain
+	sdsService := systemService.StorageDomainsService()
+	sd := sdsService.List().
+		Search("name=mydata").
+		MustSend().
+		MustStorageDomains().
+		Slice()[0]
+
+	// Update the virtual machine so that high availability is enabled and the lease is created in the selected
+	// storage domain
+	vmService := vmsService.VmService(vm.MustId())
+	vmService.Update().
 		Vm(
 			ovirtsdk4.NewVmBuilder().
-				Name("myvm").
-				Cluster(
-					ovirtsdk4.NewClusterBuilder().
-						Name("mycluster").
+				HighAvailability(
+					ovirtsdk4.NewHighAvailabilityBuilder().
+						Enabled(true).
 						MustBuild()).
-				Template(
-					ovirtsdk4.NewTemplateBuilder().
-						Name("Blank").
+				Lease(
+					ovirtsdk4.NewStorageDomainLeaseBuilder().
+						StorageDomain(
+							ovirtsdk4.NewStorageDomainBuilder().
+								Id(sd.MustId()).
+								MustBuild()).
 						MustBuild()).
 				MustBuild()).
-		Send()
-
-	if err != nil {
-		fmt.Printf("Failed to add vm, reason: %v\n", err)
-		return
-	}
-	if vm, ok := resp.Vm(); ok {
-		fmt.Printf("Add vm (%v) successfully\n", vm.MustName())
-	}
+		MustSend()
 }

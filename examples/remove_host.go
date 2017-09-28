@@ -47,30 +47,25 @@ func main() {
 		}
 	}()
 
-	// Get the reference to the "vms" service
-	vmsService := conn.SystemService().VmsService()
+	// Find the service that manages hosts
+	hostsService := conn.SystemService().HostsService()
 
-	// Use the "Add" method to create a new virtual machine:
-	resp, err := vmsService.Add().
-		Vm(
-			ovirtsdk4.NewVmBuilder().
-				Name("myvm").
-				Cluster(
-					ovirtsdk4.NewClusterBuilder().
-						Name("mycluster").
-						MustBuild()).
-				Template(
-					ovirtsdk4.NewTemplateBuilder().
-						Name("Blank").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	// Find the host
+	host := hostsService.List().
+		Search("name=myhost").
+		MustSend().
+		MustHosts().
+		Slice()[0]
 
-	if err != nil {
-		fmt.Printf("Failed to add vm, reason: %v\n", err)
-		return
+	// Find the service that manages the host
+	hostService := hostsService.HostService(host.MustId())
+
+	// If the host isn't down or in maintenance then move it to maintenance
+	if host.MustStatus() != ovirtsdk4.HOSTSTATUS_MAINTENANCE {
+		hostService.Deactivate().MustSend()
 	}
-	if vm, ok := resp.Vm(); ok {
-		fmt.Printf("Add vm (%v) successfully\n", vm.MustName())
-	}
+
+	// Remove the host
+	hostService.Remove().MustSend()
+
 }

@@ -40,6 +40,13 @@ func main() {
 	}
 	defer conn.Close()
 
+	// To use `Must` methods, you should recover it if panics
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Printf("Panics occurs, try the non-Must methods to find the reason")
+		}
+	}()
+
 	tagsService := conn.SystemService().TagsService()
 	var tagID string
 	resp, err := tagsService.List().Send()

@@ -40,23 +40,33 @@ func main() {
 	}
 	defer conn.Close()
 
-	tagService := conn.SystemService().TagsService()
-
-	resp, err := tagService.List().Send()
-	if err != nil {
-		fmt.Printf("Failed to get tag list, reason: %v\n", err)
-		return
-	}
-	if tagSlice, ok := resp.Tags(); ok {
-		for _, tag := range tagSlice.Slice() {
-			fmt.Printf("Tag: (")
-			if name, ok := tag.Name(); ok {
-				fmt.Printf(" name: %v", name)
-			}
-			if desc, ok := tag.Description(); ok {
-				fmt.Printf(" desc: %v", desc)
-			}
-			fmt.Println(")")
+	// To use `Must` methods, you should recover it if panics
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Printf("Panics occurs, try the non-Must methods to find the reason")
 		}
-	}
+	}()
+
+	// Get the service that manages the vms
+	vmsService := conn.SystemService().VmsService()
+	vm := vmsService.List().
+		Search("name=myvm").
+		MustSend().
+		MustVms().
+		Slice()[0]
+
+	// Update the placement policy of the virtual machine so that it's pinned to the host
+	vmService := vmsService.VmService(vm.MustId())
+	vmService.Update().
+		Vm(
+			ovirtsdk4.NewVmBuilder().
+				PlacementPolicy(
+					ovirtsdk4.NewVmPlacementPolicyBuilder().
+						HostsOfAny(
+							*ovirtsdk4.NewHostBuilder().
+								Name("myhost").
+								MustBuild()).
+						MustBuild()).
+				MustBuild()).
+		MustSend()
 }

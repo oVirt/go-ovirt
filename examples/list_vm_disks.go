@@ -40,6 +40,13 @@ func main() {
 	}
 	defer conn.Close()
 
+	// To use `Must` methods, you should recover it if panics
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Printf("Panics occurs, try the non-Must methods to find the reason")
+		}
+	}()
+
 	vmsService := conn.SystemService().VmsService()
 	// Use Must version methods to make a function call chain
 	vm := vmsService.List().Search("name=test4joey").MustSend().MustVms().Slice()[0]

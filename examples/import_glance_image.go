@@ -25,7 +25,7 @@ import (
 
 func main() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
-
+	// Create the connection to the server:
 	conn, err := ovirtsdk4.NewConnectionBuilder().
 		URL(inputRawURL).
 		Username("admin@internal").
@@ -47,24 +47,51 @@ func main() {
 		}
 	}()
 
+	// Get the root of the services tree
+	systemService := conn.SystemService()
+
 	// Find the Glance storage domain that is available for default in any oVirt installation
-	sdsService := conn.SystemService().StorageDomainsService()
-	resp, err := sdsService.List().
+	sdsService := systemService.StorageDomainsService()
+	sd := sdsService.List().
 		Search("name=ovirt-image-repository").
-		Send()
-	if err != nil {
-		fmt.Printf("Failed to get storage domains list, reason: %v\n", err)
-		return
-	}
-	if sds, ok := resp.StorageDomains(); ok {
-		sd := sds.Slice()[0]
-		sdService := sdsService.StorageDomainService(sd.MustId())
-		imagesService := sdService.ImagesService()
-		// Not recommended, response error should be always be checked
-		imgResp, _ := imagesService.List().Send()
-		images, _ := imgResp.Images()
-		for _, img := range images.Slice() {
-			fmt.Printf("Image name is %v\n", img.MustName())
+		MustSend().
+		MustStorageDomains().
+		Slice()[0]
+
+	// Find the service that manages the Glance storage domain
+	sdService := sdsService.StorageDomainService(sd.MustId())
+
+	// Find the service that manages the images available in that storage domain
+	imagesService := sdService.ImagesService()
+
+	// The images service doesn't support search, so in order to find an image
+	// we need to retrieve all of them and do the filtering explicitly
+	imageSlice := imagesService.List().MustSend().MustImages()
+	var image *ovirtsdk4.Image
+	for _, img := range imageSlice.Slice() {
+		if img.MustName() == "CirrOS 0.3.4 for x86_64" {
+			image = &img
+			break
 		}
 	}
+
+	// Find the service that manages the image that we found in previous step
+	imageService := imagesService.ImageService(image.MustId())
+
+	// Import the image
+	imageService.Import().
+		ImportAsTemplate(true).
+		Template(
+			ovirtsdk4.NewTemplateBuilder().
+				Name("mytemplate").
+				MustBuild()).
+		Cluster(
+			ovirtsdk4.NewClusterBuilder().
+				Name("mycluster").
+				MustBuild()).
+		StorageDomain(
+			ovirtsdk4.NewStorageDomainBuilder().
+				Name("mydata").
+				MustBuild()).
+		MustSend()
 }

@@ -47,30 +47,28 @@ func main() {
 		}
 	}()
 
-	// Get the reference to the "vms" service
-	vmsService := conn.SystemService().VmsService()
+	// Get the reference to the "datacenters" service:
+	dcsService := conn.SystemService().DataCentersService()
 
-	// Use the "Add" method to create a new virtual machine:
-	resp, err := vmsService.Add().
-		Vm(
-			ovirtsdk4.NewVmBuilder().
-				Name("myvm").
-				Cluster(
-					ovirtsdk4.NewClusterBuilder().
-						Name("mycluster").
-						MustBuild()).
-				Template(
-					ovirtsdk4.NewTemplateBuilder().
-						Name("Blank").
-						MustBuild()).
+	// Find the datacenter
+	dc := dcsService.List().
+		Search("name=mydc").
+		MustSend().
+		MustDataCenters().
+		Slice()[0]
+
+	// In order to update the data center we need a reference to the service that manages it, then we can call the
+	// "update" method passing the update
+	dcService := dcsService.DataCenterService(dc.MustId())
+	dc := dcService.Update().
+		DataCenter(
+			ovirtsdk4.NewDataCenterBuilder().
+				Description("Updated description").
 				MustBuild()).
-		Send()
+		MustSend().
+		MustDataCenter()
 
-	if err != nil {
-		fmt.Printf("Failed to add vm, reason: %v\n", err)
-		return
-	}
-	if vm, ok := resp.Vm(); ok {
-		fmt.Printf("Add vm (%v) successfully\n", vm.MustName())
-	}
+	// Print the description of the result of the update
+	fmt.Printf("%v: %v", dc.MustName(), dc.MustDescription())
+
 }

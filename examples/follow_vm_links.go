@@ -25,7 +25,7 @@ import (
 
 func main() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
-
+	// Create the connection to the server:
 	conn, err := ovirtsdk4.NewConnectionBuilder().
 		URL(inputRawURL).
 		Username("admin@internal").
@@ -47,30 +47,38 @@ func main() {
 		}
 	}()
 
-	// Get the reference to the "vms" service
+	// Locate the service that manages the virtual machines
 	vmsService := conn.SystemService().VmsService()
 
-	// Use the "Add" method to create a new virtual machine:
-	resp, err := vmsService.Add().
-		Vm(
-			ovirtsdk4.NewVmBuilder().
-				Name("myvm").
-				Cluster(
-					ovirtsdk4.NewClusterBuilder().
-						Name("mycluster").
-						MustBuild()).
-				Template(
-					ovirtsdk4.NewTemplateBuilder().
-						Name("Blank").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	// Find the virtual machine
+	vm := vmsService.List().
+		Search("name=test4joey").
+		MustSend().
+		MustVms().
+		Slice()[0]
 
-	if err != nil {
-		fmt.Printf("Failed to add vm, reason: %v\n", err)
-		return
+	// When the server returns a virtual machine it will return links to related objects, like the cluster,
+	// template and permissions something like this:
+	//
+	// <link href="/api/vms/123/permissions" rel="permissions"/>
+	// ...
+	// <cluster id="123" href="/api/clusters/123"/>
+	// <template id="456" href="/api/templates/456"/>
+	//
+	// The SDK provides a "FollowLink" method that can be used to retrieve the complete content of these related
+	// objects.
+	cluster, _ := conn.FollowLink(vm.MustCluster())
+	if cluster, ok := cluster.(*ovirtsdk4.Cluster); ok {
+		fmt.Printf("cluster: %v\n", cluster.MustName())
 	}
-	if vm, ok := resp.Vm(); ok {
-		fmt.Printf("Add vm (%v) successfully\n", vm.MustName())
+	template, _ := conn.FollowLink(vm.MustTemplate())
+	if template, ok := template.(*ovirtsdk4.Template); ok {
+		fmt.Printf("template: %v\n", template.MustName())
+	}
+	permissionSlice, _ := conn.FollowLink(vm.MustPermissions())
+	if permissionSlice, ok := permissionSlice.(*ovirtsdk4.PermissionSlice); ok {
+		for _, per := range permissionSlice.Slice() {
+			fmt.Printf("role: %v\n", per.MustRole().MustId())
+		}
 	}
 }

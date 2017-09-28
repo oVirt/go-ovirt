@@ -25,7 +25,7 @@ import (
 
 func main() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
-
+	// Create the connection to the server:
 	conn, err := ovirtsdk4.NewConnectionBuilder().
 		URL(inputRawURL).
 		Username("admin@internal").
@@ -47,30 +47,56 @@ func main() {
 		}
 	}()
 
-	// Get the reference to the "vms" service
-	vmsService := conn.SystemService().VmsService()
+	// Get storage domains service
+	sdsService := conn.SystemService().StorageDomainsService()
 
-	// Use the "Add" method to create a new virtual machine:
-	resp, err := vmsService.Add().
+	// Get export storage domain
+	exportDomain := sdsService.List().
+		Search("name=myexport").
+		MustSend().
+		MustStorageDomains().
+		Slice()[0]
+
+	// Get target storage domain
+	targetDomain := sdsService.List().
+		Search("name=mydata").
+		MustSend().
+		MustStorageDomains().
+		Slice()[0]
+
+	// Get cluster service
+	clustersService := conn.SystemService().ClustersService()
+
+	// Get the cluster we import the VM to
+	cluster := clustersService.List().
+		Search("name=mycluster").
+		MustSend().
+		MustClusters().
+		Slice()[0]
+
+	// Get VM service for export storage domain
+	vmsService := sdsService.StorageDomainService(exportDomain.MustId()).VmsService()
+
+	// Get the first exported VM, assuming we have one
+	exportedVM := vmsService.List().
+		MustSend().
+		MustVm().
+		Slice()[0]
+
+	// Import the exported VM into target storage domain, 'mydata'
+	vmsService.VmService(exportedVM.MustId()).
+		Import().
+		StorageDomain(
+			ovirtsdk4.NewStorageDomainBuilder().
+				Id(targetDomain.MustId()).
+				MustBuild()).
+		Cluster(
+			ovirtsdk4.NewClusterBuilder().
+				Id(cluster.MustId()).
+				MustBuild()).
 		Vm(
 			ovirtsdk4.NewVmBuilder().
-				Name("myvm").
-				Cluster(
-					ovirtsdk4.NewClusterBuilder().
-						Name("mycluster").
-						MustBuild()).
-				Template(
-					ovirtsdk4.NewTemplateBuilder().
-						Name("Blank").
-						MustBuild()).
+				Id(exportedVM.MustId).
 				MustBuild()).
-		Send()
-
-	if err != nil {
-		fmt.Printf("Failed to add vm, reason: %v\n", err)
-		return
-	}
-	if vm, ok := resp.Vm(); ok {
-		fmt.Printf("Add vm (%v) successfully\n", vm.MustName())
-	}
+		MustSend()
 }

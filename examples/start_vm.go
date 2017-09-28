@@ -50,27 +50,21 @@ func main() {
 	// Get the reference to the "vms" service
 	vmsService := conn.SystemService().VmsService()
 
-	// Use the "Add" method to create a new virtual machine:
-	resp, err := vmsService.Add().
-		Vm(
-			ovirtsdk4.NewVmBuilder().
-				Name("myvm").
-				Cluster(
-					ovirtsdk4.NewClusterBuilder().
-						Name("mycluster").
-						MustBuild()).
-				Template(
-					ovirtsdk4.NewTemplateBuilder().
-						Name("Blank").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	// Find the virtual machine
+	vm := vmsService.List().Search("name=myvm").MustSend().MustVms().Slice()[0]
 
-	if err != nil {
-		fmt.Printf("Failed to add vm, reason: %v\n", err)
-		return
-	}
-	if vm, ok := resp.Vm(); ok {
-		fmt.Printf("Add vm (%v) successfully\n", vm.MustName())
+	// Locate the service that manages the virtual machine, as that is where the action methods are defined
+	vmService := vmsService.VmService()
+
+	// Call the "start" method of the service to start it
+	vmService.Start().MustSend()
+
+	// Wait till the virtual machine is up
+	for {
+		time.Sleep(5 * time.Second)
+		vm = vmService.Get().MustSend().MustVm()
+		if vm.MustStatus() == ovirtsdk4.VMSTATUS_UP {
+			break
+		}
 	}
 }

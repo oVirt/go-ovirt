@@ -25,7 +25,7 @@ import (
 
 func main() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
-
+	// Create the connection to the server:
 	conn, err := ovirtsdk4.NewConnectionBuilder().
 		URL(inputRawURL).
 		Username("admin@internal").
@@ -47,43 +47,43 @@ func main() {
 		}
 	}()
 
-	// Get the reference to the storage domains service
+	// Locate the service that manages the storage domains, and use it to search for the storage domain
 	sdsService := conn.SystemService().StorageDomainsService()
+	sd := sdsService.List().
+		Search("name=myiso").
+		MustSend().
+		MustStorageDomains().
+		Slice()[0]
 
-	// Create a new NFS storage domain
-	addSdResp, err := sdsService.Add().
+	// Locate the service that manages the data centers and use it to search for the data center
+	dcsService := conn.SystemService().DataCentersService()
+	dc := dcsService.List().
+		Search("name=mydc").
+		MustSend().
+		MustDataCenters().
+		Slice()[0]
+
+	// Locate the service that manages the data center where we want to attach the storage domain
+	dcService := dcsService.DataCenterService(dc.MustId())
+
+	// Locate the service that manages the storage domains that are attached to the data center
+	attachedSdsService := dcService.StorageDomainsService()
+
+	// Use the "add" method of the service that manages the attached storage domains to attach it
+	attachedSdsService.Add().
 		StorageDomain(
 			ovirtsdk4.NewStorageDomainBuilder().
-				Name("mydata").
-				Description("My data").
-				Type(ovirtsdk4.STORAGEDOMAINTYPE_DATA).
-				Host(
-					ovirtsdk4.NewHostBuilder().
-						Name("myhost").
-						MustBuild()).
-				Storage(
-					ovirtsdk4.NewHostStorageBuilder().
-						Type(ovirtsdk4.STORAGETYPE_NFS).
-						Address("server0.example.com").
-						Path("/nfs/ovirt/40/mydata").
-						MustBuild()).
+				Id(sd.MustId()).
 				MustBuild()).
-		Send()
-	if err != nil {
-		fmt.Printf("Faild to add sd, reason: %v\n", err)
-		return
-	}
+		MustSend()
 
-	// Wait till the storage domain is unattached
-	if sd, ok := addSdResp.StorageDomain(); ok {
-		sdService := sdsService.StorageDomainService(sd.MustId())
-		for {
-			time.Sleep(5 * time.Second)
-			getSdResp, _ := sdService.Get().Send()
-			getSd, _ := getSdResp.StorageDomain()
-			if getSd.MustStatus() == ovirtsdk4.STORAGEDOMAINSTATUS_UNATTACHED {
-				break
-			}
+	// Wait till the storage domain is active
+	attachedSdService := attachedSdsService.StorageDomainService(sd.MustId())
+	for {
+		time.Sleep(5 * time.Second)
+		sd = attachedSdService.Get().MustSend().MustStorageDomain()
+		if sd.MustStatus() == ovirtsdk4.STORAGEDOMAINSTATUS_ACTIVE {
+			break
 		}
 	}
 }

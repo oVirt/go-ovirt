@@ -47,30 +47,26 @@ func main() {
 		}
 	}()
 
-	// Get the reference to the "vms" service
+	// Find the service that manages VMs
 	vmsService := conn.SystemService().VmsService()
 
-	// Use the "Add" method to create a new virtual machine:
-	resp, err := vmsService.Add().
-		Vm(
-			ovirtsdk4.NewVmBuilder().
-				Name("myvm").
-				Cluster(
-					ovirtsdk4.NewClusterBuilder().
-						Name("mycluster").
-						MustBuild()).
-				Template(
-					ovirtsdk4.NewTemplateBuilder().
-						Name("Blank").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	// Find the VM
+	vm := vmsService.List().
+		Search("name=myvm").
+		MustSend().
+		MustVms().
+		Slice()[0]
 
-	if err != nil {
-		fmt.Printf("Failed to add vm, reason: %v\n", err)
-		return
-	}
-	if vm, ok := resp.Vm(); ok {
-		fmt.Printf("Add vm (%v) successfully\n", vm.MustName())
-	}
+	// Note that the "vm" variable that we assigned above contains only the data of the VM, it doesn't have any
+	// method like "remove". Methods are defined in the services. So now that we have the description of the VM
+	// we can find the service that manages it, calling the locator method "vmService" defined in the "vms"
+	// service. This locator method receives as parameter the identifier of the VM and returns a reference to the
+	// service that manages that VM.
+	vmService := vmsService.VmService(vm.MustId())
+
+	// Now that we have the reference to the service that manages the VM we can use it to remove the VM. Note that
+	// this method doesn't need any parameter, as the identifier of the VM is already known by the service that we
+	// located in the previous step.
+	vmService.Remove().MustSend()
+
 }
