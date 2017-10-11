@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/imjoey/go-ovirt"
+	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
 func main() {

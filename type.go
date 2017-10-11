@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-package ovirtsdk4
+package ovirtsdk
 
 type Href interface {
 	Href() (string, bool)

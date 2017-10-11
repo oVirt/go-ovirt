@@ -17,7 +17,7 @@
 // Some codes of this file is from https://github.com/CpuID/ovirt-engine-sdk-go/blob/master/sdk/http/http.go.
 // And I made some bug fixes, Thanks to @CpuID
 
-package ovirtsdk4
+package ovirtsdk
 
 import (
 	"crypto/tls"

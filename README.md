@@ -9,13 +9,15 @@ oVirt Engine API.
 
 ## Usage
 
-To use the SDK you should import ovirtsdk4 package as follows:
+To use the SDK you should import ovirtsdk package as follows:
 
 ```go
 import (
-    "github.com/imjoey/go-ovirt"
+    ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4" // v4 <-> ovirt 4.x
 )
 ```
+
+> In product envrionment, you should __NEVER__ use `import "github.com/imjoey/go-ovirt"` that it imports the master branch which will always be under heavy development.
 
 That will give you access to all the classes of the SDK, and in particular
 to the `Connection` class. This is the entry point of the SDK,
@@ -26,7 +28,7 @@ and gives you access to the root of the tree of services of the API:
 import (
     "fmt"
     "time"
-    "github.com/imjoey/go-ovirt"
+    ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
 inputRawURL := "https://10.1.111.229/ovirt-engine/api"
