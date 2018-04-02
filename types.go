@@ -24,24 +24,32 @@ type Action struct {
 	Struct
 	allowPartialImport             *bool
 	async                          *bool
+	attachment                     *DiskAttachment
+	authorizedKey                  *AuthorizedKey
 	bricks                         *GlusterBrickSlice
 	certificates                   *CertificateSlice
 	checkConnectivity              *bool
 	clone                          *bool
+	clonePermissions               *bool
 	cluster                        *Cluster
 	collapseSnapshots              *bool
 	comment                        *string
+	connection                     *StorageConnection
 	connectivityTimeout            *int64
 	dataCenter                     *DataCenter
 	deployHostedEngine             *bool
 	description                    *string
 	details                        *GlusterVolumeProfileDetails
+	directory                      *string
 	discardSnapshots               *bool
+	discoveredTargets              *IscsiDetailsSlice
 	disk                           *Disk
+	diskProfile                    *DiskProfile
 	disks                          *DiskSlice
 	exclusive                      *bool
 	fault                          *Fault
 	fenceType                      *string
+	filename                       *string
 	filter                         *bool
 	fixLayout                      *bool
 	force                          *bool
@@ -49,11 +57,13 @@ type Action struct {
 	host                           *Host
 	id                             *string
 	image                          *string
+	imageTransfer                  *ImageTransfer
 	importAsTemplate               *bool
 	isAttached                     *bool
 	iscsi                          *IscsiDetails
 	iscsiTargets                   []string
 	job                            *Job
+	lease                          *StorageDomainLease
 	logicalUnits                   *LogicalUnitSlice
 	maintenanceEnabled             *bool
 	modifiedBonds                  *HostNicSlice
@@ -62,10 +72,14 @@ type Action struct {
 	name                           *string
 	option                         *Option
 	pause                          *bool
+	permission                     *Permission
 	powerManagement                *PowerManagement
 	proxyTicket                    *ProxyTicket
+	quota                          *Quota
 	reason                         *string
 	reassignBadMacs                *bool
+	reboot                         *bool
+	registrationConfiguration      *RegistrationConfiguration
 	remoteViewerConnectionFile     *string
 	removedBonds                   *HostNicSlice
 	removedLabels                  *NetworkLabelSlice
@@ -89,6 +103,7 @@ type Action struct {
 	virtualFunctionsConfiguration  *HostNicVirtualFunctionsConfiguration
 	vm                             *Vm
 	vnicProfileMappings            *VnicProfileMappingSlice
+	volatile                       *bool
 }
 
 func (p *Action) SetAllowPartialImport(attr bool) {
@@ -127,6 +142,42 @@ func (p *Action) MustAsync() bool {
 		panic("the async must not be nil, please use Async() function instead")
 	}
 	return *p.async
+}
+
+func (p *Action) SetAttachment(attr *DiskAttachment) {
+	p.attachment = attr
+}
+
+func (p *Action) Attachment() (*DiskAttachment, bool) {
+	if p.attachment != nil {
+		return p.attachment, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustAttachment() *DiskAttachment {
+	if p.attachment == nil {
+		panic("the attachment must not be nil, please use Attachment() function instead")
+	}
+	return p.attachment
+}
+
+func (p *Action) SetAuthorizedKey(attr *AuthorizedKey) {
+	p.authorizedKey = attr
+}
+
+func (p *Action) AuthorizedKey() (*AuthorizedKey, bool) {
+	if p.authorizedKey != nil {
+		return p.authorizedKey, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustAuthorizedKey() *AuthorizedKey {
+	if p.authorizedKey == nil {
+		panic("the authorizedKey must not be nil, please use AuthorizedKey() function instead")
+	}
+	return p.authorizedKey
 }
 
 func (p *Action) SetBricks(attr *GlusterBrickSlice) {
@@ -203,6 +254,25 @@ func (p *Action) MustClone() bool {
 	return *p.clone
 }
 
+func (p *Action) SetClonePermissions(attr bool) {
+	p.clonePermissions = &attr
+}
+
+func (p *Action) ClonePermissions() (bool, bool) {
+	if p.clonePermissions != nil {
+		return *p.clonePermissions, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Action) MustClonePermissions() bool {
+	if p.clonePermissions == nil {
+		panic("the clonePermissions must not be nil, please use ClonePermissions() function instead")
+	}
+	return *p.clonePermissions
+}
+
 func (p *Action) SetCluster(attr *Cluster) {
 	p.cluster = attr
 }
@@ -257,6 +327,24 @@ func (p *Action) MustComment() string {
 		panic("the comment must not be nil, please use Comment() function instead")
 	}
 	return *p.comment
+}
+
+func (p *Action) SetConnection(attr *StorageConnection) {
+	p.connection = attr
+}
+
+func (p *Action) Connection() (*StorageConnection, bool) {
+	if p.connection != nil {
+		return p.connection, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustConnection() *StorageConnection {
+	if p.connection == nil {
+		panic("the connection must not be nil, please use Connection() function instead")
+	}
+	return p.connection
 }
 
 func (p *Action) SetConnectivityTimeout(attr int64) {
@@ -352,6 +440,25 @@ func (p *Action) MustDetails() *GlusterVolumeProfileDetails {
 	return p.details
 }
 
+func (p *Action) SetDirectory(attr string) {
+	p.directory = &attr
+}
+
+func (p *Action) Directory() (string, bool) {
+	if p.directory != nil {
+		return *p.directory, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Action) MustDirectory() string {
+	if p.directory == nil {
+		panic("the directory must not be nil, please use Directory() function instead")
+	}
+	return *p.directory
+}
+
 func (p *Action) SetDiscardSnapshots(attr bool) {
 	p.discardSnapshots = &attr
 }
@@ -371,6 +478,24 @@ func (p *Action) MustDiscardSnapshots() bool {
 	return *p.discardSnapshots
 }
 
+func (p *Action) SetDiscoveredTargets(attr *IscsiDetailsSlice) {
+	p.discoveredTargets = attr
+}
+
+func (p *Action) DiscoveredTargets() (*IscsiDetailsSlice, bool) {
+	if p.discoveredTargets != nil {
+		return p.discoveredTargets, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustDiscoveredTargets() *IscsiDetailsSlice {
+	if p.discoveredTargets == nil {
+		panic("the discoveredTargets must not be nil, please use DiscoveredTargets() function instead")
+	}
+	return p.discoveredTargets
+}
+
 func (p *Action) SetDisk(attr *Disk) {
 	p.disk = attr
 }
@@ -387,6 +512,24 @@ func (p *Action) MustDisk() *Disk {
 		panic("the disk must not be nil, please use Disk() function instead")
 	}
 	return p.disk
+}
+
+func (p *Action) SetDiskProfile(attr *DiskProfile) {
+	p.diskProfile = attr
+}
+
+func (p *Action) DiskProfile() (*DiskProfile, bool) {
+	if p.diskProfile != nil {
+		return p.diskProfile, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustDiskProfile() *DiskProfile {
+	if p.diskProfile == nil {
+		panic("the diskProfile must not be nil, please use DiskProfile() function instead")
+	}
+	return p.diskProfile
 }
 
 func (p *Action) SetDisks(attr *DiskSlice) {
@@ -461,6 +604,25 @@ func (p *Action) MustFenceType() string {
 		panic("the fenceType must not be nil, please use FenceType() function instead")
 	}
 	return *p.fenceType
+}
+
+func (p *Action) SetFilename(attr string) {
+	p.filename = &attr
+}
+
+func (p *Action) Filename() (string, bool) {
+	if p.filename != nil {
+		return *p.filename, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Action) MustFilename() string {
+	if p.filename == nil {
+		panic("the filename must not be nil, please use Filename() function instead")
+	}
+	return *p.filename
 }
 
 func (p *Action) SetFilter(attr bool) {
@@ -594,6 +756,24 @@ func (p *Action) MustImage() string {
 	return *p.image
 }
 
+func (p *Action) SetImageTransfer(attr *ImageTransfer) {
+	p.imageTransfer = attr
+}
+
+func (p *Action) ImageTransfer() (*ImageTransfer, bool) {
+	if p.imageTransfer != nil {
+		return p.imageTransfer, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustImageTransfer() *ImageTransfer {
+	if p.imageTransfer == nil {
+		panic("the imageTransfer must not be nil, please use ImageTransfer() function instead")
+	}
+	return p.imageTransfer
+}
+
 func (p *Action) SetImportAsTemplate(attr bool) {
 	p.importAsTemplate = &attr
 }
@@ -684,6 +864,24 @@ func (p *Action) MustJob() *Job {
 		panic("the job must not be nil, please use Job() function instead")
 	}
 	return p.job
+}
+
+func (p *Action) SetLease(attr *StorageDomainLease) {
+	p.lease = attr
+}
+
+func (p *Action) Lease() (*StorageDomainLease, bool) {
+	if p.lease != nil {
+		return p.lease, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustLease() *StorageDomainLease {
+	if p.lease == nil {
+		panic("the lease must not be nil, please use Lease() function instead")
+	}
+	return p.lease
 }
 
 func (p *Action) SetLogicalUnits(attr *LogicalUnitSlice) {
@@ -833,6 +1031,24 @@ func (p *Action) MustPause() bool {
 	return *p.pause
 }
 
+func (p *Action) SetPermission(attr *Permission) {
+	p.permission = attr
+}
+
+func (p *Action) Permission() (*Permission, bool) {
+	if p.permission != nil {
+		return p.permission, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustPermission() *Permission {
+	if p.permission == nil {
+		panic("the permission must not be nil, please use Permission() function instead")
+	}
+	return p.permission
+}
+
 func (p *Action) SetPowerManagement(attr *PowerManagement) {
 	p.powerManagement = attr
 }
@@ -867,6 +1083,24 @@ func (p *Action) MustProxyTicket() *ProxyTicket {
 		panic("the proxyTicket must not be nil, please use ProxyTicket() function instead")
 	}
 	return p.proxyTicket
+}
+
+func (p *Action) SetQuota(attr *Quota) {
+	p.quota = attr
+}
+
+func (p *Action) Quota() (*Quota, bool) {
+	if p.quota != nil {
+		return p.quota, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustQuota() *Quota {
+	if p.quota == nil {
+		panic("the quota must not be nil, please use Quota() function instead")
+	}
+	return p.quota
 }
 
 func (p *Action) SetReason(attr string) {
@@ -905,6 +1139,43 @@ func (p *Action) MustReassignBadMacs() bool {
 		panic("the reassignBadMacs must not be nil, please use ReassignBadMacs() function instead")
 	}
 	return *p.reassignBadMacs
+}
+
+func (p *Action) SetReboot(attr bool) {
+	p.reboot = &attr
+}
+
+func (p *Action) Reboot() (bool, bool) {
+	if p.reboot != nil {
+		return *p.reboot, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Action) MustReboot() bool {
+	if p.reboot == nil {
+		panic("the reboot must not be nil, please use Reboot() function instead")
+	}
+	return *p.reboot
+}
+
+func (p *Action) SetRegistrationConfiguration(attr *RegistrationConfiguration) {
+	p.registrationConfiguration = attr
+}
+
+func (p *Action) RegistrationConfiguration() (*RegistrationConfiguration, bool) {
+	if p.registrationConfiguration != nil {
+		return p.registrationConfiguration, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustRegistrationConfiguration() *RegistrationConfiguration {
+	if p.registrationConfiguration == nil {
+		panic("the registrationConfiguration must not be nil, please use RegistrationConfiguration() function instead")
+	}
+	return p.registrationConfiguration
 }
 
 func (p *Action) SetRemoteViewerConnectionFile(attr string) {
@@ -1329,6 +1600,25 @@ func (p *Action) MustVnicProfileMappings() *VnicProfileMappingSlice {
 		panic("the vnicProfileMappings must not be nil, please use VnicProfileMappings() function instead")
 	}
 	return p.vnicProfileMappings
+}
+
+func (p *Action) SetVolatile(attr bool) {
+	p.volatile = &attr
+}
+
+func (p *Action) Volatile() (bool, bool) {
+	if p.volatile != nil {
+		return *p.volatile, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Action) MustVolatile() bool {
+	if p.volatile == nil {
+		panic("the volatile must not be nil, please use Volatile() function instead")
+	}
+	return *p.volatile
 }
 
 type AffinityGroup struct {
@@ -2164,10 +2454,48 @@ func (p *AgentConfiguration) MustUsername() string {
 
 type Api struct {
 	Struct
-	productInfo    *ProductInfo
-	specialObjects *SpecialObjects
-	summary        *ApiSummary
-	time           *time.Time
+	authenticatedUser *User
+	effectiveUser     *User
+	productInfo       *ProductInfo
+	specialObjects    *SpecialObjects
+	summary           *ApiSummary
+	time              *time.Time
+}
+
+func (p *Api) SetAuthenticatedUser(attr *User) {
+	p.authenticatedUser = attr
+}
+
+func (p *Api) AuthenticatedUser() (*User, bool) {
+	if p.authenticatedUser != nil {
+		return p.authenticatedUser, true
+	}
+	return nil, false
+}
+
+func (p *Api) MustAuthenticatedUser() *User {
+	if p.authenticatedUser == nil {
+		panic("the authenticatedUser must not be nil, please use AuthenticatedUser() function instead")
+	}
+	return p.authenticatedUser
+}
+
+func (p *Api) SetEffectiveUser(attr *User) {
+	p.effectiveUser = attr
+}
+
+func (p *Api) EffectiveUser() (*User, bool) {
+	if p.effectiveUser != nil {
+		return p.effectiveUser, true
+	}
+	return nil, false
+}
+
+func (p *Api) MustEffectiveUser() *User {
+	if p.effectiveUser == nil {
+		panic("the effectiveUser must not be nil, please use EffectiveUser() function instead")
+	}
+	return p.effectiveUser
 }
 
 func (p *Api) SetProductInfo(attr *ProductInfo) {
@@ -3507,8 +3835,11 @@ type Cluster struct {
 	dataCenter                       *DataCenter
 	description                      *string
 	display                          *Display
+	enabledFeatures                  *ClusterFeatureSlice
 	errorHandling                    *ErrorHandling
+	externalNetworkProviders         *ExternalProviderSlice
 	fencingPolicy                    *FencingPolicy
+	firewallType                     *FirewallType
 	glusterHooks                     *GlusterHookSlice
 	glusterService                   *bool
 	glusterTunedProfile              *string
@@ -3703,6 +4034,24 @@ func (p *Cluster) MustDisplay() *Display {
 	return p.display
 }
 
+func (p *Cluster) SetEnabledFeatures(attr *ClusterFeatureSlice) {
+	p.enabledFeatures = attr
+}
+
+func (p *Cluster) EnabledFeatures() (*ClusterFeatureSlice, bool) {
+	if p.enabledFeatures != nil {
+		return p.enabledFeatures, true
+	}
+	return nil, false
+}
+
+func (p *Cluster) MustEnabledFeatures() *ClusterFeatureSlice {
+	if p.enabledFeatures == nil {
+		panic("the enabledFeatures must not be nil, please use EnabledFeatures() function instead")
+	}
+	return p.enabledFeatures
+}
+
 func (p *Cluster) SetErrorHandling(attr *ErrorHandling) {
 	p.errorHandling = attr
 }
@@ -3721,6 +4070,24 @@ func (p *Cluster) MustErrorHandling() *ErrorHandling {
 	return p.errorHandling
 }
 
+func (p *Cluster) SetExternalNetworkProviders(attr *ExternalProviderSlice) {
+	p.externalNetworkProviders = attr
+}
+
+func (p *Cluster) ExternalNetworkProviders() (*ExternalProviderSlice, bool) {
+	if p.externalNetworkProviders != nil {
+		return p.externalNetworkProviders, true
+	}
+	return nil, false
+}
+
+func (p *Cluster) MustExternalNetworkProviders() *ExternalProviderSlice {
+	if p.externalNetworkProviders == nil {
+		panic("the externalNetworkProviders must not be nil, please use ExternalNetworkProviders() function instead")
+	}
+	return p.externalNetworkProviders
+}
+
 func (p *Cluster) SetFencingPolicy(attr *FencingPolicy) {
 	p.fencingPolicy = attr
 }
@@ -3737,6 +4104,25 @@ func (p *Cluster) MustFencingPolicy() *FencingPolicy {
 		panic("the fencingPolicy must not be nil, please use FencingPolicy() function instead")
 	}
 	return p.fencingPolicy
+}
+
+func (p *Cluster) SetFirewallType(attr FirewallType) {
+	p.firewallType = &attr
+}
+
+func (p *Cluster) FirewallType() (FirewallType, bool) {
+	if p.firewallType != nil {
+		return *p.firewallType, true
+	}
+	var zero FirewallType
+	return zero, false
+}
+
+func (p *Cluster) MustFirewallType() FirewallType {
+	if p.firewallType == nil {
+		panic("the firewallType must not be nil, please use FirewallType() function instead")
+	}
+	return *p.firewallType
 }
 
 func (p *Cluster) SetGlusterHooks(attr *GlusterHookSlice) {
@@ -4237,14 +4623,136 @@ func (p *Cluster) MustVirtService() bool {
 	return *p.virtService
 }
 
+type ClusterFeature struct {
+	Struct
+	clusterLevel *ClusterLevel
+	comment      *string
+	description  *string
+	id           *string
+	name         *string
+}
+
+func (p *ClusterFeature) SetClusterLevel(attr *ClusterLevel) {
+	p.clusterLevel = attr
+}
+
+func (p *ClusterFeature) ClusterLevel() (*ClusterLevel, bool) {
+	if p.clusterLevel != nil {
+		return p.clusterLevel, true
+	}
+	return nil, false
+}
+
+func (p *ClusterFeature) MustClusterLevel() *ClusterLevel {
+	if p.clusterLevel == nil {
+		panic("the clusterLevel must not be nil, please use ClusterLevel() function instead")
+	}
+	return p.clusterLevel
+}
+
+func (p *ClusterFeature) SetComment(attr string) {
+	p.comment = &attr
+}
+
+func (p *ClusterFeature) Comment() (string, bool) {
+	if p.comment != nil {
+		return *p.comment, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ClusterFeature) MustComment() string {
+	if p.comment == nil {
+		panic("the comment must not be nil, please use Comment() function instead")
+	}
+	return *p.comment
+}
+
+func (p *ClusterFeature) SetDescription(attr string) {
+	p.description = &attr
+}
+
+func (p *ClusterFeature) Description() (string, bool) {
+	if p.description != nil {
+		return *p.description, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ClusterFeature) MustDescription() string {
+	if p.description == nil {
+		panic("the description must not be nil, please use Description() function instead")
+	}
+	return *p.description
+}
+
+func (p *ClusterFeature) SetId(attr string) {
+	p.id = &attr
+}
+
+func (p *ClusterFeature) Id() (string, bool) {
+	if p.id != nil {
+		return *p.id, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ClusterFeature) MustId() string {
+	if p.id == nil {
+		panic("the id must not be nil, please use Id() function instead")
+	}
+	return *p.id
+}
+
+func (p *ClusterFeature) SetName(attr string) {
+	p.name = &attr
+}
+
+func (p *ClusterFeature) Name() (string, bool) {
+	if p.name != nil {
+		return *p.name, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ClusterFeature) MustName() string {
+	if p.name == nil {
+		panic("the name must not be nil, please use Name() function instead")
+	}
+	return *p.name
+}
+
 type ClusterLevel struct {
 	Struct
-	comment     *string
-	cpuTypes    *CpuTypeSlice
-	description *string
-	id          *string
-	name        *string
-	permits     *PermitSlice
+	clusterFeatures *ClusterFeatureSlice
+	comment         *string
+	cpuTypes        *CpuTypeSlice
+	description     *string
+	id              *string
+	name            *string
+	permits         *PermitSlice
+}
+
+func (p *ClusterLevel) SetClusterFeatures(attr *ClusterFeatureSlice) {
+	p.clusterFeatures = attr
+}
+
+func (p *ClusterLevel) ClusterFeatures() (*ClusterFeatureSlice, bool) {
+	if p.clusterFeatures != nil {
+		return p.clusterFeatures, true
+	}
+	return nil, false
+}
+
+func (p *ClusterLevel) MustClusterFeatures() *ClusterFeatureSlice {
+	if p.clusterFeatures == nil {
+		panic("the clusterFeatures must not be nil, please use ClusterFeatures() function instead")
+	}
+	return p.clusterFeatures
 }
 
 func (p *ClusterLevel) SetComment(attr string) {
@@ -5529,6 +6037,7 @@ type Disk struct {
 	alias               *string
 	bootable            *bool
 	comment             *string
+	contentType         *DiskContentType
 	description         *string
 	diskProfile         *DiskProfile
 	format              *DiskFormat
@@ -5557,6 +6066,7 @@ type Disk struct {
 	storageDomains      *StorageDomainSlice
 	storageType         *DiskStorageType
 	template            *Template
+	totalSize           *int64
 	usesScsiReservation *bool
 	vm                  *Vm
 	vms                 *VmSlice
@@ -5656,6 +6166,25 @@ func (p *Disk) MustComment() string {
 		panic("the comment must not be nil, please use Comment() function instead")
 	}
 	return *p.comment
+}
+
+func (p *Disk) SetContentType(attr DiskContentType) {
+	p.contentType = &attr
+}
+
+func (p *Disk) ContentType() (DiskContentType, bool) {
+	if p.contentType != nil {
+		return *p.contentType, true
+	}
+	var zero DiskContentType
+	return zero, false
+}
+
+func (p *Disk) MustContentType() DiskContentType {
+	if p.contentType == nil {
+		panic("the contentType must not be nil, please use ContentType() function instead")
+	}
+	return *p.contentType
 }
 
 func (p *Disk) SetDescription(attr string) {
@@ -6179,6 +6708,25 @@ func (p *Disk) MustTemplate() *Template {
 	return p.template
 }
 
+func (p *Disk) SetTotalSize(attr int64) {
+	p.totalSize = &attr
+}
+
+func (p *Disk) TotalSize() (int64, bool) {
+	if p.totalSize != nil {
+		return *p.totalSize, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *Disk) MustTotalSize() int64 {
+	if p.totalSize == nil {
+		panic("the totalSize must not be nil, please use TotalSize() function instead")
+	}
+	return *p.totalSize
+}
+
 func (p *Disk) SetUsesScsiReservation(attr bool) {
 	p.usesScsiReservation = &attr
 }
@@ -6265,6 +6813,7 @@ type DiskAttachment struct {
 	logicalName         *string
 	name                *string
 	passDiscard         *bool
+	readOnly            *bool
 	template            *Template
 	usesScsiReservation *bool
 	vm                  *Vm
@@ -6457,6 +7006,25 @@ func (p *DiskAttachment) MustPassDiscard() bool {
 		panic("the passDiscard must not be nil, please use PassDiscard() function instead")
 	}
 	return *p.passDiscard
+}
+
+func (p *DiskAttachment) SetReadOnly(attr bool) {
+	p.readOnly = &attr
+}
+
+func (p *DiskAttachment) ReadOnly() (bool, bool) {
+	if p.readOnly != nil {
+		return *p.readOnly, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *DiskAttachment) MustReadOnly() bool {
+	if p.readOnly == nil {
+		panic("the readOnly must not be nil, please use ReadOnly() function instead")
+	}
+	return *p.readOnly
 }
 
 func (p *DiskAttachment) SetTemplate(attr *Template) {
@@ -6662,6 +7230,7 @@ type DiskSnapshot struct {
 	alias               *string
 	bootable            *bool
 	comment             *string
+	contentType         *DiskContentType
 	description         *string
 	disk                *Disk
 	diskProfile         *DiskProfile
@@ -6691,6 +7260,7 @@ type DiskSnapshot struct {
 	storageDomains      *StorageDomainSlice
 	storageType         *DiskStorageType
 	template            *Template
+	totalSize           *int64
 	usesScsiReservation *bool
 	vm                  *Vm
 	vms                 *VmSlice
@@ -6790,6 +7360,25 @@ func (p *DiskSnapshot) MustComment() string {
 		panic("the comment must not be nil, please use Comment() function instead")
 	}
 	return *p.comment
+}
+
+func (p *DiskSnapshot) SetContentType(attr DiskContentType) {
+	p.contentType = &attr
+}
+
+func (p *DiskSnapshot) ContentType() (DiskContentType, bool) {
+	if p.contentType != nil {
+		return *p.contentType, true
+	}
+	var zero DiskContentType
+	return zero, false
+}
+
+func (p *DiskSnapshot) MustContentType() DiskContentType {
+	if p.contentType == nil {
+		panic("the contentType must not be nil, please use ContentType() function instead")
+	}
+	return *p.contentType
 }
 
 func (p *DiskSnapshot) SetDescription(attr string) {
@@ -7329,6 +7918,25 @@ func (p *DiskSnapshot) MustTemplate() *Template {
 		panic("the template must not be nil, please use Template() function instead")
 	}
 	return p.template
+}
+
+func (p *DiskSnapshot) SetTotalSize(attr int64) {
+	p.totalSize = &attr
+}
+
+func (p *DiskSnapshot) TotalSize() (int64, bool) {
+	if p.totalSize != nil {
+		return *p.totalSize, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *DiskSnapshot) MustTotalSize() int64 {
+	if p.totalSize == nil {
+		panic("the totalSize must not be nil, please use TotalSize() function instead")
+	}
+	return *p.totalSize
 }
 
 func (p *DiskSnapshot) SetUsesScsiReservation(attr bool) {
@@ -7954,6 +8562,7 @@ type Event struct {
 	floodRate     *int64
 	host          *Host
 	id            *string
+	index         *int64
 	name          *string
 	origin        *string
 	severity      *LogSeverity
@@ -8168,6 +8777,25 @@ func (p *Event) MustId() string {
 		panic("the id must not be nil, please use Id() function instead")
 	}
 	return *p.id
+}
+
+func (p *Event) SetIndex(attr int64) {
+	p.index = &attr
+}
+
+func (p *Event) Index() (int64, bool) {
+	if p.index != nil {
+		return *p.index, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *Event) MustIndex() int64 {
+	if p.index == nil {
+		panic("the index must not be nil, please use Index() function instead")
+	}
+	return *p.index
 }
 
 func (p *Event) SetName(attr string) {
@@ -9266,6 +9894,128 @@ func (p *ExternalHostProvider) MustUsername() string {
 		panic("the username must not be nil, please use Username() function instead")
 	}
 	return *p.username
+}
+
+type ExternalNetworkProviderConfiguration struct {
+	Struct
+	comment                 *string
+	description             *string
+	externalNetworkProvider *ExternalProvider
+	host                    *Host
+	id                      *string
+	name                    *string
+}
+
+func (p *ExternalNetworkProviderConfiguration) SetComment(attr string) {
+	p.comment = &attr
+}
+
+func (p *ExternalNetworkProviderConfiguration) Comment() (string, bool) {
+	if p.comment != nil {
+		return *p.comment, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ExternalNetworkProviderConfiguration) MustComment() string {
+	if p.comment == nil {
+		panic("the comment must not be nil, please use Comment() function instead")
+	}
+	return *p.comment
+}
+
+func (p *ExternalNetworkProviderConfiguration) SetDescription(attr string) {
+	p.description = &attr
+}
+
+func (p *ExternalNetworkProviderConfiguration) Description() (string, bool) {
+	if p.description != nil {
+		return *p.description, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ExternalNetworkProviderConfiguration) MustDescription() string {
+	if p.description == nil {
+		panic("the description must not be nil, please use Description() function instead")
+	}
+	return *p.description
+}
+
+func (p *ExternalNetworkProviderConfiguration) SetExternalNetworkProvider(attr *ExternalProvider) {
+	p.externalNetworkProvider = attr
+}
+
+func (p *ExternalNetworkProviderConfiguration) ExternalNetworkProvider() (*ExternalProvider, bool) {
+	if p.externalNetworkProvider != nil {
+		return p.externalNetworkProvider, true
+	}
+	return nil, false
+}
+
+func (p *ExternalNetworkProviderConfiguration) MustExternalNetworkProvider() *ExternalProvider {
+	if p.externalNetworkProvider == nil {
+		panic("the externalNetworkProvider must not be nil, please use ExternalNetworkProvider() function instead")
+	}
+	return p.externalNetworkProvider
+}
+
+func (p *ExternalNetworkProviderConfiguration) SetHost(attr *Host) {
+	p.host = attr
+}
+
+func (p *ExternalNetworkProviderConfiguration) Host() (*Host, bool) {
+	if p.host != nil {
+		return p.host, true
+	}
+	return nil, false
+}
+
+func (p *ExternalNetworkProviderConfiguration) MustHost() *Host {
+	if p.host == nil {
+		panic("the host must not be nil, please use Host() function instead")
+	}
+	return p.host
+}
+
+func (p *ExternalNetworkProviderConfiguration) SetId(attr string) {
+	p.id = &attr
+}
+
+func (p *ExternalNetworkProviderConfiguration) Id() (string, bool) {
+	if p.id != nil {
+		return *p.id, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ExternalNetworkProviderConfiguration) MustId() string {
+	if p.id == nil {
+		panic("the id must not be nil, please use Id() function instead")
+	}
+	return *p.id
+}
+
+func (p *ExternalNetworkProviderConfiguration) SetName(attr string) {
+	p.name = &attr
+}
+
+func (p *ExternalNetworkProviderConfiguration) Name() (string, bool) {
+	if p.name != nil {
+		return *p.name, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ExternalNetworkProviderConfiguration) MustName() string {
+	if p.name == nil {
+		panic("the name must not be nil, please use Name() function instead")
+	}
+	return *p.name
 }
 
 type ExternalProvider struct {
@@ -13172,58 +13922,59 @@ func (p *Hook) MustName() string {
 
 type Host struct {
 	Struct
-	address                     *string
-	affinityLabels              *AffinityLabelSlice
-	agents                      *AgentSlice
-	autoNumaStatus              *AutoNumaStatus
-	certificate                 *Certificate
-	cluster                     *Cluster
-	comment                     *string
-	cpu                         *Cpu
-	description                 *string
-	devicePassthrough           *HostDevicePassthrough
-	devices                     *DeviceSlice
-	display                     *Display
-	externalHostProvider        *ExternalHostProvider
-	externalStatus              *ExternalStatus
-	hardwareInformation         *HardwareInformation
-	hooks                       *HookSlice
-	hostedEngine                *HostedEngine
-	id                          *string
-	iscsi                       *IscsiDetails
-	katelloErrata               *KatelloErratumSlice
-	kdumpStatus                 *KdumpStatus
-	ksm                         *Ksm
-	libvirtVersion              *Version
-	maxSchedulingMemory         *int64
-	memory                      *int64
-	name                        *string
-	networkAttachments          *NetworkAttachmentSlice
-	nics                        *NicSlice
-	numaNodes                   *NumaNodeSlice
-	numaSupported               *bool
-	os                          *OperatingSystem
-	overrideIptables            *bool
-	permissions                 *PermissionSlice
-	port                        *int64
-	powerManagement             *PowerManagement
-	protocol                    *HostProtocol
-	rootPassword                *string
-	seLinux                     *SeLinux
-	spm                         *Spm
-	ssh                         *Ssh
-	statistics                  *StatisticSlice
-	status                      *HostStatus
-	statusDetail                *string
-	storageConnectionExtensions *StorageConnectionExtensionSlice
-	storages                    *HostStorageSlice
-	summary                     *VmSummary
-	tags                        *TagSlice
-	transparentHugePages        *TransparentHugePages
-	type_                       *HostType
-	unmanagedNetworks           *UnmanagedNetworkSlice
-	updateAvailable             *bool
-	version                     *Version
+	address                               *string
+	affinityLabels                        *AffinityLabelSlice
+	agents                                *AgentSlice
+	autoNumaStatus                        *AutoNumaStatus
+	certificate                           *Certificate
+	cluster                               *Cluster
+	comment                               *string
+	cpu                                   *Cpu
+	description                           *string
+	devicePassthrough                     *HostDevicePassthrough
+	devices                               *DeviceSlice
+	display                               *Display
+	externalHostProvider                  *ExternalHostProvider
+	externalNetworkProviderConfigurations *ExternalNetworkProviderConfigurationSlice
+	externalStatus                        *ExternalStatus
+	hardwareInformation                   *HardwareInformation
+	hooks                                 *HookSlice
+	hostedEngine                          *HostedEngine
+	id                                    *string
+	iscsi                                 *IscsiDetails
+	katelloErrata                         *KatelloErratumSlice
+	kdumpStatus                           *KdumpStatus
+	ksm                                   *Ksm
+	libvirtVersion                        *Version
+	maxSchedulingMemory                   *int64
+	memory                                *int64
+	name                                  *string
+	networkAttachments                    *NetworkAttachmentSlice
+	nics                                  *HostNicSlice
+	numaNodes                             *NumaNodeSlice
+	numaSupported                         *bool
+	os                                    *OperatingSystem
+	overrideIptables                      *bool
+	permissions                           *PermissionSlice
+	port                                  *int64
+	powerManagement                       *PowerManagement
+	protocol                              *HostProtocol
+	rootPassword                          *string
+	seLinux                               *SeLinux
+	spm                                   *Spm
+	ssh                                   *Ssh
+	statistics                            *StatisticSlice
+	status                                *HostStatus
+	statusDetail                          *string
+	storageConnectionExtensions           *StorageConnectionExtensionSlice
+	storages                              *HostStorageSlice
+	summary                               *VmSummary
+	tags                                  *TagSlice
+	transparentHugePages                  *TransparentHugePages
+	type_                                 *HostType
+	unmanagedNetworks                     *UnmanagedNetworkSlice
+	updateAvailable                       *bool
+	version                               *Version
 }
 
 func (p *Host) SetAddress(attr string) {
@@ -13462,6 +14213,24 @@ func (p *Host) MustExternalHostProvider() *ExternalHostProvider {
 		panic("the externalHostProvider must not be nil, please use ExternalHostProvider() function instead")
 	}
 	return p.externalHostProvider
+}
+
+func (p *Host) SetExternalNetworkProviderConfigurations(attr *ExternalNetworkProviderConfigurationSlice) {
+	p.externalNetworkProviderConfigurations = attr
+}
+
+func (p *Host) ExternalNetworkProviderConfigurations() (*ExternalNetworkProviderConfigurationSlice, bool) {
+	if p.externalNetworkProviderConfigurations != nil {
+		return p.externalNetworkProviderConfigurations, true
+	}
+	return nil, false
+}
+
+func (p *Host) MustExternalNetworkProviderConfigurations() *ExternalNetworkProviderConfigurationSlice {
+	if p.externalNetworkProviderConfigurations == nil {
+		panic("the externalNetworkProviderConfigurations must not be nil, please use ExternalNetworkProviderConfigurations() function instead")
+	}
+	return p.externalNetworkProviderConfigurations
 }
 
 func (p *Host) SetExternalStatus(attr ExternalStatus) {
@@ -13722,18 +14491,18 @@ func (p *Host) MustNetworkAttachments() *NetworkAttachmentSlice {
 	return p.networkAttachments
 }
 
-func (p *Host) SetNics(attr *NicSlice) {
+func (p *Host) SetNics(attr *HostNicSlice) {
 	p.nics = attr
 }
 
-func (p *Host) Nics() (*NicSlice, bool) {
+func (p *Host) Nics() (*HostNicSlice, bool) {
 	if p.nics != nil {
 		return p.nics, true
 	}
 	return nil, false
 }
 
-func (p *Host) MustNics() *NicSlice {
+func (p *Host) MustNics() *HostNicSlice {
 	if p.nics == nil {
 		panic("the nics must not be nil, please use Nics() function instead")
 	}
@@ -14186,6 +14955,7 @@ type HostDevice struct {
 	capability       *string
 	comment          *string
 	description      *string
+	driver           *string
 	host             *Host
 	id               *string
 	iommuGroup       *int64
@@ -14254,6 +15024,25 @@ func (p *HostDevice) MustDescription() string {
 		panic("the description must not be nil, please use Description() function instead")
 	}
 	return *p.description
+}
+
+func (p *HostDevice) SetDriver(attr string) {
+	p.driver = &attr
+}
+
+func (p *HostDevice) Driver() (string, bool) {
+	if p.driver != nil {
+		return *p.driver, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *HostDevice) MustDriver() string {
+	if p.driver == nil {
+		panic("the driver must not be nil, please use Driver() function instead")
+	}
+	return *p.driver
 }
 
 func (p *HostDevice) SetHost(attr *Host) {
@@ -15837,7 +16626,9 @@ type Image struct {
 	description   *string
 	id            *string
 	name          *string
+	size          *int64
 	storageDomain *StorageDomain
+	type_         *ImageFileType
 }
 
 func (p *Image) SetComment(attr string) {
@@ -15916,6 +16707,25 @@ func (p *Image) MustName() string {
 	return *p.name
 }
 
+func (p *Image) SetSize(attr int64) {
+	p.size = &attr
+}
+
+func (p *Image) Size() (int64, bool) {
+	if p.size != nil {
+		return *p.size, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *Image) MustSize() int64 {
+	if p.size == nil {
+		panic("the size must not be nil, please use Size() function instead")
+	}
+	return *p.size
+}
+
 func (p *Image) SetStorageDomain(attr *StorageDomain) {
 	p.storageDomain = attr
 }
@@ -15934,11 +16744,32 @@ func (p *Image) MustStorageDomain() *StorageDomain {
 	return p.storageDomain
 }
 
+func (p *Image) SetType(attr ImageFileType) {
+	p.type_ = &attr
+}
+
+func (p *Image) Type() (ImageFileType, bool) {
+	if p.type_ != nil {
+		return *p.type_, true
+	}
+	var zero ImageFileType
+	return zero, false
+}
+
+func (p *Image) MustType() ImageFileType {
+	if p.type_ == nil {
+		panic("the type_ must not be nil, please use Type() function instead")
+	}
+	return *p.type_
+}
+
 type ImageTransfer struct {
 	Struct
+	active       *bool
 	comment      *string
 	description  *string
 	direction    *ImageTransferDirection
+	disk         *Disk
 	host         *Host
 	id           *string
 	image        *Image
@@ -15946,6 +16777,28 @@ type ImageTransfer struct {
 	phase        *ImageTransferPhase
 	proxyUrl     *string
 	signedTicket *string
+	snapshot     *DiskSnapshot
+	transferUrl  *string
+	transferred  *int64
+}
+
+func (p *ImageTransfer) SetActive(attr bool) {
+	p.active = &attr
+}
+
+func (p *ImageTransfer) Active() (bool, bool) {
+	if p.active != nil {
+		return *p.active, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *ImageTransfer) MustActive() bool {
+	if p.active == nil {
+		panic("the active must not be nil, please use Active() function instead")
+	}
+	return *p.active
 }
 
 func (p *ImageTransfer) SetComment(attr string) {
@@ -16003,6 +16856,24 @@ func (p *ImageTransfer) MustDirection() ImageTransferDirection {
 		panic("the direction must not be nil, please use Direction() function instead")
 	}
 	return *p.direction
+}
+
+func (p *ImageTransfer) SetDisk(attr *Disk) {
+	p.disk = attr
+}
+
+func (p *ImageTransfer) Disk() (*Disk, bool) {
+	if p.disk != nil {
+		return p.disk, true
+	}
+	return nil, false
+}
+
+func (p *ImageTransfer) MustDisk() *Disk {
+	if p.disk == nil {
+		panic("the disk must not be nil, please use Disk() function instead")
+	}
+	return p.disk
 }
 
 func (p *ImageTransfer) SetHost(attr *Host) {
@@ -16134,6 +17005,62 @@ func (p *ImageTransfer) MustSignedTicket() string {
 		panic("the signedTicket must not be nil, please use SignedTicket() function instead")
 	}
 	return *p.signedTicket
+}
+
+func (p *ImageTransfer) SetSnapshot(attr *DiskSnapshot) {
+	p.snapshot = attr
+}
+
+func (p *ImageTransfer) Snapshot() (*DiskSnapshot, bool) {
+	if p.snapshot != nil {
+		return p.snapshot, true
+	}
+	return nil, false
+}
+
+func (p *ImageTransfer) MustSnapshot() *DiskSnapshot {
+	if p.snapshot == nil {
+		panic("the snapshot must not be nil, please use Snapshot() function instead")
+	}
+	return p.snapshot
+}
+
+func (p *ImageTransfer) SetTransferUrl(attr string) {
+	p.transferUrl = &attr
+}
+
+func (p *ImageTransfer) TransferUrl() (string, bool) {
+	if p.transferUrl != nil {
+		return *p.transferUrl, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ImageTransfer) MustTransferUrl() string {
+	if p.transferUrl == nil {
+		panic("the transferUrl must not be nil, please use TransferUrl() function instead")
+	}
+	return *p.transferUrl
+}
+
+func (p *ImageTransfer) SetTransferred(attr int64) {
+	p.transferred = &attr
+}
+
+func (p *ImageTransfer) Transferred() (int64, bool) {
+	if p.transferred != nil {
+		return *p.transferred, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *ImageTransfer) MustTransferred() int64 {
+	if p.transferred == nil {
+		panic("the transferred must not be nil, please use Transferred() function instead")
+	}
+	return *p.transferred
 }
 
 type Initialization struct {
@@ -16559,59 +17486,61 @@ func (p *Initialization) MustWindowsLicenseKey() string {
 
 type InstanceType struct {
 	Struct
-	bios                       *Bios
-	cdroms                     *CdromSlice
-	cluster                    *Cluster
-	comment                    *string
-	console                    *Console
-	cpu                        *Cpu
-	cpuProfile                 *CpuProfile
-	cpuShares                  *int64
-	creationTime               *time.Time
-	customCompatibilityVersion *Version
-	customCpuModel             *string
-	customEmulatedMachine      *string
-	customProperties           *CustomPropertySlice
-	deleteProtected            *bool
-	description                *string
-	diskAttachments            *DiskAttachmentSlice
-	display                    *Display
-	domain                     *Domain
-	graphicsConsoles           *GraphicsConsoleSlice
-	highAvailability           *HighAvailability
-	id                         *string
-	initialization             *Initialization
-	io                         *Io
-	largeIcon                  *Icon
-	lease                      *StorageDomainLease
-	memory                     *int64
-	memoryPolicy               *MemoryPolicy
-	migration                  *MigrationOptions
-	migrationDowntime          *int64
-	name                       *string
-	nics                       *NicSlice
-	origin                     *string
-	os                         *OperatingSystem
-	permissions                *PermissionSlice
-	quota                      *Quota
-	rngDevice                  *RngDevice
-	serialNumber               *SerialNumber
-	smallIcon                  *Icon
-	soundcardEnabled           *bool
-	sso                        *Sso
-	startPaused                *bool
-	stateless                  *bool
-	status                     *TemplateStatus
-	storageDomain              *StorageDomain
-	tags                       *TagSlice
-	timeZone                   *TimeZone
-	tunnelMigration            *bool
-	type_                      *VmType
-	usb                        *Usb
-	version                    *TemplateVersion
-	virtioScsi                 *VirtioScsi
-	vm                         *Vm
-	watchdogs                  *WatchdogSlice
+	bios                        *Bios
+	cdroms                      *CdromSlice
+	cluster                     *Cluster
+	comment                     *string
+	console                     *Console
+	cpu                         *Cpu
+	cpuProfile                  *CpuProfile
+	cpuShares                   *int64
+	creationTime                *time.Time
+	customCompatibilityVersion  *Version
+	customCpuModel              *string
+	customEmulatedMachine       *string
+	customProperties            *CustomPropertySlice
+	deleteProtected             *bool
+	description                 *string
+	diskAttachments             *DiskAttachmentSlice
+	display                     *Display
+	domain                      *Domain
+	graphicsConsoles            *GraphicsConsoleSlice
+	highAvailability            *HighAvailability
+	id                          *string
+	initialization              *Initialization
+	io                          *Io
+	largeIcon                   *Icon
+	lease                       *StorageDomainLease
+	memory                      *int64
+	memoryPolicy                *MemoryPolicy
+	migration                   *MigrationOptions
+	migrationDowntime           *int64
+	name                        *string
+	nics                        *NicSlice
+	origin                      *string
+	os                          *OperatingSystem
+	permissions                 *PermissionSlice
+	placementPolicy             *VmPlacementPolicy
+	quota                       *Quota
+	rngDevice                   *RngDevice
+	serialNumber                *SerialNumber
+	smallIcon                   *Icon
+	soundcardEnabled            *bool
+	sso                         *Sso
+	startPaused                 *bool
+	stateless                   *bool
+	status                      *TemplateStatus
+	storageDomain               *StorageDomain
+	storageErrorResumeBehaviour *VmStorageErrorResumeBehaviour
+	tags                        *TagSlice
+	timeZone                    *TimeZone
+	tunnelMigration             *bool
+	type_                       *VmType
+	usb                         *Usb
+	version                     *TemplateVersion
+	virtioScsi                  *VirtioScsi
+	vm                          *Vm
+	watchdogs                   *WatchdogSlice
 }
 
 func (p *InstanceType) SetBios(attr *Bios) {
@@ -17238,6 +18167,24 @@ func (p *InstanceType) MustPermissions() *PermissionSlice {
 	return p.permissions
 }
 
+func (p *InstanceType) SetPlacementPolicy(attr *VmPlacementPolicy) {
+	p.placementPolicy = attr
+}
+
+func (p *InstanceType) PlacementPolicy() (*VmPlacementPolicy, bool) {
+	if p.placementPolicy != nil {
+		return p.placementPolicy, true
+	}
+	return nil, false
+}
+
+func (p *InstanceType) MustPlacementPolicy() *VmPlacementPolicy {
+	if p.placementPolicy == nil {
+		panic("the placementPolicy must not be nil, please use PlacementPolicy() function instead")
+	}
+	return p.placementPolicy
+}
+
 func (p *InstanceType) SetQuota(attr *Quota) {
 	p.quota = attr
 }
@@ -17420,6 +18367,25 @@ func (p *InstanceType) MustStorageDomain() *StorageDomain {
 		panic("the storageDomain must not be nil, please use StorageDomain() function instead")
 	}
 	return p.storageDomain
+}
+
+func (p *InstanceType) SetStorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) {
+	p.storageErrorResumeBehaviour = &attr
+}
+
+func (p *InstanceType) StorageErrorResumeBehaviour() (VmStorageErrorResumeBehaviour, bool) {
+	if p.storageErrorResumeBehaviour != nil {
+		return *p.storageErrorResumeBehaviour, true
+	}
+	var zero VmStorageErrorResumeBehaviour
+	return zero, false
+}
+
+func (p *InstanceType) MustStorageErrorResumeBehaviour() VmStorageErrorResumeBehaviour {
+	if p.storageErrorResumeBehaviour == nil {
+		panic("the storageErrorResumeBehaviour must not be nil, please use StorageErrorResumeBehaviour() function instead")
+	}
+	return *p.storageErrorResumeBehaviour
 }
 
 func (p *InstanceType) SetTags(attr *TagSlice) {
@@ -18792,6 +19758,169 @@ func (p *Ksm) MustMergeAcrossNodes() bool {
 	return *p.mergeAcrossNodes
 }
 
+type LinkLayerDiscoveryProtocolElement struct {
+	Struct
+	comment     *string
+	description *string
+	id          *string
+	name        *string
+	oui         *int64
+	properties  *PropertySlice
+	subtype     *int64
+	type_       *int64
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) SetComment(attr string) {
+	p.comment = &attr
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) Comment() (string, bool) {
+	if p.comment != nil {
+		return *p.comment, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) MustComment() string {
+	if p.comment == nil {
+		panic("the comment must not be nil, please use Comment() function instead")
+	}
+	return *p.comment
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) SetDescription(attr string) {
+	p.description = &attr
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) Description() (string, bool) {
+	if p.description != nil {
+		return *p.description, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) MustDescription() string {
+	if p.description == nil {
+		panic("the description must not be nil, please use Description() function instead")
+	}
+	return *p.description
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) SetId(attr string) {
+	p.id = &attr
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) Id() (string, bool) {
+	if p.id != nil {
+		return *p.id, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) MustId() string {
+	if p.id == nil {
+		panic("the id must not be nil, please use Id() function instead")
+	}
+	return *p.id
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) SetName(attr string) {
+	p.name = &attr
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) Name() (string, bool) {
+	if p.name != nil {
+		return *p.name, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) MustName() string {
+	if p.name == nil {
+		panic("the name must not be nil, please use Name() function instead")
+	}
+	return *p.name
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) SetOui(attr int64) {
+	p.oui = &attr
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) Oui() (int64, bool) {
+	if p.oui != nil {
+		return *p.oui, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) MustOui() int64 {
+	if p.oui == nil {
+		panic("the oui must not be nil, please use Oui() function instead")
+	}
+	return *p.oui
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) SetProperties(attr *PropertySlice) {
+	p.properties = attr
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) Properties() (*PropertySlice, bool) {
+	if p.properties != nil {
+		return p.properties, true
+	}
+	return nil, false
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) MustProperties() *PropertySlice {
+	if p.properties == nil {
+		panic("the properties must not be nil, please use Properties() function instead")
+	}
+	return p.properties
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) SetSubtype(attr int64) {
+	p.subtype = &attr
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) Subtype() (int64, bool) {
+	if p.subtype != nil {
+		return *p.subtype, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) MustSubtype() int64 {
+	if p.subtype == nil {
+		panic("the subtype must not be nil, please use Subtype() function instead")
+	}
+	return *p.subtype
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) SetType(attr int64) {
+	p.type_ = &attr
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) Type() (int64, bool) {
+	if p.type_ != nil {
+		return *p.type_, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *LinkLayerDiscoveryProtocolElement) MustType() int64 {
+	if p.type_ == nil {
+		panic("the type_ must not be nil, please use Type() function instead")
+	}
+	return *p.type_
+}
+
 type LogicalUnit struct {
 	Struct
 	address           *string
@@ -19705,26 +20834,28 @@ func (p *MigrationPolicy) MustName() string {
 
 type Network struct {
 	Struct
-	cluster                  *Cluster
-	comment                  *string
-	dataCenter               *DataCenter
-	description              *string
-	display                  *bool
-	dnsResolverConfiguration *DnsResolverConfiguration
-	id                       *string
-	ip                       *Ip
-	mtu                      *int64
-	name                     *string
-	networkLabels            *NetworkLabelSlice
-	permissions              *PermissionSlice
-	profileRequired          *bool
-	qos                      *Qos
-	required                 *bool
-	status                   *NetworkStatus
-	stp                      *bool
-	usages                   []NetworkUsage
-	vlan                     *Vlan
-	vnicProfiles             *VnicProfileSlice
+	cluster                         *Cluster
+	comment                         *string
+	dataCenter                      *DataCenter
+	description                     *string
+	display                         *bool
+	dnsResolverConfiguration        *DnsResolverConfiguration
+	externalProvider                *OpenStackNetworkProvider
+	externalProviderPhysicalNetwork *Network
+	id                              *string
+	ip                              *Ip
+	mtu                             *int64
+	name                            *string
+	networkLabels                   *NetworkLabelSlice
+	permissions                     *PermissionSlice
+	profileRequired                 *bool
+	qos                             *Qos
+	required                        *bool
+	status                          *NetworkStatus
+	stp                             *bool
+	usages                          []NetworkUsage
+	vlan                            *Vlan
+	vnicProfiles                    *VnicProfileSlice
 }
 
 func (p *Network) SetCluster(attr *Cluster) {
@@ -19836,6 +20967,42 @@ func (p *Network) MustDnsResolverConfiguration() *DnsResolverConfiguration {
 		panic("the dnsResolverConfiguration must not be nil, please use DnsResolverConfiguration() function instead")
 	}
 	return p.dnsResolverConfiguration
+}
+
+func (p *Network) SetExternalProvider(attr *OpenStackNetworkProvider) {
+	p.externalProvider = attr
+}
+
+func (p *Network) ExternalProvider() (*OpenStackNetworkProvider, bool) {
+	if p.externalProvider != nil {
+		return p.externalProvider, true
+	}
+	return nil, false
+}
+
+func (p *Network) MustExternalProvider() *OpenStackNetworkProvider {
+	if p.externalProvider == nil {
+		panic("the externalProvider must not be nil, please use ExternalProvider() function instead")
+	}
+	return p.externalProvider
+}
+
+func (p *Network) SetExternalProviderPhysicalNetwork(attr *Network) {
+	p.externalProviderPhysicalNetwork = attr
+}
+
+func (p *Network) ExternalProviderPhysicalNetwork() (*Network, bool) {
+	if p.externalProviderPhysicalNetwork != nil {
+		return p.externalProviderPhysicalNetwork, true
+	}
+	return nil, false
+}
+
+func (p *Network) MustExternalProviderPhysicalNetwork() *Network {
+	if p.externalProviderPhysicalNetwork == nil {
+		panic("the externalProviderPhysicalNetwork must not be nil, please use ExternalProviderPhysicalNetwork() function instead")
+	}
+	return p.externalProviderPhysicalNetwork
 }
 
 func (p *Network) SetId(attr string) {
@@ -22093,9 +23260,11 @@ type OpenStackNetworkProvider struct {
 	Struct
 	agentConfiguration     *AgentConfiguration
 	authenticationUrl      *string
+	autoSync               *bool
 	certificates           *CertificateSlice
 	comment                *string
 	description            *string
+	externalPluginType     *string
 	id                     *string
 	name                   *string
 	networks               *OpenStackNetworkSlice
@@ -22107,6 +23276,7 @@ type OpenStackNetworkProvider struct {
 	subnets                *OpenStackSubnetSlice
 	tenantName             *string
 	type_                  *OpenStackNetworkProviderType
+	unmanaged              *bool
 	url                    *string
 	username               *string
 }
@@ -22146,6 +23316,25 @@ func (p *OpenStackNetworkProvider) MustAuthenticationUrl() string {
 		panic("the authenticationUrl must not be nil, please use AuthenticationUrl() function instead")
 	}
 	return *p.authenticationUrl
+}
+
+func (p *OpenStackNetworkProvider) SetAutoSync(attr bool) {
+	p.autoSync = &attr
+}
+
+func (p *OpenStackNetworkProvider) AutoSync() (bool, bool) {
+	if p.autoSync != nil {
+		return *p.autoSync, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *OpenStackNetworkProvider) MustAutoSync() bool {
+	if p.autoSync == nil {
+		panic("the autoSync must not be nil, please use AutoSync() function instead")
+	}
+	return *p.autoSync
 }
 
 func (p *OpenStackNetworkProvider) SetCertificates(attr *CertificateSlice) {
@@ -22202,6 +23391,25 @@ func (p *OpenStackNetworkProvider) MustDescription() string {
 		panic("the description must not be nil, please use Description() function instead")
 	}
 	return *p.description
+}
+
+func (p *OpenStackNetworkProvider) SetExternalPluginType(attr string) {
+	p.externalPluginType = &attr
+}
+
+func (p *OpenStackNetworkProvider) ExternalPluginType() (string, bool) {
+	if p.externalPluginType != nil {
+		return *p.externalPluginType, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *OpenStackNetworkProvider) MustExternalPluginType() string {
+	if p.externalPluginType == nil {
+		panic("the externalPluginType must not be nil, please use ExternalPluginType() function instead")
+	}
+	return *p.externalPluginType
 }
 
 func (p *OpenStackNetworkProvider) SetId(attr string) {
@@ -22408,6 +23616,25 @@ func (p *OpenStackNetworkProvider) MustType() OpenStackNetworkProviderType {
 		panic("the type_ must not be nil, please use Type() function instead")
 	}
 	return *p.type_
+}
+
+func (p *OpenStackNetworkProvider) SetUnmanaged(attr bool) {
+	p.unmanaged = &attr
+}
+
+func (p *OpenStackNetworkProvider) Unmanaged() (bool, bool) {
+	if p.unmanaged != nil {
+		return *p.unmanaged, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *OpenStackNetworkProvider) MustUnmanaged() bool {
+	if p.unmanaged == nil {
+		panic("the unmanaged must not be nil, please use Unmanaged() function instead")
+	}
+	return *p.unmanaged
 }
 
 func (p *OpenStackNetworkProvider) SetUrl(attr string) {
@@ -26065,6 +27292,437 @@ func (p *Rate) MustPeriod() int64 {
 	return *p.period
 }
 
+type RegistrationAffinityGroupMapping struct {
+	Struct
+	from *AffinityGroup
+	to   *AffinityGroup
+}
+
+func (p *RegistrationAffinityGroupMapping) SetFrom(attr *AffinityGroup) {
+	p.from = attr
+}
+
+func (p *RegistrationAffinityGroupMapping) From() (*AffinityGroup, bool) {
+	if p.from != nil {
+		return p.from, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationAffinityGroupMapping) MustFrom() *AffinityGroup {
+	if p.from == nil {
+		panic("the from must not be nil, please use From() function instead")
+	}
+	return p.from
+}
+
+func (p *RegistrationAffinityGroupMapping) SetTo(attr *AffinityGroup) {
+	p.to = attr
+}
+
+func (p *RegistrationAffinityGroupMapping) To() (*AffinityGroup, bool) {
+	if p.to != nil {
+		return p.to, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationAffinityGroupMapping) MustTo() *AffinityGroup {
+	if p.to == nil {
+		panic("the to must not be nil, please use To() function instead")
+	}
+	return p.to
+}
+
+type RegistrationAffinityLabelMapping struct {
+	Struct
+	from *AffinityLabel
+	to   *AffinityLabel
+}
+
+func (p *RegistrationAffinityLabelMapping) SetFrom(attr *AffinityLabel) {
+	p.from = attr
+}
+
+func (p *RegistrationAffinityLabelMapping) From() (*AffinityLabel, bool) {
+	if p.from != nil {
+		return p.from, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationAffinityLabelMapping) MustFrom() *AffinityLabel {
+	if p.from == nil {
+		panic("the from must not be nil, please use From() function instead")
+	}
+	return p.from
+}
+
+func (p *RegistrationAffinityLabelMapping) SetTo(attr *AffinityLabel) {
+	p.to = attr
+}
+
+func (p *RegistrationAffinityLabelMapping) To() (*AffinityLabel, bool) {
+	if p.to != nil {
+		return p.to, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationAffinityLabelMapping) MustTo() *AffinityLabel {
+	if p.to == nil {
+		panic("the to must not be nil, please use To() function instead")
+	}
+	return p.to
+}
+
+type RegistrationClusterMapping struct {
+	Struct
+	from *Cluster
+	to   *Cluster
+}
+
+func (p *RegistrationClusterMapping) SetFrom(attr *Cluster) {
+	p.from = attr
+}
+
+func (p *RegistrationClusterMapping) From() (*Cluster, bool) {
+	if p.from != nil {
+		return p.from, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationClusterMapping) MustFrom() *Cluster {
+	if p.from == nil {
+		panic("the from must not be nil, please use From() function instead")
+	}
+	return p.from
+}
+
+func (p *RegistrationClusterMapping) SetTo(attr *Cluster) {
+	p.to = attr
+}
+
+func (p *RegistrationClusterMapping) To() (*Cluster, bool) {
+	if p.to != nil {
+		return p.to, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationClusterMapping) MustTo() *Cluster {
+	if p.to == nil {
+		panic("the to must not be nil, please use To() function instead")
+	}
+	return p.to
+}
+
+type RegistrationConfiguration struct {
+	Struct
+	affinityGroupMappings *RegistrationAffinityGroupMappingSlice
+	affinityLabelMappings *RegistrationAffinityLabelMappingSlice
+	clusterMappings       *RegistrationClusterMappingSlice
+	domainMappings        *RegistrationDomainMappingSlice
+	lunMappings           *RegistrationLunMappingSlice
+	roleMappings          *RegistrationRoleMappingSlice
+	vnicProfileMappings   *RegistrationVnicProfileMappingSlice
+}
+
+func (p *RegistrationConfiguration) SetAffinityGroupMappings(attr *RegistrationAffinityGroupMappingSlice) {
+	p.affinityGroupMappings = attr
+}
+
+func (p *RegistrationConfiguration) AffinityGroupMappings() (*RegistrationAffinityGroupMappingSlice, bool) {
+	if p.affinityGroupMappings != nil {
+		return p.affinityGroupMappings, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationConfiguration) MustAffinityGroupMappings() *RegistrationAffinityGroupMappingSlice {
+	if p.affinityGroupMappings == nil {
+		panic("the affinityGroupMappings must not be nil, please use AffinityGroupMappings() function instead")
+	}
+	return p.affinityGroupMappings
+}
+
+func (p *RegistrationConfiguration) SetAffinityLabelMappings(attr *RegistrationAffinityLabelMappingSlice) {
+	p.affinityLabelMappings = attr
+}
+
+func (p *RegistrationConfiguration) AffinityLabelMappings() (*RegistrationAffinityLabelMappingSlice, bool) {
+	if p.affinityLabelMappings != nil {
+		return p.affinityLabelMappings, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationConfiguration) MustAffinityLabelMappings() *RegistrationAffinityLabelMappingSlice {
+	if p.affinityLabelMappings == nil {
+		panic("the affinityLabelMappings must not be nil, please use AffinityLabelMappings() function instead")
+	}
+	return p.affinityLabelMappings
+}
+
+func (p *RegistrationConfiguration) SetClusterMappings(attr *RegistrationClusterMappingSlice) {
+	p.clusterMappings = attr
+}
+
+func (p *RegistrationConfiguration) ClusterMappings() (*RegistrationClusterMappingSlice, bool) {
+	if p.clusterMappings != nil {
+		return p.clusterMappings, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationConfiguration) MustClusterMappings() *RegistrationClusterMappingSlice {
+	if p.clusterMappings == nil {
+		panic("the clusterMappings must not be nil, please use ClusterMappings() function instead")
+	}
+	return p.clusterMappings
+}
+
+func (p *RegistrationConfiguration) SetDomainMappings(attr *RegistrationDomainMappingSlice) {
+	p.domainMappings = attr
+}
+
+func (p *RegistrationConfiguration) DomainMappings() (*RegistrationDomainMappingSlice, bool) {
+	if p.domainMappings != nil {
+		return p.domainMappings, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationConfiguration) MustDomainMappings() *RegistrationDomainMappingSlice {
+	if p.domainMappings == nil {
+		panic("the domainMappings must not be nil, please use DomainMappings() function instead")
+	}
+	return p.domainMappings
+}
+
+func (p *RegistrationConfiguration) SetLunMappings(attr *RegistrationLunMappingSlice) {
+	p.lunMappings = attr
+}
+
+func (p *RegistrationConfiguration) LunMappings() (*RegistrationLunMappingSlice, bool) {
+	if p.lunMappings != nil {
+		return p.lunMappings, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationConfiguration) MustLunMappings() *RegistrationLunMappingSlice {
+	if p.lunMappings == nil {
+		panic("the lunMappings must not be nil, please use LunMappings() function instead")
+	}
+	return p.lunMappings
+}
+
+func (p *RegistrationConfiguration) SetRoleMappings(attr *RegistrationRoleMappingSlice) {
+	p.roleMappings = attr
+}
+
+func (p *RegistrationConfiguration) RoleMappings() (*RegistrationRoleMappingSlice, bool) {
+	if p.roleMappings != nil {
+		return p.roleMappings, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationConfiguration) MustRoleMappings() *RegistrationRoleMappingSlice {
+	if p.roleMappings == nil {
+		panic("the roleMappings must not be nil, please use RoleMappings() function instead")
+	}
+	return p.roleMappings
+}
+
+func (p *RegistrationConfiguration) SetVnicProfileMappings(attr *RegistrationVnicProfileMappingSlice) {
+	p.vnicProfileMappings = attr
+}
+
+func (p *RegistrationConfiguration) VnicProfileMappings() (*RegistrationVnicProfileMappingSlice, bool) {
+	if p.vnicProfileMappings != nil {
+		return p.vnicProfileMappings, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationConfiguration) MustVnicProfileMappings() *RegistrationVnicProfileMappingSlice {
+	if p.vnicProfileMappings == nil {
+		panic("the vnicProfileMappings must not be nil, please use VnicProfileMappings() function instead")
+	}
+	return p.vnicProfileMappings
+}
+
+type RegistrationDomainMapping struct {
+	Struct
+	from *Domain
+	to   *Domain
+}
+
+func (p *RegistrationDomainMapping) SetFrom(attr *Domain) {
+	p.from = attr
+}
+
+func (p *RegistrationDomainMapping) From() (*Domain, bool) {
+	if p.from != nil {
+		return p.from, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationDomainMapping) MustFrom() *Domain {
+	if p.from == nil {
+		panic("the from must not be nil, please use From() function instead")
+	}
+	return p.from
+}
+
+func (p *RegistrationDomainMapping) SetTo(attr *Domain) {
+	p.to = attr
+}
+
+func (p *RegistrationDomainMapping) To() (*Domain, bool) {
+	if p.to != nil {
+		return p.to, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationDomainMapping) MustTo() *Domain {
+	if p.to == nil {
+		panic("the to must not be nil, please use To() function instead")
+	}
+	return p.to
+}
+
+type RegistrationLunMapping struct {
+	Struct
+	from *Disk
+	to   *Disk
+}
+
+func (p *RegistrationLunMapping) SetFrom(attr *Disk) {
+	p.from = attr
+}
+
+func (p *RegistrationLunMapping) From() (*Disk, bool) {
+	if p.from != nil {
+		return p.from, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationLunMapping) MustFrom() *Disk {
+	if p.from == nil {
+		panic("the from must not be nil, please use From() function instead")
+	}
+	return p.from
+}
+
+func (p *RegistrationLunMapping) SetTo(attr *Disk) {
+	p.to = attr
+}
+
+func (p *RegistrationLunMapping) To() (*Disk, bool) {
+	if p.to != nil {
+		return p.to, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationLunMapping) MustTo() *Disk {
+	if p.to == nil {
+		panic("the to must not be nil, please use To() function instead")
+	}
+	return p.to
+}
+
+type RegistrationRoleMapping struct {
+	Struct
+	from *Role
+	to   *Role
+}
+
+func (p *RegistrationRoleMapping) SetFrom(attr *Role) {
+	p.from = attr
+}
+
+func (p *RegistrationRoleMapping) From() (*Role, bool) {
+	if p.from != nil {
+		return p.from, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationRoleMapping) MustFrom() *Role {
+	if p.from == nil {
+		panic("the from must not be nil, please use From() function instead")
+	}
+	return p.from
+}
+
+func (p *RegistrationRoleMapping) SetTo(attr *Role) {
+	p.to = attr
+}
+
+func (p *RegistrationRoleMapping) To() (*Role, bool) {
+	if p.to != nil {
+		return p.to, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationRoleMapping) MustTo() *Role {
+	if p.to == nil {
+		panic("the to must not be nil, please use To() function instead")
+	}
+	return p.to
+}
+
+type RegistrationVnicProfileMapping struct {
+	Struct
+	from *VnicProfile
+	to   *VnicProfile
+}
+
+func (p *RegistrationVnicProfileMapping) SetFrom(attr *VnicProfile) {
+	p.from = attr
+}
+
+func (p *RegistrationVnicProfileMapping) From() (*VnicProfile, bool) {
+	if p.from != nil {
+		return p.from, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationVnicProfileMapping) MustFrom() *VnicProfile {
+	if p.from == nil {
+		panic("the from must not be nil, please use From() function instead")
+	}
+	return p.from
+}
+
+func (p *RegistrationVnicProfileMapping) SetTo(attr *VnicProfile) {
+	p.to = attr
+}
+
+func (p *RegistrationVnicProfileMapping) To() (*VnicProfile, bool) {
+	if p.to != nil {
+		return p.to, true
+	}
+	return nil, false
+}
+
+func (p *RegistrationVnicProfileMapping) MustTo() *VnicProfile {
+	if p.to == nil {
+		panic("the to must not be nil, please use To() function instead")
+	}
+	return p.to
+}
+
 type ReportedConfiguration struct {
 	Struct
 	actualValue   *string
@@ -27197,91 +28855,93 @@ func (p *SkipIfSdActive) MustEnabled() bool {
 
 type Snapshot struct {
 	Struct
-	affinityLabels             *AffinityLabelSlice
-	applications               *ApplicationSlice
-	bios                       *Bios
-	cdroms                     *CdromSlice
-	cluster                    *Cluster
-	comment                    *string
-	console                    *Console
-	cpu                        *Cpu
-	cpuProfile                 *CpuProfile
-	cpuShares                  *int64
-	creationTime               *time.Time
-	customCompatibilityVersion *Version
-	customCpuModel             *string
-	customEmulatedMachine      *string
-	customProperties           *CustomPropertySlice
-	date                       *time.Time
-	deleteProtected            *bool
-	description                *string
-	diskAttachments            *DiskAttachmentSlice
-	display                    *Display
-	domain                     *Domain
-	externalHostProvider       *ExternalHostProvider
-	floppies                   *FloppySlice
-	fqdn                       *string
-	graphicsConsoles           *GraphicsConsoleSlice
-	guestOperatingSystem       *GuestOperatingSystem
-	guestTimeZone              *TimeZone
-	highAvailability           *HighAvailability
-	host                       *Host
-	hostDevices                *HostDeviceSlice
-	id                         *string
-	initialization             *Initialization
-	instanceType               *InstanceType
-	io                         *Io
-	katelloErrata              *KatelloErratumSlice
-	largeIcon                  *Icon
-	lease                      *StorageDomainLease
-	memory                     *int64
-	memoryPolicy               *MemoryPolicy
-	migration                  *MigrationOptions
-	migrationDowntime          *int64
-	name                       *string
-	nextRunConfigurationExists *bool
-	nics                       *NicSlice
-	numaNodes                  *NumaNodeSlice
-	numaTuneMode               *NumaTuneMode
-	origin                     *string
-	originalTemplate           *Template
-	os                         *OperatingSystem
-	payloads                   *PayloadSlice
-	permissions                *PermissionSlice
-	persistMemorystate         *bool
-	placementPolicy            *VmPlacementPolicy
-	quota                      *Quota
-	reportedDevices            *ReportedDeviceSlice
-	rngDevice                  *RngDevice
-	runOnce                    *bool
-	serialNumber               *SerialNumber
-	sessions                   *SessionSlice
-	smallIcon                  *Icon
-	snapshotStatus             *SnapshotStatus
-	snapshotType               *SnapshotType
-	snapshots                  *SnapshotSlice
-	soundcardEnabled           *bool
-	sso                        *Sso
-	startPaused                *bool
-	startTime                  *time.Time
-	stateless                  *bool
-	statistics                 *StatisticSlice
-	status                     *VmStatus
-	statusDetail               *string
-	stopReason                 *string
-	stopTime                   *time.Time
-	storageDomain              *StorageDomain
-	tags                       *TagSlice
-	template                   *Template
-	timeZone                   *TimeZone
-	tunnelMigration            *bool
-	type_                      *VmType
-	usb                        *Usb
-	useLatestTemplateVersion   *bool
-	virtioScsi                 *VirtioScsi
-	vm                         *Vm
-	vmPool                     *VmPool
-	watchdogs                  *WatchdogSlice
+	affinityLabels              *AffinityLabelSlice
+	applications                *ApplicationSlice
+	bios                        *Bios
+	cdroms                      *CdromSlice
+	cluster                     *Cluster
+	comment                     *string
+	console                     *Console
+	cpu                         *Cpu
+	cpuProfile                  *CpuProfile
+	cpuShares                   *int64
+	creationTime                *time.Time
+	customCompatibilityVersion  *Version
+	customCpuModel              *string
+	customEmulatedMachine       *string
+	customProperties            *CustomPropertySlice
+	date                        *time.Time
+	deleteProtected             *bool
+	description                 *string
+	diskAttachments             *DiskAttachmentSlice
+	display                     *Display
+	domain                      *Domain
+	externalHostProvider        *ExternalHostProvider
+	floppies                    *FloppySlice
+	fqdn                        *string
+	graphicsConsoles            *GraphicsConsoleSlice
+	guestOperatingSystem        *GuestOperatingSystem
+	guestTimeZone               *TimeZone
+	hasIllegalImages            *bool
+	highAvailability            *HighAvailability
+	host                        *Host
+	hostDevices                 *HostDeviceSlice
+	id                          *string
+	initialization              *Initialization
+	instanceType                *InstanceType
+	io                          *Io
+	katelloErrata               *KatelloErratumSlice
+	largeIcon                   *Icon
+	lease                       *StorageDomainLease
+	memory                      *int64
+	memoryPolicy                *MemoryPolicy
+	migration                   *MigrationOptions
+	migrationDowntime           *int64
+	name                        *string
+	nextRunConfigurationExists  *bool
+	nics                        *NicSlice
+	numaNodes                   *NumaNodeSlice
+	numaTuneMode                *NumaTuneMode
+	origin                      *string
+	originalTemplate            *Template
+	os                          *OperatingSystem
+	payloads                    *PayloadSlice
+	permissions                 *PermissionSlice
+	persistMemorystate          *bool
+	placementPolicy             *VmPlacementPolicy
+	quota                       *Quota
+	reportedDevices             *ReportedDeviceSlice
+	rngDevice                   *RngDevice
+	runOnce                     *bool
+	serialNumber                *SerialNumber
+	sessions                    *SessionSlice
+	smallIcon                   *Icon
+	snapshotStatus              *SnapshotStatus
+	snapshotType                *SnapshotType
+	snapshots                   *SnapshotSlice
+	soundcardEnabled            *bool
+	sso                         *Sso
+	startPaused                 *bool
+	startTime                   *time.Time
+	stateless                   *bool
+	statistics                  *StatisticSlice
+	status                      *VmStatus
+	statusDetail                *string
+	stopReason                  *string
+	stopTime                    *time.Time
+	storageDomain               *StorageDomain
+	storageErrorResumeBehaviour *VmStorageErrorResumeBehaviour
+	tags                        *TagSlice
+	template                    *Template
+	timeZone                    *TimeZone
+	tunnelMigration             *bool
+	type_                       *VmType
+	usb                         *Usb
+	useLatestTemplateVersion    *bool
+	virtioScsi                  *VirtioScsi
+	vm                          *Vm
+	vmPool                      *VmPool
+	watchdogs                   *WatchdogSlice
 }
 
 func (p *Snapshot) SetAffinityLabels(attr *AffinityLabelSlice) {
@@ -27777,6 +29437,25 @@ func (p *Snapshot) MustGuestTimeZone() *TimeZone {
 		panic("the guestTimeZone must not be nil, please use GuestTimeZone() function instead")
 	}
 	return p.guestTimeZone
+}
+
+func (p *Snapshot) SetHasIllegalImages(attr bool) {
+	p.hasIllegalImages = &attr
+}
+
+func (p *Snapshot) HasIllegalImages() (bool, bool) {
+	if p.hasIllegalImages != nil {
+		return *p.hasIllegalImages, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Snapshot) MustHasIllegalImages() bool {
+	if p.hasIllegalImages == nil {
+		panic("the hasIllegalImages must not be nil, please use HasIllegalImages() function instead")
+	}
+	return *p.hasIllegalImages
 }
 
 func (p *Snapshot) SetHighAvailability(attr *HighAvailability) {
@@ -28642,6 +30321,25 @@ func (p *Snapshot) MustStorageDomain() *StorageDomain {
 		panic("the storageDomain must not be nil, please use StorageDomain() function instead")
 	}
 	return p.storageDomain
+}
+
+func (p *Snapshot) SetStorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) {
+	p.storageErrorResumeBehaviour = &attr
+}
+
+func (p *Snapshot) StorageErrorResumeBehaviour() (VmStorageErrorResumeBehaviour, bool) {
+	if p.storageErrorResumeBehaviour != nil {
+		return *p.storageErrorResumeBehaviour, true
+	}
+	var zero VmStorageErrorResumeBehaviour
+	return zero, false
+}
+
+func (p *Snapshot) MustStorageErrorResumeBehaviour() VmStorageErrorResumeBehaviour {
+	if p.storageErrorResumeBehaviour == nil {
+		panic("the storageErrorResumeBehaviour must not be nil, please use StorageErrorResumeBehaviour() function instead")
+	}
+	return *p.storageErrorResumeBehaviour
 }
 
 func (p *Snapshot) SetTags(attr *TagSlice) {
@@ -30423,6 +32121,7 @@ func (p *StorageConnectionExtension) MustUsername() string {
 type StorageDomain struct {
 	Struct
 	available                  *int64
+	backup                     *bool
 	comment                    *string
 	committed                  *int64
 	criticalSpaceActionBlocker *int64
@@ -30473,6 +32172,25 @@ func (p *StorageDomain) MustAvailable() int64 {
 		panic("the available must not be nil, please use Available() function instead")
 	}
 	return *p.available
+}
+
+func (p *StorageDomain) SetBackup(attr bool) {
+	p.backup = &attr
+}
+
+func (p *StorageDomain) Backup() (bool, bool) {
+	if p.backup != nil {
+		return *p.backup, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *StorageDomain) MustBackup() bool {
+	if p.backup == nil {
+		panic("the backup must not be nil, please use Backup() function instead")
+	}
+	return *p.backup
 }
 
 func (p *StorageDomain) SetComment(attr string) {
@@ -31074,6 +32792,153 @@ func (p *StorageDomainLease) MustStorageDomain() *StorageDomain {
 	return p.storageDomain
 }
 
+type SystemOption struct {
+	Struct
+	comment     *string
+	description *string
+	id          *string
+	name        *string
+	values      *SystemOptionValueSlice
+}
+
+func (p *SystemOption) SetComment(attr string) {
+	p.comment = &attr
+}
+
+func (p *SystemOption) Comment() (string, bool) {
+	if p.comment != nil {
+		return *p.comment, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *SystemOption) MustComment() string {
+	if p.comment == nil {
+		panic("the comment must not be nil, please use Comment() function instead")
+	}
+	return *p.comment
+}
+
+func (p *SystemOption) SetDescription(attr string) {
+	p.description = &attr
+}
+
+func (p *SystemOption) Description() (string, bool) {
+	if p.description != nil {
+		return *p.description, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *SystemOption) MustDescription() string {
+	if p.description == nil {
+		panic("the description must not be nil, please use Description() function instead")
+	}
+	return *p.description
+}
+
+func (p *SystemOption) SetId(attr string) {
+	p.id = &attr
+}
+
+func (p *SystemOption) Id() (string, bool) {
+	if p.id != nil {
+		return *p.id, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *SystemOption) MustId() string {
+	if p.id == nil {
+		panic("the id must not be nil, please use Id() function instead")
+	}
+	return *p.id
+}
+
+func (p *SystemOption) SetName(attr string) {
+	p.name = &attr
+}
+
+func (p *SystemOption) Name() (string, bool) {
+	if p.name != nil {
+		return *p.name, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *SystemOption) MustName() string {
+	if p.name == nil {
+		panic("the name must not be nil, please use Name() function instead")
+	}
+	return *p.name
+}
+
+func (p *SystemOption) SetValues(attr *SystemOptionValueSlice) {
+	p.values = attr
+}
+
+func (p *SystemOption) Values() (*SystemOptionValueSlice, bool) {
+	if p.values != nil {
+		return p.values, true
+	}
+	return nil, false
+}
+
+func (p *SystemOption) MustValues() *SystemOptionValueSlice {
+	if p.values == nil {
+		panic("the values must not be nil, please use Values() function instead")
+	}
+	return p.values
+}
+
+type SystemOptionValue struct {
+	Struct
+	value   *string
+	version *string
+}
+
+func (p *SystemOptionValue) SetValue(attr string) {
+	p.value = &attr
+}
+
+func (p *SystemOptionValue) Value() (string, bool) {
+	if p.value != nil {
+		return *p.value, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *SystemOptionValue) MustValue() string {
+	if p.value == nil {
+		panic("the value must not be nil, please use Value() function instead")
+	}
+	return *p.value
+}
+
+func (p *SystemOptionValue) SetVersion(attr string) {
+	p.version = &attr
+}
+
+func (p *SystemOptionValue) Version() (string, bool) {
+	if p.version != nil {
+		return *p.version, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *SystemOptionValue) MustVersion() string {
+	if p.version == nil {
+		panic("the version must not be nil, please use Version() function instead")
+	}
+	return *p.version
+}
+
 type Tag struct {
 	Struct
 	comment     *string
@@ -31274,59 +33139,61 @@ func (p *Tag) MustVm() *Vm {
 
 type Template struct {
 	Struct
-	bios                       *Bios
-	cdroms                     *CdromSlice
-	cluster                    *Cluster
-	comment                    *string
-	console                    *Console
-	cpu                        *Cpu
-	cpuProfile                 *CpuProfile
-	cpuShares                  *int64
-	creationTime               *time.Time
-	customCompatibilityVersion *Version
-	customCpuModel             *string
-	customEmulatedMachine      *string
-	customProperties           *CustomPropertySlice
-	deleteProtected            *bool
-	description                *string
-	diskAttachments            *DiskAttachmentSlice
-	display                    *Display
-	domain                     *Domain
-	graphicsConsoles           *GraphicsConsoleSlice
-	highAvailability           *HighAvailability
-	id                         *string
-	initialization             *Initialization
-	io                         *Io
-	largeIcon                  *Icon
-	lease                      *StorageDomainLease
-	memory                     *int64
-	memoryPolicy               *MemoryPolicy
-	migration                  *MigrationOptions
-	migrationDowntime          *int64
-	name                       *string
-	nics                       *NicSlice
-	origin                     *string
-	os                         *OperatingSystem
-	permissions                *PermissionSlice
-	quota                      *Quota
-	rngDevice                  *RngDevice
-	serialNumber               *SerialNumber
-	smallIcon                  *Icon
-	soundcardEnabled           *bool
-	sso                        *Sso
-	startPaused                *bool
-	stateless                  *bool
-	status                     *TemplateStatus
-	storageDomain              *StorageDomain
-	tags                       *TagSlice
-	timeZone                   *TimeZone
-	tunnelMigration            *bool
-	type_                      *VmType
-	usb                        *Usb
-	version                    *TemplateVersion
-	virtioScsi                 *VirtioScsi
-	vm                         *Vm
-	watchdogs                  *WatchdogSlice
+	bios                        *Bios
+	cdroms                      *CdromSlice
+	cluster                     *Cluster
+	comment                     *string
+	console                     *Console
+	cpu                         *Cpu
+	cpuProfile                  *CpuProfile
+	cpuShares                   *int64
+	creationTime                *time.Time
+	customCompatibilityVersion  *Version
+	customCpuModel              *string
+	customEmulatedMachine       *string
+	customProperties            *CustomPropertySlice
+	deleteProtected             *bool
+	description                 *string
+	diskAttachments             *DiskAttachmentSlice
+	display                     *Display
+	domain                      *Domain
+	graphicsConsoles            *GraphicsConsoleSlice
+	highAvailability            *HighAvailability
+	id                          *string
+	initialization              *Initialization
+	io                          *Io
+	largeIcon                   *Icon
+	lease                       *StorageDomainLease
+	memory                      *int64
+	memoryPolicy                *MemoryPolicy
+	migration                   *MigrationOptions
+	migrationDowntime           *int64
+	name                        *string
+	nics                        *NicSlice
+	origin                      *string
+	os                          *OperatingSystem
+	permissions                 *PermissionSlice
+	placementPolicy             *VmPlacementPolicy
+	quota                       *Quota
+	rngDevice                   *RngDevice
+	serialNumber                *SerialNumber
+	smallIcon                   *Icon
+	soundcardEnabled            *bool
+	sso                         *Sso
+	startPaused                 *bool
+	stateless                   *bool
+	status                      *TemplateStatus
+	storageDomain               *StorageDomain
+	storageErrorResumeBehaviour *VmStorageErrorResumeBehaviour
+	tags                        *TagSlice
+	timeZone                    *TimeZone
+	tunnelMigration             *bool
+	type_                       *VmType
+	usb                         *Usb
+	version                     *TemplateVersion
+	virtioScsi                  *VirtioScsi
+	vm                          *Vm
+	watchdogs                   *WatchdogSlice
 }
 
 func (p *Template) SetBios(attr *Bios) {
@@ -31953,6 +33820,24 @@ func (p *Template) MustPermissions() *PermissionSlice {
 	return p.permissions
 }
 
+func (p *Template) SetPlacementPolicy(attr *VmPlacementPolicy) {
+	p.placementPolicy = attr
+}
+
+func (p *Template) PlacementPolicy() (*VmPlacementPolicy, bool) {
+	if p.placementPolicy != nil {
+		return p.placementPolicy, true
+	}
+	return nil, false
+}
+
+func (p *Template) MustPlacementPolicy() *VmPlacementPolicy {
+	if p.placementPolicy == nil {
+		panic("the placementPolicy must not be nil, please use PlacementPolicy() function instead")
+	}
+	return p.placementPolicy
+}
+
 func (p *Template) SetQuota(attr *Quota) {
 	p.quota = attr
 }
@@ -32135,6 +34020,25 @@ func (p *Template) MustStorageDomain() *StorageDomain {
 		panic("the storageDomain must not be nil, please use StorageDomain() function instead")
 	}
 	return p.storageDomain
+}
+
+func (p *Template) SetStorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) {
+	p.storageErrorResumeBehaviour = &attr
+}
+
+func (p *Template) StorageErrorResumeBehaviour() (VmStorageErrorResumeBehaviour, bool) {
+	if p.storageErrorResumeBehaviour != nil {
+		return *p.storageErrorResumeBehaviour, true
+	}
+	var zero VmStorageErrorResumeBehaviour
+	return zero, false
+}
+
+func (p *Template) MustStorageErrorResumeBehaviour() VmStorageErrorResumeBehaviour {
+	if p.storageErrorResumeBehaviour == nil {
+		panic("the storageErrorResumeBehaviour must not be nil, please use StorageErrorResumeBehaviour() function instead")
+	}
+	return *p.storageErrorResumeBehaviour
 }
 
 func (p *Template) SetTags(attr *TagSlice) {
@@ -33665,86 +35569,88 @@ func (p *Vlan) MustId() int64 {
 
 type Vm struct {
 	Struct
-	affinityLabels             *AffinityLabelSlice
-	applications               *ApplicationSlice
-	bios                       *Bios
-	cdroms                     *CdromSlice
-	cluster                    *Cluster
-	comment                    *string
-	console                    *Console
-	cpu                        *Cpu
-	cpuProfile                 *CpuProfile
-	cpuShares                  *int64
-	creationTime               *time.Time
-	customCompatibilityVersion *Version
-	customCpuModel             *string
-	customEmulatedMachine      *string
-	customProperties           *CustomPropertySlice
-	deleteProtected            *bool
-	description                *string
-	diskAttachments            *DiskAttachmentSlice
-	display                    *Display
-	domain                     *Domain
-	externalHostProvider       *ExternalHostProvider
-	floppies                   *FloppySlice
-	fqdn                       *string
-	graphicsConsoles           *GraphicsConsoleSlice
-	guestOperatingSystem       *GuestOperatingSystem
-	guestTimeZone              *TimeZone
-	highAvailability           *HighAvailability
-	host                       *Host
-	hostDevices                *HostDeviceSlice
-	id                         *string
-	initialization             *Initialization
-	instanceType               *InstanceType
-	io                         *Io
-	katelloErrata              *KatelloErratumSlice
-	largeIcon                  *Icon
-	lease                      *StorageDomainLease
-	memory                     *int64
-	memoryPolicy               *MemoryPolicy
-	migration                  *MigrationOptions
-	migrationDowntime          *int64
-	name                       *string
-	nextRunConfigurationExists *bool
-	nics                       *NicSlice
-	numaNodes                  *NumaNodeSlice
-	numaTuneMode               *NumaTuneMode
-	origin                     *string
-	originalTemplate           *Template
-	os                         *OperatingSystem
-	payloads                   *PayloadSlice
-	permissions                *PermissionSlice
-	placementPolicy            *VmPlacementPolicy
-	quota                      *Quota
-	reportedDevices            *ReportedDeviceSlice
-	rngDevice                  *RngDevice
-	runOnce                    *bool
-	serialNumber               *SerialNumber
-	sessions                   *SessionSlice
-	smallIcon                  *Icon
-	snapshots                  *SnapshotSlice
-	soundcardEnabled           *bool
-	sso                        *Sso
-	startPaused                *bool
-	startTime                  *time.Time
-	stateless                  *bool
-	statistics                 *StatisticSlice
-	status                     *VmStatus
-	statusDetail               *string
-	stopReason                 *string
-	stopTime                   *time.Time
-	storageDomain              *StorageDomain
-	tags                       *TagSlice
-	template                   *Template
-	timeZone                   *TimeZone
-	tunnelMigration            *bool
-	type_                      *VmType
-	usb                        *Usb
-	useLatestTemplateVersion   *bool
-	virtioScsi                 *VirtioScsi
-	vmPool                     *VmPool
-	watchdogs                  *WatchdogSlice
+	affinityLabels              *AffinityLabelSlice
+	applications                *ApplicationSlice
+	bios                        *Bios
+	cdroms                      *CdromSlice
+	cluster                     *Cluster
+	comment                     *string
+	console                     *Console
+	cpu                         *Cpu
+	cpuProfile                  *CpuProfile
+	cpuShares                   *int64
+	creationTime                *time.Time
+	customCompatibilityVersion  *Version
+	customCpuModel              *string
+	customEmulatedMachine       *string
+	customProperties            *CustomPropertySlice
+	deleteProtected             *bool
+	description                 *string
+	diskAttachments             *DiskAttachmentSlice
+	display                     *Display
+	domain                      *Domain
+	externalHostProvider        *ExternalHostProvider
+	floppies                    *FloppySlice
+	fqdn                        *string
+	graphicsConsoles            *GraphicsConsoleSlice
+	guestOperatingSystem        *GuestOperatingSystem
+	guestTimeZone               *TimeZone
+	hasIllegalImages            *bool
+	highAvailability            *HighAvailability
+	host                        *Host
+	hostDevices                 *HostDeviceSlice
+	id                          *string
+	initialization              *Initialization
+	instanceType                *InstanceType
+	io                          *Io
+	katelloErrata               *KatelloErratumSlice
+	largeIcon                   *Icon
+	lease                       *StorageDomainLease
+	memory                      *int64
+	memoryPolicy                *MemoryPolicy
+	migration                   *MigrationOptions
+	migrationDowntime           *int64
+	name                        *string
+	nextRunConfigurationExists  *bool
+	nics                        *NicSlice
+	numaNodes                   *NumaNodeSlice
+	numaTuneMode                *NumaTuneMode
+	origin                      *string
+	originalTemplate            *Template
+	os                          *OperatingSystem
+	payloads                    *PayloadSlice
+	permissions                 *PermissionSlice
+	placementPolicy             *VmPlacementPolicy
+	quota                       *Quota
+	reportedDevices             *ReportedDeviceSlice
+	rngDevice                   *RngDevice
+	runOnce                     *bool
+	serialNumber                *SerialNumber
+	sessions                    *SessionSlice
+	smallIcon                   *Icon
+	snapshots                   *SnapshotSlice
+	soundcardEnabled            *bool
+	sso                         *Sso
+	startPaused                 *bool
+	startTime                   *time.Time
+	stateless                   *bool
+	statistics                  *StatisticSlice
+	status                      *VmStatus
+	statusDetail                *string
+	stopReason                  *string
+	stopTime                    *time.Time
+	storageDomain               *StorageDomain
+	storageErrorResumeBehaviour *VmStorageErrorResumeBehaviour
+	tags                        *TagSlice
+	template                    *Template
+	timeZone                    *TimeZone
+	tunnelMigration             *bool
+	type_                       *VmType
+	usb                         *Usb
+	useLatestTemplateVersion    *bool
+	virtioScsi                  *VirtioScsi
+	vmPool                      *VmPool
+	watchdogs                   *WatchdogSlice
 }
 
 func (p *Vm) SetAffinityLabels(attr *AffinityLabelSlice) {
@@ -34221,6 +36127,25 @@ func (p *Vm) MustGuestTimeZone() *TimeZone {
 		panic("the guestTimeZone must not be nil, please use GuestTimeZone() function instead")
 	}
 	return p.guestTimeZone
+}
+
+func (p *Vm) SetHasIllegalImages(attr bool) {
+	p.hasIllegalImages = &attr
+}
+
+func (p *Vm) HasIllegalImages() (bool, bool) {
+	if p.hasIllegalImages != nil {
+		return *p.hasIllegalImages, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Vm) MustHasIllegalImages() bool {
+	if p.hasIllegalImages == nil {
+		panic("the hasIllegalImages must not be nil, please use HasIllegalImages() function instead")
+	}
+	return *p.hasIllegalImages
 }
 
 func (p *Vm) SetHighAvailability(attr *HighAvailability) {
@@ -35031,6 +36956,25 @@ func (p *Vm) MustStorageDomain() *StorageDomain {
 	return p.storageDomain
 }
 
+func (p *Vm) SetStorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) {
+	p.storageErrorResumeBehaviour = &attr
+}
+
+func (p *Vm) StorageErrorResumeBehaviour() (VmStorageErrorResumeBehaviour, bool) {
+	if p.storageErrorResumeBehaviour != nil {
+		return *p.storageErrorResumeBehaviour, true
+	}
+	var zero VmStorageErrorResumeBehaviour
+	return zero, false
+}
+
+func (p *Vm) MustStorageErrorResumeBehaviour() VmStorageErrorResumeBehaviour {
+	if p.storageErrorResumeBehaviour == nil {
+		panic("the storageErrorResumeBehaviour must not be nil, please use StorageErrorResumeBehaviour() function instead")
+	}
+	return *p.storageErrorResumeBehaviour
+}
+
 func (p *Vm) SetTags(attr *TagSlice) {
 	p.tags = attr
 }
@@ -35216,49 +37160,51 @@ func (p *Vm) MustWatchdogs() *WatchdogSlice {
 
 type VmBase struct {
 	Struct
-	bios                       *Bios
-	cluster                    *Cluster
-	comment                    *string
-	console                    *Console
-	cpu                        *Cpu
-	cpuProfile                 *CpuProfile
-	cpuShares                  *int64
-	creationTime               *time.Time
-	customCompatibilityVersion *Version
-	customCpuModel             *string
-	customEmulatedMachine      *string
-	customProperties           *CustomPropertySlice
-	deleteProtected            *bool
-	description                *string
-	display                    *Display
-	domain                     *Domain
-	highAvailability           *HighAvailability
-	id                         *string
-	initialization             *Initialization
-	io                         *Io
-	largeIcon                  *Icon
-	lease                      *StorageDomainLease
-	memory                     *int64
-	memoryPolicy               *MemoryPolicy
-	migration                  *MigrationOptions
-	migrationDowntime          *int64
-	name                       *string
-	origin                     *string
-	os                         *OperatingSystem
-	quota                      *Quota
-	rngDevice                  *RngDevice
-	serialNumber               *SerialNumber
-	smallIcon                  *Icon
-	soundcardEnabled           *bool
-	sso                        *Sso
-	startPaused                *bool
-	stateless                  *bool
-	storageDomain              *StorageDomain
-	timeZone                   *TimeZone
-	tunnelMigration            *bool
-	type_                      *VmType
-	usb                        *Usb
-	virtioScsi                 *VirtioScsi
+	bios                        *Bios
+	cluster                     *Cluster
+	comment                     *string
+	console                     *Console
+	cpu                         *Cpu
+	cpuProfile                  *CpuProfile
+	cpuShares                   *int64
+	creationTime                *time.Time
+	customCompatibilityVersion  *Version
+	customCpuModel              *string
+	customEmulatedMachine       *string
+	customProperties            *CustomPropertySlice
+	deleteProtected             *bool
+	description                 *string
+	display                     *Display
+	domain                      *Domain
+	highAvailability            *HighAvailability
+	id                          *string
+	initialization              *Initialization
+	io                          *Io
+	largeIcon                   *Icon
+	lease                       *StorageDomainLease
+	memory                      *int64
+	memoryPolicy                *MemoryPolicy
+	migration                   *MigrationOptions
+	migrationDowntime           *int64
+	name                        *string
+	origin                      *string
+	os                          *OperatingSystem
+	placementPolicy             *VmPlacementPolicy
+	quota                       *Quota
+	rngDevice                   *RngDevice
+	serialNumber                *SerialNumber
+	smallIcon                   *Icon
+	soundcardEnabled            *bool
+	sso                         *Sso
+	startPaused                 *bool
+	stateless                   *bool
+	storageDomain               *StorageDomain
+	storageErrorResumeBehaviour *VmStorageErrorResumeBehaviour
+	timeZone                    *TimeZone
+	tunnelMigration             *bool
+	type_                       *VmType
+	usb                         *Usb
+	virtioScsi                  *VirtioScsi
 }
 
 func (p *VmBase) SetBios(attr *Bios) {
@@ -35795,6 +37741,24 @@ func (p *VmBase) MustOs() *OperatingSystem {
 	return p.os
 }
 
+func (p *VmBase) SetPlacementPolicy(attr *VmPlacementPolicy) {
+	p.placementPolicy = attr
+}
+
+func (p *VmBase) PlacementPolicy() (*VmPlacementPolicy, bool) {
+	if p.placementPolicy != nil {
+		return p.placementPolicy, true
+	}
+	return nil, false
+}
+
+func (p *VmBase) MustPlacementPolicy() *VmPlacementPolicy {
+	if p.placementPolicy == nil {
+		panic("the placementPolicy must not be nil, please use PlacementPolicy() function instead")
+	}
+	return p.placementPolicy
+}
+
 func (p *VmBase) SetQuota(attr *Quota) {
 	p.quota = attr
 }
@@ -35958,6 +37922,25 @@ func (p *VmBase) MustStorageDomain() *StorageDomain {
 		panic("the storageDomain must not be nil, please use StorageDomain() function instead")
 	}
 	return p.storageDomain
+}
+
+func (p *VmBase) SetStorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) {
+	p.storageErrorResumeBehaviour = &attr
+}
+
+func (p *VmBase) StorageErrorResumeBehaviour() (VmStorageErrorResumeBehaviour, bool) {
+	if p.storageErrorResumeBehaviour != nil {
+		return *p.storageErrorResumeBehaviour, true
+	}
+	var zero VmStorageErrorResumeBehaviour
+	return zero, false
+}
+
+func (p *VmBase) MustStorageErrorResumeBehaviour() VmStorageErrorResumeBehaviour {
+	if p.storageErrorResumeBehaviour == nil {
+		panic("the storageErrorResumeBehaviour must not be nil, please use StorageErrorResumeBehaviour() function instead")
+	}
+	return *p.storageErrorResumeBehaviour
 }
 
 func (p *VmBase) SetTimeZone(attr *TimeZone) {
@@ -37818,6 +39801,30 @@ func (op *ClusterSlice) SetSlice(slice []Cluster) {
 	op.slice = slice
 }
 
+type ClusterFeatureSlice struct {
+	href  *string
+	slice []ClusterFeature
+}
+
+func (op *ClusterFeatureSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *ClusterFeatureSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *ClusterFeatureSlice) Slice() []ClusterFeature {
+	return op.slice
+}
+
+func (op *ClusterFeatureSlice) SetSlice(slice []ClusterFeature) {
+	op.slice = slice
+}
+
 type ClusterLevelSlice struct {
 	href  *string
 	slice []ClusterLevel
@@ -38487,6 +40494,30 @@ func (op *ExternalHostProviderSlice) Slice() []ExternalHostProvider {
 }
 
 func (op *ExternalHostProviderSlice) SetSlice(slice []ExternalHostProvider) {
+	op.slice = slice
+}
+
+type ExternalNetworkProviderConfigurationSlice struct {
+	href  *string
+	slice []ExternalNetworkProviderConfiguration
+}
+
+func (op *ExternalNetworkProviderConfigurationSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *ExternalNetworkProviderConfigurationSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *ExternalNetworkProviderConfigurationSlice) Slice() []ExternalNetworkProviderConfiguration {
+	return op.slice
+}
+
+func (op *ExternalNetworkProviderConfigurationSlice) SetSlice(slice []ExternalNetworkProviderConfiguration) {
 	op.slice = slice
 }
 
@@ -39591,6 +41622,30 @@ func (op *KsmSlice) Slice() []Ksm {
 }
 
 func (op *KsmSlice) SetSlice(slice []Ksm) {
+	op.slice = slice
+}
+
+type LinkLayerDiscoveryProtocolElementSlice struct {
+	href  *string
+	slice []LinkLayerDiscoveryProtocolElement
+}
+
+func (op *LinkLayerDiscoveryProtocolElementSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *LinkLayerDiscoveryProtocolElementSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *LinkLayerDiscoveryProtocolElementSlice) Slice() []LinkLayerDiscoveryProtocolElement {
+	return op.slice
+}
+
+func (op *LinkLayerDiscoveryProtocolElementSlice) SetSlice(slice []LinkLayerDiscoveryProtocolElement) {
 	op.slice = slice
 }
 
@@ -40794,6 +42849,198 @@ func (op *RateSlice) SetSlice(slice []Rate) {
 	op.slice = slice
 }
 
+type RegistrationAffinityGroupMappingSlice struct {
+	href  *string
+	slice []RegistrationAffinityGroupMapping
+}
+
+func (op *RegistrationAffinityGroupMappingSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *RegistrationAffinityGroupMappingSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *RegistrationAffinityGroupMappingSlice) Slice() []RegistrationAffinityGroupMapping {
+	return op.slice
+}
+
+func (op *RegistrationAffinityGroupMappingSlice) SetSlice(slice []RegistrationAffinityGroupMapping) {
+	op.slice = slice
+}
+
+type RegistrationAffinityLabelMappingSlice struct {
+	href  *string
+	slice []RegistrationAffinityLabelMapping
+}
+
+func (op *RegistrationAffinityLabelMappingSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *RegistrationAffinityLabelMappingSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *RegistrationAffinityLabelMappingSlice) Slice() []RegistrationAffinityLabelMapping {
+	return op.slice
+}
+
+func (op *RegistrationAffinityLabelMappingSlice) SetSlice(slice []RegistrationAffinityLabelMapping) {
+	op.slice = slice
+}
+
+type RegistrationClusterMappingSlice struct {
+	href  *string
+	slice []RegistrationClusterMapping
+}
+
+func (op *RegistrationClusterMappingSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *RegistrationClusterMappingSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *RegistrationClusterMappingSlice) Slice() []RegistrationClusterMapping {
+	return op.slice
+}
+
+func (op *RegistrationClusterMappingSlice) SetSlice(slice []RegistrationClusterMapping) {
+	op.slice = slice
+}
+
+type RegistrationConfigurationSlice struct {
+	href  *string
+	slice []RegistrationConfiguration
+}
+
+func (op *RegistrationConfigurationSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *RegistrationConfigurationSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *RegistrationConfigurationSlice) Slice() []RegistrationConfiguration {
+	return op.slice
+}
+
+func (op *RegistrationConfigurationSlice) SetSlice(slice []RegistrationConfiguration) {
+	op.slice = slice
+}
+
+type RegistrationDomainMappingSlice struct {
+	href  *string
+	slice []RegistrationDomainMapping
+}
+
+func (op *RegistrationDomainMappingSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *RegistrationDomainMappingSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *RegistrationDomainMappingSlice) Slice() []RegistrationDomainMapping {
+	return op.slice
+}
+
+func (op *RegistrationDomainMappingSlice) SetSlice(slice []RegistrationDomainMapping) {
+	op.slice = slice
+}
+
+type RegistrationLunMappingSlice struct {
+	href  *string
+	slice []RegistrationLunMapping
+}
+
+func (op *RegistrationLunMappingSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *RegistrationLunMappingSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *RegistrationLunMappingSlice) Slice() []RegistrationLunMapping {
+	return op.slice
+}
+
+func (op *RegistrationLunMappingSlice) SetSlice(slice []RegistrationLunMapping) {
+	op.slice = slice
+}
+
+type RegistrationRoleMappingSlice struct {
+	href  *string
+	slice []RegistrationRoleMapping
+}
+
+func (op *RegistrationRoleMappingSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *RegistrationRoleMappingSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *RegistrationRoleMappingSlice) Slice() []RegistrationRoleMapping {
+	return op.slice
+}
+
+func (op *RegistrationRoleMappingSlice) SetSlice(slice []RegistrationRoleMapping) {
+	op.slice = slice
+}
+
+type RegistrationVnicProfileMappingSlice struct {
+	href  *string
+	slice []RegistrationVnicProfileMapping
+}
+
+func (op *RegistrationVnicProfileMappingSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *RegistrationVnicProfileMappingSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *RegistrationVnicProfileMappingSlice) Slice() []RegistrationVnicProfileMapping {
+	return op.slice
+}
+
+func (op *RegistrationVnicProfileMappingSlice) SetSlice(slice []RegistrationVnicProfileMapping) {
+	op.slice = slice
+}
+
 type ReportedConfigurationSlice struct {
 	href  *string
 	slice []ReportedConfiguration
@@ -41343,6 +43590,54 @@ func (op *StorageDomainLeaseSlice) Slice() []StorageDomainLease {
 }
 
 func (op *StorageDomainLeaseSlice) SetSlice(slice []StorageDomainLease) {
+	op.slice = slice
+}
+
+type SystemOptionSlice struct {
+	href  *string
+	slice []SystemOption
+}
+
+func (op *SystemOptionSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *SystemOptionSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *SystemOptionSlice) Slice() []SystemOption {
+	return op.slice
+}
+
+func (op *SystemOptionSlice) SetSlice(slice []SystemOption) {
+	op.slice = slice
+}
+
+type SystemOptionValueSlice struct {
+	href  *string
+	slice []SystemOptionValue
+}
+
+func (op *SystemOptionValueSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *SystemOptionValueSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *SystemOptionValueSlice) Slice() []SystemOptionValue {
+	return op.slice
+}
+
+func (op *SystemOptionValueSlice) SetSlice(slice []SystemOptionValue) {
 	op.slice = slice
 }
 
@@ -42021,6 +44316,24 @@ func (builder *ActionBuilder) Async(attr bool) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) Attachment(attr *DiskAttachment) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetAttachment(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) AuthorizedKey(attr *AuthorizedKey) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetAuthorizedKey(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) Bricks(attr *GlusterBrickSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42081,6 +44394,15 @@ func (builder *ActionBuilder) Clone(attr bool) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) ClonePermissions(attr bool) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetClonePermissions(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) Cluster(attr *Cluster) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42105,6 +44427,15 @@ func (builder *ActionBuilder) Comment(attr string) *ActionBuilder {
 	}
 
 	builder.action.SetComment(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) Connection(attr *StorageConnection) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetConnection(attr)
 	return builder
 }
 
@@ -42153,6 +44484,15 @@ func (builder *ActionBuilder) Details(attr *GlusterVolumeProfileDetails) *Action
 	return builder
 }
 
+func (builder *ActionBuilder) Directory(attr string) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetDirectory(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) DiscardSnapshots(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42162,12 +44502,42 @@ func (builder *ActionBuilder) DiscardSnapshots(attr bool) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) DiscoveredTargets(attr *IscsiDetailsSlice) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetDiscoveredTargets(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) DiscoveredTargetsOfAny(anys ...IscsiDetails) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.action.discoveredTargets == nil {
+		builder.action.discoveredTargets = new(IscsiDetailsSlice)
+	}
+	builder.action.discoveredTargets.slice = append(builder.action.discoveredTargets.slice, anys...)
+	return builder
+}
+
 func (builder *ActionBuilder) Disk(attr *Disk) *ActionBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.action.SetDisk(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) DiskProfile(attr *DiskProfile) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetDiskProfile(attr)
 	return builder
 }
 
@@ -42216,6 +44586,15 @@ func (builder *ActionBuilder) FenceType(attr string) *ActionBuilder {
 	}
 
 	builder.action.SetFenceType(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) Filename(attr string) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetFilename(attr)
 	return builder
 }
 
@@ -42282,6 +44661,15 @@ func (builder *ActionBuilder) Image(attr string) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) ImageTransfer(attr *ImageTransfer) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetImageTransfer(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) ImportAsTemplate(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42333,6 +44721,15 @@ func (builder *ActionBuilder) Job(attr *Job) *ActionBuilder {
 	}
 
 	builder.action.SetJob(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) Lease(attr *StorageDomainLease) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetLease(attr)
 	return builder
 }
 
@@ -42456,6 +44853,15 @@ func (builder *ActionBuilder) Pause(attr bool) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) Permission(attr *Permission) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetPermission(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) PowerManagement(attr *PowerManagement) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42474,6 +44880,15 @@ func (builder *ActionBuilder) ProxyTicket(attr *ProxyTicket) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) Quota(attr *Quota) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetQuota(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) Reason(attr string) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -42489,6 +44904,24 @@ func (builder *ActionBuilder) ReassignBadMacs(attr bool) *ActionBuilder {
 	}
 
 	builder.action.SetReassignBadMacs(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) Reboot(attr bool) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetReboot(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) RegistrationConfiguration(attr *RegistrationConfiguration) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetRegistrationConfiguration(attr)
 	return builder
 }
 
@@ -42768,6 +45201,15 @@ func (builder *ActionBuilder) VnicProfileMappingsOfAny(anys ...VnicProfileMappin
 		builder.action.vnicProfileMappings = new(VnicProfileMappingSlice)
 	}
 	builder.action.vnicProfileMappings.slice = append(builder.action.vnicProfileMappings.slice, anys...)
+	return builder
+}
+
+func (builder *ActionBuilder) Volatile(attr bool) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetVolatile(attr)
 	return builder
 }
 
@@ -43390,6 +45832,24 @@ type ApiBuilder struct {
 
 func NewApiBuilder() *ApiBuilder {
 	return &ApiBuilder{api: &Api{}, err: nil}
+}
+
+func (builder *ApiBuilder) AuthenticatedUser(attr *User) *ApiBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.api.SetAuthenticatedUser(attr)
+	return builder
+}
+
+func (builder *ApiBuilder) EffectiveUser(attr *User) *ApiBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.api.SetEffectiveUser(attr)
+	return builder
 }
 
 func (builder *ApiBuilder) ProductInfo(attr *ProductInfo) *ApiBuilder {
@@ -44711,6 +47171,27 @@ func (builder *ClusterBuilder) Display(attr *Display) *ClusterBuilder {
 	return builder
 }
 
+func (builder *ClusterBuilder) EnabledFeatures(attr *ClusterFeatureSlice) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.cluster.SetEnabledFeatures(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) EnabledFeaturesOfAny(anys ...ClusterFeature) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.enabledFeatures == nil {
+		builder.cluster.enabledFeatures = new(ClusterFeatureSlice)
+	}
+	builder.cluster.enabledFeatures.slice = append(builder.cluster.enabledFeatures.slice, anys...)
+	return builder
+}
+
 func (builder *ClusterBuilder) ErrorHandling(attr *ErrorHandling) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -44720,12 +47201,42 @@ func (builder *ClusterBuilder) ErrorHandling(attr *ErrorHandling) *ClusterBuilde
 	return builder
 }
 
+func (builder *ClusterBuilder) ExternalNetworkProviders(attr *ExternalProviderSlice) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.cluster.SetExternalNetworkProviders(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) ExternalNetworkProvidersOfAny(anys ...ExternalProvider) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.cluster.externalNetworkProviders == nil {
+		builder.cluster.externalNetworkProviders = new(ExternalProviderSlice)
+	}
+	builder.cluster.externalNetworkProviders.slice = append(builder.cluster.externalNetworkProviders.slice, anys...)
+	return builder
+}
+
 func (builder *ClusterBuilder) FencingPolicy(attr *FencingPolicy) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.cluster.SetFencingPolicy(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) FirewallType(attr FirewallType) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.cluster.SetFirewallType(attr)
 	return builder
 }
 
@@ -45076,6 +47587,83 @@ func (builder *ClusterBuilder) MustBuild() *Cluster {
 	return builder.cluster
 }
 
+type ClusterFeatureBuilder struct {
+	clusterFeature *ClusterFeature
+	err            error
+}
+
+func NewClusterFeatureBuilder() *ClusterFeatureBuilder {
+	return &ClusterFeatureBuilder{clusterFeature: &ClusterFeature{}, err: nil}
+}
+
+func (builder *ClusterFeatureBuilder) ClusterLevel(attr *ClusterLevel) *ClusterFeatureBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.clusterFeature.SetClusterLevel(attr)
+	return builder
+}
+
+func (builder *ClusterFeatureBuilder) Comment(attr string) *ClusterFeatureBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.clusterFeature.SetComment(attr)
+	return builder
+}
+
+func (builder *ClusterFeatureBuilder) Description(attr string) *ClusterFeatureBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.clusterFeature.SetDescription(attr)
+	return builder
+}
+
+func (builder *ClusterFeatureBuilder) Id(attr string) *ClusterFeatureBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.clusterFeature.SetId(attr)
+	return builder
+}
+
+func (builder *ClusterFeatureBuilder) Name(attr string) *ClusterFeatureBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.clusterFeature.SetName(attr)
+	return builder
+}
+
+func (builder *ClusterFeatureBuilder) Href(href string) *ClusterFeatureBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.clusterFeature.SetHref(href)
+	return builder
+}
+
+func (builder *ClusterFeatureBuilder) Build() (*ClusterFeature, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.clusterFeature, nil
+}
+
+func (builder *ClusterFeatureBuilder) MustBuild() *ClusterFeature {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ClusterFeature instance, reason: %v", builder.err))
+	}
+	return builder.clusterFeature
+}
+
 type ClusterLevelBuilder struct {
 	clusterLevel *ClusterLevel
 	err          error
@@ -45083,6 +47671,27 @@ type ClusterLevelBuilder struct {
 
 func NewClusterLevelBuilder() *ClusterLevelBuilder {
 	return &ClusterLevelBuilder{clusterLevel: &ClusterLevel{}, err: nil}
+}
+
+func (builder *ClusterLevelBuilder) ClusterFeatures(attr *ClusterFeatureSlice) *ClusterLevelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.clusterLevel.SetClusterFeatures(attr)
+	return builder
+}
+
+func (builder *ClusterLevelBuilder) ClusterFeaturesOfAny(anys ...ClusterFeature) *ClusterLevelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.clusterLevel.clusterFeatures == nil {
+		builder.clusterLevel.clusterFeatures = new(ClusterFeatureSlice)
+	}
+	builder.clusterLevel.clusterFeatures.slice = append(builder.clusterLevel.clusterFeatures.slice, anys...)
+	return builder
 }
 
 func (builder *ClusterLevelBuilder) Comment(attr string) *ClusterLevelBuilder {
@@ -46249,6 +48858,15 @@ func (builder *DiskBuilder) Comment(attr string) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) ContentType(attr DiskContentType) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.disk.SetContentType(attr)
+	return builder
+}
+
 func (builder *DiskBuilder) Description(attr string) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -46537,6 +49155,15 @@ func (builder *DiskBuilder) Template(attr *Template) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) TotalSize(attr int64) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.disk.SetTotalSize(attr)
+	return builder
+}
+
 func (builder *DiskBuilder) UsesScsiReservation(attr bool) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -46704,6 +49331,15 @@ func (builder *DiskAttachmentBuilder) PassDiscard(attr bool) *DiskAttachmentBuil
 	}
 
 	builder.diskAttachment.SetPassDiscard(attr)
+	return builder
+}
+
+func (builder *DiskAttachmentBuilder) ReadOnly(attr bool) *DiskAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.diskAttachment.SetReadOnly(attr)
 	return builder
 }
 
@@ -46915,6 +49551,15 @@ func (builder *DiskSnapshotBuilder) Comment(attr string) *DiskSnapshotBuilder {
 	}
 
 	builder.diskSnapshot.SetComment(attr)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) ContentType(attr DiskContentType) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.diskSnapshot.SetContentType(attr)
 	return builder
 }
 
@@ -47212,6 +49857,15 @@ func (builder *DiskSnapshotBuilder) Template(attr *Template) *DiskSnapshotBuilde
 	}
 
 	builder.diskSnapshot.SetTemplate(attr)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) TotalSize(attr int64) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.diskSnapshot.SetTotalSize(attr)
 	return builder
 }
 
@@ -47886,6 +50540,15 @@ func (builder *EventBuilder) Id(attr string) *EventBuilder {
 	}
 
 	builder.event.SetId(attr)
+	return builder
+}
+
+func (builder *EventBuilder) Index(attr int64) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.event.SetIndex(attr)
 	return builder
 }
 
@@ -48637,6 +51300,92 @@ func (builder *ExternalHostProviderBuilder) MustBuild() *ExternalHostProvider {
 		panic(fmt.Sprintf("Failed to build ExternalHostProvider instance, reason: %v", builder.err))
 	}
 	return builder.externalHostProvider
+}
+
+type ExternalNetworkProviderConfigurationBuilder struct {
+	externalNetworkProviderConfiguration *ExternalNetworkProviderConfiguration
+	err                                  error
+}
+
+func NewExternalNetworkProviderConfigurationBuilder() *ExternalNetworkProviderConfigurationBuilder {
+	return &ExternalNetworkProviderConfigurationBuilder{externalNetworkProviderConfiguration: &ExternalNetworkProviderConfiguration{}, err: nil}
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) Comment(attr string) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalNetworkProviderConfiguration.SetComment(attr)
+	return builder
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) Description(attr string) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalNetworkProviderConfiguration.SetDescription(attr)
+	return builder
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) ExternalNetworkProvider(attr *ExternalProvider) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalNetworkProviderConfiguration.SetExternalNetworkProvider(attr)
+	return builder
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) Host(attr *Host) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalNetworkProviderConfiguration.SetHost(attr)
+	return builder
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) Id(attr string) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalNetworkProviderConfiguration.SetId(attr)
+	return builder
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) Name(attr string) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalNetworkProviderConfiguration.SetName(attr)
+	return builder
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) Href(href string) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalNetworkProviderConfiguration.SetHref(href)
+	return builder
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) Build() (*ExternalNetworkProviderConfiguration, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.externalNetworkProviderConfiguration, nil
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) MustBuild() *ExternalNetworkProviderConfiguration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalNetworkProviderConfiguration instance, reason: %v", builder.err))
+	}
+	return builder.externalNetworkProviderConfiguration
 }
 
 type ExternalProviderBuilder struct {
@@ -51564,6 +54313,27 @@ func (builder *HostBuilder) ExternalHostProvider(attr *ExternalHostProvider) *Ho
 	return builder
 }
 
+func (builder *HostBuilder) ExternalNetworkProviderConfigurations(attr *ExternalNetworkProviderConfigurationSlice) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.host.SetExternalNetworkProviderConfigurations(attr)
+	return builder
+}
+
+func (builder *HostBuilder) ExternalNetworkProviderConfigurationsOfAny(anys ...ExternalNetworkProviderConfiguration) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.host.externalNetworkProviderConfigurations == nil {
+		builder.host.externalNetworkProviderConfigurations = new(ExternalNetworkProviderConfigurationSlice)
+	}
+	builder.host.externalNetworkProviderConfigurations.slice = append(builder.host.externalNetworkProviderConfigurations.slice, anys...)
+	return builder
+}
+
 func (builder *HostBuilder) ExternalStatus(attr ExternalStatus) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -51726,7 +54496,7 @@ func (builder *HostBuilder) NetworkAttachmentsOfAny(anys ...NetworkAttachment) *
 	return builder
 }
 
-func (builder *HostBuilder) Nics(attr *NicSlice) *HostBuilder {
+func (builder *HostBuilder) Nics(attr *HostNicSlice) *HostBuilder {
 	if builder.err != nil {
 		return builder
 	}
@@ -51735,13 +54505,13 @@ func (builder *HostBuilder) Nics(attr *NicSlice) *HostBuilder {
 	return builder
 }
 
-func (builder *HostBuilder) NicsOfAny(anys ...Nic) *HostBuilder {
+func (builder *HostBuilder) NicsOfAny(anys ...HostNic) *HostBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	if builder.host.nics == nil {
-		builder.host.nics = new(NicSlice)
+		builder.host.nics = new(HostNicSlice)
 	}
 	builder.host.nics.slice = append(builder.host.nics.slice, anys...)
 	return builder
@@ -52103,6 +54873,15 @@ func (builder *HostDeviceBuilder) Description(attr string) *HostDeviceBuilder {
 	}
 
 	builder.hostDevice.SetDescription(attr)
+	return builder
+}
+
+func (builder *HostDeviceBuilder) Driver(attr string) *HostDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.hostDevice.SetDriver(attr)
 	return builder
 }
 
@@ -53157,12 +55936,30 @@ func (builder *ImageBuilder) Name(attr string) *ImageBuilder {
 	return builder
 }
 
+func (builder *ImageBuilder) Size(attr int64) *ImageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.image.SetSize(attr)
+	return builder
+}
+
 func (builder *ImageBuilder) StorageDomain(attr *StorageDomain) *ImageBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
 	builder.image.SetStorageDomain(attr)
+	return builder
+}
+
+func (builder *ImageBuilder) Type(attr ImageFileType) *ImageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.image.SetType(attr)
 	return builder
 }
 
@@ -53198,6 +55995,15 @@ func NewImageTransferBuilder() *ImageTransferBuilder {
 	return &ImageTransferBuilder{imageTransfer: &ImageTransfer{}, err: nil}
 }
 
+func (builder *ImageTransferBuilder) Active(attr bool) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.imageTransfer.SetActive(attr)
+	return builder
+}
+
 func (builder *ImageTransferBuilder) Comment(attr string) *ImageTransferBuilder {
 	if builder.err != nil {
 		return builder
@@ -53222,6 +56028,15 @@ func (builder *ImageTransferBuilder) Direction(attr ImageTransferDirection) *Ima
 	}
 
 	builder.imageTransfer.SetDirection(attr)
+	return builder
+}
+
+func (builder *ImageTransferBuilder) Disk(attr *Disk) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.imageTransfer.SetDisk(attr)
 	return builder
 }
 
@@ -53285,6 +56100,33 @@ func (builder *ImageTransferBuilder) SignedTicket(attr string) *ImageTransferBui
 	}
 
 	builder.imageTransfer.SetSignedTicket(attr)
+	return builder
+}
+
+func (builder *ImageTransferBuilder) Snapshot(attr *DiskSnapshot) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.imageTransfer.SetSnapshot(attr)
+	return builder
+}
+
+func (builder *ImageTransferBuilder) TransferUrl(attr string) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.imageTransfer.SetTransferUrl(attr)
+	return builder
+}
+
+func (builder *ImageTransferBuilder) Transferred(attr int64) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.imageTransfer.SetTransferred(attr)
 	return builder
 }
 
@@ -53931,6 +56773,15 @@ func (builder *InstanceTypeBuilder) PermissionsOfAny(anys ...Permission) *Instan
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) PlacementPolicy(attr *VmPlacementPolicy) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.instanceType.SetPlacementPolicy(attr)
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) Quota(attr *Quota) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -54018,6 +56869,15 @@ func (builder *InstanceTypeBuilder) StorageDomain(attr *StorageDomain) *Instance
 	}
 
 	builder.instanceType.SetStorageDomain(attr)
+	return builder
+}
+
+func (builder *InstanceTypeBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.instanceType.SetStorageErrorResumeBehaviour(attr)
 	return builder
 }
 
@@ -55016,6 +57876,122 @@ func (builder *KsmBuilder) MustBuild() *Ksm {
 	return builder.ksm
 }
 
+type LinkLayerDiscoveryProtocolElementBuilder struct {
+	linkLayerDiscoveryProtocolElement *LinkLayerDiscoveryProtocolElement
+	err                               error
+}
+
+func NewLinkLayerDiscoveryProtocolElementBuilder() *LinkLayerDiscoveryProtocolElementBuilder {
+	return &LinkLayerDiscoveryProtocolElementBuilder{linkLayerDiscoveryProtocolElement: &LinkLayerDiscoveryProtocolElement{}, err: nil}
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Comment(attr string) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetComment(attr)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Description(attr string) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetDescription(attr)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Id(attr string) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetId(attr)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Name(attr string) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetName(attr)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Oui(attr int64) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetOui(attr)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Properties(attr *PropertySlice) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetProperties(attr)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) PropertiesOfAny(anys ...Property) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.linkLayerDiscoveryProtocolElement.properties == nil {
+		builder.linkLayerDiscoveryProtocolElement.properties = new(PropertySlice)
+	}
+	builder.linkLayerDiscoveryProtocolElement.properties.slice = append(builder.linkLayerDiscoveryProtocolElement.properties.slice, anys...)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Subtype(attr int64) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetSubtype(attr)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Type(attr int64) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetType(attr)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Href(href string) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.linkLayerDiscoveryProtocolElement.SetHref(href)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) Build() (*LinkLayerDiscoveryProtocolElement, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.linkLayerDiscoveryProtocolElement, nil
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) MustBuild() *LinkLayerDiscoveryProtocolElement {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build LinkLayerDiscoveryProtocolElement instance, reason: %v", builder.err))
+	}
+	return builder.linkLayerDiscoveryProtocolElement
+}
+
 type LogicalUnitBuilder struct {
 	logicalUnit *LogicalUnit
 	err         error
@@ -55772,6 +58748,24 @@ func (builder *NetworkBuilder) DnsResolverConfiguration(attr *DnsResolverConfigu
 	}
 
 	builder.network.SetDnsResolverConfiguration(attr)
+	return builder
+}
+
+func (builder *NetworkBuilder) ExternalProvider(attr *OpenStackNetworkProvider) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.network.SetExternalProvider(attr)
+	return builder
+}
+
+func (builder *NetworkBuilder) ExternalProviderPhysicalNetwork(attr *Network) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.network.SetExternalProviderPhysicalNetwork(attr)
 	return builder
 }
 
@@ -57507,6 +60501,15 @@ func (builder *OpenStackNetworkProviderBuilder) AuthenticationUrl(attr string) *
 	return builder
 }
 
+func (builder *OpenStackNetworkProviderBuilder) AutoSync(attr bool) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.openStackNetworkProvider.SetAutoSync(attr)
+	return builder
+}
+
 func (builder *OpenStackNetworkProviderBuilder) Certificates(attr *CertificateSlice) *OpenStackNetworkProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -57543,6 +60546,15 @@ func (builder *OpenStackNetworkProviderBuilder) Description(attr string) *OpenSt
 	}
 
 	builder.openStackNetworkProvider.SetDescription(attr)
+	return builder
+}
+
+func (builder *OpenStackNetworkProviderBuilder) ExternalPluginType(attr string) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.openStackNetworkProvider.SetExternalPluginType(attr)
 	return builder
 }
 
@@ -57678,6 +60690,15 @@ func (builder *OpenStackNetworkProviderBuilder) Type(attr OpenStackNetworkProvid
 	}
 
 	builder.openStackNetworkProvider.SetType(attr)
+	return builder
+}
+
+func (builder *OpenStackNetworkProviderBuilder) Unmanaged(attr bool) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.openStackNetworkProvider.SetUnmanaged(attr)
 	return builder
 }
 
@@ -60393,6 +63414,535 @@ func (builder *RateBuilder) MustBuild() *Rate {
 	return builder.rate
 }
 
+type RegistrationAffinityGroupMappingBuilder struct {
+	registrationAffinityGroupMapping *RegistrationAffinityGroupMapping
+	err                              error
+}
+
+func NewRegistrationAffinityGroupMappingBuilder() *RegistrationAffinityGroupMappingBuilder {
+	return &RegistrationAffinityGroupMappingBuilder{registrationAffinityGroupMapping: &RegistrationAffinityGroupMapping{}, err: nil}
+}
+
+func (builder *RegistrationAffinityGroupMappingBuilder) From(attr *AffinityGroup) *RegistrationAffinityGroupMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationAffinityGroupMapping.SetFrom(attr)
+	return builder
+}
+
+func (builder *RegistrationAffinityGroupMappingBuilder) To(attr *AffinityGroup) *RegistrationAffinityGroupMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationAffinityGroupMapping.SetTo(attr)
+	return builder
+}
+
+func (builder *RegistrationAffinityGroupMappingBuilder) Href(href string) *RegistrationAffinityGroupMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationAffinityGroupMapping.SetHref(href)
+	return builder
+}
+
+func (builder *RegistrationAffinityGroupMappingBuilder) Build() (*RegistrationAffinityGroupMapping, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.registrationAffinityGroupMapping, nil
+}
+
+func (builder *RegistrationAffinityGroupMappingBuilder) MustBuild() *RegistrationAffinityGroupMapping {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RegistrationAffinityGroupMapping instance, reason: %v", builder.err))
+	}
+	return builder.registrationAffinityGroupMapping
+}
+
+type RegistrationAffinityLabelMappingBuilder struct {
+	registrationAffinityLabelMapping *RegistrationAffinityLabelMapping
+	err                              error
+}
+
+func NewRegistrationAffinityLabelMappingBuilder() *RegistrationAffinityLabelMappingBuilder {
+	return &RegistrationAffinityLabelMappingBuilder{registrationAffinityLabelMapping: &RegistrationAffinityLabelMapping{}, err: nil}
+}
+
+func (builder *RegistrationAffinityLabelMappingBuilder) From(attr *AffinityLabel) *RegistrationAffinityLabelMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationAffinityLabelMapping.SetFrom(attr)
+	return builder
+}
+
+func (builder *RegistrationAffinityLabelMappingBuilder) To(attr *AffinityLabel) *RegistrationAffinityLabelMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationAffinityLabelMapping.SetTo(attr)
+	return builder
+}
+
+func (builder *RegistrationAffinityLabelMappingBuilder) Href(href string) *RegistrationAffinityLabelMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationAffinityLabelMapping.SetHref(href)
+	return builder
+}
+
+func (builder *RegistrationAffinityLabelMappingBuilder) Build() (*RegistrationAffinityLabelMapping, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.registrationAffinityLabelMapping, nil
+}
+
+func (builder *RegistrationAffinityLabelMappingBuilder) MustBuild() *RegistrationAffinityLabelMapping {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RegistrationAffinityLabelMapping instance, reason: %v", builder.err))
+	}
+	return builder.registrationAffinityLabelMapping
+}
+
+type RegistrationClusterMappingBuilder struct {
+	registrationClusterMapping *RegistrationClusterMapping
+	err                        error
+}
+
+func NewRegistrationClusterMappingBuilder() *RegistrationClusterMappingBuilder {
+	return &RegistrationClusterMappingBuilder{registrationClusterMapping: &RegistrationClusterMapping{}, err: nil}
+}
+
+func (builder *RegistrationClusterMappingBuilder) From(attr *Cluster) *RegistrationClusterMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationClusterMapping.SetFrom(attr)
+	return builder
+}
+
+func (builder *RegistrationClusterMappingBuilder) To(attr *Cluster) *RegistrationClusterMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationClusterMapping.SetTo(attr)
+	return builder
+}
+
+func (builder *RegistrationClusterMappingBuilder) Href(href string) *RegistrationClusterMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationClusterMapping.SetHref(href)
+	return builder
+}
+
+func (builder *RegistrationClusterMappingBuilder) Build() (*RegistrationClusterMapping, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.registrationClusterMapping, nil
+}
+
+func (builder *RegistrationClusterMappingBuilder) MustBuild() *RegistrationClusterMapping {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RegistrationClusterMapping instance, reason: %v", builder.err))
+	}
+	return builder.registrationClusterMapping
+}
+
+type RegistrationConfigurationBuilder struct {
+	registrationConfiguration *RegistrationConfiguration
+	err                       error
+}
+
+func NewRegistrationConfigurationBuilder() *RegistrationConfigurationBuilder {
+	return &RegistrationConfigurationBuilder{registrationConfiguration: &RegistrationConfiguration{}, err: nil}
+}
+
+func (builder *RegistrationConfigurationBuilder) AffinityGroupMappings(attr *RegistrationAffinityGroupMappingSlice) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationConfiguration.SetAffinityGroupMappings(attr)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) AffinityGroupMappingsOfAny(anys ...RegistrationAffinityGroupMapping) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.registrationConfiguration.affinityGroupMappings == nil {
+		builder.registrationConfiguration.affinityGroupMappings = new(RegistrationAffinityGroupMappingSlice)
+	}
+	builder.registrationConfiguration.affinityGroupMappings.slice = append(builder.registrationConfiguration.affinityGroupMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) AffinityLabelMappings(attr *RegistrationAffinityLabelMappingSlice) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationConfiguration.SetAffinityLabelMappings(attr)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) AffinityLabelMappingsOfAny(anys ...RegistrationAffinityLabelMapping) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.registrationConfiguration.affinityLabelMappings == nil {
+		builder.registrationConfiguration.affinityLabelMappings = new(RegistrationAffinityLabelMappingSlice)
+	}
+	builder.registrationConfiguration.affinityLabelMappings.slice = append(builder.registrationConfiguration.affinityLabelMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) ClusterMappings(attr *RegistrationClusterMappingSlice) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationConfiguration.SetClusterMappings(attr)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) ClusterMappingsOfAny(anys ...RegistrationClusterMapping) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.registrationConfiguration.clusterMappings == nil {
+		builder.registrationConfiguration.clusterMappings = new(RegistrationClusterMappingSlice)
+	}
+	builder.registrationConfiguration.clusterMappings.slice = append(builder.registrationConfiguration.clusterMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) DomainMappings(attr *RegistrationDomainMappingSlice) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationConfiguration.SetDomainMappings(attr)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) DomainMappingsOfAny(anys ...RegistrationDomainMapping) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.registrationConfiguration.domainMappings == nil {
+		builder.registrationConfiguration.domainMappings = new(RegistrationDomainMappingSlice)
+	}
+	builder.registrationConfiguration.domainMappings.slice = append(builder.registrationConfiguration.domainMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) LunMappings(attr *RegistrationLunMappingSlice) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationConfiguration.SetLunMappings(attr)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) LunMappingsOfAny(anys ...RegistrationLunMapping) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.registrationConfiguration.lunMappings == nil {
+		builder.registrationConfiguration.lunMappings = new(RegistrationLunMappingSlice)
+	}
+	builder.registrationConfiguration.lunMappings.slice = append(builder.registrationConfiguration.lunMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) RoleMappings(attr *RegistrationRoleMappingSlice) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationConfiguration.SetRoleMappings(attr)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) RoleMappingsOfAny(anys ...RegistrationRoleMapping) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.registrationConfiguration.roleMappings == nil {
+		builder.registrationConfiguration.roleMappings = new(RegistrationRoleMappingSlice)
+	}
+	builder.registrationConfiguration.roleMappings.slice = append(builder.registrationConfiguration.roleMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) VnicProfileMappings(attr *RegistrationVnicProfileMappingSlice) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationConfiguration.SetVnicProfileMappings(attr)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) VnicProfileMappingsOfAny(anys ...RegistrationVnicProfileMapping) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.registrationConfiguration.vnicProfileMappings == nil {
+		builder.registrationConfiguration.vnicProfileMappings = new(RegistrationVnicProfileMappingSlice)
+	}
+	builder.registrationConfiguration.vnicProfileMappings.slice = append(builder.registrationConfiguration.vnicProfileMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) Href(href string) *RegistrationConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationConfiguration.SetHref(href)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) Build() (*RegistrationConfiguration, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.registrationConfiguration, nil
+}
+
+func (builder *RegistrationConfigurationBuilder) MustBuild() *RegistrationConfiguration {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RegistrationConfiguration instance, reason: %v", builder.err))
+	}
+	return builder.registrationConfiguration
+}
+
+type RegistrationDomainMappingBuilder struct {
+	registrationDomainMapping *RegistrationDomainMapping
+	err                       error
+}
+
+func NewRegistrationDomainMappingBuilder() *RegistrationDomainMappingBuilder {
+	return &RegistrationDomainMappingBuilder{registrationDomainMapping: &RegistrationDomainMapping{}, err: nil}
+}
+
+func (builder *RegistrationDomainMappingBuilder) From(attr *Domain) *RegistrationDomainMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationDomainMapping.SetFrom(attr)
+	return builder
+}
+
+func (builder *RegistrationDomainMappingBuilder) To(attr *Domain) *RegistrationDomainMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationDomainMapping.SetTo(attr)
+	return builder
+}
+
+func (builder *RegistrationDomainMappingBuilder) Href(href string) *RegistrationDomainMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationDomainMapping.SetHref(href)
+	return builder
+}
+
+func (builder *RegistrationDomainMappingBuilder) Build() (*RegistrationDomainMapping, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.registrationDomainMapping, nil
+}
+
+func (builder *RegistrationDomainMappingBuilder) MustBuild() *RegistrationDomainMapping {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RegistrationDomainMapping instance, reason: %v", builder.err))
+	}
+	return builder.registrationDomainMapping
+}
+
+type RegistrationLunMappingBuilder struct {
+	registrationLunMapping *RegistrationLunMapping
+	err                    error
+}
+
+func NewRegistrationLunMappingBuilder() *RegistrationLunMappingBuilder {
+	return &RegistrationLunMappingBuilder{registrationLunMapping: &RegistrationLunMapping{}, err: nil}
+}
+
+func (builder *RegistrationLunMappingBuilder) From(attr *Disk) *RegistrationLunMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationLunMapping.SetFrom(attr)
+	return builder
+}
+
+func (builder *RegistrationLunMappingBuilder) To(attr *Disk) *RegistrationLunMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationLunMapping.SetTo(attr)
+	return builder
+}
+
+func (builder *RegistrationLunMappingBuilder) Href(href string) *RegistrationLunMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationLunMapping.SetHref(href)
+	return builder
+}
+
+func (builder *RegistrationLunMappingBuilder) Build() (*RegistrationLunMapping, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.registrationLunMapping, nil
+}
+
+func (builder *RegistrationLunMappingBuilder) MustBuild() *RegistrationLunMapping {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RegistrationLunMapping instance, reason: %v", builder.err))
+	}
+	return builder.registrationLunMapping
+}
+
+type RegistrationRoleMappingBuilder struct {
+	registrationRoleMapping *RegistrationRoleMapping
+	err                     error
+}
+
+func NewRegistrationRoleMappingBuilder() *RegistrationRoleMappingBuilder {
+	return &RegistrationRoleMappingBuilder{registrationRoleMapping: &RegistrationRoleMapping{}, err: nil}
+}
+
+func (builder *RegistrationRoleMappingBuilder) From(attr *Role) *RegistrationRoleMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationRoleMapping.SetFrom(attr)
+	return builder
+}
+
+func (builder *RegistrationRoleMappingBuilder) To(attr *Role) *RegistrationRoleMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationRoleMapping.SetTo(attr)
+	return builder
+}
+
+func (builder *RegistrationRoleMappingBuilder) Href(href string) *RegistrationRoleMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationRoleMapping.SetHref(href)
+	return builder
+}
+
+func (builder *RegistrationRoleMappingBuilder) Build() (*RegistrationRoleMapping, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.registrationRoleMapping, nil
+}
+
+func (builder *RegistrationRoleMappingBuilder) MustBuild() *RegistrationRoleMapping {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RegistrationRoleMapping instance, reason: %v", builder.err))
+	}
+	return builder.registrationRoleMapping
+}
+
+type RegistrationVnicProfileMappingBuilder struct {
+	registrationVnicProfileMapping *RegistrationVnicProfileMapping
+	err                            error
+}
+
+func NewRegistrationVnicProfileMappingBuilder() *RegistrationVnicProfileMappingBuilder {
+	return &RegistrationVnicProfileMappingBuilder{registrationVnicProfileMapping: &RegistrationVnicProfileMapping{}, err: nil}
+}
+
+func (builder *RegistrationVnicProfileMappingBuilder) From(attr *VnicProfile) *RegistrationVnicProfileMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationVnicProfileMapping.SetFrom(attr)
+	return builder
+}
+
+func (builder *RegistrationVnicProfileMappingBuilder) To(attr *VnicProfile) *RegistrationVnicProfileMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationVnicProfileMapping.SetTo(attr)
+	return builder
+}
+
+func (builder *RegistrationVnicProfileMappingBuilder) Href(href string) *RegistrationVnicProfileMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.registrationVnicProfileMapping.SetHref(href)
+	return builder
+}
+
+func (builder *RegistrationVnicProfileMappingBuilder) Build() (*RegistrationVnicProfileMapping, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.registrationVnicProfileMapping, nil
+}
+
+func (builder *RegistrationVnicProfileMappingBuilder) MustBuild() *RegistrationVnicProfileMapping {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build RegistrationVnicProfileMapping instance, reason: %v", builder.err))
+	}
+	return builder.registrationVnicProfileMapping
+}
+
 type ReportedConfigurationBuilder struct {
 	reportedConfiguration *ReportedConfiguration
 	err                   error
@@ -61660,6 +65210,15 @@ func (builder *SnapshotBuilder) GuestTimeZone(attr *TimeZone) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) HasIllegalImages(attr bool) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.snapshot.SetHasIllegalImages(attr)
+	return builder
+}
+
 func (builder *SnapshotBuilder) HighAvailability(attr *HighAvailability) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -62200,6 +65759,15 @@ func (builder *SnapshotBuilder) StorageDomain(attr *StorageDomain) *SnapshotBuil
 	}
 
 	builder.snapshot.SetStorageDomain(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.snapshot.SetStorageErrorResumeBehaviour(attr)
 	return builder
 }
 
@@ -63393,6 +66961,15 @@ func (builder *StorageDomainBuilder) Available(attr int64) *StorageDomainBuilder
 	return builder
 }
 
+func (builder *StorageDomainBuilder) Backup(attr bool) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.storageDomain.SetBackup(attr)
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Comment(attr string) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -63854,6 +67431,145 @@ func (builder *StorageDomainLeaseBuilder) MustBuild() *StorageDomainLease {
 		panic(fmt.Sprintf("Failed to build StorageDomainLease instance, reason: %v", builder.err))
 	}
 	return builder.storageDomainLease
+}
+
+type SystemOptionBuilder struct {
+	systemOption *SystemOption
+	err          error
+}
+
+func NewSystemOptionBuilder() *SystemOptionBuilder {
+	return &SystemOptionBuilder{systemOption: &SystemOption{}, err: nil}
+}
+
+func (builder *SystemOptionBuilder) Comment(attr string) *SystemOptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOption.SetComment(attr)
+	return builder
+}
+
+func (builder *SystemOptionBuilder) Description(attr string) *SystemOptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOption.SetDescription(attr)
+	return builder
+}
+
+func (builder *SystemOptionBuilder) Id(attr string) *SystemOptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOption.SetId(attr)
+	return builder
+}
+
+func (builder *SystemOptionBuilder) Name(attr string) *SystemOptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOption.SetName(attr)
+	return builder
+}
+
+func (builder *SystemOptionBuilder) Values(attr *SystemOptionValueSlice) *SystemOptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOption.SetValues(attr)
+	return builder
+}
+
+func (builder *SystemOptionBuilder) ValuesOfAny(anys ...SystemOptionValue) *SystemOptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.systemOption.values == nil {
+		builder.systemOption.values = new(SystemOptionValueSlice)
+	}
+	builder.systemOption.values.slice = append(builder.systemOption.values.slice, anys...)
+	return builder
+}
+
+func (builder *SystemOptionBuilder) Href(href string) *SystemOptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOption.SetHref(href)
+	return builder
+}
+
+func (builder *SystemOptionBuilder) Build() (*SystemOption, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.systemOption, nil
+}
+
+func (builder *SystemOptionBuilder) MustBuild() *SystemOption {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SystemOption instance, reason: %v", builder.err))
+	}
+	return builder.systemOption
+}
+
+type SystemOptionValueBuilder struct {
+	systemOptionValue *SystemOptionValue
+	err               error
+}
+
+func NewSystemOptionValueBuilder() *SystemOptionValueBuilder {
+	return &SystemOptionValueBuilder{systemOptionValue: &SystemOptionValue{}, err: nil}
+}
+
+func (builder *SystemOptionValueBuilder) Value(attr string) *SystemOptionValueBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOptionValue.SetValue(attr)
+	return builder
+}
+
+func (builder *SystemOptionValueBuilder) Version(attr string) *SystemOptionValueBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOptionValue.SetVersion(attr)
+	return builder
+}
+
+func (builder *SystemOptionValueBuilder) Href(href string) *SystemOptionValueBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.systemOptionValue.SetHref(href)
+	return builder
+}
+
+func (builder *SystemOptionValueBuilder) Build() (*SystemOptionValue, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.systemOptionValue, nil
+}
+
+func (builder *SystemOptionValueBuilder) MustBuild() *SystemOptionValue {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build SystemOptionValue instance, reason: %v", builder.err))
+	}
+	return builder.systemOptionValue
 }
 
 type TagBuilder struct {
@@ -64365,6 +68081,15 @@ func (builder *TemplateBuilder) PermissionsOfAny(anys ...Permission) *TemplateBu
 	return builder
 }
 
+func (builder *TemplateBuilder) PlacementPolicy(attr *VmPlacementPolicy) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.template.SetPlacementPolicy(attr)
+	return builder
+}
+
 func (builder *TemplateBuilder) Quota(attr *Quota) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -64452,6 +68177,15 @@ func (builder *TemplateBuilder) StorageDomain(attr *StorageDomain) *TemplateBuil
 	}
 
 	builder.template.SetStorageDomain(attr)
+	return builder
+}
+
+func (builder *TemplateBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.template.SetStorageErrorResumeBehaviour(attr)
 	return builder
 }
 
@@ -66036,6 +69770,15 @@ func (builder *VmBuilder) GuestTimeZone(attr *TimeZone) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) HasIllegalImages(attr bool) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.vm.SetHasIllegalImages(attr)
+	return builder
+}
+
 func (builder *VmBuilder) HighAvailability(attr *HighAvailability) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -66552,6 +70295,15 @@ func (builder *VmBuilder) StorageDomain(attr *StorageDomain) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.vm.SetStorageErrorResumeBehaviour(attr)
+	return builder
+}
+
 func (builder *VmBuilder) Tags(attr *TagSlice) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -66971,6 +70723,15 @@ func (builder *VmBaseBuilder) Os(attr *OperatingSystem) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) PlacementPolicy(attr *VmPlacementPolicy) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.vmBase.SetPlacementPolicy(attr)
+	return builder
+}
+
 func (builder *VmBaseBuilder) Quota(attr *Quota) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -67049,6 +70810,15 @@ func (builder *VmBaseBuilder) StorageDomain(attr *StorageDomain) *VmBaseBuilder 
 	}
 
 	builder.vmBase.SetStorageDomain(attr)
+	return builder
+}
+
+func (builder *VmBaseBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.vmBase.SetStorageErrorResumeBehaviour(attr)
 	return builder
 }
 
@@ -68032,6 +71802,7 @@ type Architecture string
 
 const (
 	ARCHITECTURE_PPC64     Architecture = "ppc64"
+	ARCHITECTURE_S390X     Architecture = "s390x"
 	ARCHITECTURE_UNDEFINED Architecture = "undefined"
 	ARCHITECTURE_X86_64    Architecture = "x86_64"
 )
@@ -68064,6 +71835,7 @@ const (
 type ConfigurationType string
 
 const (
+	CONFIGURATIONTYPE_OVA ConfigurationType = "ova"
 	CONFIGURATIONTYPE_OVF ConfigurationType = "ovf"
 )
 
@@ -68093,6 +71865,16 @@ const (
 	DATACENTERSTATUS_PROBLEMATIC     DataCenterStatus = "problematic"
 	DATACENTERSTATUS_UNINITIALIZED   DataCenterStatus = "uninitialized"
 	DATACENTERSTATUS_UP              DataCenterStatus = "up"
+)
+
+type DiskContentType string
+
+const (
+	DISKCONTENTTYPE_DATA                   DiskContentType = "data"
+	DISKCONTENTTYPE_ISO                    DiskContentType = "iso"
+	DISKCONTENTTYPE_MEMORY_DUMP_VOLUME     DiskContentType = "memory_dump_volume"
+	DISKCONTENTTYPE_MEMORY_METADATA_VOLUME DiskContentType = "memory_metadata_volume"
+	DISKCONTENTTYPE_OVF_STORE              DiskContentType = "ovf_store"
 )
 
 type DiskFormat string
@@ -68184,6 +71966,13 @@ const (
 	FENCETYPE_START   FenceType = "start"
 	FENCETYPE_STATUS  FenceType = "status"
 	FENCETYPE_STOP    FenceType = "stop"
+)
+
+type FirewallType string
+
+const (
+	FIREWALLTYPE_FIREWALLD FirewallType = "firewalld"
+	FIREWALLTYPE_IPTABLES  FirewallType = "iptables"
 )
 
 type GlusterBrickStatus string
@@ -68295,6 +72084,14 @@ const (
 	HOSTTYPE_OVIRT_NODE HostType = "ovirt_node"
 	HOSTTYPE_RHEL       HostType = "rhel"
 	HOSTTYPE_RHEV_H     HostType = "rhev_h"
+)
+
+type ImageFileType string
+
+const (
+	IMAGEFILETYPE_DISK   ImageFileType = "disk"
+	IMAGEFILETYPE_FLOPPY ImageFileType = "floppy"
+	IMAGEFILETYPE_ISO    ImageFileType = "iso"
 )
 
 type ImageTransferDirection string
@@ -68803,11 +72600,20 @@ const (
 	VMSTATUS_WAIT_FOR_LAUNCH    VmStatus = "wait_for_launch"
 )
 
+type VmStorageErrorResumeBehaviour string
+
+const (
+	VMSTORAGEERRORRESUMEBEHAVIOUR_AUTO_RESUME  VmStorageErrorResumeBehaviour = "auto_resume"
+	VMSTORAGEERRORRESUMEBEHAVIOUR_KILL         VmStorageErrorResumeBehaviour = "kill"
+	VMSTORAGEERRORRESUMEBEHAVIOUR_LEAVE_PAUSED VmStorageErrorResumeBehaviour = "leave_paused"
+)
+
 type VmType string
 
 const (
-	VMTYPE_DESKTOP VmType = "desktop"
-	VMTYPE_SERVER  VmType = "server"
+	VMTYPE_DESKTOP          VmType = "desktop"
+	VMTYPE_HIGH_PERFORMANCE VmType = "high_performance"
+	VMTYPE_SERVER           VmType = "server"
 )
 
 type VnicPassThroughMode string
@@ -68830,5 +72636,6 @@ const (
 type WatchdogModel string
 
 const (
+	WATCHDOGMODEL_DIAG288  WatchdogModel = "diag288"
 	WATCHDOGMODEL_I6300ESB WatchdogModel = "i6300esb"
 )
