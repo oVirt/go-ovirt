@@ -48,7 +48,7 @@ func (op *followService) Service(path string) (Service, error) {
 }
 
 func (op *followService) String() string {
-	return fmt.Sprintf("followService:%s", op.Path)
+	return fmt.Sprintf("followService:%s", op.path)
 }
 
 //
@@ -655,7 +655,7 @@ func (op *jobsService) Service(path string) (Service, error) {
 }
 
 func (op *jobsService) String() string {
-	return fmt.Sprintf("jobsService:%s", op.Path)
+	return fmt.Sprintf("jobsService:%s", op.path)
 }
 
 //
@@ -1294,7 +1294,7 @@ func (op *dataCentersService) Service(path string) (Service, error) {
 }
 
 func (op *dataCentersService) String() string {
-	return fmt.Sprintf("dataCentersService:%s", op.Path)
+	return fmt.Sprintf("dataCentersService:%s", op.path)
 }
 
 //
@@ -1636,7 +1636,7 @@ func (op *permissionService) Service(path string) (Service, error) {
 }
 
 func (op *permissionService) String() string {
-	return fmt.Sprintf("permissionService:%s", op.Path)
+	return fmt.Sprintf("permissionService:%s", op.path)
 }
 
 //
@@ -1847,7 +1847,7 @@ func (op *storageService) Service(path string) (Service, error) {
 }
 
 func (op *storageService) String() string {
-	return fmt.Sprintf("storageService:%s", op.Path)
+	return fmt.Sprintf("storageService:%s", op.path)
 }
 
 //
@@ -2330,7 +2330,7 @@ func (op *assignedTagsService) Service(path string) (Service, error) {
 }
 
 func (op *assignedTagsService) String() string {
-	return fmt.Sprintf("assignedTagsService:%s", op.Path)
+	return fmt.Sprintf("assignedTagsService:%s", op.path)
 }
 
 //
@@ -2531,7 +2531,7 @@ func (op *linkLayerDiscoveryProtocolService) Service(path string) (Service, erro
 }
 
 func (op *linkLayerDiscoveryProtocolService) String() string {
-	return fmt.Sprintf("linkLayerDiscoveryProtocolService:%s", op.Path)
+	return fmt.Sprintf("linkLayerDiscoveryProtocolService:%s", op.path)
 }
 
 //
@@ -4658,7 +4658,7 @@ func (op *systemPermissionsService) Service(path string) (Service, error) {
 }
 
 func (op *systemPermissionsService) String() string {
-	return fmt.Sprintf("systemPermissionsService:%s", op.Path)
+	return fmt.Sprintf("systemPermissionsService:%s", op.path)
 }
 
 //
@@ -5079,7 +5079,7 @@ func (op *schedulingPoliciesService) Service(path string) (Service, error) {
 }
 
 func (op *schedulingPoliciesService) String() string {
-	return fmt.Sprintf("schedulingPoliciesService:%s", op.Path)
+	return fmt.Sprintf("schedulingPoliciesService:%s", op.path)
 }
 
 //
@@ -5593,7 +5593,7 @@ func (op *clusterNetworkService) Service(path string) (Service, error) {
 }
 
 func (op *clusterNetworkService) String() string {
-	return fmt.Sprintf("clusterNetworkService:%s", op.Path)
+	return fmt.Sprintf("clusterNetworkService:%s", op.path)
 }
 
 //
@@ -5809,7 +5809,7 @@ func (op *templateCdromService) Service(path string) (Service, error) {
 }
 
 func (op *templateCdromService) String() string {
-	return fmt.Sprintf("templateCdromService:%s", op.Path)
+	return fmt.Sprintf("templateCdromService:%s", op.path)
 }
 
 //
@@ -6216,7 +6216,7 @@ func (op *networkAttachmentsService) Service(path string) (Service, error) {
 }
 
 func (op *networkAttachmentsService) String() string {
-	return fmt.Sprintf("networkAttachmentsService:%s", op.Path)
+	return fmt.Sprintf("networkAttachmentsService:%s", op.path)
 }
 
 //
@@ -6558,7 +6558,7 @@ func (op *unmanagedNetworkService) Service(path string) (Service, error) {
 }
 
 func (op *unmanagedNetworkService) String() string {
-	return fmt.Sprintf("unmanagedNetworkService:%s", op.Path)
+	return fmt.Sprintf("unmanagedNetworkService:%s", op.path)
 }
 
 //
@@ -6786,7 +6786,7 @@ func (op *snapshotNicsService) Service(path string) (Service, error) {
 }
 
 func (op *snapshotNicsService) String() string {
-	return fmt.Sprintf("snapshotNicsService:%s", op.Path)
+	return fmt.Sprintf("snapshotNicsService:%s", op.path)
 }
 
 //
@@ -7057,7 +7057,7 @@ func (op *hostStorageService) Service(path string) (Service, error) {
 }
 
 func (op *hostStorageService) String() string {
-	return fmt.Sprintf("hostStorageService:%s", op.Path)
+	return fmt.Sprintf("hostStorageService:%s", op.path)
 }
 
 //
@@ -7621,7 +7621,7 @@ func (op *tagsService) Service(path string) (Service, error) {
 }
 
 func (op *tagsService) String() string {
-	return fmt.Sprintf("tagsService:%s", op.Path)
+	return fmt.Sprintf("tagsService:%s", op.path)
 }
 
 //
@@ -8688,7 +8688,7 @@ func (op *hostsService) Service(path string) (Service, error) {
 }
 
 func (op *hostsService) String() string {
-	return fmt.Sprintf("hostsService:%s", op.Path)
+	return fmt.Sprintf("hostsService:%s", op.path)
 }
 
 //
@@ -9108,7 +9108,7 @@ func (op *balancesService) Service(path string) (Service, error) {
 }
 
 func (op *balancesService) String() string {
-	return fmt.Sprintf("balancesService:%s", op.Path)
+	return fmt.Sprintf("balancesService:%s", op.path)
 }
 
 //
@@ -9450,7 +9450,7 @@ func (op *diskSnapshotService) Service(path string) (Service, error) {
 }
 
 func (op *diskSnapshotService) String() string {
-	return fmt.Sprintf("diskSnapshotService:%s", op.Path)
+	return fmt.Sprintf("diskSnapshotService:%s", op.path)
 }
 
 //
@@ -9795,7 +9795,7 @@ func (op *storageDomainServerConnectionService) Service(path string) (Service, e
 }
 
 func (op *storageDomainServerConnectionService) String() string {
-	return fmt.Sprintf("storageDomainServerConnectionService:%s", op.Path)
+	return fmt.Sprintf("storageDomainServerConnectionService:%s", op.path)
 }
 
 //
@@ -10198,7 +10198,7 @@ func (op *openstackSubnetsService) Service(path string) (Service, error) {
 }
 
 func (op *openstackSubnetsService) String() string {
-	return fmt.Sprintf("openstackSubnetsService:%s", op.Path)
+	return fmt.Sprintf("openstackSubnetsService:%s", op.path)
 }
 
 //
@@ -10395,7 +10395,7 @@ func (op *openstackVolumeTypeService) Service(path string) (Service, error) {
 }
 
 func (op *openstackVolumeTypeService) String() string {
-	return fmt.Sprintf("openstackVolumeTypeService:%s", op.Path)
+	return fmt.Sprintf("openstackVolumeTypeService:%s", op.path)
 }
 
 //
@@ -10916,7 +10916,7 @@ func (op *openstackVolumeAuthenticationKeyService) Service(path string) (Service
 }
 
 func (op *openstackVolumeAuthenticationKeyService) String() string {
-	return fmt.Sprintf("openstackVolumeAuthenticationKeyService:%s", op.Path)
+	return fmt.Sprintf("openstackVolumeAuthenticationKeyService:%s", op.path)
 }
 
 //
@@ -11322,7 +11322,7 @@ func (op *openstackImageProvidersService) Service(path string) (Service, error) 
 }
 
 func (op *openstackImageProvidersService) String() string {
-	return fmt.Sprintf("openstackImageProvidersService:%s", op.Path)
+	return fmt.Sprintf("openstackImageProvidersService:%s", op.path)
 }
 
 //
@@ -12213,7 +12213,7 @@ func (op *openstackImageProviderService) Service(path string) (Service, error) {
 }
 
 func (op *openstackImageProviderService) String() string {
-	return fmt.Sprintf("openstackImageProviderService:%s", op.Path)
+	return fmt.Sprintf("openstackImageProviderService:%s", op.path)
 }
 
 //
@@ -12658,7 +12658,7 @@ func (op *openstackImageService) Service(path string) (Service, error) {
 }
 
 func (op *openstackImageService) String() string {
-	return fmt.Sprintf("openstackImageService:%s", op.Path)
+	return fmt.Sprintf("openstackImageService:%s", op.path)
 }
 
 //
@@ -12885,7 +12885,7 @@ func (op *openstackVolumeTypesService) Service(path string) (Service, error) {
 }
 
 func (op *openstackVolumeTypesService) String() string {
-	return fmt.Sprintf("openstackVolumeTypesService:%s", op.Path)
+	return fmt.Sprintf("openstackVolumeTypesService:%s", op.path)
 }
 
 //
@@ -13227,7 +13227,7 @@ func (op *openstackSubnetService) Service(path string) (Service, error) {
 }
 
 func (op *openstackSubnetService) String() string {
-	return fmt.Sprintf("openstackSubnetService:%s", op.Path)
+	return fmt.Sprintf("openstackSubnetService:%s", op.path)
 }
 
 //
@@ -13454,7 +13454,7 @@ func (op *openstackNetworksService) Service(path string) (Service, error) {
 }
 
 func (op *openstackNetworksService) String() string {
-	return fmt.Sprintf("openstackNetworksService:%s", op.Path)
+	return fmt.Sprintf("openstackNetworksService:%s", op.path)
 }
 
 //
@@ -14371,7 +14371,7 @@ func (op *openstackVolumeProviderService) Service(path string) (Service, error) 
 }
 
 func (op *openstackVolumeProviderService) String() string {
-	return fmt.Sprintf("openstackVolumeProviderService:%s", op.Path)
+	return fmt.Sprintf("openstackVolumeProviderService:%s", op.path)
 }
 
 //
@@ -14599,7 +14599,7 @@ func (op *openstackImagesService) Service(path string) (Service, error) {
 }
 
 func (op *openstackImagesService) String() string {
-	return fmt.Sprintf("openstackImagesService:%s", op.Path)
+	return fmt.Sprintf("openstackImagesService:%s", op.path)
 }
 
 //
@@ -15005,7 +15005,7 @@ func (op *openstackVolumeAuthenticationKeysService) Service(path string) (Servic
 }
 
 func (op *openstackVolumeAuthenticationKeysService) String() string {
-	return fmt.Sprintf("openstackVolumeAuthenticationKeysService:%s", op.Path)
+	return fmt.Sprintf("openstackVolumeAuthenticationKeysService:%s", op.path)
 }
 
 //
@@ -15416,7 +15416,7 @@ func (op *openstackNetworkProvidersService) Service(path string) (Service, error
 }
 
 func (op *openstackNetworkProvidersService) String() string {
-	return fmt.Sprintf("openstackNetworkProvidersService:%s", op.Path)
+	return fmt.Sprintf("openstackNetworkProvidersService:%s", op.path)
 }
 
 //
@@ -15790,7 +15790,7 @@ func (op *openstackNetworkService) Service(path string) (Service, error) {
 }
 
 func (op *openstackNetworkService) String() string {
-	return fmt.Sprintf("openstackNetworkService:%s", op.Path)
+	return fmt.Sprintf("openstackNetworkService:%s", op.path)
 }
 
 //
@@ -16256,7 +16256,7 @@ func (op *openstackVolumeProvidersService) Service(path string) (Service, error)
 }
 
 func (op *openstackVolumeProvidersService) String() string {
-	return fmt.Sprintf("openstackVolumeProvidersService:%s", op.Path)
+	return fmt.Sprintf("openstackVolumeProvidersService:%s", op.path)
 }
 
 //
@@ -17236,7 +17236,7 @@ func (op *openstackNetworkProviderService) Service(path string) (Service, error)
 }
 
 func (op *openstackNetworkProviderService) String() string {
-	return fmt.Sprintf("openstackNetworkProviderService:%s", op.Path)
+	return fmt.Sprintf("openstackNetworkProviderService:%s", op.path)
 }
 
 //
@@ -17578,7 +17578,7 @@ func (op *assignedCpuProfileService) Service(path string) (Service, error) {
 }
 
 func (op *assignedCpuProfileService) String() string {
-	return fmt.Sprintf("assignedCpuProfileService:%s", op.Path)
+	return fmt.Sprintf("assignedCpuProfileService:%s", op.path)
 }
 
 //
@@ -18722,7 +18722,7 @@ func (op *storageServerConnectionsService) Service(path string) (Service, error)
 }
 
 func (op *storageServerConnectionsService) String() string {
-	return fmt.Sprintf("storageServerConnectionsService:%s", op.Path)
+	return fmt.Sprintf("storageServerConnectionsService:%s", op.path)
 }
 
 //
@@ -18900,7 +18900,7 @@ func (op *copyableService) Service(path string) (Service, error) {
 }
 
 func (op *copyableService) String() string {
-	return fmt.Sprintf("copyableService:%s", op.Path)
+	return fmt.Sprintf("copyableService:%s", op.path)
 }
 
 //
@@ -19189,7 +19189,7 @@ func (op *vmSessionsService) Service(path string) (Service, error) {
 }
 
 func (op *vmSessionsService) String() string {
-	return fmt.Sprintf("vmSessionsService:%s", op.Path)
+	return fmt.Sprintf("vmSessionsService:%s", op.path)
 }
 
 //
@@ -20377,7 +20377,7 @@ func (op *vmDiskService) Service(path string) (Service, error) {
 }
 
 func (op *vmDiskService) String() string {
-	return fmt.Sprintf("vmDiskService:%s", op.Path)
+	return fmt.Sprintf("vmDiskService:%s", op.path)
 }
 
 //
@@ -20626,7 +20626,7 @@ func (op *hostDeviceService) Service(path string) (Service, error) {
 }
 
 func (op *hostDeviceService) String() string {
-	return fmt.Sprintf("hostDeviceService:%s", op.Path)
+	return fmt.Sprintf("hostDeviceService:%s", op.path)
 }
 
 //
@@ -20980,7 +20980,7 @@ func (op *assignedVnicProfileService) Service(path string) (Service, error) {
 }
 
 func (op *assignedVnicProfileService) String() string {
-	return fmt.Sprintf("assignedVnicProfileService:%s", op.Path)
+	return fmt.Sprintf("assignedVnicProfileService:%s", op.path)
 }
 
 //
@@ -21527,7 +21527,7 @@ func (op *cpuProfileService) Service(path string) (Service, error) {
 }
 
 func (op *cpuProfileService) String() string {
-	return fmt.Sprintf("cpuProfileService:%s", op.Path)
+	return fmt.Sprintf("cpuProfileService:%s", op.path)
 }
 
 //
@@ -22041,7 +22041,7 @@ func (op *dataCenterNetworkService) Service(path string) (Service, error) {
 }
 
 func (op *dataCenterNetworkService) String() string {
-	return fmt.Sprintf("dataCenterNetworkService:%s", op.Path)
+	return fmt.Sprintf("dataCenterNetworkService:%s", op.path)
 }
 
 //
@@ -22305,7 +22305,7 @@ func (op *networkFiltersService) Service(path string) (Service, error) {
 }
 
 func (op *networkFiltersService) String() string {
-	return fmt.Sprintf("networkFiltersService:%s", op.Path)
+	return fmt.Sprintf("networkFiltersService:%s", op.path)
 }
 
 //
@@ -22661,7 +22661,7 @@ func (op *schedulingPolicyUnitService) Service(path string) (Service, error) {
 }
 
 func (op *schedulingPolicyUnitService) String() string {
-	return fmt.Sprintf("schedulingPolicyUnitService:%s", op.Path)
+	return fmt.Sprintf("schedulingPolicyUnitService:%s", op.path)
 }
 
 //
@@ -22862,7 +22862,7 @@ func (op *externalNetworkProviderConfigurationService) Service(path string) (Ser
 }
 
 func (op *externalNetworkProviderConfigurationService) String() string {
-	return fmt.Sprintf("externalNetworkProviderConfigurationService:%s", op.Path)
+	return fmt.Sprintf("externalNetworkProviderConfigurationService:%s", op.path)
 }
 
 //
@@ -23425,7 +23425,7 @@ func (op *vnicProfilesService) Service(path string) (Service, error) {
 }
 
 func (op *vnicProfilesService) String() string {
-	return fmt.Sprintf("vnicProfilesService:%s", op.Path)
+	return fmt.Sprintf("vnicProfilesService:%s", op.path)
 }
 
 //
@@ -23821,7 +23821,7 @@ func (op *assignedAffinityLabelsService) Service(path string) (Service, error) {
 }
 
 func (op *assignedAffinityLabelsService) String() string {
-	return fmt.Sprintf("assignedAffinityLabelsService:%s", op.Path)
+	return fmt.Sprintf("assignedAffinityLabelsService:%s", op.path)
 }
 
 //
@@ -24440,7 +24440,7 @@ func (op *iscsiBondService) Service(path string) (Service, error) {
 }
 
 func (op *iscsiBondService) String() string {
-	return fmt.Sprintf("iscsiBondService:%s", op.Path)
+	return fmt.Sprintf("iscsiBondService:%s", op.path)
 }
 
 //
@@ -24651,7 +24651,7 @@ func (op *storageDomainContentDiskService) Service(path string) (Service, error)
 }
 
 func (op *storageDomainContentDiskService) String() string {
-	return fmt.Sprintf("storageDomainContentDiskService:%s", op.Path)
+	return fmt.Sprintf("storageDomainContentDiskService:%s", op.path)
 }
 
 //
@@ -25186,7 +25186,7 @@ func (op *networkAttachmentService) Service(path string) (Service, error) {
 }
 
 func (op *networkAttachmentService) String() string {
-	return fmt.Sprintf("networkAttachmentService:%s", op.Path)
+	return fmt.Sprintf("networkAttachmentService:%s", op.path)
 }
 
 //
@@ -25383,7 +25383,7 @@ func (op *vmReportedDeviceService) Service(path string) (Service, error) {
 }
 
 func (op *vmReportedDeviceService) String() string {
-	return fmt.Sprintf("vmReportedDeviceService:%s", op.Path)
+	return fmt.Sprintf("vmReportedDeviceService:%s", op.path)
 }
 
 //
@@ -25580,7 +25580,7 @@ func (op *snapshotDiskService) Service(path string) (Service, error) {
 }
 
 func (op *snapshotDiskService) String() string {
-	return fmt.Sprintf("snapshotDiskService:%s", op.Path)
+	return fmt.Sprintf("snapshotDiskService:%s", op.path)
 }
 
 //
@@ -25846,7 +25846,7 @@ func (op *storageDomainVmsService) Service(path string) (Service, error) {
 }
 
 func (op *storageDomainVmsService) String() string {
-	return fmt.Sprintf("storageDomainVmsService:%s", op.Path)
+	return fmt.Sprintf("storageDomainVmsService:%s", op.path)
 }
 
 //
@@ -26514,7 +26514,7 @@ func (op *instanceTypesService) Service(path string) (Service, error) {
 }
 
 func (op *instanceTypesService) String() string {
-	return fmt.Sprintf("instanceTypesService:%s", op.Path)
+	return fmt.Sprintf("instanceTypesService:%s", op.path)
 }
 
 //
@@ -26831,7 +26831,7 @@ func (op *domainUsersService) Service(path string) (Service, error) {
 }
 
 func (op *domainUsersService) String() string {
-	return fmt.Sprintf("domainUsersService:%s", op.Path)
+	return fmt.Sprintf("domainUsersService:%s", op.path)
 }
 
 //
@@ -27028,7 +27028,7 @@ func (op *domainGroupService) Service(path string) (Service, error) {
 }
 
 func (op *domainGroupService) String() string {
-	return fmt.Sprintf("domainGroupService:%s", op.Path)
+	return fmt.Sprintf("domainGroupService:%s", op.path)
 }
 
 //
@@ -27283,7 +27283,7 @@ func (op *domainGroupsService) Service(path string) (Service, error) {
 }
 
 func (op *domainGroupsService) String() string {
-	return fmt.Sprintf("domainGroupsService:%s", op.Path)
+	return fmt.Sprintf("domainGroupsService:%s", op.path)
 }
 
 //
@@ -27741,7 +27741,7 @@ func (op *groupService) Service(path string) (Service, error) {
 }
 
 func (op *groupService) String() string {
-	return fmt.Sprintf("groupService:%s", op.Path)
+	return fmt.Sprintf("groupService:%s", op.path)
 }
 
 //
@@ -28243,7 +28243,7 @@ func (op *sshPublicKeysService) Service(path string) (Service, error) {
 }
 
 func (op *sshPublicKeysService) String() string {
-	return fmt.Sprintf("sshPublicKeysService:%s", op.Path)
+	return fmt.Sprintf("sshPublicKeysService:%s", op.path)
 }
 
 //
@@ -28730,7 +28730,7 @@ func (op *userService) Service(path string) (Service, error) {
 }
 
 func (op *userService) String() string {
-	return fmt.Sprintf("userService:%s", op.Path)
+	return fmt.Sprintf("userService:%s", op.path)
 }
 
 //
@@ -29280,7 +29280,7 @@ func (op *groupsService) Service(path string) (Service, error) {
 }
 
 func (op *groupsService) String() string {
-	return fmt.Sprintf("groupsService:%s", op.Path)
+	return fmt.Sprintf("groupsService:%s", op.path)
 }
 
 //
@@ -29560,7 +29560,7 @@ func (op *domainsService) Service(path string) (Service, error) {
 }
 
 func (op *domainsService) String() string {
-	return fmt.Sprintf("domainsService:%s", op.Path)
+	return fmt.Sprintf("domainsService:%s", op.path)
 }
 
 //
@@ -30092,7 +30092,7 @@ func (op *sshPublicKeyService) Service(path string) (Service, error) {
 }
 
 func (op *sshPublicKeyService) String() string {
-	return fmt.Sprintf("sshPublicKeyService:%s", op.Path)
+	return fmt.Sprintf("sshPublicKeyService:%s", op.path)
 }
 
 //
@@ -30692,7 +30692,7 @@ func (op *usersService) Service(path string) (Service, error) {
 }
 
 func (op *usersService) String() string {
-	return fmt.Sprintf("usersService:%s", op.Path)
+	return fmt.Sprintf("usersService:%s", op.path)
 }
 
 //
@@ -30947,7 +30947,7 @@ func (op *domainUserService) Service(path string) (Service, error) {
 }
 
 func (op *domainUserService) String() string {
-	return fmt.Sprintf("domainUserService:%s", op.Path)
+	return fmt.Sprintf("domainUserService:%s", op.path)
 }
 
 //
@@ -31219,7 +31219,7 @@ func (op *domainService) Service(path string) (Service, error) {
 }
 
 func (op *domainService) String() string {
-	return fmt.Sprintf("domainService:%s", op.Path)
+	return fmt.Sprintf("domainService:%s", op.path)
 }
 
 //
@@ -31765,7 +31765,7 @@ func (op *affinityLabelService) Service(path string) (Service, error) {
 }
 
 func (op *affinityLabelService) String() string {
-	return fmt.Sprintf("affinityLabelService:%s", op.Path)
+	return fmt.Sprintf("affinityLabelService:%s", op.path)
 }
 
 //
@@ -32216,7 +32216,7 @@ func (op *hostNicService) Service(path string) (Service, error) {
 }
 
 func (op *hostNicService) String() string {
-	return fmt.Sprintf("hostNicService:%s", op.Path)
+	return fmt.Sprintf("hostNicService:%s", op.path)
 }
 
 //
@@ -33591,7 +33591,7 @@ func (op *attachedStorageDomainDiskService) Service(path string) (Service, error
 }
 
 func (op *attachedStorageDomainDiskService) String() string {
-	return fmt.Sprintf("attachedStorageDomainDiskService:%s", op.Path)
+	return fmt.Sprintf("attachedStorageDomainDiskService:%s", op.path)
 }
 
 //
@@ -34132,7 +34132,7 @@ func (op *instanceTypeNicService) Service(path string) (Service, error) {
 }
 
 func (op *instanceTypeNicService) String() string {
-	return fmt.Sprintf("instanceTypeNicService:%s", op.Path)
+	return fmt.Sprintf("instanceTypeNicService:%s", op.path)
 }
 
 //
@@ -34543,7 +34543,7 @@ func (op *affinityLabelsService) Service(path string) (Service, error) {
 }
 
 func (op *affinityLabelsService) String() string {
-	return fmt.Sprintf("affinityLabelsService:%s", op.Path)
+	return fmt.Sprintf("affinityLabelsService:%s", op.path)
 }
 
 //
@@ -35078,7 +35078,7 @@ func (op *templateWatchdogService) Service(path string) (Service, error) {
 }
 
 func (op *templateWatchdogService) String() string {
-	return fmt.Sprintf("templateWatchdogService:%s", op.Path)
+	return fmt.Sprintf("templateWatchdogService:%s", op.path)
 }
 
 //
@@ -36534,7 +36534,7 @@ func (op *vmsService) Service(path string) (Service, error) {
 }
 
 func (op *vmsService) String() string {
-	return fmt.Sprintf("vmsService:%s", op.Path)
+	return fmt.Sprintf("vmsService:%s", op.path)
 }
 
 //
@@ -36843,7 +36843,7 @@ func (op *filesService) Service(path string) (Service, error) {
 }
 
 func (op *filesService) String() string {
-	return fmt.Sprintf("filesService:%s", op.Path)
+	return fmt.Sprintf("filesService:%s", op.path)
 }
 
 //
@@ -37610,7 +37610,7 @@ func (op *networkService) Service(path string) (Service, error) {
 }
 
 func (op *networkService) String() string {
-	return fmt.Sprintf("networkService:%s", op.Path)
+	return fmt.Sprintf("networkService:%s", op.path)
 }
 
 //
@@ -38076,7 +38076,7 @@ func (op *iscsiBondsService) Service(path string) (Service, error) {
 }
 
 func (op *iscsiBondsService) String() string {
-	return fmt.Sprintf("iscsiBondsService:%s", op.Path)
+	return fmt.Sprintf("iscsiBondsService:%s", op.path)
 }
 
 //
@@ -38305,7 +38305,7 @@ func (op *hostDevicesService) Service(path string) (Service, error) {
 }
 
 func (op *hostDevicesService) String() string {
-	return fmt.Sprintf("hostDevicesService:%s", op.Path)
+	return fmt.Sprintf("hostDevicesService:%s", op.path)
 }
 
 //
@@ -38532,7 +38532,7 @@ func (op *vmReportedDevicesService) Service(path string) (Service, error) {
 }
 
 func (op *vmReportedDevicesService) String() string {
-	return fmt.Sprintf("vmReportedDevicesService:%s", op.Path)
+	return fmt.Sprintf("vmReportedDevicesService:%s", op.path)
 }
 
 //
@@ -38980,7 +38980,7 @@ func (op *vmHostDeviceService) Service(path string) (Service, error) {
 }
 
 func (op *vmHostDeviceService) String() string {
-	return fmt.Sprintf("vmHostDeviceService:%s", op.Path)
+	return fmt.Sprintf("vmHostDeviceService:%s", op.path)
 }
 
 //
@@ -39401,7 +39401,7 @@ func (op *filtersService) Service(path string) (Service, error) {
 }
 
 func (op *filtersService) String() string {
-	return fmt.Sprintf("filtersService:%s", op.Path)
+	return fmt.Sprintf("filtersService:%s", op.path)
 }
 
 //
@@ -39883,7 +39883,7 @@ func (op *quotaStorageLimitsService) Service(path string) (Service, error) {
 }
 
 func (op *quotaStorageLimitsService) String() string {
-	return fmt.Sprintf("quotaStorageLimitsService:%s", op.Path)
+	return fmt.Sprintf("quotaStorageLimitsService:%s", op.path)
 }
 
 //
@@ -40468,7 +40468,7 @@ func (op *schedulingPolicyService) Service(path string) (Service, error) {
 }
 
 func (op *schedulingPolicyService) String() string {
-	return fmt.Sprintf("schedulingPolicyService:%s", op.Path)
+	return fmt.Sprintf("schedulingPolicyService:%s", op.path)
 }
 
 //
@@ -46064,7 +46064,7 @@ func (op *hostService) Service(path string) (Service, error) {
 }
 
 func (op *hostService) String() string {
-	return fmt.Sprintf("hostService:%s", op.Path)
+	return fmt.Sprintf("hostService:%s", op.path)
 }
 
 //
@@ -47170,7 +47170,7 @@ func (op *clusterService) Service(path string) (Service, error) {
 }
 
 func (op *clusterService) String() string {
-	return fmt.Sprintf("clusterService:%s", op.Path)
+	return fmt.Sprintf("clusterService:%s", op.path)
 }
 
 //
@@ -47629,7 +47629,7 @@ func (op *vmHostDevicesService) Service(path string) (Service, error) {
 }
 
 func (op *vmHostDevicesService) String() string {
-	return fmt.Sprintf("vmHostDevicesService:%s", op.Path)
+	return fmt.Sprintf("vmHostDevicesService:%s", op.path)
 }
 
 //
@@ -47826,7 +47826,7 @@ func (op *fileService) Service(path string) (Service, error) {
 }
 
 func (op *fileService) String() string {
-	return fmt.Sprintf("fileService:%s", op.Path)
+	return fmt.Sprintf("fileService:%s", op.path)
 }
 
 //
@@ -48168,7 +48168,7 @@ func (op *assignedDiskProfileService) Service(path string) (Service, error) {
 }
 
 func (op *assignedDiskProfileService) String() string {
-	return fmt.Sprintf("assignedDiskProfileService:%s", op.Path)
+	return fmt.Sprintf("assignedDiskProfileService:%s", op.path)
 }
 
 //
@@ -48574,7 +48574,7 @@ func (op *diskProfilesService) Service(path string) (Service, error) {
 }
 
 func (op *diskProfilesService) String() string {
-	return fmt.Sprintf("diskProfilesService:%s", op.Path)
+	return fmt.Sprintf("diskProfilesService:%s", op.path)
 }
 
 //
@@ -48613,7 +48613,7 @@ func (op *measurableService) Service(path string) (Service, error) {
 }
 
 func (op *measurableService) String() string {
-	return fmt.Sprintf("measurableService:%s", op.Path)
+	return fmt.Sprintf("measurableService:%s", op.path)
 }
 
 //
@@ -48841,7 +48841,7 @@ func (op *operatingSystemsService) Service(path string) (Service, error) {
 }
 
 func (op *operatingSystemsService) String() string {
-	return fmt.Sprintf("operatingSystemsService:%s", op.Path)
+	return fmt.Sprintf("operatingSystemsService:%s", op.path)
 }
 
 //
@@ -49292,7 +49292,7 @@ func (op *storageDomainDisksService) Service(path string) (Service, error) {
 }
 
 func (op *storageDomainDisksService) String() string {
-	return fmt.Sprintf("storageDomainDisksService:%s", op.Path)
+	return fmt.Sprintf("storageDomainDisksService:%s", op.path)
 }
 
 //
@@ -49731,7 +49731,7 @@ func (op *vmGraphicsConsolesService) Service(path string) (Service, error) {
 }
 
 func (op *vmGraphicsConsolesService) String() string {
-	return fmt.Sprintf("vmGraphicsConsolesService:%s", op.Path)
+	return fmt.Sprintf("vmGraphicsConsolesService:%s", op.path)
 }
 
 //
@@ -49928,7 +49928,7 @@ func (op *statisticService) Service(path string) (Service, error) {
 }
 
 func (op *statisticService) String() string {
-	return fmt.Sprintf("statisticService:%s", op.Path)
+	return fmt.Sprintf("statisticService:%s", op.path)
 }
 
 //
@@ -50170,7 +50170,7 @@ func (op *schedulingPolicyUnitsService) Service(path string) (Service, error) {
 }
 
 func (op *schedulingPolicyUnitsService) String() string {
-	return fmt.Sprintf("schedulingPolicyUnitsService:%s", op.Path)
+	return fmt.Sprintf("schedulingPolicyUnitsService:%s", op.path)
 }
 
 //
@@ -50567,7 +50567,7 @@ func (op *affinityLabelVmsService) Service(path string) (Service, error) {
 }
 
 func (op *affinityLabelVmsService) String() string {
-	return fmt.Sprintf("affinityLabelVmsService:%s", op.Path)
+	return fmt.Sprintf("affinityLabelVmsService:%s", op.path)
 }
 
 //
@@ -51099,7 +51099,7 @@ func (op *vmNicsService) Service(path string) (Service, error) {
 }
 
 func (op *vmNicsService) String() string {
-	return fmt.Sprintf("vmNicsService:%s", op.Path)
+	return fmt.Sprintf("vmNicsService:%s", op.path)
 }
 
 //
@@ -51277,7 +51277,7 @@ func (op *moveableService) Service(path string) (Service, error) {
 }
 
 func (op *moveableService) String() string {
-	return fmt.Sprintf("moveableService:%s", op.Path)
+	return fmt.Sprintf("moveableService:%s", op.path)
 }
 
 //
@@ -51713,7 +51713,7 @@ func (op *eventService) Service(path string) (Service, error) {
 }
 
 func (op *eventService) String() string {
-	return fmt.Sprintf("eventService:%s", op.Path)
+	return fmt.Sprintf("eventService:%s", op.path)
 }
 
 //
@@ -52316,7 +52316,7 @@ func (op *snapshotService) Service(path string) (Service, error) {
 }
 
 func (op *snapshotService) String() string {
-	return fmt.Sprintf("snapshotService:%s", op.Path)
+	return fmt.Sprintf("snapshotService:%s", op.path)
 }
 
 //
@@ -52722,7 +52722,7 @@ func (op *templateNicsService) Service(path string) (Service, error) {
 }
 
 func (op *templateNicsService) String() string {
-	return fmt.Sprintf("templateNicsService:%s", op.Path)
+	return fmt.Sprintf("templateNicsService:%s", op.path)
 }
 
 //
@@ -53194,7 +53194,7 @@ func (op *macPoolsService) Service(path string) (Service, error) {
 }
 
 func (op *macPoolsService) String() string {
-	return fmt.Sprintf("macPoolsService:%s", op.Path)
+	return fmt.Sprintf("macPoolsService:%s", op.path)
 }
 
 //
@@ -54127,7 +54127,7 @@ func (op *templateService) Service(path string) (Service, error) {
 }
 
 func (op *templateService) String() string {
-	return fmt.Sprintf("templateService:%s", op.Path)
+	return fmt.Sprintf("templateService:%s", op.path)
 }
 
 //
@@ -54565,7 +54565,7 @@ func (op *affinityGroupVmsService) Service(path string) (Service, error) {
 }
 
 func (op *affinityGroupVmsService) String() string {
-	return fmt.Sprintf("affinityGroupVmsService:%s", op.Path)
+	return fmt.Sprintf("affinityGroupVmsService:%s", op.path)
 }
 
 //
@@ -55568,7 +55568,7 @@ func (op *imageTransfersService) Service(path string) (Service, error) {
 }
 
 func (op *imageTransfersService) String() string {
-	return fmt.Sprintf("imageTransfersService:%s", op.Path)
+	return fmt.Sprintf("imageTransfersService:%s", op.path)
 }
 
 //
@@ -55905,7 +55905,7 @@ func (op *affinityLabelHostService) Service(path string) (Service, error) {
 }
 
 func (op *affinityLabelHostService) String() string {
-	return fmt.Sprintf("affinityLabelHostService:%s", op.Path)
+	return fmt.Sprintf("affinityLabelHostService:%s", op.path)
 }
 
 //
@@ -56309,7 +56309,7 @@ func (op *storageDomainServerConnectionsService) Service(path string) (Service, 
 }
 
 func (op *storageDomainServerConnectionsService) String() string {
-	return fmt.Sprintf("storageDomainServerConnectionsService:%s", op.Path)
+	return fmt.Sprintf("storageDomainServerConnectionsService:%s", op.path)
 }
 
 //
@@ -56712,7 +56712,7 @@ func (op *vmDisksService) Service(path string) (Service, error) {
 }
 
 func (op *vmDisksService) String() string {
-	return fmt.Sprintf("vmDisksService:%s", op.Path)
+	return fmt.Sprintf("vmDisksService:%s", op.path)
 }
 
 //
@@ -57252,7 +57252,7 @@ func (op *vmPoolsService) Service(path string) (Service, error) {
 }
 
 func (op *vmPoolsService) String() string {
-	return fmt.Sprintf("vmPoolsService:%s", op.Path)
+	return fmt.Sprintf("vmPoolsService:%s", op.path)
 }
 
 //
@@ -57830,7 +57830,7 @@ func (op *vmCdromService) Service(path string) (Service, error) {
 }
 
 func (op *vmCdromService) String() string {
-	return fmt.Sprintf("vmCdromService:%s", op.Path)
+	return fmt.Sprintf("vmCdromService:%s", op.path)
 }
 
 //
@@ -58072,7 +58072,7 @@ func (op *storageDomainTemplatesService) Service(path string) (Service, error) {
 }
 
 func (op *storageDomainTemplatesService) String() string {
-	return fmt.Sprintf("storageDomainTemplatesService:%s", op.Path)
+	return fmt.Sprintf("storageDomainTemplatesService:%s", op.path)
 }
 
 //
@@ -58414,7 +58414,7 @@ func (op *quotaStorageLimitService) Service(path string) (Service, error) {
 }
 
 func (op *quotaStorageLimitService) String() string {
-	return fmt.Sprintf("quotaStorageLimitService:%s", op.Path)
+	return fmt.Sprintf("quotaStorageLimitService:%s", op.path)
 }
 
 //
@@ -59064,7 +59064,7 @@ func (op *tagService) Service(path string) (Service, error) {
 }
 
 func (op *tagService) String() string {
-	return fmt.Sprintf("tagService:%s", op.Path)
+	return fmt.Sprintf("tagService:%s", op.path)
 }
 
 //
@@ -64027,7 +64027,7 @@ func (op *vmService) Service(path string) (Service, error) {
 }
 
 func (op *vmService) String() string {
-	return fmt.Sprintf("vmService:%s", op.Path)
+	return fmt.Sprintf("vmService:%s", op.path)
 }
 
 //
@@ -64224,7 +64224,7 @@ func (op *hostHookService) Service(path string) (Service, error) {
 }
 
 func (op *hostHookService) String() string {
-	return fmt.Sprintf("hostHookService:%s", op.Path)
+	return fmt.Sprintf("hostHookService:%s", op.path)
 }
 
 //
@@ -64645,7 +64645,7 @@ func (op *imageService) Service(path string) (Service, error) {
 }
 
 func (op *imageService) String() string {
-	return fmt.Sprintf("imageService:%s", op.Path)
+	return fmt.Sprintf("imageService:%s", op.path)
 }
 
 //
@@ -65137,7 +65137,7 @@ func (op *qossService) Service(path string) (Service, error) {
 }
 
 func (op *qossService) String() string {
-	return fmt.Sprintf("qossService:%s", op.Path)
+	return fmt.Sprintf("qossService:%s", op.path)
 }
 
 //
@@ -65769,7 +65769,7 @@ func (op *bookmarkService) Service(path string) (Service, error) {
 }
 
 func (op *bookmarkService) String() string {
-	return fmt.Sprintf("bookmarkService:%s", op.Path)
+	return fmt.Sprintf("bookmarkService:%s", op.path)
 }
 
 //
@@ -66129,7 +66129,7 @@ func (op *networkLabelService) Service(path string) (Service, error) {
 }
 
 func (op *networkLabelService) String() string {
-	return fmt.Sprintf("networkLabelService:%s", op.Path)
+	return fmt.Sprintf("networkLabelService:%s", op.path)
 }
 
 //
@@ -67494,7 +67494,7 @@ func (op *storageServerConnectionService) Service(path string) (Service, error) 
 }
 
 func (op *storageServerConnectionService) String() string {
-	return fmt.Sprintf("storageServerConnectionService:%s", op.Path)
+	return fmt.Sprintf("storageServerConnectionService:%s", op.path)
 }
 
 //
@@ -67932,7 +67932,7 @@ func (op *clusterNetworksService) Service(path string) (Service, error) {
 }
 
 func (op *clusterNetworksService) String() string {
-	return fmt.Sprintf("clusterNetworksService:%s", op.Path)
+	return fmt.Sprintf("clusterNetworksService:%s", op.path)
 }
 
 //
@@ -68136,7 +68136,7 @@ func (op *clusterExternalProvidersService) Service(path string) (Service, error)
 }
 
 func (op *clusterExternalProvidersService) String() string {
-	return fmt.Sprintf("clusterExternalProvidersService:%s", op.Path)
+	return fmt.Sprintf("clusterExternalProvidersService:%s", op.path)
 }
 
 //
@@ -68364,7 +68364,7 @@ func (op *snapshotCdromsService) Service(path string) (Service, error) {
 }
 
 func (op *snapshotCdromsService) String() string {
-	return fmt.Sprintf("snapshotCdromsService:%s", op.Path)
+	return fmt.Sprintf("snapshotCdromsService:%s", op.path)
 }
 
 //
@@ -68604,7 +68604,7 @@ func (op *externalProviderCertificateService) Service(path string) (Service, err
 }
 
 func (op *externalProviderCertificateService) String() string {
-	return fmt.Sprintf("externalProviderCertificateService:%s", op.Path)
+	return fmt.Sprintf("externalProviderCertificateService:%s", op.path)
 }
 
 //
@@ -69172,7 +69172,7 @@ func (op *snapshotsService) Service(path string) (Service, error) {
 }
 
 func (op *snapshotsService) String() string {
-	return fmt.Sprintf("snapshotsService:%s", op.Path)
+	return fmt.Sprintf("snapshotsService:%s", op.path)
 }
 
 //
@@ -69381,7 +69381,7 @@ func (op *hostNumaNodeService) Service(path string) (Service, error) {
 }
 
 func (op *hostNumaNodeService) String() string {
-	return fmt.Sprintf("hostNumaNodeService:%s", op.Path)
+	return fmt.Sprintf("hostNumaNodeService:%s", op.path)
 }
 
 //
@@ -69729,7 +69729,7 @@ func (op *templateGraphicsConsoleService) Service(path string) (Service, error) 
 }
 
 func (op *templateGraphicsConsoleService) String() string {
-	return fmt.Sprintf("templateGraphicsConsoleService:%s", op.Path)
+	return fmt.Sprintf("templateGraphicsConsoleService:%s", op.path)
 }
 
 //
@@ -70849,7 +70849,7 @@ func (op *vmGraphicsConsoleService) Service(path string) (Service, error) {
 }
 
 func (op *vmGraphicsConsoleService) String() string {
-	return fmt.Sprintf("vmGraphicsConsoleService:%s", op.Path)
+	return fmt.Sprintf("vmGraphicsConsoleService:%s", op.path)
 }
 
 //
@@ -71191,7 +71191,7 @@ func (op *quotaClusterLimitService) Service(path string) (Service, error) {
 }
 
 func (op *quotaClusterLimitService) String() string {
-	return fmt.Sprintf("quotaClusterLimitService:%s", op.Path)
+	return fmt.Sprintf("quotaClusterLimitService:%s", op.path)
 }
 
 //
@@ -71861,7 +71861,7 @@ func (op *qosService) Service(path string) (Service, error) {
 }
 
 func (op *qosService) String() string {
-	return fmt.Sprintf("qosService:%s", op.Path)
+	return fmt.Sprintf("qosService:%s", op.path)
 }
 
 //
@@ -72090,7 +72090,7 @@ func (op *hostNicsService) Service(path string) (Service, error) {
 }
 
 func (op *hostNicsService) String() string {
-	return fmt.Sprintf("hostNicsService:%s", op.Path)
+	return fmt.Sprintf("hostNicsService:%s", op.path)
 }
 
 //
@@ -72304,7 +72304,7 @@ func (op *externalNetworkProviderConfigurationsService) Service(path string) (Se
 }
 
 func (op *externalNetworkProviderConfigurationsService) String() string {
-	return fmt.Sprintf("externalNetworkProviderConfigurationsService:%s", op.Path)
+	return fmt.Sprintf("externalNetworkProviderConfigurationsService:%s", op.path)
 }
 
 //
@@ -72839,7 +72839,7 @@ func (op *templateNicService) Service(path string) (Service, error) {
 }
 
 func (op *templateNicService) String() string {
-	return fmt.Sprintf("templateNicService:%s", op.Path)
+	return fmt.Sprintf("templateNicService:%s", op.path)
 }
 
 //
@@ -73337,7 +73337,7 @@ func (op *bookmarksService) Service(path string) (Service, error) {
 }
 
 func (op *bookmarksService) String() string {
-	return fmt.Sprintf("bookmarksService:%s", op.Path)
+	return fmt.Sprintf("bookmarksService:%s", op.path)
 }
 
 //
@@ -73565,7 +73565,7 @@ func (op *snapshotDisksService) Service(path string) (Service, error) {
 }
 
 func (op *snapshotDisksService) String() string {
-	return fmt.Sprintf("snapshotDisksService:%s", op.Path)
+	return fmt.Sprintf("snapshotDisksService:%s", op.path)
 }
 
 //
@@ -73971,7 +73971,7 @@ func (op *assignedCpuProfilesService) Service(path string) (Service, error) {
 }
 
 func (op *assignedCpuProfilesService) String() string {
-	return fmt.Sprintf("assignedCpuProfilesService:%s", op.Path)
+	return fmt.Sprintf("assignedCpuProfilesService:%s", op.path)
 }
 
 //
@@ -74407,7 +74407,7 @@ func (op *nicNetworkFilterParametersService) Service(path string) (Service, erro
 }
 
 func (op *nicNetworkFilterParametersService) String() string {
-	return fmt.Sprintf("nicNetworkFilterParametersService:%s", op.Path)
+	return fmt.Sprintf("nicNetworkFilterParametersService:%s", op.path)
 }
 
 //
@@ -74791,7 +74791,7 @@ func (op *templateDiskAttachmentService) Service(path string) (Service, error) {
 }
 
 func (op *templateDiskAttachmentService) String() string {
-	return fmt.Sprintf("templateDiskAttachmentService:%s", op.Path)
+	return fmt.Sprintf("templateDiskAttachmentService:%s", op.path)
 }
 
 //
@@ -75133,7 +75133,7 @@ func (op *virtualFunctionAllowedNetworkService) Service(path string) (Service, e
 }
 
 func (op *virtualFunctionAllowedNetworkService) String() string {
-	return fmt.Sprintf("virtualFunctionAllowedNetworkService:%s", op.Path)
+	return fmt.Sprintf("virtualFunctionAllowedNetworkService:%s", op.path)
 }
 
 //
@@ -75576,7 +75576,7 @@ func (op *networkLabelsService) Service(path string) (Service, error) {
 }
 
 func (op *networkLabelsService) String() string {
-	return fmt.Sprintf("networkLabelsService:%s", op.Path)
+	return fmt.Sprintf("networkLabelsService:%s", op.path)
 }
 
 //
@@ -76140,7 +76140,7 @@ func (op *clustersService) Service(path string) (Service, error) {
 }
 
 func (op *clustersService) String() string {
-	return fmt.Sprintf("clustersService:%s", op.Path)
+	return fmt.Sprintf("clustersService:%s", op.path)
 }
 
 //
@@ -76476,7 +76476,7 @@ func (op *assignedAffinityLabelService) Service(path string) (Service, error) {
 }
 
 func (op *assignedAffinityLabelService) String() string {
-	return fmt.Sprintf("assignedAffinityLabelService:%s", op.Path)
+	return fmt.Sprintf("assignedAffinityLabelService:%s", op.path)
 }
 
 //
@@ -76832,7 +76832,7 @@ func (op *weightService) Service(path string) (Service, error) {
 }
 
 func (op *weightService) String() string {
-	return fmt.Sprintf("weightService:%s", op.Path)
+	return fmt.Sprintf("weightService:%s", op.path)
 }
 
 //
@@ -77379,7 +77379,7 @@ func (op *diskProfileService) Service(path string) (Service, error) {
 }
 
 func (op *diskProfileService) String() string {
-	return fmt.Sprintf("diskProfileService:%s", op.Path)
+	return fmt.Sprintf("diskProfileService:%s", op.path)
 }
 
 //
@@ -78869,7 +78869,7 @@ func (op *storageDomainsService) Service(path string) (Service, error) {
 }
 
 func (op *storageDomainsService) String() string {
-	return fmt.Sprintf("storageDomainsService:%s", op.Path)
+	return fmt.Sprintf("storageDomainsService:%s", op.path)
 }
 
 //
@@ -79337,7 +79337,7 @@ func (op *clusterEnabledFeaturesService) Service(path string) (Service, error) {
 }
 
 func (op *clusterEnabledFeaturesService) String() string {
-	return fmt.Sprintf("clusterEnabledFeaturesService:%s", op.Path)
+	return fmt.Sprintf("clusterEnabledFeaturesService:%s", op.path)
 }
 
 //
@@ -79534,7 +79534,7 @@ func (op *snapshotCdromService) Service(path string) (Service, error) {
 }
 
 func (op *snapshotCdromService) String() string {
-	return fmt.Sprintf("snapshotCdromService:%s", op.Path)
+	return fmt.Sprintf("snapshotCdromService:%s", op.path)
 }
 
 //
@@ -79941,7 +79941,7 @@ func (op *quotaClusterLimitsService) Service(path string) (Service, error) {
 }
 
 func (op *quotaClusterLimitsService) String() string {
-	return fmt.Sprintf("quotaClusterLimitsService:%s", op.Path)
+	return fmt.Sprintf("quotaClusterLimitsService:%s", op.path)
 }
 
 //
@@ -80407,7 +80407,7 @@ func (op *fenceAgentsService) Service(path string) (Service, error) {
 }
 
 func (op *fenceAgentsService) String() string {
-	return fmt.Sprintf("fenceAgentsService:%s", op.Path)
+	return fmt.Sprintf("fenceAgentsService:%s", op.path)
 }
 
 //
@@ -80948,7 +80948,7 @@ func (op *instanceTypeWatchdogService) Service(path string) (Service, error) {
 }
 
 func (op *instanceTypeWatchdogService) String() string {
-	return fmt.Sprintf("instanceTypeWatchdogService:%s", op.Path)
+	return fmt.Sprintf("instanceTypeWatchdogService:%s", op.path)
 }
 
 //
@@ -83074,7 +83074,7 @@ func (op *assignedPermissionsService) Service(path string) (Service, error) {
 }
 
 func (op *assignedPermissionsService) String() string {
-	return fmt.Sprintf("assignedPermissionsService:%s", op.Path)
+	return fmt.Sprintf("assignedPermissionsService:%s", op.path)
 }
 
 //
@@ -83474,7 +83474,7 @@ func (op *permitService) Service(path string) (Service, error) {
 }
 
 func (op *permitService) String() string {
-	return fmt.Sprintf("permitService:%s", op.Path)
+	return fmt.Sprintf("permitService:%s", op.path)
 }
 
 //
@@ -84521,7 +84521,7 @@ func (op *systemService) Service(path string) (Service, error) {
 }
 
 func (op *systemService) String() string {
-	return fmt.Sprintf("systemService:%s", op.Path)
+	return fmt.Sprintf("systemService:%s", op.path)
 }
 
 //
@@ -85132,7 +85132,7 @@ func (op *vmWatchdogService) Service(path string) (Service, error) {
 }
 
 func (op *vmWatchdogService) String() string {
-	return fmt.Sprintf("vmWatchdogService:%s", op.Path)
+	return fmt.Sprintf("vmWatchdogService:%s", op.path)
 }
 
 //
@@ -85359,7 +85359,7 @@ func (op *unmanagedNetworksService) Service(path string) (Service, error) {
 }
 
 func (op *unmanagedNetworksService) String() string {
-	return fmt.Sprintf("unmanagedNetworksService:%s", op.Path)
+	return fmt.Sprintf("unmanagedNetworksService:%s", op.path)
 }
 
 //
@@ -85586,7 +85586,7 @@ func (op *hostNumaNodesService) Service(path string) (Service, error) {
 }
 
 func (op *hostNumaNodesService) String() string {
-	return fmt.Sprintf("hostNumaNodesService:%s", op.Path)
+	return fmt.Sprintf("hostNumaNodesService:%s", op.path)
 }
 
 //
@@ -85942,7 +85942,7 @@ func (op *filterService) Service(path string) (Service, error) {
 }
 
 func (op *filterService) String() string {
-	return fmt.Sprintf("filterService:%s", op.Path)
+	return fmt.Sprintf("filterService:%s", op.path)
 }
 
 //
@@ -86519,7 +86519,7 @@ func (op *storageServerConnectionExtensionService) Service(path string) (Service
 }
 
 func (op *storageServerConnectionExtensionService) String() string {
-	return fmt.Sprintf("storageServerConnectionExtensionService:%s", op.Path)
+	return fmt.Sprintf("storageServerConnectionExtensionService:%s", op.path)
 }
 
 //
@@ -87370,7 +87370,7 @@ func (op *dataCenterService) Service(path string) (Service, error) {
 }
 
 func (op *dataCenterService) String() string {
-	return fmt.Sprintf("dataCenterService:%s", op.Path)
+	return fmt.Sprintf("dataCenterService:%s", op.path)
 }
 
 //
@@ -87624,7 +87624,7 @@ func (op *clusterFeaturesService) Service(path string) (Service, error) {
 }
 
 func (op *clusterFeaturesService) String() string {
-	return fmt.Sprintf("clusterFeaturesService:%s", op.Path)
+	return fmt.Sprintf("clusterFeaturesService:%s", op.path)
 }
 
 //
@@ -87900,7 +87900,7 @@ func (op *externalVmImportsService) Service(path string) (Service, error) {
 }
 
 func (op *externalVmImportsService) String() string {
-	return fmt.Sprintf("externalVmImportsService:%s", op.Path)
+	return fmt.Sprintf("externalVmImportsService:%s", op.path)
 }
 
 //
@@ -88127,7 +88127,7 @@ func (op *hostHooksService) Service(path string) (Service, error) {
 }
 
 func (op *hostHooksService) String() string {
-	return fmt.Sprintf("hostHooksService:%s", op.Path)
+	return fmt.Sprintf("hostHooksService:%s", op.path)
 }
 
 //
@@ -88355,7 +88355,7 @@ func (op *diskSnapshotsService) Service(path string) (Service, error) {
 }
 
 func (op *diskSnapshotsService) String() string {
-	return fmt.Sprintf("diskSnapshotsService:%s", op.Path)
+	return fmt.Sprintf("diskSnapshotsService:%s", op.path)
 }
 
 //
@@ -88762,7 +88762,7 @@ func (op *instanceTypeGraphicsConsolesService) Service(path string) (Service, er
 }
 
 func (op *instanceTypeGraphicsConsolesService) String() string {
-	return fmt.Sprintf("instanceTypeGraphicsConsolesService:%s", op.Path)
+	return fmt.Sprintf("instanceTypeGraphicsConsolesService:%s", op.path)
 }
 
 //
@@ -89159,7 +89159,7 @@ func (op *affinityLabelHostsService) Service(path string) (Service, error) {
 }
 
 func (op *affinityLabelHostsService) String() string {
-	return fmt.Sprintf("affinityLabelHostsService:%s", op.Path)
+	return fmt.Sprintf("affinityLabelHostsService:%s", op.path)
 }
 
 //
@@ -90120,7 +90120,7 @@ func (op *storageDomainVmService) Service(path string) (Service, error) {
 }
 
 func (op *storageDomainVmService) String() string {
-	return fmt.Sprintf("storageDomainVmService:%s", op.Path)
+	return fmt.Sprintf("storageDomainVmService:%s", op.path)
 }
 
 //
@@ -90811,7 +90811,7 @@ func (op *quotaService) Service(path string) (Service, error) {
 }
 
 func (op *quotaService) String() string {
-	return fmt.Sprintf("quotaService:%s", op.Path)
+	return fmt.Sprintf("quotaService:%s", op.path)
 }
 
 //
@@ -91070,7 +91070,7 @@ func (op *clusterLevelsService) Service(path string) (Service, error) {
 }
 
 func (op *clusterLevelsService) String() string {
-	return fmt.Sprintf("clusterLevelsService:%s", op.Path)
+	return fmt.Sprintf("clusterLevelsService:%s", op.path)
 }
 
 //
@@ -91307,7 +91307,7 @@ func (op *clusterFeatureService) Service(path string) (Service, error) {
 }
 
 func (op *clusterFeatureService) String() string {
-	return fmt.Sprintf("clusterFeatureService:%s", op.Path)
+	return fmt.Sprintf("clusterFeatureService:%s", op.path)
 }
 
 //
@@ -92147,7 +92147,7 @@ func (op *diskAttachmentsService) Service(path string) (Service, error) {
 }
 
 func (op *diskAttachmentsService) String() string {
-	return fmt.Sprintf("diskAttachmentsService:%s", op.Path)
+	return fmt.Sprintf("diskAttachmentsService:%s", op.path)
 }
 
 //
@@ -92323,7 +92323,7 @@ func (op *affinityGroupVmService) Service(path string) (Service, error) {
 }
 
 func (op *affinityGroupVmService) String() string {
-	return fmt.Sprintf("affinityGroupVmService:%s", op.Path)
+	return fmt.Sprintf("affinityGroupVmService:%s", op.path)
 }
 
 //
@@ -92757,7 +92757,7 @@ func (op *attachedStorageDomainDisksService) Service(path string) (Service, erro
 }
 
 func (op *attachedStorageDomainDisksService) String() string {
-	return fmt.Sprintf("attachedStorageDomainDisksService:%s", op.Path)
+	return fmt.Sprintf("attachedStorageDomainDisksService:%s", op.path)
 }
 
 //
@@ -93255,7 +93255,7 @@ func (op *permitsService) Service(path string) (Service, error) {
 }
 
 func (op *permitsService) String() string {
-	return fmt.Sprintf("permitsService:%s", op.Path)
+	return fmt.Sprintf("permitsService:%s", op.path)
 }
 
 //
@@ -93809,7 +93809,7 @@ func (op *vnicProfileService) Service(path string) (Service, error) {
 }
 
 func (op *vnicProfileService) String() string {
-	return fmt.Sprintf("vnicProfileService:%s", op.Path)
+	return fmt.Sprintf("vnicProfileService:%s", op.path)
 }
 
 //
@@ -94215,7 +94215,7 @@ func (op *templateWatchdogsService) Service(path string) (Service, error) {
 }
 
 func (op *templateWatchdogsService) String() string {
-	return fmt.Sprintf("templateWatchdogsService:%s", op.Path)
+	return fmt.Sprintf("templateWatchdogsService:%s", op.path)
 }
 
 //
@@ -94458,7 +94458,7 @@ func (op *vmApplicationsService) Service(path string) (Service, error) {
 }
 
 func (op *vmApplicationsService) String() string {
-	return fmt.Sprintf("vmApplicationsService:%s", op.Path)
+	return fmt.Sprintf("vmApplicationsService:%s", op.path)
 }
 
 //
@@ -94674,7 +94674,7 @@ func (op *templateDiskAttachmentsService) Service(path string) (Service, error) 
 }
 
 func (op *templateDiskAttachmentsService) String() string {
-	return fmt.Sprintf("templateDiskAttachmentsService:%s", op.Path)
+	return fmt.Sprintf("templateDiskAttachmentsService:%s", op.path)
 }
 
 //
@@ -95022,7 +95022,7 @@ func (op *instanceTypeGraphicsConsoleService) Service(path string) (Service, err
 }
 
 func (op *instanceTypeGraphicsConsoleService) String() string {
-	return fmt.Sprintf("instanceTypeGraphicsConsoleService:%s", op.Path)
+	return fmt.Sprintf("instanceTypeGraphicsConsoleService:%s", op.path)
 }
 
 //
@@ -96692,7 +96692,7 @@ func (op *diskService) Service(path string) (Service, error) {
 }
 
 func (op *diskService) String() string {
-	return fmt.Sprintf("diskService:%s", op.Path)
+	return fmt.Sprintf("diskService:%s", op.path)
 }
 
 //
@@ -97293,7 +97293,7 @@ func (op *vmNumaNodeService) Service(path string) (Service, error) {
 }
 
 func (op *vmNumaNodeService) String() string {
-	return fmt.Sprintf("vmNumaNodeService:%s", op.Path)
+	return fmt.Sprintf("vmNumaNodeService:%s", op.path)
 }
 
 //
@@ -97889,7 +97889,7 @@ func (op *affinityGroupService) Service(path string) (Service, error) {
 }
 
 func (op *affinityGroupService) String() string {
-	return fmt.Sprintf("affinityGroupService:%s", op.Path)
+	return fmt.Sprintf("affinityGroupService:%s", op.path)
 }
 
 //
@@ -98332,7 +98332,7 @@ func (op *quotasService) Service(path string) (Service, error) {
 }
 
 func (op *quotasService) String() string {
-	return fmt.Sprintf("quotasService:%s", op.Path)
+	return fmt.Sprintf("quotasService:%s", op.path)
 }
 
 //
@@ -98591,7 +98591,7 @@ func (op *storageDomainContentDisksService) Service(path string) (Service, error
 }
 
 func (op *storageDomainContentDisksService) String() string {
-	return fmt.Sprintf("storageDomainContentDisksService:%s", op.Path)
+	return fmt.Sprintf("storageDomainContentDisksService:%s", op.path)
 }
 
 //
@@ -98805,7 +98805,7 @@ func (op *networkFilterService) Service(path string) (Service, error) {
 }
 
 func (op *networkFilterService) String() string {
-	return fmt.Sprintf("networkFilterService:%s", op.Path)
+	return fmt.Sprintf("networkFilterService:%s", op.path)
 }
 
 //
@@ -99042,7 +99042,7 @@ func (op *iconService) Service(path string) (Service, error) {
 }
 
 func (op *iconService) String() string {
-	return fmt.Sprintf("iconService:%s", op.Path)
+	return fmt.Sprintf("iconService:%s", op.path)
 }
 
 //
@@ -99269,7 +99269,7 @@ func (op *templateDisksService) Service(path string) (Service, error) {
 }
 
 func (op *templateDisksService) String() string {
-	return fmt.Sprintf("templateDisksService:%s", op.Path)
+	return fmt.Sprintf("templateDisksService:%s", op.path)
 }
 
 //
@@ -99497,7 +99497,7 @@ func (op *imagesService) Service(path string) (Service, error) {
 }
 
 func (op *imagesService) String() string {
-	return fmt.Sprintf("imagesService:%s", op.Path)
+	return fmt.Sprintf("imagesService:%s", op.path)
 }
 
 //
@@ -100726,7 +100726,7 @@ func (op *storageDomainDiskService) Service(path string) (Service, error) {
 }
 
 func (op *storageDomainDiskService) String() string {
-	return fmt.Sprintf("storageDomainDiskService:%s", op.Path)
+	return fmt.Sprintf("storageDomainDiskService:%s", op.path)
 }
 
 //
@@ -100955,7 +100955,7 @@ func (op *assignedRolesService) Service(path string) (Service, error) {
 }
 
 func (op *assignedRolesService) String() string {
-	return fmt.Sprintf("assignedRolesService:%s", op.Path)
+	return fmt.Sprintf("assignedRolesService:%s", op.path)
 }
 
 //
@@ -101843,7 +101843,7 @@ func (op *vmPoolService) Service(path string) (Service, error) {
 }
 
 func (op *vmPoolService) String() string {
-	return fmt.Sprintf("vmPoolService:%s", op.Path)
+	return fmt.Sprintf("vmPoolService:%s", op.path)
 }
 
 //
@@ -102297,7 +102297,7 @@ func (op *storageServerConnectionExtensionsService) Service(path string) (Servic
 }
 
 func (op *storageServerConnectionExtensionsService) String() string {
-	return fmt.Sprintf("storageServerConnectionExtensionsService:%s", op.Path)
+	return fmt.Sprintf("storageServerConnectionExtensionsService:%s", op.path)
 }
 
 //
@@ -102700,7 +102700,7 @@ func (op *virtualFunctionAllowedNetworksService) Service(path string) (Service, 
 }
 
 func (op *virtualFunctionAllowedNetworksService) String() string {
-	return fmt.Sprintf("virtualFunctionAllowedNetworksService:%s", op.Path)
+	return fmt.Sprintf("virtualFunctionAllowedNetworksService:%s", op.path)
 }
 
 //
@@ -103106,7 +103106,7 @@ func (op *cpuProfilesService) Service(path string) (Service, error) {
 }
 
 func (op *cpuProfilesService) String() string {
-	return fmt.Sprintf("cpuProfilesService:%s", op.Path)
+	return fmt.Sprintf("cpuProfilesService:%s", op.path)
 }
 
 //
@@ -103335,7 +103335,7 @@ func (op *templateCdromsService) Service(path string) (Service, error) {
 }
 
 func (op *templateCdromsService) String() string {
-	return fmt.Sprintf("templateCdromsService:%s", op.Path)
+	return fmt.Sprintf("templateCdromsService:%s", op.path)
 }
 
 //
@@ -103940,7 +103940,7 @@ func (op *fenceAgentService) Service(path string) (Service, error) {
 }
 
 func (op *fenceAgentService) String() string {
-	return fmt.Sprintf("fenceAgentService:%s", op.Path)
+	return fmt.Sprintf("fenceAgentService:%s", op.path)
 }
 
 //
@@ -104137,7 +104137,7 @@ func (op *snapshotNicService) Service(path string) (Service, error) {
 }
 
 func (op *snapshotNicService) String() string {
-	return fmt.Sprintf("snapshotNicService:%s", op.Path)
+	return fmt.Sprintf("snapshotNicService:%s", op.path)
 }
 
 //
@@ -104773,7 +104773,7 @@ func (op *diskAttachmentService) Service(path string) (Service, error) {
 }
 
 func (op *diskAttachmentService) String() string {
-	return fmt.Sprintf("diskAttachmentService:%s", op.Path)
+	return fmt.Sprintf("diskAttachmentService:%s", op.path)
 }
 
 //
@@ -105110,7 +105110,7 @@ func (op *affinityLabelVmService) Service(path string) (Service, error) {
 }
 
 func (op *affinityLabelVmService) String() string {
-	return fmt.Sprintf("affinityLabelVmService:%s", op.Path)
+	return fmt.Sprintf("affinityLabelVmService:%s", op.path)
 }
 
 //
@@ -105406,7 +105406,7 @@ func (op *clusterLevelService) Service(path string) (Service, error) {
 }
 
 func (op *clusterLevelService) String() string {
-	return fmt.Sprintf("clusterLevelService:%s", op.Path)
+	return fmt.Sprintf("clusterLevelService:%s", op.path)
 }
 
 //
@@ -105826,7 +105826,7 @@ func (op *instanceTypeNicsService) Service(path string) (Service, error) {
 }
 
 func (op *instanceTypeNicsService) String() string {
-	return fmt.Sprintf("instanceTypeNicsService:%s", op.Path)
+	return fmt.Sprintf("instanceTypeNicsService:%s", op.path)
 }
 
 //
@@ -106637,7 +106637,7 @@ func (op *eventsService) Service(path string) (Service, error) {
 }
 
 func (op *eventsService) String() string {
-	return fmt.Sprintf("eventsService:%s", op.Path)
+	return fmt.Sprintf("eventsService:%s", op.path)
 }
 
 //
@@ -107274,7 +107274,7 @@ func (op *networksService) Service(path string) (Service, error) {
 }
 
 func (op *networksService) String() string {
-	return fmt.Sprintf("networksService:%s", op.Path)
+	return fmt.Sprintf("networksService:%s", op.path)
 }
 
 //
@@ -107951,7 +107951,7 @@ func (op *jobService) Service(path string) (Service, error) {
 }
 
 func (op *jobService) String() string {
-	return fmt.Sprintf("jobService:%s", op.Path)
+	return fmt.Sprintf("jobService:%s", op.path)
 }
 
 //
@@ -108272,7 +108272,7 @@ func (op *systemOptionService) Service(path string) (Service, error) {
 }
 
 func (op *systemOptionService) String() string {
-	return fmt.Sprintf("systemOptionService:%s", op.Path)
+	return fmt.Sprintf("systemOptionService:%s", op.path)
 }
 
 //
@@ -109874,7 +109874,7 @@ func (op *storageDomainService) Service(path string) (Service, error) {
 }
 
 func (op *storageDomainService) String() string {
-	return fmt.Sprintf("storageDomainService:%s", op.Path)
+	return fmt.Sprintf("storageDomainService:%s", op.path)
 }
 
 //
@@ -110280,7 +110280,7 @@ func (op *assignedVnicProfilesService) Service(path string) (Service, error) {
 }
 
 func (op *assignedVnicProfilesService) String() string {
-	return fmt.Sprintf("assignedVnicProfilesService:%s", op.Path)
+	return fmt.Sprintf("assignedVnicProfilesService:%s", op.path)
 }
 
 //
@@ -111322,7 +111322,7 @@ func (op *imageTransferService) Service(path string) (Service, error) {
 }
 
 func (op *imageTransferService) String() string {
-	return fmt.Sprintf("imageTransferService:%s", op.Path)
+	return fmt.Sprintf("imageTransferService:%s", op.path)
 }
 
 //
@@ -111984,7 +111984,7 @@ func (op *roleService) Service(path string) (Service, error) {
 }
 
 func (op *roleService) String() string {
-	return fmt.Sprintf("roleService:%s", op.Path)
+	return fmt.Sprintf("roleService:%s", op.path)
 }
 
 //
@@ -112976,7 +112976,7 @@ func (op *vmNicService) Service(path string) (Service, error) {
 }
 
 func (op *vmNicService) String() string {
-	return fmt.Sprintf("vmNicService:%s", op.Path)
+	return fmt.Sprintf("vmNicService:%s", op.path)
 }
 
 //
@@ -113173,7 +113173,7 @@ func (op *operatingSystemService) Service(path string) (Service, error) {
 }
 
 func (op *operatingSystemService) String() string {
-	return fmt.Sprintf("operatingSystemService:%s", op.Path)
+	return fmt.Sprintf("operatingSystemService:%s", op.path)
 }
 
 //
@@ -113580,7 +113580,7 @@ func (op *attachedStorageDomainsService) Service(path string) (Service, error) {
 }
 
 func (op *attachedStorageDomainsService) String() string {
-	return fmt.Sprintf("attachedStorageDomainsService:%s", op.Path)
+	return fmt.Sprintf("attachedStorageDomainsService:%s", op.path)
 }
 
 //
@@ -113952,7 +113952,7 @@ func (op *externalProviderService) Service(path string) (Service, error) {
 }
 
 func (op *externalProviderService) String() string {
-	return fmt.Sprintf("externalProviderService:%s", op.Path)
+	return fmt.Sprintf("externalProviderService:%s", op.path)
 }
 
 //
@@ -114167,7 +114167,7 @@ func (op *vmApplicationService) Service(path string) (Service, error) {
 }
 
 func (op *vmApplicationService) String() string {
-	return fmt.Sprintf("vmApplicationService:%s", op.Path)
+	return fmt.Sprintf("vmApplicationService:%s", op.path)
 }
 
 //
@@ -114587,7 +114587,7 @@ func (op *weightsService) Service(path string) (Service, error) {
 }
 
 func (op *weightsService) String() string {
-	return fmt.Sprintf("weightsService:%s", op.Path)
+	return fmt.Sprintf("weightsService:%s", op.path)
 }
 
 //
@@ -114958,7 +114958,7 @@ func (op *statisticsService) Service(path string) (Service, error) {
 }
 
 func (op *statisticsService) String() string {
-	return fmt.Sprintf("statisticsService:%s", op.Path)
+	return fmt.Sprintf("statisticsService:%s", op.path)
 }
 
 //
@@ -115423,7 +115423,7 @@ func (op *affinityGroupsService) Service(path string) (Service, error) {
 }
 
 func (op *affinityGroupsService) String() string {
-	return fmt.Sprintf("affinityGroupsService:%s", op.Path)
+	return fmt.Sprintf("affinityGroupsService:%s", op.path)
 }
 
 //
@@ -115823,7 +115823,7 @@ func (op *assignedTagService) Service(path string) (Service, error) {
 }
 
 func (op *assignedTagService) String() string {
-	return fmt.Sprintf("assignedTagService:%s", op.Path)
+	return fmt.Sprintf("assignedTagService:%s", op.path)
 }
 
 //
@@ -116568,7 +116568,7 @@ func (op *attachedStorageDomainService) Service(path string) (Service, error) {
 }
 
 func (op *attachedStorageDomainService) String() string {
-	return fmt.Sprintf("attachedStorageDomainService:%s", op.Path)
+	return fmt.Sprintf("attachedStorageDomainService:%s", op.path)
 }
 
 //
@@ -116877,7 +116877,7 @@ func (op *katelloErrataService) Service(path string) (Service, error) {
 }
 
 func (op *katelloErrataService) String() string {
-	return fmt.Sprintf("katelloErrataService:%s", op.Path)
+	return fmt.Sprintf("katelloErrataService:%s", op.path)
 }
 
 //
@@ -117169,7 +117169,7 @@ func (op *externalHostGroupsService) Service(path string) (Service, error) {
 }
 
 func (op *externalHostGroupsService) String() string {
-	return fmt.Sprintf("externalHostGroupsService:%s", op.Path)
+	return fmt.Sprintf("externalHostGroupsService:%s", op.path)
 }
 
 //
@@ -117439,7 +117439,7 @@ func (op *katelloErratumService) Service(path string) (Service, error) {
 }
 
 func (op *katelloErratumService) String() string {
-	return fmt.Sprintf("katelloErratumService:%s", op.Path)
+	return fmt.Sprintf("katelloErratumService:%s", op.path)
 }
 
 //
@@ -117751,7 +117751,7 @@ func (op *externalDiscoveredHostsService) Service(path string) (Service, error) 
 }
 
 func (op *externalDiscoveredHostsService) String() string {
-	return fmt.Sprintf("externalDiscoveredHostsService:%s", op.Path)
+	return fmt.Sprintf("externalDiscoveredHostsService:%s", op.path)
 }
 
 //
@@ -118002,7 +118002,7 @@ func (op *externalHostGroupService) Service(path string) (Service, error) {
 }
 
 func (op *externalHostGroupService) String() string {
-	return fmt.Sprintf("externalHostGroupService:%s", op.Path)
+	return fmt.Sprintf("externalHostGroupService:%s", op.path)
 }
 
 //
@@ -118408,7 +118408,7 @@ func (op *externalHostProvidersService) Service(path string) (Service, error) {
 }
 
 func (op *externalHostProvidersService) String() string {
-	return fmt.Sprintf("externalHostProvidersService:%s", op.Path)
+	return fmt.Sprintf("externalHostProvidersService:%s", op.path)
 }
 
 //
@@ -118657,7 +118657,7 @@ func (op *externalComputeResourceService) Service(path string) (Service, error) 
 }
 
 func (op *externalComputeResourceService) String() string {
-	return fmt.Sprintf("externalComputeResourceService:%s", op.Path)
+	return fmt.Sprintf("externalComputeResourceService:%s", op.path)
 }
 
 //
@@ -118943,7 +118943,7 @@ func (op *externalComputeResourcesService) Service(path string) (Service, error)
 }
 
 func (op *externalComputeResourcesService) String() string {
-	return fmt.Sprintf("externalComputeResourcesService:%s", op.Path)
+	return fmt.Sprintf("externalComputeResourcesService:%s", op.path)
 }
 
 //
@@ -119140,7 +119140,7 @@ func (op *externalHostService) Service(path string) (Service, error) {
 }
 
 func (op *externalHostService) String() string {
-	return fmt.Sprintf("externalHostService:%s", op.Path)
+	return fmt.Sprintf("externalHostService:%s", op.path)
 }
 
 //
@@ -119395,7 +119395,7 @@ func (op *externalDiscoveredHostService) Service(path string) (Service, error) {
 }
 
 func (op *externalDiscoveredHostService) String() string {
-	return fmt.Sprintf("externalDiscoveredHostService:%s", op.Path)
+	return fmt.Sprintf("externalDiscoveredHostService:%s", op.path)
 }
 
 //
@@ -120376,7 +120376,7 @@ func (op *externalHostProviderService) Service(path string) (Service, error) {
 }
 
 func (op *externalHostProviderService) String() string {
-	return fmt.Sprintf("externalHostProviderService:%s", op.Path)
+	return fmt.Sprintf("externalHostProviderService:%s", op.path)
 }
 
 //
@@ -120685,7 +120685,7 @@ func (op *engineKatelloErrataService) Service(path string) (Service, error) {
 }
 
 func (op *engineKatelloErrataService) String() string {
-	return fmt.Sprintf("engineKatelloErrataService:%s", op.Path)
+	return fmt.Sprintf("engineKatelloErrataService:%s", op.path)
 }
 
 //
@@ -120912,7 +120912,7 @@ func (op *externalHostsService) Service(path string) (Service, error) {
 }
 
 func (op *externalHostsService) String() string {
-	return fmt.Sprintf("externalHostsService:%s", op.Path)
+	return fmt.Sprintf("externalHostsService:%s", op.path)
 }
 
 //
@@ -121127,7 +121127,7 @@ func (op *storageDomainVmDiskAttachmentsService) Service(path string) (Service, 
 }
 
 func (op *storageDomainVmDiskAttachmentsService) String() string {
-	return fmt.Sprintf("storageDomainVmDiskAttachmentsService:%s", op.Path)
+	return fmt.Sprintf("storageDomainVmDiskAttachmentsService:%s", op.path)
 }
 
 //
@@ -121701,7 +121701,7 @@ func (op *nicNetworkFilterParameterService) Service(path string) (Service, error
 }
 
 func (op *nicNetworkFilterParameterService) String() string {
-	return fmt.Sprintf("nicNetworkFilterParameterService:%s", op.Path)
+	return fmt.Sprintf("nicNetworkFilterParameterService:%s", op.path)
 }
 
 //
@@ -121898,7 +121898,7 @@ func (op *vmSessionService) Service(path string) (Service, error) {
 }
 
 func (op *vmSessionService) String() string {
-	return fmt.Sprintf("vmSessionService:%s", op.Path)
+	return fmt.Sprintf("vmSessionService:%s", op.path)
 }
 
 //
@@ -122577,7 +122577,7 @@ func (op *templateDiskService) Service(path string) (Service, error) {
 }
 
 func (op *templateDiskService) String() string {
-	return fmt.Sprintf("templateDiskService:%s", op.Path)
+	return fmt.Sprintf("templateDiskService:%s", op.path)
 }
 
 //
@@ -123361,7 +123361,7 @@ func (op *templatesService) Service(path string) (Service, error) {
 }
 
 func (op *templatesService) String() string {
-	return fmt.Sprintf("templatesService:%s", op.Path)
+	return fmt.Sprintf("templatesService:%s", op.path)
 }
 
 //
@@ -123562,7 +123562,7 @@ func (op *storageDomainVmDiskAttachmentService) Service(path string) (Service, e
 }
 
 func (op *storageDomainVmDiskAttachmentService) String() string {
-	return fmt.Sprintf("storageDomainVmDiskAttachmentService:%s", op.Path)
+	return fmt.Sprintf("storageDomainVmDiskAttachmentService:%s", op.path)
 }
 
 //
@@ -124006,7 +124006,7 @@ func (op *dataCenterNetworksService) Service(path string) (Service, error) {
 }
 
 func (op *dataCenterNetworksService) String() string {
-	return fmt.Sprintf("dataCenterNetworksService:%s", op.Path)
+	return fmt.Sprintf("dataCenterNetworksService:%s", op.path)
 }
 
 //
@@ -124478,7 +124478,7 @@ func (op *vmNumaNodesService) Service(path string) (Service, error) {
 }
 
 func (op *vmNumaNodesService) String() string {
-	return fmt.Sprintf("vmNumaNodesService:%s", op.Path)
+	return fmt.Sprintf("vmNumaNodesService:%s", op.path)
 }
 
 //
@@ -124940,7 +124940,7 @@ func (op *vmWatchdogsService) Service(path string) (Service, error) {
 }
 
 func (op *vmWatchdogsService) String() string {
-	return fmt.Sprintf("vmWatchdogsService:%s", op.Path)
+	return fmt.Sprintf("vmWatchdogsService:%s", op.path)
 }
 
 //
@@ -125360,7 +125360,7 @@ func (op *instanceTypeWatchdogsService) Service(path string) (Service, error) {
 }
 
 func (op *instanceTypeWatchdogsService) String() string {
-	return fmt.Sprintf("instanceTypeWatchdogsService:%s", op.Path)
+	return fmt.Sprintf("instanceTypeWatchdogsService:%s", op.path)
 }
 
 //
@@ -125939,7 +125939,7 @@ func (op *stepsService) Service(path string) (Service, error) {
 }
 
 func (op *stepsService) String() string {
-	return fmt.Sprintf("stepsService:%s", op.Path)
+	return fmt.Sprintf("stepsService:%s", op.path)
 }
 
 //
@@ -128266,7 +128266,7 @@ func (op *glusterVolumeService) Service(path string) (Service, error) {
 }
 
 func (op *glusterVolumeService) String() string {
-	return fmt.Sprintf("glusterVolumeService:%s", op.Path)
+	return fmt.Sprintf("glusterVolumeService:%s", op.path)
 }
 
 //
@@ -129744,7 +129744,7 @@ func (op *glusterBricksService) Service(path string) (Service, error) {
 }
 
 func (op *glusterBricksService) String() string {
-	return fmt.Sprintf("glusterBricksService:%s", op.Path)
+	return fmt.Sprintf("glusterBricksService:%s", op.path)
 }
 
 //
@@ -129971,7 +129971,7 @@ func (op *glusterHooksService) Service(path string) (Service, error) {
 }
 
 func (op *glusterHooksService) String() string {
-	return fmt.Sprintf("glusterHooksService:%s", op.Path)
+	return fmt.Sprintf("glusterHooksService:%s", op.path)
 }
 
 //
@@ -130818,7 +130818,7 @@ func (op *glusterHookService) Service(path string) (Service, error) {
 }
 
 func (op *glusterHookService) String() string {
-	return fmt.Sprintf("glusterHookService:%s", op.Path)
+	return fmt.Sprintf("glusterHookService:%s", op.path)
 }
 
 //
@@ -131362,7 +131362,7 @@ func (op *glusterVolumesService) Service(path string) (Service, error) {
 }
 
 func (op *glusterVolumesService) String() string {
-	return fmt.Sprintf("glusterVolumesService:%s", op.Path)
+	return fmt.Sprintf("glusterVolumesService:%s", op.path)
 }
 
 //
@@ -132044,7 +132044,7 @@ func (op *glusterBrickService) Service(path string) (Service, error) {
 }
 
 func (op *glusterBrickService) String() string {
-	return fmt.Sprintf("glusterBrickService:%s", op.Path)
+	return fmt.Sprintf("glusterBrickService:%s", op.path)
 }
 
 //
@@ -132672,7 +132672,7 @@ func (op *macPoolService) Service(path string) (Service, error) {
 }
 
 func (op *macPoolService) String() string {
-	return fmt.Sprintf("macPoolService:%s", op.Path)
+	return fmt.Sprintf("macPoolService:%s", op.path)
 }
 
 //
@@ -132946,7 +132946,7 @@ func (op *iconsService) Service(path string) (Service, error) {
 }
 
 func (op *iconsService) String() string {
-	return fmt.Sprintf("iconsService:%s", op.Path)
+	return fmt.Sprintf("iconsService:%s", op.path)
 }
 
 //
@@ -133215,7 +133215,7 @@ func (op *externalProviderCertificatesService) Service(path string) (Service, er
 }
 
 func (op *externalProviderCertificatesService) String() string {
-	return fmt.Sprintf("externalProviderCertificatesService:%s", op.Path)
+	return fmt.Sprintf("externalProviderCertificatesService:%s", op.path)
 }
 
 //
@@ -133734,7 +133734,7 @@ func (op *rolesService) Service(path string) (Service, error) {
 }
 
 func (op *rolesService) String() string {
-	return fmt.Sprintf("rolesService:%s", op.Path)
+	return fmt.Sprintf("rolesService:%s", op.path)
 }
 
 //
@@ -134571,7 +134571,7 @@ func (op *storageDomainTemplateService) Service(path string) (Service, error) {
 }
 
 func (op *storageDomainTemplateService) String() string {
-	return fmt.Sprintf("storageDomainTemplateService:%s", op.Path)
+	return fmt.Sprintf("storageDomainTemplateService:%s", op.path)
 }
 
 //
@@ -134610,7 +134610,7 @@ func (op *systemOptionsService) Service(path string) (Service, error) {
 }
 
 func (op *systemOptionsService) String() string {
-	return fmt.Sprintf("systemOptionsService:%s", op.Path)
+	return fmt.Sprintf("systemOptionsService:%s", op.path)
 }
 
 //
@@ -135835,7 +135835,7 @@ func (op *disksService) Service(path string) (Service, error) {
 }
 
 func (op *disksService) String() string {
-	return fmt.Sprintf("disksService:%s", op.Path)
+	return fmt.Sprintf("disksService:%s", op.path)
 }
 
 //
@@ -136241,7 +136241,7 @@ func (op *assignedDiskProfilesService) Service(path string) (Service, error) {
 }
 
 func (op *assignedDiskProfilesService) String() string {
-	return fmt.Sprintf("assignedDiskProfilesService:%s", op.Path)
+	return fmt.Sprintf("assignedDiskProfilesService:%s", op.path)
 }
 
 //
@@ -136921,7 +136921,7 @@ func (op *instanceTypeService) Service(path string) (Service, error) {
 }
 
 func (op *instanceTypeService) String() string {
-	return fmt.Sprintf("instanceTypeService:%s", op.Path)
+	return fmt.Sprintf("instanceTypeService:%s", op.path)
 }
 
 //
@@ -137277,7 +137277,7 @@ func (op *balanceService) Service(path string) (Service, error) {
 }
 
 func (op *balanceService) String() string {
-	return fmt.Sprintf("balanceService:%s", op.Path)
+	return fmt.Sprintf("balanceService:%s", op.path)
 }
 
 //
@@ -137684,7 +137684,7 @@ func (op *templateGraphicsConsolesService) Service(path string) (Service, error)
 }
 
 func (op *templateGraphicsConsolesService) String() string {
-	return fmt.Sprintf("templateGraphicsConsolesService:%s", op.Path)
+	return fmt.Sprintf("templateGraphicsConsolesService:%s", op.path)
 }
 
 //
@@ -138096,7 +138096,7 @@ func (op *vmCdromsService) Service(path string) (Service, error) {
 }
 
 func (op *vmCdromsService) String() string {
-	return fmt.Sprintf("vmCdromsService:%s", op.Path)
+	return fmt.Sprintf("vmCdromsService:%s", op.path)
 }
 
 //
@@ -138482,7 +138482,7 @@ func (op *clusterEnabledFeatureService) Service(path string) (Service, error) {
 }
 
 func (op *clusterEnabledFeatureService) String() string {
-	return fmt.Sprintf("clusterEnabledFeatureService:%s", op.Path)
+	return fmt.Sprintf("clusterEnabledFeatureService:%s", op.path)
 }
 
 //
@@ -138970,7 +138970,7 @@ func (op *stepService) Service(path string) (Service, error) {
 }
 
 func (op *stepService) String() string {
-	return fmt.Sprintf("stepService:%s", op.Path)
+	return fmt.Sprintf("stepService:%s", op.path)
 }
 
 //
@@ -139007,5 +139007,5 @@ func (op *areaService) Service(path string) (Service, error) {
 }
 
 func (op *areaService) String() string {
-	return fmt.Sprintf("areaService:%s", op.Path)
+	return fmt.Sprintf("areaService:%s", op.path)
 }
