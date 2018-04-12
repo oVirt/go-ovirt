@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func updateDatacenter() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -60,7 +60,7 @@ func main() {
 	// In order to update the data center we need a reference to the service that manages it, then we can call the
 	// "update" method passing the update
 	dcService := dcsService.DataCenterService(dc.MustId())
-	dc := dcService.Update().
+	dc = dcService.Update().
 		DataCenter(
 			ovirtsdk4.NewDataCenterBuilder().
 				Description("Updated description").

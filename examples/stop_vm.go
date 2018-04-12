@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func stopVM() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -54,7 +54,7 @@ func main() {
 	vm := vmsService.List().Search("name=myvm").MustSend().MustVms().Slice()[0]
 
 	// Locate the service that manages the virtual machine, as that is where the action methods are defined
-	vmService := vmsService.VmService()
+	vmService := vmsService.VmService(vm.MustId())
 
 	// Call the "stop" method of the service to stop it
 	vmService.Stop().MustSend()

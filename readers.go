@@ -125,7 +125,7 @@ func XMLSeLinuxReadMany(reader *XMLReader, start *xml.StartElement) (*SeLinuxSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -239,7 +239,7 @@ func XMLPmProxyReadMany(reader *XMLReader, start *xml.StartElement) (*PmProxySli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -359,7 +359,7 @@ func XMLMigrationBandwidthReadMany(reader *XMLReader, start *xml.StartElement) (
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -445,7 +445,7 @@ func XMLVlanReadMany(reader *XMLReader, start *xml.StartElement) (*VlanSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -606,7 +606,7 @@ func XMLSshReadMany(reader *XMLReader, start *xml.StartElement) (*SshSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -754,7 +754,7 @@ func XMLIconReadMany(reader *XMLReader, start *xml.StartElement) (*IconSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -903,7 +903,7 @@ func XMLHardwareInformationReadMany(reader *XMLReader, start *xml.StartElement) 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -1028,7 +1028,7 @@ func XMLCpuTopologyReadMany(reader *XMLReader, start *xml.StartElement) (*CpuTop
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -1217,7 +1217,7 @@ func XMLVirtualNumaNodeReadMany(reader *XMLReader, start *xml.StartElement) (*Vi
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -1377,7 +1377,7 @@ func XMLLinkLayerDiscoveryProtocolElementReadMany(reader *XMLReader, start *xml.
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -1502,7 +1502,7 @@ func XMLAffinityRuleReadMany(reader *XMLReader, start *xml.StartElement) (*Affin
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -1639,7 +1639,7 @@ func XMLProfileDetailReadMany(reader *XMLReader, start *xml.StartElement) (*Prof
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -1783,7 +1783,7 @@ func XMLAgentConfigurationReadMany(reader *XMLReader, start *xml.StartElement) (
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -1937,7 +1937,7 @@ func XMLMacPoolReadMany(reader *XMLReader, start *xml.StartElement) (*MacPoolSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -2108,7 +2108,7 @@ func XMLCdromReadMany(reader *XMLReader, start *xml.StartElement) (*CdromSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -2513,7 +2513,7 @@ func XMLClusterReadMany(reader *XMLReader, start *xml.StartElement) (*ClusterSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -2632,7 +2632,7 @@ func XMLRegistrationDomainMappingReadMany(reader *XMLReader, start *xml.StartEle
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -2745,7 +2745,7 @@ func XMLIoReadMany(reader *XMLReader, start *xml.StartElement) (*IoSlice, error)
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -2864,7 +2864,7 @@ func XMLTicketReadMany(reader *XMLReader, start *xml.StartElement) (*TicketSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -3243,7 +3243,7 @@ func XMLDiskSnapshotReadMany(reader *XMLReader, start *xml.StartElement) (*DiskS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -3362,7 +3362,7 @@ func XMLVcpuPinReadMany(reader *XMLReader, start *xml.StartElement) (*VcpuPinSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -3505,7 +3505,7 @@ func XMLGuestOperatingSystemReadMany(reader *XMLReader, start *xml.StartElement)
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -3694,7 +3694,7 @@ func XMLVnicProfileReadMany(reader *XMLReader, start *xml.StartElement) (*VnicPr
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -3836,7 +3836,7 @@ func XMLApplicationReadMany(reader *XMLReader, start *xml.StartElement) (*Applic
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -3984,7 +3984,7 @@ func XMLGlusterVolumeProfileDetailsReadMany(reader *XMLReader, start *xml.StartE
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -4180,7 +4180,7 @@ func XMLAgentReadMany(reader *XMLReader, start *xml.StartElement) (*AgentSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -4342,7 +4342,7 @@ func XMLGlusterServerHookReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -4467,7 +4467,7 @@ func XMLProductInfoReadMany(reader *XMLReader, start *xml.StartElement) (*Produc
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -4586,7 +4586,7 @@ func XMLDnsReadMany(reader *XMLReader, start *xml.StartElement) (*DnsSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -4970,7 +4970,7 @@ func XMLVmBaseReadMany(reader *XMLReader, start *xml.StartElement) (*VmBaseSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -5112,7 +5112,7 @@ func XMLNetworkFilterReadMany(reader *XMLReader, start *xml.StartElement) (*Netw
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -5284,7 +5284,7 @@ func XMLQuotaClusterLimitReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -5397,7 +5397,7 @@ func XMLBlockStatisticReadMany(reader *XMLReader, start *xml.StartElement) (*Blo
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -5540,7 +5540,7 @@ func XMLApiReadMany(reader *XMLReader, start *xml.StartElement) (*ApiSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -5685,7 +5685,7 @@ func XMLNicConfigurationReadMany(reader *XMLReader, start *xml.StartElement) (*N
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -5798,7 +5798,7 @@ func XMLSkipIfSdActiveReadMany(reader *XMLReader, start *xml.StartElement) (*Ski
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -5946,7 +5946,7 @@ func XMLFilterReadMany(reader *XMLReader, start *xml.StartElement) (*FilterSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -6065,7 +6065,7 @@ func XMLHighAvailabilityReadMany(reader *XMLReader, start *xml.StartElement) (*H
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -6147,7 +6147,7 @@ func XMLMethodReadMany(reader *XMLReader, start *xml.StartElement) (*MethodSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -6266,7 +6266,7 @@ func XMLRegistrationAffinityLabelMappingReadMany(reader *XMLReader, start *xml.S
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -6398,7 +6398,7 @@ func XMLIpReadMany(reader *XMLReader, start *xml.StartElement) (*IpSlice, error)
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -6517,7 +6517,7 @@ func XMLNfsProfileDetailReadMany(reader *XMLReader, start *xml.StartElement) (*N
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -6636,7 +6636,7 @@ func XMLRegistrationRoleMappingReadMany(reader *XMLReader, start *xml.StartEleme
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -6749,7 +6749,7 @@ func XMLEntityProfileDetailReadMany(reader *XMLReader, start *xml.StartElement) 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -7113,7 +7113,7 @@ func XMLStorageDomainReadMany(reader *XMLReader, start *xml.StartElement) (*Stor
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -7305,7 +7305,7 @@ func XMLDisplayReadMany(reader *XMLReader, start *xml.StartElement) (*DisplaySli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -7560,7 +7560,7 @@ func XMLOpenStackNetworkProviderReadMany(reader *XMLReader, start *xml.StartElem
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -7702,7 +7702,7 @@ func XMLSystemOptionReadMany(reader *XMLReader, start *xml.StartElement) (*Syste
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -7821,7 +7821,7 @@ func XMLFopStatisticReadMany(reader *XMLReader, start *xml.StartElement) (*FopSt
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -8028,7 +8028,7 @@ func XMLGlusterBrickAdvancedDetailsReadMany(reader *XMLReader, start *xml.StartE
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -8141,7 +8141,7 @@ func XMLStorageDomainLeaseReadMany(reader *XMLReader, start *xml.StartElement) (
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -8278,7 +8278,7 @@ func XMLHostedEngineReadMany(reader *XMLReader, start *xml.StartElement) (*Hoste
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -8438,7 +8438,7 @@ func XMLQuotaStorageLimitReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -8557,7 +8557,7 @@ func XMLRegistrationAffinityGroupMappingReadMany(reader *XMLReader, start *xml.S
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -8687,7 +8687,7 @@ func XMLVolumeGroupReadMany(reader *XMLReader, start *xml.StartElement) (*Volume
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -8874,7 +8874,7 @@ func XMLGroupReadMany(reader *XMLReader, start *xml.StartElement) (*GroupSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -8993,7 +8993,7 @@ func XMLNetworkConfigurationReadMany(reader *XMLReader, start *xml.StartElement)
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -9118,7 +9118,7 @@ func XMLVnicProfileMappingReadMany(reader *XMLReader, start *xml.StartElement) (
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -9491,7 +9491,7 @@ func XMLDiskReadMany(reader *XMLReader, start *xml.StartElement) (*DiskSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -9610,7 +9610,7 @@ func XMLApiSummaryItemReadMany(reader *XMLReader, start *xml.StartElement) (*Api
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -9777,7 +9777,7 @@ func XMLOpenstackVolumeAuthenticationKeyReadMany(reader *XMLReader, start *xml.S
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -9902,7 +9902,7 @@ func XMLOptionReadMany(reader *XMLReader, start *xml.StartElement) (*OptionSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -10050,7 +10050,7 @@ func XMLBalanceReadMany(reader *XMLReader, start *xml.StartElement) (*BalanceSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -10283,7 +10283,7 @@ func XMLEventReadMany(reader *XMLReader, start *xml.StartElement) (*EventSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -10396,7 +10396,7 @@ func XMLKernelReadMany(reader *XMLReader, start *xml.StartElement) (*KernelSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -10605,7 +10605,7 @@ func XMLIscsiDetailsReadMany(reader *XMLReader, start *xml.StartElement) (*Iscsi
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -10759,7 +10759,7 @@ func XMLFileReadMany(reader *XMLReader, start *xml.StartElement) (*FileSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -10922,7 +10922,7 @@ func XMLCpuReadMany(reader *XMLReader, start *xml.StartElement) (*CpuSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -11035,7 +11035,7 @@ func XMLPackageReadMany(reader *XMLReader, start *xml.StartElement) (*PackageSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -11239,7 +11239,7 @@ func XMLImageTransferReadMany(reader *XMLReader, start *xml.StartElement) (*Imag
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -11376,7 +11376,7 @@ func XMLMemoryPolicyReadMany(reader *XMLReader, start *xml.StartElement) (*Memor
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -11524,7 +11524,7 @@ func XMLAuthorizedKeyReadMany(reader *XMLReader, start *xml.StartElement) (*Auth
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -11644,7 +11644,7 @@ func XMLUsbReadMany(reader *XMLReader, start *xml.StartElement) (*UsbSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -11848,7 +11848,7 @@ func XMLGlusterHookReadMany(reader *XMLReader, start *xml.StartElement) (*Gluste
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -11984,7 +11984,7 @@ func XMLMigrationPolicyReadMany(reader *XMLReader, start *xml.StartElement) (*Mi
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -12104,7 +12104,7 @@ func XMLIpAddressAssignmentReadMany(reader *XMLReader, start *xml.StartElement) 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -12263,7 +12263,7 @@ func XMLCpuProfileReadMany(reader *XMLReader, start *xml.StartElement) (*CpuProf
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -12382,7 +12382,7 @@ func XMLValueReadMany(reader *XMLReader, start *xml.StartElement) (*ValueSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -12569,7 +12569,7 @@ func XMLSchedulingPolicyReadMany(reader *XMLReader, start *xml.StartElement) (*S
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -12689,7 +12689,7 @@ func XMLRngDeviceReadMany(reader *XMLReader, start *xml.StartElement) (*RngDevic
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -12802,7 +12802,7 @@ func XMLDnsResolverConfigurationReadMany(reader *XMLReader, start *xml.StartElem
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -12951,7 +12951,7 @@ func XMLRegistrationConfigurationReadMany(reader *XMLReader, start *xml.StartEle
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -13141,7 +13141,7 @@ func XMLKatelloErratumReadMany(reader *XMLReader, start *xml.StartElement) (*Kat
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -13283,7 +13283,7 @@ func XMLBookmarkReadMany(reader *XMLReader, start *xml.StartElement) (*BookmarkS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -13425,7 +13425,7 @@ func XMLClusterFeatureReadMany(reader *XMLReader, start *xml.StartElement) (*Clu
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -13550,7 +13550,7 @@ func XMLTemplateVersionReadMany(reader *XMLReader, start *xml.StartElement) (*Te
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -13793,7 +13793,7 @@ func XMLGlusterBrickReadMany(reader *XMLReader, start *xml.StartElement) (*Glust
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -13983,7 +13983,7 @@ func XMLJobReadMany(reader *XMLReader, start *xml.StartElement) (*JobSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -14149,7 +14149,7 @@ func XMLExternalDiscoveredHostReadMany(reader *XMLReader, start *xml.StartElemen
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -14351,7 +14351,7 @@ func XMLPermissionReadMany(reader *XMLReader, start *xml.StartElement) (*Permiss
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -14465,7 +14465,7 @@ func XMLVnicPassThroughReadMany(reader *XMLReader, start *xml.StartElement) (*Vn
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -14679,7 +14679,7 @@ func XMLGlusterVolumeReadMany(reader *XMLReader, start *xml.StartElement) (*Glus
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -14798,7 +14798,7 @@ func XMLRegistrationLunMappingReadMany(reader *XMLReader, start *xml.StartElemen
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -14917,7 +14917,7 @@ func XMLPropertyReadMany(reader *XMLReader, start *xml.StartElement) (*PropertyS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -15042,7 +15042,7 @@ func XMLNumaNodePinReadMany(reader *XMLReader, start *xml.StartElement) (*NumaNo
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -15155,7 +15155,7 @@ func XMLProxyTicketReadMany(reader *XMLReader, start *xml.StartElement) (*ProxyT
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -15297,7 +15297,7 @@ func XMLOpenStackNetworkReadMany(reader *XMLReader, start *xml.StartElement) (*O
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -15463,7 +15463,7 @@ func XMLSessionReadMany(reader *XMLReader, start *xml.StartElement) (*SessionSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -15634,7 +15634,7 @@ func XMLFloppyReadMany(reader *XMLReader, start *xml.StartElement) (*FloppySlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -16114,7 +16114,7 @@ func XMLInstanceTypeReadMany(reader *XMLReader, start *xml.StartElement) (*Insta
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -16262,7 +16262,7 @@ func XMLSshPublicKeyReadMany(reader *XMLReader, start *xml.StartElement) (*SshPu
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -16411,7 +16411,7 @@ func XMLCloudInitReadMany(reader *XMLReader, start *xml.StartElement) (*CloudIni
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -16542,7 +16542,7 @@ func XMLReportedConfigurationReadMany(reader *XMLReader, start *xml.StartElement
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -16690,7 +16690,7 @@ func XMLNetworkFilterParameterReadMany(reader *XMLReader, start *xml.StartElemen
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -16803,7 +16803,7 @@ func XMLMacReadMany(reader *XMLReader, start *xml.StartElement) (*MacSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -17528,7 +17528,7 @@ func XMLSnapshotReadMany(reader *XMLReader, start *xml.StartElement) (*SnapshotS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -17647,7 +17647,7 @@ func XMLRateReadMany(reader *XMLReader, start *xml.StartElement) (*RateSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -17760,7 +17760,7 @@ func XMLBiosReadMany(reader *XMLReader, start *xml.StartElement) (*BiosSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -17926,7 +17926,7 @@ func XMLVersionReadMany(reader *XMLReader, start *xml.StartElement) (*VersionSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -18045,7 +18045,7 @@ func XMLSystemOptionValueReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -18242,7 +18242,7 @@ func XMLDiskAttachmentReadMany(reader *XMLReader, start *xml.StartElement) (*Dis
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -18396,7 +18396,7 @@ func XMLWeightReadMany(reader *XMLReader, start *xml.StartElement) (*WeightSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -18555,7 +18555,7 @@ func XMLDiskProfileReadMany(reader *XMLReader, start *xml.StartElement) (*DiskPr
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -18668,7 +18668,7 @@ func XMLGlusterBrickMemoryInfoReadMany(reader *XMLReader, start *xml.StartElemen
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -18913,7 +18913,7 @@ func XMLQosReadMany(reader *XMLReader, start *xml.StartElement) (*QosSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -19039,7 +19039,7 @@ func XMLCpuTypeReadMany(reader *XMLReader, start *xml.StartElement) (*CpuTypeSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -19279,7 +19279,7 @@ func XMLHostStorageReadMany(reader *XMLReader, start *xml.StartElement) (*HostSt
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -19398,7 +19398,7 @@ func XMLTimeZoneReadMany(reader *XMLReader, start *xml.StartElement) (*TimeZoneS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -19557,7 +19557,7 @@ func XMLClusterLevelReadMany(reader *XMLReader, start *xml.StartElement) (*Clust
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -19789,7 +19789,7 @@ func XMLVmPoolReadMany(reader *XMLReader, start *xml.StartElement) (*VmPoolSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -20005,7 +20005,7 @@ func XMLStepReadMany(reader *XMLReader, start *xml.StartElement) (*StepSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -20160,7 +20160,7 @@ func XMLImageReadMany(reader *XMLReader, start *xml.StartElement) (*ImageSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -20273,7 +20273,7 @@ func XMLTransparentHugePagesReadMany(reader *XMLReader, start *xml.StartElement)
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -20428,7 +20428,7 @@ func XMLOperatingSystemReadMany(reader *XMLReader, start *xml.StartElement) (*Op
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -20576,7 +20576,7 @@ func XMLUnmanagedNetworkReadMany(reader *XMLReader, start *xml.StartElement) (*U
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -20695,7 +20695,7 @@ func XMLCoreReadMany(reader *XMLReader, start *xml.StartElement) (*CoreSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -20831,7 +20831,7 @@ func XMLVendorReadMany(reader *XMLReader, start *xml.StartElement) (*VendorSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -20951,7 +20951,7 @@ func XMLSpmReadMany(reader *XMLReader, start *xml.StartElement) (*SpmSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -21064,7 +21064,7 @@ func XMLSsoReadMany(reader *XMLReader, start *xml.StartElement) (*SsoSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -21297,7 +21297,7 @@ func XMLInitializationReadMany(reader *XMLReader, start *xml.StartElement) (*Ini
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -21368,7 +21368,7 @@ func XMLPortMirroringReadMany(reader *XMLReader, start *xml.StartElement) (*Port
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -21481,7 +21481,7 @@ func XMLHostDevicePassthroughReadMany(reader *XMLReader, start *xml.StartElement
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -21665,7 +21665,7 @@ func XMLGlusterMemoryPoolReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -21813,7 +21813,7 @@ func XMLOpenStackVolumeTypeReadMany(reader *XMLReader, start *xml.StartElement) 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -21973,7 +21973,7 @@ func XMLStorageConnectionExtensionReadMany(reader *XMLReader, start *xml.StartEl
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -22092,7 +22092,7 @@ func XMLKsmReadMany(reader *XMLReader, start *xml.StartElement) (*KsmSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -22572,7 +22572,7 @@ func XMLTemplateReadMany(reader *XMLReader, start *xml.StartElement) (*TemplateS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -22750,7 +22750,7 @@ func XMLOpenStackProviderReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -22864,7 +22864,7 @@ func XMLErrorHandlingReadMany(reader *XMLReader, start *xml.StartElement) (*Erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -23052,7 +23052,7 @@ func XMLAffinityGroupReadMany(reader *XMLReader, start *xml.StartElement) (*Affi
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -23188,7 +23188,7 @@ func XMLIdentifiedReadMany(reader *XMLReader, start *xml.StartElement) (*Identif
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -23352,7 +23352,7 @@ func XMLDomainReadMany(reader *XMLReader, start *xml.StartElement) (*DomainSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -23524,7 +23524,7 @@ func XMLExternalProviderReadMany(reader *XMLReader, start *xml.StartElement) (*E
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -23714,7 +23714,7 @@ func XMLNetworkAttachmentReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -23879,7 +23879,7 @@ func XMLRoleReadMany(reader *XMLReader, start *xml.StartElement) (*RoleSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -24065,7 +24065,7 @@ func XMLExternalVmImportReadMany(reader *XMLReader, start *xml.StartElement) (*E
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -24239,7 +24239,7 @@ func XMLPowerManagementReadMany(reader *XMLReader, start *xml.StartElement) (*Po
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -24400,7 +24400,7 @@ func XMLReportedDeviceReadMany(reader *XMLReader, start *xml.StartElement) (*Rep
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -24564,7 +24564,7 @@ func XMLIscsiBondReadMany(reader *XMLReader, start *xml.StartElement) (*IscsiBon
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -24706,7 +24706,7 @@ func XMLOpenStackImageReadMany(reader *XMLReader, start *xml.StartElement) (*Ope
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -24843,7 +24843,7 @@ func XMLFencingPolicyReadMany(reader *XMLReader, start *xml.StartElement) (*Fenc
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -25070,7 +25070,7 @@ func XMLLogicalUnitReadMany(reader *XMLReader, start *xml.StartElement) (*Logica
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -25183,7 +25183,7 @@ func XMLConsoleReadMany(reader *XMLReader, start *xml.StartElement) (*ConsoleSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -25344,7 +25344,7 @@ func XMLSchedulingPolicyUnitReadMany(reader *XMLReader, start *xml.StartElement)
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -25627,7 +25627,7 @@ func XMLHostNicReadMany(reader *XMLReader, start *xml.StartElement) (*HostNicSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -25791,7 +25791,7 @@ func XMLAffinityLabelReadMany(reader *XMLReader, start *xml.StartElement) (*Affi
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -25939,7 +25939,7 @@ func XMLExternalNetworkProviderConfigurationReadMany(reader *XMLReader, start *x
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -26070,7 +26070,7 @@ func XMLGlusterClientReadMany(reader *XMLReader, start *xml.StartElement) (*Glus
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -26218,7 +26218,7 @@ func XMLNetworkLabelReadMany(reader *XMLReader, start *xml.StartElement) (*Netwo
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -26510,7 +26510,7 @@ func XMLNicReadMany(reader *XMLReader, start *xml.StartElement) (*NicSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -26687,7 +26687,7 @@ func XMLNumaNodeReadMany(reader *XMLReader, start *xml.StartElement) (*NumaNodeS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -26806,7 +26806,7 @@ func XMLSpecialObjectsReadMany(reader *XMLReader, start *xml.StartElement) (*Spe
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -26931,7 +26931,7 @@ func XMLHostNicVirtualFunctionsConfigurationReadMany(reader *XMLReader, start *x
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -27051,7 +27051,7 @@ func XMLConfigurationReadMany(reader *XMLReader, start *xml.StartElement) (*Conf
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -27184,7 +27184,7 @@ func XMLMigrationOptionsReadMany(reader *XMLReader, start *xml.StartElement) (*M
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -27303,7 +27303,7 @@ func XMLRangeReadMany(reader *XMLReader, start *xml.StartElement) (*RangeSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -27463,7 +27463,7 @@ func XMLExternalComputeResourceReadMany(reader *XMLReader, start *xml.StartEleme
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -27599,7 +27599,7 @@ func XMLProductReadMany(reader *XMLReader, start *xml.StartElement) (*ProductSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -27747,7 +27747,7 @@ func XMLPermitReadMany(reader *XMLReader, start *xml.StartElement) (*PermitSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -27878,7 +27878,7 @@ func XMLBondingReadMany(reader *XMLReader, start *xml.StartElement) (*BondingSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -28032,7 +28032,7 @@ func XMLHookReadMany(reader *XMLReader, start *xml.StartElement) (*HookSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -28198,7 +28198,7 @@ func XMLOpenStackSubnetReadMany(reader *XMLReader, start *xml.StartElement) (*Op
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -28317,7 +28317,7 @@ func XMLRegistrationClusterMappingReadMany(reader *XMLReader, start *xml.StartEl
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -28534,7 +28534,7 @@ func XMLStatisticReadMany(reader *XMLReader, start *xml.StartElement) (*Statisti
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -28751,7 +28751,7 @@ func XMLOpenStackVolumeProviderReadMany(reader *XMLReader, start *xml.StartEleme
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -28870,7 +28870,7 @@ func XMLBrickProfileDetailReadMany(reader *XMLReader, start *xml.StartElement) (
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -28995,7 +28995,7 @@ func XMLCustomPropertyReadMany(reader *XMLReader, start *xml.StartElement) (*Cus
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -29161,7 +29161,7 @@ func XMLExternalHostGroupReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -29383,7 +29383,7 @@ func XMLStorageConnectionReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -29548,7 +29548,7 @@ func XMLDeviceReadMany(reader *XMLReader, start *xml.StartElement) (*DeviceSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -29667,7 +29667,7 @@ func XMLSkipIfConnectivityBrokenReadMany(reader *XMLReader, start *xml.StartElem
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -29846,7 +29846,7 @@ func XMLWatchdogReadMany(reader *XMLReader, start *xml.StartElement) (*WatchdogS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -30025,7 +30025,7 @@ func XMLGraphicsConsoleReadMany(reader *XMLReader, start *xml.StartElement) (*Gr
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -30283,7 +30283,7 @@ func XMLDataCenterReadMany(reader *XMLReader, start *xml.StartElement) (*DataCen
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -30500,7 +30500,7 @@ func XMLQuotaReadMany(reader *XMLReader, start *xml.StartElement) (*QuotaSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -30625,7 +30625,7 @@ func XMLVmPlacementPolicyReadMany(reader *XMLReader, start *xml.StartElement) (*
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -30750,7 +30750,7 @@ func XMLVmSummaryReadMany(reader *XMLReader, start *xml.StartElement) (*VmSummar
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -30863,7 +30863,7 @@ func XMLVirtioScsiReadMany(reader *XMLReader, start *xml.StartElement) (*VirtioS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -31114,7 +31114,7 @@ func XMLUserReadMany(reader *XMLReader, start *xml.StartElement) (*UserSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -31227,7 +31227,7 @@ func XMLMemoryOverCommitReadMany(reader *XMLReader, start *xml.StartElement) (*M
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -31738,7 +31738,7 @@ func XMLHostReadMany(reader *XMLReader, start *xml.StartElement) (*HostSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -31892,7 +31892,7 @@ func XMLCertificateReadMany(reader *XMLReader, start *xml.StartElement) (*Certif
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -32040,7 +32040,7 @@ func XMLOperatingSystemInfoReadMany(reader *XMLReader, start *xml.StartElement) 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -32733,7 +32733,7 @@ func XMLVmReadMany(reader *XMLReader, start *xml.StartElement) (*VmSlice, error)
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -32935,7 +32935,7 @@ func XMLHostDeviceReadMany(reader *XMLReader, start *xml.StartElement) (*HostDev
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -33083,7 +33083,7 @@ func XMLExternalHostReadMany(reader *XMLReader, start *xml.StartElement) (*Exter
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -33202,7 +33202,7 @@ func XMLRegistrationVnicProfileMappingReadMany(reader *XMLReader, start *xml.Sta
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -33333,7 +33333,7 @@ func XMLApiSummaryReadMany(reader *XMLReader, start *xml.StartElement) (*ApiSumm
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -33446,7 +33446,7 @@ func XMLBootMenuReadMany(reader *XMLReader, start *xml.StartElement) (*BootMenuS
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -33572,7 +33572,7 @@ func XMLPayloadReadMany(reader *XMLReader, start *xml.StartElement) (*PayloadSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -33772,7 +33772,7 @@ func XMLOpenStackImageProviderReadMany(reader *XMLReader, start *xml.StartElemen
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -34032,7 +34032,7 @@ func XMLNetworkReadMany(reader *XMLReader, start *xml.StartElement) (*NetworkSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -34204,7 +34204,7 @@ func XMLTagReadMany(reader *XMLReader, start *xml.StartElement) (*TagSlice, erro
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -34317,7 +34317,7 @@ func XMLCpuTuneReadMany(reader *XMLReader, start *xml.StartElement) (*CpuTuneSli
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -34437,7 +34437,7 @@ func XMLSerialNumberReadMany(reader *XMLReader, start *xml.StartElement) (*Seria
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -34550,7 +34550,7 @@ func XMLBootReadMany(reader *XMLReader, start *xml.StartElement) (*BootSlice, er
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -34777,7 +34777,7 @@ func XMLExternalHostProviderReadMany(reader *XMLReader, start *xml.StartElement)
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -34896,7 +34896,7 @@ func XMLFaultReadMany(reader *XMLReader, start *xml.StartElement) (*FaultSlice, 
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -35009,7 +35009,7 @@ func XMLGracePeriodReadMany(reader *XMLReader, start *xml.StartElement) (*GraceP
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:
@@ -35613,7 +35613,7 @@ func XMLActionReadMany(reader *XMLReader, start *xml.StartElement) (*ActionSlice
 					return nil, err
 				}
 				if one != nil {
-					result.slice = append(result.slice, *one)
+					result.slice = append(result.slice, one)
 				}
 			}
 		case xml.EndElement:

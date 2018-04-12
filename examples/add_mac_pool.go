@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func addMacPool() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -56,7 +56,7 @@ func main() {
 			ovirtsdk4.NewMacPoolBuilder().
 				Name("mymacpool").
 				RangesOfAny(
-					*ovirtsdk4.NewRangeBuilder().
+					ovirtsdk4.NewRangeBuilder().
 						From("02:00:00:00:00:00").
 						To("02:00:00:01:00:00").
 						MustBuild()).

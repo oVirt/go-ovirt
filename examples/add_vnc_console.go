@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func addVNCConsole() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -65,7 +65,7 @@ func main() {
 	var console *ovirtsdk4.GraphicsConsole
 	for _, c := range consoleSlice.Slice() {
 		if c.MustProtocol() == ovirtsdk4.GRAPHICSTYPE_VNC {
-			*console = c
+			console = c
 		}
 	}
 

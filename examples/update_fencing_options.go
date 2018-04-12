@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func updateFencingOptions() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -71,7 +71,7 @@ func main() {
 	var agent *ovirtsdk4.Agent
 	for _, ag := range agentSlice.Slice() {
 		if ag.MustType() == "ipmlan" {
-			agent = &ag
+			agent = ag
 			break
 		}
 	}
@@ -84,7 +84,7 @@ func main() {
 
 	// Create a list of modified options, containing all the original options except the one with the name we want
 	// to modify, as we will add that with the right value later
-	var modifiedList []ovirtsdk4.Option
+	var modifiedList []*ovirtsdk4.Option
 	for _, ori := range optionSlice.Slice() {
 		if name != ori.MustName() {
 			modifiedList = append(modifiedList, ori)

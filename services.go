@@ -11539,7 +11539,7 @@ func (p *openstackImageProviderServiceImportCertificatesRequest) Certificates(ce
 	return p
 }
 
-func (p *openstackImageProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *openstackImageProviderServiceImportCertificatesRequest {
+func (p *openstackImageProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...*Certificate) *openstackImageProviderServiceImportCertificatesRequest {
 	if p.certificates == nil {
 		p.certificates = new(CertificateSlice)
 	}
@@ -13671,7 +13671,7 @@ func (p *openstackVolumeProviderServiceImportCertificatesRequest) Certificates(c
 	return p
 }
 
-func (p *openstackVolumeProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *openstackVolumeProviderServiceImportCertificatesRequest {
+func (p *openstackVolumeProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...*Certificate) *openstackVolumeProviderServiceImportCertificatesRequest {
 	if p.certificates == nil {
 		p.certificates = new(CertificateSlice)
 	}
@@ -16492,7 +16492,7 @@ func (p *openstackNetworkProviderServiceImportCertificatesRequest) Certificates(
 	return p
 }
 
-func (p *openstackNetworkProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *openstackNetworkProviderServiceImportCertificatesRequest {
+func (p *openstackNetworkProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...*Certificate) *openstackNetworkProviderServiceImportCertificatesRequest {
 	if p.certificates == nil {
 		p.certificates = new(CertificateSlice)
 	}
@@ -43291,7 +43291,7 @@ func (p *hostServiceSetupNetworksRequest) ModifiedBonds(modifiedBonds *HostNicSl
 	return p
 }
 
-func (p *hostServiceSetupNetworksRequest) ModifiedBondsOfAny(anys ...HostNic) *hostServiceSetupNetworksRequest {
+func (p *hostServiceSetupNetworksRequest) ModifiedBondsOfAny(anys ...*HostNic) *hostServiceSetupNetworksRequest {
 	if p.modifiedBonds == nil {
 		p.modifiedBonds = new(HostNicSlice)
 	}
@@ -43304,7 +43304,7 @@ func (p *hostServiceSetupNetworksRequest) ModifiedLabels(modifiedLabels *Network
 	return p
 }
 
-func (p *hostServiceSetupNetworksRequest) ModifiedLabelsOfAny(anys ...NetworkLabel) *hostServiceSetupNetworksRequest {
+func (p *hostServiceSetupNetworksRequest) ModifiedLabelsOfAny(anys ...*NetworkLabel) *hostServiceSetupNetworksRequest {
 	if p.modifiedLabels == nil {
 		p.modifiedLabels = new(NetworkLabelSlice)
 	}
@@ -43317,7 +43317,7 @@ func (p *hostServiceSetupNetworksRequest) ModifiedNetworkAttachments(modifiedNet
 	return p
 }
 
-func (p *hostServiceSetupNetworksRequest) ModifiedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *hostServiceSetupNetworksRequest {
+func (p *hostServiceSetupNetworksRequest) ModifiedNetworkAttachmentsOfAny(anys ...*NetworkAttachment) *hostServiceSetupNetworksRequest {
 	if p.modifiedNetworkAttachments == nil {
 		p.modifiedNetworkAttachments = new(NetworkAttachmentSlice)
 	}
@@ -43330,7 +43330,7 @@ func (p *hostServiceSetupNetworksRequest) RemovedBonds(removedBonds *HostNicSlic
 	return p
 }
 
-func (p *hostServiceSetupNetworksRequest) RemovedBondsOfAny(anys ...HostNic) *hostServiceSetupNetworksRequest {
+func (p *hostServiceSetupNetworksRequest) RemovedBondsOfAny(anys ...*HostNic) *hostServiceSetupNetworksRequest {
 	if p.removedBonds == nil {
 		p.removedBonds = new(HostNicSlice)
 	}
@@ -43343,7 +43343,7 @@ func (p *hostServiceSetupNetworksRequest) RemovedLabels(removedLabels *NetworkLa
 	return p
 }
 
-func (p *hostServiceSetupNetworksRequest) RemovedLabelsOfAny(anys ...NetworkLabel) *hostServiceSetupNetworksRequest {
+func (p *hostServiceSetupNetworksRequest) RemovedLabelsOfAny(anys ...*NetworkLabel) *hostServiceSetupNetworksRequest {
 	if p.removedLabels == nil {
 		p.removedLabels = new(NetworkLabelSlice)
 	}
@@ -43356,7 +43356,7 @@ func (p *hostServiceSetupNetworksRequest) RemovedNetworkAttachments(removedNetwo
 	return p
 }
 
-func (p *hostServiceSetupNetworksRequest) RemovedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *hostServiceSetupNetworksRequest {
+func (p *hostServiceSetupNetworksRequest) RemovedNetworkAttachmentsOfAny(anys ...*NetworkAttachment) *hostServiceSetupNetworksRequest {
 	if p.removedNetworkAttachments == nil {
 		p.removedNetworkAttachments = new(NetworkAttachmentSlice)
 	}
@@ -43369,7 +43369,7 @@ func (p *hostServiceSetupNetworksRequest) SynchronizedNetworkAttachments(synchro
 	return p
 }
 
-func (p *hostServiceSetupNetworksRequest) SynchronizedNetworkAttachmentsOfAny(anys ...NetworkAttachment) *hostServiceSetupNetworksRequest {
+func (p *hostServiceSetupNetworksRequest) SynchronizedNetworkAttachmentsOfAny(anys ...*NetworkAttachment) *hostServiceSetupNetworksRequest {
 	if p.synchronizedNetworkAttachments == nil {
 		p.synchronizedNetworkAttachments = new(NetworkAttachmentSlice)
 	}
@@ -52107,7 +52107,7 @@ func (p *snapshotServiceRestoreRequest) Disks(disks *DiskSlice) *snapshotService
 	return p
 }
 
-func (p *snapshotServiceRestoreRequest) DisksOfAny(anys ...Disk) *snapshotServiceRestoreRequest {
+func (p *snapshotServiceRestoreRequest) DisksOfAny(anys ...*Disk) *snapshotServiceRestoreRequest {
 	if p.disks == nil {
 		p.disks = new(DiskSlice)
 	}
@@ -61102,7 +61102,7 @@ func (p *vmServicePreviewSnapshotRequest) Disks(disks *DiskSlice) *vmServicePrev
 	return p
 }
 
-func (p *vmServicePreviewSnapshotRequest) DisksOfAny(anys ...Disk) *vmServicePreviewSnapshotRequest {
+func (p *vmServicePreviewSnapshotRequest) DisksOfAny(anys ...*Disk) *vmServicePreviewSnapshotRequest {
 	if p.disks == nil {
 		p.disks = new(DiskSlice)
 	}
@@ -89778,7 +89778,7 @@ func (p *storageDomainVmServiceRegisterRequest) VnicProfileMappings(vnicProfileM
 	return p
 }
 
-func (p *storageDomainVmServiceRegisterRequest) VnicProfileMappingsOfAny(anys ...VnicProfileMapping) *storageDomainVmServiceRegisterRequest {
+func (p *storageDomainVmServiceRegisterRequest) VnicProfileMappingsOfAny(anys ...*VnicProfileMapping) *storageDomainVmServiceRegisterRequest {
 	if p.vnicProfileMappings == nil {
 		p.vnicProfileMappings = new(VnicProfileMappingSlice)
 	}
@@ -108708,7 +108708,7 @@ func (p *storageDomainServiceReduceLunsRequest) LogicalUnits(logicalUnits *Logic
 	return p
 }
 
-func (p *storageDomainServiceReduceLunsRequest) LogicalUnitsOfAny(anys ...LogicalUnit) *storageDomainServiceReduceLunsRequest {
+func (p *storageDomainServiceReduceLunsRequest) LogicalUnitsOfAny(anys ...*LogicalUnit) *storageDomainServiceReduceLunsRequest {
 	if p.logicalUnits == nil {
 		p.logicalUnits = new(LogicalUnitSlice)
 	}
@@ -108933,7 +108933,7 @@ func (p *storageDomainServiceRefreshLunsRequest) LogicalUnits(logicalUnits *Logi
 	return p
 }
 
-func (p *storageDomainServiceRefreshLunsRequest) LogicalUnitsOfAny(anys ...LogicalUnit) *storageDomainServiceRefreshLunsRequest {
+func (p *storageDomainServiceRefreshLunsRequest) LogicalUnitsOfAny(anys ...*LogicalUnit) *storageDomainServiceRefreshLunsRequest {
 	if p.logicalUnits == nil {
 		p.logicalUnits = new(LogicalUnitSlice)
 	}
@@ -113628,7 +113628,7 @@ func (p *externalProviderServiceImportCertificatesRequest) Certificates(certific
 	return p
 }
 
-func (p *externalProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *externalProviderServiceImportCertificatesRequest {
+func (p *externalProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...*Certificate) *externalProviderServiceImportCertificatesRequest {
 	if p.certificates == nil {
 		p.certificates = new(CertificateSlice)
 	}
@@ -119666,7 +119666,7 @@ func (p *externalHostProviderServiceImportCertificatesRequest) Certificates(cert
 	return p
 }
 
-func (p *externalHostProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...Certificate) *externalHostProviderServiceImportCertificatesRequest {
+func (p *externalHostProviderServiceImportCertificatesRequest) CertificatesOfAny(anys ...*Certificate) *externalHostProviderServiceImportCertificatesRequest {
 	if p.certificates == nil {
 		p.certificates = new(CertificateSlice)
 	}
@@ -128339,7 +128339,7 @@ func (p *glusterBricksServiceActivateRequest) Bricks(bricks *GlusterBrickSlice) 
 	return p
 }
 
-func (p *glusterBricksServiceActivateRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceActivateRequest {
+func (p *glusterBricksServiceActivateRequest) BricksOfAny(anys ...*GlusterBrick) *glusterBricksServiceActivateRequest {
 	if p.bricks == nil {
 		p.bricks = new(GlusterBrickSlice)
 	}
@@ -128561,7 +128561,7 @@ func (p *glusterBricksServiceAddRequest) Bricks(bricks *GlusterBrickSlice) *glus
 	return p
 }
 
-func (p *glusterBricksServiceAddRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceAddRequest {
+func (p *glusterBricksServiceAddRequest) BricksOfAny(anys ...*GlusterBrick) *glusterBricksServiceAddRequest {
 	if p.bricks == nil {
 		p.bricks = new(GlusterBrickSlice)
 	}
@@ -129097,7 +129097,7 @@ func (p *glusterBricksServiceMigrateRequest) Bricks(bricks *GlusterBrickSlice) *
 	return p
 }
 
-func (p *glusterBricksServiceMigrateRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceMigrateRequest {
+func (p *glusterBricksServiceMigrateRequest) BricksOfAny(anys ...*GlusterBrick) *glusterBricksServiceMigrateRequest {
 	if p.bricks == nil {
 		p.bricks = new(GlusterBrickSlice)
 	}
@@ -129329,7 +129329,7 @@ func (p *glusterBricksServiceRemoveRequest) Bricks(bricks *GlusterBrickSlice) *g
 	return p
 }
 
-func (p *glusterBricksServiceRemoveRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceRemoveRequest {
+func (p *glusterBricksServiceRemoveRequest) BricksOfAny(anys ...*GlusterBrick) *glusterBricksServiceRemoveRequest {
 	if p.bricks == nil {
 		p.bricks = new(GlusterBrickSlice)
 	}
@@ -129555,7 +129555,7 @@ func (p *glusterBricksServiceStopMigrateRequest) Bricks(bricks *GlusterBrickSlic
 	return p
 }
 
-func (p *glusterBricksServiceStopMigrateRequest) BricksOfAny(anys ...GlusterBrick) *glusterBricksServiceStopMigrateRequest {
+func (p *glusterBricksServiceStopMigrateRequest) BricksOfAny(anys ...*GlusterBrick) *glusterBricksServiceStopMigrateRequest {
 	if p.bricks == nil {
 		p.bricks = new(GlusterBrickSlice)
 	}
@@ -134256,7 +134256,7 @@ func (p *storageDomainTemplateServiceRegisterRequest) VnicProfileMappings(vnicPr
 	return p
 }
 
-func (p *storageDomainTemplateServiceRegisterRequest) VnicProfileMappingsOfAny(anys ...VnicProfileMapping) *storageDomainTemplateServiceRegisterRequest {
+func (p *storageDomainTemplateServiceRegisterRequest) VnicProfileMappingsOfAny(anys ...*VnicProfileMapping) *storageDomainTemplateServiceRegisterRequest {
 	if p.vnicProfileMappings == nil {
 		p.vnicProfileMappings = new(VnicProfileMappingSlice)
 	}

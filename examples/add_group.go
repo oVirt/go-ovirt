@@ -52,7 +52,7 @@ func main() {
 
 	// Use the "add" method to add group from a directory service. Please note that domain name is name of the
 	// authorization provider
-	addgResp, err := groupsService.Add().
+	_, err = groupsService.Add().
 		Group(
 			ovirtsdk4.NewGroupBuilder().
 				Name("Developers").

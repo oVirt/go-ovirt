@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func addVMDisk() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -73,7 +73,7 @@ func main() {
 						Format(ovirtsdk4.DISKFORMAT_COW).
 						ProvisionedSize(int64(10) * int64(1<<30)).
 						StorageDomainsOfAny(
-							*ovirtsdk4.NewStorageDomainBuilder().
+							ovirtsdk4.NewStorageDomainBuilder().
 								Name("mydata").
 								MustBuild()).
 						MustBuild()).

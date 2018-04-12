@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func pinVM() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -63,7 +63,7 @@ func main() {
 				PlacementPolicy(
 					ovirtsdk4.NewVmPlacementPolicyBuilder().
 						HostsOfAny(
-							*ovirtsdk4.NewHostBuilder().
+							ovirtsdk4.NewHostBuilder().
 								Name("myhost").
 								MustBuild()).
 						MustBuild()).

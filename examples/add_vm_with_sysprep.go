@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func addVMWithSysprep() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -79,15 +79,8 @@ func main() {
 		}
 		getResp, _ := vmService.Get().Send()
 		vm, _ := getResp.Vm()
+		vm.MustId()
 	}
-
-	// The content of the Unattend.xml file. Note that this is an incomplete file, make sure to use a complete one,
-	// maybe reading it from an external file:
-	unattendXML :=
-		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-			"<unattend xmlns=\"urn:schemas-microsoft-com:unattend\">\n" +
-			"  ...\n" +
-			"</unattend>\n"
 
 	// Start the virtual machine enabling Sysprep. Make sure to use a Windows operating system, either in the
 	// template, or overriding it explicitly here. Without that the Sysprep logic won't be triggered.

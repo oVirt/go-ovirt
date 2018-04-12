@@ -43,7 +43,7 @@ func XMLSeLinuxWriteMany(writer *XMLWriter, structSlice *SeLinuxSlice, plural, s
 	}
 	writer.WriteStart("", "se_linuxs", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSeLinuxWriteOne(writer, &o, "se_linux")
+		XMLSeLinuxWriteOne(writer, o, "se_linux")
 	}
 	writer.WriteEnd("se_linuxs")
 	return nil
@@ -73,7 +73,7 @@ func XMLPmProxyWriteMany(writer *XMLWriter, structSlice *PmProxySlice, plural, s
 	}
 	writer.WriteStart("", "pm_proxies", nil)
 	for _, o := range structSlice.Slice() {
-		XMLPmProxyWriteOne(writer, &o, "pm_proxy")
+		XMLPmProxyWriteOne(writer, o, "pm_proxy")
 	}
 	writer.WriteEnd("pm_proxies")
 	return nil
@@ -106,7 +106,7 @@ func XMLMigrationBandwidthWriteMany(writer *XMLWriter, structSlice *MigrationBan
 	}
 	writer.WriteStart("", "migration_bandwidths", nil)
 	for _, o := range structSlice.Slice() {
-		XMLMigrationBandwidthWriteOne(writer, &o, "migration_bandwidth")
+		XMLMigrationBandwidthWriteOne(writer, o, "migration_bandwidth")
 	}
 	writer.WriteEnd("migration_bandwidths")
 	return nil
@@ -140,7 +140,7 @@ func XMLVlanWriteMany(writer *XMLWriter, structSlice *VlanSlice, plural, singula
 	}
 	writer.WriteStart("", "vlans", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVlanWriteOne(writer, &o, "vlan")
+		XMLVlanWriteOne(writer, o, "vlan")
 	}
 	writer.WriteEnd("vlans")
 	return nil
@@ -195,7 +195,7 @@ func XMLSshWriteMany(writer *XMLWriter, structSlice *SshSlice, plural, singular 
 	}
 	writer.WriteStart("", "sshs", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSshWriteOne(writer, &o, "ssh")
+		XMLSshWriteOne(writer, o, "ssh")
 	}
 	writer.WriteEnd("sshs")
 	return nil
@@ -244,7 +244,7 @@ func XMLIconWriteMany(writer *XMLWriter, structSlice *IconSlice, plural, singula
 	}
 	writer.WriteStart("", "icons", nil)
 	for _, o := range structSlice.Slice() {
-		XMLIconWriteOne(writer, &o, "icon")
+		XMLIconWriteOne(writer, o, "icon")
 	}
 	writer.WriteEnd("icons")
 	return nil
@@ -292,7 +292,7 @@ func XMLHardwareInformationWriteMany(writer *XMLWriter, structSlice *HardwareInf
 	}
 	writer.WriteStart("", "hardware_informations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHardwareInformationWriteOne(writer, &o, "hardware_information")
+		XMLHardwareInformationWriteOne(writer, o, "hardware_information")
 	}
 	writer.WriteEnd("hardware_informations")
 	return nil
@@ -328,7 +328,7 @@ func XMLCpuTopologyWriteMany(writer *XMLWriter, structSlice *CpuTopologySlice, p
 	}
 	writer.WriteStart("", "cpu_topologies", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuTopologyWriteOne(writer, &o, "cpu_topology")
+		XMLCpuTopologyWriteOne(writer, o, "cpu_topology")
 	}
 	writer.WriteEnd("cpu_topologies")
 	return nil
@@ -395,7 +395,7 @@ func XMLVirtualNumaNodeWriteMany(writer *XMLWriter, structSlice *VirtualNumaNode
 	}
 	writer.WriteStart("", "vm_numa_nodes", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVirtualNumaNodeWriteOne(writer, &o, "vm_numa_node")
+		XMLVirtualNumaNodeWriteOne(writer, o, "vm_numa_node")
 	}
 	writer.WriteEnd("vm_numa_nodes")
 	return nil
@@ -450,7 +450,7 @@ func XMLLinkLayerDiscoveryProtocolElementWriteMany(writer *XMLWriter, structSlic
 	}
 	writer.WriteStart("", "link_layer_discovery_protocol_elements", nil)
 	for _, o := range structSlice.Slice() {
-		XMLLinkLayerDiscoveryProtocolElementWriteOne(writer, &o, "link_layer_discovery_protocol_element")
+		XMLLinkLayerDiscoveryProtocolElementWriteOne(writer, o, "link_layer_discovery_protocol_element")
 	}
 	writer.WriteEnd("link_layer_discovery_protocol_elements")
 	return nil
@@ -486,7 +486,7 @@ func XMLAffinityRuleWriteMany(writer *XMLWriter, structSlice *AffinityRuleSlice,
 	}
 	writer.WriteStart("", "affinity_rules", nil)
 	for _, o := range structSlice.Slice() {
-		XMLAffinityRuleWriteOne(writer, &o, "affinity_rule")
+		XMLAffinityRuleWriteOne(writer, o, "affinity_rule")
 	}
 	writer.WriteEnd("affinity_rules")
 	return nil
@@ -528,7 +528,7 @@ func XMLProfileDetailWriteMany(writer *XMLWriter, structSlice *ProfileDetailSlic
 	}
 	writer.WriteStart("", "profile_details", nil)
 	for _, o := range structSlice.Slice() {
-		XMLProfileDetailWriteOne(writer, &o, "profile_detail")
+		XMLProfileDetailWriteOne(writer, o, "profile_detail")
 	}
 	writer.WriteEnd("profile_details")
 	return nil
@@ -573,7 +573,7 @@ func XMLAgentConfigurationWriteMany(writer *XMLWriter, structSlice *AgentConfigu
 	}
 	writer.WriteStart("", "agent_configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLAgentConfigurationWriteOne(writer, &o, "agent_configuration")
+		XMLAgentConfigurationWriteOne(writer, o, "agent_configuration")
 	}
 	writer.WriteEnd("agent_configurations")
 	return nil
@@ -625,7 +625,7 @@ func XMLMacPoolWriteMany(writer *XMLWriter, structSlice *MacPoolSlice, plural, s
 	}
 	writer.WriteStart("", "mac_pools", nil)
 	for _, o := range structSlice.Slice() {
-		XMLMacPoolWriteOne(writer, &o, "mac_pool")
+		XMLMacPoolWriteOne(writer, o, "mac_pool")
 	}
 	writer.WriteEnd("mac_pools")
 	return nil
@@ -683,7 +683,7 @@ func XMLCdromWriteMany(writer *XMLWriter, structSlice *CdromSlice, plural, singu
 	}
 	writer.WriteStart("", "cdroms", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCdromWriteOne(writer, &o, "cdrom")
+		XMLCdromWriteOne(writer, o, "cdrom")
 	}
 	writer.WriteEnd("cdroms")
 	return nil
@@ -837,7 +837,7 @@ func XMLClusterWriteMany(writer *XMLWriter, structSlice *ClusterSlice, plural, s
 	}
 	writer.WriteStart("", "clusters", nil)
 	for _, o := range structSlice.Slice() {
-		XMLClusterWriteOne(writer, &o, "cluster")
+		XMLClusterWriteOne(writer, o, "cluster")
 	}
 	writer.WriteEnd("clusters")
 	return nil
@@ -870,7 +870,7 @@ func XMLRegistrationDomainMappingWriteMany(writer *XMLWriter, structSlice *Regis
 	}
 	writer.WriteStart("", "registration_domain_mappings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationDomainMappingWriteOne(writer, &o, "registration_domain_mapping")
+		XMLRegistrationDomainMappingWriteOne(writer, o, "registration_domain_mapping")
 	}
 	writer.WriteEnd("registration_domain_mappings")
 	return nil
@@ -900,7 +900,7 @@ func XMLIoWriteMany(writer *XMLWriter, structSlice *IoSlice, plural, singular st
 	}
 	writer.WriteStart("", "ios", nil)
 	for _, o := range structSlice.Slice() {
-		XMLIoWriteOne(writer, &o, "io")
+		XMLIoWriteOne(writer, o, "io")
 	}
 	writer.WriteEnd("ios")
 	return nil
@@ -933,7 +933,7 @@ func XMLTicketWriteMany(writer *XMLWriter, structSlice *TicketSlice, plural, sin
 	}
 	writer.WriteStart("", "tickets", nil)
 	for _, o := range structSlice.Slice() {
-		XMLTicketWriteOne(writer, &o, "ticket")
+		XMLTicketWriteOne(writer, o, "ticket")
 	}
 	writer.WriteEnd("tickets")
 	return nil
@@ -1084,7 +1084,7 @@ func XMLDiskSnapshotWriteMany(writer *XMLWriter, structSlice *DiskSnapshotSlice,
 	}
 	writer.WriteStart("", "disk_snapshots", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDiskSnapshotWriteOne(writer, &o, "disk_snapshot")
+		XMLDiskSnapshotWriteOne(writer, o, "disk_snapshot")
 	}
 	writer.WriteEnd("disk_snapshots")
 	return nil
@@ -1117,7 +1117,7 @@ func XMLVcpuPinWriteMany(writer *XMLWriter, structSlice *VcpuPinSlice, plural, s
 	}
 	writer.WriteStart("", "vcpu_pins", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVcpuPinWriteOne(writer, &o, "vcpu_pin")
+		XMLVcpuPinWriteOne(writer, o, "vcpu_pin")
 	}
 	writer.WriteEnd("vcpu_pins")
 	return nil
@@ -1162,7 +1162,7 @@ func XMLGuestOperatingSystemWriteMany(writer *XMLWriter, structSlice *GuestOpera
 	}
 	writer.WriteStart("", "guest_operating_systems", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGuestOperatingSystemWriteOne(writer, &o, "guest_operating_system")
+		XMLGuestOperatingSystemWriteOne(writer, o, "guest_operating_system")
 	}
 	writer.WriteEnd("guest_operating_systems")
 	return nil
@@ -1229,7 +1229,7 @@ func XMLVnicProfileWriteMany(writer *XMLWriter, structSlice *VnicProfileSlice, p
 	}
 	writer.WriteStart("", "vnic_profiles", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVnicProfileWriteOne(writer, &o, "vnic_profile")
+		XMLVnicProfileWriteOne(writer, o, "vnic_profile")
 	}
 	writer.WriteEnd("vnic_profiles")
 	return nil
@@ -1275,7 +1275,7 @@ func XMLApplicationWriteMany(writer *XMLWriter, structSlice *ApplicationSlice, p
 	}
 	writer.WriteStart("", "applications", nil)
 	for _, o := range structSlice.Slice() {
-		XMLApplicationWriteOne(writer, &o, "application")
+		XMLApplicationWriteOne(writer, o, "application")
 	}
 	writer.WriteEnd("applications")
 	return nil
@@ -1324,7 +1324,7 @@ func XMLGlusterVolumeProfileDetailsWriteMany(writer *XMLWriter, structSlice *Glu
 	}
 	writer.WriteStart("", "gluster_volume_profile_detailss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterVolumeProfileDetailsWriteOne(writer, &o, "gluster_volume_profile_details")
+		XMLGlusterVolumeProfileDetailsWriteOne(writer, o, "gluster_volume_profile_details")
 	}
 	writer.WriteEnd("gluster_volume_profile_detailss")
 	return nil
@@ -1397,7 +1397,7 @@ func XMLAgentWriteMany(writer *XMLWriter, structSlice *AgentSlice, plural, singu
 	}
 	writer.WriteStart("", "agents", nil)
 	for _, o := range structSlice.Slice() {
-		XMLAgentWriteOne(writer, &o, "agent")
+		XMLAgentWriteOne(writer, o, "agent")
 	}
 	writer.WriteEnd("agents")
 	return nil
@@ -1452,7 +1452,7 @@ func XMLGlusterServerHookWriteMany(writer *XMLWriter, structSlice *GlusterServer
 	}
 	writer.WriteStart("", "server_hooks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterServerHookWriteOne(writer, &o, "server_hook")
+		XMLGlusterServerHookWriteOne(writer, o, "server_hook")
 	}
 	writer.WriteEnd("server_hooks")
 	return nil
@@ -1488,7 +1488,7 @@ func XMLProductInfoWriteMany(writer *XMLWriter, structSlice *ProductInfoSlice, p
 	}
 	writer.WriteStart("", "product_infos", nil)
 	for _, o := range structSlice.Slice() {
-		XMLProductInfoWriteOne(writer, &o, "product_info")
+		XMLProductInfoWriteOne(writer, o, "product_info")
 	}
 	writer.WriteEnd("product_infos")
 	return nil
@@ -1521,7 +1521,7 @@ func XMLDnsWriteMany(writer *XMLWriter, structSlice *DnsSlice, plural, singular 
 	}
 	writer.WriteStart("", "dnss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDnsWriteOne(writer, &o, "dns")
+		XMLDnsWriteOne(writer, o, "dns")
 	}
 	writer.WriteEnd("dnss")
 	return nil
@@ -1687,7 +1687,7 @@ func XMLVmBaseWriteMany(writer *XMLWriter, structSlice *VmBaseSlice, plural, sin
 	}
 	writer.WriteStart("", "vm_bases", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmBaseWriteOne(writer, &o, "vm_base")
+		XMLVmBaseWriteOne(writer, o, "vm_base")
 	}
 	writer.WriteEnd("vm_bases")
 	return nil
@@ -1733,7 +1733,7 @@ func XMLNetworkFilterWriteMany(writer *XMLWriter, structSlice *NetworkFilterSlic
 	}
 	writer.WriteStart("", "network_filters", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkFilterWriteOne(writer, &o, "network_filter")
+		XMLNetworkFilterWriteOne(writer, o, "network_filter")
 	}
 	writer.WriteEnd("network_filters")
 	return nil
@@ -1794,7 +1794,7 @@ func XMLQuotaClusterLimitWriteMany(writer *XMLWriter, structSlice *QuotaClusterL
 	}
 	writer.WriteStart("", "quota_cluster_limits", nil)
 	for _, o := range structSlice.Slice() {
-		XMLQuotaClusterLimitWriteOne(writer, &o, "quota_cluster_limit")
+		XMLQuotaClusterLimitWriteOne(writer, o, "quota_cluster_limit")
 	}
 	writer.WriteEnd("quota_cluster_limits")
 	return nil
@@ -1824,7 +1824,7 @@ func XMLBlockStatisticWriteMany(writer *XMLWriter, structSlice *BlockStatisticSl
 	}
 	writer.WriteStart("", "block_statistics", nil)
 	for _, o := range structSlice.Slice() {
-		XMLBlockStatisticWriteOne(writer, &o, "block_statistic")
+		XMLBlockStatisticWriteOne(writer, o, "block_statistic")
 	}
 	writer.WriteEnd("block_statistics")
 	return nil
@@ -1869,7 +1869,7 @@ func XMLApiWriteMany(writer *XMLWriter, structSlice *ApiSlice, plural, singular 
 	}
 	writer.WriteStart("", "apis", nil)
 	for _, o := range structSlice.Slice() {
-		XMLApiWriteOne(writer, &o, "api")
+		XMLApiWriteOne(writer, o, "api")
 	}
 	writer.WriteEnd("apis")
 	return nil
@@ -1914,7 +1914,7 @@ func XMLNicConfigurationWriteMany(writer *XMLWriter, structSlice *NicConfigurati
 	}
 	writer.WriteStart("", "nic_configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNicConfigurationWriteOne(writer, &o, "nic_configuration")
+		XMLNicConfigurationWriteOne(writer, o, "nic_configuration")
 	}
 	writer.WriteEnd("nic_configurations")
 	return nil
@@ -1944,7 +1944,7 @@ func XMLSkipIfSdActiveWriteMany(writer *XMLWriter, structSlice *SkipIfSdActiveSl
 	}
 	writer.WriteStart("", "skip_if_sd_actives", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSkipIfSdActiveWriteOne(writer, &o, "skip_if_sd_active")
+		XMLSkipIfSdActiveWriteOne(writer, o, "skip_if_sd_active")
 	}
 	writer.WriteEnd("skip_if_sd_actives")
 	return nil
@@ -1993,7 +1993,7 @@ func XMLFilterWriteMany(writer *XMLWriter, structSlice *FilterSlice, plural, sin
 	}
 	writer.WriteStart("", "filters", nil)
 	for _, o := range structSlice.Slice() {
-		XMLFilterWriteOne(writer, &o, "filter")
+		XMLFilterWriteOne(writer, o, "filter")
 	}
 	writer.WriteEnd("filters")
 	return nil
@@ -2026,7 +2026,7 @@ func XMLHighAvailabilityWriteMany(writer *XMLWriter, structSlice *HighAvailabili
 	}
 	writer.WriteStart("", "high_availabilities", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHighAvailabilityWriteOne(writer, &o, "high_availability")
+		XMLHighAvailabilityWriteOne(writer, o, "high_availability")
 	}
 	writer.WriteEnd("high_availabilities")
 	return nil
@@ -2060,7 +2060,7 @@ func XMLMethodWriteMany(writer *XMLWriter, structSlice *MethodSlice, plural, sin
 	}
 	writer.WriteStart("", "methods", nil)
 	for _, o := range structSlice.Slice() {
-		XMLMethodWriteOne(writer, &o, "method")
+		XMLMethodWriteOne(writer, o, "method")
 	}
 	writer.WriteEnd("methods")
 	return nil
@@ -2093,7 +2093,7 @@ func XMLRegistrationAffinityLabelMappingWriteMany(writer *XMLWriter, structSlice
 	}
 	writer.WriteStart("", "registration_affinity_label_mappings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationAffinityLabelMappingWriteOne(writer, &o, "registration_affinity_label_mapping")
+		XMLRegistrationAffinityLabelMappingWriteOne(writer, o, "registration_affinity_label_mapping")
 	}
 	writer.WriteEnd("registration_affinity_label_mappings")
 	return nil
@@ -2132,7 +2132,7 @@ func XMLIpWriteMany(writer *XMLWriter, structSlice *IpSlice, plural, singular st
 	}
 	writer.WriteStart("", "ips", nil)
 	for _, o := range structSlice.Slice() {
-		XMLIpWriteOne(writer, &o, "ip")
+		XMLIpWriteOne(writer, o, "ip")
 	}
 	writer.WriteEnd("ips")
 	return nil
@@ -2165,7 +2165,7 @@ func XMLNfsProfileDetailWriteMany(writer *XMLWriter, structSlice *NfsProfileDeta
 	}
 	writer.WriteStart("", "nfs_profile_details", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNfsProfileDetailWriteOne(writer, &o, "nfs_profile_detail")
+		XMLNfsProfileDetailWriteOne(writer, o, "nfs_profile_detail")
 	}
 	writer.WriteEnd("nfs_profile_details")
 	return nil
@@ -2198,7 +2198,7 @@ func XMLRegistrationRoleMappingWriteMany(writer *XMLWriter, structSlice *Registr
 	}
 	writer.WriteStart("", "registration_role_mappings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationRoleMappingWriteOne(writer, &o, "registration_role_mapping")
+		XMLRegistrationRoleMappingWriteOne(writer, o, "registration_role_mapping")
 	}
 	writer.WriteEnd("registration_role_mappings")
 	return nil
@@ -2228,7 +2228,7 @@ func XMLEntityProfileDetailWriteMany(writer *XMLWriter, structSlice *EntityProfi
 	}
 	writer.WriteStart("", "entity_profile_details", nil)
 	for _, o := range structSlice.Slice() {
-		XMLEntityProfileDetailWriteOne(writer, &o, "entity_profile_detail")
+		XMLEntityProfileDetailWriteOne(writer, o, "entity_profile_detail")
 	}
 	writer.WriteEnd("entity_profile_details")
 	return nil
@@ -2358,7 +2358,7 @@ func XMLStorageDomainWriteMany(writer *XMLWriter, structSlice *StorageDomainSlic
 	}
 	writer.WriteStart("", "storage_domains", nil)
 	for _, o := range structSlice.Slice() {
-		XMLStorageDomainWriteOne(writer, &o, "storage_domain")
+		XMLStorageDomainWriteOne(writer, o, "storage_domain")
 	}
 	writer.WriteEnd("storage_domains")
 	return nil
@@ -2427,7 +2427,7 @@ func XMLDisplayWriteMany(writer *XMLWriter, structSlice *DisplaySlice, plural, s
 	}
 	writer.WriteStart("", "displays", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDisplayWriteOne(writer, &o, "display")
+		XMLDisplayWriteOne(writer, o, "display")
 	}
 	writer.WriteEnd("displays")
 	return nil
@@ -2521,7 +2521,7 @@ func XMLOpenStackNetworkProviderWriteMany(writer *XMLWriter, structSlice *OpenSt
 	}
 	writer.WriteStart("", "openstack_network_providers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackNetworkProviderWriteOne(writer, &o, "openstack_network_provider")
+		XMLOpenStackNetworkProviderWriteOne(writer, o, "openstack_network_provider")
 	}
 	writer.WriteEnd("openstack_network_providers")
 	return nil
@@ -2567,7 +2567,7 @@ func XMLSystemOptionWriteMany(writer *XMLWriter, structSlice *SystemOptionSlice,
 	}
 	writer.WriteStart("", "system_options", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSystemOptionWriteOne(writer, &o, "system_option")
+		XMLSystemOptionWriteOne(writer, o, "system_option")
 	}
 	writer.WriteEnd("system_options")
 	return nil
@@ -2600,7 +2600,7 @@ func XMLFopStatisticWriteMany(writer *XMLWriter, structSlice *FopStatisticSlice,
 	}
 	writer.WriteStart("", "fop_statistics", nil)
 	for _, o := range structSlice.Slice() {
-		XMLFopStatisticWriteOne(writer, &o, "fop_statistic")
+		XMLFopStatisticWriteOne(writer, o, "fop_statistic")
 	}
 	writer.WriteEnd("fop_statistics")
 	return nil
@@ -2676,7 +2676,7 @@ func XMLGlusterBrickAdvancedDetailsWriteMany(writer *XMLWriter, structSlice *Glu
 	}
 	writer.WriteStart("", "gluster_brick_advanced_detailss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterBrickAdvancedDetailsWriteOne(writer, &o, "gluster_brick_advanced_details")
+		XMLGlusterBrickAdvancedDetailsWriteOne(writer, o, "gluster_brick_advanced_details")
 	}
 	writer.WriteEnd("gluster_brick_advanced_detailss")
 	return nil
@@ -2706,7 +2706,7 @@ func XMLStorageDomainLeaseWriteMany(writer *XMLWriter, structSlice *StorageDomai
 	}
 	writer.WriteStart("", "storage_domain_leases", nil)
 	for _, o := range structSlice.Slice() {
-		XMLStorageDomainLeaseWriteOne(writer, &o, "storage_domain_lease")
+		XMLStorageDomainLeaseWriteOne(writer, o, "storage_domain_lease")
 	}
 	writer.WriteEnd("storage_domain_leases")
 	return nil
@@ -2748,7 +2748,7 @@ func XMLHostedEngineWriteMany(writer *XMLWriter, structSlice *HostedEngineSlice,
 	}
 	writer.WriteStart("", "hosted_engines", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostedEngineWriteOne(writer, &o, "hosted_engine")
+		XMLHostedEngineWriteOne(writer, o, "hosted_engine")
 	}
 	writer.WriteEnd("hosted_engines")
 	return nil
@@ -2803,7 +2803,7 @@ func XMLQuotaStorageLimitWriteMany(writer *XMLWriter, structSlice *QuotaStorageL
 	}
 	writer.WriteStart("", "quota_storage_limits", nil)
 	for _, o := range structSlice.Slice() {
-		XMLQuotaStorageLimitWriteOne(writer, &o, "quota_storage_limit")
+		XMLQuotaStorageLimitWriteOne(writer, o, "quota_storage_limit")
 	}
 	writer.WriteEnd("quota_storage_limits")
 	return nil
@@ -2836,7 +2836,7 @@ func XMLRegistrationAffinityGroupMappingWriteMany(writer *XMLWriter, structSlice
 	}
 	writer.WriteStart("", "registration_affinity_group_mappings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationAffinityGroupMappingWriteOne(writer, &o, "registration_affinity_group_mapping")
+		XMLRegistrationAffinityGroupMappingWriteOne(writer, o, "registration_affinity_group_mapping")
 	}
 	writer.WriteEnd("registration_affinity_group_mappings")
 	return nil
@@ -2876,7 +2876,7 @@ func XMLVolumeGroupWriteMany(writer *XMLWriter, structSlice *VolumeGroupSlice, p
 	}
 	writer.WriteStart("", "volume_groups", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVolumeGroupWriteOne(writer, &o, "volume_group")
+		XMLVolumeGroupWriteOne(writer, o, "volume_group")
 	}
 	writer.WriteEnd("volume_groups")
 	return nil
@@ -2937,7 +2937,7 @@ func XMLGroupWriteMany(writer *XMLWriter, structSlice *GroupSlice, plural, singu
 	}
 	writer.WriteStart("", "groups", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGroupWriteOne(writer, &o, "group")
+		XMLGroupWriteOne(writer, o, "group")
 	}
 	writer.WriteEnd("groups")
 	return nil
@@ -2970,7 +2970,7 @@ func XMLNetworkConfigurationWriteMany(writer *XMLWriter, structSlice *NetworkCon
 	}
 	writer.WriteStart("", "network_configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkConfigurationWriteOne(writer, &o, "network_configuration")
+		XMLNetworkConfigurationWriteOne(writer, o, "network_configuration")
 	}
 	writer.WriteEnd("network_configurations")
 	return nil
@@ -3006,7 +3006,7 @@ func XMLVnicProfileMappingWriteMany(writer *XMLWriter, structSlice *VnicProfileM
 	}
 	writer.WriteStart("", "vnic_profile_mappings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVnicProfileMappingWriteOne(writer, &o, "vnic_profile_mapping")
+		XMLVnicProfileMappingWriteOne(writer, o, "vnic_profile_mapping")
 	}
 	writer.WriteEnd("vnic_profile_mappings")
 	return nil
@@ -3154,7 +3154,7 @@ func XMLDiskWriteMany(writer *XMLWriter, structSlice *DiskSlice, plural, singula
 	}
 	writer.WriteStart("", "disks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDiskWriteOne(writer, &o, "disk")
+		XMLDiskWriteOne(writer, o, "disk")
 	}
 	writer.WriteEnd("disks")
 	return nil
@@ -3187,7 +3187,7 @@ func XMLApiSummaryItemWriteMany(writer *XMLWriter, structSlice *ApiSummaryItemSl
 	}
 	writer.WriteStart("", "api_summary_items", nil)
 	for _, o := range structSlice.Slice() {
-		XMLApiSummaryItemWriteOne(writer, &o, "api_summary_item")
+		XMLApiSummaryItemWriteOne(writer, o, "api_summary_item")
 	}
 	writer.WriteEnd("api_summary_items")
 	return nil
@@ -3245,7 +3245,7 @@ func XMLOpenstackVolumeAuthenticationKeyWriteMany(writer *XMLWriter, structSlice
 	}
 	writer.WriteStart("", "openstack_volume_authentication_keys", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenstackVolumeAuthenticationKeyWriteOne(writer, &o, "openstack_volume_authentication_key")
+		XMLOpenstackVolumeAuthenticationKeyWriteOne(writer, o, "openstack_volume_authentication_key")
 	}
 	writer.WriteEnd("openstack_volume_authentication_keys")
 	return nil
@@ -3281,7 +3281,7 @@ func XMLOptionWriteMany(writer *XMLWriter, structSlice *OptionSlice, plural, sin
 	}
 	writer.WriteStart("", "options", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOptionWriteOne(writer, &o, "option")
+		XMLOptionWriteOne(writer, o, "option")
 	}
 	writer.WriteEnd("options")
 	return nil
@@ -3330,7 +3330,7 @@ func XMLBalanceWriteMany(writer *XMLWriter, structSlice *BalanceSlice, plural, s
 	}
 	writer.WriteStart("", "balances", nil)
 	for _, o := range structSlice.Slice() {
-		XMLBalanceWriteOne(writer, &o, "balance")
+		XMLBalanceWriteOne(writer, o, "balance")
 	}
 	writer.WriteEnd("balances")
 	return nil
@@ -3421,7 +3421,7 @@ func XMLEventWriteMany(writer *XMLWriter, structSlice *EventSlice, plural, singu
 	}
 	writer.WriteStart("", "events", nil)
 	for _, o := range structSlice.Slice() {
-		XMLEventWriteOne(writer, &o, "event")
+		XMLEventWriteOne(writer, o, "event")
 	}
 	writer.WriteEnd("events")
 	return nil
@@ -3451,7 +3451,7 @@ func XMLKernelWriteMany(writer *XMLWriter, structSlice *KernelSlice, plural, sin
 	}
 	writer.WriteStart("", "kernels", nil)
 	for _, o := range structSlice.Slice() {
-		XMLKernelWriteOne(writer, &o, "kernel")
+		XMLKernelWriteOne(writer, o, "kernel")
 	}
 	writer.WriteEnd("kernels")
 	return nil
@@ -3529,7 +3529,7 @@ func XMLIscsiDetailsWriteMany(writer *XMLWriter, structSlice *IscsiDetailsSlice,
 	}
 	writer.WriteStart("", "iscsi_detailss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLIscsiDetailsWriteOne(writer, &o, "iscsi_details")
+		XMLIscsiDetailsWriteOne(writer, o, "iscsi_details")
 	}
 	writer.WriteEnd("iscsi_detailss")
 	return nil
@@ -3581,7 +3581,7 @@ func XMLFileWriteMany(writer *XMLWriter, structSlice *FileSlice, plural, singula
 	}
 	writer.WriteStart("", "files", nil)
 	for _, o := range structSlice.Slice() {
-		XMLFileWriteOne(writer, &o, "file")
+		XMLFileWriteOne(writer, o, "file")
 	}
 	writer.WriteEnd("files")
 	return nil
@@ -3635,7 +3635,7 @@ func XMLCpuWriteMany(writer *XMLWriter, structSlice *CpuSlice, plural, singular 
 	}
 	writer.WriteStart("", "cpus", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuWriteOne(writer, &o, "cpu")
+		XMLCpuWriteOne(writer, o, "cpu")
 	}
 	writer.WriteEnd("cpus")
 	return nil
@@ -3665,7 +3665,7 @@ func XMLPackageWriteMany(writer *XMLWriter, structSlice *PackageSlice, plural, s
 	}
 	writer.WriteStart("", "packages", nil)
 	for _, o := range structSlice.Slice() {
-		XMLPackageWriteOne(writer, &o, "package")
+		XMLPackageWriteOne(writer, o, "package")
 	}
 	writer.WriteEnd("packages")
 	return nil
@@ -3741,7 +3741,7 @@ func XMLImageTransferWriteMany(writer *XMLWriter, structSlice *ImageTransferSlic
 	}
 	writer.WriteStart("", "image_transfers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLImageTransferWriteOne(writer, &o, "image_transfer")
+		XMLImageTransferWriteOne(writer, o, "image_transfer")
 	}
 	writer.WriteEnd("image_transfers")
 	return nil
@@ -3783,7 +3783,7 @@ func XMLMemoryPolicyWriteMany(writer *XMLWriter, structSlice *MemoryPolicySlice,
 	}
 	writer.WriteStart("", "memory_policies", nil)
 	for _, o := range structSlice.Slice() {
-		XMLMemoryPolicyWriteOne(writer, &o, "memory_policy")
+		XMLMemoryPolicyWriteOne(writer, o, "memory_policy")
 	}
 	writer.WriteEnd("memory_policies")
 	return nil
@@ -3832,7 +3832,7 @@ func XMLAuthorizedKeyWriteMany(writer *XMLWriter, structSlice *AuthorizedKeySlic
 	}
 	writer.WriteStart("", "authorized_keys", nil)
 	for _, o := range structSlice.Slice() {
-		XMLAuthorizedKeyWriteOne(writer, &o, "authorized_key")
+		XMLAuthorizedKeyWriteOne(writer, o, "authorized_key")
 	}
 	writer.WriteEnd("authorized_keys")
 	return nil
@@ -3865,7 +3865,7 @@ func XMLUsbWriteMany(writer *XMLWriter, structSlice *UsbSlice, plural, singular 
 	}
 	writer.WriteStart("", "usbs", nil)
 	for _, o := range structSlice.Slice() {
-		XMLUsbWriteOne(writer, &o, "usb")
+		XMLUsbWriteOne(writer, o, "usb")
 	}
 	writer.WriteEnd("usbs")
 	return nil
@@ -3938,7 +3938,7 @@ func XMLGlusterHookWriteMany(writer *XMLWriter, structSlice *GlusterHookSlice, p
 	}
 	writer.WriteStart("", "gluster_hooks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterHookWriteOne(writer, &o, "gluster_hook")
+		XMLGlusterHookWriteOne(writer, o, "gluster_hook")
 	}
 	writer.WriteEnd("gluster_hooks")
 	return nil
@@ -3981,7 +3981,7 @@ func XMLMigrationPolicyWriteMany(writer *XMLWriter, structSlice *MigrationPolicy
 	}
 	writer.WriteStart("", "migration_policies", nil)
 	for _, o := range structSlice.Slice() {
-		XMLMigrationPolicyWriteOne(writer, &o, "migration_policy")
+		XMLMigrationPolicyWriteOne(writer, o, "migration_policy")
 	}
 	writer.WriteEnd("migration_policies")
 	return nil
@@ -4014,7 +4014,7 @@ func XMLIpAddressAssignmentWriteMany(writer *XMLWriter, structSlice *IpAddressAs
 	}
 	writer.WriteStart("", "ip_address_assignments", nil)
 	for _, o := range structSlice.Slice() {
-		XMLIpAddressAssignmentWriteOne(writer, &o, "ip_address_assignment")
+		XMLIpAddressAssignmentWriteOne(writer, o, "ip_address_assignment")
 	}
 	writer.WriteEnd("ip_address_assignments")
 	return nil
@@ -4066,7 +4066,7 @@ func XMLCpuProfileWriteMany(writer *XMLWriter, structSlice *CpuProfileSlice, plu
 	}
 	writer.WriteStart("", "cpu_profiles", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuProfileWriteOne(writer, &o, "cpu_profile")
+		XMLCpuProfileWriteOne(writer, o, "cpu_profile")
 	}
 	writer.WriteEnd("cpu_profiles")
 	return nil
@@ -4099,7 +4099,7 @@ func XMLValueWriteMany(writer *XMLWriter, structSlice *ValueSlice, plural, singu
 	}
 	writer.WriteStart("", "values", nil)
 	for _, o := range structSlice.Slice() {
-		XMLValueWriteOne(writer, &o, "value")
+		XMLValueWriteOne(writer, o, "value")
 	}
 	writer.WriteEnd("values")
 	return nil
@@ -4160,7 +4160,7 @@ func XMLSchedulingPolicyWriteMany(writer *XMLWriter, structSlice *SchedulingPoli
 	}
 	writer.WriteStart("", "scheduling_policies", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSchedulingPolicyWriteOne(writer, &o, "scheduling_policy")
+		XMLSchedulingPolicyWriteOne(writer, o, "scheduling_policy")
 	}
 	writer.WriteEnd("scheduling_policies")
 	return nil
@@ -4193,7 +4193,7 @@ func XMLRngDeviceWriteMany(writer *XMLWriter, structSlice *RngDeviceSlice, plura
 	}
 	writer.WriteStart("", "rng_devices", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRngDeviceWriteOne(writer, &o, "rng_device")
+		XMLRngDeviceWriteOne(writer, o, "rng_device")
 	}
 	writer.WriteEnd("rng_devices")
 	return nil
@@ -4223,7 +4223,7 @@ func XMLDnsResolverConfigurationWriteMany(writer *XMLWriter, structSlice *DnsRes
 	}
 	writer.WriteStart("", "dns_resolver_configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDnsResolverConfigurationWriteOne(writer, &o, "dns_resolver_configuration")
+		XMLDnsResolverConfigurationWriteOne(writer, o, "dns_resolver_configuration")
 	}
 	writer.WriteEnd("dns_resolver_configurations")
 	return nil
@@ -4271,7 +4271,7 @@ func XMLRegistrationConfigurationWriteMany(writer *XMLWriter, structSlice *Regis
 	}
 	writer.WriteStart("", "registration_configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationConfigurationWriteOne(writer, &o, "registration_configuration")
+		XMLRegistrationConfigurationWriteOne(writer, o, "registration_configuration")
 	}
 	writer.WriteEnd("registration_configurations")
 	return nil
@@ -4341,7 +4341,7 @@ func XMLKatelloErratumWriteMany(writer *XMLWriter, structSlice *KatelloErratumSl
 	}
 	writer.WriteStart("", "katello_errata", nil)
 	for _, o := range structSlice.Slice() {
-		XMLKatelloErratumWriteOne(writer, &o, "katello_erratum")
+		XMLKatelloErratumWriteOne(writer, o, "katello_erratum")
 	}
 	writer.WriteEnd("katello_errata")
 	return nil
@@ -4387,7 +4387,7 @@ func XMLBookmarkWriteMany(writer *XMLWriter, structSlice *BookmarkSlice, plural,
 	}
 	writer.WriteStart("", "bookmarks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLBookmarkWriteOne(writer, &o, "bookmark")
+		XMLBookmarkWriteOne(writer, o, "bookmark")
 	}
 	writer.WriteEnd("bookmarks")
 	return nil
@@ -4433,7 +4433,7 @@ func XMLClusterFeatureWriteMany(writer *XMLWriter, structSlice *ClusterFeatureSl
 	}
 	writer.WriteStart("", "cluster_features", nil)
 	for _, o := range structSlice.Slice() {
-		XMLClusterFeatureWriteOne(writer, &o, "cluster_feature")
+		XMLClusterFeatureWriteOne(writer, o, "cluster_feature")
 	}
 	writer.WriteEnd("cluster_features")
 	return nil
@@ -4469,7 +4469,7 @@ func XMLTemplateVersionWriteMany(writer *XMLWriter, structSlice *TemplateVersion
 	}
 	writer.WriteStart("", "template_versions", nil)
 	for _, o := range structSlice.Slice() {
-		XMLTemplateVersionWriteOne(writer, &o, "template_version")
+		XMLTemplateVersionWriteOne(writer, o, "template_version")
 	}
 	writer.WriteEnd("template_versions")
 	return nil
@@ -4560,7 +4560,7 @@ func XMLGlusterBrickWriteMany(writer *XMLWriter, structSlice *GlusterBrickSlice,
 	}
 	writer.WriteStart("", "bricks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterBrickWriteOne(writer, &o, "brick")
+		XMLGlusterBrickWriteOne(writer, o, "brick")
 	}
 	writer.WriteEnd("bricks")
 	return nil
@@ -4627,7 +4627,7 @@ func XMLJobWriteMany(writer *XMLWriter, structSlice *JobSlice, plural, singular 
 	}
 	writer.WriteStart("", "jobs", nil)
 	for _, o := range structSlice.Slice() {
-		XMLJobWriteOne(writer, &o, "job")
+		XMLJobWriteOne(writer, o, "job")
 	}
 	writer.WriteEnd("jobs")
 	return nil
@@ -4685,7 +4685,7 @@ func XMLExternalDiscoveredHostWriteMany(writer *XMLWriter, structSlice *External
 	}
 	writer.WriteStart("", "external_discovered_hosts", nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalDiscoveredHostWriteOne(writer, &o, "external_discovered_host")
+		XMLExternalDiscoveredHostWriteOne(writer, o, "external_discovered_host")
 	}
 	writer.WriteEnd("external_discovered_hosts")
 	return nil
@@ -4761,7 +4761,7 @@ func XMLPermissionWriteMany(writer *XMLWriter, structSlice *PermissionSlice, plu
 	}
 	writer.WriteStart("", "permissions", nil)
 	for _, o := range structSlice.Slice() {
-		XMLPermissionWriteOne(writer, &o, "permission")
+		XMLPermissionWriteOne(writer, o, "permission")
 	}
 	writer.WriteEnd("permissions")
 	return nil
@@ -4791,7 +4791,7 @@ func XMLVnicPassThroughWriteMany(writer *XMLWriter, structSlice *VnicPassThrough
 	}
 	writer.WriteStart("", "vnic_pass_throughs", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVnicPassThroughWriteOne(writer, &o, "vnic_pass_through")
+		XMLVnicPassThroughWriteOne(writer, o, "vnic_pass_through")
 	}
 	writer.WriteEnd("vnic_pass_throughs")
 	return nil
@@ -4867,7 +4867,7 @@ func XMLGlusterVolumeWriteMany(writer *XMLWriter, structSlice *GlusterVolumeSlic
 	}
 	writer.WriteStart("", "gluster_volumes", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterVolumeWriteOne(writer, &o, "gluster_volume")
+		XMLGlusterVolumeWriteOne(writer, o, "gluster_volume")
 	}
 	writer.WriteEnd("gluster_volumes")
 	return nil
@@ -4900,7 +4900,7 @@ func XMLRegistrationLunMappingWriteMany(writer *XMLWriter, structSlice *Registra
 	}
 	writer.WriteStart("", "registration_lun_mappings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationLunMappingWriteOne(writer, &o, "registration_lun_mapping")
+		XMLRegistrationLunMappingWriteOne(writer, o, "registration_lun_mapping")
 	}
 	writer.WriteEnd("registration_lun_mappings")
 	return nil
@@ -4933,7 +4933,7 @@ func XMLPropertyWriteMany(writer *XMLWriter, structSlice *PropertySlice, plural,
 	}
 	writer.WriteStart("", "properties", nil)
 	for _, o := range structSlice.Slice() {
-		XMLPropertyWriteOne(writer, &o, "property")
+		XMLPropertyWriteOne(writer, o, "property")
 	}
 	writer.WriteEnd("properties")
 	return nil
@@ -4969,7 +4969,7 @@ func XMLNumaNodePinWriteMany(writer *XMLWriter, structSlice *NumaNodePinSlice, p
 	}
 	writer.WriteStart("", "numa_node_pins", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNumaNodePinWriteOne(writer, &o, "numa_node_pin")
+		XMLNumaNodePinWriteOne(writer, o, "numa_node_pin")
 	}
 	writer.WriteEnd("numa_node_pins")
 	return nil
@@ -4999,7 +4999,7 @@ func XMLProxyTicketWriteMany(writer *XMLWriter, structSlice *ProxyTicketSlice, p
 	}
 	writer.WriteStart("", "proxy_tickets", nil)
 	for _, o := range structSlice.Slice() {
-		XMLProxyTicketWriteOne(writer, &o, "proxy_ticket")
+		XMLProxyTicketWriteOne(writer, o, "proxy_ticket")
 	}
 	writer.WriteEnd("proxy_tickets")
 	return nil
@@ -5045,7 +5045,7 @@ func XMLOpenStackNetworkWriteMany(writer *XMLWriter, structSlice *OpenStackNetwo
 	}
 	writer.WriteStart("", "openstack_networks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackNetworkWriteOne(writer, &o, "openstack_network")
+		XMLOpenStackNetworkWriteOne(writer, o, "openstack_network")
 	}
 	writer.WriteEnd("openstack_networks")
 	return nil
@@ -5103,7 +5103,7 @@ func XMLSessionWriteMany(writer *XMLWriter, structSlice *SessionSlice, plural, s
 	}
 	writer.WriteStart("", "sessions", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSessionWriteOne(writer, &o, "session")
+		XMLSessionWriteOne(writer, o, "session")
 	}
 	writer.WriteEnd("sessions")
 	return nil
@@ -5161,7 +5161,7 @@ func XMLFloppyWriteMany(writer *XMLWriter, structSlice *FloppySlice, plural, sin
 	}
 	writer.WriteStart("", "floppies", nil)
 	for _, o := range structSlice.Slice() {
-		XMLFloppyWriteOne(writer, &o, "floppy")
+		XMLFloppyWriteOne(writer, o, "floppy")
 	}
 	writer.WriteEnd("floppies")
 	return nil
@@ -5357,7 +5357,7 @@ func XMLInstanceTypeWriteMany(writer *XMLWriter, structSlice *InstanceTypeSlice,
 	}
 	writer.WriteStart("", "instance_types", nil)
 	for _, o := range structSlice.Slice() {
-		XMLInstanceTypeWriteOne(writer, &o, "instance_type")
+		XMLInstanceTypeWriteOne(writer, o, "instance_type")
 	}
 	writer.WriteEnd("instance_types")
 	return nil
@@ -5406,7 +5406,7 @@ func XMLSshPublicKeyWriteMany(writer *XMLWriter, structSlice *SshPublicKeySlice,
 	}
 	writer.WriteStart("", "ssh_public_keys", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSshPublicKeyWriteOne(writer, &o, "ssh_public_key")
+		XMLSshPublicKeyWriteOne(writer, o, "ssh_public_key")
 	}
 	writer.WriteEnd("ssh_public_keys")
 	return nil
@@ -5454,7 +5454,7 @@ func XMLCloudInitWriteMany(writer *XMLWriter, structSlice *CloudInitSlice, plura
 	}
 	writer.WriteStart("", "cloud_inits", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCloudInitWriteOne(writer, &o, "cloud_init")
+		XMLCloudInitWriteOne(writer, o, "cloud_init")
 	}
 	writer.WriteEnd("cloud_inits")
 	return nil
@@ -5493,7 +5493,7 @@ func XMLReportedConfigurationWriteMany(writer *XMLWriter, structSlice *ReportedC
 	}
 	writer.WriteStart("", "reported_configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLReportedConfigurationWriteOne(writer, &o, "reported_configuration")
+		XMLReportedConfigurationWriteOne(writer, o, "reported_configuration")
 	}
 	writer.WriteEnd("reported_configurations")
 	return nil
@@ -5542,7 +5542,7 @@ func XMLNetworkFilterParameterWriteMany(writer *XMLWriter, structSlice *NetworkF
 	}
 	writer.WriteStart("", "network_filter_parameters", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkFilterParameterWriteOne(writer, &o, "network_filter_parameter")
+		XMLNetworkFilterParameterWriteOne(writer, o, "network_filter_parameter")
 	}
 	writer.WriteEnd("network_filter_parameters")
 	return nil
@@ -5572,7 +5572,7 @@ func XMLMacWriteMany(writer *XMLWriter, structSlice *MacSlice, plural, singular 
 	}
 	writer.WriteStart("", "macs", nil)
 	for _, o := range structSlice.Slice() {
-		XMLMacWriteOne(writer, &o, "mac")
+		XMLMacWriteOne(writer, o, "mac")
 	}
 	writer.WriteEnd("macs")
 	return nil
@@ -5864,7 +5864,7 @@ func XMLSnapshotWriteMany(writer *XMLWriter, structSlice *SnapshotSlice, plural,
 	}
 	writer.WriteStart("", "snapshots", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSnapshotWriteOne(writer, &o, "snapshot")
+		XMLSnapshotWriteOne(writer, o, "snapshot")
 	}
 	writer.WriteEnd("snapshots")
 	return nil
@@ -5897,7 +5897,7 @@ func XMLRateWriteMany(writer *XMLWriter, structSlice *RateSlice, plural, singula
 	}
 	writer.WriteStart("", "rates", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRateWriteOne(writer, &o, "rate")
+		XMLRateWriteOne(writer, o, "rate")
 	}
 	writer.WriteEnd("rates")
 	return nil
@@ -5927,7 +5927,7 @@ func XMLBiosWriteMany(writer *XMLWriter, structSlice *BiosSlice, plural, singula
 	}
 	writer.WriteStart("", "bioss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLBiosWriteOne(writer, &o, "bios")
+		XMLBiosWriteOne(writer, o, "bios")
 	}
 	writer.WriteEnd("bioss")
 	return nil
@@ -5985,7 +5985,7 @@ func XMLVersionWriteMany(writer *XMLWriter, structSlice *VersionSlice, plural, s
 	}
 	writer.WriteStart("", "versions", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVersionWriteOne(writer, &o, "version")
+		XMLVersionWriteOne(writer, o, "version")
 	}
 	writer.WriteEnd("versions")
 	return nil
@@ -6018,7 +6018,7 @@ func XMLSystemOptionValueWriteMany(writer *XMLWriter, structSlice *SystemOptionV
 	}
 	writer.WriteStart("", "system_option_values", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSystemOptionValueWriteOne(writer, &o, "system_option_value")
+		XMLSystemOptionValueWriteOne(writer, o, "system_option_value")
 	}
 	writer.WriteEnd("system_option_values")
 	return nil
@@ -6091,7 +6091,7 @@ func XMLDiskAttachmentWriteMany(writer *XMLWriter, structSlice *DiskAttachmentSl
 	}
 	writer.WriteStart("", "disk_attachments", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDiskAttachmentWriteOne(writer, &o, "disk_attachment")
+		XMLDiskAttachmentWriteOne(writer, o, "disk_attachment")
 	}
 	writer.WriteEnd("disk_attachments")
 	return nil
@@ -6143,7 +6143,7 @@ func XMLWeightWriteMany(writer *XMLWriter, structSlice *WeightSlice, plural, sin
 	}
 	writer.WriteStart("", "weights", nil)
 	for _, o := range structSlice.Slice() {
-		XMLWeightWriteOne(writer, &o, "weight")
+		XMLWeightWriteOne(writer, o, "weight")
 	}
 	writer.WriteEnd("weights")
 	return nil
@@ -6195,7 +6195,7 @@ func XMLDiskProfileWriteMany(writer *XMLWriter, structSlice *DiskProfileSlice, p
 	}
 	writer.WriteStart("", "disk_profiles", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDiskProfileWriteOne(writer, &o, "disk_profile")
+		XMLDiskProfileWriteOne(writer, o, "disk_profile")
 	}
 	writer.WriteEnd("disk_profiles")
 	return nil
@@ -6225,7 +6225,7 @@ func XMLGlusterBrickMemoryInfoWriteMany(writer *XMLWriter, structSlice *GlusterB
 	}
 	writer.WriteStart("", "gluster_brick_memory_infos", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterBrickMemoryInfoWriteOne(writer, &o, "brick_memoryinfo")
+		XMLGlusterBrickMemoryInfoWriteOne(writer, o, "brick_memoryinfo")
 	}
 	writer.WriteEnd("gluster_brick_memory_infos")
 	return nil
@@ -6322,7 +6322,7 @@ func XMLQosWriteMany(writer *XMLWriter, structSlice *QosSlice, plural, singular 
 	}
 	writer.WriteStart("", "qoss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLQosWriteOne(writer, &o, "qos")
+		XMLQosWriteOne(writer, o, "qos")
 	}
 	writer.WriteEnd("qoss")
 	return nil
@@ -6358,7 +6358,7 @@ func XMLCpuTypeWriteMany(writer *XMLWriter, structSlice *CpuTypeSlice, plural, s
 	}
 	writer.WriteStart("", "cpu_types", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuTypeWriteOne(writer, &o, "cpu_type")
+		XMLCpuTypeWriteOne(writer, o, "cpu_type")
 	}
 	writer.WriteEnd("cpu_types")
 	return nil
@@ -6452,7 +6452,7 @@ func XMLHostStorageWriteMany(writer *XMLWriter, structSlice *HostStorageSlice, p
 	}
 	writer.WriteStart("", "host_storages", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostStorageWriteOne(writer, &o, "host_storage")
+		XMLHostStorageWriteOne(writer, o, "host_storage")
 	}
 	writer.WriteEnd("host_storages")
 	return nil
@@ -6485,7 +6485,7 @@ func XMLTimeZoneWriteMany(writer *XMLWriter, structSlice *TimeZoneSlice, plural,
 	}
 	writer.WriteStart("", "time_zones", nil)
 	for _, o := range structSlice.Slice() {
-		XMLTimeZoneWriteOne(writer, &o, "time_zone")
+		XMLTimeZoneWriteOne(writer, o, "time_zone")
 	}
 	writer.WriteEnd("time_zones")
 	return nil
@@ -6537,7 +6537,7 @@ func XMLClusterLevelWriteMany(writer *XMLWriter, structSlice *ClusterLevelSlice,
 	}
 	writer.WriteStart("", "cluster_levels", nil)
 	for _, o := range structSlice.Slice() {
-		XMLClusterLevelWriteOne(writer, &o, "cluster_level")
+		XMLClusterLevelWriteOne(writer, o, "cluster_level")
 	}
 	writer.WriteEnd("cluster_levels")
 	return nil
@@ -6625,7 +6625,7 @@ func XMLVmPoolWriteMany(writer *XMLWriter, structSlice *VmPoolSlice, plural, sin
 	}
 	writer.WriteStart("", "vm_pools", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmPoolWriteOne(writer, &o, "vm_pool")
+		XMLVmPoolWriteOne(writer, o, "vm_pool")
 	}
 	writer.WriteEnd("vm_pools")
 	return nil
@@ -6704,7 +6704,7 @@ func XMLStepWriteMany(writer *XMLWriter, structSlice *StepSlice, plural, singula
 	}
 	writer.WriteStart("", "steps", nil)
 	for _, o := range structSlice.Slice() {
-		XMLStepWriteOne(writer, &o, "step")
+		XMLStepWriteOne(writer, o, "step")
 	}
 	writer.WriteEnd("steps")
 	return nil
@@ -6756,7 +6756,7 @@ func XMLImageWriteMany(writer *XMLWriter, structSlice *ImageSlice, plural, singu
 	}
 	writer.WriteStart("", "images", nil)
 	for _, o := range structSlice.Slice() {
-		XMLImageWriteOne(writer, &o, "image")
+		XMLImageWriteOne(writer, o, "image")
 	}
 	writer.WriteEnd("images")
 	return nil
@@ -6786,7 +6786,7 @@ func XMLTransparentHugePagesWriteMany(writer *XMLWriter, structSlice *Transparen
 	}
 	writer.WriteStart("", "transparent_huge_pagess", nil)
 	for _, o := range structSlice.Slice() {
-		XMLTransparentHugePagesWriteOne(writer, &o, "transparent_hugepages")
+		XMLTransparentHugePagesWriteOne(writer, o, "transparent_hugepages")
 	}
 	writer.WriteEnd("transparent_huge_pagess")
 	return nil
@@ -6837,7 +6837,7 @@ func XMLOperatingSystemWriteMany(writer *XMLWriter, structSlice *OperatingSystem
 	}
 	writer.WriteStart("", "oss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOperatingSystemWriteOne(writer, &o, "os")
+		XMLOperatingSystemWriteOne(writer, o, "os")
 	}
 	writer.WriteEnd("oss")
 	return nil
@@ -6886,7 +6886,7 @@ func XMLUnmanagedNetworkWriteMany(writer *XMLWriter, structSlice *UnmanagedNetwo
 	}
 	writer.WriteStart("", "unmanaged_networks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLUnmanagedNetworkWriteOne(writer, &o, "unmanaged_network")
+		XMLUnmanagedNetworkWriteOne(writer, o, "unmanaged_network")
 	}
 	writer.WriteEnd("unmanaged_networks")
 	return nil
@@ -6919,7 +6919,7 @@ func XMLCoreWriteMany(writer *XMLWriter, structSlice *CoreSlice, plural, singula
 	}
 	writer.WriteStart("", "cores", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCoreWriteOne(writer, &o, "core")
+		XMLCoreWriteOne(writer, o, "core")
 	}
 	writer.WriteEnd("cores")
 	return nil
@@ -6962,7 +6962,7 @@ func XMLVendorWriteMany(writer *XMLWriter, structSlice *VendorSlice, plural, sin
 	}
 	writer.WriteStart("", "vendors", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVendorWriteOne(writer, &o, "vendor")
+		XMLVendorWriteOne(writer, o, "vendor")
 	}
 	writer.WriteEnd("vendors")
 	return nil
@@ -6995,7 +6995,7 @@ func XMLSpmWriteMany(writer *XMLWriter, structSlice *SpmSlice, plural, singular 
 	}
 	writer.WriteStart("", "spms", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSpmWriteOne(writer, &o, "spm")
+		XMLSpmWriteOne(writer, o, "spm")
 	}
 	writer.WriteEnd("spms")
 	return nil
@@ -7025,7 +7025,7 @@ func XMLSsoWriteMany(writer *XMLWriter, structSlice *SsoSlice, plural, singular 
 	}
 	writer.WriteStart("", "ssos", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSsoWriteOne(writer, &o, "sso")
+		XMLSsoWriteOne(writer, o, "sso")
 	}
 	writer.WriteEnd("ssos")
 	return nil
@@ -7115,7 +7115,7 @@ func XMLInitializationWriteMany(writer *XMLWriter, structSlice *InitializationSl
 	}
 	writer.WriteStart("", "initializations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLInitializationWriteOne(writer, &o, "initialization")
+		XMLInitializationWriteOne(writer, o, "initialization")
 	}
 	writer.WriteEnd("initializations")
 	return nil
@@ -7142,7 +7142,7 @@ func XMLPortMirroringWriteMany(writer *XMLWriter, structSlice *PortMirroringSlic
 	}
 	writer.WriteStart("", "port_mirrorings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLPortMirroringWriteOne(writer, &o, "port_mirroring")
+		XMLPortMirroringWriteOne(writer, o, "port_mirroring")
 	}
 	writer.WriteEnd("port_mirrorings")
 	return nil
@@ -7172,7 +7172,7 @@ func XMLHostDevicePassthroughWriteMany(writer *XMLWriter, structSlice *HostDevic
 	}
 	writer.WriteStart("", "host_device_passthroughs", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostDevicePassthroughWriteOne(writer, &o, "host_device_passthrough")
+		XMLHostDevicePassthroughWriteOne(writer, o, "host_device_passthrough")
 	}
 	writer.WriteEnd("host_device_passthroughs")
 	return nil
@@ -7239,7 +7239,7 @@ func XMLGlusterMemoryPoolWriteMany(writer *XMLWriter, structSlice *GlusterMemory
 	}
 	writer.WriteStart("", "memory_pools", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterMemoryPoolWriteOne(writer, &o, "memory_pool")
+		XMLGlusterMemoryPoolWriteOne(writer, o, "memory_pool")
 	}
 	writer.WriteEnd("memory_pools")
 	return nil
@@ -7288,7 +7288,7 @@ func XMLOpenStackVolumeTypeWriteMany(writer *XMLWriter, structSlice *OpenStackVo
 	}
 	writer.WriteStart("", "open_stack_volume_types", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackVolumeTypeWriteOne(writer, &o, "open_stack_volume_type")
+		XMLOpenStackVolumeTypeWriteOne(writer, o, "open_stack_volume_type")
 	}
 	writer.WriteEnd("open_stack_volume_types")
 	return nil
@@ -7343,7 +7343,7 @@ func XMLStorageConnectionExtensionWriteMany(writer *XMLWriter, structSlice *Stor
 	}
 	writer.WriteStart("", "storage_connection_extensions", nil)
 	for _, o := range structSlice.Slice() {
-		XMLStorageConnectionExtensionWriteOne(writer, &o, "storage_connection_extension")
+		XMLStorageConnectionExtensionWriteOne(writer, o, "storage_connection_extension")
 	}
 	writer.WriteEnd("storage_connection_extensions")
 	return nil
@@ -7376,7 +7376,7 @@ func XMLKsmWriteMany(writer *XMLWriter, structSlice *KsmSlice, plural, singular 
 	}
 	writer.WriteStart("", "ksms", nil)
 	for _, o := range structSlice.Slice() {
-		XMLKsmWriteOne(writer, &o, "ksm")
+		XMLKsmWriteOne(writer, o, "ksm")
 	}
 	writer.WriteEnd("ksms")
 	return nil
@@ -7572,7 +7572,7 @@ func XMLTemplateWriteMany(writer *XMLWriter, structSlice *TemplateSlice, plural,
 	}
 	writer.WriteStart("", "templates", nil)
 	for _, o := range structSlice.Slice() {
-		XMLTemplateWriteOne(writer, &o, "template")
+		XMLTemplateWriteOne(writer, o, "template")
 	}
 	writer.WriteEnd("templates")
 	return nil
@@ -7636,7 +7636,7 @@ func XMLOpenStackProviderWriteMany(writer *XMLWriter, structSlice *OpenStackProv
 	}
 	writer.WriteStart("", "open_stack_providers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackProviderWriteOne(writer, &o, "open_stack_provider")
+		XMLOpenStackProviderWriteOne(writer, o, "open_stack_provider")
 	}
 	writer.WriteEnd("open_stack_providers")
 	return nil
@@ -7666,7 +7666,7 @@ func XMLErrorHandlingWriteMany(writer *XMLWriter, structSlice *ErrorHandlingSlic
 	}
 	writer.WriteStart("", "error_handlings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLErrorHandlingWriteOne(writer, &o, "error_handling")
+		XMLErrorHandlingWriteOne(writer, o, "error_handling")
 	}
 	writer.WriteEnd("error_handlings")
 	return nil
@@ -7730,7 +7730,7 @@ func XMLAffinityGroupWriteMany(writer *XMLWriter, structSlice *AffinityGroupSlic
 	}
 	writer.WriteStart("", "affinity_groups", nil)
 	for _, o := range structSlice.Slice() {
-		XMLAffinityGroupWriteOne(writer, &o, "affinity_group")
+		XMLAffinityGroupWriteOne(writer, o, "affinity_group")
 	}
 	writer.WriteEnd("affinity_groups")
 	return nil
@@ -7773,7 +7773,7 @@ func XMLIdentifiedWriteMany(writer *XMLWriter, structSlice *IdentifiedSlice, plu
 	}
 	writer.WriteStart("", "identifieds", nil)
 	for _, o := range structSlice.Slice() {
-		XMLIdentifiedWriteOne(writer, &o, "identified")
+		XMLIdentifiedWriteOne(writer, o, "identified")
 	}
 	writer.WriteEnd("identifieds")
 	return nil
@@ -7825,7 +7825,7 @@ func XMLDomainWriteMany(writer *XMLWriter, structSlice *DomainSlice, plural, sin
 	}
 	writer.WriteStart("", "domains", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDomainWriteOne(writer, &o, "domain")
+		XMLDomainWriteOne(writer, o, "domain")
 	}
 	writer.WriteEnd("domains")
 	return nil
@@ -7886,7 +7886,7 @@ func XMLExternalProviderWriteMany(writer *XMLWriter, structSlice *ExternalProvid
 	}
 	writer.WriteStart("", "external_providers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalProviderWriteOne(writer, &o, "external_provider")
+		XMLExternalProviderWriteOne(writer, o, "external_provider")
 	}
 	writer.WriteEnd("external_providers")
 	return nil
@@ -7956,7 +7956,7 @@ func XMLNetworkAttachmentWriteMany(writer *XMLWriter, structSlice *NetworkAttach
 	}
 	writer.WriteStart("", "network_attachments", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkAttachmentWriteOne(writer, &o, "network_attachment")
+		XMLNetworkAttachmentWriteOne(writer, o, "network_attachment")
 	}
 	writer.WriteEnd("network_attachments")
 	return nil
@@ -8011,7 +8011,7 @@ func XMLRoleWriteMany(writer *XMLWriter, structSlice *RoleSlice, plural, singula
 	}
 	writer.WriteStart("", "roles", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRoleWriteOne(writer, &o, "role")
+		XMLRoleWriteOne(writer, o, "role")
 	}
 	writer.WriteEnd("roles")
 	return nil
@@ -8077,7 +8077,7 @@ func XMLExternalVmImportWriteMany(writer *XMLWriter, structSlice *ExternalVmImpo
 	}
 	writer.WriteStart("", "external_vm_imports", nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalVmImportWriteOne(writer, &o, "external_vm_import")
+		XMLExternalVmImportWriteOne(writer, o, "external_vm_import")
 	}
 	writer.WriteEnd("external_vm_imports")
 	return nil
@@ -8137,7 +8137,7 @@ func XMLPowerManagementWriteMany(writer *XMLWriter, structSlice *PowerManagement
 	}
 	writer.WriteStart("", "power_managements", nil)
 	for _, o := range structSlice.Slice() {
-		XMLPowerManagementWriteOne(writer, &o, "power_management")
+		XMLPowerManagementWriteOne(writer, o, "power_management")
 	}
 	writer.WriteEnd("power_managements")
 	return nil
@@ -8192,7 +8192,7 @@ func XMLReportedDeviceWriteMany(writer *XMLWriter, structSlice *ReportedDeviceSl
 	}
 	writer.WriteStart("", "reported_devices", nil)
 	for _, o := range structSlice.Slice() {
-		XMLReportedDeviceWriteOne(writer, &o, "reported_device")
+		XMLReportedDeviceWriteOne(writer, o, "reported_device")
 	}
 	writer.WriteEnd("reported_devices")
 	return nil
@@ -8244,7 +8244,7 @@ func XMLIscsiBondWriteMany(writer *XMLWriter, structSlice *IscsiBondSlice, plura
 	}
 	writer.WriteStart("", "iscsi_bonds", nil)
 	for _, o := range structSlice.Slice() {
-		XMLIscsiBondWriteOne(writer, &o, "iscsi_bond")
+		XMLIscsiBondWriteOne(writer, o, "iscsi_bond")
 	}
 	writer.WriteEnd("iscsi_bonds")
 	return nil
@@ -8290,7 +8290,7 @@ func XMLOpenStackImageWriteMany(writer *XMLWriter, structSlice *OpenStackImageSl
 	}
 	writer.WriteStart("", "openstack_images", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackImageWriteOne(writer, &o, "openstack_image")
+		XMLOpenStackImageWriteOne(writer, o, "openstack_image")
 	}
 	writer.WriteEnd("openstack_images")
 	return nil
@@ -8332,7 +8332,7 @@ func XMLFencingPolicyWriteMany(writer *XMLWriter, structSlice *FencingPolicySlic
 	}
 	writer.WriteStart("", "fencing_policies", nil)
 	for _, o := range structSlice.Slice() {
-		XMLFencingPolicyWriteOne(writer, &o, "fencing_policy")
+		XMLFencingPolicyWriteOne(writer, o, "fencing_policy")
 	}
 	writer.WriteEnd("fencing_policies")
 	return nil
@@ -8420,7 +8420,7 @@ func XMLLogicalUnitWriteMany(writer *XMLWriter, structSlice *LogicalUnitSlice, p
 	}
 	writer.WriteStart("", "logical_units", nil)
 	for _, o := range structSlice.Slice() {
-		XMLLogicalUnitWriteOne(writer, &o, "logical_unit")
+		XMLLogicalUnitWriteOne(writer, o, "logical_unit")
 	}
 	writer.WriteEnd("logical_units")
 	return nil
@@ -8450,7 +8450,7 @@ func XMLConsoleWriteMany(writer *XMLWriter, structSlice *ConsoleSlice, plural, s
 	}
 	writer.WriteStart("", "consoles", nil)
 	for _, o := range structSlice.Slice() {
-		XMLConsoleWriteOne(writer, &o, "console")
+		XMLConsoleWriteOne(writer, o, "console")
 	}
 	writer.WriteEnd("consoles")
 	return nil
@@ -8505,7 +8505,7 @@ func XMLSchedulingPolicyUnitWriteMany(writer *XMLWriter, structSlice *Scheduling
 	}
 	writer.WriteStart("", "scheduling_policy_units", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSchedulingPolicyUnitWriteOne(writer, &o, "scheduling_policy_unit")
+		XMLSchedulingPolicyUnitWriteOne(writer, o, "scheduling_policy_unit")
 	}
 	writer.WriteEnd("scheduling_policy_units")
 	return nil
@@ -8620,7 +8620,7 @@ func XMLHostNicWriteMany(writer *XMLWriter, structSlice *HostNicSlice, plural, s
 	}
 	writer.WriteStart("", "host_nics", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostNicWriteOne(writer, &o, "host_nic")
+		XMLHostNicWriteOne(writer, o, "host_nic")
 	}
 	writer.WriteEnd("host_nics")
 	return nil
@@ -8672,7 +8672,7 @@ func XMLAffinityLabelWriteMany(writer *XMLWriter, structSlice *AffinityLabelSlic
 	}
 	writer.WriteStart("", "affinity_labels", nil)
 	for _, o := range structSlice.Slice() {
-		XMLAffinityLabelWriteOne(writer, &o, "affinity_label")
+		XMLAffinityLabelWriteOne(writer, o, "affinity_label")
 	}
 	writer.WriteEnd("affinity_labels")
 	return nil
@@ -8721,7 +8721,7 @@ func XMLExternalNetworkProviderConfigurationWriteMany(writer *XMLWriter, structS
 	}
 	writer.WriteStart("", "external_network_provider_configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalNetworkProviderConfigurationWriteOne(writer, &o, "external_network_provider_configuration")
+		XMLExternalNetworkProviderConfigurationWriteOne(writer, o, "external_network_provider_configuration")
 	}
 	writer.WriteEnd("external_network_provider_configurations")
 	return nil
@@ -8760,7 +8760,7 @@ func XMLGlusterClientWriteMany(writer *XMLWriter, structSlice *GlusterClientSlic
 	}
 	writer.WriteStart("", "gluster_clients", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterClientWriteOne(writer, &o, "gluster_client")
+		XMLGlusterClientWriteOne(writer, o, "gluster_client")
 	}
 	writer.WriteEnd("gluster_clients")
 	return nil
@@ -8809,7 +8809,7 @@ func XMLNetworkLabelWriteMany(writer *XMLWriter, structSlice *NetworkLabelSlice,
 	}
 	writer.WriteStart("", "network_labels", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkLabelWriteOne(writer, &o, "network_label")
+		XMLNetworkLabelWriteOne(writer, o, "network_label")
 	}
 	writer.WriteEnd("network_labels")
 	return nil
@@ -8909,7 +8909,7 @@ func XMLNicWriteMany(writer *XMLWriter, structSlice *NicSlice, plural, singular 
 	}
 	writer.WriteStart("", "nics", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNicWriteOne(writer, &o, "nic")
+		XMLNicWriteOne(writer, o, "nic")
 	}
 	writer.WriteEnd("nics")
 	return nil
@@ -8970,7 +8970,7 @@ func XMLNumaNodeWriteMany(writer *XMLWriter, structSlice *NumaNodeSlice, plural,
 	}
 	writer.WriteStart("", "host_numa_nodes", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNumaNodeWriteOne(writer, &o, "host_numa_node")
+		XMLNumaNodeWriteOne(writer, o, "host_numa_node")
 	}
 	writer.WriteEnd("host_numa_nodes")
 	return nil
@@ -9003,7 +9003,7 @@ func XMLSpecialObjectsWriteMany(writer *XMLWriter, structSlice *SpecialObjectsSl
 	}
 	writer.WriteStart("", "special_objectss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSpecialObjectsWriteOne(writer, &o, "special_objects")
+		XMLSpecialObjectsWriteOne(writer, o, "special_objects")
 	}
 	writer.WriteEnd("special_objectss")
 	return nil
@@ -9039,7 +9039,7 @@ func XMLHostNicVirtualFunctionsConfigurationWriteMany(writer *XMLWriter, structS
 	}
 	writer.WriteStart("", "host_nic_virtual_functions_configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostNicVirtualFunctionsConfigurationWriteOne(writer, &o, "host_nic_virtual_functions_configuration")
+		XMLHostNicVirtualFunctionsConfigurationWriteOne(writer, o, "host_nic_virtual_functions_configuration")
 	}
 	writer.WriteEnd("host_nic_virtual_functions_configurations")
 	return nil
@@ -9072,7 +9072,7 @@ func XMLConfigurationWriteMany(writer *XMLWriter, structSlice *ConfigurationSlic
 	}
 	writer.WriteStart("", "configurations", nil)
 	for _, o := range structSlice.Slice() {
-		XMLConfigurationWriteOne(writer, &o, "configuration")
+		XMLConfigurationWriteOne(writer, o, "configuration")
 	}
 	writer.WriteEnd("configurations")
 	return nil
@@ -9111,7 +9111,7 @@ func XMLMigrationOptionsWriteMany(writer *XMLWriter, structSlice *MigrationOptio
 	}
 	writer.WriteStart("", "migration_optionss", nil)
 	for _, o := range structSlice.Slice() {
-		XMLMigrationOptionsWriteOne(writer, &o, "migration")
+		XMLMigrationOptionsWriteOne(writer, o, "migration")
 	}
 	writer.WriteEnd("migration_optionss")
 	return nil
@@ -9144,7 +9144,7 @@ func XMLRangeWriteMany(writer *XMLWriter, structSlice *RangeSlice, plural, singu
 	}
 	writer.WriteStart("", "ranges", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRangeWriteOne(writer, &o, "range")
+		XMLRangeWriteOne(writer, o, "range")
 	}
 	writer.WriteEnd("ranges")
 	return nil
@@ -9199,7 +9199,7 @@ func XMLExternalComputeResourceWriteMany(writer *XMLWriter, structSlice *Externa
 	}
 	writer.WriteStart("", "external_compute_resources", nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalComputeResourceWriteOne(writer, &o, "external_compute_resource")
+		XMLExternalComputeResourceWriteOne(writer, o, "external_compute_resource")
 	}
 	writer.WriteEnd("external_compute_resources")
 	return nil
@@ -9242,7 +9242,7 @@ func XMLProductWriteMany(writer *XMLWriter, structSlice *ProductSlice, plural, s
 	}
 	writer.WriteStart("", "products", nil)
 	for _, o := range structSlice.Slice() {
-		XMLProductWriteOne(writer, &o, "product")
+		XMLProductWriteOne(writer, o, "product")
 	}
 	writer.WriteEnd("products")
 	return nil
@@ -9291,7 +9291,7 @@ func XMLPermitWriteMany(writer *XMLWriter, structSlice *PermitSlice, plural, sin
 	}
 	writer.WriteStart("", "permits", nil)
 	for _, o := range structSlice.Slice() {
-		XMLPermitWriteOne(writer, &o, "permit")
+		XMLPermitWriteOne(writer, o, "permit")
 	}
 	writer.WriteEnd("permits")
 	return nil
@@ -9330,7 +9330,7 @@ func XMLBondingWriteMany(writer *XMLWriter, structSlice *BondingSlice, plural, s
 	}
 	writer.WriteStart("", "bondings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLBondingWriteOne(writer, &o, "bonding")
+		XMLBondingWriteOne(writer, o, "bonding")
 	}
 	writer.WriteEnd("bondings")
 	return nil
@@ -9382,7 +9382,7 @@ func XMLHookWriteMany(writer *XMLWriter, structSlice *HookSlice, plural, singula
 	}
 	writer.WriteStart("", "hooks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHookWriteOne(writer, &o, "hook")
+		XMLHookWriteOne(writer, o, "hook")
 	}
 	writer.WriteEnd("hooks")
 	return nil
@@ -9440,7 +9440,7 @@ func XMLOpenStackSubnetWriteMany(writer *XMLWriter, structSlice *OpenStackSubnet
 	}
 	writer.WriteStart("", "openstack_subnets", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackSubnetWriteOne(writer, &o, "openstack_subnet")
+		XMLOpenStackSubnetWriteOne(writer, o, "openstack_subnet")
 	}
 	writer.WriteEnd("openstack_subnets")
 	return nil
@@ -9473,7 +9473,7 @@ func XMLRegistrationClusterMappingWriteMany(writer *XMLWriter, structSlice *Regi
 	}
 	writer.WriteStart("", "registration_cluster_mappings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationClusterMappingWriteOne(writer, &o, "registration_cluster_mapping")
+		XMLRegistrationClusterMappingWriteOne(writer, o, "registration_cluster_mapping")
 	}
 	writer.WriteEnd("registration_cluster_mappings")
 	return nil
@@ -9555,7 +9555,7 @@ func XMLStatisticWriteMany(writer *XMLWriter, structSlice *StatisticSlice, plura
 	}
 	writer.WriteStart("", "statistics", nil)
 	for _, o := range structSlice.Slice() {
-		XMLStatisticWriteOne(writer, &o, "statistic")
+		XMLStatisticWriteOne(writer, o, "statistic")
 	}
 	writer.WriteEnd("statistics")
 	return nil
@@ -9631,7 +9631,7 @@ func XMLOpenStackVolumeProviderWriteMany(writer *XMLWriter, structSlice *OpenSta
 	}
 	writer.WriteStart("", "openstack_volume_providers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackVolumeProviderWriteOne(writer, &o, "openstack_volume_provider")
+		XMLOpenStackVolumeProviderWriteOne(writer, o, "openstack_volume_provider")
 	}
 	writer.WriteEnd("openstack_volume_providers")
 	return nil
@@ -9664,7 +9664,7 @@ func XMLBrickProfileDetailWriteMany(writer *XMLWriter, structSlice *BrickProfile
 	}
 	writer.WriteStart("", "brick_profile_details", nil)
 	for _, o := range structSlice.Slice() {
-		XMLBrickProfileDetailWriteOne(writer, &o, "brick_profile_detail")
+		XMLBrickProfileDetailWriteOne(writer, o, "brick_profile_detail")
 	}
 	writer.WriteEnd("brick_profile_details")
 	return nil
@@ -9700,7 +9700,7 @@ func XMLCustomPropertyWriteMany(writer *XMLWriter, structSlice *CustomPropertySl
 	}
 	writer.WriteStart("", "custom_properties", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCustomPropertyWriteOne(writer, &o, "custom_property")
+		XMLCustomPropertyWriteOne(writer, o, "custom_property")
 	}
 	writer.WriteEnd("custom_properties")
 	return nil
@@ -9758,7 +9758,7 @@ func XMLExternalHostGroupWriteMany(writer *XMLWriter, structSlice *ExternalHostG
 	}
 	writer.WriteStart("", "external_host_groups", nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalHostGroupWriteOne(writer, &o, "external_host_group")
+		XMLExternalHostGroupWriteOne(writer, o, "external_host_group")
 	}
 	writer.WriteEnd("external_host_groups")
 	return nil
@@ -9843,7 +9843,7 @@ func XMLStorageConnectionWriteMany(writer *XMLWriter, structSlice *StorageConnec
 	}
 	writer.WriteStart("", "storage_connections", nil)
 	for _, o := range structSlice.Slice() {
-		XMLStorageConnectionWriteOne(writer, &o, "storage_connection")
+		XMLStorageConnectionWriteOne(writer, o, "storage_connection")
 	}
 	writer.WriteEnd("storage_connections")
 	return nil
@@ -9898,7 +9898,7 @@ func XMLDeviceWriteMany(writer *XMLWriter, structSlice *DeviceSlice, plural, sin
 	}
 	writer.WriteStart("", "devices", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDeviceWriteOne(writer, &o, "device")
+		XMLDeviceWriteOne(writer, o, "device")
 	}
 	writer.WriteEnd("devices")
 	return nil
@@ -9931,7 +9931,7 @@ func XMLSkipIfConnectivityBrokenWriteMany(writer *XMLWriter, structSlice *SkipIf
 	}
 	writer.WriteStart("", "skip_if_connectivity_brokens", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSkipIfConnectivityBrokenWriteOne(writer, &o, "skip_if_connectivity_broken")
+		XMLSkipIfConnectivityBrokenWriteOne(writer, o, "skip_if_connectivity_broken")
 	}
 	writer.WriteEnd("skip_if_connectivity_brokens")
 	return nil
@@ -9992,7 +9992,7 @@ func XMLWatchdogWriteMany(writer *XMLWriter, structSlice *WatchdogSlice, plural,
 	}
 	writer.WriteStart("", "watchdogs", nil)
 	for _, o := range structSlice.Slice() {
-		XMLWatchdogWriteOne(writer, &o, "watchdog")
+		XMLWatchdogWriteOne(writer, o, "watchdog")
 	}
 	writer.WriteEnd("watchdogs")
 	return nil
@@ -10056,7 +10056,7 @@ func XMLGraphicsConsoleWriteMany(writer *XMLWriter, structSlice *GraphicsConsole
 	}
 	writer.WriteStart("", "graphics_consoles", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGraphicsConsoleWriteOne(writer, &o, "graphics_console")
+		XMLGraphicsConsoleWriteOne(writer, o, "graphics_console")
 	}
 	writer.WriteEnd("graphics_consoles")
 	return nil
@@ -10141,7 +10141,7 @@ func XMLDataCenterWriteMany(writer *XMLWriter, structSlice *DataCenterSlice, plu
 	}
 	writer.WriteStart("", "data_centers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLDataCenterWriteOne(writer, &o, "data_center")
+		XMLDataCenterWriteOne(writer, o, "data_center")
 	}
 	writer.WriteEnd("data_centers")
 	return nil
@@ -10217,7 +10217,7 @@ func XMLQuotaWriteMany(writer *XMLWriter, structSlice *QuotaSlice, plural, singu
 	}
 	writer.WriteStart("", "quotas", nil)
 	for _, o := range structSlice.Slice() {
-		XMLQuotaWriteOne(writer, &o, "quota")
+		XMLQuotaWriteOne(writer, o, "quota")
 	}
 	writer.WriteEnd("quotas")
 	return nil
@@ -10250,7 +10250,7 @@ func XMLVmPlacementPolicyWriteMany(writer *XMLWriter, structSlice *VmPlacementPo
 	}
 	writer.WriteStart("", "vm_placement_policies", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmPlacementPolicyWriteOne(writer, &o, "vm_placement_policy")
+		XMLVmPlacementPolicyWriteOne(writer, o, "vm_placement_policy")
 	}
 	writer.WriteEnd("vm_placement_policies")
 	return nil
@@ -10286,7 +10286,7 @@ func XMLVmSummaryWriteMany(writer *XMLWriter, structSlice *VmSummarySlice, plura
 	}
 	writer.WriteStart("", "vm_summaries", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmSummaryWriteOne(writer, &o, "vm_summary")
+		XMLVmSummaryWriteOne(writer, o, "vm_summary")
 	}
 	writer.WriteEnd("vm_summaries")
 	return nil
@@ -10316,7 +10316,7 @@ func XMLVirtioScsiWriteMany(writer *XMLWriter, structSlice *VirtioScsiSlice, plu
 	}
 	writer.WriteStart("", "virtio_scsis", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVirtioScsiWriteOne(writer, &o, "virtio_scsi")
+		XMLVirtioScsiWriteOne(writer, o, "virtio_scsi")
 	}
 	writer.WriteEnd("virtio_scsis")
 	return nil
@@ -10404,7 +10404,7 @@ func XMLUserWriteMany(writer *XMLWriter, structSlice *UserSlice, plural, singula
 	}
 	writer.WriteStart("", "users", nil)
 	for _, o := range structSlice.Slice() {
-		XMLUserWriteOne(writer, &o, "user")
+		XMLUserWriteOne(writer, o, "user")
 	}
 	writer.WriteEnd("users")
 	return nil
@@ -10434,7 +10434,7 @@ func XMLMemoryOverCommitWriteMany(writer *XMLWriter, structSlice *MemoryOverComm
 	}
 	writer.WriteStart("", "memory_over_commits", nil)
 	for _, o := range structSlice.Slice() {
-		XMLMemoryOverCommitWriteOne(writer, &o, "memory_over_commit")
+		XMLMemoryOverCommitWriteOne(writer, o, "memory_over_commit")
 	}
 	writer.WriteEnd("memory_over_commits")
 	return nil
@@ -10624,7 +10624,7 @@ func XMLHostWriteMany(writer *XMLWriter, structSlice *HostSlice, plural, singula
 	}
 	writer.WriteStart("", "hosts", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostWriteOne(writer, &o, "host")
+		XMLHostWriteOne(writer, o, "host")
 	}
 	writer.WriteEnd("hosts")
 	return nil
@@ -10676,7 +10676,7 @@ func XMLCertificateWriteMany(writer *XMLWriter, structSlice *CertificateSlice, p
 	}
 	writer.WriteStart("", "certificates", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCertificateWriteOne(writer, &o, "certificate")
+		XMLCertificateWriteOne(writer, o, "certificate")
 	}
 	writer.WriteEnd("certificates")
 	return nil
@@ -10725,7 +10725,7 @@ func XMLOperatingSystemInfoWriteMany(writer *XMLWriter, structSlice *OperatingSy
 	}
 	writer.WriteStart("", "operation_systems", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOperatingSystemInfoWriteOne(writer, &o, "operating_system")
+		XMLOperatingSystemInfoWriteOne(writer, o, "operating_system")
 	}
 	writer.WriteEnd("operation_systems")
 	return nil
@@ -11002,7 +11002,7 @@ func XMLVmWriteMany(writer *XMLWriter, structSlice *VmSlice, plural, singular st
 	}
 	writer.WriteStart("", "vms", nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmWriteOne(writer, &o, "vm")
+		XMLVmWriteOne(writer, o, "vm")
 	}
 	writer.WriteEnd("vms")
 	return nil
@@ -11078,7 +11078,7 @@ func XMLHostDeviceWriteMany(writer *XMLWriter, structSlice *HostDeviceSlice, plu
 	}
 	writer.WriteStart("", "host_devices", nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostDeviceWriteOne(writer, &o, "host_device")
+		XMLHostDeviceWriteOne(writer, o, "host_device")
 	}
 	writer.WriteEnd("host_devices")
 	return nil
@@ -11127,7 +11127,7 @@ func XMLExternalHostWriteMany(writer *XMLWriter, structSlice *ExternalHostSlice,
 	}
 	writer.WriteStart("", "external_hosts", nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalHostWriteOne(writer, &o, "external_host")
+		XMLExternalHostWriteOne(writer, o, "external_host")
 	}
 	writer.WriteEnd("external_hosts")
 	return nil
@@ -11160,7 +11160,7 @@ func XMLRegistrationVnicProfileMappingWriteMany(writer *XMLWriter, structSlice *
 	}
 	writer.WriteStart("", "registration_vnic_profile_mappings", nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationVnicProfileMappingWriteOne(writer, &o, "registration_vnic_profile_mapping")
+		XMLRegistrationVnicProfileMappingWriteOne(writer, o, "registration_vnic_profile_mapping")
 	}
 	writer.WriteEnd("registration_vnic_profile_mappings")
 	return nil
@@ -11199,7 +11199,7 @@ func XMLApiSummaryWriteMany(writer *XMLWriter, structSlice *ApiSummarySlice, plu
 	}
 	writer.WriteStart("", "api_summaries", nil)
 	for _, o := range structSlice.Slice() {
-		XMLApiSummaryWriteOne(writer, &o, "api_summary")
+		XMLApiSummaryWriteOne(writer, o, "api_summary")
 	}
 	writer.WriteEnd("api_summaries")
 	return nil
@@ -11229,7 +11229,7 @@ func XMLBootMenuWriteMany(writer *XMLWriter, structSlice *BootMenuSlice, plural,
 	}
 	writer.WriteStart("", "boot_menus", nil)
 	for _, o := range structSlice.Slice() {
-		XMLBootMenuWriteOne(writer, &o, "boot_menu")
+		XMLBootMenuWriteOne(writer, o, "boot_menu")
 	}
 	writer.WriteEnd("boot_menus")
 	return nil
@@ -11265,7 +11265,7 @@ func XMLPayloadWriteMany(writer *XMLWriter, structSlice *PayloadSlice, plural, s
 	}
 	writer.WriteStart("", "payloads", nil)
 	for _, o := range structSlice.Slice() {
-		XMLPayloadWriteOne(writer, &o, "payload")
+		XMLPayloadWriteOne(writer, o, "payload")
 	}
 	writer.WriteEnd("payloads")
 	return nil
@@ -11335,7 +11335,7 @@ func XMLOpenStackImageProviderWriteMany(writer *XMLWriter, structSlice *OpenStac
 	}
 	writer.WriteStart("", "openstack_image_providers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackImageProviderWriteOne(writer, &o, "openstack_image_provider")
+		XMLOpenStackImageProviderWriteOne(writer, o, "openstack_image_provider")
 	}
 	writer.WriteEnd("openstack_image_providers")
 	return nil
@@ -11432,7 +11432,7 @@ func XMLNetworkWriteMany(writer *XMLWriter, structSlice *NetworkSlice, plural, s
 	}
 	writer.WriteStart("", "networks", nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkWriteOne(writer, &o, "network")
+		XMLNetworkWriteOne(writer, o, "network")
 	}
 	writer.WriteEnd("networks")
 	return nil
@@ -11493,7 +11493,7 @@ func XMLTagWriteMany(writer *XMLWriter, structSlice *TagSlice, plural, singular 
 	}
 	writer.WriteStart("", "tags", nil)
 	for _, o := range structSlice.Slice() {
-		XMLTagWriteOne(writer, &o, "tag")
+		XMLTagWriteOne(writer, o, "tag")
 	}
 	writer.WriteEnd("tags")
 	return nil
@@ -11523,7 +11523,7 @@ func XMLCpuTuneWriteMany(writer *XMLWriter, structSlice *CpuTuneSlice, plural, s
 	}
 	writer.WriteStart("", "cpu_tunes", nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuTuneWriteOne(writer, &o, "cpu_tune")
+		XMLCpuTuneWriteOne(writer, o, "cpu_tune")
 	}
 	writer.WriteEnd("cpu_tunes")
 	return nil
@@ -11556,7 +11556,7 @@ func XMLSerialNumberWriteMany(writer *XMLWriter, structSlice *SerialNumberSlice,
 	}
 	writer.WriteStart("", "serial_numbers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLSerialNumberWriteOne(writer, &o, "serial_number")
+		XMLSerialNumberWriteOne(writer, o, "serial_number")
 	}
 	writer.WriteEnd("serial_numbers")
 	return nil
@@ -11586,7 +11586,7 @@ func XMLBootWriteMany(writer *XMLWriter, structSlice *BootSlice, plural, singula
 	}
 	writer.WriteStart("", "boots", nil)
 	for _, o := range structSlice.Slice() {
-		XMLBootWriteOne(writer, &o, "boot")
+		XMLBootWriteOne(writer, o, "boot")
 	}
 	writer.WriteEnd("boots")
 	return nil
@@ -11662,7 +11662,7 @@ func XMLExternalHostProviderWriteMany(writer *XMLWriter, structSlice *ExternalHo
 	}
 	writer.WriteStart("", "external_host_providers", nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalHostProviderWriteOne(writer, &o, "external_host_provider")
+		XMLExternalHostProviderWriteOne(writer, o, "external_host_provider")
 	}
 	writer.WriteEnd("external_host_providers")
 	return nil
@@ -11695,7 +11695,7 @@ func XMLFaultWriteMany(writer *XMLWriter, structSlice *FaultSlice, plural, singu
 	}
 	writer.WriteStart("", "faults", nil)
 	for _, o := range structSlice.Slice() {
-		XMLFaultWriteOne(writer, &o, "fault")
+		XMLFaultWriteOne(writer, o, "fault")
 	}
 	writer.WriteEnd("faults")
 	return nil
@@ -11725,7 +11725,7 @@ func XMLGracePeriodWriteMany(writer *XMLWriter, structSlice *GracePeriodSlice, p
 	}
 	writer.WriteStart("", "grace_periods", nil)
 	for _, o := range structSlice.Slice() {
-		XMLGracePeriodWriteOne(writer, &o, "grace_period")
+		XMLGracePeriodWriteOne(writer, o, "grace_period")
 	}
 	writer.WriteEnd("grace_periods")
 	return nil
@@ -12002,7 +12002,7 @@ func XMLActionWriteMany(writer *XMLWriter, structSlice *ActionSlice, plural, sin
 	}
 	writer.WriteStart("", "actions", nil)
 	for _, o := range structSlice.Slice() {
-		XMLActionWriteOne(writer, &o, "action")
+		XMLActionWriteOne(writer, o, "action")
 	}
 	writer.WriteEnd("actions")
 	return nil

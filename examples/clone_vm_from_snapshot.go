@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func cloneVMFromSnapshot() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 	// Create the connection to the server:
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -66,7 +66,7 @@ func main() {
 	var snap *ovirtsdk4.Snapshot
 	for _, sn := range snapSlice.Slice() {
 		if sn.MustDescription() == "mysnap" {
-			snap = &sn
+			snap = sn
 		}
 	}
 

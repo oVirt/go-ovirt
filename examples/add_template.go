@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func addTemplate() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -59,8 +59,8 @@ func main() {
 	// Get the identifiers of the disks attached to the virtual machine. We # need this because we want to tell the
 	// server to create the disks of the template using a format different to the format used by the original disks	.
 	var diskIDs []string
-	das, _ := conn.FollowLink(vm.MustDiskAttachments())
-	if das, ok := disks.(*ovirtsdk4.DiskAttachmentSlice); ok {
+	dasInterface, _ := conn.FollowLink(vm.MustDiskAttachments())
+	if das, ok := dasInterface.(*ovirtsdk4.DiskAttachmentSlice); ok {
 		for _, da := range das.Slice() {
 			diskIDs = append(diskIDs, da.MustDisk().MustId())
 		}

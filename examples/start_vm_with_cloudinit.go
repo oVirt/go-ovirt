@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func startVMWithCloudinit() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -54,7 +54,7 @@ func main() {
 	vm := vmsService.List().Search("name=myvm").MustSend().MustVms().Slice()[0]
 
 	// Locate the service that manages the virtual machine, as that is where the action methods are defined
-	vmService := vmsService.VmService()
+	vmService := vmsService.VmService(vm.MustId())
 
 	// Create cloud-init script, which you want to execute in deployed virtual machine, please note that
 	// the script must be properly formatted and indented as it's using YAML.
@@ -76,7 +76,7 @@ func main() {
 						RootPassword("redhat123").
 						HostName("myvm.example.com").
 						NicConfigurationsOfAny(
-							*ovirtsdk4.NewNicConfigurationBuilder().
+							ovirtsdk4.NewNicConfigurationBuilder().
 								Name("eth0").
 								OnBoot(true).
 								BootProtocol(ovirtsdk4.BOOTPROTOCOL_STATIC).

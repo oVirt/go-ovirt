@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func registerVM() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -64,7 +64,7 @@ func main() {
 	var vm *ovirtsdk4.Vm
 	for _, v := range unregVMSlice.Slice() {
 		if v.MustName() == "myvm" {
-			vm = &v
+			vm = v
 			break
 		}
 	}
@@ -84,7 +84,7 @@ func main() {
 				Name("mycluster").
 				MustBuild()).
 		VnicProfileMappingsOfAny(
-			*ovirtsdk4.NewVnicProfileMappingBuilder().
+			ovirtsdk4.NewVnicProfileMappingBuilder().
 				SourceNetworkName("mynetwork").
 				SourceNetworkProfileName("mynetwork").
 				TargetVnicProfile(

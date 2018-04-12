@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func addLunDiskToVM() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -67,7 +67,7 @@ func main() {
 							ovirtsdk4.NewHostStorageBuilder().
 								Type(ovirtsdk4.STORAGETYPE_ISCSI).
 								LogicalUnitsOfAny(
-									*ovirtsdk4.NewLogicalUnitBuilder().
+									ovirtsdk4.NewLogicalUnitBuilder().
 										Address("192.168.200.3").
 										Port(3260).
 										Target("iqn.2014-07.org.ovirt:storage").

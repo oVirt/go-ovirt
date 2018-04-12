@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func updateQuotaLimits() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -67,6 +67,7 @@ func main() {
 		MustStorageDomains().
 		Slice()[0]
 	sdService := sdsService.StorageDomainService(sd.MustId())
+	sdService.ImagesService()
 
 	// Find the quota and the service that manages it. Note that the service that manages the quota doesn't support
 	// search, so we need to retrieve all the quotas and filter explicitly. If the quota doesn't exist, create it.
@@ -75,7 +76,7 @@ func main() {
 	var quota *ovirtsdk4.Quota
 	for _, q := range quotaSlice.Slice() {
 		if q.MustId() == "myquota" {
-			quota = &q
+			quota = q
 			break
 		}
 	}
@@ -101,7 +102,7 @@ func main() {
 	var limit *ovirtsdk4.QuotaStorageLimit
 	for _, l := range limitSlice.Slice() {
 		if l.MustId() == sd.MustId() {
-			limit = &l
+			limit = l
 			break
 		}
 	}

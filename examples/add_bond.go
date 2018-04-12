@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func addBond() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -63,26 +63,26 @@ func main() {
 	hostService := hostsService.HostService(host.MustId())
 
 	// Configure the host adding a bond with two slaves, and attaching it to a network with an static IP address
-	setupNetworkResp, err := hostService.SetupNetworks().
+	_, err = hostService.SetupNetworks().
 		ModifiedBondsOfAny(
 			ovirtsdk4.NewHostNicBuilder().
 				Name("bond0").
 				Bonding(
 					ovirtsdk4.NewBondingBuilder().
 						OptionsOfAny(
-							*ovirtsdk4.NewOptionBuilder().
+							ovirtsdk4.NewOptionBuilder().
 								Name("mode").
 								Value("1").
 								MustBuild(),
-							*ovirtsdk4.NewOptionBuilder().
+							ovirtsdk4.NewOptionBuilder().
 								Name("miimon").
 								Value("100").
 								MustBuild()).
 						SlavesOfAny(
-							*ovirtsdk4.NewHostNicBuilder().
+							ovirtsdk4.NewHostNicBuilder().
 								Name("eth0").
 								MustBuild(),
-							*ovirtsdk4.NewHostNicBuilder().
+							ovirtsdk4.NewHostNicBuilder().
 								Name("eth1").
 								MustBuild()).
 						MustBuild()).
@@ -94,7 +94,7 @@ func main() {
 						Name("mynetwork").
 						MustBuild()).
 				IpAddressAssignmentsOfAny(
-					*ovirtsdk4.NewIpAddressAssignmentBuilder().
+					ovirtsdk4.NewIpAddressAssignmentBuilder().
 						AssignmentMethod(
 							ovirtsdk4.BOOTPROTOCOL_STATIC).
 						Ip(

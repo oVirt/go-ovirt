@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func listAffinityLabels() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -78,7 +78,7 @@ func main() {
 			}
 			if vms, ok := vms.(*ovirtsdk4.VmSlice); ok {
 				for _, vmLink := range vms.Slice() {
-					vm, err := conn.FollowLink(&vmLink)
+					vm, err := conn.FollowLink(vmLink)
 					if err != nil {
 						fmt.Printf("Failed to follow vm link: %v, reason: %v\n", vmLink.MustHref(), err)
 						return

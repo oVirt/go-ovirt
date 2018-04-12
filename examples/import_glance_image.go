@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func importGlanceImage() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 	// Create the connection to the server:
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -70,7 +70,7 @@ func main() {
 	var image *ovirtsdk4.Image
 	for _, img := range imageSlice.Slice() {
 		if img.MustName() == "CirrOS 0.3.4 for x86_64" {
-			image = &img
+			image = img
 			break
 		}
 	}

@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func addVMFromTemplate() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -104,13 +104,13 @@ func main() {
 									MustBuild()).
 							// Use the vararg syntax to add just one or some
 							DiskAttachmentsOfAny(
-								*ovirtsdk4.NewDiskAttachmentBuilder().
+								ovirtsdk4.NewDiskAttachmentBuilder().
 									Disk(
 										ovirtsdk4.NewDiskBuilder().
 											Id(disk.MustId()).
 											Format(ovirtsdk4.DISKFORMAT_COW).
 											StorageDomainsOfAny(
-												*ovirtsdk4.NewStorageDomainBuilder().
+												ovirtsdk4.NewStorageDomainBuilder().
 													Id(sd.MustId()).
 													MustBuild()).
 											MustBuild()).

@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func main() {
+func assignTagToVM() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 	// Create the connection to the server:
 	conn, err := ovirtsdk4.NewConnectionBuilder().
