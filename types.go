@@ -44325,6 +44325,23 @@ func (builder *ActionBuilder) Attachment(attr *DiskAttachment) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) AttachmentBuilder(attrBuilder *DiskAttachmentBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Attachment(attr)
+}
+
 func (builder *ActionBuilder) AuthorizedKey(attr *AuthorizedKey) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44332,6 +44349,23 @@ func (builder *ActionBuilder) AuthorizedKey(attr *AuthorizedKey) *ActionBuilder 
 
 	builder.action.SetAuthorizedKey(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) AuthorizedKeyBuilder(attrBuilder *AuthorizedKeyBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.AuthorizedKey(attr)
 }
 
 func (builder *ActionBuilder) Bricks(attr *GlusterBrickSlice) *ActionBuilder {
@@ -44355,6 +44389,26 @@ func (builder *ActionBuilder) BricksOfAny(anys ...GlusterBrick) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) BricksBuilderOfAny(anyBuilders ...GlusterBrickBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.BricksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ActionBuilder) Certificates(attr *CertificateSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44373,6 +44427,26 @@ func (builder *ActionBuilder) CertificatesOfAny(anys ...Certificate) *ActionBuil
 		builder.action.certificates = new(CertificateSlice)
 	}
 	builder.action.certificates.slice = append(builder.action.certificates.slice, anys...)
+	return builder
+}
+
+func (builder *ActionBuilder) CertificatesBuilderOfAny(anyBuilders ...CertificateBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CertificatesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -44412,6 +44486,23 @@ func (builder *ActionBuilder) Cluster(attr *Cluster) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
 func (builder *ActionBuilder) CollapseSnapshots(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44439,6 +44530,23 @@ func (builder *ActionBuilder) Connection(attr *StorageConnection) *ActionBuilder
 	return builder
 }
 
+func (builder *ActionBuilder) ConnectionBuilder(attrBuilder *StorageConnectionBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Connection(attr)
+}
+
 func (builder *ActionBuilder) ConnectivityTimeout(attr int64) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44455,6 +44563,23 @@ func (builder *ActionBuilder) DataCenter(attr *DataCenter) *ActionBuilder {
 
 	builder.action.SetDataCenter(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
 }
 
 func (builder *ActionBuilder) DeployHostedEngine(attr bool) *ActionBuilder {
@@ -44482,6 +44607,23 @@ func (builder *ActionBuilder) Details(attr *GlusterVolumeProfileDetails) *Action
 
 	builder.action.SetDetails(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) DetailsBuilder(attrBuilder *GlusterVolumeProfileDetailsBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Details(attr)
 }
 
 func (builder *ActionBuilder) Directory(attr string) *ActionBuilder {
@@ -44523,6 +44665,26 @@ func (builder *ActionBuilder) DiscoveredTargetsOfAny(anys ...IscsiDetails) *Acti
 	return builder
 }
 
+func (builder *ActionBuilder) DiscoveredTargetsBuilderOfAny(anyBuilders ...IscsiDetailsBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiscoveredTargetsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ActionBuilder) Disk(attr *Disk) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44532,6 +44694,23 @@ func (builder *ActionBuilder) Disk(attr *Disk) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) DiskBuilder(attrBuilder *DiskBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Disk(attr)
+}
+
 func (builder *ActionBuilder) DiskProfile(attr *DiskProfile) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44539,6 +44718,23 @@ func (builder *ActionBuilder) DiskProfile(attr *DiskProfile) *ActionBuilder {
 
 	builder.action.SetDiskProfile(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) DiskProfileBuilder(attrBuilder *DiskProfileBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DiskProfile(attr)
 }
 
 func (builder *ActionBuilder) Disks(attr *DiskSlice) *ActionBuilder {
@@ -44562,6 +44758,26 @@ func (builder *ActionBuilder) DisksOfAny(anys ...Disk) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) DisksBuilderOfAny(anyBuilders ...DiskBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DisksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ActionBuilder) Exclusive(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44578,6 +44794,23 @@ func (builder *ActionBuilder) Fault(attr *Fault) *ActionBuilder {
 
 	builder.action.SetFault(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) FaultBuilder(attrBuilder *FaultBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Fault(attr)
 }
 
 func (builder *ActionBuilder) FenceType(attr string) *ActionBuilder {
@@ -44634,6 +44867,23 @@ func (builder *ActionBuilder) GracePeriod(attr *GracePeriod) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) GracePeriodBuilder(attrBuilder *GracePeriodBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.GracePeriod(attr)
+}
+
 func (builder *ActionBuilder) Host(attr *Host) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44641,6 +44891,23 @@ func (builder *ActionBuilder) Host(attr *Host) *ActionBuilder {
 
 	builder.action.SetHost(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) HostBuilder(attrBuilder *HostBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *ActionBuilder) Id(attr string) *ActionBuilder {
@@ -44670,6 +44937,23 @@ func (builder *ActionBuilder) ImageTransfer(attr *ImageTransfer) *ActionBuilder 
 	return builder
 }
 
+func (builder *ActionBuilder) ImageTransferBuilder(attrBuilder *ImageTransferBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ImageTransfer(attr)
+}
+
 func (builder *ActionBuilder) ImportAsTemplate(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44695,6 +44979,23 @@ func (builder *ActionBuilder) Iscsi(attr *IscsiDetails) *ActionBuilder {
 
 	builder.action.SetIscsi(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) IscsiBuilder(attrBuilder *IscsiDetailsBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Iscsi(attr)
 }
 
 func (builder *ActionBuilder) IscsiTargets(attr []string) *ActionBuilder {
@@ -44724,6 +45025,23 @@ func (builder *ActionBuilder) Job(attr *Job) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) JobBuilder(attrBuilder *JobBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Job(attr)
+}
+
 func (builder *ActionBuilder) Lease(attr *StorageDomainLease) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44731,6 +45049,23 @@ func (builder *ActionBuilder) Lease(attr *StorageDomainLease) *ActionBuilder {
 
 	builder.action.SetLease(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) LeaseBuilder(attrBuilder *StorageDomainLeaseBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Lease(attr)
 }
 
 func (builder *ActionBuilder) LogicalUnits(attr *LogicalUnitSlice) *ActionBuilder {
@@ -44751,6 +45086,26 @@ func (builder *ActionBuilder) LogicalUnitsOfAny(anys ...LogicalUnit) *ActionBuil
 		builder.action.logicalUnits = new(LogicalUnitSlice)
 	}
 	builder.action.logicalUnits.slice = append(builder.action.logicalUnits.slice, anys...)
+	return builder
+}
+
+func (builder *ActionBuilder) LogicalUnitsBuilderOfAny(anyBuilders ...LogicalUnitBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.LogicalUnitsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -44784,6 +45139,26 @@ func (builder *ActionBuilder) ModifiedBondsOfAny(anys ...HostNic) *ActionBuilder
 	return builder
 }
 
+func (builder *ActionBuilder) ModifiedBondsBuilderOfAny(anyBuilders ...HostNicBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ModifiedBondsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ActionBuilder) ModifiedLabels(attr *NetworkLabelSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44802,6 +45177,26 @@ func (builder *ActionBuilder) ModifiedLabelsOfAny(anys ...NetworkLabel) *ActionB
 		builder.action.modifiedLabels = new(NetworkLabelSlice)
 	}
 	builder.action.modifiedLabels.slice = append(builder.action.modifiedLabels.slice, anys...)
+	return builder
+}
+
+func (builder *ActionBuilder) ModifiedLabelsBuilderOfAny(anyBuilders ...NetworkLabelBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ModifiedLabelsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -44826,6 +45221,26 @@ func (builder *ActionBuilder) ModifiedNetworkAttachmentsOfAny(anys ...NetworkAtt
 	return builder
 }
 
+func (builder *ActionBuilder) ModifiedNetworkAttachmentsBuilderOfAny(anyBuilders ...NetworkAttachmentBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ModifiedNetworkAttachmentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ActionBuilder) Name(attr string) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44842,6 +45257,23 @@ func (builder *ActionBuilder) Option(attr *Option) *ActionBuilder {
 
 	builder.action.SetOption(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) OptionBuilder(attrBuilder *OptionBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Option(attr)
 }
 
 func (builder *ActionBuilder) Pause(attr bool) *ActionBuilder {
@@ -44862,6 +45294,23 @@ func (builder *ActionBuilder) Permission(attr *Permission) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) PermissionBuilder(attrBuilder *PermissionBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Permission(attr)
+}
+
 func (builder *ActionBuilder) PowerManagement(attr *PowerManagement) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44869,6 +45318,23 @@ func (builder *ActionBuilder) PowerManagement(attr *PowerManagement) *ActionBuil
 
 	builder.action.SetPowerManagement(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) PowerManagementBuilder(attrBuilder *PowerManagementBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PowerManagement(attr)
 }
 
 func (builder *ActionBuilder) ProxyTicket(attr *ProxyTicket) *ActionBuilder {
@@ -44880,6 +45346,23 @@ func (builder *ActionBuilder) ProxyTicket(attr *ProxyTicket) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) ProxyTicketBuilder(attrBuilder *ProxyTicketBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ProxyTicket(attr)
+}
+
 func (builder *ActionBuilder) Quota(attr *Quota) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44887,6 +45370,23 @@ func (builder *ActionBuilder) Quota(attr *Quota) *ActionBuilder {
 
 	builder.action.SetQuota(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
 }
 
 func (builder *ActionBuilder) Reason(attr string) *ActionBuilder {
@@ -44925,6 +45425,23 @@ func (builder *ActionBuilder) RegistrationConfiguration(attr *RegistrationConfig
 	return builder
 }
 
+func (builder *ActionBuilder) RegistrationConfigurationBuilder(attrBuilder *RegistrationConfigurationBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.RegistrationConfiguration(attr)
+}
+
 func (builder *ActionBuilder) RemoteViewerConnectionFile(attr string) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44955,6 +45472,26 @@ func (builder *ActionBuilder) RemovedBondsOfAny(anys ...HostNic) *ActionBuilder 
 	return builder
 }
 
+func (builder *ActionBuilder) RemovedBondsBuilderOfAny(anyBuilders ...HostNicBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.RemovedBondsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ActionBuilder) RemovedLabels(attr *NetworkLabelSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44976,6 +45513,26 @@ func (builder *ActionBuilder) RemovedLabelsOfAny(anys ...NetworkLabel) *ActionBu
 	return builder
 }
 
+func (builder *ActionBuilder) RemovedLabelsBuilderOfAny(anyBuilders ...NetworkLabelBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.RemovedLabelsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ActionBuilder) RemovedNetworkAttachments(attr *NetworkAttachmentSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -44994,6 +45551,26 @@ func (builder *ActionBuilder) RemovedNetworkAttachmentsOfAny(anys ...NetworkAtta
 		builder.action.removedNetworkAttachments = new(NetworkAttachmentSlice)
 	}
 	builder.action.removedNetworkAttachments.slice = append(builder.action.removedNetworkAttachments.slice, anys...)
+	return builder
+}
+
+func (builder *ActionBuilder) RemovedNetworkAttachmentsBuilderOfAny(anyBuilders ...NetworkAttachmentBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.RemovedNetworkAttachmentsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -45033,6 +45610,23 @@ func (builder *ActionBuilder) Snapshot(attr *Snapshot) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) SnapshotBuilder(attrBuilder *SnapshotBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Snapshot(attr)
+}
+
 func (builder *ActionBuilder) Ssh(attr *Ssh) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -45040,6 +45634,23 @@ func (builder *ActionBuilder) Ssh(attr *Ssh) *ActionBuilder {
 
 	builder.action.SetSsh(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) SshBuilder(attrBuilder *SshBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ssh(attr)
 }
 
 func (builder *ActionBuilder) Status(attr string) *ActionBuilder {
@@ -45069,6 +45680,23 @@ func (builder *ActionBuilder) StorageDomain(attr *StorageDomain) *ActionBuilder 
 	return builder
 }
 
+func (builder *ActionBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
 func (builder *ActionBuilder) StorageDomains(attr *StorageDomainSlice) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -45087,6 +45715,26 @@ func (builder *ActionBuilder) StorageDomainsOfAny(anys ...StorageDomain) *Action
 		builder.action.storageDomains = new(StorageDomainSlice)
 	}
 	builder.action.storageDomains.slice = append(builder.action.storageDomains.slice, anys...)
+	return builder
+}
+
+func (builder *ActionBuilder) StorageDomainsBuilderOfAny(anyBuilders ...StorageDomainBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StorageDomainsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -45120,6 +45768,26 @@ func (builder *ActionBuilder) SynchronizedNetworkAttachmentsOfAny(anys ...Networ
 	return builder
 }
 
+func (builder *ActionBuilder) SynchronizedNetworkAttachmentsBuilderOfAny(anyBuilders ...NetworkAttachmentBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SynchronizedNetworkAttachmentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ActionBuilder) Template(attr *Template) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -45129,6 +45797,23 @@ func (builder *ActionBuilder) Template(attr *Template) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *ActionBuilder) Ticket(attr *Ticket) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -45136,6 +45821,23 @@ func (builder *ActionBuilder) Ticket(attr *Ticket) *ActionBuilder {
 
 	builder.action.SetTicket(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) TicketBuilder(attrBuilder *TicketBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ticket(attr)
 }
 
 func (builder *ActionBuilder) UndeployHostedEngine(attr bool) *ActionBuilder {
@@ -45174,6 +45876,23 @@ func (builder *ActionBuilder) VirtualFunctionsConfiguration(attr *HostNicVirtual
 	return builder
 }
 
+func (builder *ActionBuilder) VirtualFunctionsConfigurationBuilder(attrBuilder *HostNicVirtualFunctionsConfigurationBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VirtualFunctionsConfiguration(attr)
+}
+
 func (builder *ActionBuilder) Vm(attr *Vm) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -45181,6 +45900,23 @@ func (builder *ActionBuilder) Vm(attr *Vm) *ActionBuilder {
 
 	builder.action.SetVm(attr)
 	return builder
+}
+
+func (builder *ActionBuilder) VmBuilder(attrBuilder *VmBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *ActionBuilder) VnicProfileMappings(attr *VnicProfileMappingSlice) *ActionBuilder {
@@ -45201,6 +45937,26 @@ func (builder *ActionBuilder) VnicProfileMappingsOfAny(anys ...VnicProfileMappin
 		builder.action.vnicProfileMappings = new(VnicProfileMappingSlice)
 	}
 	builder.action.vnicProfileMappings.slice = append(builder.action.vnicProfileMappings.slice, anys...)
+	return builder
+}
+
+func (builder *ActionBuilder) VnicProfileMappingsBuilderOfAny(anyBuilders ...VnicProfileMappingBuilder) *ActionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VnicProfileMappingsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -45254,6 +46010,23 @@ func (builder *AffinityGroupBuilder) Cluster(attr *Cluster) *AffinityGroupBuilde
 	return builder
 }
 
+func (builder *AffinityGroupBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
 func (builder *AffinityGroupBuilder) Comment(attr string) *AffinityGroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -45302,6 +46075,26 @@ func (builder *AffinityGroupBuilder) HostsOfAny(anys ...Host) *AffinityGroupBuil
 	return builder
 }
 
+func (builder *AffinityGroupBuilder) HostsBuilderOfAny(anyBuilders ...HostBuilder) *AffinityGroupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HostsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *AffinityGroupBuilder) HostsRule(attr *AffinityRule) *AffinityGroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -45309,6 +46102,23 @@ func (builder *AffinityGroupBuilder) HostsRule(attr *AffinityRule) *AffinityGrou
 
 	builder.affinityGroup.SetHostsRule(attr)
 	return builder
+}
+
+func (builder *AffinityGroupBuilder) HostsRuleBuilder(attrBuilder *AffinityRuleBuilder) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HostsRule(attr)
 }
 
 func (builder *AffinityGroupBuilder) Id(attr string) *AffinityGroupBuilder {
@@ -45359,6 +46169,26 @@ func (builder *AffinityGroupBuilder) VmsOfAny(anys ...Vm) *AffinityGroupBuilder 
 	return builder
 }
 
+func (builder *AffinityGroupBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *AffinityGroupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *AffinityGroupBuilder) VmsRule(attr *AffinityRule) *AffinityGroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -45366,6 +46196,23 @@ func (builder *AffinityGroupBuilder) VmsRule(attr *AffinityRule) *AffinityGroupB
 
 	builder.affinityGroup.SetVmsRule(attr)
 	return builder
+}
+
+func (builder *AffinityGroupBuilder) VmsRuleBuilder(attrBuilder *AffinityRuleBuilder) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VmsRule(attr)
 }
 
 func (builder *AffinityGroupBuilder) Href(href string) *AffinityGroupBuilder {
@@ -45439,6 +46286,26 @@ func (builder *AffinityLabelBuilder) HostsOfAny(anys ...Host) *AffinityLabelBuil
 	return builder
 }
 
+func (builder *AffinityLabelBuilder) HostsBuilderOfAny(anyBuilders ...HostBuilder) *AffinityLabelBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HostsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *AffinityLabelBuilder) Id(attr string) *AffinityLabelBuilder {
 	if builder.err != nil {
 		return builder
@@ -45484,6 +46351,26 @@ func (builder *AffinityLabelBuilder) VmsOfAny(anys ...Vm) *AffinityLabelBuilder 
 		builder.affinityLabel.vms = new(VmSlice)
 	}
 	builder.affinityLabel.vms.slice = append(builder.affinityLabel.vms.slice, anys...)
+	return builder
+}
+
+func (builder *AffinityLabelBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *AffinityLabelBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -45632,6 +46519,23 @@ func (builder *AgentBuilder) Host(attr *Host) *AgentBuilder {
 	return builder
 }
 
+func (builder *AgentBuilder) HostBuilder(attrBuilder *HostBuilder) *AgentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *AgentBuilder) Id(attr string) *AgentBuilder {
 	if builder.err != nil {
 		return builder
@@ -45668,6 +46572,26 @@ func (builder *AgentBuilder) OptionsOfAny(anys ...Option) *AgentBuilder {
 		builder.agent.options = new(OptionSlice)
 	}
 	builder.agent.options.slice = append(builder.agent.options.slice, anys...)
+	return builder
+}
+
+func (builder *AgentBuilder) OptionsBuilderOfAny(anyBuilders ...OptionBuilder) *AgentBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.OptionsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -45843,6 +46767,23 @@ func (builder *ApiBuilder) AuthenticatedUser(attr *User) *ApiBuilder {
 	return builder
 }
 
+func (builder *ApiBuilder) AuthenticatedUserBuilder(attrBuilder *UserBuilder) *ApiBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.AuthenticatedUser(attr)
+}
+
 func (builder *ApiBuilder) EffectiveUser(attr *User) *ApiBuilder {
 	if builder.err != nil {
 		return builder
@@ -45850,6 +46791,23 @@ func (builder *ApiBuilder) EffectiveUser(attr *User) *ApiBuilder {
 
 	builder.api.SetEffectiveUser(attr)
 	return builder
+}
+
+func (builder *ApiBuilder) EffectiveUserBuilder(attrBuilder *UserBuilder) *ApiBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.EffectiveUser(attr)
 }
 
 func (builder *ApiBuilder) ProductInfo(attr *ProductInfo) *ApiBuilder {
@@ -45861,6 +46819,23 @@ func (builder *ApiBuilder) ProductInfo(attr *ProductInfo) *ApiBuilder {
 	return builder
 }
 
+func (builder *ApiBuilder) ProductInfoBuilder(attrBuilder *ProductInfoBuilder) *ApiBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ProductInfo(attr)
+}
+
 func (builder *ApiBuilder) SpecialObjects(attr *SpecialObjects) *ApiBuilder {
 	if builder.err != nil {
 		return builder
@@ -45870,6 +46845,23 @@ func (builder *ApiBuilder) SpecialObjects(attr *SpecialObjects) *ApiBuilder {
 	return builder
 }
 
+func (builder *ApiBuilder) SpecialObjectsBuilder(attrBuilder *SpecialObjectsBuilder) *ApiBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SpecialObjects(attr)
+}
+
 func (builder *ApiBuilder) Summary(attr *ApiSummary) *ApiBuilder {
 	if builder.err != nil {
 		return builder
@@ -45877,6 +46869,23 @@ func (builder *ApiBuilder) Summary(attr *ApiSummary) *ApiBuilder {
 
 	builder.api.SetSummary(attr)
 	return builder
+}
+
+func (builder *ApiBuilder) SummaryBuilder(attrBuilder *ApiSummaryBuilder) *ApiBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Summary(attr)
 }
 
 func (builder *ApiBuilder) Time(attr time.Time) *ApiBuilder {
@@ -45929,6 +46938,23 @@ func (builder *ApiSummaryBuilder) Hosts(attr *ApiSummaryItem) *ApiSummaryBuilder
 	return builder
 }
 
+func (builder *ApiSummaryBuilder) HostsBuilder(attrBuilder *ApiSummaryItemBuilder) *ApiSummaryBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Hosts(attr)
+}
+
 func (builder *ApiSummaryBuilder) StorageDomains(attr *ApiSummaryItem) *ApiSummaryBuilder {
 	if builder.err != nil {
 		return builder
@@ -45936,6 +46962,23 @@ func (builder *ApiSummaryBuilder) StorageDomains(attr *ApiSummaryItem) *ApiSumma
 
 	builder.apiSummary.SetStorageDomains(attr)
 	return builder
+}
+
+func (builder *ApiSummaryBuilder) StorageDomainsBuilder(attrBuilder *ApiSummaryItemBuilder) *ApiSummaryBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomains(attr)
 }
 
 func (builder *ApiSummaryBuilder) Users(attr *ApiSummaryItem) *ApiSummaryBuilder {
@@ -45947,6 +46990,23 @@ func (builder *ApiSummaryBuilder) Users(attr *ApiSummaryItem) *ApiSummaryBuilder
 	return builder
 }
 
+func (builder *ApiSummaryBuilder) UsersBuilder(attrBuilder *ApiSummaryItemBuilder) *ApiSummaryBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Users(attr)
+}
+
 func (builder *ApiSummaryBuilder) Vms(attr *ApiSummaryItem) *ApiSummaryBuilder {
 	if builder.err != nil {
 		return builder
@@ -45954,6 +47014,23 @@ func (builder *ApiSummaryBuilder) Vms(attr *ApiSummaryItem) *ApiSummaryBuilder {
 
 	builder.apiSummary.SetVms(attr)
 	return builder
+}
+
+func (builder *ApiSummaryBuilder) VmsBuilder(attrBuilder *ApiSummaryItemBuilder) *ApiSummaryBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vms(attr)
 }
 
 func (builder *ApiSummaryBuilder) Href(href string) *ApiSummaryBuilder {
@@ -46083,6 +47160,23 @@ func (builder *ApplicationBuilder) Vm(attr *Vm) *ApplicationBuilder {
 	return builder
 }
 
+func (builder *ApplicationBuilder) VmBuilder(attrBuilder *VmBuilder) *ApplicationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
+}
+
 func (builder *ApplicationBuilder) Href(href string) *ApplicationBuilder {
 	if builder.err != nil {
 		return builder
@@ -46169,6 +47263,23 @@ func (builder *AuthorizedKeyBuilder) User(attr *User) *AuthorizedKeyBuilder {
 	return builder
 }
 
+func (builder *AuthorizedKeyBuilder) UserBuilder(attrBuilder *UserBuilder) *AuthorizedKeyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
+}
+
 func (builder *AuthorizedKeyBuilder) Href(href string) *AuthorizedKeyBuilder {
 	if builder.err != nil {
 		return builder
@@ -46246,6 +47357,23 @@ func (builder *BalanceBuilder) SchedulingPolicy(attr *SchedulingPolicy) *Balance
 	return builder
 }
 
+func (builder *BalanceBuilder) SchedulingPolicyBuilder(attrBuilder *SchedulingPolicyBuilder) *BalanceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SchedulingPolicy(attr)
+}
+
 func (builder *BalanceBuilder) SchedulingPolicyUnit(attr *SchedulingPolicyUnit) *BalanceBuilder {
 	if builder.err != nil {
 		return builder
@@ -46253,6 +47381,23 @@ func (builder *BalanceBuilder) SchedulingPolicyUnit(attr *SchedulingPolicyUnit) 
 
 	builder.balance.SetSchedulingPolicyUnit(attr)
 	return builder
+}
+
+func (builder *BalanceBuilder) SchedulingPolicyUnitBuilder(attrBuilder *SchedulingPolicyUnitBuilder) *BalanceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SchedulingPolicyUnit(attr)
 }
 
 func (builder *BalanceBuilder) Href(href string) *BalanceBuilder {
@@ -46294,6 +47439,23 @@ func (builder *BiosBuilder) BootMenu(attr *BootMenu) *BiosBuilder {
 
 	builder.bios.SetBootMenu(attr)
 	return builder
+}
+
+func (builder *BiosBuilder) BootMenuBuilder(attrBuilder *BootMenuBuilder) *BiosBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.BootMenu(attr)
 }
 
 func (builder *BiosBuilder) Href(href string) *BiosBuilder {
@@ -46349,6 +47511,26 @@ func (builder *BlockStatisticBuilder) StatisticsOfAny(anys ...Statistic) *BlockS
 	return builder
 }
 
+func (builder *BlockStatisticBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *BlockStatisticBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *BlockStatisticBuilder) Href(href string) *BlockStatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -46390,6 +47572,23 @@ func (builder *BondingBuilder) ActiveSlave(attr *HostNic) *BondingBuilder {
 	return builder
 }
 
+func (builder *BondingBuilder) ActiveSlaveBuilder(attrBuilder *HostNicBuilder) *BondingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ActiveSlave(attr)
+}
+
 func (builder *BondingBuilder) AdPartnerMac(attr *Mac) *BondingBuilder {
 	if builder.err != nil {
 		return builder
@@ -46397,6 +47596,23 @@ func (builder *BondingBuilder) AdPartnerMac(attr *Mac) *BondingBuilder {
 
 	builder.bonding.SetAdPartnerMac(attr)
 	return builder
+}
+
+func (builder *BondingBuilder) AdPartnerMacBuilder(attrBuilder *MacBuilder) *BondingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.AdPartnerMac(attr)
 }
 
 func (builder *BondingBuilder) Options(attr *OptionSlice) *BondingBuilder {
@@ -46420,6 +47636,26 @@ func (builder *BondingBuilder) OptionsOfAny(anys ...Option) *BondingBuilder {
 	return builder
 }
 
+func (builder *BondingBuilder) OptionsBuilderOfAny(anyBuilders ...OptionBuilder) *BondingBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.OptionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *BondingBuilder) Slaves(attr *HostNicSlice) *BondingBuilder {
 	if builder.err != nil {
 		return builder
@@ -46438,6 +47674,26 @@ func (builder *BondingBuilder) SlavesOfAny(anys ...HostNic) *BondingBuilder {
 		builder.bonding.slaves = new(HostNicSlice)
 	}
 	builder.bonding.slaves.slice = append(builder.bonding.slaves.slice, anys...)
+	return builder
+}
+
+func (builder *BondingBuilder) SlavesBuilderOfAny(anyBuilders ...HostNicBuilder) *BondingBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SlavesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -46650,6 +47906,23 @@ func (builder *BrickProfileDetailBuilder) Brick(attr *GlusterBrick) *BrickProfil
 	return builder
 }
 
+func (builder *BrickProfileDetailBuilder) BrickBuilder(attrBuilder *GlusterBrickBuilder) *BrickProfileDetailBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Brick(attr)
+}
+
 func (builder *BrickProfileDetailBuilder) ProfileDetails(attr *ProfileDetailSlice) *BrickProfileDetailBuilder {
 	if builder.err != nil {
 		return builder
@@ -46668,6 +47941,26 @@ func (builder *BrickProfileDetailBuilder) ProfileDetailsOfAny(anys ...ProfileDet
 		builder.brickProfileDetail.profileDetails = new(ProfileDetailSlice)
 	}
 	builder.brickProfileDetail.profileDetails.slice = append(builder.brickProfileDetail.profileDetails.slice, anys...)
+	return builder
+}
+
+func (builder *BrickProfileDetailBuilder) ProfileDetailsBuilderOfAny(anyBuilders ...ProfileDetailBuilder) *BrickProfileDetailBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ProfileDetailsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -46730,6 +48023,23 @@ func (builder *CdromBuilder) File(attr *File) *CdromBuilder {
 	return builder
 }
 
+func (builder *CdromBuilder) FileBuilder(attrBuilder *FileBuilder) *CdromBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.File(attr)
+}
+
 func (builder *CdromBuilder) Id(attr string) *CdromBuilder {
 	if builder.err != nil {
 		return builder
@@ -46746,6 +48056,23 @@ func (builder *CdromBuilder) InstanceType(attr *InstanceType) *CdromBuilder {
 
 	builder.cdrom.SetInstanceType(attr)
 	return builder
+}
+
+func (builder *CdromBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *CdromBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
 }
 
 func (builder *CdromBuilder) Name(attr string) *CdromBuilder {
@@ -46766,6 +48093,23 @@ func (builder *CdromBuilder) Template(attr *Template) *CdromBuilder {
 	return builder
 }
 
+func (builder *CdromBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *CdromBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *CdromBuilder) Vm(attr *Vm) *CdromBuilder {
 	if builder.err != nil {
 		return builder
@@ -46773,6 +48117,23 @@ func (builder *CdromBuilder) Vm(attr *Vm) *CdromBuilder {
 
 	builder.cdrom.SetVm(attr)
 	return builder
+}
+
+func (builder *CdromBuilder) VmBuilder(attrBuilder *VmBuilder) *CdromBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *CdromBuilder) Vms(attr *VmSlice) *CdromBuilder {
@@ -46793,6 +48154,26 @@ func (builder *CdromBuilder) VmsOfAny(anys ...Vm) *CdromBuilder {
 		builder.cdrom.vms = new(VmSlice)
 	}
 	builder.cdrom.vms.slice = append(builder.cdrom.vms.slice, anys...)
+	return builder
+}
+
+func (builder *CdromBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *CdromBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -46944,6 +48325,26 @@ func (builder *CloudInitBuilder) AuthorizedKeysOfAny(anys ...AuthorizedKey) *Clo
 	return builder
 }
 
+func (builder *CloudInitBuilder) AuthorizedKeysBuilderOfAny(anyBuilders ...AuthorizedKeyBuilder) *CloudInitBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AuthorizedKeysOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *CloudInitBuilder) Files(attr *FileSlice) *CloudInitBuilder {
 	if builder.err != nil {
 		return builder
@@ -46965,6 +48366,26 @@ func (builder *CloudInitBuilder) FilesOfAny(anys ...File) *CloudInitBuilder {
 	return builder
 }
 
+func (builder *CloudInitBuilder) FilesBuilderOfAny(anyBuilders ...FileBuilder) *CloudInitBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.FilesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *CloudInitBuilder) Host(attr *Host) *CloudInitBuilder {
 	if builder.err != nil {
 		return builder
@@ -46974,6 +48395,23 @@ func (builder *CloudInitBuilder) Host(attr *Host) *CloudInitBuilder {
 	return builder
 }
 
+func (builder *CloudInitBuilder) HostBuilder(attrBuilder *HostBuilder) *CloudInitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *CloudInitBuilder) NetworkConfiguration(attr *NetworkConfiguration) *CloudInitBuilder {
 	if builder.err != nil {
 		return builder
@@ -46981,6 +48419,23 @@ func (builder *CloudInitBuilder) NetworkConfiguration(attr *NetworkConfiguration
 
 	builder.cloudInit.SetNetworkConfiguration(attr)
 	return builder
+}
+
+func (builder *CloudInitBuilder) NetworkConfigurationBuilder(attrBuilder *NetworkConfigurationBuilder) *CloudInitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.NetworkConfiguration(attr)
 }
 
 func (builder *CloudInitBuilder) RegenerateSshKeys(attr bool) *CloudInitBuilder {
@@ -47019,6 +48474,26 @@ func (builder *CloudInitBuilder) UsersOfAny(anys ...User) *CloudInitBuilder {
 		builder.cloudInit.users = new(UserSlice)
 	}
 	builder.cloudInit.users.slice = append(builder.cloudInit.users.slice, anys...)
+	return builder
+}
+
+func (builder *CloudInitBuilder) UsersBuilderOfAny(anyBuilders ...UserBuilder) *CloudInitBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.UsersOfAny(*attr)
+	}
 	return builder
 }
 
@@ -47075,6 +48550,26 @@ func (builder *ClusterBuilder) AffinityGroupsOfAny(anys ...AffinityGroup) *Clust
 	return builder
 }
 
+func (builder *ClusterBuilder) AffinityGroupsBuilderOfAny(anyBuilders ...AffinityGroupBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AffinityGroupsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ClusterBuilder) BallooningEnabled(attr bool) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47102,6 +48597,23 @@ func (builder *ClusterBuilder) Cpu(attr *Cpu) *ClusterBuilder {
 	return builder
 }
 
+func (builder *ClusterBuilder) CpuBuilder(attrBuilder *CpuBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *ClusterBuilder) CpuProfiles(attr *CpuProfileSlice) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47120,6 +48632,26 @@ func (builder *ClusterBuilder) CpuProfilesOfAny(anys ...CpuProfile) *ClusterBuil
 		builder.cluster.cpuProfiles = new(CpuProfileSlice)
 	}
 	builder.cluster.cpuProfiles.slice = append(builder.cluster.cpuProfiles.slice, anys...)
+	return builder
+}
+
+func (builder *ClusterBuilder) CpuProfilesBuilderOfAny(anyBuilders ...CpuProfileBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CpuProfilesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -47144,6 +48676,26 @@ func (builder *ClusterBuilder) CustomSchedulingPolicyPropertiesOfAny(anys ...Pro
 	return builder
 }
 
+func (builder *ClusterBuilder) CustomSchedulingPolicyPropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CustomSchedulingPolicyPropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ClusterBuilder) DataCenter(attr *DataCenter) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47151,6 +48703,23 @@ func (builder *ClusterBuilder) DataCenter(attr *DataCenter) *ClusterBuilder {
 
 	builder.cluster.SetDataCenter(attr)
 	return builder
+}
+
+func (builder *ClusterBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
 }
 
 func (builder *ClusterBuilder) Description(attr string) *ClusterBuilder {
@@ -47169,6 +48738,23 @@ func (builder *ClusterBuilder) Display(attr *Display) *ClusterBuilder {
 
 	builder.cluster.SetDisplay(attr)
 	return builder
+}
+
+func (builder *ClusterBuilder) DisplayBuilder(attrBuilder *DisplayBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Display(attr)
 }
 
 func (builder *ClusterBuilder) EnabledFeatures(attr *ClusterFeatureSlice) *ClusterBuilder {
@@ -47192,6 +48778,26 @@ func (builder *ClusterBuilder) EnabledFeaturesOfAny(anys ...ClusterFeature) *Clu
 	return builder
 }
 
+func (builder *ClusterBuilder) EnabledFeaturesBuilderOfAny(anyBuilders ...ClusterFeatureBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.EnabledFeaturesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ClusterBuilder) ErrorHandling(attr *ErrorHandling) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47199,6 +48805,23 @@ func (builder *ClusterBuilder) ErrorHandling(attr *ErrorHandling) *ClusterBuilde
 
 	builder.cluster.SetErrorHandling(attr)
 	return builder
+}
+
+func (builder *ClusterBuilder) ErrorHandlingBuilder(attrBuilder *ErrorHandlingBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ErrorHandling(attr)
 }
 
 func (builder *ClusterBuilder) ExternalNetworkProviders(attr *ExternalProviderSlice) *ClusterBuilder {
@@ -47222,6 +48845,26 @@ func (builder *ClusterBuilder) ExternalNetworkProvidersOfAny(anys ...ExternalPro
 	return builder
 }
 
+func (builder *ClusterBuilder) ExternalNetworkProvidersBuilderOfAny(anyBuilders ...ExternalProviderBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ExternalNetworkProvidersOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ClusterBuilder) FencingPolicy(attr *FencingPolicy) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47229,6 +48872,23 @@ func (builder *ClusterBuilder) FencingPolicy(attr *FencingPolicy) *ClusterBuilde
 
 	builder.cluster.SetFencingPolicy(attr)
 	return builder
+}
+
+func (builder *ClusterBuilder) FencingPolicyBuilder(attrBuilder *FencingPolicyBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.FencingPolicy(attr)
 }
 
 func (builder *ClusterBuilder) FirewallType(attr FirewallType) *ClusterBuilder {
@@ -47258,6 +48918,26 @@ func (builder *ClusterBuilder) GlusterHooksOfAny(anys ...GlusterHook) *ClusterBu
 		builder.cluster.glusterHooks = new(GlusterHookSlice)
 	}
 	builder.cluster.glusterHooks.slice = append(builder.cluster.glusterHooks.slice, anys...)
+	return builder
+}
+
+func (builder *ClusterBuilder) GlusterHooksBuilderOfAny(anyBuilders ...GlusterHookBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GlusterHooksOfAny(*attr)
+	}
 	return builder
 }
 
@@ -47300,6 +48980,26 @@ func (builder *ClusterBuilder) GlusterVolumesOfAny(anys ...GlusterVolume) *Clust
 	return builder
 }
 
+func (builder *ClusterBuilder) GlusterVolumesBuilderOfAny(anyBuilders ...GlusterVolumeBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GlusterVolumesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ClusterBuilder) HaReservation(attr bool) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47327,6 +49027,23 @@ func (builder *ClusterBuilder) Ksm(attr *Ksm) *ClusterBuilder {
 	return builder
 }
 
+func (builder *ClusterBuilder) KsmBuilder(attrBuilder *KsmBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ksm(attr)
+}
+
 func (builder *ClusterBuilder) MacPool(attr *MacPool) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47334,6 +49051,23 @@ func (builder *ClusterBuilder) MacPool(attr *MacPool) *ClusterBuilder {
 
 	builder.cluster.SetMacPool(attr)
 	return builder
+}
+
+func (builder *ClusterBuilder) MacPoolBuilder(attrBuilder *MacPoolBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.MacPool(attr)
 }
 
 func (builder *ClusterBuilder) MaintenanceReasonRequired(attr bool) *ClusterBuilder {
@@ -47354,6 +49088,23 @@ func (builder *ClusterBuilder) ManagementNetwork(attr *Network) *ClusterBuilder 
 	return builder
 }
 
+func (builder *ClusterBuilder) ManagementNetworkBuilder(attrBuilder *NetworkBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ManagementNetwork(attr)
+}
+
 func (builder *ClusterBuilder) MemoryPolicy(attr *MemoryPolicy) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47363,6 +49114,23 @@ func (builder *ClusterBuilder) MemoryPolicy(attr *MemoryPolicy) *ClusterBuilder 
 	return builder
 }
 
+func (builder *ClusterBuilder) MemoryPolicyBuilder(attrBuilder *MemoryPolicyBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.MemoryPolicy(attr)
+}
+
 func (builder *ClusterBuilder) Migration(attr *MigrationOptions) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47370,6 +49138,23 @@ func (builder *ClusterBuilder) Migration(attr *MigrationOptions) *ClusterBuilder
 
 	builder.cluster.SetMigration(attr)
 	return builder
+}
+
+func (builder *ClusterBuilder) MigrationBuilder(attrBuilder *MigrationOptionsBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Migration(attr)
 }
 
 func (builder *ClusterBuilder) Name(attr string) *ClusterBuilder {
@@ -47402,6 +49187,26 @@ func (builder *ClusterBuilder) NetworkFiltersOfAny(anys ...NetworkFilter) *Clust
 	return builder
 }
 
+func (builder *ClusterBuilder) NetworkFiltersBuilderOfAny(anyBuilders ...NetworkFilterBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworkFiltersOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ClusterBuilder) Networks(attr *NetworkSlice) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47420,6 +49225,26 @@ func (builder *ClusterBuilder) NetworksOfAny(anys ...Network) *ClusterBuilder {
 		builder.cluster.networks = new(NetworkSlice)
 	}
 	builder.cluster.networks.slice = append(builder.cluster.networks.slice, anys...)
+	return builder
+}
+
+func (builder *ClusterBuilder) NetworksBuilderOfAny(anyBuilders ...NetworkBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworksOfAny(*attr)
+	}
 	return builder
 }
 
@@ -47453,6 +49278,26 @@ func (builder *ClusterBuilder) PermissionsOfAny(anys ...Permission) *ClusterBuil
 	return builder
 }
 
+func (builder *ClusterBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ClusterBuilder) RequiredRngSources(attr []RngSource) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47480,6 +49325,23 @@ func (builder *ClusterBuilder) SchedulingPolicy(attr *SchedulingPolicy) *Cluster
 	return builder
 }
 
+func (builder *ClusterBuilder) SchedulingPolicyBuilder(attrBuilder *SchedulingPolicyBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SchedulingPolicy(attr)
+}
+
 func (builder *ClusterBuilder) SerialNumber(attr *SerialNumber) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -47487,6 +49349,23 @@ func (builder *ClusterBuilder) SerialNumber(attr *SerialNumber) *ClusterBuilder 
 
 	builder.cluster.SetSerialNumber(attr)
 	return builder
+}
+
+func (builder *ClusterBuilder) SerialNumberBuilder(attrBuilder *SerialNumberBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SerialNumber(attr)
 }
 
 func (builder *ClusterBuilder) SupportedVersions(attr *VersionSlice) *ClusterBuilder {
@@ -47507,6 +49386,26 @@ func (builder *ClusterBuilder) SupportedVersionsOfAny(anys ...Version) *ClusterB
 		builder.cluster.supportedVersions = new(VersionSlice)
 	}
 	builder.cluster.supportedVersions.slice = append(builder.cluster.supportedVersions.slice, anys...)
+	return builder
+}
+
+func (builder *ClusterBuilder) SupportedVersionsBuilderOfAny(anyBuilders ...VersionBuilder) *ClusterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SupportedVersionsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -47553,6 +49452,23 @@ func (builder *ClusterBuilder) Version(attr *Version) *ClusterBuilder {
 
 	builder.cluster.SetVersion(attr)
 	return builder
+}
+
+func (builder *ClusterBuilder) VersionBuilder(attrBuilder *VersionBuilder) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
 }
 
 func (builder *ClusterBuilder) VirtService(attr bool) *ClusterBuilder {
@@ -47603,6 +49519,23 @@ func (builder *ClusterFeatureBuilder) ClusterLevel(attr *ClusterLevel) *ClusterF
 
 	builder.clusterFeature.SetClusterLevel(attr)
 	return builder
+}
+
+func (builder *ClusterFeatureBuilder) ClusterLevelBuilder(attrBuilder *ClusterLevelBuilder) *ClusterFeatureBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ClusterLevel(attr)
 }
 
 func (builder *ClusterFeatureBuilder) Comment(attr string) *ClusterFeatureBuilder {
@@ -47694,6 +49627,26 @@ func (builder *ClusterLevelBuilder) ClusterFeaturesOfAny(anys ...ClusterFeature)
 	return builder
 }
 
+func (builder *ClusterLevelBuilder) ClusterFeaturesBuilderOfAny(anyBuilders ...ClusterFeatureBuilder) *ClusterLevelBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ClusterFeaturesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ClusterLevelBuilder) Comment(attr string) *ClusterLevelBuilder {
 	if builder.err != nil {
 		return builder
@@ -47721,6 +49674,26 @@ func (builder *ClusterLevelBuilder) CpuTypesOfAny(anys ...CpuType) *ClusterLevel
 		builder.clusterLevel.cpuTypes = new(CpuTypeSlice)
 	}
 	builder.clusterLevel.cpuTypes.slice = append(builder.clusterLevel.cpuTypes.slice, anys...)
+	return builder
+}
+
+func (builder *ClusterLevelBuilder) CpuTypesBuilderOfAny(anyBuilders ...CpuTypeBuilder) *ClusterLevelBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CpuTypesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -47769,6 +49742,26 @@ func (builder *ClusterLevelBuilder) PermitsOfAny(anys ...Permit) *ClusterLevelBu
 		builder.clusterLevel.permits = new(PermitSlice)
 	}
 	builder.clusterLevel.permits.slice = append(builder.clusterLevel.permits.slice, anys...)
+	return builder
+}
+
+func (builder *ClusterLevelBuilder) PermitsBuilderOfAny(anyBuilders ...PermitBuilder) *ClusterLevelBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermitsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -47975,6 +49968,26 @@ func (builder *CpuBuilder) CoresOfAny(anys ...Core) *CpuBuilder {
 	return builder
 }
 
+func (builder *CpuBuilder) CoresBuilderOfAny(anyBuilders ...CoreBuilder) *CpuBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CoresOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *CpuBuilder) CpuTune(attr *CpuTune) *CpuBuilder {
 	if builder.err != nil {
 		return builder
@@ -47982,6 +49995,23 @@ func (builder *CpuBuilder) CpuTune(attr *CpuTune) *CpuBuilder {
 
 	builder.cpu.SetCpuTune(attr)
 	return builder
+}
+
+func (builder *CpuBuilder) CpuTuneBuilder(attrBuilder *CpuTuneBuilder) *CpuBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CpuTune(attr)
 }
 
 func (builder *CpuBuilder) Level(attr int64) *CpuBuilder {
@@ -48027,6 +50057,23 @@ func (builder *CpuBuilder) Topology(attr *CpuTopology) *CpuBuilder {
 
 	builder.cpu.SetTopology(attr)
 	return builder
+}
+
+func (builder *CpuBuilder) TopologyBuilder(attrBuilder *CpuTopologyBuilder) *CpuBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Topology(attr)
 }
 
 func (builder *CpuBuilder) Type(attr string) *CpuBuilder {
@@ -48077,6 +50124,23 @@ func (builder *CpuProfileBuilder) Cluster(attr *Cluster) *CpuProfileBuilder {
 
 	builder.cpuProfile.SetCluster(attr)
 	return builder
+}
+
+func (builder *CpuProfileBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *CpuProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *CpuProfileBuilder) Comment(attr string) *CpuProfileBuilder {
@@ -48136,6 +50200,26 @@ func (builder *CpuProfileBuilder) PermissionsOfAny(anys ...Permission) *CpuProfi
 	return builder
 }
 
+func (builder *CpuProfileBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *CpuProfileBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *CpuProfileBuilder) Qos(attr *Qos) *CpuProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -48143,6 +50227,23 @@ func (builder *CpuProfileBuilder) Qos(attr *Qos) *CpuProfileBuilder {
 
 	builder.cpuProfile.SetQos(attr)
 	return builder
+}
+
+func (builder *CpuProfileBuilder) QosBuilder(attrBuilder *QosBuilder) *CpuProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Qos(attr)
 }
 
 func (builder *CpuProfileBuilder) Href(href string) *CpuProfileBuilder {
@@ -48254,6 +50355,26 @@ func (builder *CpuTuneBuilder) VcpuPinsOfAny(anys ...VcpuPin) *CpuTuneBuilder {
 		builder.cpuTune.vcpuPins = new(VcpuPinSlice)
 	}
 	builder.cpuTune.vcpuPins.slice = append(builder.cpuTune.vcpuPins.slice, anys...)
+	return builder
+}
+
+func (builder *CpuTuneBuilder) VcpuPinsBuilderOfAny(anyBuilders ...VcpuPinBuilder) *CpuTuneBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VcpuPinsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -48428,6 +50549,26 @@ func (builder *DataCenterBuilder) ClustersOfAny(anys ...Cluster) *DataCenterBuil
 	return builder
 }
 
+func (builder *DataCenterBuilder) ClustersBuilderOfAny(anyBuilders ...ClusterBuilder) *DataCenterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ClustersOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DataCenterBuilder) Comment(attr string) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -48476,6 +50617,26 @@ func (builder *DataCenterBuilder) IscsiBondsOfAny(anys ...IscsiBond) *DataCenter
 	return builder
 }
 
+func (builder *DataCenterBuilder) IscsiBondsBuilderOfAny(anyBuilders ...IscsiBondBuilder) *DataCenterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.IscsiBondsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DataCenterBuilder) Local(attr bool) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -48492,6 +50653,23 @@ func (builder *DataCenterBuilder) MacPool(attr *MacPool) *DataCenterBuilder {
 
 	builder.dataCenter.SetMacPool(attr)
 	return builder
+}
+
+func (builder *DataCenterBuilder) MacPoolBuilder(attrBuilder *MacPoolBuilder) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.MacPool(attr)
 }
 
 func (builder *DataCenterBuilder) Name(attr string) *DataCenterBuilder {
@@ -48524,6 +50702,26 @@ func (builder *DataCenterBuilder) NetworksOfAny(anys ...Network) *DataCenterBuil
 	return builder
 }
 
+func (builder *DataCenterBuilder) NetworksBuilderOfAny(anyBuilders ...NetworkBuilder) *DataCenterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DataCenterBuilder) Permissions(attr *PermissionSlice) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -48545,6 +50743,26 @@ func (builder *DataCenterBuilder) PermissionsOfAny(anys ...Permission) *DataCent
 	return builder
 }
 
+func (builder *DataCenterBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *DataCenterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DataCenterBuilder) Qoss(attr *QosSlice) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -48563,6 +50781,26 @@ func (builder *DataCenterBuilder) QossOfAny(anys ...Qos) *DataCenterBuilder {
 		builder.dataCenter.qoss = new(QosSlice)
 	}
 	builder.dataCenter.qoss.slice = append(builder.dataCenter.qoss.slice, anys...)
+	return builder
+}
+
+func (builder *DataCenterBuilder) QossBuilderOfAny(anyBuilders ...QosBuilder) *DataCenterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.QossOfAny(*attr)
+	}
 	return builder
 }
 
@@ -48596,6 +50834,26 @@ func (builder *DataCenterBuilder) QuotasOfAny(anys ...Quota) *DataCenterBuilder 
 	return builder
 }
 
+func (builder *DataCenterBuilder) QuotasBuilderOfAny(anyBuilders ...QuotaBuilder) *DataCenterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.QuotasOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DataCenterBuilder) Status(attr DataCenterStatus) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -48623,6 +50881,26 @@ func (builder *DataCenterBuilder) StorageDomainsOfAny(anys ...StorageDomain) *Da
 		builder.dataCenter.storageDomains = new(StorageDomainSlice)
 	}
 	builder.dataCenter.storageDomains.slice = append(builder.dataCenter.storageDomains.slice, anys...)
+	return builder
+}
+
+func (builder *DataCenterBuilder) StorageDomainsBuilderOfAny(anyBuilders ...StorageDomainBuilder) *DataCenterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StorageDomainsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -48656,6 +50934,26 @@ func (builder *DataCenterBuilder) SupportedVersionsOfAny(anys ...Version) *DataC
 	return builder
 }
 
+func (builder *DataCenterBuilder) SupportedVersionsBuilderOfAny(anyBuilders ...VersionBuilder) *DataCenterBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SupportedVersionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DataCenterBuilder) Version(attr *Version) *DataCenterBuilder {
 	if builder.err != nil {
 		return builder
@@ -48663,6 +50961,23 @@ func (builder *DataCenterBuilder) Version(attr *Version) *DataCenterBuilder {
 
 	builder.dataCenter.SetVersion(attr)
 	return builder
+}
+
+func (builder *DataCenterBuilder) VersionBuilder(attrBuilder *VersionBuilder) *DataCenterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
 }
 
 func (builder *DataCenterBuilder) Href(href string) *DataCenterBuilder {
@@ -48733,6 +51048,23 @@ func (builder *DeviceBuilder) InstanceType(attr *InstanceType) *DeviceBuilder {
 	return builder
 }
 
+func (builder *DeviceBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *DeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *DeviceBuilder) Name(attr string) *DeviceBuilder {
 	if builder.err != nil {
 		return builder
@@ -48751,6 +51083,23 @@ func (builder *DeviceBuilder) Template(attr *Template) *DeviceBuilder {
 	return builder
 }
 
+func (builder *DeviceBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *DeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *DeviceBuilder) Vm(attr *Vm) *DeviceBuilder {
 	if builder.err != nil {
 		return builder
@@ -48758,6 +51107,23 @@ func (builder *DeviceBuilder) Vm(attr *Vm) *DeviceBuilder {
 
 	builder.device.SetVm(attr)
 	return builder
+}
+
+func (builder *DeviceBuilder) VmBuilder(attrBuilder *VmBuilder) *DeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *DeviceBuilder) Vms(attr *VmSlice) *DeviceBuilder {
@@ -48778,6 +51144,26 @@ func (builder *DeviceBuilder) VmsOfAny(anys ...Vm) *DeviceBuilder {
 		builder.device.vms = new(VmSlice)
 	}
 	builder.device.vms.slice = append(builder.device.vms.slice, anys...)
+	return builder
+}
+
+func (builder *DeviceBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *DeviceBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -48885,6 +51271,23 @@ func (builder *DiskBuilder) DiskProfile(attr *DiskProfile) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) DiskProfileBuilder(attrBuilder *DiskProfileBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DiskProfile(attr)
+}
+
 func (builder *DiskBuilder) Format(attr DiskFormat) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -48930,6 +51333,23 @@ func (builder *DiskBuilder) InstanceType(attr *InstanceType) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *DiskBuilder) Interface(attr DiskInterface) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -48957,6 +51377,23 @@ func (builder *DiskBuilder) LunStorage(attr *HostStorage) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) LunStorageBuilder(attrBuilder *HostStorageBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LunStorage(attr)
+}
+
 func (builder *DiskBuilder) Name(attr string) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -48973,6 +51410,23 @@ func (builder *DiskBuilder) OpenstackVolumeType(attr *OpenStackVolumeType) *Disk
 
 	builder.disk.SetOpenstackVolumeType(attr)
 	return builder
+}
+
+func (builder *DiskBuilder) OpenstackVolumeTypeBuilder(attrBuilder *OpenStackVolumeTypeBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OpenstackVolumeType(attr)
 }
 
 func (builder *DiskBuilder) Permissions(attr *PermissionSlice) *DiskBuilder {
@@ -48993,6 +51447,26 @@ func (builder *DiskBuilder) PermissionsOfAny(anys ...Permission) *DiskBuilder {
 		builder.disk.permissions = new(PermissionSlice)
 	}
 	builder.disk.permissions.slice = append(builder.disk.permissions.slice, anys...)
+	return builder
+}
+
+func (builder *DiskBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *DiskBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -49032,6 +51506,23 @@ func (builder *DiskBuilder) Quota(attr *Quota) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
+}
+
 func (builder *DiskBuilder) ReadOnly(attr bool) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -49068,6 +51559,23 @@ func (builder *DiskBuilder) Snapshot(attr *Snapshot) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) SnapshotBuilder(attrBuilder *SnapshotBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Snapshot(attr)
+}
+
 func (builder *DiskBuilder) Sparse(attr bool) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -49098,6 +51606,26 @@ func (builder *DiskBuilder) StatisticsOfAny(anys ...Statistic) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *DiskBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DiskBuilder) Status(attr DiskStatus) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -49114,6 +51642,23 @@ func (builder *DiskBuilder) StorageDomain(attr *StorageDomain) *DiskBuilder {
 
 	builder.disk.SetStorageDomain(attr)
 	return builder
+}
+
+func (builder *DiskBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
 }
 
 func (builder *DiskBuilder) StorageDomains(attr *StorageDomainSlice) *DiskBuilder {
@@ -49137,6 +51682,26 @@ func (builder *DiskBuilder) StorageDomainsOfAny(anys ...StorageDomain) *DiskBuil
 	return builder
 }
 
+func (builder *DiskBuilder) StorageDomainsBuilderOfAny(anyBuilders ...StorageDomainBuilder) *DiskBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StorageDomainsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DiskBuilder) StorageType(attr DiskStorageType) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -49153,6 +51718,23 @@ func (builder *DiskBuilder) Template(attr *Template) *DiskBuilder {
 
 	builder.disk.SetTemplate(attr)
 	return builder
+}
+
+func (builder *DiskBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
 }
 
 func (builder *DiskBuilder) TotalSize(attr int64) *DiskBuilder {
@@ -49182,6 +51764,23 @@ func (builder *DiskBuilder) Vm(attr *Vm) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) VmBuilder(attrBuilder *VmBuilder) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
+}
+
 func (builder *DiskBuilder) Vms(attr *VmSlice) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -49200,6 +51799,26 @@ func (builder *DiskBuilder) VmsOfAny(anys ...Vm) *DiskBuilder {
 		builder.disk.vms = new(VmSlice)
 	}
 	builder.disk.vms.slice = append(builder.disk.vms.slice, anys...)
+	return builder
+}
+
+func (builder *DiskBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *DiskBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -49289,6 +51908,23 @@ func (builder *DiskAttachmentBuilder) Disk(attr *Disk) *DiskAttachmentBuilder {
 	return builder
 }
 
+func (builder *DiskAttachmentBuilder) DiskBuilder(attrBuilder *DiskBuilder) *DiskAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Disk(attr)
+}
+
 func (builder *DiskAttachmentBuilder) Id(attr string) *DiskAttachmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -49352,6 +51988,23 @@ func (builder *DiskAttachmentBuilder) Template(attr *Template) *DiskAttachmentBu
 	return builder
 }
 
+func (builder *DiskAttachmentBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *DiskAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *DiskAttachmentBuilder) UsesScsiReservation(attr bool) *DiskAttachmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -49368,6 +52021,23 @@ func (builder *DiskAttachmentBuilder) Vm(attr *Vm) *DiskAttachmentBuilder {
 
 	builder.diskAttachment.SetVm(attr)
 	return builder
+}
+
+func (builder *DiskAttachmentBuilder) VmBuilder(attrBuilder *VmBuilder) *DiskAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *DiskAttachmentBuilder) Href(href string) *DiskAttachmentBuilder {
@@ -49459,6 +52129,26 @@ func (builder *DiskProfileBuilder) PermissionsOfAny(anys ...Permission) *DiskPro
 	return builder
 }
 
+func (builder *DiskProfileBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *DiskProfileBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DiskProfileBuilder) Qos(attr *Qos) *DiskProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -49468,6 +52158,23 @@ func (builder *DiskProfileBuilder) Qos(attr *Qos) *DiskProfileBuilder {
 	return builder
 }
 
+func (builder *DiskProfileBuilder) QosBuilder(attrBuilder *QosBuilder) *DiskProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Qos(attr)
+}
+
 func (builder *DiskProfileBuilder) StorageDomain(attr *StorageDomain) *DiskProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -49475,6 +52182,23 @@ func (builder *DiskProfileBuilder) StorageDomain(attr *StorageDomain) *DiskProfi
 
 	builder.diskProfile.SetStorageDomain(attr)
 	return builder
+}
+
+func (builder *DiskProfileBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *DiskProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
 }
 
 func (builder *DiskProfileBuilder) Href(href string) *DiskProfileBuilder {
@@ -49581,6 +52305,23 @@ func (builder *DiskSnapshotBuilder) Disk(attr *Disk) *DiskSnapshotBuilder {
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) DiskBuilder(attrBuilder *DiskBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Disk(attr)
+}
+
 func (builder *DiskSnapshotBuilder) DiskProfile(attr *DiskProfile) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -49588,6 +52329,23 @@ func (builder *DiskSnapshotBuilder) DiskProfile(attr *DiskProfile) *DiskSnapshot
 
 	builder.diskSnapshot.SetDiskProfile(attr)
 	return builder
+}
+
+func (builder *DiskSnapshotBuilder) DiskProfileBuilder(attrBuilder *DiskProfileBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DiskProfile(attr)
 }
 
 func (builder *DiskSnapshotBuilder) Format(attr DiskFormat) *DiskSnapshotBuilder {
@@ -49635,6 +52393,23 @@ func (builder *DiskSnapshotBuilder) InstanceType(attr *InstanceType) *DiskSnapsh
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *DiskSnapshotBuilder) Interface(attr DiskInterface) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -49662,6 +52437,23 @@ func (builder *DiskSnapshotBuilder) LunStorage(attr *HostStorage) *DiskSnapshotB
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) LunStorageBuilder(attrBuilder *HostStorageBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LunStorage(attr)
+}
+
 func (builder *DiskSnapshotBuilder) Name(attr string) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -49678,6 +52470,23 @@ func (builder *DiskSnapshotBuilder) OpenstackVolumeType(attr *OpenStackVolumeTyp
 
 	builder.diskSnapshot.SetOpenstackVolumeType(attr)
 	return builder
+}
+
+func (builder *DiskSnapshotBuilder) OpenstackVolumeTypeBuilder(attrBuilder *OpenStackVolumeTypeBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OpenstackVolumeType(attr)
 }
 
 func (builder *DiskSnapshotBuilder) Permissions(attr *PermissionSlice) *DiskSnapshotBuilder {
@@ -49698,6 +52507,26 @@ func (builder *DiskSnapshotBuilder) PermissionsOfAny(anys ...Permission) *DiskSn
 		builder.diskSnapshot.permissions = new(PermissionSlice)
 	}
 	builder.diskSnapshot.permissions.slice = append(builder.diskSnapshot.permissions.slice, anys...)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -49737,6 +52566,23 @@ func (builder *DiskSnapshotBuilder) Quota(attr *Quota) *DiskSnapshotBuilder {
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
+}
+
 func (builder *DiskSnapshotBuilder) ReadOnly(attr bool) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -49773,6 +52619,23 @@ func (builder *DiskSnapshotBuilder) Snapshot(attr *Snapshot) *DiskSnapshotBuilde
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) SnapshotBuilder(attrBuilder *SnapshotBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Snapshot(attr)
+}
+
 func (builder *DiskSnapshotBuilder) Sparse(attr bool) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -49803,6 +52666,26 @@ func (builder *DiskSnapshotBuilder) StatisticsOfAny(anys ...Statistic) *DiskSnap
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DiskSnapshotBuilder) Status(attr DiskStatus) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -49819,6 +52702,23 @@ func (builder *DiskSnapshotBuilder) StorageDomain(attr *StorageDomain) *DiskSnap
 
 	builder.diskSnapshot.SetStorageDomain(attr)
 	return builder
+}
+
+func (builder *DiskSnapshotBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
 }
 
 func (builder *DiskSnapshotBuilder) StorageDomains(attr *StorageDomainSlice) *DiskSnapshotBuilder {
@@ -49842,6 +52742,26 @@ func (builder *DiskSnapshotBuilder) StorageDomainsOfAny(anys ...StorageDomain) *
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) StorageDomainsBuilderOfAny(anyBuilders ...StorageDomainBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StorageDomainsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DiskSnapshotBuilder) StorageType(attr DiskStorageType) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -49858,6 +52778,23 @@ func (builder *DiskSnapshotBuilder) Template(attr *Template) *DiskSnapshotBuilde
 
 	builder.diskSnapshot.SetTemplate(attr)
 	return builder
+}
+
+func (builder *DiskSnapshotBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
 }
 
 func (builder *DiskSnapshotBuilder) TotalSize(attr int64) *DiskSnapshotBuilder {
@@ -49887,6 +52824,23 @@ func (builder *DiskSnapshotBuilder) Vm(attr *Vm) *DiskSnapshotBuilder {
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) VmBuilder(attrBuilder *VmBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
+}
+
 func (builder *DiskSnapshotBuilder) Vms(attr *VmSlice) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -49905,6 +52859,26 @@ func (builder *DiskSnapshotBuilder) VmsOfAny(anys ...Vm) *DiskSnapshotBuilder {
 		builder.diskSnapshot.vms = new(VmSlice)
 	}
 	builder.diskSnapshot.vms.slice = append(builder.diskSnapshot.vms.slice, anys...)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -49974,6 +52948,23 @@ func (builder *DisplayBuilder) Certificate(attr *Certificate) *DisplayBuilder {
 
 	builder.display.SetCertificate(attr)
 	return builder
+}
+
+func (builder *DisplayBuilder) CertificateBuilder(attrBuilder *CertificateBuilder) *DisplayBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Certificate(attr)
 }
 
 func (builder *DisplayBuilder) CopyPasteEnabled(attr bool) *DisplayBuilder {
@@ -50128,6 +53119,26 @@ func (builder *DnsBuilder) SearchDomainsOfAny(anys ...Host) *DnsBuilder {
 	return builder
 }
 
+func (builder *DnsBuilder) SearchDomainsBuilderOfAny(anyBuilders ...HostBuilder) *DnsBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SearchDomainsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DnsBuilder) Servers(attr *HostSlice) *DnsBuilder {
 	if builder.err != nil {
 		return builder
@@ -50146,6 +53157,26 @@ func (builder *DnsBuilder) ServersOfAny(anys ...Host) *DnsBuilder {
 		builder.dns.servers = new(HostSlice)
 	}
 	builder.dns.servers.slice = append(builder.dns.servers.slice, anys...)
+	return builder
+}
+
+func (builder *DnsBuilder) ServersBuilderOfAny(anyBuilders ...HostBuilder) *DnsBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ServersOfAny(*attr)
+	}
 	return builder
 }
 
@@ -50270,6 +53301,26 @@ func (builder *DomainBuilder) GroupsOfAny(anys ...Group) *DomainBuilder {
 	return builder
 }
 
+func (builder *DomainBuilder) GroupsBuilderOfAny(anyBuilders ...GroupBuilder) *DomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GroupsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *DomainBuilder) Id(attr string) *DomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -50297,6 +53348,23 @@ func (builder *DomainBuilder) User(attr *User) *DomainBuilder {
 	return builder
 }
 
+func (builder *DomainBuilder) UserBuilder(attrBuilder *UserBuilder) *DomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
+}
+
 func (builder *DomainBuilder) Users(attr *UserSlice) *DomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -50315,6 +53383,26 @@ func (builder *DomainBuilder) UsersOfAny(anys ...User) *DomainBuilder {
 		builder.domain.users = new(UserSlice)
 	}
 	builder.domain.users.slice = append(builder.domain.users.slice, anys...)
+	return builder
+}
+
+func (builder *DomainBuilder) UsersBuilderOfAny(anyBuilders ...UserBuilder) *DomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.UsersOfAny(*attr)
+	}
 	return builder
 }
 
@@ -50368,6 +53456,26 @@ func (builder *EntityProfileDetailBuilder) ProfileDetailsOfAny(anys ...ProfileDe
 		builder.entityProfileDetail.profileDetails = new(ProfileDetailSlice)
 	}
 	builder.entityProfileDetail.profileDetails.slice = append(builder.entityProfileDetail.profileDetails.slice, anys...)
+	return builder
+}
+
+func (builder *EntityProfileDetailBuilder) ProfileDetailsBuilderOfAny(anyBuilders ...ProfileDetailBuilder) *EntityProfileDetailBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ProfileDetailsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -50453,6 +53561,23 @@ func (builder *EventBuilder) Cluster(attr *Cluster) *EventBuilder {
 	return builder
 }
 
+func (builder *EventBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
 func (builder *EventBuilder) Code(attr int64) *EventBuilder {
 	if builder.err != nil {
 		return builder
@@ -50507,6 +53632,23 @@ func (builder *EventBuilder) DataCenter(attr *DataCenter) *EventBuilder {
 	return builder
 }
 
+func (builder *EventBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
+}
+
 func (builder *EventBuilder) Description(attr string) *EventBuilder {
 	if builder.err != nil {
 		return builder
@@ -50532,6 +53674,23 @@ func (builder *EventBuilder) Host(attr *Host) *EventBuilder {
 
 	builder.event.SetHost(attr)
 	return builder
+}
+
+func (builder *EventBuilder) HostBuilder(attrBuilder *HostBuilder) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *EventBuilder) Id(attr string) *EventBuilder {
@@ -50588,6 +53747,23 @@ func (builder *EventBuilder) StorageDomain(attr *StorageDomain) *EventBuilder {
 	return builder
 }
 
+func (builder *EventBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
 func (builder *EventBuilder) Template(attr *Template) *EventBuilder {
 	if builder.err != nil {
 		return builder
@@ -50595,6 +53771,23 @@ func (builder *EventBuilder) Template(attr *Template) *EventBuilder {
 
 	builder.event.SetTemplate(attr)
 	return builder
+}
+
+func (builder *EventBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
 }
 
 func (builder *EventBuilder) Time(attr time.Time) *EventBuilder {
@@ -50615,6 +53808,23 @@ func (builder *EventBuilder) User(attr *User) *EventBuilder {
 	return builder
 }
 
+func (builder *EventBuilder) UserBuilder(attrBuilder *UserBuilder) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
+}
+
 func (builder *EventBuilder) Vm(attr *Vm) *EventBuilder {
 	if builder.err != nil {
 		return builder
@@ -50622,6 +53832,23 @@ func (builder *EventBuilder) Vm(attr *Vm) *EventBuilder {
 
 	builder.event.SetVm(attr)
 	return builder
+}
+
+func (builder *EventBuilder) VmBuilder(attrBuilder *VmBuilder) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *EventBuilder) Href(href string) *EventBuilder {
@@ -50681,6 +53908,23 @@ func (builder *ExternalComputeResourceBuilder) ExternalHostProvider(attr *Extern
 
 	builder.externalComputeResource.SetExternalHostProvider(attr)
 	return builder
+}
+
+func (builder *ExternalComputeResourceBuilder) ExternalHostProviderBuilder(attrBuilder *ExternalHostProviderBuilder) *ExternalComputeResourceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalHostProvider(attr)
 }
 
 func (builder *ExternalComputeResourceBuilder) Id(attr string) *ExternalComputeResourceBuilder {
@@ -50785,6 +54029,23 @@ func (builder *ExternalDiscoveredHostBuilder) ExternalHostProvider(attr *Externa
 
 	builder.externalDiscoveredHost.SetExternalHostProvider(attr)
 	return builder
+}
+
+func (builder *ExternalDiscoveredHostBuilder) ExternalHostProviderBuilder(attrBuilder *ExternalHostProviderBuilder) *ExternalDiscoveredHostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalHostProvider(attr)
 }
 
 func (builder *ExternalDiscoveredHostBuilder) Id(attr string) *ExternalDiscoveredHostBuilder {
@@ -50909,6 +54170,23 @@ func (builder *ExternalHostBuilder) ExternalHostProvider(attr *ExternalHostProvi
 	return builder
 }
 
+func (builder *ExternalHostBuilder) ExternalHostProviderBuilder(attrBuilder *ExternalHostProviderBuilder) *ExternalHostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalHostProvider(attr)
+}
+
 func (builder *ExternalHostBuilder) Id(attr string) *ExternalHostBuilder {
 	if builder.err != nil {
 		return builder
@@ -51002,6 +54280,23 @@ func (builder *ExternalHostGroupBuilder) ExternalHostProvider(attr *ExternalHost
 
 	builder.externalHostGroup.SetExternalHostProvider(attr)
 	return builder
+}
+
+func (builder *ExternalHostGroupBuilder) ExternalHostProviderBuilder(attrBuilder *ExternalHostProviderBuilder) *ExternalHostGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalHostProvider(attr)
 }
 
 func (builder *ExternalHostGroupBuilder) Id(attr string) *ExternalHostGroupBuilder {
@@ -51102,6 +54397,26 @@ func (builder *ExternalHostProviderBuilder) CertificatesOfAny(anys ...Certificat
 	return builder
 }
 
+func (builder *ExternalHostProviderBuilder) CertificatesBuilderOfAny(anyBuilders ...CertificateBuilder) *ExternalHostProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CertificatesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ExternalHostProviderBuilder) Comment(attr string) *ExternalHostProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -51129,6 +54444,26 @@ func (builder *ExternalHostProviderBuilder) ComputeResourcesOfAny(anys ...Extern
 		builder.externalHostProvider.computeResources = new(ExternalComputeResourceSlice)
 	}
 	builder.externalHostProvider.computeResources.slice = append(builder.externalHostProvider.computeResources.slice, anys...)
+	return builder
+}
+
+func (builder *ExternalHostProviderBuilder) ComputeResourcesBuilderOfAny(anyBuilders ...ExternalComputeResourceBuilder) *ExternalHostProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ComputeResourcesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -51162,6 +54497,26 @@ func (builder *ExternalHostProviderBuilder) DiscoveredHostsOfAny(anys ...Externa
 	return builder
 }
 
+func (builder *ExternalHostProviderBuilder) DiscoveredHostsBuilderOfAny(anyBuilders ...ExternalDiscoveredHostBuilder) *ExternalHostProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiscoveredHostsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ExternalHostProviderBuilder) HostGroups(attr *ExternalHostGroupSlice) *ExternalHostProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -51183,6 +54538,26 @@ func (builder *ExternalHostProviderBuilder) HostGroupsOfAny(anys ...ExternalHost
 	return builder
 }
 
+func (builder *ExternalHostProviderBuilder) HostGroupsBuilderOfAny(anyBuilders ...ExternalHostGroupBuilder) *ExternalHostProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HostGroupsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ExternalHostProviderBuilder) Hosts(attr *HostSlice) *ExternalHostProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -51201,6 +54576,26 @@ func (builder *ExternalHostProviderBuilder) HostsOfAny(anys ...Host) *ExternalHo
 		builder.externalHostProvider.hosts = new(HostSlice)
 	}
 	builder.externalHostProvider.hosts.slice = append(builder.externalHostProvider.hosts.slice, anys...)
+	return builder
+}
+
+func (builder *ExternalHostProviderBuilder) HostsBuilderOfAny(anyBuilders ...HostBuilder) *ExternalHostProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HostsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -51249,6 +54644,26 @@ func (builder *ExternalHostProviderBuilder) PropertiesOfAny(anys ...Property) *E
 		builder.externalHostProvider.properties = new(PropertySlice)
 	}
 	builder.externalHostProvider.properties.slice = append(builder.externalHostProvider.properties.slice, anys...)
+	return builder
+}
+
+func (builder *ExternalHostProviderBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *ExternalHostProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -51338,6 +54753,23 @@ func (builder *ExternalNetworkProviderConfigurationBuilder) ExternalNetworkProvi
 	return builder
 }
 
+func (builder *ExternalNetworkProviderConfigurationBuilder) ExternalNetworkProviderBuilder(attrBuilder *ExternalProviderBuilder) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalNetworkProvider(attr)
+}
+
 func (builder *ExternalNetworkProviderConfigurationBuilder) Host(attr *Host) *ExternalNetworkProviderConfigurationBuilder {
 	if builder.err != nil {
 		return builder
@@ -51345,6 +54777,23 @@ func (builder *ExternalNetworkProviderConfigurationBuilder) Host(attr *Host) *Ex
 
 	builder.externalNetworkProviderConfiguration.SetHost(attr)
 	return builder
+}
+
+func (builder *ExternalNetworkProviderConfigurationBuilder) HostBuilder(attrBuilder *HostBuilder) *ExternalNetworkProviderConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *ExternalNetworkProviderConfigurationBuilder) Id(attr string) *ExternalNetworkProviderConfigurationBuilder {
@@ -51472,6 +54921,26 @@ func (builder *ExternalProviderBuilder) PropertiesOfAny(anys ...Property) *Exter
 	return builder
 }
 
+func (builder *ExternalProviderBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *ExternalProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ExternalProviderBuilder) RequiresAuthentication(attr bool) *ExternalProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -51540,6 +55009,23 @@ func (builder *ExternalVmImportBuilder) Cluster(attr *Cluster) *ExternalVmImport
 	return builder
 }
 
+func (builder *ExternalVmImportBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *ExternalVmImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
 func (builder *ExternalVmImportBuilder) CpuProfile(attr *CpuProfile) *ExternalVmImportBuilder {
 	if builder.err != nil {
 		return builder
@@ -51547,6 +55033,23 @@ func (builder *ExternalVmImportBuilder) CpuProfile(attr *CpuProfile) *ExternalVm
 
 	builder.externalVmImport.SetCpuProfile(attr)
 	return builder
+}
+
+func (builder *ExternalVmImportBuilder) CpuProfileBuilder(attrBuilder *CpuProfileBuilder) *ExternalVmImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CpuProfile(attr)
 }
 
 func (builder *ExternalVmImportBuilder) DriversIso(attr *File) *ExternalVmImportBuilder {
@@ -51558,6 +55061,23 @@ func (builder *ExternalVmImportBuilder) DriversIso(attr *File) *ExternalVmImport
 	return builder
 }
 
+func (builder *ExternalVmImportBuilder) DriversIsoBuilder(attrBuilder *FileBuilder) *ExternalVmImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DriversIso(attr)
+}
+
 func (builder *ExternalVmImportBuilder) Host(attr *Host) *ExternalVmImportBuilder {
 	if builder.err != nil {
 		return builder
@@ -51565,6 +55085,23 @@ func (builder *ExternalVmImportBuilder) Host(attr *Host) *ExternalVmImportBuilde
 
 	builder.externalVmImport.SetHost(attr)
 	return builder
+}
+
+func (builder *ExternalVmImportBuilder) HostBuilder(attrBuilder *HostBuilder) *ExternalVmImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *ExternalVmImportBuilder) Name(attr string) *ExternalVmImportBuilder {
@@ -51603,6 +55140,23 @@ func (builder *ExternalVmImportBuilder) Quota(attr *Quota) *ExternalVmImportBuil
 	return builder
 }
 
+func (builder *ExternalVmImportBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *ExternalVmImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
+}
+
 func (builder *ExternalVmImportBuilder) Sparse(attr bool) *ExternalVmImportBuilder {
 	if builder.err != nil {
 		return builder
@@ -51619,6 +55173,23 @@ func (builder *ExternalVmImportBuilder) StorageDomain(attr *StorageDomain) *Exte
 
 	builder.externalVmImport.SetStorageDomain(attr)
 	return builder
+}
+
+func (builder *ExternalVmImportBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *ExternalVmImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
 }
 
 func (builder *ExternalVmImportBuilder) Url(attr string) *ExternalVmImportBuilder {
@@ -51646,6 +55217,23 @@ func (builder *ExternalVmImportBuilder) Vm(attr *Vm) *ExternalVmImportBuilder {
 
 	builder.externalVmImport.SetVm(attr)
 	return builder
+}
+
+func (builder *ExternalVmImportBuilder) VmBuilder(attrBuilder *VmBuilder) *ExternalVmImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *ExternalVmImportBuilder) Href(href string) *ExternalVmImportBuilder {
@@ -51748,6 +55336,23 @@ func (builder *FencingPolicyBuilder) SkipIfConnectivityBroken(attr *SkipIfConnec
 	return builder
 }
 
+func (builder *FencingPolicyBuilder) SkipIfConnectivityBrokenBuilder(attrBuilder *SkipIfConnectivityBrokenBuilder) *FencingPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SkipIfConnectivityBroken(attr)
+}
+
 func (builder *FencingPolicyBuilder) SkipIfGlusterBricksUp(attr bool) *FencingPolicyBuilder {
 	if builder.err != nil {
 		return builder
@@ -51773,6 +55378,23 @@ func (builder *FencingPolicyBuilder) SkipIfSdActive(attr *SkipIfSdActive) *Fenci
 
 	builder.fencingPolicy.SetSkipIfSdActive(attr)
 	return builder
+}
+
+func (builder *FencingPolicyBuilder) SkipIfSdActiveBuilder(attrBuilder *SkipIfSdActiveBuilder) *FencingPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SkipIfSdActive(attr)
 }
 
 func (builder *FencingPolicyBuilder) Href(href string) *FencingPolicyBuilder {
@@ -51859,6 +55481,23 @@ func (builder *FileBuilder) StorageDomain(attr *StorageDomain) *FileBuilder {
 
 	builder.file.SetStorageDomain(attr)
 	return builder
+}
+
+func (builder *FileBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *FileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
 }
 
 func (builder *FileBuilder) Type(attr string) *FileBuilder {
@@ -51956,6 +55595,23 @@ func (builder *FilterBuilder) SchedulingPolicyUnit(attr *SchedulingPolicyUnit) *
 	return builder
 }
 
+func (builder *FilterBuilder) SchedulingPolicyUnitBuilder(attrBuilder *SchedulingPolicyUnitBuilder) *FilterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SchedulingPolicyUnit(attr)
+}
+
 func (builder *FilterBuilder) Href(href string) *FilterBuilder {
 	if builder.err != nil {
 		return builder
@@ -52015,6 +55671,23 @@ func (builder *FloppyBuilder) File(attr *File) *FloppyBuilder {
 	return builder
 }
 
+func (builder *FloppyBuilder) FileBuilder(attrBuilder *FileBuilder) *FloppyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.File(attr)
+}
+
 func (builder *FloppyBuilder) Id(attr string) *FloppyBuilder {
 	if builder.err != nil {
 		return builder
@@ -52031,6 +55704,23 @@ func (builder *FloppyBuilder) InstanceType(attr *InstanceType) *FloppyBuilder {
 
 	builder.floppy.SetInstanceType(attr)
 	return builder
+}
+
+func (builder *FloppyBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *FloppyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
 }
 
 func (builder *FloppyBuilder) Name(attr string) *FloppyBuilder {
@@ -52051,6 +55741,23 @@ func (builder *FloppyBuilder) Template(attr *Template) *FloppyBuilder {
 	return builder
 }
 
+func (builder *FloppyBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *FloppyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *FloppyBuilder) Vm(attr *Vm) *FloppyBuilder {
 	if builder.err != nil {
 		return builder
@@ -52058,6 +55765,23 @@ func (builder *FloppyBuilder) Vm(attr *Vm) *FloppyBuilder {
 
 	builder.floppy.SetVm(attr)
 	return builder
+}
+
+func (builder *FloppyBuilder) VmBuilder(attrBuilder *VmBuilder) *FloppyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *FloppyBuilder) Vms(attr *VmSlice) *FloppyBuilder {
@@ -52078,6 +55802,26 @@ func (builder *FloppyBuilder) VmsOfAny(anys ...Vm) *FloppyBuilder {
 		builder.floppy.vms = new(VmSlice)
 	}
 	builder.floppy.vms.slice = append(builder.floppy.vms.slice, anys...)
+	return builder
+}
+
+func (builder *FloppyBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *FloppyBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -52140,6 +55884,26 @@ func (builder *FopStatisticBuilder) StatisticsOfAny(anys ...Statistic) *FopStati
 		builder.fopStatistic.statistics = new(StatisticSlice)
 	}
 	builder.fopStatistic.statistics.slice = append(builder.fopStatistic.statistics.slice, anys...)
+	return builder
+}
+
+func (builder *FopStatisticBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *FopStatisticBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -52241,6 +56005,26 @@ func (builder *GlusterBrickBuilder) GlusterClientsOfAny(anys ...GlusterClient) *
 	return builder
 }
 
+func (builder *GlusterBrickBuilder) GlusterClientsBuilderOfAny(anyBuilders ...GlusterClientBuilder) *GlusterBrickBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GlusterClientsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *GlusterBrickBuilder) GlusterVolume(attr *GlusterVolume) *GlusterBrickBuilder {
 	if builder.err != nil {
 		return builder
@@ -52248,6 +56032,23 @@ func (builder *GlusterBrickBuilder) GlusterVolume(attr *GlusterVolume) *GlusterB
 
 	builder.glusterBrick.SetGlusterVolume(attr)
 	return builder
+}
+
+func (builder *GlusterBrickBuilder) GlusterVolumeBuilder(attrBuilder *GlusterVolumeBuilder) *GlusterBrickBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.GlusterVolume(attr)
 }
 
 func (builder *GlusterBrickBuilder) Id(attr string) *GlusterBrickBuilder {
@@ -52268,6 +56069,23 @@ func (builder *GlusterBrickBuilder) InstanceType(attr *InstanceType) *GlusterBri
 	return builder
 }
 
+func (builder *GlusterBrickBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *GlusterBrickBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *GlusterBrickBuilder) MemoryPools(attr *GlusterMemoryPoolSlice) *GlusterBrickBuilder {
 	if builder.err != nil {
 		return builder
@@ -52286,6 +56104,26 @@ func (builder *GlusterBrickBuilder) MemoryPoolsOfAny(anys ...GlusterMemoryPool) 
 		builder.glusterBrick.memoryPools = new(GlusterMemoryPoolSlice)
 	}
 	builder.glusterBrick.memoryPools.slice = append(builder.glusterBrick.memoryPools.slice, anys...)
+	return builder
+}
+
+func (builder *GlusterBrickBuilder) MemoryPoolsBuilderOfAny(anyBuilders ...GlusterMemoryPoolBuilder) *GlusterBrickBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.MemoryPoolsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -52355,6 +56193,26 @@ func (builder *GlusterBrickBuilder) StatisticsOfAny(anys ...Statistic) *GlusterB
 	return builder
 }
 
+func (builder *GlusterBrickBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *GlusterBrickBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *GlusterBrickBuilder) Status(attr GlusterBrickStatus) *GlusterBrickBuilder {
 	if builder.err != nil {
 		return builder
@@ -52373,6 +56231,23 @@ func (builder *GlusterBrickBuilder) Template(attr *Template) *GlusterBrickBuilde
 	return builder
 }
 
+func (builder *GlusterBrickBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *GlusterBrickBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *GlusterBrickBuilder) Vm(attr *Vm) *GlusterBrickBuilder {
 	if builder.err != nil {
 		return builder
@@ -52380,6 +56255,23 @@ func (builder *GlusterBrickBuilder) Vm(attr *Vm) *GlusterBrickBuilder {
 
 	builder.glusterBrick.SetVm(attr)
 	return builder
+}
+
+func (builder *GlusterBrickBuilder) VmBuilder(attrBuilder *VmBuilder) *GlusterBrickBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *GlusterBrickBuilder) Vms(attr *VmSlice) *GlusterBrickBuilder {
@@ -52400,6 +56292,26 @@ func (builder *GlusterBrickBuilder) VmsOfAny(anys ...Vm) *GlusterBrickBuilder {
 		builder.glusterBrick.vms = new(VmSlice)
 	}
 	builder.glusterBrick.vms.slice = append(builder.glusterBrick.vms.slice, anys...)
+	return builder
+}
+
+func (builder *GlusterBrickBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *GlusterBrickBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -52492,6 +56404,26 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) GlusterClientsOfAny(anys ...G
 	return builder
 }
 
+func (builder *GlusterBrickAdvancedDetailsBuilder) GlusterClientsBuilderOfAny(anyBuilders ...GlusterClientBuilder) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GlusterClientsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *GlusterBrickAdvancedDetailsBuilder) Id(attr string) *GlusterBrickAdvancedDetailsBuilder {
 	if builder.err != nil {
 		return builder
@@ -52508,6 +56440,23 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) InstanceType(attr *InstanceTy
 
 	builder.glusterBrickAdvancedDetails.SetInstanceType(attr)
 	return builder
+}
+
+func (builder *GlusterBrickAdvancedDetailsBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
 }
 
 func (builder *GlusterBrickAdvancedDetailsBuilder) MemoryPools(attr *GlusterMemoryPoolSlice) *GlusterBrickAdvancedDetailsBuilder {
@@ -52528,6 +56477,26 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) MemoryPoolsOfAny(anys ...Glus
 		builder.glusterBrickAdvancedDetails.memoryPools = new(GlusterMemoryPoolSlice)
 	}
 	builder.glusterBrickAdvancedDetails.memoryPools.slice = append(builder.glusterBrickAdvancedDetails.memoryPools.slice, anys...)
+	return builder
+}
+
+func (builder *GlusterBrickAdvancedDetailsBuilder) MemoryPoolsBuilderOfAny(anyBuilders ...GlusterMemoryPoolBuilder) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.MemoryPoolsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -52576,6 +56545,23 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) Template(attr *Template) *Glu
 	return builder
 }
 
+func (builder *GlusterBrickAdvancedDetailsBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *GlusterBrickAdvancedDetailsBuilder) Vm(attr *Vm) *GlusterBrickAdvancedDetailsBuilder {
 	if builder.err != nil {
 		return builder
@@ -52583,6 +56569,23 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) Vm(attr *Vm) *GlusterBrickAdv
 
 	builder.glusterBrickAdvancedDetails.SetVm(attr)
 	return builder
+}
+
+func (builder *GlusterBrickAdvancedDetailsBuilder) VmBuilder(attrBuilder *VmBuilder) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *GlusterBrickAdvancedDetailsBuilder) Vms(attr *VmSlice) *GlusterBrickAdvancedDetailsBuilder {
@@ -52603,6 +56606,26 @@ func (builder *GlusterBrickAdvancedDetailsBuilder) VmsOfAny(anys ...Vm) *Gluster
 		builder.glusterBrickAdvancedDetails.vms = new(VmSlice)
 	}
 	builder.glusterBrickAdvancedDetails.vms.slice = append(builder.glusterBrickAdvancedDetails.vms.slice, anys...)
+	return builder
+}
+
+func (builder *GlusterBrickAdvancedDetailsBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *GlusterBrickAdvancedDetailsBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -52656,6 +56679,26 @@ func (builder *GlusterBrickMemoryInfoBuilder) MemoryPoolsOfAny(anys ...GlusterMe
 		builder.glusterBrickMemoryInfo.memoryPools = new(GlusterMemoryPoolSlice)
 	}
 	builder.glusterBrickMemoryInfo.memoryPools.slice = append(builder.glusterBrickMemoryInfo.memoryPools.slice, anys...)
+	return builder
+}
+
+func (builder *GlusterBrickMemoryInfoBuilder) MemoryPoolsBuilderOfAny(anyBuilders ...GlusterMemoryPoolBuilder) *GlusterBrickMemoryInfoBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.MemoryPoolsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -52777,6 +56820,23 @@ func (builder *GlusterHookBuilder) Cluster(attr *Cluster) *GlusterHookBuilder {
 	return builder
 }
 
+func (builder *GlusterHookBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *GlusterHookBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
 func (builder *GlusterHookBuilder) Comment(attr string) *GlusterHookBuilder {
 	if builder.err != nil {
 		return builder
@@ -52876,6 +56936,26 @@ func (builder *GlusterHookBuilder) ServerHooksOfAny(anys ...GlusterServerHook) *
 		builder.glusterHook.serverHooks = new(GlusterServerHookSlice)
 	}
 	builder.glusterHook.serverHooks.slice = append(builder.glusterHook.serverHooks.slice, anys...)
+	return builder
+}
+
+func (builder *GlusterHookBuilder) ServerHooksBuilderOfAny(anyBuilders ...GlusterServerHookBuilder) *GlusterHookBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ServerHooksOfAny(*attr)
+	}
 	return builder
 }
 
@@ -53114,6 +57194,23 @@ func (builder *GlusterServerHookBuilder) Host(attr *Host) *GlusterServerHookBuil
 	return builder
 }
 
+func (builder *GlusterServerHookBuilder) HostBuilder(attrBuilder *HostBuilder) *GlusterServerHookBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *GlusterServerHookBuilder) Id(attr string) *GlusterServerHookBuilder {
 	if builder.err != nil {
 		return builder
@@ -53194,6 +57291,26 @@ func (builder *GlusterVolumeBuilder) BricksOfAny(anys ...GlusterBrick) *GlusterV
 	return builder
 }
 
+func (builder *GlusterVolumeBuilder) BricksBuilderOfAny(anyBuilders ...GlusterBrickBuilder) *GlusterVolumeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.BricksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *GlusterVolumeBuilder) Cluster(attr *Cluster) *GlusterVolumeBuilder {
 	if builder.err != nil {
 		return builder
@@ -53201,6 +57318,23 @@ func (builder *GlusterVolumeBuilder) Cluster(attr *Cluster) *GlusterVolumeBuilde
 
 	builder.glusterVolume.SetCluster(attr)
 	return builder
+}
+
+func (builder *GlusterVolumeBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *GlusterVolumeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *GlusterVolumeBuilder) Comment(attr string) *GlusterVolumeBuilder {
@@ -53269,6 +57403,26 @@ func (builder *GlusterVolumeBuilder) OptionsOfAny(anys ...Option) *GlusterVolume
 	return builder
 }
 
+func (builder *GlusterVolumeBuilder) OptionsBuilderOfAny(anyBuilders ...OptionBuilder) *GlusterVolumeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.OptionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *GlusterVolumeBuilder) RedundancyCount(attr int64) *GlusterVolumeBuilder {
 	if builder.err != nil {
 		return builder
@@ -53305,6 +57459,26 @@ func (builder *GlusterVolumeBuilder) StatisticsOfAny(anys ...Statistic) *Gluster
 		builder.glusterVolume.statistics = new(StatisticSlice)
 	}
 	builder.glusterVolume.statistics.slice = append(builder.glusterVolume.statistics.slice, anys...)
+	return builder
+}
+
+func (builder *GlusterVolumeBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *GlusterVolumeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -53406,6 +57580,26 @@ func (builder *GlusterVolumeProfileDetailsBuilder) BrickProfileDetailsOfAny(anys
 	return builder
 }
 
+func (builder *GlusterVolumeProfileDetailsBuilder) BrickProfileDetailsBuilderOfAny(anyBuilders ...BrickProfileDetailBuilder) *GlusterVolumeProfileDetailsBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.BrickProfileDetailsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *GlusterVolumeProfileDetailsBuilder) Comment(attr string) *GlusterVolumeProfileDetailsBuilder {
 	if builder.err != nil {
 		return builder
@@ -53460,6 +57654,26 @@ func (builder *GlusterVolumeProfileDetailsBuilder) NfsProfileDetailsOfAny(anys .
 		builder.glusterVolumeProfileDetails.nfsProfileDetails = new(NfsProfileDetailSlice)
 	}
 	builder.glusterVolumeProfileDetails.nfsProfileDetails.slice = append(builder.glusterVolumeProfileDetails.nfsProfileDetails.slice, anys...)
+	return builder
+}
+
+func (builder *GlusterVolumeProfileDetailsBuilder) NfsProfileDetailsBuilderOfAny(anyBuilders ...NfsProfileDetailBuilder) *GlusterVolumeProfileDetailsBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NfsProfileDetailsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -53581,6 +57795,23 @@ func (builder *GraphicsConsoleBuilder) InstanceType(attr *InstanceType) *Graphic
 	return builder
 }
 
+func (builder *GraphicsConsoleBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *GraphicsConsoleBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *GraphicsConsoleBuilder) Name(attr string) *GraphicsConsoleBuilder {
 	if builder.err != nil {
 		return builder
@@ -53617,6 +57848,23 @@ func (builder *GraphicsConsoleBuilder) Template(attr *Template) *GraphicsConsole
 	return builder
 }
 
+func (builder *GraphicsConsoleBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *GraphicsConsoleBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *GraphicsConsoleBuilder) TlsPort(attr int64) *GraphicsConsoleBuilder {
 	if builder.err != nil {
 		return builder
@@ -53633,6 +57881,23 @@ func (builder *GraphicsConsoleBuilder) Vm(attr *Vm) *GraphicsConsoleBuilder {
 
 	builder.graphicsConsole.SetVm(attr)
 	return builder
+}
+
+func (builder *GraphicsConsoleBuilder) VmBuilder(attrBuilder *VmBuilder) *GraphicsConsoleBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *GraphicsConsoleBuilder) Href(href string) *GraphicsConsoleBuilder {
@@ -53694,6 +57959,23 @@ func (builder *GroupBuilder) Domain(attr *Domain) *GroupBuilder {
 	return builder
 }
 
+func (builder *GroupBuilder) DomainBuilder(attrBuilder *DomainBuilder) *GroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Domain(attr)
+}
+
 func (builder *GroupBuilder) DomainEntryId(attr string) *GroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -53751,6 +58033,26 @@ func (builder *GroupBuilder) PermissionsOfAny(anys ...Permission) *GroupBuilder 
 	return builder
 }
 
+func (builder *GroupBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *GroupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *GroupBuilder) Roles(attr *RoleSlice) *GroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -53772,6 +58074,26 @@ func (builder *GroupBuilder) RolesOfAny(anys ...Role) *GroupBuilder {
 	return builder
 }
 
+func (builder *GroupBuilder) RolesBuilderOfAny(anyBuilders ...RoleBuilder) *GroupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.RolesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *GroupBuilder) Tags(attr *TagSlice) *GroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -53790,6 +58112,26 @@ func (builder *GroupBuilder) TagsOfAny(anys ...Tag) *GroupBuilder {
 		builder.group.tags = new(TagSlice)
 	}
 	builder.group.tags.slice = append(builder.group.tags.slice, anys...)
+	return builder
+}
+
+func (builder *GroupBuilder) TagsBuilderOfAny(anyBuilders ...TagBuilder) *GroupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.TagsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -53870,6 +58212,23 @@ func (builder *GuestOperatingSystemBuilder) Kernel(attr *Kernel) *GuestOperating
 	return builder
 }
 
+func (builder *GuestOperatingSystemBuilder) KernelBuilder(attrBuilder *KernelBuilder) *GuestOperatingSystemBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Kernel(attr)
+}
+
 func (builder *GuestOperatingSystemBuilder) Version(attr *Version) *GuestOperatingSystemBuilder {
 	if builder.err != nil {
 		return builder
@@ -53877,6 +58236,23 @@ func (builder *GuestOperatingSystemBuilder) Version(attr *Version) *GuestOperati
 
 	builder.guestOperatingSystem.SetVersion(attr)
 	return builder
+}
+
+func (builder *GuestOperatingSystemBuilder) VersionBuilder(attrBuilder *VersionBuilder) *GuestOperatingSystemBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
 }
 
 func (builder *GuestOperatingSystemBuilder) Href(href string) *GuestOperatingSystemBuilder {
@@ -54101,6 +58477,23 @@ func (builder *HookBuilder) Host(attr *Host) *HookBuilder {
 	return builder
 }
 
+func (builder *HookBuilder) HostBuilder(attrBuilder *HostBuilder) *HookBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *HookBuilder) Id(attr string) *HookBuilder {
 	if builder.err != nil {
 		return builder
@@ -54190,6 +58583,26 @@ func (builder *HostBuilder) AffinityLabelsOfAny(anys ...AffinityLabel) *HostBuil
 	return builder
 }
 
+func (builder *HostBuilder) AffinityLabelsBuilderOfAny(anyBuilders ...AffinityLabelBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AffinityLabelsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) Agents(attr *AgentSlice) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54211,6 +58624,26 @@ func (builder *HostBuilder) AgentsOfAny(anys ...Agent) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) AgentsBuilderOfAny(anyBuilders ...AgentBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AgentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) AutoNumaStatus(attr AutoNumaStatus) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54229,6 +58662,23 @@ func (builder *HostBuilder) Certificate(attr *Certificate) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) CertificateBuilder(attrBuilder *CertificateBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Certificate(attr)
+}
+
 func (builder *HostBuilder) Cluster(attr *Cluster) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54236,6 +58686,23 @@ func (builder *HostBuilder) Cluster(attr *Cluster) *HostBuilder {
 
 	builder.host.SetCluster(attr)
 	return builder
+}
+
+func (builder *HostBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *HostBuilder) Comment(attr string) *HostBuilder {
@@ -54256,6 +58723,23 @@ func (builder *HostBuilder) Cpu(attr *Cpu) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) CpuBuilder(attrBuilder *CpuBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *HostBuilder) Description(attr string) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54272,6 +58756,23 @@ func (builder *HostBuilder) DevicePassthrough(attr *HostDevicePassthrough) *Host
 
 	builder.host.SetDevicePassthrough(attr)
 	return builder
+}
+
+func (builder *HostBuilder) DevicePassthroughBuilder(attrBuilder *HostDevicePassthroughBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DevicePassthrough(attr)
 }
 
 func (builder *HostBuilder) Devices(attr *DeviceSlice) *HostBuilder {
@@ -54295,6 +58796,26 @@ func (builder *HostBuilder) DevicesOfAny(anys ...Device) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) DevicesBuilderOfAny(anyBuilders ...DeviceBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DevicesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) Display(attr *Display) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54304,6 +58825,23 @@ func (builder *HostBuilder) Display(attr *Display) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) DisplayBuilder(attrBuilder *DisplayBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Display(attr)
+}
+
 func (builder *HostBuilder) ExternalHostProvider(attr *ExternalHostProvider) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54311,6 +58849,23 @@ func (builder *HostBuilder) ExternalHostProvider(attr *ExternalHostProvider) *Ho
 
 	builder.host.SetExternalHostProvider(attr)
 	return builder
+}
+
+func (builder *HostBuilder) ExternalHostProviderBuilder(attrBuilder *ExternalHostProviderBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalHostProvider(attr)
 }
 
 func (builder *HostBuilder) ExternalNetworkProviderConfigurations(attr *ExternalNetworkProviderConfigurationSlice) *HostBuilder {
@@ -54334,6 +58889,26 @@ func (builder *HostBuilder) ExternalNetworkProviderConfigurationsOfAny(anys ...E
 	return builder
 }
 
+func (builder *HostBuilder) ExternalNetworkProviderConfigurationsBuilderOfAny(anyBuilders ...ExternalNetworkProviderConfigurationBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ExternalNetworkProviderConfigurationsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) ExternalStatus(attr ExternalStatus) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54350,6 +58925,23 @@ func (builder *HostBuilder) HardwareInformation(attr *HardwareInformation) *Host
 
 	builder.host.SetHardwareInformation(attr)
 	return builder
+}
+
+func (builder *HostBuilder) HardwareInformationBuilder(attrBuilder *HardwareInformationBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HardwareInformation(attr)
 }
 
 func (builder *HostBuilder) Hooks(attr *HookSlice) *HostBuilder {
@@ -54373,6 +58965,26 @@ func (builder *HostBuilder) HooksOfAny(anys ...Hook) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) HooksBuilderOfAny(anyBuilders ...HookBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HooksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) HostedEngine(attr *HostedEngine) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54380,6 +58992,23 @@ func (builder *HostBuilder) HostedEngine(attr *HostedEngine) *HostBuilder {
 
 	builder.host.SetHostedEngine(attr)
 	return builder
+}
+
+func (builder *HostBuilder) HostedEngineBuilder(attrBuilder *HostedEngineBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HostedEngine(attr)
 }
 
 func (builder *HostBuilder) Id(attr string) *HostBuilder {
@@ -54398,6 +59027,23 @@ func (builder *HostBuilder) Iscsi(attr *IscsiDetails) *HostBuilder {
 
 	builder.host.SetIscsi(attr)
 	return builder
+}
+
+func (builder *HostBuilder) IscsiBuilder(attrBuilder *IscsiDetailsBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Iscsi(attr)
 }
 
 func (builder *HostBuilder) KatelloErrata(attr *KatelloErratumSlice) *HostBuilder {
@@ -54421,6 +59067,26 @@ func (builder *HostBuilder) KatelloErrataOfAny(anys ...KatelloErratum) *HostBuil
 	return builder
 }
 
+func (builder *HostBuilder) KatelloErrataBuilderOfAny(anyBuilders ...KatelloErratumBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.KatelloErrataOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) KdumpStatus(attr KdumpStatus) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54439,6 +59105,23 @@ func (builder *HostBuilder) Ksm(attr *Ksm) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) KsmBuilder(attrBuilder *KsmBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ksm(attr)
+}
+
 func (builder *HostBuilder) LibvirtVersion(attr *Version) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54446,6 +59129,23 @@ func (builder *HostBuilder) LibvirtVersion(attr *Version) *HostBuilder {
 
 	builder.host.SetLibvirtVersion(attr)
 	return builder
+}
+
+func (builder *HostBuilder) LibvirtVersionBuilder(attrBuilder *VersionBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LibvirtVersion(attr)
 }
 
 func (builder *HostBuilder) MaxSchedulingMemory(attr int64) *HostBuilder {
@@ -54496,6 +59196,26 @@ func (builder *HostBuilder) NetworkAttachmentsOfAny(anys ...NetworkAttachment) *
 	return builder
 }
 
+func (builder *HostBuilder) NetworkAttachmentsBuilderOfAny(anyBuilders ...NetworkAttachmentBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworkAttachmentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) Nics(attr *HostNicSlice) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54514,6 +59234,26 @@ func (builder *HostBuilder) NicsOfAny(anys ...HostNic) *HostBuilder {
 		builder.host.nics = new(HostNicSlice)
 	}
 	builder.host.nics.slice = append(builder.host.nics.slice, anys...)
+	return builder
+}
+
+func (builder *HostBuilder) NicsBuilderOfAny(anyBuilders ...HostNicBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NicsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -54538,6 +59278,26 @@ func (builder *HostBuilder) NumaNodesOfAny(anys ...NumaNode) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) NumaNodesBuilderOfAny(anyBuilders ...NumaNodeBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NumaNodesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) NumaSupported(attr bool) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54554,6 +59314,23 @@ func (builder *HostBuilder) Os(attr *OperatingSystem) *HostBuilder {
 
 	builder.host.SetOs(attr)
 	return builder
+}
+
+func (builder *HostBuilder) OsBuilder(attrBuilder *OperatingSystemBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Os(attr)
 }
 
 func (builder *HostBuilder) OverrideIptables(attr bool) *HostBuilder {
@@ -54586,6 +59363,26 @@ func (builder *HostBuilder) PermissionsOfAny(anys ...Permission) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) Port(attr int64) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54602,6 +59399,23 @@ func (builder *HostBuilder) PowerManagement(attr *PowerManagement) *HostBuilder 
 
 	builder.host.SetPowerManagement(attr)
 	return builder
+}
+
+func (builder *HostBuilder) PowerManagementBuilder(attrBuilder *PowerManagementBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PowerManagement(attr)
 }
 
 func (builder *HostBuilder) Protocol(attr HostProtocol) *HostBuilder {
@@ -54631,6 +59445,23 @@ func (builder *HostBuilder) SeLinux(attr *SeLinux) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) SeLinuxBuilder(attrBuilder *SeLinuxBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SeLinux(attr)
+}
+
 func (builder *HostBuilder) Spm(attr *Spm) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54640,6 +59471,23 @@ func (builder *HostBuilder) Spm(attr *Spm) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) SpmBuilder(attrBuilder *SpmBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Spm(attr)
+}
+
 func (builder *HostBuilder) Ssh(attr *Ssh) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54647,6 +59495,23 @@ func (builder *HostBuilder) Ssh(attr *Ssh) *HostBuilder {
 
 	builder.host.SetSsh(attr)
 	return builder
+}
+
+func (builder *HostBuilder) SshBuilder(attrBuilder *SshBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ssh(attr)
 }
 
 func (builder *HostBuilder) Statistics(attr *StatisticSlice) *HostBuilder {
@@ -54667,6 +59532,26 @@ func (builder *HostBuilder) StatisticsOfAny(anys ...Statistic) *HostBuilder {
 		builder.host.statistics = new(StatisticSlice)
 	}
 	builder.host.statistics.slice = append(builder.host.statistics.slice, anys...)
+	return builder
+}
+
+func (builder *HostBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -54709,6 +59594,26 @@ func (builder *HostBuilder) StorageConnectionExtensionsOfAny(anys ...StorageConn
 	return builder
 }
 
+func (builder *HostBuilder) StorageConnectionExtensionsBuilderOfAny(anyBuilders ...StorageConnectionExtensionBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StorageConnectionExtensionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) Storages(attr *HostStorageSlice) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54730,6 +59635,26 @@ func (builder *HostBuilder) StoragesOfAny(anys ...HostStorage) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) StoragesBuilderOfAny(anyBuilders ...HostStorageBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StoragesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) Summary(attr *VmSummary) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54737,6 +59662,23 @@ func (builder *HostBuilder) Summary(attr *VmSummary) *HostBuilder {
 
 	builder.host.SetSummary(attr)
 	return builder
+}
+
+func (builder *HostBuilder) SummaryBuilder(attrBuilder *VmSummaryBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Summary(attr)
 }
 
 func (builder *HostBuilder) Tags(attr *TagSlice) *HostBuilder {
@@ -54760,6 +59702,26 @@ func (builder *HostBuilder) TagsOfAny(anys ...Tag) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) TagsBuilderOfAny(anyBuilders ...TagBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.TagsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) TransparentHugePages(attr *TransparentHugePages) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54767,6 +59729,23 @@ func (builder *HostBuilder) TransparentHugePages(attr *TransparentHugePages) *Ho
 
 	builder.host.SetTransparentHugePages(attr)
 	return builder
+}
+
+func (builder *HostBuilder) TransparentHugePagesBuilder(attrBuilder *TransparentHugePagesBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.TransparentHugePages(attr)
 }
 
 func (builder *HostBuilder) Type(attr HostType) *HostBuilder {
@@ -54799,6 +59778,26 @@ func (builder *HostBuilder) UnmanagedNetworksOfAny(anys ...UnmanagedNetwork) *Ho
 	return builder
 }
 
+func (builder *HostBuilder) UnmanagedNetworksBuilderOfAny(anyBuilders ...UnmanagedNetworkBuilder) *HostBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.UnmanagedNetworksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostBuilder) UpdateAvailable(attr bool) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -54815,6 +59814,23 @@ func (builder *HostBuilder) Version(attr *Version) *HostBuilder {
 
 	builder.host.SetVersion(attr)
 	return builder
+}
+
+func (builder *HostBuilder) VersionBuilder(attrBuilder *VersionBuilder) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
 }
 
 func (builder *HostBuilder) Href(href string) *HostBuilder {
@@ -54894,6 +59910,23 @@ func (builder *HostDeviceBuilder) Host(attr *Host) *HostDeviceBuilder {
 	return builder
 }
 
+func (builder *HostDeviceBuilder) HostBuilder(attrBuilder *HostBuilder) *HostDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *HostDeviceBuilder) Id(attr string) *HostDeviceBuilder {
 	if builder.err != nil {
 		return builder
@@ -54930,6 +59963,23 @@ func (builder *HostDeviceBuilder) ParentDevice(attr *HostDevice) *HostDeviceBuil
 	return builder
 }
 
+func (builder *HostDeviceBuilder) ParentDeviceBuilder(attrBuilder *HostDeviceBuilder) *HostDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ParentDevice(attr)
+}
+
 func (builder *HostDeviceBuilder) PhysicalFunction(attr *HostDevice) *HostDeviceBuilder {
 	if builder.err != nil {
 		return builder
@@ -54937,6 +59987,23 @@ func (builder *HostDeviceBuilder) PhysicalFunction(attr *HostDevice) *HostDevice
 
 	builder.hostDevice.SetPhysicalFunction(attr)
 	return builder
+}
+
+func (builder *HostDeviceBuilder) PhysicalFunctionBuilder(attrBuilder *HostDeviceBuilder) *HostDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PhysicalFunction(attr)
 }
 
 func (builder *HostDeviceBuilder) Placeholder(attr bool) *HostDeviceBuilder {
@@ -54957,6 +60024,23 @@ func (builder *HostDeviceBuilder) Product(attr *Product) *HostDeviceBuilder {
 	return builder
 }
 
+func (builder *HostDeviceBuilder) ProductBuilder(attrBuilder *ProductBuilder) *HostDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Product(attr)
+}
+
 func (builder *HostDeviceBuilder) Vendor(attr *Vendor) *HostDeviceBuilder {
 	if builder.err != nil {
 		return builder
@@ -54964,6 +60048,23 @@ func (builder *HostDeviceBuilder) Vendor(attr *Vendor) *HostDeviceBuilder {
 
 	builder.hostDevice.SetVendor(attr)
 	return builder
+}
+
+func (builder *HostDeviceBuilder) VendorBuilder(attrBuilder *VendorBuilder) *HostDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vendor(attr)
 }
 
 func (builder *HostDeviceBuilder) VirtualFunctions(attr int64) *HostDeviceBuilder {
@@ -54982,6 +60083,23 @@ func (builder *HostDeviceBuilder) Vm(attr *Vm) *HostDeviceBuilder {
 
 	builder.hostDevice.SetVm(attr)
 	return builder
+}
+
+func (builder *HostDeviceBuilder) VmBuilder(attrBuilder *VmBuilder) *HostDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *HostDeviceBuilder) Href(href string) *HostDeviceBuilder {
@@ -55084,6 +60202,23 @@ func (builder *HostNicBuilder) Bonding(attr *Bonding) *HostNicBuilder {
 	return builder
 }
 
+func (builder *HostNicBuilder) BondingBuilder(attrBuilder *BondingBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Bonding(attr)
+}
+
 func (builder *HostNicBuilder) BootProtocol(attr BootProtocol) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55147,6 +60282,23 @@ func (builder *HostNicBuilder) Host(attr *Host) *HostNicBuilder {
 	return builder
 }
 
+func (builder *HostNicBuilder) HostBuilder(attrBuilder *HostBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *HostNicBuilder) Id(attr string) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55165,6 +60317,23 @@ func (builder *HostNicBuilder) Ip(attr *Ip) *HostNicBuilder {
 	return builder
 }
 
+func (builder *HostNicBuilder) IpBuilder(attrBuilder *IpBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ip(attr)
+}
+
 func (builder *HostNicBuilder) Ipv6(attr *Ip) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55172,6 +60341,23 @@ func (builder *HostNicBuilder) Ipv6(attr *Ip) *HostNicBuilder {
 
 	builder.hostNic.SetIpv6(attr)
 	return builder
+}
+
+func (builder *HostNicBuilder) Ipv6Builder(attrBuilder *IpBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ipv6(attr)
 }
 
 func (builder *HostNicBuilder) Ipv6BootProtocol(attr BootProtocol) *HostNicBuilder {
@@ -55190,6 +60376,23 @@ func (builder *HostNicBuilder) Mac(attr *Mac) *HostNicBuilder {
 
 	builder.hostNic.SetMac(attr)
 	return builder
+}
+
+func (builder *HostNicBuilder) MacBuilder(attrBuilder *MacBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Mac(attr)
 }
 
 func (builder *HostNicBuilder) Mtu(attr int64) *HostNicBuilder {
@@ -55219,6 +60422,23 @@ func (builder *HostNicBuilder) Network(attr *Network) *HostNicBuilder {
 	return builder
 }
 
+func (builder *HostNicBuilder) NetworkBuilder(attrBuilder *NetworkBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Network(attr)
+}
+
 func (builder *HostNicBuilder) NetworkLabels(attr *NetworkLabelSlice) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55240,6 +60460,26 @@ func (builder *HostNicBuilder) NetworkLabelsOfAny(anys ...NetworkLabel) *HostNic
 	return builder
 }
 
+func (builder *HostNicBuilder) NetworkLabelsBuilderOfAny(anyBuilders ...NetworkLabelBuilder) *HostNicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworkLabelsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostNicBuilder) OverrideConfiguration(attr bool) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55256,6 +60496,23 @@ func (builder *HostNicBuilder) PhysicalFunction(attr *HostNic) *HostNicBuilder {
 
 	builder.hostNic.SetPhysicalFunction(attr)
 	return builder
+}
+
+func (builder *HostNicBuilder) PhysicalFunctionBuilder(attrBuilder *HostNicBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PhysicalFunction(attr)
 }
 
 func (builder *HostNicBuilder) Properties(attr *PropertySlice) *HostNicBuilder {
@@ -55279,6 +60536,26 @@ func (builder *HostNicBuilder) PropertiesOfAny(anys ...Property) *HostNicBuilder
 	return builder
 }
 
+func (builder *HostNicBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *HostNicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostNicBuilder) Qos(attr *Qos) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55286,6 +60563,23 @@ func (builder *HostNicBuilder) Qos(attr *Qos) *HostNicBuilder {
 
 	builder.hostNic.SetQos(attr)
 	return builder
+}
+
+func (builder *HostNicBuilder) QosBuilder(attrBuilder *QosBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Qos(attr)
 }
 
 func (builder *HostNicBuilder) Speed(attr int64) *HostNicBuilder {
@@ -55318,6 +60612,26 @@ func (builder *HostNicBuilder) StatisticsOfAny(anys ...Statistic) *HostNicBuilde
 	return builder
 }
 
+func (builder *HostNicBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *HostNicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *HostNicBuilder) Status(attr NicStatus) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55336,6 +60650,23 @@ func (builder *HostNicBuilder) VirtualFunctionsConfiguration(attr *HostNicVirtua
 	return builder
 }
 
+func (builder *HostNicBuilder) VirtualFunctionsConfigurationBuilder(attrBuilder *HostNicVirtualFunctionsConfigurationBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VirtualFunctionsConfiguration(attr)
+}
+
 func (builder *HostNicBuilder) Vlan(attr *Vlan) *HostNicBuilder {
 	if builder.err != nil {
 		return builder
@@ -55343,6 +60674,23 @@ func (builder *HostNicBuilder) Vlan(attr *Vlan) *HostNicBuilder {
 
 	builder.hostNic.SetVlan(attr)
 	return builder
+}
+
+func (builder *HostNicBuilder) VlanBuilder(attrBuilder *VlanBuilder) *HostNicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vlan(attr)
 }
 
 func (builder *HostNicBuilder) Href(href string) *HostNicBuilder {
@@ -55472,6 +60820,23 @@ func (builder *HostStorageBuilder) Host(attr *Host) *HostStorageBuilder {
 	return builder
 }
 
+func (builder *HostStorageBuilder) HostBuilder(attrBuilder *HostBuilder) *HostStorageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *HostStorageBuilder) Id(attr string) *HostStorageBuilder {
 	if builder.err != nil {
 		return builder
@@ -55499,6 +60864,26 @@ func (builder *HostStorageBuilder) LogicalUnitsOfAny(anys ...LogicalUnit) *HostS
 		builder.hostStorage.logicalUnits = new(LogicalUnitSlice)
 	}
 	builder.hostStorage.logicalUnits.slice = append(builder.hostStorage.logicalUnits.slice, anys...)
+	return builder
+}
+
+func (builder *HostStorageBuilder) LogicalUnitsBuilderOfAny(anyBuilders ...LogicalUnitBuilder) *HostStorageBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.LogicalUnitsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -55635,6 +61020,23 @@ func (builder *HostStorageBuilder) VolumeGroup(attr *VolumeGroup) *HostStorageBu
 
 	builder.hostStorage.SetVolumeGroup(attr)
 	return builder
+}
+
+func (builder *HostStorageBuilder) VolumeGroupBuilder(attrBuilder *VolumeGroupBuilder) *HostStorageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VolumeGroup(attr)
 }
 
 func (builder *HostStorageBuilder) Href(href string) *HostStorageBuilder {
@@ -55954,6 +61356,23 @@ func (builder *ImageBuilder) StorageDomain(attr *StorageDomain) *ImageBuilder {
 	return builder
 }
 
+func (builder *ImageBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *ImageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
 func (builder *ImageBuilder) Type(attr ImageFileType) *ImageBuilder {
 	if builder.err != nil {
 		return builder
@@ -56040,6 +61459,23 @@ func (builder *ImageTransferBuilder) Disk(attr *Disk) *ImageTransferBuilder {
 	return builder
 }
 
+func (builder *ImageTransferBuilder) DiskBuilder(attrBuilder *DiskBuilder) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Disk(attr)
+}
+
 func (builder *ImageTransferBuilder) Host(attr *Host) *ImageTransferBuilder {
 	if builder.err != nil {
 		return builder
@@ -56047,6 +61483,23 @@ func (builder *ImageTransferBuilder) Host(attr *Host) *ImageTransferBuilder {
 
 	builder.imageTransfer.SetHost(attr)
 	return builder
+}
+
+func (builder *ImageTransferBuilder) HostBuilder(attrBuilder *HostBuilder) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *ImageTransferBuilder) Id(attr string) *ImageTransferBuilder {
@@ -56065,6 +61518,23 @@ func (builder *ImageTransferBuilder) Image(attr *Image) *ImageTransferBuilder {
 
 	builder.imageTransfer.SetImage(attr)
 	return builder
+}
+
+func (builder *ImageTransferBuilder) ImageBuilder(attrBuilder *ImageBuilder) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Image(attr)
 }
 
 func (builder *ImageTransferBuilder) Name(attr string) *ImageTransferBuilder {
@@ -56110,6 +61580,23 @@ func (builder *ImageTransferBuilder) Snapshot(attr *DiskSnapshot) *ImageTransfer
 
 	builder.imageTransfer.SetSnapshot(attr)
 	return builder
+}
+
+func (builder *ImageTransferBuilder) SnapshotBuilder(attrBuilder *DiskSnapshotBuilder) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Snapshot(attr)
 }
 
 func (builder *ImageTransferBuilder) TransferUrl(attr string) *ImageTransferBuilder {
@@ -56189,6 +61676,23 @@ func (builder *InitializationBuilder) CloudInit(attr *CloudInit) *Initialization
 	return builder
 }
 
+func (builder *InitializationBuilder) CloudInitBuilder(attrBuilder *CloudInitBuilder) *InitializationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CloudInit(attr)
+}
+
 func (builder *InitializationBuilder) Configuration(attr *Configuration) *InitializationBuilder {
 	if builder.err != nil {
 		return builder
@@ -56196,6 +61700,23 @@ func (builder *InitializationBuilder) Configuration(attr *Configuration) *Initia
 
 	builder.initialization.SetConfiguration(attr)
 	return builder
+}
+
+func (builder *InitializationBuilder) ConfigurationBuilder(attrBuilder *ConfigurationBuilder) *InitializationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Configuration(attr)
 }
 
 func (builder *InitializationBuilder) CustomScript(attr string) *InitializationBuilder {
@@ -56270,6 +61791,26 @@ func (builder *InitializationBuilder) NicConfigurationsOfAny(anys ...NicConfigur
 		builder.initialization.nicConfigurations = new(NicConfigurationSlice)
 	}
 	builder.initialization.nicConfigurations.slice = append(builder.initialization.nicConfigurations.slice, anys...)
+	return builder
+}
+
+func (builder *InitializationBuilder) NicConfigurationsBuilderOfAny(anyBuilders ...NicConfigurationBuilder) *InitializationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NicConfigurationsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -56404,6 +61945,23 @@ func (builder *InstanceTypeBuilder) Bios(attr *Bios) *InstanceTypeBuilder {
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) BiosBuilder(attrBuilder *BiosBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Bios(attr)
+}
+
 func (builder *InstanceTypeBuilder) Cdroms(attr *CdromSlice) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56425,6 +61983,26 @@ func (builder *InstanceTypeBuilder) CdromsOfAny(anys ...Cdrom) *InstanceTypeBuil
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) CdromsBuilderOfAny(anyBuilders ...CdromBuilder) *InstanceTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CdromsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) Cluster(attr *Cluster) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56432,6 +62010,23 @@ func (builder *InstanceTypeBuilder) Cluster(attr *Cluster) *InstanceTypeBuilder 
 
 	builder.instanceType.SetCluster(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *InstanceTypeBuilder) Comment(attr string) *InstanceTypeBuilder {
@@ -56452,6 +62047,23 @@ func (builder *InstanceTypeBuilder) Console(attr *Console) *InstanceTypeBuilder 
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) ConsoleBuilder(attrBuilder *ConsoleBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Console(attr)
+}
+
 func (builder *InstanceTypeBuilder) Cpu(attr *Cpu) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56461,6 +62073,23 @@ func (builder *InstanceTypeBuilder) Cpu(attr *Cpu) *InstanceTypeBuilder {
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) CpuBuilder(attrBuilder *CpuBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *InstanceTypeBuilder) CpuProfile(attr *CpuProfile) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56468,6 +62097,23 @@ func (builder *InstanceTypeBuilder) CpuProfile(attr *CpuProfile) *InstanceTypeBu
 
 	builder.instanceType.SetCpuProfile(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) CpuProfileBuilder(attrBuilder *CpuProfileBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CpuProfile(attr)
 }
 
 func (builder *InstanceTypeBuilder) CpuShares(attr int64) *InstanceTypeBuilder {
@@ -56495,6 +62141,23 @@ func (builder *InstanceTypeBuilder) CustomCompatibilityVersion(attr *Version) *I
 
 	builder.instanceType.SetCustomCompatibilityVersion(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) CustomCompatibilityVersionBuilder(attrBuilder *VersionBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CustomCompatibilityVersion(attr)
 }
 
 func (builder *InstanceTypeBuilder) CustomCpuModel(attr string) *InstanceTypeBuilder {
@@ -56533,6 +62196,26 @@ func (builder *InstanceTypeBuilder) CustomPropertiesOfAny(anys ...CustomProperty
 		builder.instanceType.customProperties = new(CustomPropertySlice)
 	}
 	builder.instanceType.customProperties.slice = append(builder.instanceType.customProperties.slice, anys...)
+	return builder
+}
+
+func (builder *InstanceTypeBuilder) CustomPropertiesBuilderOfAny(anyBuilders ...CustomPropertyBuilder) *InstanceTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CustomPropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -56575,6 +62258,26 @@ func (builder *InstanceTypeBuilder) DiskAttachmentsOfAny(anys ...DiskAttachment)
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) DiskAttachmentsBuilderOfAny(anyBuilders ...DiskAttachmentBuilder) *InstanceTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiskAttachmentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) Display(attr *Display) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56584,6 +62287,23 @@ func (builder *InstanceTypeBuilder) Display(attr *Display) *InstanceTypeBuilder 
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) DisplayBuilder(attrBuilder *DisplayBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Display(attr)
+}
+
 func (builder *InstanceTypeBuilder) Domain(attr *Domain) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56591,6 +62311,23 @@ func (builder *InstanceTypeBuilder) Domain(attr *Domain) *InstanceTypeBuilder {
 
 	builder.instanceType.SetDomain(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) DomainBuilder(attrBuilder *DomainBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Domain(attr)
 }
 
 func (builder *InstanceTypeBuilder) GraphicsConsoles(attr *GraphicsConsoleSlice) *InstanceTypeBuilder {
@@ -56614,6 +62351,26 @@ func (builder *InstanceTypeBuilder) GraphicsConsolesOfAny(anys ...GraphicsConsol
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) GraphicsConsolesBuilderOfAny(anyBuilders ...GraphicsConsoleBuilder) *InstanceTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GraphicsConsolesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) HighAvailability(attr *HighAvailability) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56621,6 +62378,23 @@ func (builder *InstanceTypeBuilder) HighAvailability(attr *HighAvailability) *In
 
 	builder.instanceType.SetHighAvailability(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) HighAvailabilityBuilder(attrBuilder *HighAvailabilityBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HighAvailability(attr)
 }
 
 func (builder *InstanceTypeBuilder) Id(attr string) *InstanceTypeBuilder {
@@ -56641,6 +62415,23 @@ func (builder *InstanceTypeBuilder) Initialization(attr *Initialization) *Instan
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) InitializationBuilder(attrBuilder *InitializationBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Initialization(attr)
+}
+
 func (builder *InstanceTypeBuilder) Io(attr *Io) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56648,6 +62439,23 @@ func (builder *InstanceTypeBuilder) Io(attr *Io) *InstanceTypeBuilder {
 
 	builder.instanceType.SetIo(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) IoBuilder(attrBuilder *IoBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Io(attr)
 }
 
 func (builder *InstanceTypeBuilder) LargeIcon(attr *Icon) *InstanceTypeBuilder {
@@ -56659,6 +62467,23 @@ func (builder *InstanceTypeBuilder) LargeIcon(attr *Icon) *InstanceTypeBuilder {
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) LargeIconBuilder(attrBuilder *IconBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LargeIcon(attr)
+}
+
 func (builder *InstanceTypeBuilder) Lease(attr *StorageDomainLease) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56666,6 +62491,23 @@ func (builder *InstanceTypeBuilder) Lease(attr *StorageDomainLease) *InstanceTyp
 
 	builder.instanceType.SetLease(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) LeaseBuilder(attrBuilder *StorageDomainLeaseBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Lease(attr)
 }
 
 func (builder *InstanceTypeBuilder) Memory(attr int64) *InstanceTypeBuilder {
@@ -56686,6 +62528,23 @@ func (builder *InstanceTypeBuilder) MemoryPolicy(attr *MemoryPolicy) *InstanceTy
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) MemoryPolicyBuilder(attrBuilder *MemoryPolicyBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.MemoryPolicy(attr)
+}
+
 func (builder *InstanceTypeBuilder) Migration(attr *MigrationOptions) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56693,6 +62552,23 @@ func (builder *InstanceTypeBuilder) Migration(attr *MigrationOptions) *InstanceT
 
 	builder.instanceType.SetMigration(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) MigrationBuilder(attrBuilder *MigrationOptionsBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Migration(attr)
 }
 
 func (builder *InstanceTypeBuilder) MigrationDowntime(attr int64) *InstanceTypeBuilder {
@@ -56734,6 +62610,26 @@ func (builder *InstanceTypeBuilder) NicsOfAny(anys ...Nic) *InstanceTypeBuilder 
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) NicsBuilderOfAny(anyBuilders ...NicBuilder) *InstanceTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NicsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) Origin(attr string) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56750,6 +62646,23 @@ func (builder *InstanceTypeBuilder) Os(attr *OperatingSystem) *InstanceTypeBuild
 
 	builder.instanceType.SetOs(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) OsBuilder(attrBuilder *OperatingSystemBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Os(attr)
 }
 
 func (builder *InstanceTypeBuilder) Permissions(attr *PermissionSlice) *InstanceTypeBuilder {
@@ -56773,6 +62686,26 @@ func (builder *InstanceTypeBuilder) PermissionsOfAny(anys ...Permission) *Instan
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *InstanceTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) PlacementPolicy(attr *VmPlacementPolicy) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56780,6 +62713,23 @@ func (builder *InstanceTypeBuilder) PlacementPolicy(attr *VmPlacementPolicy) *In
 
 	builder.instanceType.SetPlacementPolicy(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) PlacementPolicyBuilder(attrBuilder *VmPlacementPolicyBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PlacementPolicy(attr)
 }
 
 func (builder *InstanceTypeBuilder) Quota(attr *Quota) *InstanceTypeBuilder {
@@ -56791,6 +62741,23 @@ func (builder *InstanceTypeBuilder) Quota(attr *Quota) *InstanceTypeBuilder {
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
+}
+
 func (builder *InstanceTypeBuilder) RngDevice(attr *RngDevice) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56798,6 +62765,23 @@ func (builder *InstanceTypeBuilder) RngDevice(attr *RngDevice) *InstanceTypeBuil
 
 	builder.instanceType.SetRngDevice(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) RngDeviceBuilder(attrBuilder *RngDeviceBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.RngDevice(attr)
 }
 
 func (builder *InstanceTypeBuilder) SerialNumber(attr *SerialNumber) *InstanceTypeBuilder {
@@ -56809,6 +62793,23 @@ func (builder *InstanceTypeBuilder) SerialNumber(attr *SerialNumber) *InstanceTy
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) SerialNumberBuilder(attrBuilder *SerialNumberBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SerialNumber(attr)
+}
+
 func (builder *InstanceTypeBuilder) SmallIcon(attr *Icon) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56816,6 +62817,23 @@ func (builder *InstanceTypeBuilder) SmallIcon(attr *Icon) *InstanceTypeBuilder {
 
 	builder.instanceType.SetSmallIcon(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) SmallIconBuilder(attrBuilder *IconBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SmallIcon(attr)
 }
 
 func (builder *InstanceTypeBuilder) SoundcardEnabled(attr bool) *InstanceTypeBuilder {
@@ -56834,6 +62852,23 @@ func (builder *InstanceTypeBuilder) Sso(attr *Sso) *InstanceTypeBuilder {
 
 	builder.instanceType.SetSso(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) SsoBuilder(attrBuilder *SsoBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Sso(attr)
 }
 
 func (builder *InstanceTypeBuilder) StartPaused(attr bool) *InstanceTypeBuilder {
@@ -56872,6 +62907,23 @@ func (builder *InstanceTypeBuilder) StorageDomain(attr *StorageDomain) *Instance
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
 func (builder *InstanceTypeBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56902,6 +62954,26 @@ func (builder *InstanceTypeBuilder) TagsOfAny(anys ...Tag) *InstanceTypeBuilder 
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) TagsBuilderOfAny(anyBuilders ...TagBuilder) *InstanceTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.TagsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) TimeZone(attr *TimeZone) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56909,6 +62981,23 @@ func (builder *InstanceTypeBuilder) TimeZone(attr *TimeZone) *InstanceTypeBuilde
 
 	builder.instanceType.SetTimeZone(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.TimeZone(attr)
 }
 
 func (builder *InstanceTypeBuilder) TunnelMigration(attr bool) *InstanceTypeBuilder {
@@ -56938,6 +63027,23 @@ func (builder *InstanceTypeBuilder) Usb(attr *Usb) *InstanceTypeBuilder {
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) UsbBuilder(attrBuilder *UsbBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Usb(attr)
+}
+
 func (builder *InstanceTypeBuilder) Version(attr *TemplateVersion) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56945,6 +63051,23 @@ func (builder *InstanceTypeBuilder) Version(attr *TemplateVersion) *InstanceType
 
 	builder.instanceType.SetVersion(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) VersionBuilder(attrBuilder *TemplateVersionBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
 }
 
 func (builder *InstanceTypeBuilder) VirtioScsi(attr *VirtioScsi) *InstanceTypeBuilder {
@@ -56956,6 +63079,23 @@ func (builder *InstanceTypeBuilder) VirtioScsi(attr *VirtioScsi) *InstanceTypeBu
 	return builder
 }
 
+func (builder *InstanceTypeBuilder) VirtioScsiBuilder(attrBuilder *VirtioScsiBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VirtioScsi(attr)
+}
+
 func (builder *InstanceTypeBuilder) Vm(attr *Vm) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -56963,6 +63103,23 @@ func (builder *InstanceTypeBuilder) Vm(attr *Vm) *InstanceTypeBuilder {
 
 	builder.instanceType.SetVm(attr)
 	return builder
+}
+
+func (builder *InstanceTypeBuilder) VmBuilder(attrBuilder *VmBuilder) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *InstanceTypeBuilder) Watchdogs(attr *WatchdogSlice) *InstanceTypeBuilder {
@@ -56983,6 +63140,26 @@ func (builder *InstanceTypeBuilder) WatchdogsOfAny(anys ...Watchdog) *InstanceTy
 		builder.instanceType.watchdogs = new(WatchdogSlice)
 	}
 	builder.instanceType.watchdogs.slice = append(builder.instanceType.watchdogs.slice, anys...)
+	return builder
+}
+
+func (builder *InstanceTypeBuilder) WatchdogsBuilderOfAny(anyBuilders ...WatchdogBuilder) *InstanceTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.WatchdogsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -57145,6 +63322,23 @@ func (builder *IpAddressAssignmentBuilder) Ip(attr *Ip) *IpAddressAssignmentBuil
 	return builder
 }
 
+func (builder *IpAddressAssignmentBuilder) IpBuilder(attrBuilder *IpBuilder) *IpAddressAssignmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ip(attr)
+}
+
 func (builder *IpAddressAssignmentBuilder) Href(href string) *IpAddressAssignmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -57195,6 +63389,23 @@ func (builder *IscsiBondBuilder) DataCenter(attr *DataCenter) *IscsiBondBuilder 
 	return builder
 }
 
+func (builder *IscsiBondBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *IscsiBondBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
+}
+
 func (builder *IscsiBondBuilder) Description(attr string) *IscsiBondBuilder {
 	if builder.err != nil {
 		return builder
@@ -57243,6 +63454,26 @@ func (builder *IscsiBondBuilder) NetworksOfAny(anys ...Network) *IscsiBondBuilde
 	return builder
 }
 
+func (builder *IscsiBondBuilder) NetworksBuilderOfAny(anyBuilders ...NetworkBuilder) *IscsiBondBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *IscsiBondBuilder) StorageConnections(attr *StorageConnectionSlice) *IscsiBondBuilder {
 	if builder.err != nil {
 		return builder
@@ -57261,6 +63492,26 @@ func (builder *IscsiBondBuilder) StorageConnectionsOfAny(anys ...StorageConnecti
 		builder.iscsiBond.storageConnections = new(StorageConnectionSlice)
 	}
 	builder.iscsiBond.storageConnections.slice = append(builder.iscsiBond.storageConnections.slice, anys...)
+	return builder
+}
+
+func (builder *IscsiBondBuilder) StorageConnectionsBuilderOfAny(anyBuilders ...StorageConnectionBuilder) *IscsiBondBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StorageConnectionsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -57562,6 +63813,23 @@ func (builder *JobBuilder) Owner(attr *User) *JobBuilder {
 	return builder
 }
 
+func (builder *JobBuilder) OwnerBuilder(attrBuilder *UserBuilder) *JobBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Owner(attr)
+}
+
 func (builder *JobBuilder) StartTime(attr time.Time) *JobBuilder {
 	if builder.err != nil {
 		return builder
@@ -57598,6 +63866,26 @@ func (builder *JobBuilder) StepsOfAny(anys ...Step) *JobBuilder {
 		builder.job.steps = new(StepSlice)
 	}
 	builder.job.steps.slice = append(builder.job.steps.slice, anys...)
+	return builder
+}
+
+func (builder *JobBuilder) StepsBuilderOfAny(anyBuilders ...StepBuilder) *JobBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StepsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -57660,6 +63948,23 @@ func (builder *KatelloErratumBuilder) Host(attr *Host) *KatelloErratumBuilder {
 	return builder
 }
 
+func (builder *KatelloErratumBuilder) HostBuilder(attrBuilder *HostBuilder) *KatelloErratumBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *KatelloErratumBuilder) Id(attr string) *KatelloErratumBuilder {
 	if builder.err != nil {
 		return builder
@@ -57705,6 +64010,26 @@ func (builder *KatelloErratumBuilder) PackagesOfAny(anys ...Package) *KatelloErr
 		builder.katelloErratum.packages = new(PackageSlice)
 	}
 	builder.katelloErratum.packages.slice = append(builder.katelloErratum.packages.slice, anys...)
+	return builder
+}
+
+func (builder *KatelloErratumBuilder) PackagesBuilderOfAny(anyBuilders ...PackageBuilder) *KatelloErratumBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PackagesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -57762,6 +64087,23 @@ func (builder *KatelloErratumBuilder) Vm(attr *Vm) *KatelloErratumBuilder {
 	return builder
 }
 
+func (builder *KatelloErratumBuilder) VmBuilder(attrBuilder *VmBuilder) *KatelloErratumBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
+}
+
 func (builder *KatelloErratumBuilder) Href(href string) *KatelloErratumBuilder {
 	if builder.err != nil {
 		return builder
@@ -57801,6 +64143,23 @@ func (builder *KernelBuilder) Version(attr *Version) *KernelBuilder {
 
 	builder.kernel.SetVersion(attr)
 	return builder
+}
+
+func (builder *KernelBuilder) VersionBuilder(attrBuilder *VersionBuilder) *KernelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
 }
 
 func (builder *KernelBuilder) Href(href string) *KernelBuilder {
@@ -57948,6 +64307,26 @@ func (builder *LinkLayerDiscoveryProtocolElementBuilder) PropertiesOfAny(anys ..
 		builder.linkLayerDiscoveryProtocolElement.properties = new(PropertySlice)
 	}
 	builder.linkLayerDiscoveryProtocolElement.properties.slice = append(builder.linkLayerDiscoveryProtocolElement.properties.slice, anys...)
+	return builder
+}
+
+func (builder *LinkLayerDiscoveryProtocolElementBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *LinkLayerDiscoveryProtocolElementBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -58320,6 +64699,26 @@ func (builder *MacPoolBuilder) RangesOfAny(anys ...Range) *MacPoolBuilder {
 	return builder
 }
 
+func (builder *MacPoolBuilder) RangesBuilderOfAny(anyBuilders ...RangeBuilder) *MacPoolBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.RangesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *MacPoolBuilder) Href(href string) *MacPoolBuilder {
 	if builder.err != nil {
 		return builder
@@ -58429,6 +64828,23 @@ func (builder *MemoryPolicyBuilder) OverCommit(attr *MemoryOverCommit) *MemoryPo
 	return builder
 }
 
+func (builder *MemoryPolicyBuilder) OverCommitBuilder(attrBuilder *MemoryOverCommitBuilder) *MemoryPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OverCommit(attr)
+}
+
 func (builder *MemoryPolicyBuilder) TransparentHugePages(attr *TransparentHugePages) *MemoryPolicyBuilder {
 	if builder.err != nil {
 		return builder
@@ -58436,6 +64852,23 @@ func (builder *MemoryPolicyBuilder) TransparentHugePages(attr *TransparentHugePa
 
 	builder.memoryPolicy.SetTransparentHugePages(attr)
 	return builder
+}
+
+func (builder *MemoryPolicyBuilder) TransparentHugePagesBuilder(attrBuilder *TransparentHugePagesBuilder) *MemoryPolicyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.TransparentHugePages(attr)
 }
 
 func (builder *MemoryPolicyBuilder) Href(href string) *MemoryPolicyBuilder {
@@ -58579,6 +65012,23 @@ func (builder *MigrationOptionsBuilder) Bandwidth(attr *MigrationBandwidth) *Mig
 	return builder
 }
 
+func (builder *MigrationOptionsBuilder) BandwidthBuilder(attrBuilder *MigrationBandwidthBuilder) *MigrationOptionsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Bandwidth(attr)
+}
+
 func (builder *MigrationOptionsBuilder) Compressed(attr InheritableBoolean) *MigrationOptionsBuilder {
 	if builder.err != nil {
 		return builder
@@ -58595,6 +65045,23 @@ func (builder *MigrationOptionsBuilder) Policy(attr *MigrationPolicy) *Migration
 
 	builder.migrationOptions.SetPolicy(attr)
 	return builder
+}
+
+func (builder *MigrationOptionsBuilder) PolicyBuilder(attrBuilder *MigrationPolicyBuilder) *MigrationOptionsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Policy(attr)
 }
 
 func (builder *MigrationOptionsBuilder) Href(href string) *MigrationOptionsBuilder {
@@ -58706,6 +65173,23 @@ func (builder *NetworkBuilder) Cluster(attr *Cluster) *NetworkBuilder {
 	return builder
 }
 
+func (builder *NetworkBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
 func (builder *NetworkBuilder) Comment(attr string) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -58722,6 +65206,23 @@ func (builder *NetworkBuilder) DataCenter(attr *DataCenter) *NetworkBuilder {
 
 	builder.network.SetDataCenter(attr)
 	return builder
+}
+
+func (builder *NetworkBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
 }
 
 func (builder *NetworkBuilder) Description(attr string) *NetworkBuilder {
@@ -58751,6 +65252,23 @@ func (builder *NetworkBuilder) DnsResolverConfiguration(attr *DnsResolverConfigu
 	return builder
 }
 
+func (builder *NetworkBuilder) DnsResolverConfigurationBuilder(attrBuilder *DnsResolverConfigurationBuilder) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DnsResolverConfiguration(attr)
+}
+
 func (builder *NetworkBuilder) ExternalProvider(attr *OpenStackNetworkProvider) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -58760,6 +65278,23 @@ func (builder *NetworkBuilder) ExternalProvider(attr *OpenStackNetworkProvider) 
 	return builder
 }
 
+func (builder *NetworkBuilder) ExternalProviderBuilder(attrBuilder *OpenStackNetworkProviderBuilder) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalProvider(attr)
+}
+
 func (builder *NetworkBuilder) ExternalProviderPhysicalNetwork(attr *Network) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -58767,6 +65302,23 @@ func (builder *NetworkBuilder) ExternalProviderPhysicalNetwork(attr *Network) *N
 
 	builder.network.SetExternalProviderPhysicalNetwork(attr)
 	return builder
+}
+
+func (builder *NetworkBuilder) ExternalProviderPhysicalNetworkBuilder(attrBuilder *NetworkBuilder) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalProviderPhysicalNetwork(attr)
 }
 
 func (builder *NetworkBuilder) Id(attr string) *NetworkBuilder {
@@ -58785,6 +65337,23 @@ func (builder *NetworkBuilder) Ip(attr *Ip) *NetworkBuilder {
 
 	builder.network.SetIp(attr)
 	return builder
+}
+
+func (builder *NetworkBuilder) IpBuilder(attrBuilder *IpBuilder) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ip(attr)
 }
 
 func (builder *NetworkBuilder) Mtu(attr int64) *NetworkBuilder {
@@ -58826,6 +65395,26 @@ func (builder *NetworkBuilder) NetworkLabelsOfAny(anys ...NetworkLabel) *Network
 	return builder
 }
 
+func (builder *NetworkBuilder) NetworkLabelsBuilderOfAny(anyBuilders ...NetworkLabelBuilder) *NetworkBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworkLabelsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NetworkBuilder) Permissions(attr *PermissionSlice) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -58847,6 +65436,26 @@ func (builder *NetworkBuilder) PermissionsOfAny(anys ...Permission) *NetworkBuil
 	return builder
 }
 
+func (builder *NetworkBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *NetworkBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NetworkBuilder) ProfileRequired(attr bool) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -58863,6 +65472,23 @@ func (builder *NetworkBuilder) Qos(attr *Qos) *NetworkBuilder {
 
 	builder.network.SetQos(attr)
 	return builder
+}
+
+func (builder *NetworkBuilder) QosBuilder(attrBuilder *QosBuilder) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Qos(attr)
 }
 
 func (builder *NetworkBuilder) Required(attr bool) *NetworkBuilder {
@@ -58919,6 +65545,23 @@ func (builder *NetworkBuilder) Vlan(attr *Vlan) *NetworkBuilder {
 	return builder
 }
 
+func (builder *NetworkBuilder) VlanBuilder(attrBuilder *VlanBuilder) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vlan(attr)
+}
+
 func (builder *NetworkBuilder) VnicProfiles(attr *VnicProfileSlice) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -58937,6 +65580,26 @@ func (builder *NetworkBuilder) VnicProfilesOfAny(anys ...VnicProfile) *NetworkBu
 		builder.network.vnicProfiles = new(VnicProfileSlice)
 	}
 	builder.network.vnicProfiles.slice = append(builder.network.vnicProfiles.slice, anys...)
+	return builder
+}
+
+func (builder *NetworkBuilder) VnicProfilesBuilderOfAny(anyBuilders ...VnicProfileBuilder) *NetworkBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VnicProfilesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -58999,6 +65662,23 @@ func (builder *NetworkAttachmentBuilder) DnsResolverConfiguration(attr *DnsResol
 	return builder
 }
 
+func (builder *NetworkAttachmentBuilder) DnsResolverConfigurationBuilder(attrBuilder *DnsResolverConfigurationBuilder) *NetworkAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DnsResolverConfiguration(attr)
+}
+
 func (builder *NetworkAttachmentBuilder) Host(attr *Host) *NetworkAttachmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -59008,6 +65688,23 @@ func (builder *NetworkAttachmentBuilder) Host(attr *Host) *NetworkAttachmentBuil
 	return builder
 }
 
+func (builder *NetworkAttachmentBuilder) HostBuilder(attrBuilder *HostBuilder) *NetworkAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *NetworkAttachmentBuilder) HostNic(attr *HostNic) *NetworkAttachmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -59015,6 +65712,23 @@ func (builder *NetworkAttachmentBuilder) HostNic(attr *HostNic) *NetworkAttachme
 
 	builder.networkAttachment.SetHostNic(attr)
 	return builder
+}
+
+func (builder *NetworkAttachmentBuilder) HostNicBuilder(attrBuilder *HostNicBuilder) *NetworkAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HostNic(attr)
 }
 
 func (builder *NetworkAttachmentBuilder) Id(attr string) *NetworkAttachmentBuilder {
@@ -59056,6 +65770,26 @@ func (builder *NetworkAttachmentBuilder) IpAddressAssignmentsOfAny(anys ...IpAdd
 	return builder
 }
 
+func (builder *NetworkAttachmentBuilder) IpAddressAssignmentsBuilderOfAny(anyBuilders ...IpAddressAssignmentBuilder) *NetworkAttachmentBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.IpAddressAssignmentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NetworkAttachmentBuilder) Name(attr string) *NetworkAttachmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -59072,6 +65806,23 @@ func (builder *NetworkAttachmentBuilder) Network(attr *Network) *NetworkAttachme
 
 	builder.networkAttachment.SetNetwork(attr)
 	return builder
+}
+
+func (builder *NetworkAttachmentBuilder) NetworkBuilder(attrBuilder *NetworkBuilder) *NetworkAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Network(attr)
 }
 
 func (builder *NetworkAttachmentBuilder) Properties(attr *PropertySlice) *NetworkAttachmentBuilder {
@@ -59095,6 +65846,26 @@ func (builder *NetworkAttachmentBuilder) PropertiesOfAny(anys ...Property) *Netw
 	return builder
 }
 
+func (builder *NetworkAttachmentBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *NetworkAttachmentBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NetworkAttachmentBuilder) Qos(attr *Qos) *NetworkAttachmentBuilder {
 	if builder.err != nil {
 		return builder
@@ -59102,6 +65873,23 @@ func (builder *NetworkAttachmentBuilder) Qos(attr *Qos) *NetworkAttachmentBuilde
 
 	builder.networkAttachment.SetQos(attr)
 	return builder
+}
+
+func (builder *NetworkAttachmentBuilder) QosBuilder(attrBuilder *QosBuilder) *NetworkAttachmentBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Qos(attr)
 }
 
 func (builder *NetworkAttachmentBuilder) ReportedConfigurations(attr *ReportedConfigurationSlice) *NetworkAttachmentBuilder {
@@ -59122,6 +65910,26 @@ func (builder *NetworkAttachmentBuilder) ReportedConfigurationsOfAny(anys ...Rep
 		builder.networkAttachment.reportedConfigurations = new(ReportedConfigurationSlice)
 	}
 	builder.networkAttachment.reportedConfigurations.slice = append(builder.networkAttachment.reportedConfigurations.slice, anys...)
+	return builder
+}
+
+func (builder *NetworkAttachmentBuilder) ReportedConfigurationsBuilderOfAny(anyBuilders ...ReportedConfigurationBuilder) *NetworkAttachmentBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ReportedConfigurationsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -59166,6 +65974,23 @@ func (builder *NetworkConfigurationBuilder) Dns(attr *Dns) *NetworkConfiguration
 	return builder
 }
 
+func (builder *NetworkConfigurationBuilder) DnsBuilder(attrBuilder *DnsBuilder) *NetworkConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Dns(attr)
+}
+
 func (builder *NetworkConfigurationBuilder) Nics(attr *NicSlice) *NetworkConfigurationBuilder {
 	if builder.err != nil {
 		return builder
@@ -59184,6 +66009,26 @@ func (builder *NetworkConfigurationBuilder) NicsOfAny(anys ...Nic) *NetworkConfi
 		builder.networkConfiguration.nics = new(NicSlice)
 	}
 	builder.networkConfiguration.nics.slice = append(builder.networkConfiguration.nics.slice, anys...)
+	return builder
+}
+
+func (builder *NetworkConfigurationBuilder) NicsBuilderOfAny(anyBuilders ...NicBuilder) *NetworkConfigurationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NicsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -59264,6 +66109,23 @@ func (builder *NetworkFilterBuilder) Version(attr *Version) *NetworkFilterBuilde
 	return builder
 }
 
+func (builder *NetworkFilterBuilder) VersionBuilder(attrBuilder *VersionBuilder) *NetworkFilterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
+}
+
 func (builder *NetworkFilterBuilder) Href(href string) *NetworkFilterBuilder {
 	if builder.err != nil {
 		return builder
@@ -59341,6 +66203,23 @@ func (builder *NetworkFilterParameterBuilder) Nic(attr *Nic) *NetworkFilterParam
 	return builder
 }
 
+func (builder *NetworkFilterParameterBuilder) NicBuilder(attrBuilder *NicBuilder) *NetworkFilterParameterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Nic(attr)
+}
+
 func (builder *NetworkFilterParameterBuilder) Value(attr string) *NetworkFilterParameterBuilder {
 	if builder.err != nil {
 		return builder
@@ -59409,6 +66288,23 @@ func (builder *NetworkLabelBuilder) HostNic(attr *HostNic) *NetworkLabelBuilder 
 	return builder
 }
 
+func (builder *NetworkLabelBuilder) HostNicBuilder(attrBuilder *HostNicBuilder) *NetworkLabelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HostNic(attr)
+}
+
 func (builder *NetworkLabelBuilder) Id(attr string) *NetworkLabelBuilder {
 	if builder.err != nil {
 		return builder
@@ -59434,6 +66330,23 @@ func (builder *NetworkLabelBuilder) Network(attr *Network) *NetworkLabelBuilder 
 
 	builder.networkLabel.SetNetwork(attr)
 	return builder
+}
+
+func (builder *NetworkLabelBuilder) NetworkBuilder(attrBuilder *NetworkBuilder) *NetworkLabelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Network(attr)
 }
 
 func (builder *NetworkLabelBuilder) Href(href string) *NetworkLabelBuilder {
@@ -59495,6 +66408,26 @@ func (builder *NfsProfileDetailBuilder) ProfileDetailsOfAny(anys ...ProfileDetai
 		builder.nfsProfileDetail.profileDetails = new(ProfileDetailSlice)
 	}
 	builder.nfsProfileDetail.profileDetails.slice = append(builder.nfsProfileDetail.profileDetails.slice, anys...)
+	return builder
+}
+
+func (builder *NfsProfileDetailBuilder) ProfileDetailsBuilderOfAny(anyBuilders ...ProfileDetailBuilder) *NfsProfileDetailBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ProfileDetailsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -59575,6 +66508,23 @@ func (builder *NicBuilder) InstanceType(attr *InstanceType) *NicBuilder {
 	return builder
 }
 
+func (builder *NicBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *NicBuilder) Interface(attr NicInterface) *NicBuilder {
 	if builder.err != nil {
 		return builder
@@ -59602,6 +66552,23 @@ func (builder *NicBuilder) Mac(attr *Mac) *NicBuilder {
 	return builder
 }
 
+func (builder *NicBuilder) MacBuilder(attrBuilder *MacBuilder) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Mac(attr)
+}
+
 func (builder *NicBuilder) Name(attr string) *NicBuilder {
 	if builder.err != nil {
 		return builder
@@ -59618,6 +66585,23 @@ func (builder *NicBuilder) Network(attr *Network) *NicBuilder {
 
 	builder.nic.SetNetwork(attr)
 	return builder
+}
+
+func (builder *NicBuilder) NetworkBuilder(attrBuilder *NetworkBuilder) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Network(attr)
 }
 
 func (builder *NicBuilder) NetworkAttachments(attr *NetworkAttachmentSlice) *NicBuilder {
@@ -59638,6 +66622,26 @@ func (builder *NicBuilder) NetworkAttachmentsOfAny(anys ...NetworkAttachment) *N
 		builder.nic.networkAttachments = new(NetworkAttachmentSlice)
 	}
 	builder.nic.networkAttachments.slice = append(builder.nic.networkAttachments.slice, anys...)
+	return builder
+}
+
+func (builder *NicBuilder) NetworkAttachmentsBuilderOfAny(anyBuilders ...NetworkAttachmentBuilder) *NicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworkAttachmentsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -59662,6 +66666,26 @@ func (builder *NicBuilder) NetworkFilterParametersOfAny(anys ...NetworkFilterPar
 	return builder
 }
 
+func (builder *NicBuilder) NetworkFilterParametersBuilderOfAny(anyBuilders ...NetworkFilterParameterBuilder) *NicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworkFilterParametersOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NicBuilder) NetworkLabels(attr *NetworkLabelSlice) *NicBuilder {
 	if builder.err != nil {
 		return builder
@@ -59680,6 +66704,26 @@ func (builder *NicBuilder) NetworkLabelsOfAny(anys ...NetworkLabel) *NicBuilder 
 		builder.nic.networkLabels = new(NetworkLabelSlice)
 	}
 	builder.nic.networkLabels.slice = append(builder.nic.networkLabels.slice, anys...)
+	return builder
+}
+
+func (builder *NicBuilder) NetworkLabelsBuilderOfAny(anyBuilders ...NetworkLabelBuilder) *NicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworkLabelsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -59722,6 +66766,26 @@ func (builder *NicBuilder) ReportedDevicesOfAny(anys ...ReportedDevice) *NicBuil
 	return builder
 }
 
+func (builder *NicBuilder) ReportedDevicesBuilderOfAny(anyBuilders ...ReportedDeviceBuilder) *NicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ReportedDevicesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NicBuilder) Statistics(attr *StatisticSlice) *NicBuilder {
 	if builder.err != nil {
 		return builder
@@ -59743,6 +66807,26 @@ func (builder *NicBuilder) StatisticsOfAny(anys ...Statistic) *NicBuilder {
 	return builder
 }
 
+func (builder *NicBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *NicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NicBuilder) Template(attr *Template) *NicBuilder {
 	if builder.err != nil {
 		return builder
@@ -59750,6 +66834,23 @@ func (builder *NicBuilder) Template(attr *Template) *NicBuilder {
 
 	builder.nic.SetTemplate(attr)
 	return builder
+}
+
+func (builder *NicBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
 }
 
 func (builder *NicBuilder) VirtualFunctionAllowedLabels(attr *NetworkLabelSlice) *NicBuilder {
@@ -59770,6 +66871,26 @@ func (builder *NicBuilder) VirtualFunctionAllowedLabelsOfAny(anys ...NetworkLabe
 		builder.nic.virtualFunctionAllowedLabels = new(NetworkLabelSlice)
 	}
 	builder.nic.virtualFunctionAllowedLabels.slice = append(builder.nic.virtualFunctionAllowedLabels.slice, anys...)
+	return builder
+}
+
+func (builder *NicBuilder) VirtualFunctionAllowedLabelsBuilderOfAny(anyBuilders ...NetworkLabelBuilder) *NicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VirtualFunctionAllowedLabelsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -59794,6 +66915,26 @@ func (builder *NicBuilder) VirtualFunctionAllowedNetworksOfAny(anys ...Network) 
 	return builder
 }
 
+func (builder *NicBuilder) VirtualFunctionAllowedNetworksBuilderOfAny(anyBuilders ...NetworkBuilder) *NicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VirtualFunctionAllowedNetworksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NicBuilder) Vm(attr *Vm) *NicBuilder {
 	if builder.err != nil {
 		return builder
@@ -59801,6 +66942,23 @@ func (builder *NicBuilder) Vm(attr *Vm) *NicBuilder {
 
 	builder.nic.SetVm(attr)
 	return builder
+}
+
+func (builder *NicBuilder) VmBuilder(attrBuilder *VmBuilder) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *NicBuilder) Vms(attr *VmSlice) *NicBuilder {
@@ -59824,6 +66982,26 @@ func (builder *NicBuilder) VmsOfAny(anys ...Vm) *NicBuilder {
 	return builder
 }
 
+func (builder *NicBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *NicBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NicBuilder) VnicProfile(attr *VnicProfile) *NicBuilder {
 	if builder.err != nil {
 		return builder
@@ -59831,6 +67009,23 @@ func (builder *NicBuilder) VnicProfile(attr *VnicProfile) *NicBuilder {
 
 	builder.nic.SetVnicProfile(attr)
 	return builder
+}
+
+func (builder *NicBuilder) VnicProfileBuilder(attrBuilder *VnicProfileBuilder) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VnicProfile(attr)
 }
 
 func (builder *NicBuilder) Href(href string) *NicBuilder {
@@ -59883,6 +67078,23 @@ func (builder *NicConfigurationBuilder) Ip(attr *Ip) *NicConfigurationBuilder {
 	return builder
 }
 
+func (builder *NicConfigurationBuilder) IpBuilder(attrBuilder *IpBuilder) *NicConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ip(attr)
+}
+
 func (builder *NicConfigurationBuilder) Ipv6(attr *Ip) *NicConfigurationBuilder {
 	if builder.err != nil {
 		return builder
@@ -59890,6 +67102,23 @@ func (builder *NicConfigurationBuilder) Ipv6(attr *Ip) *NicConfigurationBuilder 
 
 	builder.nicConfiguration.SetIpv6(attr)
 	return builder
+}
+
+func (builder *NicConfigurationBuilder) Ipv6Builder(attrBuilder *IpBuilder) *NicConfigurationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ipv6(attr)
 }
 
 func (builder *NicConfigurationBuilder) Ipv6BootProtocol(attr BootProtocol) *NicConfigurationBuilder {
@@ -59969,6 +67198,23 @@ func (builder *NumaNodeBuilder) Cpu(attr *Cpu) *NumaNodeBuilder {
 	return builder
 }
 
+func (builder *NumaNodeBuilder) CpuBuilder(attrBuilder *CpuBuilder) *NumaNodeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *NumaNodeBuilder) Description(attr string) *NumaNodeBuilder {
 	if builder.err != nil {
 		return builder
@@ -59985,6 +67231,23 @@ func (builder *NumaNodeBuilder) Host(attr *Host) *NumaNodeBuilder {
 
 	builder.numaNode.SetHost(attr)
 	return builder
+}
+
+func (builder *NumaNodeBuilder) HostBuilder(attrBuilder *HostBuilder) *NumaNodeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *NumaNodeBuilder) Id(attr string) *NumaNodeBuilder {
@@ -60053,6 +67316,26 @@ func (builder *NumaNodeBuilder) StatisticsOfAny(anys ...Statistic) *NumaNodeBuil
 	return builder
 }
 
+func (builder *NumaNodeBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *NumaNodeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *NumaNodeBuilder) Href(href string) *NumaNodeBuilder {
 	if builder.err != nil {
 		return builder
@@ -60092,6 +67375,23 @@ func (builder *NumaNodePinBuilder) HostNumaNode(attr *NumaNode) *NumaNodePinBuil
 
 	builder.numaNodePin.SetHostNumaNode(attr)
 	return builder
+}
+
+func (builder *NumaNodePinBuilder) HostNumaNodeBuilder(attrBuilder *NumaNodeBuilder) *NumaNodePinBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HostNumaNode(attr)
 }
 
 func (builder *NumaNodePinBuilder) Index(attr int64) *NumaNodePinBuilder {
@@ -60189,6 +67489,23 @@ func (builder *OpenStackImageBuilder) OpenstackImageProvider(attr *OpenStackImag
 	return builder
 }
 
+func (builder *OpenStackImageBuilder) OpenstackImageProviderBuilder(attrBuilder *OpenStackImageProviderBuilder) *OpenStackImageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OpenstackImageProvider(attr)
+}
+
 func (builder *OpenStackImageBuilder) Href(href string) *OpenStackImageBuilder {
 	if builder.err != nil {
 		return builder
@@ -60251,6 +67568,26 @@ func (builder *OpenStackImageProviderBuilder) CertificatesOfAny(anys ...Certific
 	return builder
 }
 
+func (builder *OpenStackImageProviderBuilder) CertificatesBuilderOfAny(anyBuilders ...CertificateBuilder) *OpenStackImageProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CertificatesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *OpenStackImageProviderBuilder) Comment(attr string) *OpenStackImageProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -60299,6 +67636,26 @@ func (builder *OpenStackImageProviderBuilder) ImagesOfAny(anys ...OpenStackImage
 	return builder
 }
 
+func (builder *OpenStackImageProviderBuilder) ImagesBuilderOfAny(anyBuilders ...OpenStackImageBuilder) *OpenStackImageProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ImagesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *OpenStackImageProviderBuilder) Name(attr string) *OpenStackImageProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -60335,6 +67692,26 @@ func (builder *OpenStackImageProviderBuilder) PropertiesOfAny(anys ...Property) 
 		builder.openStackImageProvider.properties = new(PropertySlice)
 	}
 	builder.openStackImageProvider.properties.slice = append(builder.openStackImageProvider.properties.slice, anys...)
+	return builder
+}
+
+func (builder *OpenStackImageProviderBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *OpenStackImageProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -60451,6 +67828,23 @@ func (builder *OpenStackNetworkBuilder) OpenstackNetworkProvider(attr *OpenStack
 	return builder
 }
 
+func (builder *OpenStackNetworkBuilder) OpenstackNetworkProviderBuilder(attrBuilder *OpenStackNetworkProviderBuilder) *OpenStackNetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OpenstackNetworkProvider(attr)
+}
+
 func (builder *OpenStackNetworkBuilder) Href(href string) *OpenStackNetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -60492,6 +67886,23 @@ func (builder *OpenStackNetworkProviderBuilder) AgentConfiguration(attr *AgentCo
 	return builder
 }
 
+func (builder *OpenStackNetworkProviderBuilder) AgentConfigurationBuilder(attrBuilder *AgentConfigurationBuilder) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.AgentConfiguration(attr)
+}
+
 func (builder *OpenStackNetworkProviderBuilder) AuthenticationUrl(attr string) *OpenStackNetworkProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -60528,6 +67939,26 @@ func (builder *OpenStackNetworkProviderBuilder) CertificatesOfAny(anys ...Certif
 		builder.openStackNetworkProvider.certificates = new(CertificateSlice)
 	}
 	builder.openStackNetworkProvider.certificates.slice = append(builder.openStackNetworkProvider.certificates.slice, anys...)
+	return builder
+}
+
+func (builder *OpenStackNetworkProviderBuilder) CertificatesBuilderOfAny(anyBuilders ...CertificateBuilder) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CertificatesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -60597,6 +68028,26 @@ func (builder *OpenStackNetworkProviderBuilder) NetworksOfAny(anys ...OpenStackN
 	return builder
 }
 
+func (builder *OpenStackNetworkProviderBuilder) NetworksBuilderOfAny(anyBuilders ...OpenStackNetworkBuilder) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NetworksOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *OpenStackNetworkProviderBuilder) Password(attr string) *OpenStackNetworkProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -60636,6 +68087,26 @@ func (builder *OpenStackNetworkProviderBuilder) PropertiesOfAny(anys ...Property
 	return builder
 }
 
+func (builder *OpenStackNetworkProviderBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *OpenStackNetworkProviderBuilder) ReadOnly(attr bool) *OpenStackNetworkProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -60672,6 +68143,26 @@ func (builder *OpenStackNetworkProviderBuilder) SubnetsOfAny(anys ...OpenStackSu
 		builder.openStackNetworkProvider.subnets = new(OpenStackSubnetSlice)
 	}
 	builder.openStackNetworkProvider.subnets.slice = append(builder.openStackNetworkProvider.subnets.slice, anys...)
+	return builder
+}
+
+func (builder *OpenStackNetworkProviderBuilder) SubnetsBuilderOfAny(anyBuilders ...OpenStackSubnetBuilder) *OpenStackNetworkProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SubnetsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -60824,6 +68315,26 @@ func (builder *OpenStackProviderBuilder) PropertiesOfAny(anys ...Property) *Open
 		builder.openStackProvider.properties = new(PropertySlice)
 	}
 	builder.openStackProvider.properties.slice = append(builder.openStackProvider.properties.slice, anys...)
+	return builder
+}
+
+func (builder *OpenStackProviderBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *OpenStackProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -60985,6 +68496,23 @@ func (builder *OpenStackSubnetBuilder) OpenstackNetwork(attr *OpenStackNetwork) 
 	return builder
 }
 
+func (builder *OpenStackSubnetBuilder) OpenstackNetworkBuilder(attrBuilder *OpenStackNetworkBuilder) *OpenStackSubnetBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OpenstackNetwork(attr)
+}
+
 func (builder *OpenStackSubnetBuilder) Href(href string) *OpenStackSubnetBuilder {
 	if builder.err != nil {
 		return builder
@@ -61038,6 +68566,26 @@ func (builder *OpenStackVolumeProviderBuilder) AuthenticationKeysOfAny(anys ...O
 	return builder
 }
 
+func (builder *OpenStackVolumeProviderBuilder) AuthenticationKeysBuilderOfAny(anyBuilders ...OpenstackVolumeAuthenticationKeyBuilder) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AuthenticationKeysOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *OpenStackVolumeProviderBuilder) AuthenticationUrl(attr string) *OpenStackVolumeProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -61068,6 +68616,26 @@ func (builder *OpenStackVolumeProviderBuilder) CertificatesOfAny(anys ...Certifi
 	return builder
 }
 
+func (builder *OpenStackVolumeProviderBuilder) CertificatesBuilderOfAny(anyBuilders ...CertificateBuilder) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CertificatesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *OpenStackVolumeProviderBuilder) Comment(attr string) *OpenStackVolumeProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -61084,6 +68652,23 @@ func (builder *OpenStackVolumeProviderBuilder) DataCenter(attr *DataCenter) *Ope
 
 	builder.openStackVolumeProvider.SetDataCenter(attr)
 	return builder
+}
+
+func (builder *OpenStackVolumeProviderBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
 }
 
 func (builder *OpenStackVolumeProviderBuilder) Description(attr string) *OpenStackVolumeProviderBuilder {
@@ -61143,6 +68728,26 @@ func (builder *OpenStackVolumeProviderBuilder) PropertiesOfAny(anys ...Property)
 	return builder
 }
 
+func (builder *OpenStackVolumeProviderBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *OpenStackVolumeProviderBuilder) RequiresAuthentication(attr bool) *OpenStackVolumeProviderBuilder {
 	if builder.err != nil {
 		return builder
@@ -61197,6 +68802,26 @@ func (builder *OpenStackVolumeProviderBuilder) VolumeTypesOfAny(anys ...OpenStac
 		builder.openStackVolumeProvider.volumeTypes = new(OpenStackVolumeTypeSlice)
 	}
 	builder.openStackVolumeProvider.volumeTypes.slice = append(builder.openStackVolumeProvider.volumeTypes.slice, anys...)
+	return builder
+}
+
+func (builder *OpenStackVolumeProviderBuilder) VolumeTypesBuilderOfAny(anyBuilders ...OpenStackVolumeTypeBuilder) *OpenStackVolumeProviderBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VolumeTypesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -61277,6 +68902,23 @@ func (builder *OpenStackVolumeTypeBuilder) OpenstackVolumeProvider(attr *OpenSta
 	return builder
 }
 
+func (builder *OpenStackVolumeTypeBuilder) OpenstackVolumeProviderBuilder(attrBuilder *OpenStackVolumeProviderBuilder) *OpenStackVolumeTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OpenstackVolumeProvider(attr)
+}
+
 func (builder *OpenStackVolumeTypeBuilder) Properties(attr *PropertySlice) *OpenStackVolumeTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -61295,6 +68937,26 @@ func (builder *OpenStackVolumeTypeBuilder) PropertiesOfAny(anys ...Property) *Op
 		builder.openStackVolumeType.properties = new(PropertySlice)
 	}
 	builder.openStackVolumeType.properties.slice = append(builder.openStackVolumeType.properties.slice, anys...)
+	return builder
+}
+
+func (builder *OpenStackVolumeTypeBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *OpenStackVolumeTypeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -61384,6 +69046,23 @@ func (builder *OpenstackVolumeAuthenticationKeyBuilder) OpenstackVolumeProvider(
 	return builder
 }
 
+func (builder *OpenstackVolumeAuthenticationKeyBuilder) OpenstackVolumeProviderBuilder(attrBuilder *OpenStackVolumeProviderBuilder) *OpenstackVolumeAuthenticationKeyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OpenstackVolumeProvider(attr)
+}
+
 func (builder *OpenstackVolumeAuthenticationKeyBuilder) UsageType(attr OpenstackVolumeAuthenticationKeyUsageType) *OpenstackVolumeAuthenticationKeyBuilder {
 	if builder.err != nil {
 		return builder
@@ -61452,6 +69131,23 @@ func (builder *OperatingSystemBuilder) Boot(attr *Boot) *OperatingSystemBuilder 
 	return builder
 }
 
+func (builder *OperatingSystemBuilder) BootBuilder(attrBuilder *BootBuilder) *OperatingSystemBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Boot(attr)
+}
+
 func (builder *OperatingSystemBuilder) Cmdline(attr string) *OperatingSystemBuilder {
 	if builder.err != nil {
 		return builder
@@ -61513,6 +69209,23 @@ func (builder *OperatingSystemBuilder) Version(attr *Version) *OperatingSystemBu
 
 	builder.operatingSystem.SetVersion(attr)
 	return builder
+}
+
+func (builder *OperatingSystemBuilder) VersionBuilder(attrBuilder *VersionBuilder) *OperatingSystemBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
 }
 
 func (builder *OperatingSystemBuilder) Href(href string) *OperatingSystemBuilder {
@@ -61583,6 +69296,23 @@ func (builder *OperatingSystemInfoBuilder) LargeIcon(attr *Icon) *OperatingSyste
 	return builder
 }
 
+func (builder *OperatingSystemInfoBuilder) LargeIconBuilder(attrBuilder *IconBuilder) *OperatingSystemInfoBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LargeIcon(attr)
+}
+
 func (builder *OperatingSystemInfoBuilder) Name(attr string) *OperatingSystemInfoBuilder {
 	if builder.err != nil {
 		return builder
@@ -61599,6 +69329,23 @@ func (builder *OperatingSystemInfoBuilder) SmallIcon(attr *Icon) *OperatingSyste
 
 	builder.operatingSystemInfo.SetSmallIcon(attr)
 	return builder
+}
+
+func (builder *OperatingSystemInfoBuilder) SmallIconBuilder(attrBuilder *IconBuilder) *OperatingSystemInfoBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SmallIcon(attr)
 }
 
 func (builder *OperatingSystemInfoBuilder) Href(href string) *OperatingSystemInfoBuilder {
@@ -61754,6 +69501,26 @@ func (builder *PayloadBuilder) FilesOfAny(anys ...File) *PayloadBuilder {
 	return builder
 }
 
+func (builder *PayloadBuilder) FilesBuilderOfAny(anyBuilders ...FileBuilder) *PayloadBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.FilesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *PayloadBuilder) Type(attr VmDeviceType) *PayloadBuilder {
 	if builder.err != nil {
 		return builder
@@ -61813,6 +69580,23 @@ func (builder *PermissionBuilder) Cluster(attr *Cluster) *PermissionBuilder {
 	return builder
 }
 
+func (builder *PermissionBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
 func (builder *PermissionBuilder) Comment(attr string) *PermissionBuilder {
 	if builder.err != nil {
 		return builder
@@ -61829,6 +69613,23 @@ func (builder *PermissionBuilder) DataCenter(attr *DataCenter) *PermissionBuilde
 
 	builder.permission.SetDataCenter(attr)
 	return builder
+}
+
+func (builder *PermissionBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
 }
 
 func (builder *PermissionBuilder) Description(attr string) *PermissionBuilder {
@@ -61849,6 +69650,23 @@ func (builder *PermissionBuilder) Disk(attr *Disk) *PermissionBuilder {
 	return builder
 }
 
+func (builder *PermissionBuilder) DiskBuilder(attrBuilder *DiskBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Disk(attr)
+}
+
 func (builder *PermissionBuilder) Group(attr *Group) *PermissionBuilder {
 	if builder.err != nil {
 		return builder
@@ -61858,6 +69676,23 @@ func (builder *PermissionBuilder) Group(attr *Group) *PermissionBuilder {
 	return builder
 }
 
+func (builder *PermissionBuilder) GroupBuilder(attrBuilder *GroupBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Group(attr)
+}
+
 func (builder *PermissionBuilder) Host(attr *Host) *PermissionBuilder {
 	if builder.err != nil {
 		return builder
@@ -61865,6 +69700,23 @@ func (builder *PermissionBuilder) Host(attr *Host) *PermissionBuilder {
 
 	builder.permission.SetHost(attr)
 	return builder
+}
+
+func (builder *PermissionBuilder) HostBuilder(attrBuilder *HostBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *PermissionBuilder) Id(attr string) *PermissionBuilder {
@@ -61894,6 +69746,23 @@ func (builder *PermissionBuilder) Role(attr *Role) *PermissionBuilder {
 	return builder
 }
 
+func (builder *PermissionBuilder) RoleBuilder(attrBuilder *RoleBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Role(attr)
+}
+
 func (builder *PermissionBuilder) StorageDomain(attr *StorageDomain) *PermissionBuilder {
 	if builder.err != nil {
 		return builder
@@ -61901,6 +69770,23 @@ func (builder *PermissionBuilder) StorageDomain(attr *StorageDomain) *Permission
 
 	builder.permission.SetStorageDomain(attr)
 	return builder
+}
+
+func (builder *PermissionBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
 }
 
 func (builder *PermissionBuilder) Template(attr *Template) *PermissionBuilder {
@@ -61912,6 +69798,23 @@ func (builder *PermissionBuilder) Template(attr *Template) *PermissionBuilder {
 	return builder
 }
 
+func (builder *PermissionBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *PermissionBuilder) User(attr *User) *PermissionBuilder {
 	if builder.err != nil {
 		return builder
@@ -61919,6 +69822,23 @@ func (builder *PermissionBuilder) User(attr *User) *PermissionBuilder {
 
 	builder.permission.SetUser(attr)
 	return builder
+}
+
+func (builder *PermissionBuilder) UserBuilder(attrBuilder *UserBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
 }
 
 func (builder *PermissionBuilder) Vm(attr *Vm) *PermissionBuilder {
@@ -61930,6 +69850,23 @@ func (builder *PermissionBuilder) Vm(attr *Vm) *PermissionBuilder {
 	return builder
 }
 
+func (builder *PermissionBuilder) VmBuilder(attrBuilder *VmBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
+}
+
 func (builder *PermissionBuilder) VmPool(attr *VmPool) *PermissionBuilder {
 	if builder.err != nil {
 		return builder
@@ -61937,6 +69874,23 @@ func (builder *PermissionBuilder) VmPool(attr *VmPool) *PermissionBuilder {
 
 	builder.permission.SetVmPool(attr)
 	return builder
+}
+
+func (builder *PermissionBuilder) VmPoolBuilder(attrBuilder *VmPoolBuilder) *PermissionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VmPool(attr)
 }
 
 func (builder *PermissionBuilder) Href(href string) *PermissionBuilder {
@@ -62023,6 +69977,23 @@ func (builder *PermitBuilder) Role(attr *Role) *PermitBuilder {
 
 	builder.permit.SetRole(attr)
 	return builder
+}
+
+func (builder *PermitBuilder) RoleBuilder(attrBuilder *RoleBuilder) *PermitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Role(attr)
 }
 
 func (builder *PermitBuilder) Href(href string) *PermitBuilder {
@@ -62160,6 +70131,26 @@ func (builder *PowerManagementBuilder) AgentsOfAny(anys ...Agent) *PowerManageme
 	return builder
 }
 
+func (builder *PowerManagementBuilder) AgentsBuilderOfAny(anyBuilders ...AgentBuilder) *PowerManagementBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AgentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *PowerManagementBuilder) AutomaticPmEnabled(attr bool) *PowerManagementBuilder {
 	if builder.err != nil {
 		return builder
@@ -62208,6 +70199,26 @@ func (builder *PowerManagementBuilder) OptionsOfAny(anys ...Option) *PowerManage
 	return builder
 }
 
+func (builder *PowerManagementBuilder) OptionsBuilderOfAny(anyBuilders ...OptionBuilder) *PowerManagementBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.OptionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *PowerManagementBuilder) Password(attr string) *PowerManagementBuilder {
 	if builder.err != nil {
 		return builder
@@ -62235,6 +70246,26 @@ func (builder *PowerManagementBuilder) PmProxiesOfAny(anys ...PmProxy) *PowerMan
 		builder.powerManagement.pmProxies = new(PmProxySlice)
 	}
 	builder.powerManagement.pmProxies.slice = append(builder.powerManagement.pmProxies.slice, anys...)
+	return builder
+}
+
+func (builder *PowerManagementBuilder) PmProxiesBuilderOfAny(anyBuilders ...PmProxyBuilder) *PowerManagementBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PmProxiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -62392,6 +70423,23 @@ func (builder *ProductInfoBuilder) Version(attr *Version) *ProductInfoBuilder {
 	return builder
 }
 
+func (builder *ProductInfoBuilder) VersionBuilder(attrBuilder *VersionBuilder) *ProductInfoBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
+}
+
 func (builder *ProductInfoBuilder) Href(href string) *ProductInfoBuilder {
 	if builder.err != nil {
 		return builder
@@ -62445,6 +70493,26 @@ func (builder *ProfileDetailBuilder) BlockStatisticsOfAny(anys ...BlockStatistic
 	return builder
 }
 
+func (builder *ProfileDetailBuilder) BlockStatisticsBuilderOfAny(anyBuilders ...BlockStatisticBuilder) *ProfileDetailBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.BlockStatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ProfileDetailBuilder) Duration(attr int64) *ProfileDetailBuilder {
 	if builder.err != nil {
 		return builder
@@ -62475,6 +70543,26 @@ func (builder *ProfileDetailBuilder) FopStatisticsOfAny(anys ...FopStatistic) *P
 	return builder
 }
 
+func (builder *ProfileDetailBuilder) FopStatisticsBuilderOfAny(anyBuilders ...FopStatisticBuilder) *ProfileDetailBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.FopStatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ProfileDetailBuilder) ProfileType(attr string) *ProfileDetailBuilder {
 	if builder.err != nil {
 		return builder
@@ -62502,6 +70590,26 @@ func (builder *ProfileDetailBuilder) StatisticsOfAny(anys ...Statistic) *Profile
 		builder.profileDetail.statistics = new(StatisticSlice)
 	}
 	builder.profileDetail.statistics.slice = append(builder.profileDetail.statistics.slice, anys...)
+	return builder
+}
+
+func (builder *ProfileDetailBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *ProfileDetailBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -62653,6 +70761,23 @@ func (builder *QosBuilder) DataCenter(attr *DataCenter) *QosBuilder {
 
 	builder.qos.SetDataCenter(attr)
 	return builder
+}
+
+func (builder *QosBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *QosBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
 }
 
 func (builder *QosBuilder) Description(attr string) *QosBuilder {
@@ -62894,6 +71019,23 @@ func (builder *QuotaBuilder) DataCenter(attr *DataCenter) *QuotaBuilder {
 	return builder
 }
 
+func (builder *QuotaBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *QuotaBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
+}
+
 func (builder *QuotaBuilder) Description(attr string) *QuotaBuilder {
 	if builder.err != nil {
 		return builder
@@ -62921,6 +71063,26 @@ func (builder *QuotaBuilder) DisksOfAny(anys ...Disk) *QuotaBuilder {
 		builder.quota.disks = new(DiskSlice)
 	}
 	builder.quota.disks.slice = append(builder.quota.disks.slice, anys...)
+	return builder
+}
+
+func (builder *QuotaBuilder) DisksBuilderOfAny(anyBuilders ...DiskBuilder) *QuotaBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DisksOfAny(*attr)
+	}
 	return builder
 }
 
@@ -62963,6 +71125,26 @@ func (builder *QuotaBuilder) PermissionsOfAny(anys ...Permission) *QuotaBuilder 
 	return builder
 }
 
+func (builder *QuotaBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *QuotaBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *QuotaBuilder) QuotaClusterLimits(attr *QuotaClusterLimitSlice) *QuotaBuilder {
 	if builder.err != nil {
 		return builder
@@ -62984,6 +71166,26 @@ func (builder *QuotaBuilder) QuotaClusterLimitsOfAny(anys ...QuotaClusterLimit) 
 	return builder
 }
 
+func (builder *QuotaBuilder) QuotaClusterLimitsBuilderOfAny(anyBuilders ...QuotaClusterLimitBuilder) *QuotaBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.QuotaClusterLimitsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *QuotaBuilder) QuotaStorageLimits(attr *QuotaStorageLimitSlice) *QuotaBuilder {
 	if builder.err != nil {
 		return builder
@@ -63002,6 +71204,26 @@ func (builder *QuotaBuilder) QuotaStorageLimitsOfAny(anys ...QuotaStorageLimit) 
 		builder.quota.quotaStorageLimits = new(QuotaStorageLimitSlice)
 	}
 	builder.quota.quotaStorageLimits.slice = append(builder.quota.quotaStorageLimits.slice, anys...)
+	return builder
+}
+
+func (builder *QuotaBuilder) QuotaStorageLimitsBuilderOfAny(anyBuilders ...QuotaStorageLimitBuilder) *QuotaBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.QuotaStorageLimitsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -63044,6 +71266,26 @@ func (builder *QuotaBuilder) UsersOfAny(anys ...User) *QuotaBuilder {
 	return builder
 }
 
+func (builder *QuotaBuilder) UsersBuilderOfAny(anyBuilders ...UserBuilder) *QuotaBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.UsersOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *QuotaBuilder) Vms(attr *VmSlice) *QuotaBuilder {
 	if builder.err != nil {
 		return builder
@@ -63062,6 +71304,26 @@ func (builder *QuotaBuilder) VmsOfAny(anys ...Vm) *QuotaBuilder {
 		builder.quota.vms = new(VmSlice)
 	}
 	builder.quota.vms.slice = append(builder.quota.vms.slice, anys...)
+	return builder
+}
+
+func (builder *QuotaBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *QuotaBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -63104,6 +71366,23 @@ func (builder *QuotaClusterLimitBuilder) Cluster(attr *Cluster) *QuotaClusterLim
 
 	builder.quotaClusterLimit.SetCluster(attr)
 	return builder
+}
+
+func (builder *QuotaClusterLimitBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *QuotaClusterLimitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *QuotaClusterLimitBuilder) Comment(attr string) *QuotaClusterLimitBuilder {
@@ -63167,6 +71446,23 @@ func (builder *QuotaClusterLimitBuilder) Quota(attr *Quota) *QuotaClusterLimitBu
 
 	builder.quotaClusterLimit.SetQuota(attr)
 	return builder
+}
+
+func (builder *QuotaClusterLimitBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *QuotaClusterLimitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
 }
 
 func (builder *QuotaClusterLimitBuilder) VcpuLimit(attr int64) *QuotaClusterLimitBuilder {
@@ -63273,6 +71569,23 @@ func (builder *QuotaStorageLimitBuilder) Quota(attr *Quota) *QuotaStorageLimitBu
 	return builder
 }
 
+func (builder *QuotaStorageLimitBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *QuotaStorageLimitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
+}
+
 func (builder *QuotaStorageLimitBuilder) StorageDomain(attr *StorageDomain) *QuotaStorageLimitBuilder {
 	if builder.err != nil {
 		return builder
@@ -63280,6 +71593,23 @@ func (builder *QuotaStorageLimitBuilder) StorageDomain(attr *StorageDomain) *Quo
 
 	builder.quotaStorageLimit.SetStorageDomain(attr)
 	return builder
+}
+
+func (builder *QuotaStorageLimitBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *QuotaStorageLimitBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
 }
 
 func (builder *QuotaStorageLimitBuilder) Usage(attr float64) *QuotaStorageLimitBuilder {
@@ -63432,6 +71762,23 @@ func (builder *RegistrationAffinityGroupMappingBuilder) From(attr *AffinityGroup
 	return builder
 }
 
+func (builder *RegistrationAffinityGroupMappingBuilder) FromBuilder(attrBuilder *AffinityGroupBuilder) *RegistrationAffinityGroupMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.From(attr)
+}
+
 func (builder *RegistrationAffinityGroupMappingBuilder) To(attr *AffinityGroup) *RegistrationAffinityGroupMappingBuilder {
 	if builder.err != nil {
 		return builder
@@ -63439,6 +71786,23 @@ func (builder *RegistrationAffinityGroupMappingBuilder) To(attr *AffinityGroup) 
 
 	builder.registrationAffinityGroupMapping.SetTo(attr)
 	return builder
+}
+
+func (builder *RegistrationAffinityGroupMappingBuilder) ToBuilder(attrBuilder *AffinityGroupBuilder) *RegistrationAffinityGroupMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.To(attr)
 }
 
 func (builder *RegistrationAffinityGroupMappingBuilder) Href(href string) *RegistrationAffinityGroupMappingBuilder {
@@ -63482,6 +71846,23 @@ func (builder *RegistrationAffinityLabelMappingBuilder) From(attr *AffinityLabel
 	return builder
 }
 
+func (builder *RegistrationAffinityLabelMappingBuilder) FromBuilder(attrBuilder *AffinityLabelBuilder) *RegistrationAffinityLabelMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.From(attr)
+}
+
 func (builder *RegistrationAffinityLabelMappingBuilder) To(attr *AffinityLabel) *RegistrationAffinityLabelMappingBuilder {
 	if builder.err != nil {
 		return builder
@@ -63489,6 +71870,23 @@ func (builder *RegistrationAffinityLabelMappingBuilder) To(attr *AffinityLabel) 
 
 	builder.registrationAffinityLabelMapping.SetTo(attr)
 	return builder
+}
+
+func (builder *RegistrationAffinityLabelMappingBuilder) ToBuilder(attrBuilder *AffinityLabelBuilder) *RegistrationAffinityLabelMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.To(attr)
 }
 
 func (builder *RegistrationAffinityLabelMappingBuilder) Href(href string) *RegistrationAffinityLabelMappingBuilder {
@@ -63532,6 +71930,23 @@ func (builder *RegistrationClusterMappingBuilder) From(attr *Cluster) *Registrat
 	return builder
 }
 
+func (builder *RegistrationClusterMappingBuilder) FromBuilder(attrBuilder *ClusterBuilder) *RegistrationClusterMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.From(attr)
+}
+
 func (builder *RegistrationClusterMappingBuilder) To(attr *Cluster) *RegistrationClusterMappingBuilder {
 	if builder.err != nil {
 		return builder
@@ -63539,6 +71954,23 @@ func (builder *RegistrationClusterMappingBuilder) To(attr *Cluster) *Registratio
 
 	builder.registrationClusterMapping.SetTo(attr)
 	return builder
+}
+
+func (builder *RegistrationClusterMappingBuilder) ToBuilder(attrBuilder *ClusterBuilder) *RegistrationClusterMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.To(attr)
 }
 
 func (builder *RegistrationClusterMappingBuilder) Href(href string) *RegistrationClusterMappingBuilder {
@@ -63594,6 +72026,26 @@ func (builder *RegistrationConfigurationBuilder) AffinityGroupMappingsOfAny(anys
 	return builder
 }
 
+func (builder *RegistrationConfigurationBuilder) AffinityGroupMappingsBuilderOfAny(anyBuilders ...RegistrationAffinityGroupMappingBuilder) *RegistrationConfigurationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AffinityGroupMappingsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *RegistrationConfigurationBuilder) AffinityLabelMappings(attr *RegistrationAffinityLabelMappingSlice) *RegistrationConfigurationBuilder {
 	if builder.err != nil {
 		return builder
@@ -63612,6 +72064,26 @@ func (builder *RegistrationConfigurationBuilder) AffinityLabelMappingsOfAny(anys
 		builder.registrationConfiguration.affinityLabelMappings = new(RegistrationAffinityLabelMappingSlice)
 	}
 	builder.registrationConfiguration.affinityLabelMappings.slice = append(builder.registrationConfiguration.affinityLabelMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) AffinityLabelMappingsBuilderOfAny(anyBuilders ...RegistrationAffinityLabelMappingBuilder) *RegistrationConfigurationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AffinityLabelMappingsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -63636,6 +72108,26 @@ func (builder *RegistrationConfigurationBuilder) ClusterMappingsOfAny(anys ...Re
 	return builder
 }
 
+func (builder *RegistrationConfigurationBuilder) ClusterMappingsBuilderOfAny(anyBuilders ...RegistrationClusterMappingBuilder) *RegistrationConfigurationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ClusterMappingsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *RegistrationConfigurationBuilder) DomainMappings(attr *RegistrationDomainMappingSlice) *RegistrationConfigurationBuilder {
 	if builder.err != nil {
 		return builder
@@ -63654,6 +72146,26 @@ func (builder *RegistrationConfigurationBuilder) DomainMappingsOfAny(anys ...Reg
 		builder.registrationConfiguration.domainMappings = new(RegistrationDomainMappingSlice)
 	}
 	builder.registrationConfiguration.domainMappings.slice = append(builder.registrationConfiguration.domainMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) DomainMappingsBuilderOfAny(anyBuilders ...RegistrationDomainMappingBuilder) *RegistrationConfigurationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DomainMappingsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -63678,6 +72190,26 @@ func (builder *RegistrationConfigurationBuilder) LunMappingsOfAny(anys ...Regist
 	return builder
 }
 
+func (builder *RegistrationConfigurationBuilder) LunMappingsBuilderOfAny(anyBuilders ...RegistrationLunMappingBuilder) *RegistrationConfigurationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.LunMappingsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *RegistrationConfigurationBuilder) RoleMappings(attr *RegistrationRoleMappingSlice) *RegistrationConfigurationBuilder {
 	if builder.err != nil {
 		return builder
@@ -63699,6 +72231,26 @@ func (builder *RegistrationConfigurationBuilder) RoleMappingsOfAny(anys ...Regis
 	return builder
 }
 
+func (builder *RegistrationConfigurationBuilder) RoleMappingsBuilderOfAny(anyBuilders ...RegistrationRoleMappingBuilder) *RegistrationConfigurationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.RoleMappingsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *RegistrationConfigurationBuilder) VnicProfileMappings(attr *RegistrationVnicProfileMappingSlice) *RegistrationConfigurationBuilder {
 	if builder.err != nil {
 		return builder
@@ -63717,6 +72269,26 @@ func (builder *RegistrationConfigurationBuilder) VnicProfileMappingsOfAny(anys .
 		builder.registrationConfiguration.vnicProfileMappings = new(RegistrationVnicProfileMappingSlice)
 	}
 	builder.registrationConfiguration.vnicProfileMappings.slice = append(builder.registrationConfiguration.vnicProfileMappings.slice, anys...)
+	return builder
+}
+
+func (builder *RegistrationConfigurationBuilder) VnicProfileMappingsBuilderOfAny(anyBuilders ...RegistrationVnicProfileMappingBuilder) *RegistrationConfigurationBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VnicProfileMappingsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -63761,6 +72333,23 @@ func (builder *RegistrationDomainMappingBuilder) From(attr *Domain) *Registratio
 	return builder
 }
 
+func (builder *RegistrationDomainMappingBuilder) FromBuilder(attrBuilder *DomainBuilder) *RegistrationDomainMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.From(attr)
+}
+
 func (builder *RegistrationDomainMappingBuilder) To(attr *Domain) *RegistrationDomainMappingBuilder {
 	if builder.err != nil {
 		return builder
@@ -63768,6 +72357,23 @@ func (builder *RegistrationDomainMappingBuilder) To(attr *Domain) *RegistrationD
 
 	builder.registrationDomainMapping.SetTo(attr)
 	return builder
+}
+
+func (builder *RegistrationDomainMappingBuilder) ToBuilder(attrBuilder *DomainBuilder) *RegistrationDomainMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.To(attr)
 }
 
 func (builder *RegistrationDomainMappingBuilder) Href(href string) *RegistrationDomainMappingBuilder {
@@ -63811,6 +72417,23 @@ func (builder *RegistrationLunMappingBuilder) From(attr *Disk) *RegistrationLunM
 	return builder
 }
 
+func (builder *RegistrationLunMappingBuilder) FromBuilder(attrBuilder *DiskBuilder) *RegistrationLunMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.From(attr)
+}
+
 func (builder *RegistrationLunMappingBuilder) To(attr *Disk) *RegistrationLunMappingBuilder {
 	if builder.err != nil {
 		return builder
@@ -63818,6 +72441,23 @@ func (builder *RegistrationLunMappingBuilder) To(attr *Disk) *RegistrationLunMap
 
 	builder.registrationLunMapping.SetTo(attr)
 	return builder
+}
+
+func (builder *RegistrationLunMappingBuilder) ToBuilder(attrBuilder *DiskBuilder) *RegistrationLunMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.To(attr)
 }
 
 func (builder *RegistrationLunMappingBuilder) Href(href string) *RegistrationLunMappingBuilder {
@@ -63861,6 +72501,23 @@ func (builder *RegistrationRoleMappingBuilder) From(attr *Role) *RegistrationRol
 	return builder
 }
 
+func (builder *RegistrationRoleMappingBuilder) FromBuilder(attrBuilder *RoleBuilder) *RegistrationRoleMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.From(attr)
+}
+
 func (builder *RegistrationRoleMappingBuilder) To(attr *Role) *RegistrationRoleMappingBuilder {
 	if builder.err != nil {
 		return builder
@@ -63868,6 +72525,23 @@ func (builder *RegistrationRoleMappingBuilder) To(attr *Role) *RegistrationRoleM
 
 	builder.registrationRoleMapping.SetTo(attr)
 	return builder
+}
+
+func (builder *RegistrationRoleMappingBuilder) ToBuilder(attrBuilder *RoleBuilder) *RegistrationRoleMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.To(attr)
 }
 
 func (builder *RegistrationRoleMappingBuilder) Href(href string) *RegistrationRoleMappingBuilder {
@@ -63911,6 +72585,23 @@ func (builder *RegistrationVnicProfileMappingBuilder) From(attr *VnicProfile) *R
 	return builder
 }
 
+func (builder *RegistrationVnicProfileMappingBuilder) FromBuilder(attrBuilder *VnicProfileBuilder) *RegistrationVnicProfileMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.From(attr)
+}
+
 func (builder *RegistrationVnicProfileMappingBuilder) To(attr *VnicProfile) *RegistrationVnicProfileMappingBuilder {
 	if builder.err != nil {
 		return builder
@@ -63918,6 +72609,23 @@ func (builder *RegistrationVnicProfileMappingBuilder) To(attr *VnicProfile) *Reg
 
 	builder.registrationVnicProfileMapping.SetTo(attr)
 	return builder
+}
+
+func (builder *RegistrationVnicProfileMappingBuilder) ToBuilder(attrBuilder *VnicProfileBuilder) *RegistrationVnicProfileMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.To(attr)
 }
 
 func (builder *RegistrationVnicProfileMappingBuilder) Href(href string) *RegistrationVnicProfileMappingBuilder {
@@ -64068,6 +72776,26 @@ func (builder *ReportedDeviceBuilder) IpsOfAny(anys ...Ip) *ReportedDeviceBuilde
 	return builder
 }
 
+func (builder *ReportedDeviceBuilder) IpsBuilderOfAny(anyBuilders ...IpBuilder) *ReportedDeviceBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.IpsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *ReportedDeviceBuilder) Mac(attr *Mac) *ReportedDeviceBuilder {
 	if builder.err != nil {
 		return builder
@@ -64075,6 +72803,23 @@ func (builder *ReportedDeviceBuilder) Mac(attr *Mac) *ReportedDeviceBuilder {
 
 	builder.reportedDevice.SetMac(attr)
 	return builder
+}
+
+func (builder *ReportedDeviceBuilder) MacBuilder(attrBuilder *MacBuilder) *ReportedDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Mac(attr)
 }
 
 func (builder *ReportedDeviceBuilder) Name(attr string) *ReportedDeviceBuilder {
@@ -64102,6 +72847,23 @@ func (builder *ReportedDeviceBuilder) Vm(attr *Vm) *ReportedDeviceBuilder {
 
 	builder.reportedDevice.SetVm(attr)
 	return builder
+}
+
+func (builder *ReportedDeviceBuilder) VmBuilder(attrBuilder *VmBuilder) *ReportedDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *ReportedDeviceBuilder) Href(href string) *ReportedDeviceBuilder {
@@ -64143,6 +72905,23 @@ func (builder *RngDeviceBuilder) Rate(attr *Rate) *RngDeviceBuilder {
 
 	builder.rngDevice.SetRate(attr)
 	return builder
+}
+
+func (builder *RngDeviceBuilder) RateBuilder(attrBuilder *RateBuilder) *RngDeviceBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Rate(attr)
 }
 
 func (builder *RngDeviceBuilder) Source(attr RngSource) *RngDeviceBuilder {
@@ -64261,6 +73040,26 @@ func (builder *RoleBuilder) PermitsOfAny(anys ...Permit) *RoleBuilder {
 	return builder
 }
 
+func (builder *RoleBuilder) PermitsBuilderOfAny(anyBuilders ...PermitBuilder) *RoleBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermitsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *RoleBuilder) User(attr *User) *RoleBuilder {
 	if builder.err != nil {
 		return builder
@@ -64268,6 +73067,23 @@ func (builder *RoleBuilder) User(attr *User) *RoleBuilder {
 
 	builder.role.SetUser(attr)
 	return builder
+}
+
+func (builder *RoleBuilder) UserBuilder(attrBuilder *UserBuilder) *RoleBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
 }
 
 func (builder *RoleBuilder) Href(href string) *RoleBuilder {
@@ -64323,6 +73139,26 @@ func (builder *SchedulingPolicyBuilder) BalancesOfAny(anys ...Balance) *Scheduli
 	return builder
 }
 
+func (builder *SchedulingPolicyBuilder) BalancesBuilderOfAny(anyBuilders ...BalanceBuilder) *SchedulingPolicyBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.BalancesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SchedulingPolicyBuilder) Comment(attr string) *SchedulingPolicyBuilder {
 	if builder.err != nil {
 		return builder
@@ -64368,6 +73204,26 @@ func (builder *SchedulingPolicyBuilder) FiltersOfAny(anys ...Filter) *Scheduling
 		builder.schedulingPolicy.filters = new(FilterSlice)
 	}
 	builder.schedulingPolicy.filters.slice = append(builder.schedulingPolicy.filters.slice, anys...)
+	return builder
+}
+
+func (builder *SchedulingPolicyBuilder) FiltersBuilderOfAny(anyBuilders ...FilterBuilder) *SchedulingPolicyBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.FiltersOfAny(*attr)
+	}
 	return builder
 }
 
@@ -64419,6 +73275,26 @@ func (builder *SchedulingPolicyBuilder) PropertiesOfAny(anys ...Property) *Sched
 	return builder
 }
 
+func (builder *SchedulingPolicyBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *SchedulingPolicyBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SchedulingPolicyBuilder) Weight(attr *WeightSlice) *SchedulingPolicyBuilder {
 	if builder.err != nil {
 		return builder
@@ -64437,6 +73313,26 @@ func (builder *SchedulingPolicyBuilder) WeightOfAny(anys ...Weight) *SchedulingP
 		builder.schedulingPolicy.weight = new(WeightSlice)
 	}
 	builder.schedulingPolicy.weight.slice = append(builder.schedulingPolicy.weight.slice, anys...)
+	return builder
+}
+
+func (builder *SchedulingPolicyBuilder) WeightBuilderOfAny(anyBuilders ...WeightBuilder) *SchedulingPolicyBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.WeightOfAny(*attr)
+	}
 	return builder
 }
 
@@ -64544,6 +73440,26 @@ func (builder *SchedulingPolicyUnitBuilder) PropertiesOfAny(anys ...Property) *S
 		builder.schedulingPolicyUnit.properties = new(PropertySlice)
 	}
 	builder.schedulingPolicyUnit.properties.slice = append(builder.schedulingPolicyUnit.properties.slice, anys...)
+	return builder
+}
+
+func (builder *SchedulingPolicyUnitBuilder) PropertiesBuilderOfAny(anyBuilders ...PropertyBuilder) *SchedulingPolicyUnitBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -64724,6 +73640,23 @@ func (builder *SessionBuilder) Ip(attr *Ip) *SessionBuilder {
 	return builder
 }
 
+func (builder *SessionBuilder) IpBuilder(attrBuilder *IpBuilder) *SessionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Ip(attr)
+}
+
 func (builder *SessionBuilder) Name(attr string) *SessionBuilder {
 	if builder.err != nil {
 		return builder
@@ -64751,6 +73684,23 @@ func (builder *SessionBuilder) User(attr *User) *SessionBuilder {
 	return builder
 }
 
+func (builder *SessionBuilder) UserBuilder(attrBuilder *UserBuilder) *SessionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
+}
+
 func (builder *SessionBuilder) Vm(attr *Vm) *SessionBuilder {
 	if builder.err != nil {
 		return builder
@@ -64758,6 +73708,23 @@ func (builder *SessionBuilder) Vm(attr *Vm) *SessionBuilder {
 
 	builder.session.SetVm(attr)
 	return builder
+}
+
+func (builder *SessionBuilder) VmBuilder(attrBuilder *VmBuilder) *SessionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *SessionBuilder) Href(href string) *SessionBuilder {
@@ -64904,6 +73871,26 @@ func (builder *SnapshotBuilder) AffinityLabelsOfAny(anys ...AffinityLabel) *Snap
 	return builder
 }
 
+func (builder *SnapshotBuilder) AffinityLabelsBuilderOfAny(anyBuilders ...AffinityLabelBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AffinityLabelsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) Applications(attr *ApplicationSlice) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -64925,6 +73912,26 @@ func (builder *SnapshotBuilder) ApplicationsOfAny(anys ...Application) *Snapshot
 	return builder
 }
 
+func (builder *SnapshotBuilder) ApplicationsBuilderOfAny(anyBuilders ...ApplicationBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ApplicationsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) Bios(attr *Bios) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -64932,6 +73939,23 @@ func (builder *SnapshotBuilder) Bios(attr *Bios) *SnapshotBuilder {
 
 	builder.snapshot.SetBios(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) BiosBuilder(attrBuilder *BiosBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Bios(attr)
 }
 
 func (builder *SnapshotBuilder) Cdroms(attr *CdromSlice) *SnapshotBuilder {
@@ -64955,6 +73979,26 @@ func (builder *SnapshotBuilder) CdromsOfAny(anys ...Cdrom) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) CdromsBuilderOfAny(anyBuilders ...CdromBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CdromsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) Cluster(attr *Cluster) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -64962,6 +74006,23 @@ func (builder *SnapshotBuilder) Cluster(attr *Cluster) *SnapshotBuilder {
 
 	builder.snapshot.SetCluster(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *SnapshotBuilder) Comment(attr string) *SnapshotBuilder {
@@ -64982,6 +74043,23 @@ func (builder *SnapshotBuilder) Console(attr *Console) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) ConsoleBuilder(attrBuilder *ConsoleBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Console(attr)
+}
+
 func (builder *SnapshotBuilder) Cpu(attr *Cpu) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -64991,6 +74069,23 @@ func (builder *SnapshotBuilder) Cpu(attr *Cpu) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) CpuBuilder(attrBuilder *CpuBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *SnapshotBuilder) CpuProfile(attr *CpuProfile) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -64998,6 +74093,23 @@ func (builder *SnapshotBuilder) CpuProfile(attr *CpuProfile) *SnapshotBuilder {
 
 	builder.snapshot.SetCpuProfile(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) CpuProfileBuilder(attrBuilder *CpuProfileBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CpuProfile(attr)
 }
 
 func (builder *SnapshotBuilder) CpuShares(attr int64) *SnapshotBuilder {
@@ -65025,6 +74137,23 @@ func (builder *SnapshotBuilder) CustomCompatibilityVersion(attr *Version) *Snaps
 
 	builder.snapshot.SetCustomCompatibilityVersion(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) CustomCompatibilityVersionBuilder(attrBuilder *VersionBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CustomCompatibilityVersion(attr)
 }
 
 func (builder *SnapshotBuilder) CustomCpuModel(attr string) *SnapshotBuilder {
@@ -65063,6 +74192,26 @@ func (builder *SnapshotBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *S
 		builder.snapshot.customProperties = new(CustomPropertySlice)
 	}
 	builder.snapshot.customProperties.slice = append(builder.snapshot.customProperties.slice, anys...)
+	return builder
+}
+
+func (builder *SnapshotBuilder) CustomPropertiesBuilderOfAny(anyBuilders ...CustomPropertyBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CustomPropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -65114,6 +74263,26 @@ func (builder *SnapshotBuilder) DiskAttachmentsOfAny(anys ...DiskAttachment) *Sn
 	return builder
 }
 
+func (builder *SnapshotBuilder) DiskAttachmentsBuilderOfAny(anyBuilders ...DiskAttachmentBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiskAttachmentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) Display(attr *Display) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65121,6 +74290,23 @@ func (builder *SnapshotBuilder) Display(attr *Display) *SnapshotBuilder {
 
 	builder.snapshot.SetDisplay(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) DisplayBuilder(attrBuilder *DisplayBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Display(attr)
 }
 
 func (builder *SnapshotBuilder) Domain(attr *Domain) *SnapshotBuilder {
@@ -65132,6 +74318,23 @@ func (builder *SnapshotBuilder) Domain(attr *Domain) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) DomainBuilder(attrBuilder *DomainBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Domain(attr)
+}
+
 func (builder *SnapshotBuilder) ExternalHostProvider(attr *ExternalHostProvider) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65139,6 +74342,23 @@ func (builder *SnapshotBuilder) ExternalHostProvider(attr *ExternalHostProvider)
 
 	builder.snapshot.SetExternalHostProvider(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) ExternalHostProviderBuilder(attrBuilder *ExternalHostProviderBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalHostProvider(attr)
 }
 
 func (builder *SnapshotBuilder) Floppies(attr *FloppySlice) *SnapshotBuilder {
@@ -65159,6 +74379,26 @@ func (builder *SnapshotBuilder) FloppiesOfAny(anys ...Floppy) *SnapshotBuilder {
 		builder.snapshot.floppies = new(FloppySlice)
 	}
 	builder.snapshot.floppies.slice = append(builder.snapshot.floppies.slice, anys...)
+	return builder
+}
+
+func (builder *SnapshotBuilder) FloppiesBuilderOfAny(anyBuilders ...FloppyBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.FloppiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -65192,6 +74432,26 @@ func (builder *SnapshotBuilder) GraphicsConsolesOfAny(anys ...GraphicsConsole) *
 	return builder
 }
 
+func (builder *SnapshotBuilder) GraphicsConsolesBuilderOfAny(anyBuilders ...GraphicsConsoleBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GraphicsConsolesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) GuestOperatingSystem(attr *GuestOperatingSystem) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65201,6 +74461,23 @@ func (builder *SnapshotBuilder) GuestOperatingSystem(attr *GuestOperatingSystem)
 	return builder
 }
 
+func (builder *SnapshotBuilder) GuestOperatingSystemBuilder(attrBuilder *GuestOperatingSystemBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.GuestOperatingSystem(attr)
+}
+
 func (builder *SnapshotBuilder) GuestTimeZone(attr *TimeZone) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65208,6 +74485,23 @@ func (builder *SnapshotBuilder) GuestTimeZone(attr *TimeZone) *SnapshotBuilder {
 
 	builder.snapshot.SetGuestTimeZone(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) GuestTimeZoneBuilder(attrBuilder *TimeZoneBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.GuestTimeZone(attr)
 }
 
 func (builder *SnapshotBuilder) HasIllegalImages(attr bool) *SnapshotBuilder {
@@ -65228,6 +74522,23 @@ func (builder *SnapshotBuilder) HighAvailability(attr *HighAvailability) *Snapsh
 	return builder
 }
 
+func (builder *SnapshotBuilder) HighAvailabilityBuilder(attrBuilder *HighAvailabilityBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HighAvailability(attr)
+}
+
 func (builder *SnapshotBuilder) Host(attr *Host) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65235,6 +74546,23 @@ func (builder *SnapshotBuilder) Host(attr *Host) *SnapshotBuilder {
 
 	builder.snapshot.SetHost(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) HostBuilder(attrBuilder *HostBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *SnapshotBuilder) HostDevices(attr *HostDeviceSlice) *SnapshotBuilder {
@@ -65258,6 +74586,26 @@ func (builder *SnapshotBuilder) HostDevicesOfAny(anys ...HostDevice) *SnapshotBu
 	return builder
 }
 
+func (builder *SnapshotBuilder) HostDevicesBuilderOfAny(anyBuilders ...HostDeviceBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HostDevicesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) Id(attr string) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65276,6 +74624,23 @@ func (builder *SnapshotBuilder) Initialization(attr *Initialization) *SnapshotBu
 	return builder
 }
 
+func (builder *SnapshotBuilder) InitializationBuilder(attrBuilder *InitializationBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Initialization(attr)
+}
+
 func (builder *SnapshotBuilder) InstanceType(attr *InstanceType) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65285,6 +74650,23 @@ func (builder *SnapshotBuilder) InstanceType(attr *InstanceType) *SnapshotBuilde
 	return builder
 }
 
+func (builder *SnapshotBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *SnapshotBuilder) Io(attr *Io) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65292,6 +74674,23 @@ func (builder *SnapshotBuilder) Io(attr *Io) *SnapshotBuilder {
 
 	builder.snapshot.SetIo(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) IoBuilder(attrBuilder *IoBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Io(attr)
 }
 
 func (builder *SnapshotBuilder) KatelloErrata(attr *KatelloErratumSlice) *SnapshotBuilder {
@@ -65315,6 +74714,26 @@ func (builder *SnapshotBuilder) KatelloErrataOfAny(anys ...KatelloErratum) *Snap
 	return builder
 }
 
+func (builder *SnapshotBuilder) KatelloErrataBuilderOfAny(anyBuilders ...KatelloErratumBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.KatelloErrataOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) LargeIcon(attr *Icon) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65324,6 +74743,23 @@ func (builder *SnapshotBuilder) LargeIcon(attr *Icon) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) LargeIconBuilder(attrBuilder *IconBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LargeIcon(attr)
+}
+
 func (builder *SnapshotBuilder) Lease(attr *StorageDomainLease) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65331,6 +74767,23 @@ func (builder *SnapshotBuilder) Lease(attr *StorageDomainLease) *SnapshotBuilder
 
 	builder.snapshot.SetLease(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) LeaseBuilder(attrBuilder *StorageDomainLeaseBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Lease(attr)
 }
 
 func (builder *SnapshotBuilder) Memory(attr int64) *SnapshotBuilder {
@@ -65351,6 +74804,23 @@ func (builder *SnapshotBuilder) MemoryPolicy(attr *MemoryPolicy) *SnapshotBuilde
 	return builder
 }
 
+func (builder *SnapshotBuilder) MemoryPolicyBuilder(attrBuilder *MemoryPolicyBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.MemoryPolicy(attr)
+}
+
 func (builder *SnapshotBuilder) Migration(attr *MigrationOptions) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65358,6 +74828,23 @@ func (builder *SnapshotBuilder) Migration(attr *MigrationOptions) *SnapshotBuild
 
 	builder.snapshot.SetMigration(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) MigrationBuilder(attrBuilder *MigrationOptionsBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Migration(attr)
 }
 
 func (builder *SnapshotBuilder) MigrationDowntime(attr int64) *SnapshotBuilder {
@@ -65408,6 +74895,26 @@ func (builder *SnapshotBuilder) NicsOfAny(anys ...Nic) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) NicsBuilderOfAny(anyBuilders ...NicBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NicsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) NumaNodes(attr *NumaNodeSlice) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65426,6 +74933,26 @@ func (builder *SnapshotBuilder) NumaNodesOfAny(anys ...NumaNode) *SnapshotBuilde
 		builder.snapshot.numaNodes = new(NumaNodeSlice)
 	}
 	builder.snapshot.numaNodes.slice = append(builder.snapshot.numaNodes.slice, anys...)
+	return builder
+}
+
+func (builder *SnapshotBuilder) NumaNodesBuilderOfAny(anyBuilders ...NumaNodeBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NumaNodesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -65456,6 +74983,23 @@ func (builder *SnapshotBuilder) OriginalTemplate(attr *Template) *SnapshotBuilde
 	return builder
 }
 
+func (builder *SnapshotBuilder) OriginalTemplateBuilder(attrBuilder *TemplateBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OriginalTemplate(attr)
+}
+
 func (builder *SnapshotBuilder) Os(attr *OperatingSystem) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65463,6 +75007,23 @@ func (builder *SnapshotBuilder) Os(attr *OperatingSystem) *SnapshotBuilder {
 
 	builder.snapshot.SetOs(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) OsBuilder(attrBuilder *OperatingSystemBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Os(attr)
 }
 
 func (builder *SnapshotBuilder) Payloads(attr *PayloadSlice) *SnapshotBuilder {
@@ -65483,6 +75044,26 @@ func (builder *SnapshotBuilder) PayloadsOfAny(anys ...Payload) *SnapshotBuilder 
 		builder.snapshot.payloads = new(PayloadSlice)
 	}
 	builder.snapshot.payloads.slice = append(builder.snapshot.payloads.slice, anys...)
+	return builder
+}
+
+func (builder *SnapshotBuilder) PayloadsBuilderOfAny(anyBuilders ...PayloadBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PayloadsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -65507,6 +75088,26 @@ func (builder *SnapshotBuilder) PermissionsOfAny(anys ...Permission) *SnapshotBu
 	return builder
 }
 
+func (builder *SnapshotBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) PersistMemorystate(attr bool) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65525,6 +75126,23 @@ func (builder *SnapshotBuilder) PlacementPolicy(attr *VmPlacementPolicy) *Snapsh
 	return builder
 }
 
+func (builder *SnapshotBuilder) PlacementPolicyBuilder(attrBuilder *VmPlacementPolicyBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PlacementPolicy(attr)
+}
+
 func (builder *SnapshotBuilder) Quota(attr *Quota) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65532,6 +75150,23 @@ func (builder *SnapshotBuilder) Quota(attr *Quota) *SnapshotBuilder {
 
 	builder.snapshot.SetQuota(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
 }
 
 func (builder *SnapshotBuilder) ReportedDevices(attr *ReportedDeviceSlice) *SnapshotBuilder {
@@ -65555,6 +75190,26 @@ func (builder *SnapshotBuilder) ReportedDevicesOfAny(anys ...ReportedDevice) *Sn
 	return builder
 }
 
+func (builder *SnapshotBuilder) ReportedDevicesBuilderOfAny(anyBuilders ...ReportedDeviceBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ReportedDevicesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) RngDevice(attr *RngDevice) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65562,6 +75217,23 @@ func (builder *SnapshotBuilder) RngDevice(attr *RngDevice) *SnapshotBuilder {
 
 	builder.snapshot.SetRngDevice(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) RngDeviceBuilder(attrBuilder *RngDeviceBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.RngDevice(attr)
 }
 
 func (builder *SnapshotBuilder) RunOnce(attr bool) *SnapshotBuilder {
@@ -65580,6 +75252,23 @@ func (builder *SnapshotBuilder) SerialNumber(attr *SerialNumber) *SnapshotBuilde
 
 	builder.snapshot.SetSerialNumber(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) SerialNumberBuilder(attrBuilder *SerialNumberBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SerialNumber(attr)
 }
 
 func (builder *SnapshotBuilder) Sessions(attr *SessionSlice) *SnapshotBuilder {
@@ -65603,6 +75292,26 @@ func (builder *SnapshotBuilder) SessionsOfAny(anys ...Session) *SnapshotBuilder 
 	return builder
 }
 
+func (builder *SnapshotBuilder) SessionsBuilderOfAny(anyBuilders ...SessionBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SessionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) SmallIcon(attr *Icon) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65610,6 +75319,23 @@ func (builder *SnapshotBuilder) SmallIcon(attr *Icon) *SnapshotBuilder {
 
 	builder.snapshot.SetSmallIcon(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) SmallIconBuilder(attrBuilder *IconBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SmallIcon(attr)
 }
 
 func (builder *SnapshotBuilder) SnapshotStatus(attr SnapshotStatus) *SnapshotBuilder {
@@ -65651,6 +75377,26 @@ func (builder *SnapshotBuilder) SnapshotsOfAny(anys ...Snapshot) *SnapshotBuilde
 	return builder
 }
 
+func (builder *SnapshotBuilder) SnapshotsBuilderOfAny(anyBuilders ...SnapshotBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SnapshotsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) SoundcardEnabled(attr bool) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65667,6 +75413,23 @@ func (builder *SnapshotBuilder) Sso(attr *Sso) *SnapshotBuilder {
 
 	builder.snapshot.SetSso(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) SsoBuilder(attrBuilder *SsoBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Sso(attr)
 }
 
 func (builder *SnapshotBuilder) StartPaused(attr bool) *SnapshotBuilder {
@@ -65717,6 +75480,26 @@ func (builder *SnapshotBuilder) StatisticsOfAny(anys ...Statistic) *SnapshotBuil
 	return builder
 }
 
+func (builder *SnapshotBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) Status(attr VmStatus) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65762,6 +75545,23 @@ func (builder *SnapshotBuilder) StorageDomain(attr *StorageDomain) *SnapshotBuil
 	return builder
 }
 
+func (builder *SnapshotBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
 func (builder *SnapshotBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65792,6 +75592,26 @@ func (builder *SnapshotBuilder) TagsOfAny(anys ...Tag) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) TagsBuilderOfAny(anyBuilders ...TagBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.TagsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) Template(attr *Template) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65801,6 +75621,23 @@ func (builder *SnapshotBuilder) Template(attr *Template) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *SnapshotBuilder) TimeZone(attr *TimeZone) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65808,6 +75645,23 @@ func (builder *SnapshotBuilder) TimeZone(attr *TimeZone) *SnapshotBuilder {
 
 	builder.snapshot.SetTimeZone(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.TimeZone(attr)
 }
 
 func (builder *SnapshotBuilder) TunnelMigration(attr bool) *SnapshotBuilder {
@@ -65837,6 +75691,23 @@ func (builder *SnapshotBuilder) Usb(attr *Usb) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) UsbBuilder(attrBuilder *UsbBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Usb(attr)
+}
+
 func (builder *SnapshotBuilder) UseLatestTemplateVersion(attr bool) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65855,6 +75726,23 @@ func (builder *SnapshotBuilder) VirtioScsi(attr *VirtioScsi) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) VirtioScsiBuilder(attrBuilder *VirtioScsiBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VirtioScsi(attr)
+}
+
 func (builder *SnapshotBuilder) Vm(attr *Vm) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65864,6 +75752,23 @@ func (builder *SnapshotBuilder) Vm(attr *Vm) *SnapshotBuilder {
 	return builder
 }
 
+func (builder *SnapshotBuilder) VmBuilder(attrBuilder *VmBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
+}
+
 func (builder *SnapshotBuilder) VmPool(attr *VmPool) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -65871,6 +75776,23 @@ func (builder *SnapshotBuilder) VmPool(attr *VmPool) *SnapshotBuilder {
 
 	builder.snapshot.SetVmPool(attr)
 	return builder
+}
+
+func (builder *SnapshotBuilder) VmPoolBuilder(attrBuilder *VmPoolBuilder) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VmPool(attr)
 }
 
 func (builder *SnapshotBuilder) Watchdogs(attr *WatchdogSlice) *SnapshotBuilder {
@@ -65891,6 +75813,26 @@ func (builder *SnapshotBuilder) WatchdogsOfAny(anys ...Watchdog) *SnapshotBuilde
 		builder.snapshot.watchdogs = new(WatchdogSlice)
 	}
 	builder.snapshot.watchdogs.slice = append(builder.snapshot.watchdogs.slice, anys...)
+	return builder
+}
+
+func (builder *SnapshotBuilder) WatchdogsBuilderOfAny(anyBuilders ...WatchdogBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.WatchdogsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -65935,6 +75877,23 @@ func (builder *SpecialObjectsBuilder) BlankTemplate(attr *Template) *SpecialObje
 	return builder
 }
 
+func (builder *SpecialObjectsBuilder) BlankTemplateBuilder(attrBuilder *TemplateBuilder) *SpecialObjectsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.BlankTemplate(attr)
+}
+
 func (builder *SpecialObjectsBuilder) RootTag(attr *Tag) *SpecialObjectsBuilder {
 	if builder.err != nil {
 		return builder
@@ -65942,6 +75901,23 @@ func (builder *SpecialObjectsBuilder) RootTag(attr *Tag) *SpecialObjectsBuilder 
 
 	builder.specialObjects.SetRootTag(attr)
 	return builder
+}
+
+func (builder *SpecialObjectsBuilder) RootTagBuilder(attrBuilder *TagBuilder) *SpecialObjectsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.RootTag(attr)
 }
 
 func (builder *SpecialObjectsBuilder) Href(href string) *SpecialObjectsBuilder {
@@ -66098,6 +76074,23 @@ func (builder *SshBuilder) User(attr *User) *SshBuilder {
 	return builder
 }
 
+func (builder *SshBuilder) UserBuilder(attrBuilder *UserBuilder) *SshBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
+}
+
 func (builder *SshBuilder) Href(href string) *SshBuilder {
 	if builder.err != nil {
 		return builder
@@ -66184,6 +76177,23 @@ func (builder *SshPublicKeyBuilder) User(attr *User) *SshPublicKeyBuilder {
 	return builder
 }
 
+func (builder *SshPublicKeyBuilder) UserBuilder(attrBuilder *UserBuilder) *SshPublicKeyBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
+}
+
 func (builder *SshPublicKeyBuilder) Href(href string) *SshPublicKeyBuilder {
 	if builder.err != nil {
 		return builder
@@ -66237,6 +76247,26 @@ func (builder *SsoBuilder) MethodsOfAny(anys ...Method) *SsoBuilder {
 	return builder
 }
 
+func (builder *SsoBuilder) MethodsBuilderOfAny(anyBuilders ...MethodBuilder) *SsoBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.MethodsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *SsoBuilder) Href(href string) *SsoBuilder {
 	if builder.err != nil {
 		return builder
@@ -66278,6 +76308,23 @@ func (builder *StatisticBuilder) Brick(attr *GlusterBrick) *StatisticBuilder {
 	return builder
 }
 
+func (builder *StatisticBuilder) BrickBuilder(attrBuilder *GlusterBrickBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Brick(attr)
+}
+
 func (builder *StatisticBuilder) Comment(attr string) *StatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -66305,6 +76352,23 @@ func (builder *StatisticBuilder) Disk(attr *Disk) *StatisticBuilder {
 	return builder
 }
 
+func (builder *StatisticBuilder) DiskBuilder(attrBuilder *DiskBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Disk(attr)
+}
+
 func (builder *StatisticBuilder) GlusterVolume(attr *GlusterVolume) *StatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -66312,6 +76376,23 @@ func (builder *StatisticBuilder) GlusterVolume(attr *GlusterVolume) *StatisticBu
 
 	builder.statistic.SetGlusterVolume(attr)
 	return builder
+}
+
+func (builder *StatisticBuilder) GlusterVolumeBuilder(attrBuilder *GlusterVolumeBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.GlusterVolume(attr)
 }
 
 func (builder *StatisticBuilder) Host(attr *Host) *StatisticBuilder {
@@ -66323,6 +76404,23 @@ func (builder *StatisticBuilder) Host(attr *Host) *StatisticBuilder {
 	return builder
 }
 
+func (builder *StatisticBuilder) HostBuilder(attrBuilder *HostBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *StatisticBuilder) HostNic(attr *HostNic) *StatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -66332,6 +76430,23 @@ func (builder *StatisticBuilder) HostNic(attr *HostNic) *StatisticBuilder {
 	return builder
 }
 
+func (builder *StatisticBuilder) HostNicBuilder(attrBuilder *HostNicBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HostNic(attr)
+}
+
 func (builder *StatisticBuilder) HostNumaNode(attr *NumaNode) *StatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -66339,6 +76454,23 @@ func (builder *StatisticBuilder) HostNumaNode(attr *NumaNode) *StatisticBuilder 
 
 	builder.statistic.SetHostNumaNode(attr)
 	return builder
+}
+
+func (builder *StatisticBuilder) HostNumaNodeBuilder(attrBuilder *NumaNodeBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HostNumaNode(attr)
 }
 
 func (builder *StatisticBuilder) Id(attr string) *StatisticBuilder {
@@ -66377,6 +76509,23 @@ func (builder *StatisticBuilder) Nic(attr *Nic) *StatisticBuilder {
 	return builder
 }
 
+func (builder *StatisticBuilder) NicBuilder(attrBuilder *NicBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Nic(attr)
+}
+
 func (builder *StatisticBuilder) Step(attr *Step) *StatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -66384,6 +76533,23 @@ func (builder *StatisticBuilder) Step(attr *Step) *StatisticBuilder {
 
 	builder.statistic.SetStep(attr)
 	return builder
+}
+
+func (builder *StatisticBuilder) StepBuilder(attrBuilder *StepBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Step(attr)
 }
 
 func (builder *StatisticBuilder) Type(attr ValueType) *StatisticBuilder {
@@ -66425,6 +76591,26 @@ func (builder *StatisticBuilder) ValuesOfAny(anys ...Value) *StatisticBuilder {
 	return builder
 }
 
+func (builder *StatisticBuilder) ValuesBuilderOfAny(anyBuilders ...ValueBuilder) *StatisticBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ValuesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *StatisticBuilder) Vm(attr *Vm) *StatisticBuilder {
 	if builder.err != nil {
 		return builder
@@ -66432,6 +76618,23 @@ func (builder *StatisticBuilder) Vm(attr *Vm) *StatisticBuilder {
 
 	builder.statistic.SetVm(attr)
 	return builder
+}
+
+func (builder *StatisticBuilder) VmBuilder(attrBuilder *VmBuilder) *StatisticBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *StatisticBuilder) Href(href string) *StatisticBuilder {
@@ -66502,6 +76705,23 @@ func (builder *StepBuilder) ExecutionHost(attr *Host) *StepBuilder {
 	return builder
 }
 
+func (builder *StepBuilder) ExecutionHostBuilder(attrBuilder *HostBuilder) *StepBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExecutionHost(attr)
+}
+
 func (builder *StepBuilder) External(attr bool) *StepBuilder {
 	if builder.err != nil {
 		return builder
@@ -66538,6 +76758,23 @@ func (builder *StepBuilder) Job(attr *Job) *StepBuilder {
 	return builder
 }
 
+func (builder *StepBuilder) JobBuilder(attrBuilder *JobBuilder) *StepBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Job(attr)
+}
+
 func (builder *StepBuilder) Name(attr string) *StepBuilder {
 	if builder.err != nil {
 		return builder
@@ -66563,6 +76800,23 @@ func (builder *StepBuilder) ParentStep(attr *Step) *StepBuilder {
 
 	builder.step.SetParentStep(attr)
 	return builder
+}
+
+func (builder *StepBuilder) ParentStepBuilder(attrBuilder *StepBuilder) *StepBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ParentStep(attr)
 }
 
 func (builder *StepBuilder) Progress(attr int64) *StepBuilder {
@@ -66601,6 +76855,26 @@ func (builder *StepBuilder) StatisticsOfAny(anys ...Statistic) *StepBuilder {
 		builder.step.statistics = new(StatisticSlice)
 	}
 	builder.step.statistics.slice = append(builder.step.statistics.slice, anys...)
+	return builder
+}
+
+func (builder *StepBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *StepBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -66688,6 +76962,23 @@ func (builder *StorageConnectionBuilder) Host(attr *Host) *StorageConnectionBuil
 
 	builder.storageConnection.SetHost(attr)
 	return builder
+}
+
+func (builder *StorageConnectionBuilder) HostBuilder(attrBuilder *HostBuilder) *StorageConnectionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *StorageConnectionBuilder) Id(attr string) *StorageConnectionBuilder {
@@ -66875,6 +77166,23 @@ func (builder *StorageConnectionExtensionBuilder) Host(attr *Host) *StorageConne
 	return builder
 }
 
+func (builder *StorageConnectionExtensionBuilder) HostBuilder(attrBuilder *HostBuilder) *StorageConnectionExtensionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *StorageConnectionExtensionBuilder) Id(attr string) *StorageConnectionExtensionBuilder {
 	if builder.err != nil {
 		return builder
@@ -67006,6 +77314,23 @@ func (builder *StorageDomainBuilder) DataCenter(attr *DataCenter) *StorageDomain
 	return builder
 }
 
+func (builder *StorageDomainBuilder) DataCenterBuilder(attrBuilder *DataCenterBuilder) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.DataCenter(attr)
+}
+
 func (builder *StorageDomainBuilder) DataCenters(attr *DataCenterSlice) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -67024,6 +77349,26 @@ func (builder *StorageDomainBuilder) DataCentersOfAny(anys ...DataCenter) *Stora
 		builder.storageDomain.dataCenters = new(DataCenterSlice)
 	}
 	builder.storageDomain.dataCenters.slice = append(builder.storageDomain.dataCenters.slice, anys...)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) DataCentersBuilderOfAny(anyBuilders ...DataCenterBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DataCentersOfAny(*attr)
+	}
 	return builder
 }
 
@@ -67066,6 +77411,26 @@ func (builder *StorageDomainBuilder) DiskProfilesOfAny(anys ...DiskProfile) *Sto
 	return builder
 }
 
+func (builder *StorageDomainBuilder) DiskProfilesBuilderOfAny(anyBuilders ...DiskProfileBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiskProfilesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *StorageDomainBuilder) DiskSnapshots(attr *DiskSnapshotSlice) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -67087,6 +77452,26 @@ func (builder *StorageDomainBuilder) DiskSnapshotsOfAny(anys ...DiskSnapshot) *S
 	return builder
 }
 
+func (builder *StorageDomainBuilder) DiskSnapshotsBuilderOfAny(anyBuilders ...DiskSnapshotBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiskSnapshotsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Disks(attr *DiskSlice) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -67105,6 +77490,26 @@ func (builder *StorageDomainBuilder) DisksOfAny(anys ...Disk) *StorageDomainBuil
 		builder.storageDomain.disks = new(DiskSlice)
 	}
 	builder.storageDomain.disks.slice = append(builder.storageDomain.disks.slice, anys...)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) DisksBuilderOfAny(anyBuilders ...DiskBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DisksOfAny(*attr)
+	}
 	return builder
 }
 
@@ -67138,6 +77543,26 @@ func (builder *StorageDomainBuilder) FilesOfAny(anys ...File) *StorageDomainBuil
 	return builder
 }
 
+func (builder *StorageDomainBuilder) FilesBuilderOfAny(anyBuilders ...FileBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.FilesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Host(attr *Host) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -67145,6 +77570,23 @@ func (builder *StorageDomainBuilder) Host(attr *Host) *StorageDomainBuilder {
 
 	builder.storageDomain.SetHost(attr)
 	return builder
+}
+
+func (builder *StorageDomainBuilder) HostBuilder(attrBuilder *HostBuilder) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *StorageDomainBuilder) Id(attr string) *StorageDomainBuilder {
@@ -67174,6 +77616,26 @@ func (builder *StorageDomainBuilder) ImagesOfAny(anys ...Image) *StorageDomainBu
 		builder.storageDomain.images = new(ImageSlice)
 	}
 	builder.storageDomain.images.slice = append(builder.storageDomain.images.slice, anys...)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) ImagesBuilderOfAny(anyBuilders ...ImageBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ImagesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -67225,6 +77687,26 @@ func (builder *StorageDomainBuilder) PermissionsOfAny(anys ...Permission) *Stora
 	return builder
 }
 
+func (builder *StorageDomainBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Status(attr StorageDomainStatus) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -67241,6 +77723,23 @@ func (builder *StorageDomainBuilder) Storage(attr *HostStorage) *StorageDomainBu
 
 	builder.storageDomain.SetStorage(attr)
 	return builder
+}
+
+func (builder *StorageDomainBuilder) StorageBuilder(attrBuilder *HostStorageBuilder) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Storage(attr)
 }
 
 func (builder *StorageDomainBuilder) StorageConnections(attr *StorageConnectionSlice) *StorageDomainBuilder {
@@ -67261,6 +77760,26 @@ func (builder *StorageDomainBuilder) StorageConnectionsOfAny(anys ...StorageConn
 		builder.storageDomain.storageConnections = new(StorageConnectionSlice)
 	}
 	builder.storageDomain.storageConnections.slice = append(builder.storageDomain.storageConnections.slice, anys...)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) StorageConnectionsBuilderOfAny(anyBuilders ...StorageConnectionBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StorageConnectionsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -67312,6 +77831,26 @@ func (builder *StorageDomainBuilder) TemplatesOfAny(anys ...Template) *StorageDo
 	return builder
 }
 
+func (builder *StorageDomainBuilder) TemplatesBuilderOfAny(anyBuilders ...TemplateBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.TemplatesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *StorageDomainBuilder) Type(attr StorageDomainType) *StorageDomainBuilder {
 	if builder.err != nil {
 		return builder
@@ -67348,6 +77887,26 @@ func (builder *StorageDomainBuilder) VmsOfAny(anys ...Vm) *StorageDomainBuilder 
 		builder.storageDomain.vms = new(VmSlice)
 	}
 	builder.storageDomain.vms.slice = append(builder.storageDomain.vms.slice, anys...)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *StorageDomainBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -67408,6 +77967,23 @@ func (builder *StorageDomainLeaseBuilder) StorageDomain(attr *StorageDomain) *St
 
 	builder.storageDomainLease.SetStorageDomain(attr)
 	return builder
+}
+
+func (builder *StorageDomainLeaseBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *StorageDomainLeaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
 }
 
 func (builder *StorageDomainLeaseBuilder) Href(href string) *StorageDomainLeaseBuilder {
@@ -67496,6 +78072,26 @@ func (builder *SystemOptionBuilder) ValuesOfAny(anys ...SystemOptionValue) *Syst
 		builder.systemOption.values = new(SystemOptionValueSlice)
 	}
 	builder.systemOption.values.slice = append(builder.systemOption.values.slice, anys...)
+	return builder
+}
+
+func (builder *SystemOptionBuilder) ValuesBuilderOfAny(anyBuilders ...SystemOptionValueBuilder) *SystemOptionBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ValuesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -67608,6 +78204,23 @@ func (builder *TagBuilder) Group(attr *Group) *TagBuilder {
 	return builder
 }
 
+func (builder *TagBuilder) GroupBuilder(attrBuilder *GroupBuilder) *TagBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Group(attr)
+}
+
 func (builder *TagBuilder) Host(attr *Host) *TagBuilder {
 	if builder.err != nil {
 		return builder
@@ -67615,6 +78228,23 @@ func (builder *TagBuilder) Host(attr *Host) *TagBuilder {
 
 	builder.tag.SetHost(attr)
 	return builder
+}
+
+func (builder *TagBuilder) HostBuilder(attrBuilder *HostBuilder) *TagBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *TagBuilder) Id(attr string) *TagBuilder {
@@ -67644,6 +78274,23 @@ func (builder *TagBuilder) Parent(attr *Tag) *TagBuilder {
 	return builder
 }
 
+func (builder *TagBuilder) ParentBuilder(attrBuilder *TagBuilder) *TagBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Parent(attr)
+}
+
 func (builder *TagBuilder) Template(attr *Template) *TagBuilder {
 	if builder.err != nil {
 		return builder
@@ -67651,6 +78298,23 @@ func (builder *TagBuilder) Template(attr *Template) *TagBuilder {
 
 	builder.tag.SetTemplate(attr)
 	return builder
+}
+
+func (builder *TagBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *TagBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
 }
 
 func (builder *TagBuilder) User(attr *User) *TagBuilder {
@@ -67662,6 +78326,23 @@ func (builder *TagBuilder) User(attr *User) *TagBuilder {
 	return builder
 }
 
+func (builder *TagBuilder) UserBuilder(attrBuilder *UserBuilder) *TagBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
+}
+
 func (builder *TagBuilder) Vm(attr *Vm) *TagBuilder {
 	if builder.err != nil {
 		return builder
@@ -67669,6 +78350,23 @@ func (builder *TagBuilder) Vm(attr *Vm) *TagBuilder {
 
 	builder.tag.SetVm(attr)
 	return builder
+}
+
+func (builder *TagBuilder) VmBuilder(attrBuilder *VmBuilder) *TagBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *TagBuilder) Href(href string) *TagBuilder {
@@ -67712,6 +78410,23 @@ func (builder *TemplateBuilder) Bios(attr *Bios) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) BiosBuilder(attrBuilder *BiosBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Bios(attr)
+}
+
 func (builder *TemplateBuilder) Cdroms(attr *CdromSlice) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67733,6 +78448,26 @@ func (builder *TemplateBuilder) CdromsOfAny(anys ...Cdrom) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) CdromsBuilderOfAny(anyBuilders ...CdromBuilder) *TemplateBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CdromsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *TemplateBuilder) Cluster(attr *Cluster) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67740,6 +78475,23 @@ func (builder *TemplateBuilder) Cluster(attr *Cluster) *TemplateBuilder {
 
 	builder.template.SetCluster(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *TemplateBuilder) Comment(attr string) *TemplateBuilder {
@@ -67760,6 +78512,23 @@ func (builder *TemplateBuilder) Console(attr *Console) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) ConsoleBuilder(attrBuilder *ConsoleBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Console(attr)
+}
+
 func (builder *TemplateBuilder) Cpu(attr *Cpu) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67769,6 +78538,23 @@ func (builder *TemplateBuilder) Cpu(attr *Cpu) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) CpuBuilder(attrBuilder *CpuBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *TemplateBuilder) CpuProfile(attr *CpuProfile) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67776,6 +78562,23 @@ func (builder *TemplateBuilder) CpuProfile(attr *CpuProfile) *TemplateBuilder {
 
 	builder.template.SetCpuProfile(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) CpuProfileBuilder(attrBuilder *CpuProfileBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CpuProfile(attr)
 }
 
 func (builder *TemplateBuilder) CpuShares(attr int64) *TemplateBuilder {
@@ -67803,6 +78606,23 @@ func (builder *TemplateBuilder) CustomCompatibilityVersion(attr *Version) *Templ
 
 	builder.template.SetCustomCompatibilityVersion(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) CustomCompatibilityVersionBuilder(attrBuilder *VersionBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CustomCompatibilityVersion(attr)
 }
 
 func (builder *TemplateBuilder) CustomCpuModel(attr string) *TemplateBuilder {
@@ -67841,6 +78661,26 @@ func (builder *TemplateBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *T
 		builder.template.customProperties = new(CustomPropertySlice)
 	}
 	builder.template.customProperties.slice = append(builder.template.customProperties.slice, anys...)
+	return builder
+}
+
+func (builder *TemplateBuilder) CustomPropertiesBuilderOfAny(anyBuilders ...CustomPropertyBuilder) *TemplateBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CustomPropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -67883,6 +78723,26 @@ func (builder *TemplateBuilder) DiskAttachmentsOfAny(anys ...DiskAttachment) *Te
 	return builder
 }
 
+func (builder *TemplateBuilder) DiskAttachmentsBuilderOfAny(anyBuilders ...DiskAttachmentBuilder) *TemplateBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiskAttachmentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *TemplateBuilder) Display(attr *Display) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67892,6 +78752,23 @@ func (builder *TemplateBuilder) Display(attr *Display) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) DisplayBuilder(attrBuilder *DisplayBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Display(attr)
+}
+
 func (builder *TemplateBuilder) Domain(attr *Domain) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67899,6 +78776,23 @@ func (builder *TemplateBuilder) Domain(attr *Domain) *TemplateBuilder {
 
 	builder.template.SetDomain(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) DomainBuilder(attrBuilder *DomainBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Domain(attr)
 }
 
 func (builder *TemplateBuilder) GraphicsConsoles(attr *GraphicsConsoleSlice) *TemplateBuilder {
@@ -67922,6 +78816,26 @@ func (builder *TemplateBuilder) GraphicsConsolesOfAny(anys ...GraphicsConsole) *
 	return builder
 }
 
+func (builder *TemplateBuilder) GraphicsConsolesBuilderOfAny(anyBuilders ...GraphicsConsoleBuilder) *TemplateBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GraphicsConsolesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *TemplateBuilder) HighAvailability(attr *HighAvailability) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67929,6 +78843,23 @@ func (builder *TemplateBuilder) HighAvailability(attr *HighAvailability) *Templa
 
 	builder.template.SetHighAvailability(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) HighAvailabilityBuilder(attrBuilder *HighAvailabilityBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HighAvailability(attr)
 }
 
 func (builder *TemplateBuilder) Id(attr string) *TemplateBuilder {
@@ -67949,6 +78880,23 @@ func (builder *TemplateBuilder) Initialization(attr *Initialization) *TemplateBu
 	return builder
 }
 
+func (builder *TemplateBuilder) InitializationBuilder(attrBuilder *InitializationBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Initialization(attr)
+}
+
 func (builder *TemplateBuilder) Io(attr *Io) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67956,6 +78904,23 @@ func (builder *TemplateBuilder) Io(attr *Io) *TemplateBuilder {
 
 	builder.template.SetIo(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) IoBuilder(attrBuilder *IoBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Io(attr)
 }
 
 func (builder *TemplateBuilder) LargeIcon(attr *Icon) *TemplateBuilder {
@@ -67967,6 +78932,23 @@ func (builder *TemplateBuilder) LargeIcon(attr *Icon) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) LargeIconBuilder(attrBuilder *IconBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LargeIcon(attr)
+}
+
 func (builder *TemplateBuilder) Lease(attr *StorageDomainLease) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -67974,6 +78956,23 @@ func (builder *TemplateBuilder) Lease(attr *StorageDomainLease) *TemplateBuilder
 
 	builder.template.SetLease(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) LeaseBuilder(attrBuilder *StorageDomainLeaseBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Lease(attr)
 }
 
 func (builder *TemplateBuilder) Memory(attr int64) *TemplateBuilder {
@@ -67994,6 +78993,23 @@ func (builder *TemplateBuilder) MemoryPolicy(attr *MemoryPolicy) *TemplateBuilde
 	return builder
 }
 
+func (builder *TemplateBuilder) MemoryPolicyBuilder(attrBuilder *MemoryPolicyBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.MemoryPolicy(attr)
+}
+
 func (builder *TemplateBuilder) Migration(attr *MigrationOptions) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68001,6 +79017,23 @@ func (builder *TemplateBuilder) Migration(attr *MigrationOptions) *TemplateBuild
 
 	builder.template.SetMigration(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) MigrationBuilder(attrBuilder *MigrationOptionsBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Migration(attr)
 }
 
 func (builder *TemplateBuilder) MigrationDowntime(attr int64) *TemplateBuilder {
@@ -68042,6 +79075,26 @@ func (builder *TemplateBuilder) NicsOfAny(anys ...Nic) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) NicsBuilderOfAny(anyBuilders ...NicBuilder) *TemplateBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NicsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *TemplateBuilder) Origin(attr string) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68058,6 +79111,23 @@ func (builder *TemplateBuilder) Os(attr *OperatingSystem) *TemplateBuilder {
 
 	builder.template.SetOs(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) OsBuilder(attrBuilder *OperatingSystemBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Os(attr)
 }
 
 func (builder *TemplateBuilder) Permissions(attr *PermissionSlice) *TemplateBuilder {
@@ -68081,6 +79151,26 @@ func (builder *TemplateBuilder) PermissionsOfAny(anys ...Permission) *TemplateBu
 	return builder
 }
 
+func (builder *TemplateBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *TemplateBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *TemplateBuilder) PlacementPolicy(attr *VmPlacementPolicy) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68088,6 +79178,23 @@ func (builder *TemplateBuilder) PlacementPolicy(attr *VmPlacementPolicy) *Templa
 
 	builder.template.SetPlacementPolicy(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) PlacementPolicyBuilder(attrBuilder *VmPlacementPolicyBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PlacementPolicy(attr)
 }
 
 func (builder *TemplateBuilder) Quota(attr *Quota) *TemplateBuilder {
@@ -68099,6 +79206,23 @@ func (builder *TemplateBuilder) Quota(attr *Quota) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
+}
+
 func (builder *TemplateBuilder) RngDevice(attr *RngDevice) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68106,6 +79230,23 @@ func (builder *TemplateBuilder) RngDevice(attr *RngDevice) *TemplateBuilder {
 
 	builder.template.SetRngDevice(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) RngDeviceBuilder(attrBuilder *RngDeviceBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.RngDevice(attr)
 }
 
 func (builder *TemplateBuilder) SerialNumber(attr *SerialNumber) *TemplateBuilder {
@@ -68117,6 +79258,23 @@ func (builder *TemplateBuilder) SerialNumber(attr *SerialNumber) *TemplateBuilde
 	return builder
 }
 
+func (builder *TemplateBuilder) SerialNumberBuilder(attrBuilder *SerialNumberBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SerialNumber(attr)
+}
+
 func (builder *TemplateBuilder) SmallIcon(attr *Icon) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68124,6 +79282,23 @@ func (builder *TemplateBuilder) SmallIcon(attr *Icon) *TemplateBuilder {
 
 	builder.template.SetSmallIcon(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) SmallIconBuilder(attrBuilder *IconBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SmallIcon(attr)
 }
 
 func (builder *TemplateBuilder) SoundcardEnabled(attr bool) *TemplateBuilder {
@@ -68142,6 +79317,23 @@ func (builder *TemplateBuilder) Sso(attr *Sso) *TemplateBuilder {
 
 	builder.template.SetSso(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) SsoBuilder(attrBuilder *SsoBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Sso(attr)
 }
 
 func (builder *TemplateBuilder) StartPaused(attr bool) *TemplateBuilder {
@@ -68180,6 +79372,23 @@ func (builder *TemplateBuilder) StorageDomain(attr *StorageDomain) *TemplateBuil
 	return builder
 }
 
+func (builder *TemplateBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
 func (builder *TemplateBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68210,6 +79419,26 @@ func (builder *TemplateBuilder) TagsOfAny(anys ...Tag) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) TagsBuilderOfAny(anyBuilders ...TagBuilder) *TemplateBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.TagsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *TemplateBuilder) TimeZone(attr *TimeZone) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68217,6 +79446,23 @@ func (builder *TemplateBuilder) TimeZone(attr *TimeZone) *TemplateBuilder {
 
 	builder.template.SetTimeZone(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.TimeZone(attr)
 }
 
 func (builder *TemplateBuilder) TunnelMigration(attr bool) *TemplateBuilder {
@@ -68246,6 +79492,23 @@ func (builder *TemplateBuilder) Usb(attr *Usb) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) UsbBuilder(attrBuilder *UsbBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Usb(attr)
+}
+
 func (builder *TemplateBuilder) Version(attr *TemplateVersion) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68253,6 +79516,23 @@ func (builder *TemplateBuilder) Version(attr *TemplateVersion) *TemplateBuilder 
 
 	builder.template.SetVersion(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) VersionBuilder(attrBuilder *TemplateVersionBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Version(attr)
 }
 
 func (builder *TemplateBuilder) VirtioScsi(attr *VirtioScsi) *TemplateBuilder {
@@ -68264,6 +79544,23 @@ func (builder *TemplateBuilder) VirtioScsi(attr *VirtioScsi) *TemplateBuilder {
 	return builder
 }
 
+func (builder *TemplateBuilder) VirtioScsiBuilder(attrBuilder *VirtioScsiBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VirtioScsi(attr)
+}
+
 func (builder *TemplateBuilder) Vm(attr *Vm) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -68271,6 +79568,23 @@ func (builder *TemplateBuilder) Vm(attr *Vm) *TemplateBuilder {
 
 	builder.template.SetVm(attr)
 	return builder
+}
+
+func (builder *TemplateBuilder) VmBuilder(attrBuilder *VmBuilder) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *TemplateBuilder) Watchdogs(attr *WatchdogSlice) *TemplateBuilder {
@@ -68291,6 +79605,26 @@ func (builder *TemplateBuilder) WatchdogsOfAny(anys ...Watchdog) *TemplateBuilde
 		builder.template.watchdogs = new(WatchdogSlice)
 	}
 	builder.template.watchdogs.slice = append(builder.template.watchdogs.slice, anys...)
+	return builder
+}
+
+func (builder *TemplateBuilder) WatchdogsBuilderOfAny(anyBuilders ...WatchdogBuilder) *TemplateBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.WatchdogsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -68333,6 +79667,23 @@ func (builder *TemplateVersionBuilder) BaseTemplate(attr *Template) *TemplateVer
 
 	builder.templateVersion.SetBaseTemplate(attr)
 	return builder
+}
+
+func (builder *TemplateVersionBuilder) BaseTemplateBuilder(attrBuilder *TemplateBuilder) *TemplateVersionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.BaseTemplate(attr)
 }
 
 func (builder *TemplateVersionBuilder) VersionName(attr string) *TemplateVersionBuilder {
@@ -68553,6 +79904,23 @@ func (builder *UnmanagedNetworkBuilder) Host(attr *Host) *UnmanagedNetworkBuilde
 	return builder
 }
 
+func (builder *UnmanagedNetworkBuilder) HostBuilder(attrBuilder *HostBuilder) *UnmanagedNetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
 func (builder *UnmanagedNetworkBuilder) HostNic(attr *HostNic) *UnmanagedNetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -68560,6 +79928,23 @@ func (builder *UnmanagedNetworkBuilder) HostNic(attr *HostNic) *UnmanagedNetwork
 
 	builder.unmanagedNetwork.SetHostNic(attr)
 	return builder
+}
+
+func (builder *UnmanagedNetworkBuilder) HostNicBuilder(attrBuilder *HostNicBuilder) *UnmanagedNetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HostNic(attr)
 }
 
 func (builder *UnmanagedNetworkBuilder) Id(attr string) *UnmanagedNetworkBuilder {
@@ -68698,6 +80083,23 @@ func (builder *UserBuilder) Domain(attr *Domain) *UserBuilder {
 	return builder
 }
 
+func (builder *UserBuilder) DomainBuilder(attrBuilder *DomainBuilder) *UserBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Domain(attr)
+}
+
 func (builder *UserBuilder) DomainEntryId(attr string) *UserBuilder {
 	if builder.err != nil {
 		return builder
@@ -68734,6 +80136,26 @@ func (builder *UserBuilder) GroupsOfAny(anys ...Group) *UserBuilder {
 		builder.user.groups = new(GroupSlice)
 	}
 	builder.user.groups.slice = append(builder.user.groups.slice, anys...)
+	return builder
+}
+
+func (builder *UserBuilder) GroupsBuilderOfAny(anyBuilders ...GroupBuilder) *UserBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GroupsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -68812,6 +80234,26 @@ func (builder *UserBuilder) PermissionsOfAny(anys ...Permission) *UserBuilder {
 	return builder
 }
 
+func (builder *UserBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *UserBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *UserBuilder) Principal(attr string) *UserBuilder {
 	if builder.err != nil {
 		return builder
@@ -68842,6 +80284,26 @@ func (builder *UserBuilder) RolesOfAny(anys ...Role) *UserBuilder {
 	return builder
 }
 
+func (builder *UserBuilder) RolesBuilderOfAny(anyBuilders ...RoleBuilder) *UserBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.RolesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *UserBuilder) SshPublicKeys(attr *SshPublicKeySlice) *UserBuilder {
 	if builder.err != nil {
 		return builder
@@ -68863,6 +80325,26 @@ func (builder *UserBuilder) SshPublicKeysOfAny(anys ...SshPublicKey) *UserBuilde
 	return builder
 }
 
+func (builder *UserBuilder) SshPublicKeysBuilderOfAny(anyBuilders ...SshPublicKeyBuilder) *UserBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SshPublicKeysOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *UserBuilder) Tags(attr *TagSlice) *UserBuilder {
 	if builder.err != nil {
 		return builder
@@ -68881,6 +80363,26 @@ func (builder *UserBuilder) TagsOfAny(anys ...Tag) *UserBuilder {
 		builder.user.tags = new(TagSlice)
 	}
 	builder.user.tags.slice = append(builder.user.tags.slice, anys...)
+	return builder
+}
+
+func (builder *UserBuilder) TagsBuilderOfAny(anyBuilders ...TagBuilder) *UserBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.TagsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -69265,6 +80767,23 @@ func (builder *VirtualNumaNodeBuilder) Cpu(attr *Cpu) *VirtualNumaNodeBuilder {
 	return builder
 }
 
+func (builder *VirtualNumaNodeBuilder) CpuBuilder(attrBuilder *CpuBuilder) *VirtualNumaNodeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *VirtualNumaNodeBuilder) Description(attr string) *VirtualNumaNodeBuilder {
 	if builder.err != nil {
 		return builder
@@ -69281,6 +80800,23 @@ func (builder *VirtualNumaNodeBuilder) Host(attr *Host) *VirtualNumaNodeBuilder 
 
 	builder.virtualNumaNode.SetHost(attr)
 	return builder
+}
+
+func (builder *VirtualNumaNodeBuilder) HostBuilder(attrBuilder *HostBuilder) *VirtualNumaNodeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *VirtualNumaNodeBuilder) Id(attr string) *VirtualNumaNodeBuilder {
@@ -69349,6 +80885,26 @@ func (builder *VirtualNumaNodeBuilder) NumaNodePinsOfAny(anys ...NumaNodePin) *V
 	return builder
 }
 
+func (builder *VirtualNumaNodeBuilder) NumaNodePinsBuilderOfAny(anyBuilders ...NumaNodePinBuilder) *VirtualNumaNodeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NumaNodePinsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VirtualNumaNodeBuilder) Statistics(attr *StatisticSlice) *VirtualNumaNodeBuilder {
 	if builder.err != nil {
 		return builder
@@ -69370,6 +80926,26 @@ func (builder *VirtualNumaNodeBuilder) StatisticsOfAny(anys ...Statistic) *Virtu
 	return builder
 }
 
+func (builder *VirtualNumaNodeBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *VirtualNumaNodeBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VirtualNumaNodeBuilder) Vm(attr *Vm) *VirtualNumaNodeBuilder {
 	if builder.err != nil {
 		return builder
@@ -69377,6 +80953,23 @@ func (builder *VirtualNumaNodeBuilder) Vm(attr *Vm) *VirtualNumaNodeBuilder {
 
 	builder.virtualNumaNode.SetVm(attr)
 	return builder
+}
+
+func (builder *VirtualNumaNodeBuilder) VmBuilder(attrBuilder *VmBuilder) *VirtualNumaNodeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *VirtualNumaNodeBuilder) Href(href string) *VirtualNumaNodeBuilder {
@@ -69473,6 +81066,26 @@ func (builder *VmBuilder) AffinityLabelsOfAny(anys ...AffinityLabel) *VmBuilder 
 	return builder
 }
 
+func (builder *VmBuilder) AffinityLabelsBuilderOfAny(anyBuilders ...AffinityLabelBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.AffinityLabelsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) Applications(attr *ApplicationSlice) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69494,6 +81107,26 @@ func (builder *VmBuilder) ApplicationsOfAny(anys ...Application) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) ApplicationsBuilderOfAny(anyBuilders ...ApplicationBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ApplicationsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) Bios(attr *Bios) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69501,6 +81134,23 @@ func (builder *VmBuilder) Bios(attr *Bios) *VmBuilder {
 
 	builder.vm.SetBios(attr)
 	return builder
+}
+
+func (builder *VmBuilder) BiosBuilder(attrBuilder *BiosBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Bios(attr)
 }
 
 func (builder *VmBuilder) Cdroms(attr *CdromSlice) *VmBuilder {
@@ -69524,6 +81174,26 @@ func (builder *VmBuilder) CdromsOfAny(anys ...Cdrom) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) CdromsBuilderOfAny(anyBuilders ...CdromBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CdromsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) Cluster(attr *Cluster) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69531,6 +81201,23 @@ func (builder *VmBuilder) Cluster(attr *Cluster) *VmBuilder {
 
 	builder.vm.SetCluster(attr)
 	return builder
+}
+
+func (builder *VmBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *VmBuilder) Comment(attr string) *VmBuilder {
@@ -69551,6 +81238,23 @@ func (builder *VmBuilder) Console(attr *Console) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) ConsoleBuilder(attrBuilder *ConsoleBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Console(attr)
+}
+
 func (builder *VmBuilder) Cpu(attr *Cpu) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69560,6 +81264,23 @@ func (builder *VmBuilder) Cpu(attr *Cpu) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) CpuBuilder(attrBuilder *CpuBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *VmBuilder) CpuProfile(attr *CpuProfile) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69567,6 +81288,23 @@ func (builder *VmBuilder) CpuProfile(attr *CpuProfile) *VmBuilder {
 
 	builder.vm.SetCpuProfile(attr)
 	return builder
+}
+
+func (builder *VmBuilder) CpuProfileBuilder(attrBuilder *CpuProfileBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CpuProfile(attr)
 }
 
 func (builder *VmBuilder) CpuShares(attr int64) *VmBuilder {
@@ -69594,6 +81332,23 @@ func (builder *VmBuilder) CustomCompatibilityVersion(attr *Version) *VmBuilder {
 
 	builder.vm.SetCustomCompatibilityVersion(attr)
 	return builder
+}
+
+func (builder *VmBuilder) CustomCompatibilityVersionBuilder(attrBuilder *VersionBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CustomCompatibilityVersion(attr)
 }
 
 func (builder *VmBuilder) CustomCpuModel(attr string) *VmBuilder {
@@ -69632,6 +81387,26 @@ func (builder *VmBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *VmBuild
 		builder.vm.customProperties = new(CustomPropertySlice)
 	}
 	builder.vm.customProperties.slice = append(builder.vm.customProperties.slice, anys...)
+	return builder
+}
+
+func (builder *VmBuilder) CustomPropertiesBuilderOfAny(anyBuilders ...CustomPropertyBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CustomPropertiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -69674,6 +81449,26 @@ func (builder *VmBuilder) DiskAttachmentsOfAny(anys ...DiskAttachment) *VmBuilde
 	return builder
 }
 
+func (builder *VmBuilder) DiskAttachmentsBuilderOfAny(anyBuilders ...DiskAttachmentBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiskAttachmentsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) Display(attr *Display) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69681,6 +81476,23 @@ func (builder *VmBuilder) Display(attr *Display) *VmBuilder {
 
 	builder.vm.SetDisplay(attr)
 	return builder
+}
+
+func (builder *VmBuilder) DisplayBuilder(attrBuilder *DisplayBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Display(attr)
 }
 
 func (builder *VmBuilder) Domain(attr *Domain) *VmBuilder {
@@ -69692,6 +81504,23 @@ func (builder *VmBuilder) Domain(attr *Domain) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) DomainBuilder(attrBuilder *DomainBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Domain(attr)
+}
+
 func (builder *VmBuilder) ExternalHostProvider(attr *ExternalHostProvider) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69699,6 +81528,23 @@ func (builder *VmBuilder) ExternalHostProvider(attr *ExternalHostProvider) *VmBu
 
 	builder.vm.SetExternalHostProvider(attr)
 	return builder
+}
+
+func (builder *VmBuilder) ExternalHostProviderBuilder(attrBuilder *ExternalHostProviderBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.ExternalHostProvider(attr)
 }
 
 func (builder *VmBuilder) Floppies(attr *FloppySlice) *VmBuilder {
@@ -69719,6 +81565,26 @@ func (builder *VmBuilder) FloppiesOfAny(anys ...Floppy) *VmBuilder {
 		builder.vm.floppies = new(FloppySlice)
 	}
 	builder.vm.floppies.slice = append(builder.vm.floppies.slice, anys...)
+	return builder
+}
+
+func (builder *VmBuilder) FloppiesBuilderOfAny(anyBuilders ...FloppyBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.FloppiesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -69752,6 +81618,26 @@ func (builder *VmBuilder) GraphicsConsolesOfAny(anys ...GraphicsConsole) *VmBuil
 	return builder
 }
 
+func (builder *VmBuilder) GraphicsConsolesBuilderOfAny(anyBuilders ...GraphicsConsoleBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.GraphicsConsolesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) GuestOperatingSystem(attr *GuestOperatingSystem) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69761,6 +81647,23 @@ func (builder *VmBuilder) GuestOperatingSystem(attr *GuestOperatingSystem) *VmBu
 	return builder
 }
 
+func (builder *VmBuilder) GuestOperatingSystemBuilder(attrBuilder *GuestOperatingSystemBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.GuestOperatingSystem(attr)
+}
+
 func (builder *VmBuilder) GuestTimeZone(attr *TimeZone) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69768,6 +81671,23 @@ func (builder *VmBuilder) GuestTimeZone(attr *TimeZone) *VmBuilder {
 
 	builder.vm.SetGuestTimeZone(attr)
 	return builder
+}
+
+func (builder *VmBuilder) GuestTimeZoneBuilder(attrBuilder *TimeZoneBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.GuestTimeZone(attr)
 }
 
 func (builder *VmBuilder) HasIllegalImages(attr bool) *VmBuilder {
@@ -69788,6 +81708,23 @@ func (builder *VmBuilder) HighAvailability(attr *HighAvailability) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) HighAvailabilityBuilder(attrBuilder *HighAvailabilityBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HighAvailability(attr)
+}
+
 func (builder *VmBuilder) Host(attr *Host) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69795,6 +81732,23 @@ func (builder *VmBuilder) Host(attr *Host) *VmBuilder {
 
 	builder.vm.SetHost(attr)
 	return builder
+}
+
+func (builder *VmBuilder) HostBuilder(attrBuilder *HostBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
 }
 
 func (builder *VmBuilder) HostDevices(attr *HostDeviceSlice) *VmBuilder {
@@ -69818,6 +81772,26 @@ func (builder *VmBuilder) HostDevicesOfAny(anys ...HostDevice) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) HostDevicesBuilderOfAny(anyBuilders ...HostDeviceBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HostDevicesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) Id(attr string) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69836,6 +81810,23 @@ func (builder *VmBuilder) Initialization(attr *Initialization) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) InitializationBuilder(attrBuilder *InitializationBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Initialization(attr)
+}
+
 func (builder *VmBuilder) InstanceType(attr *InstanceType) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69845,6 +81836,23 @@ func (builder *VmBuilder) InstanceType(attr *InstanceType) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *VmBuilder) Io(attr *Io) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69852,6 +81860,23 @@ func (builder *VmBuilder) Io(attr *Io) *VmBuilder {
 
 	builder.vm.SetIo(attr)
 	return builder
+}
+
+func (builder *VmBuilder) IoBuilder(attrBuilder *IoBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Io(attr)
 }
 
 func (builder *VmBuilder) KatelloErrata(attr *KatelloErratumSlice) *VmBuilder {
@@ -69875,6 +81900,26 @@ func (builder *VmBuilder) KatelloErrataOfAny(anys ...KatelloErratum) *VmBuilder 
 	return builder
 }
 
+func (builder *VmBuilder) KatelloErrataBuilderOfAny(anyBuilders ...KatelloErratumBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.KatelloErrataOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) LargeIcon(attr *Icon) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69884,6 +81929,23 @@ func (builder *VmBuilder) LargeIcon(attr *Icon) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) LargeIconBuilder(attrBuilder *IconBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LargeIcon(attr)
+}
+
 func (builder *VmBuilder) Lease(attr *StorageDomainLease) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69891,6 +81953,23 @@ func (builder *VmBuilder) Lease(attr *StorageDomainLease) *VmBuilder {
 
 	builder.vm.SetLease(attr)
 	return builder
+}
+
+func (builder *VmBuilder) LeaseBuilder(attrBuilder *StorageDomainLeaseBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Lease(attr)
 }
 
 func (builder *VmBuilder) Memory(attr int64) *VmBuilder {
@@ -69911,6 +81990,23 @@ func (builder *VmBuilder) MemoryPolicy(attr *MemoryPolicy) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) MemoryPolicyBuilder(attrBuilder *MemoryPolicyBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.MemoryPolicy(attr)
+}
+
 func (builder *VmBuilder) Migration(attr *MigrationOptions) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69918,6 +82014,23 @@ func (builder *VmBuilder) Migration(attr *MigrationOptions) *VmBuilder {
 
 	builder.vm.SetMigration(attr)
 	return builder
+}
+
+func (builder *VmBuilder) MigrationBuilder(attrBuilder *MigrationOptionsBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Migration(attr)
 }
 
 func (builder *VmBuilder) MigrationDowntime(attr int64) *VmBuilder {
@@ -69968,6 +82081,26 @@ func (builder *VmBuilder) NicsOfAny(anys ...Nic) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) NicsBuilderOfAny(anyBuilders ...NicBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NicsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) NumaNodes(attr *NumaNodeSlice) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -69986,6 +82119,26 @@ func (builder *VmBuilder) NumaNodesOfAny(anys ...NumaNode) *VmBuilder {
 		builder.vm.numaNodes = new(NumaNodeSlice)
 	}
 	builder.vm.numaNodes.slice = append(builder.vm.numaNodes.slice, anys...)
+	return builder
+}
+
+func (builder *VmBuilder) NumaNodesBuilderOfAny(anyBuilders ...NumaNodeBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.NumaNodesOfAny(*attr)
+	}
 	return builder
 }
 
@@ -70016,6 +82169,23 @@ func (builder *VmBuilder) OriginalTemplate(attr *Template) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) OriginalTemplateBuilder(attrBuilder *TemplateBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.OriginalTemplate(attr)
+}
+
 func (builder *VmBuilder) Os(attr *OperatingSystem) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70023,6 +82193,23 @@ func (builder *VmBuilder) Os(attr *OperatingSystem) *VmBuilder {
 
 	builder.vm.SetOs(attr)
 	return builder
+}
+
+func (builder *VmBuilder) OsBuilder(attrBuilder *OperatingSystemBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Os(attr)
 }
 
 func (builder *VmBuilder) Payloads(attr *PayloadSlice) *VmBuilder {
@@ -70043,6 +82230,26 @@ func (builder *VmBuilder) PayloadsOfAny(anys ...Payload) *VmBuilder {
 		builder.vm.payloads = new(PayloadSlice)
 	}
 	builder.vm.payloads.slice = append(builder.vm.payloads.slice, anys...)
+	return builder
+}
+
+func (builder *VmBuilder) PayloadsBuilderOfAny(anyBuilders ...PayloadBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PayloadsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -70067,6 +82274,26 @@ func (builder *VmBuilder) PermissionsOfAny(anys ...Permission) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) PlacementPolicy(attr *VmPlacementPolicy) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70076,6 +82303,23 @@ func (builder *VmBuilder) PlacementPolicy(attr *VmPlacementPolicy) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) PlacementPolicyBuilder(attrBuilder *VmPlacementPolicyBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PlacementPolicy(attr)
+}
+
 func (builder *VmBuilder) Quota(attr *Quota) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70083,6 +82327,23 @@ func (builder *VmBuilder) Quota(attr *Quota) *VmBuilder {
 
 	builder.vm.SetQuota(attr)
 	return builder
+}
+
+func (builder *VmBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
 }
 
 func (builder *VmBuilder) ReportedDevices(attr *ReportedDeviceSlice) *VmBuilder {
@@ -70106,6 +82367,26 @@ func (builder *VmBuilder) ReportedDevicesOfAny(anys ...ReportedDevice) *VmBuilde
 	return builder
 }
 
+func (builder *VmBuilder) ReportedDevicesBuilderOfAny(anyBuilders ...ReportedDeviceBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.ReportedDevicesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) RngDevice(attr *RngDevice) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70113,6 +82394,23 @@ func (builder *VmBuilder) RngDevice(attr *RngDevice) *VmBuilder {
 
 	builder.vm.SetRngDevice(attr)
 	return builder
+}
+
+func (builder *VmBuilder) RngDeviceBuilder(attrBuilder *RngDeviceBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.RngDevice(attr)
 }
 
 func (builder *VmBuilder) RunOnce(attr bool) *VmBuilder {
@@ -70131,6 +82429,23 @@ func (builder *VmBuilder) SerialNumber(attr *SerialNumber) *VmBuilder {
 
 	builder.vm.SetSerialNumber(attr)
 	return builder
+}
+
+func (builder *VmBuilder) SerialNumberBuilder(attrBuilder *SerialNumberBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SerialNumber(attr)
 }
 
 func (builder *VmBuilder) Sessions(attr *SessionSlice) *VmBuilder {
@@ -70154,6 +82469,26 @@ func (builder *VmBuilder) SessionsOfAny(anys ...Session) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) SessionsBuilderOfAny(anyBuilders ...SessionBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SessionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) SmallIcon(attr *Icon) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70161,6 +82496,23 @@ func (builder *VmBuilder) SmallIcon(attr *Icon) *VmBuilder {
 
 	builder.vm.SetSmallIcon(attr)
 	return builder
+}
+
+func (builder *VmBuilder) SmallIconBuilder(attrBuilder *IconBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SmallIcon(attr)
 }
 
 func (builder *VmBuilder) Snapshots(attr *SnapshotSlice) *VmBuilder {
@@ -70184,6 +82536,26 @@ func (builder *VmBuilder) SnapshotsOfAny(anys ...Snapshot) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) SnapshotsBuilderOfAny(anyBuilders ...SnapshotBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.SnapshotsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) SoundcardEnabled(attr bool) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70200,6 +82572,23 @@ func (builder *VmBuilder) Sso(attr *Sso) *VmBuilder {
 
 	builder.vm.SetSso(attr)
 	return builder
+}
+
+func (builder *VmBuilder) SsoBuilder(attrBuilder *SsoBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Sso(attr)
 }
 
 func (builder *VmBuilder) StartPaused(attr bool) *VmBuilder {
@@ -70250,6 +82639,26 @@ func (builder *VmBuilder) StatisticsOfAny(anys ...Statistic) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.StatisticsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) Status(attr VmStatus) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70295,6 +82704,23 @@ func (builder *VmBuilder) StorageDomain(attr *StorageDomain) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
 func (builder *VmBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70325,6 +82751,26 @@ func (builder *VmBuilder) TagsOfAny(anys ...Tag) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) TagsBuilderOfAny(anyBuilders ...TagBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.TagsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBuilder) Template(attr *Template) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70334,6 +82780,23 @@ func (builder *VmBuilder) Template(attr *Template) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *VmBuilder) TimeZone(attr *TimeZone) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70341,6 +82804,23 @@ func (builder *VmBuilder) TimeZone(attr *TimeZone) *VmBuilder {
 
 	builder.vm.SetTimeZone(attr)
 	return builder
+}
+
+func (builder *VmBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.TimeZone(attr)
 }
 
 func (builder *VmBuilder) TunnelMigration(attr bool) *VmBuilder {
@@ -70370,6 +82850,23 @@ func (builder *VmBuilder) Usb(attr *Usb) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) UsbBuilder(attrBuilder *UsbBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Usb(attr)
+}
+
 func (builder *VmBuilder) UseLatestTemplateVersion(attr bool) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70388,6 +82885,23 @@ func (builder *VmBuilder) VirtioScsi(attr *VirtioScsi) *VmBuilder {
 	return builder
 }
 
+func (builder *VmBuilder) VirtioScsiBuilder(attrBuilder *VirtioScsiBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VirtioScsi(attr)
+}
+
 func (builder *VmBuilder) VmPool(attr *VmPool) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -70395,6 +82909,23 @@ func (builder *VmBuilder) VmPool(attr *VmPool) *VmBuilder {
 
 	builder.vm.SetVmPool(attr)
 	return builder
+}
+
+func (builder *VmBuilder) VmPoolBuilder(attrBuilder *VmPoolBuilder) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VmPool(attr)
 }
 
 func (builder *VmBuilder) Watchdogs(attr *WatchdogSlice) *VmBuilder {
@@ -70415,6 +82946,26 @@ func (builder *VmBuilder) WatchdogsOfAny(anys ...Watchdog) *VmBuilder {
 		builder.vm.watchdogs = new(WatchdogSlice)
 	}
 	builder.vm.watchdogs.slice = append(builder.vm.watchdogs.slice, anys...)
+	return builder
+}
+
+func (builder *VmBuilder) WatchdogsBuilderOfAny(anyBuilders ...WatchdogBuilder) *VmBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.WatchdogsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -70459,6 +83010,23 @@ func (builder *VmBaseBuilder) Bios(attr *Bios) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) BiosBuilder(attrBuilder *BiosBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Bios(attr)
+}
+
 func (builder *VmBaseBuilder) Cluster(attr *Cluster) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70466,6 +83034,23 @@ func (builder *VmBaseBuilder) Cluster(attr *Cluster) *VmBaseBuilder {
 
 	builder.vmBase.SetCluster(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
 }
 
 func (builder *VmBaseBuilder) Comment(attr string) *VmBaseBuilder {
@@ -70486,6 +83071,23 @@ func (builder *VmBaseBuilder) Console(attr *Console) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) ConsoleBuilder(attrBuilder *ConsoleBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Console(attr)
+}
+
 func (builder *VmBaseBuilder) Cpu(attr *Cpu) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70495,6 +83097,23 @@ func (builder *VmBaseBuilder) Cpu(attr *Cpu) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) CpuBuilder(attrBuilder *CpuBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cpu(attr)
+}
+
 func (builder *VmBaseBuilder) CpuProfile(attr *CpuProfile) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70502,6 +83121,23 @@ func (builder *VmBaseBuilder) CpuProfile(attr *CpuProfile) *VmBaseBuilder {
 
 	builder.vmBase.SetCpuProfile(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) CpuProfileBuilder(attrBuilder *CpuProfileBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CpuProfile(attr)
 }
 
 func (builder *VmBaseBuilder) CpuShares(attr int64) *VmBaseBuilder {
@@ -70529,6 +83165,23 @@ func (builder *VmBaseBuilder) CustomCompatibilityVersion(attr *Version) *VmBaseB
 
 	builder.vmBase.SetCustomCompatibilityVersion(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) CustomCompatibilityVersionBuilder(attrBuilder *VersionBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CustomCompatibilityVersion(attr)
 }
 
 func (builder *VmBaseBuilder) CustomCpuModel(attr string) *VmBaseBuilder {
@@ -70570,6 +83223,26 @@ func (builder *VmBaseBuilder) CustomPropertiesOfAny(anys ...CustomProperty) *VmB
 	return builder
 }
 
+func (builder *VmBaseBuilder) CustomPropertiesBuilderOfAny(anyBuilders ...CustomPropertyBuilder) *VmBaseBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CustomPropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmBaseBuilder) DeleteProtected(attr bool) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70597,6 +83270,23 @@ func (builder *VmBaseBuilder) Display(attr *Display) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) DisplayBuilder(attrBuilder *DisplayBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Display(attr)
+}
+
 func (builder *VmBaseBuilder) Domain(attr *Domain) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70606,6 +83296,23 @@ func (builder *VmBaseBuilder) Domain(attr *Domain) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) DomainBuilder(attrBuilder *DomainBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Domain(attr)
+}
+
 func (builder *VmBaseBuilder) HighAvailability(attr *HighAvailability) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70613,6 +83320,23 @@ func (builder *VmBaseBuilder) HighAvailability(attr *HighAvailability) *VmBaseBu
 
 	builder.vmBase.SetHighAvailability(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) HighAvailabilityBuilder(attrBuilder *HighAvailabilityBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.HighAvailability(attr)
 }
 
 func (builder *VmBaseBuilder) Id(attr string) *VmBaseBuilder {
@@ -70633,6 +83357,23 @@ func (builder *VmBaseBuilder) Initialization(attr *Initialization) *VmBaseBuilde
 	return builder
 }
 
+func (builder *VmBaseBuilder) InitializationBuilder(attrBuilder *InitializationBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Initialization(attr)
+}
+
 func (builder *VmBaseBuilder) Io(attr *Io) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70640,6 +83381,23 @@ func (builder *VmBaseBuilder) Io(attr *Io) *VmBaseBuilder {
 
 	builder.vmBase.SetIo(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) IoBuilder(attrBuilder *IoBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Io(attr)
 }
 
 func (builder *VmBaseBuilder) LargeIcon(attr *Icon) *VmBaseBuilder {
@@ -70651,6 +83409,23 @@ func (builder *VmBaseBuilder) LargeIcon(attr *Icon) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) LargeIconBuilder(attrBuilder *IconBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.LargeIcon(attr)
+}
+
 func (builder *VmBaseBuilder) Lease(attr *StorageDomainLease) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70658,6 +83433,23 @@ func (builder *VmBaseBuilder) Lease(attr *StorageDomainLease) *VmBaseBuilder {
 
 	builder.vmBase.SetLease(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) LeaseBuilder(attrBuilder *StorageDomainLeaseBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Lease(attr)
 }
 
 func (builder *VmBaseBuilder) Memory(attr int64) *VmBaseBuilder {
@@ -70678,6 +83470,23 @@ func (builder *VmBaseBuilder) MemoryPolicy(attr *MemoryPolicy) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) MemoryPolicyBuilder(attrBuilder *MemoryPolicyBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.MemoryPolicy(attr)
+}
+
 func (builder *VmBaseBuilder) Migration(attr *MigrationOptions) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70685,6 +83494,23 @@ func (builder *VmBaseBuilder) Migration(attr *MigrationOptions) *VmBaseBuilder {
 
 	builder.vmBase.SetMigration(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) MigrationBuilder(attrBuilder *MigrationOptionsBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Migration(attr)
 }
 
 func (builder *VmBaseBuilder) MigrationDowntime(attr int64) *VmBaseBuilder {
@@ -70723,6 +83549,23 @@ func (builder *VmBaseBuilder) Os(attr *OperatingSystem) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) OsBuilder(attrBuilder *OperatingSystemBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Os(attr)
+}
+
 func (builder *VmBaseBuilder) PlacementPolicy(attr *VmPlacementPolicy) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70730,6 +83573,23 @@ func (builder *VmBaseBuilder) PlacementPolicy(attr *VmPlacementPolicy) *VmBaseBu
 
 	builder.vmBase.SetPlacementPolicy(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) PlacementPolicyBuilder(attrBuilder *VmPlacementPolicyBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PlacementPolicy(attr)
 }
 
 func (builder *VmBaseBuilder) Quota(attr *Quota) *VmBaseBuilder {
@@ -70741,6 +83601,23 @@ func (builder *VmBaseBuilder) Quota(attr *Quota) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
+}
+
 func (builder *VmBaseBuilder) RngDevice(attr *RngDevice) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70748,6 +83625,23 @@ func (builder *VmBaseBuilder) RngDevice(attr *RngDevice) *VmBaseBuilder {
 
 	builder.vmBase.SetRngDevice(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) RngDeviceBuilder(attrBuilder *RngDeviceBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.RngDevice(attr)
 }
 
 func (builder *VmBaseBuilder) SerialNumber(attr *SerialNumber) *VmBaseBuilder {
@@ -70759,6 +83653,23 @@ func (builder *VmBaseBuilder) SerialNumber(attr *SerialNumber) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) SerialNumberBuilder(attrBuilder *SerialNumberBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SerialNumber(attr)
+}
+
 func (builder *VmBaseBuilder) SmallIcon(attr *Icon) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70766,6 +83677,23 @@ func (builder *VmBaseBuilder) SmallIcon(attr *Icon) *VmBaseBuilder {
 
 	builder.vmBase.SetSmallIcon(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) SmallIconBuilder(attrBuilder *IconBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SmallIcon(attr)
 }
 
 func (builder *VmBaseBuilder) SoundcardEnabled(attr bool) *VmBaseBuilder {
@@ -70784,6 +83712,23 @@ func (builder *VmBaseBuilder) Sso(attr *Sso) *VmBaseBuilder {
 
 	builder.vmBase.SetSso(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) SsoBuilder(attrBuilder *SsoBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Sso(attr)
 }
 
 func (builder *VmBaseBuilder) StartPaused(attr bool) *VmBaseBuilder {
@@ -70813,6 +83758,23 @@ func (builder *VmBaseBuilder) StorageDomain(attr *StorageDomain) *VmBaseBuilder 
 	return builder
 }
 
+func (builder *VmBaseBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
 func (builder *VmBaseBuilder) StorageErrorResumeBehaviour(attr VmStorageErrorResumeBehaviour) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70829,6 +83791,23 @@ func (builder *VmBaseBuilder) TimeZone(attr *TimeZone) *VmBaseBuilder {
 
 	builder.vmBase.SetTimeZone(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.TimeZone(attr)
 }
 
 func (builder *VmBaseBuilder) TunnelMigration(attr bool) *VmBaseBuilder {
@@ -70858,6 +83837,23 @@ func (builder *VmBaseBuilder) Usb(attr *Usb) *VmBaseBuilder {
 	return builder
 }
 
+func (builder *VmBaseBuilder) UsbBuilder(attrBuilder *UsbBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Usb(attr)
+}
+
 func (builder *VmBaseBuilder) VirtioScsi(attr *VirtioScsi) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -70865,6 +83861,23 @@ func (builder *VmBaseBuilder) VirtioScsi(attr *VirtioScsi) *VmBaseBuilder {
 
 	builder.vmBase.SetVirtioScsi(attr)
 	return builder
+}
+
+func (builder *VmBaseBuilder) VirtioScsiBuilder(attrBuilder *VirtioScsiBuilder) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.VirtioScsi(attr)
 }
 
 func (builder *VmBaseBuilder) Href(href string) *VmBaseBuilder {
@@ -70929,6 +83942,26 @@ func (builder *VmPlacementPolicyBuilder) HostsOfAny(anys ...Host) *VmPlacementPo
 	return builder
 }
 
+func (builder *VmPlacementPolicyBuilder) HostsBuilderOfAny(anyBuilders ...HostBuilder) *VmPlacementPolicyBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HostsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmPlacementPolicyBuilder) Href(href string) *VmPlacementPolicyBuilder {
 	if builder.err != nil {
 		return builder
@@ -70979,6 +84012,23 @@ func (builder *VmPoolBuilder) Cluster(attr *Cluster) *VmPoolBuilder {
 	return builder
 }
 
+func (builder *VmPoolBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *VmPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
 func (builder *VmPoolBuilder) Comment(attr string) *VmPoolBuilder {
 	if builder.err != nil {
 		return builder
@@ -71006,6 +84056,23 @@ func (builder *VmPoolBuilder) Display(attr *Display) *VmPoolBuilder {
 	return builder
 }
 
+func (builder *VmPoolBuilder) DisplayBuilder(attrBuilder *DisplayBuilder) *VmPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Display(attr)
+}
+
 func (builder *VmPoolBuilder) Id(attr string) *VmPoolBuilder {
 	if builder.err != nil {
 		return builder
@@ -71022,6 +84089,23 @@ func (builder *VmPoolBuilder) InstanceType(attr *InstanceType) *VmPoolBuilder {
 
 	builder.vmPool.SetInstanceType(attr)
 	return builder
+}
+
+func (builder *VmPoolBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *VmPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
 }
 
 func (builder *VmPoolBuilder) MaxUserVms(attr int64) *VmPoolBuilder {
@@ -71063,6 +84147,26 @@ func (builder *VmPoolBuilder) PermissionsOfAny(anys ...Permission) *VmPoolBuilde
 	return builder
 }
 
+func (builder *VmPoolBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *VmPoolBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VmPoolBuilder) PrestartedVms(attr int64) *VmPoolBuilder {
 	if builder.err != nil {
 		return builder
@@ -71079,6 +84183,23 @@ func (builder *VmPoolBuilder) RngDevice(attr *RngDevice) *VmPoolBuilder {
 
 	builder.vmPool.SetRngDevice(attr)
 	return builder
+}
+
+func (builder *VmPoolBuilder) RngDeviceBuilder(attrBuilder *RngDeviceBuilder) *VmPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.RngDevice(attr)
 }
 
 func (builder *VmPoolBuilder) Size(attr int64) *VmPoolBuilder {
@@ -71117,6 +84238,23 @@ func (builder *VmPoolBuilder) Template(attr *Template) *VmPoolBuilder {
 	return builder
 }
 
+func (builder *VmPoolBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *VmPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *VmPoolBuilder) Type(attr VmPoolType) *VmPoolBuilder {
 	if builder.err != nil {
 		return builder
@@ -71142,6 +84280,23 @@ func (builder *VmPoolBuilder) Vm(attr *Vm) *VmPoolBuilder {
 
 	builder.vmPool.SetVm(attr)
 	return builder
+}
+
+func (builder *VmPoolBuilder) VmBuilder(attrBuilder *VmBuilder) *VmPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *VmPoolBuilder) Href(href string) *VmPoolBuilder {
@@ -71306,6 +84461,26 @@ func (builder *VnicProfileBuilder) CustomPropertiesOfAny(anys ...CustomProperty)
 	return builder
 }
 
+func (builder *VnicProfileBuilder) CustomPropertiesBuilderOfAny(anyBuilders ...CustomPropertyBuilder) *VnicProfileBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.CustomPropertiesOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VnicProfileBuilder) Description(attr string) *VnicProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -71351,6 +84526,23 @@ func (builder *VnicProfileBuilder) Network(attr *Network) *VnicProfileBuilder {
 	return builder
 }
 
+func (builder *VnicProfileBuilder) NetworkBuilder(attrBuilder *NetworkBuilder) *VnicProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Network(attr)
+}
+
 func (builder *VnicProfileBuilder) NetworkFilter(attr *NetworkFilter) *VnicProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -71360,6 +84552,23 @@ func (builder *VnicProfileBuilder) NetworkFilter(attr *NetworkFilter) *VnicProfi
 	return builder
 }
 
+func (builder *VnicProfileBuilder) NetworkFilterBuilder(attrBuilder *NetworkFilterBuilder) *VnicProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.NetworkFilter(attr)
+}
+
 func (builder *VnicProfileBuilder) PassThrough(attr *VnicPassThrough) *VnicProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -71367,6 +84576,23 @@ func (builder *VnicProfileBuilder) PassThrough(attr *VnicPassThrough) *VnicProfi
 
 	builder.vnicProfile.SetPassThrough(attr)
 	return builder
+}
+
+func (builder *VnicProfileBuilder) PassThroughBuilder(attrBuilder *VnicPassThroughBuilder) *VnicProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.PassThrough(attr)
 }
 
 func (builder *VnicProfileBuilder) Permissions(attr *PermissionSlice) *VnicProfileBuilder {
@@ -71390,6 +84616,26 @@ func (builder *VnicProfileBuilder) PermissionsOfAny(anys ...Permission) *VnicPro
 	return builder
 }
 
+func (builder *VnicProfileBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *VnicProfileBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(*attr)
+	}
+	return builder
+}
+
 func (builder *VnicProfileBuilder) PortMirroring(attr bool) *VnicProfileBuilder {
 	if builder.err != nil {
 		return builder
@@ -71406,6 +84652,23 @@ func (builder *VnicProfileBuilder) Qos(attr *Qos) *VnicProfileBuilder {
 
 	builder.vnicProfile.SetQos(attr)
 	return builder
+}
+
+func (builder *VnicProfileBuilder) QosBuilder(attrBuilder *QosBuilder) *VnicProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Qos(attr)
 }
 
 func (builder *VnicProfileBuilder) Href(href string) *VnicProfileBuilder {
@@ -71467,6 +84730,23 @@ func (builder *VnicProfileMappingBuilder) TargetVnicProfile(attr *VnicProfile) *
 	return builder
 }
 
+func (builder *VnicProfileMappingBuilder) TargetVnicProfileBuilder(attrBuilder *VnicProfileBuilder) *VnicProfileMappingBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.TargetVnicProfile(attr)
+}
+
 func (builder *VnicProfileMappingBuilder) Href(href string) *VnicProfileMappingBuilder {
 	if builder.err != nil {
 		return builder
@@ -71526,6 +84806,26 @@ func (builder *VolumeGroupBuilder) LogicalUnitsOfAny(anys ...LogicalUnit) *Volum
 		builder.volumeGroup.logicalUnits = new(LogicalUnitSlice)
 	}
 	builder.volumeGroup.logicalUnits.slice = append(builder.volumeGroup.logicalUnits.slice, anys...)
+	return builder
+}
+
+func (builder *VolumeGroupBuilder) LogicalUnitsBuilderOfAny(anyBuilders ...LogicalUnitBuilder) *VolumeGroupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.LogicalUnitsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -71615,6 +84915,23 @@ func (builder *WatchdogBuilder) InstanceType(attr *InstanceType) *WatchdogBuilde
 	return builder
 }
 
+func (builder *WatchdogBuilder) InstanceTypeBuilder(attrBuilder *InstanceTypeBuilder) *WatchdogBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.InstanceType(attr)
+}
+
 func (builder *WatchdogBuilder) Model(attr WatchdogModel) *WatchdogBuilder {
 	if builder.err != nil {
 		return builder
@@ -71642,6 +84959,23 @@ func (builder *WatchdogBuilder) Template(attr *Template) *WatchdogBuilder {
 	return builder
 }
 
+func (builder *WatchdogBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *WatchdogBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
 func (builder *WatchdogBuilder) Vm(attr *Vm) *WatchdogBuilder {
 	if builder.err != nil {
 		return builder
@@ -71649,6 +84983,23 @@ func (builder *WatchdogBuilder) Vm(attr *Vm) *WatchdogBuilder {
 
 	builder.watchdog.SetVm(attr)
 	return builder
+}
+
+func (builder *WatchdogBuilder) VmBuilder(attrBuilder *VmBuilder) *WatchdogBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
 }
 
 func (builder *WatchdogBuilder) Vms(attr *VmSlice) *WatchdogBuilder {
@@ -71669,6 +85020,26 @@ func (builder *WatchdogBuilder) VmsOfAny(anys ...Vm) *WatchdogBuilder {
 		builder.watchdog.vms = new(VmSlice)
 	}
 	builder.watchdog.vms.slice = append(builder.watchdog.vms.slice, anys...)
+	return builder
+}
+
+func (builder *WatchdogBuilder) VmsBuilderOfAny(anyBuilders ...VmBuilder) *WatchdogBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmsOfAny(*attr)
+	}
 	return builder
 }
 
@@ -71758,6 +85129,23 @@ func (builder *WeightBuilder) SchedulingPolicy(attr *SchedulingPolicy) *WeightBu
 	return builder
 }
 
+func (builder *WeightBuilder) SchedulingPolicyBuilder(attrBuilder *SchedulingPolicyBuilder) *WeightBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SchedulingPolicy(attr)
+}
+
 func (builder *WeightBuilder) SchedulingPolicyUnit(attr *SchedulingPolicyUnit) *WeightBuilder {
 	if builder.err != nil {
 		return builder
@@ -71765,6 +85153,23 @@ func (builder *WeightBuilder) SchedulingPolicyUnit(attr *SchedulingPolicyUnit) *
 
 	builder.weight.SetSchedulingPolicyUnit(attr)
 	return builder
+}
+
+func (builder *WeightBuilder) SchedulingPolicyUnitBuilder(attrBuilder *SchedulingPolicyUnitBuilder) *WeightBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SchedulingPolicyUnit(attr)
 }
 
 func (builder *WeightBuilder) Href(href string) *WeightBuilder {
