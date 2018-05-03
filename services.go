@@ -8338,9 +8338,13 @@ func (p *hostsServiceAddUsingRootPasswordRequest) UndeployHostedEngine(undeployH
 func (p *hostsServiceAddUsingRootPasswordRequest) Send() (*hostsServiceAddUsingRootPasswordResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.hostsService.connection.URL(), p.hostsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -8396,9 +8400,13 @@ func (p *hostsServiceAddUsingRootPasswordRequest) Send() (*hostsServiceAddUsingR
 func (p *hostsServiceAddUsingRootPasswordRequest) MustSend() *hostsServiceAddUsingRootPasswordResponse {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.hostsService.connection.URL(), p.hostsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -8525,9 +8533,13 @@ func (p *hostsServiceAddUsingSshRequest) UndeployHostedEngine(undeployHostedEngi
 func (p *hostsServiceAddUsingSshRequest) Send() (*hostsServiceAddUsingSshResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.hostsService.connection.URL(), p.hostsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -8583,9 +8595,13 @@ func (p *hostsServiceAddUsingSshRequest) Send() (*hostsServiceAddUsingSshRespons
 func (p *hostsServiceAddUsingSshRequest) MustSend() *hostsServiceAddUsingSshResponse {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.hostsService.connection.URL(), p.hostsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -11854,7 +11870,9 @@ func (p *openstackImageProviderServiceTestConnectivityRequest) Async(async bool)
 func (p *openstackImageProviderServiceTestConnectivityRequest) Send() (*openstackImageProviderServiceTestConnectivityResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.openstackImageProviderService.connection.URL(), p.openstackImageProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -11909,7 +11927,9 @@ func (p *openstackImageProviderServiceTestConnectivityRequest) Send() (*openstac
 func (p *openstackImageProviderServiceTestConnectivityRequest) MustSend() *openstackImageProviderServiceTestConnectivityResponse {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.openstackImageProviderService.connection.URL(), p.openstackImageProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -12481,10 +12501,14 @@ func (p *openstackImageServiceImportRequest) Template(template *Template) *opens
 func (p *openstackImageServiceImportRequest) Send() (*openstackImageServiceImportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/import", p.openstackImageService.connection.URL(), p.openstackImageService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Disk(p.disk)
-	actionBuilder.ImportAsTemplate(*p.importAsTemplate)
+	if p.importAsTemplate != nil {
+		actionBuilder.ImportAsTemplate(*p.importAsTemplate)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	actionBuilder.Template(p.template)
 	action, err := actionBuilder.Build()
@@ -12541,10 +12565,14 @@ func (p *openstackImageServiceImportRequest) Send() (*openstackImageServiceImpor
 func (p *openstackImageServiceImportRequest) MustSend() *openstackImageServiceImportResponse {
 	rawURL := fmt.Sprintf("%s%s/import", p.openstackImageService.connection.URL(), p.openstackImageService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Disk(p.disk)
-	actionBuilder.ImportAsTemplate(*p.importAsTemplate)
+	if p.importAsTemplate != nil {
+		actionBuilder.ImportAsTemplate(*p.importAsTemplate)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	actionBuilder.Template(p.template)
 	action, err := actionBuilder.Build()
@@ -14000,7 +14028,9 @@ func (p *openstackVolumeProviderServiceTestConnectivityRequest) Async(async bool
 func (p *openstackVolumeProviderServiceTestConnectivityRequest) Send() (*openstackVolumeProviderServiceTestConnectivityResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.openstackVolumeProviderService.connection.URL(), p.openstackVolumeProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -14055,7 +14085,9 @@ func (p *openstackVolumeProviderServiceTestConnectivityRequest) Send() (*opensta
 func (p *openstackVolumeProviderServiceTestConnectivityRequest) MustSend() *openstackVolumeProviderServiceTestConnectivityResponse {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.openstackVolumeProviderService.connection.URL(), p.openstackVolumeProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -15643,7 +15675,9 @@ func (p *openstackNetworkServiceImportRequest) DataCenter(dataCenter *DataCenter
 func (p *openstackNetworkServiceImportRequest) Send() (*openstackNetworkServiceImportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/import", p.openstackNetworkService.connection.URL(), p.openstackNetworkService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.DataCenter(p.dataCenter)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -15699,7 +15733,9 @@ func (p *openstackNetworkServiceImportRequest) Send() (*openstackNetworkServiceI
 func (p *openstackNetworkServiceImportRequest) MustSend() *openstackNetworkServiceImportResponse {
 	rawURL := fmt.Sprintf("%s%s/import", p.openstackNetworkService.connection.URL(), p.openstackNetworkService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.DataCenter(p.dataCenter)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -16825,7 +16861,9 @@ func (p *openstackNetworkProviderServiceTestConnectivityRequest) Async(async boo
 func (p *openstackNetworkProviderServiceTestConnectivityRequest) Send() (*openstackNetworkProviderServiceTestConnectivityResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.openstackNetworkProviderService.connection.URL(), p.openstackNetworkProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -16880,7 +16918,9 @@ func (p *openstackNetworkProviderServiceTestConnectivityRequest) Send() (*openst
 func (p *openstackNetworkProviderServiceTestConnectivityRequest) MustSend() *openstackNetworkProviderServiceTestConnectivityResponse {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.openstackNetworkProviderService.connection.URL(), p.openstackNetworkProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -18771,7 +18811,9 @@ func (p *copyableServiceCopyRequest) Async(async bool) *copyableServiceCopyReque
 func (p *copyableServiceCopyRequest) Send() (*copyableServiceCopyResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/copy", p.copyableService.connection.URL(), p.copyableService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -18826,7 +18868,9 @@ func (p *copyableServiceCopyRequest) Send() (*copyableServiceCopyResponse, error
 func (p *copyableServiceCopyRequest) MustSend() *copyableServiceCopyResponse {
 	rawURL := fmt.Sprintf("%s%s/copy", p.copyableService.connection.URL(), p.copyableService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -19238,7 +19282,9 @@ func (p *vmDiskServiceActivateRequest) Async(async bool) *vmDiskServiceActivateR
 func (p *vmDiskServiceActivateRequest) Send() (*vmDiskServiceActivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/activate", p.vmDiskService.connection.URL(), p.vmDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -19293,7 +19339,9 @@ func (p *vmDiskServiceActivateRequest) Send() (*vmDiskServiceActivateResponse, e
 func (p *vmDiskServiceActivateRequest) MustSend() *vmDiskServiceActivateResponse {
 	rawURL := fmt.Sprintf("%s%s/activate", p.vmDiskService.connection.URL(), p.vmDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -19389,7 +19437,9 @@ func (p *vmDiskServiceDeactivateRequest) Async(async bool) *vmDiskServiceDeactiv
 func (p *vmDiskServiceDeactivateRequest) Send() (*vmDiskServiceDeactivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/deactivate", p.vmDiskService.connection.URL(), p.vmDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -19444,7 +19494,9 @@ func (p *vmDiskServiceDeactivateRequest) Send() (*vmDiskServiceDeactivateRespons
 func (p *vmDiskServiceDeactivateRequest) MustSend() *vmDiskServiceDeactivateResponse {
 	rawURL := fmt.Sprintf("%s%s/deactivate", p.vmDiskService.connection.URL(), p.vmDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -19546,8 +19598,12 @@ func (p *vmDiskServiceExportRequest) Filter(filter bool) *vmDiskServiceExportReq
 func (p *vmDiskServiceExportRequest) Send() (*vmDiskServiceExportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/export", p.vmDiskService.connection.URL(), p.vmDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -19602,8 +19658,12 @@ func (p *vmDiskServiceExportRequest) Send() (*vmDiskServiceExportResponse, error
 func (p *vmDiskServiceExportRequest) MustSend() *vmDiskServiceExportResponse {
 	rawURL := fmt.Sprintf("%s%s/export", p.vmDiskService.connection.URL(), p.vmDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -19875,8 +19935,12 @@ func (p *vmDiskServiceMoveRequest) Filter(filter bool) *vmDiskServiceMoveRequest
 func (p *vmDiskServiceMoveRequest) Send() (*vmDiskServiceMoveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/move", p.vmDiskService.connection.URL(), p.vmDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -19931,8 +19995,12 @@ func (p *vmDiskServiceMoveRequest) Send() (*vmDiskServiceMoveResponse, error) {
 func (p *vmDiskServiceMoveRequest) MustSend() *vmDiskServiceMoveResponse {
 	rawURL := fmt.Sprintf("%s%s/move", p.vmDiskService.connection.URL(), p.vmDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -31996,7 +32064,9 @@ func (p *hostNicServiceUpdateVirtualFunctionsConfigurationRequest) VirtualFuncti
 func (p *hostNicServiceUpdateVirtualFunctionsConfigurationRequest) Send() (*hostNicServiceUpdateVirtualFunctionsConfigurationResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/updatevirtualfunctionsconfiguration", p.hostNicService.connection.URL(), p.hostNicService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.VirtualFunctionsConfiguration(p.virtualFunctionsConfiguration)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -32052,7 +32122,9 @@ func (p *hostNicServiceUpdateVirtualFunctionsConfigurationRequest) Send() (*host
 func (p *hostNicServiceUpdateVirtualFunctionsConfigurationRequest) MustSend() *hostNicServiceUpdateVirtualFunctionsConfigurationResponse {
 	rawURL := fmt.Sprintf("%s%s/updatevirtualfunctionsconfiguration", p.hostNicService.connection.URL(), p.hostNicService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.VirtualFunctionsConfiguration(p.virtualFunctionsConfiguration)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -32793,8 +32865,12 @@ func (p *attachedStorageDomainDiskServiceMoveRequest) StorageDomain(storageDomai
 func (p *attachedStorageDomainDiskServiceMoveRequest) Send() (*attachedStorageDomainDiskServiceMoveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/move", p.attachedStorageDomainDiskService.connection.URL(), p.attachedStorageDomainDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -32850,8 +32926,12 @@ func (p *attachedStorageDomainDiskServiceMoveRequest) Send() (*attachedStorageDo
 func (p *attachedStorageDomainDiskServiceMoveRequest) MustSend() *attachedStorageDomainDiskServiceMoveResponse {
 	rawURL := fmt.Sprintf("%s%s/move", p.attachedStorageDomainDiskService.connection.URL(), p.attachedStorageDomainDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -35749,8 +35829,12 @@ func (p *vmsServiceAddFromConfigurationRequest) Vm(vm *Vm) *vmsServiceAddFromCon
 func (p *vmsServiceAddFromConfigurationRequest) Send() (*vmsServiceAddFromConfigurationResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/fromconfiguration", p.vmsService.connection.URL(), p.vmsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Clone(*p.clone)
-	actionBuilder.ClonePermissions(*p.clonePermissions)
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -35807,8 +35891,12 @@ func (p *vmsServiceAddFromConfigurationRequest) Send() (*vmsServiceAddFromConfig
 func (p *vmsServiceAddFromConfigurationRequest) MustSend() *vmsServiceAddFromConfigurationResponse {
 	rawURL := fmt.Sprintf("%s%s/fromconfiguration", p.vmsService.connection.URL(), p.vmsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Clone(*p.clone)
-	actionBuilder.ClonePermissions(*p.clonePermissions)
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -35936,8 +36024,12 @@ func (p *vmsServiceAddFromScratchRequest) Vm(vm *Vm) *vmsServiceAddFromScratchRe
 func (p *vmsServiceAddFromScratchRequest) Send() (*vmsServiceAddFromScratchResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/fromscratch", p.vmsService.connection.URL(), p.vmsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Clone(*p.clone)
-	actionBuilder.ClonePermissions(*p.clonePermissions)
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -35994,8 +36086,12 @@ func (p *vmsServiceAddFromScratchRequest) Send() (*vmsServiceAddFromScratchRespo
 func (p *vmsServiceAddFromScratchRequest) MustSend() *vmsServiceAddFromScratchResponse {
 	rawURL := fmt.Sprintf("%s%s/fromscratch", p.vmsService.connection.URL(), p.vmsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Clone(*p.clone)
-	actionBuilder.ClonePermissions(*p.clonePermissions)
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -36123,8 +36219,12 @@ func (p *vmsServiceAddFromSnapshotRequest) Vm(vm *Vm) *vmsServiceAddFromSnapshot
 func (p *vmsServiceAddFromSnapshotRequest) Send() (*vmsServiceAddFromSnapshotResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/fromsnapshot", p.vmsService.connection.URL(), p.vmsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Clone(*p.clone)
-	actionBuilder.ClonePermissions(*p.clonePermissions)
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -36181,8 +36281,12 @@ func (p *vmsServiceAddFromSnapshotRequest) Send() (*vmsServiceAddFromSnapshotRes
 func (p *vmsServiceAddFromSnapshotRequest) MustSend() *vmsServiceAddFromSnapshotResponse {
 	rawURL := fmt.Sprintf("%s%s/fromsnapshot", p.vmsService.connection.URL(), p.vmsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Clone(*p.clone)
-	actionBuilder.ClonePermissions(*p.clonePermissions)
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -40519,7 +40623,9 @@ func (p *hostServiceActivateRequest) Async(async bool) *hostServiceActivateReque
 func (p *hostServiceActivateRequest) Send() (*hostServiceActivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/activate", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -40574,7 +40680,9 @@ func (p *hostServiceActivateRequest) Send() (*hostServiceActivateResponse, error
 func (p *hostServiceActivateRequest) MustSend() *hostServiceActivateResponse {
 	rawURL := fmt.Sprintf("%s%s/activate", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -40686,7 +40794,9 @@ func (p *hostServiceApproveRequest) Host(host *Host) *hostServiceApproveRequest 
 func (p *hostServiceApproveRequest) Send() (*hostServiceApproveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/approve", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
@@ -40743,7 +40853,9 @@ func (p *hostServiceApproveRequest) Send() (*hostServiceApproveResponse, error) 
 func (p *hostServiceApproveRequest) MustSend() *hostServiceApproveResponse {
 	rawURL := fmt.Sprintf("%s%s/approve", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
@@ -40861,7 +40973,9 @@ func (p *hostServiceCommitNetConfigRequest) Async(async bool) *hostServiceCommit
 func (p *hostServiceCommitNetConfigRequest) Send() (*hostServiceCommitNetConfigResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/commitnetconfig", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -40916,7 +41030,9 @@ func (p *hostServiceCommitNetConfigRequest) Send() (*hostServiceCommitNetConfigR
 func (p *hostServiceCommitNetConfigRequest) MustSend() *hostServiceCommitNetConfigResponse {
 	rawURL := fmt.Sprintf("%s%s/commitnetconfig", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -41057,9 +41173,15 @@ func (p *hostServiceDeactivateRequest) StopGlusterService(stopGlusterService boo
 func (p *hostServiceDeactivateRequest) Send() (*hostServiceDeactivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/deactivate", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Reason(*p.reason)
-	actionBuilder.StopGlusterService(*p.stopGlusterService)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.reason != nil {
+		actionBuilder.Reason(*p.reason)
+	}
+	if p.stopGlusterService != nil {
+		actionBuilder.StopGlusterService(*p.stopGlusterService)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -41114,9 +41236,15 @@ func (p *hostServiceDeactivateRequest) Send() (*hostServiceDeactivateResponse, e
 func (p *hostServiceDeactivateRequest) MustSend() *hostServiceDeactivateResponse {
 	rawURL := fmt.Sprintf("%s%s/deactivate", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Reason(*p.reason)
-	actionBuilder.StopGlusterService(*p.stopGlusterService)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.reason != nil {
+		actionBuilder.Reason(*p.reason)
+	}
+	if p.stopGlusterService != nil {
+		actionBuilder.StopGlusterService(*p.stopGlusterService)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -41216,7 +41344,9 @@ func (p *hostServiceEnrollCertificateRequest) Async(async bool) *hostServiceEnro
 func (p *hostServiceEnrollCertificateRequest) Send() (*hostServiceEnrollCertificateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/enrollcertificate", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -41271,7 +41401,9 @@ func (p *hostServiceEnrollCertificateRequest) Send() (*hostServiceEnrollCertific
 func (p *hostServiceEnrollCertificateRequest) MustSend() *hostServiceEnrollCertificateResponse {
 	rawURL := fmt.Sprintf("%s%s/enrollcertificate", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -41400,8 +41532,12 @@ func (p *hostServiceFenceRequest) FenceType(fenceType string) *hostServiceFenceR
 func (p *hostServiceFenceRequest) Send() (*hostServiceFenceResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/fence", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.FenceType(*p.fenceType)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.fenceType != nil {
+		actionBuilder.FenceType(*p.fenceType)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -41457,8 +41593,12 @@ func (p *hostServiceFenceRequest) Send() (*hostServiceFenceResponse, error) {
 func (p *hostServiceFenceRequest) MustSend() *hostServiceFenceResponse {
 	rawURL := fmt.Sprintf("%s%s/fence", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.FenceType(*p.fenceType)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.fenceType != nil {
+		actionBuilder.FenceType(*p.fenceType)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -41626,7 +41766,9 @@ func (p *hostServiceForceSelectSpmRequest) Async(async bool) *hostServiceForceSe
 func (p *hostServiceForceSelectSpmRequest) Send() (*hostServiceForceSelectSpmResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/forceselectspm", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -41681,7 +41823,9 @@ func (p *hostServiceForceSelectSpmRequest) Send() (*hostServiceForceSelectSpmRes
 func (p *hostServiceForceSelectSpmRequest) MustSend() *hostServiceForceSelectSpmResponse {
 	rawURL := fmt.Sprintf("%s%s/forceselectspm", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -42089,13 +42233,23 @@ func (p *hostServiceInstallRequest) UndeployHostedEngine(undeployHostedEngine bo
 func (p *hostServiceInstallRequest) Send() (*hostServiceInstallResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/install", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.Image(*p.image)
-	actionBuilder.RootPassword(*p.rootPassword)
+	if p.image != nil {
+		actionBuilder.Image(*p.image)
+	}
+	if p.rootPassword != nil {
+		actionBuilder.RootPassword(*p.rootPassword)
+	}
 	actionBuilder.Ssh(p.ssh)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -42150,13 +42304,23 @@ func (p *hostServiceInstallRequest) Send() (*hostServiceInstallResponse, error) 
 func (p *hostServiceInstallRequest) MustSend() *hostServiceInstallResponse {
 	rawURL := fmt.Sprintf("%s%s/install", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.Image(*p.image)
-	actionBuilder.RootPassword(*p.rootPassword)
+	if p.image != nil {
+		actionBuilder.Image(*p.image)
+	}
+	if p.rootPassword != nil {
+		actionBuilder.RootPassword(*p.rootPassword)
+	}
 	actionBuilder.Ssh(p.ssh)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -42372,7 +42536,9 @@ func (p *hostServiceIscsiDiscoverRequest) Iscsi(iscsi *IscsiDetails) *hostServic
 func (p *hostServiceIscsiDiscoverRequest) Send() (*hostServiceIscsiDiscoverResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/iscsidiscover", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Iscsi(p.iscsi)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -42429,7 +42595,9 @@ func (p *hostServiceIscsiDiscoverRequest) Send() (*hostServiceIscsiDiscoverRespo
 func (p *hostServiceIscsiDiscoverRequest) MustSend() *hostServiceIscsiDiscoverResponse {
 	rawURL := fmt.Sprintf("%s%s/iscsidiscover", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Iscsi(p.iscsi)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -42620,7 +42788,9 @@ func (p *hostServiceIscsiLoginRequest) Iscsi(iscsi *IscsiDetails) *hostServiceIs
 func (p *hostServiceIscsiLoginRequest) Send() (*hostServiceIscsiLoginResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/iscsilogin", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Iscsi(p.iscsi)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -42676,7 +42846,9 @@ func (p *hostServiceIscsiLoginRequest) Send() (*hostServiceIscsiLoginResponse, e
 func (p *hostServiceIscsiLoginRequest) MustSend() *hostServiceIscsiLoginResponse {
 	rawURL := fmt.Sprintf("%s%s/iscsilogin", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Iscsi(p.iscsi)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -42776,7 +42948,9 @@ func (p *hostServiceRefreshRequest) Async(async bool) *hostServiceRefreshRequest
 func (p *hostServiceRefreshRequest) Send() (*hostServiceRefreshResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/refresh", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -42831,7 +43005,9 @@ func (p *hostServiceRefreshRequest) Send() (*hostServiceRefreshResponse, error) 
 func (p *hostServiceRefreshRequest) MustSend() *hostServiceRefreshResponse {
 	rawURL := fmt.Sprintf("%s%s/refresh", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -43380,9 +43556,15 @@ func (p *hostServiceSetupNetworksRequest) SynchronizedNetworkAttachmentsOfAny(an
 func (p *hostServiceSetupNetworksRequest) Send() (*hostServiceSetupNetworksResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/setupnetworks", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.CheckConnectivity(*p.checkConnectivity)
-	actionBuilder.ConnectivityTimeout(*p.connectivityTimeout)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.checkConnectivity != nil {
+		actionBuilder.CheckConnectivity(*p.checkConnectivity)
+	}
+	if p.connectivityTimeout != nil {
+		actionBuilder.ConnectivityTimeout(*p.connectivityTimeout)
+	}
 	actionBuilder.ModifiedBonds(p.modifiedBonds)
 	actionBuilder.ModifiedLabels(p.modifiedLabels)
 	actionBuilder.ModifiedNetworkAttachments(p.modifiedNetworkAttachments)
@@ -43444,9 +43626,15 @@ func (p *hostServiceSetupNetworksRequest) Send() (*hostServiceSetupNetworksRespo
 func (p *hostServiceSetupNetworksRequest) MustSend() *hostServiceSetupNetworksResponse {
 	rawURL := fmt.Sprintf("%s%s/setupnetworks", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.CheckConnectivity(*p.checkConnectivity)
-	actionBuilder.ConnectivityTimeout(*p.connectivityTimeout)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.checkConnectivity != nil {
+		actionBuilder.CheckConnectivity(*p.checkConnectivity)
+	}
+	if p.connectivityTimeout != nil {
+		actionBuilder.ConnectivityTimeout(*p.connectivityTimeout)
+	}
 	actionBuilder.ModifiedBonds(p.modifiedBonds)
 	actionBuilder.ModifiedLabels(p.modifiedLabels)
 	actionBuilder.ModifiedNetworkAttachments(p.modifiedNetworkAttachments)
@@ -43861,7 +44049,9 @@ func (p *hostServiceSyncAllNetworksRequest) Async(async bool) *hostServiceSyncAl
 func (p *hostServiceSyncAllNetworksRequest) Send() (*hostServiceSyncAllNetworksResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/syncallnetworks", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -43916,7 +44106,9 @@ func (p *hostServiceSyncAllNetworksRequest) Send() (*hostServiceSyncAllNetworksR
 func (p *hostServiceSyncAllNetworksRequest) MustSend() *hostServiceSyncAllNetworksResponse {
 	rawURL := fmt.Sprintf("%s%s/syncallnetworks", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -44040,7 +44232,9 @@ func (p *hostServiceUnregisteredStorageDomainsDiscoverRequest) Iscsi(iscsi *Iscs
 func (p *hostServiceUnregisteredStorageDomainsDiscoverRequest) Send() (*hostServiceUnregisteredStorageDomainsDiscoverResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/unregisteredstoragedomainsdiscover", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Iscsi(p.iscsi)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -44097,7 +44291,9 @@ func (p *hostServiceUnregisteredStorageDomainsDiscoverRequest) Send() (*hostServ
 func (p *hostServiceUnregisteredStorageDomainsDiscoverRequest) MustSend() *hostServiceUnregisteredStorageDomainsDiscoverResponse {
 	rawURL := fmt.Sprintf("%s%s/unregisteredstoragedomainsdiscover", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Iscsi(p.iscsi)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -44462,9 +44658,15 @@ func (p *hostServiceUpgradeRequest) Reboot(reboot bool) *hostServiceUpgradeReque
 func (p *hostServiceUpgradeRequest) Send() (*hostServiceUpgradeResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/upgrade", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Image(*p.image)
-	actionBuilder.Reboot(*p.reboot)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.image != nil {
+		actionBuilder.Image(*p.image)
+	}
+	if p.reboot != nil {
+		actionBuilder.Reboot(*p.reboot)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -44519,9 +44721,15 @@ func (p *hostServiceUpgradeRequest) Send() (*hostServiceUpgradeResponse, error) 
 func (p *hostServiceUpgradeRequest) MustSend() *hostServiceUpgradeResponse {
 	rawURL := fmt.Sprintf("%s%s/upgrade", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Image(*p.image)
-	actionBuilder.Reboot(*p.reboot)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.image != nil {
+		actionBuilder.Image(*p.image)
+	}
+	if p.reboot != nil {
+		actionBuilder.Reboot(*p.reboot)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -44788,7 +44996,9 @@ func (p *hostServiceApproveUsingRootPasswordRequest) Host(host *Host) *hostServi
 func (p *hostServiceApproveUsingRootPasswordRequest) Send() (*hostServiceApproveUsingRootPasswordResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
@@ -44845,7 +45055,9 @@ func (p *hostServiceApproveUsingRootPasswordRequest) Send() (*hostServiceApprove
 func (p *hostServiceApproveUsingRootPasswordRequest) MustSend() *hostServiceApproveUsingRootPasswordResponse {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
@@ -44985,13 +45197,23 @@ func (p *hostServiceInstallUsingRootPasswordRequest) UndeployHostedEngine(undepl
 func (p *hostServiceInstallUsingRootPasswordRequest) Send() (*hostServiceInstallUsingRootPasswordResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.Image(*p.image)
-	actionBuilder.RootPassword(*p.rootPassword)
+	if p.image != nil {
+		actionBuilder.Image(*p.image)
+	}
+	if p.rootPassword != nil {
+		actionBuilder.RootPassword(*p.rootPassword)
+	}
 	actionBuilder.Ssh(p.ssh)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -45046,13 +45268,23 @@ func (p *hostServiceInstallUsingRootPasswordRequest) Send() (*hostServiceInstall
 func (p *hostServiceInstallUsingRootPasswordRequest) MustSend() *hostServiceInstallUsingRootPasswordResponse {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.Image(*p.image)
-	actionBuilder.RootPassword(*p.rootPassword)
+	if p.image != nil {
+		actionBuilder.Image(*p.image)
+	}
+	if p.rootPassword != nil {
+		actionBuilder.RootPassword(*p.rootPassword)
+	}
 	actionBuilder.Ssh(p.ssh)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -45159,7 +45391,9 @@ func (p *hostServiceUpdateUsingRootPasswordRequest) Host(host *Host) *hostServic
 func (p *hostServiceUpdateUsingRootPasswordRequest) Send() (*hostServiceUpdateUsingRootPasswordResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -45216,7 +45450,9 @@ func (p *hostServiceUpdateUsingRootPasswordRequest) Send() (*hostServiceUpdateUs
 func (p *hostServiceUpdateUsingRootPasswordRequest) MustSend() *hostServiceUpdateUsingRootPasswordResponse {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -45345,7 +45581,9 @@ func (p *hostServiceApproveUsingSshRequest) Host(host *Host) *hostServiceApprove
 func (p *hostServiceApproveUsingSshRequest) Send() (*hostServiceApproveUsingSshResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
@@ -45402,7 +45640,9 @@ func (p *hostServiceApproveUsingSshRequest) Send() (*hostServiceApproveUsingSshR
 func (p *hostServiceApproveUsingSshRequest) MustSend() *hostServiceApproveUsingSshResponse {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
@@ -45542,13 +45782,23 @@ func (p *hostServiceInstallUsingSshRequest) UndeployHostedEngine(undeployHostedE
 func (p *hostServiceInstallUsingSshRequest) Send() (*hostServiceInstallUsingSshResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.Image(*p.image)
-	actionBuilder.RootPassword(*p.rootPassword)
+	if p.image != nil {
+		actionBuilder.Image(*p.image)
+	}
+	if p.rootPassword != nil {
+		actionBuilder.RootPassword(*p.rootPassword)
+	}
 	actionBuilder.Ssh(p.ssh)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -45603,13 +45853,23 @@ func (p *hostServiceInstallUsingSshRequest) Send() (*hostServiceInstallUsingSshR
 func (p *hostServiceInstallUsingSshRequest) MustSend() *hostServiceInstallUsingSshResponse {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.deployHostedEngine != nil {
+		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.Image(*p.image)
-	actionBuilder.RootPassword(*p.rootPassword)
+	if p.image != nil {
+		actionBuilder.Image(*p.image)
+	}
+	if p.rootPassword != nil {
+		actionBuilder.RootPassword(*p.rootPassword)
+	}
 	actionBuilder.Ssh(p.ssh)
-	actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	if p.undeployHostedEngine != nil {
+		actionBuilder.UndeployHostedEngine(*p.undeployHostedEngine)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -45716,7 +45976,9 @@ func (p *hostServiceUpdateUsingSshRequest) Host(host *Host) *hostServiceUpdateUs
 func (p *hostServiceUpdateUsingSshRequest) Send() (*hostServiceUpdateUsingSshResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -45773,7 +46035,9 @@ func (p *hostServiceUpdateUsingSshRequest) Send() (*hostServiceUpdateUsingSshRes
 func (p *hostServiceUpdateUsingSshRequest) MustSend() *hostServiceUpdateUsingSshResponse {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.hostService.connection.URL(), p.hostService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -46686,7 +46950,9 @@ func (p *clusterServiceResetEmulatedMachineRequest) Async(async bool) *clusterSe
 func (p *clusterServiceResetEmulatedMachineRequest) Send() (*clusterServiceResetEmulatedMachineResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/resetemulatedmachine", p.clusterService.connection.URL(), p.clusterService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -46741,7 +47007,9 @@ func (p *clusterServiceResetEmulatedMachineRequest) Send() (*clusterServiceReset
 func (p *clusterServiceResetEmulatedMachineRequest) MustSend() *clusterServiceResetEmulatedMachineResponse {
 	rawURL := fmt.Sprintf("%s%s/resetemulatedmachine", p.clusterService.connection.URL(), p.clusterService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -51148,7 +51416,9 @@ func (p *moveableServiceMoveRequest) Async(async bool) *moveableServiceMoveReque
 func (p *moveableServiceMoveRequest) Send() (*moveableServiceMoveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/move", p.moveableService.connection.URL(), p.moveableService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -51203,7 +51473,9 @@ func (p *moveableServiceMoveRequest) Send() (*moveableServiceMoveResponse, error
 func (p *moveableServiceMoveRequest) MustSend() *moveableServiceMoveResponse {
 	rawURL := fmt.Sprintf("%s%s/move", p.moveableService.connection.URL(), p.moveableService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -52123,9 +52395,13 @@ func (p *snapshotServiceRestoreRequest) RestoreMemory(restoreMemory bool) *snaps
 func (p *snapshotServiceRestoreRequest) Send() (*snapshotServiceRestoreResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/restore", p.snapshotService.connection.URL(), p.snapshotService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Disks(p.disks)
-	actionBuilder.RestoreMemory(*p.restoreMemory)
+	if p.restoreMemory != nil {
+		actionBuilder.RestoreMemory(*p.restoreMemory)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -52180,9 +52456,13 @@ func (p *snapshotServiceRestoreRequest) Send() (*snapshotServiceRestoreResponse,
 func (p *snapshotServiceRestoreRequest) MustSend() *snapshotServiceRestoreResponse {
 	rawURL := fmt.Sprintf("%s%s/restore", p.snapshotService.connection.URL(), p.snapshotService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Disks(p.disks)
-	actionBuilder.RestoreMemory(*p.restoreMemory)
+	if p.restoreMemory != nil {
+		actionBuilder.RestoreMemory(*p.restoreMemory)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -53264,7 +53544,9 @@ func (p *templateServiceExportRequest) StorageDomain(storageDomain *StorageDomai
 func (p *templateServiceExportRequest) Send() (*templateServiceExportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/export", p.templateService.connection.URL(), p.templateService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -53320,7 +53602,9 @@ func (p *templateServiceExportRequest) Send() (*templateServiceExportResponse, e
 func (p *templateServiceExportRequest) MustSend() *templateServiceExportResponse {
 	rawURL := fmt.Sprintf("%s%s/export", p.templateService.connection.URL(), p.templateService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -59124,7 +59408,9 @@ func (p *vmServiceCancelMigrationRequest) Async(async bool) *vmServiceCancelMigr
 func (p *vmServiceCancelMigrationRequest) Send() (*vmServiceCancelMigrationResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/cancelmigration", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -59179,7 +59465,9 @@ func (p *vmServiceCancelMigrationRequest) Send() (*vmServiceCancelMigrationRespo
 func (p *vmServiceCancelMigrationRequest) MustSend() *vmServiceCancelMigrationResponse {
 	rawURL := fmt.Sprintf("%s%s/cancelmigration", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -59303,7 +59591,9 @@ func (p *vmServiceCloneRequest) Vm(vm *Vm) *vmServiceCloneRequest {
 func (p *vmServiceCloneRequest) Send() (*vmServiceCloneResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/clone", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -59359,7 +59649,9 @@ func (p *vmServiceCloneRequest) Send() (*vmServiceCloneResponse, error) {
 func (p *vmServiceCloneRequest) MustSend() *vmServiceCloneResponse {
 	rawURL := fmt.Sprintf("%s%s/clone", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -59458,7 +59750,9 @@ func (p *vmServiceCommitSnapshotRequest) Async(async bool) *vmServiceCommitSnaps
 func (p *vmServiceCommitSnapshotRequest) Send() (*vmServiceCommitSnapshotResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/commitsnapshot", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -59513,7 +59807,9 @@ func (p *vmServiceCommitSnapshotRequest) Send() (*vmServiceCommitSnapshotRespons
 func (p *vmServiceCommitSnapshotRequest) MustSend() *vmServiceCommitSnapshotResponse {
 	rawURL := fmt.Sprintf("%s%s/commitsnapshot", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -59624,7 +59920,9 @@ func (p *vmServiceDetachRequest) Async(async bool) *vmServiceDetachRequest {
 func (p *vmServiceDetachRequest) Send() (*vmServiceDetachResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/detach", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -59679,7 +59977,9 @@ func (p *vmServiceDetachRequest) Send() (*vmServiceDetachResponse, error) {
 func (p *vmServiceDetachRequest) MustSend() *vmServiceDetachResponse {
 	rawURL := fmt.Sprintf("%s%s/detach", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -59850,9 +60150,15 @@ func (p *vmServiceExportRequest) StorageDomain(storageDomain *StorageDomain) *vm
 func (p *vmServiceExportRequest) Send() (*vmServiceExportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/export", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DiscardSnapshots(*p.discardSnapshots)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.discardSnapshots != nil {
+		actionBuilder.DiscardSnapshots(*p.discardSnapshots)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -59908,9 +60214,15 @@ func (p *vmServiceExportRequest) Send() (*vmServiceExportResponse, error) {
 func (p *vmServiceExportRequest) MustSend() *vmServiceExportResponse {
 	rawURL := fmt.Sprintf("%s%s/export", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DiscardSnapshots(*p.discardSnapshots)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.discardSnapshots != nil {
+		actionBuilder.DiscardSnapshots(*p.discardSnapshots)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -60090,7 +60402,9 @@ func (p *vmServiceFreezeFilesystemsRequest) Async(async bool) *vmServiceFreezeFi
 func (p *vmServiceFreezeFilesystemsRequest) Send() (*vmServiceFreezeFilesystemsResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/freezefilesystems", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -60145,7 +60459,9 @@ func (p *vmServiceFreezeFilesystemsRequest) Send() (*vmServiceFreezeFilesystemsR
 func (p *vmServiceFreezeFilesystemsRequest) MustSend() *vmServiceFreezeFilesystemsResponse {
 	rawURL := fmt.Sprintf("%s%s/freezefilesystems", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -60497,7 +60813,9 @@ func (p *vmServiceLogonRequest) Async(async bool) *vmServiceLogonRequest {
 func (p *vmServiceLogonRequest) Send() (*vmServiceLogonResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/logon", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -60552,7 +60870,9 @@ func (p *vmServiceLogonRequest) Send() (*vmServiceLogonResponse, error) {
 func (p *vmServiceLogonRequest) MustSend() *vmServiceLogonResponse {
 	rawURL := fmt.Sprintf("%s%s/logon", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -60697,8 +61017,12 @@ func (p *vmServiceMaintenanceRequest) MaintenanceEnabled(maintenanceEnabled bool
 func (p *vmServiceMaintenanceRequest) Send() (*vmServiceMaintenanceResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/maintenance", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.MaintenanceEnabled(*p.maintenanceEnabled)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.maintenanceEnabled != nil {
+		actionBuilder.MaintenanceEnabled(*p.maintenanceEnabled)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -60753,8 +61077,12 @@ func (p *vmServiceMaintenanceRequest) Send() (*vmServiceMaintenanceResponse, err
 func (p *vmServiceMaintenanceRequest) MustSend() *vmServiceMaintenanceResponse {
 	rawURL := fmt.Sprintf("%s%s/maintenance", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.MaintenanceEnabled(*p.maintenanceEnabled)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.maintenanceEnabled != nil {
+		actionBuilder.MaintenanceEnabled(*p.maintenanceEnabled)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -60907,9 +61235,13 @@ func (p *vmServiceMigrateRequest) Host(host *Host) *vmServiceMigrateRequest {
 func (p *vmServiceMigrateRequest) Send() (*vmServiceMigrateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/migrate", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -60965,9 +61297,13 @@ func (p *vmServiceMigrateRequest) Send() (*vmServiceMigrateResponse, error) {
 func (p *vmServiceMigrateRequest) MustSend() *vmServiceMigrateResponse {
 	rawURL := fmt.Sprintf("%s%s/migrate", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -61133,10 +61469,14 @@ func (p *vmServicePreviewSnapshotRequest) Vm(vm *Vm) *vmServicePreviewSnapshotRe
 func (p *vmServicePreviewSnapshotRequest) Send() (*vmServicePreviewSnapshotResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/previewsnapshot", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Disks(p.disks)
 	actionBuilder.Lease(p.lease)
-	actionBuilder.RestoreMemory(*p.restoreMemory)
+	if p.restoreMemory != nil {
+		actionBuilder.RestoreMemory(*p.restoreMemory)
+	}
 	actionBuilder.Snapshot(p.snapshot)
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -61193,10 +61533,14 @@ func (p *vmServicePreviewSnapshotRequest) Send() (*vmServicePreviewSnapshotRespo
 func (p *vmServicePreviewSnapshotRequest) MustSend() *vmServicePreviewSnapshotResponse {
 	rawURL := fmt.Sprintf("%s%s/previewsnapshot", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Disks(p.disks)
 	actionBuilder.Lease(p.lease)
-	actionBuilder.RestoreMemory(*p.restoreMemory)
+	if p.restoreMemory != nil {
+		actionBuilder.RestoreMemory(*p.restoreMemory)
+	}
 	actionBuilder.Snapshot(p.snapshot)
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -61316,7 +61660,9 @@ func (p *vmServiceRebootRequest) Async(async bool) *vmServiceRebootRequest {
 func (p *vmServiceRebootRequest) Send() (*vmServiceRebootResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/reboot", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -61371,7 +61717,9 @@ func (p *vmServiceRebootRequest) Send() (*vmServiceRebootResponse, error) {
 func (p *vmServiceRebootRequest) MustSend() *vmServiceRebootResponse {
 	rawURL := fmt.Sprintf("%s%s/reboot", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -61682,7 +62030,9 @@ func (p *vmServiceReorderMacAddressesRequest) Async(async bool) *vmServiceReorde
 func (p *vmServiceReorderMacAddressesRequest) Send() (*vmServiceReorderMacAddressesResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/reordermacaddresses", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -61737,7 +62087,9 @@ func (p *vmServiceReorderMacAddressesRequest) Send() (*vmServiceReorderMacAddres
 func (p *vmServiceReorderMacAddressesRequest) MustSend() *vmServiceReorderMacAddressesResponse {
 	rawURL := fmt.Sprintf("%s%s/reordermacaddresses", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -61845,7 +62197,9 @@ func (p *vmServiceShutdownRequest) Async(async bool) *vmServiceShutdownRequest {
 func (p *vmServiceShutdownRequest) Send() (*vmServiceShutdownResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/shutdown", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -61900,7 +62254,9 @@ func (p *vmServiceShutdownRequest) Send() (*vmServiceShutdownResponse, error) {
 func (p *vmServiceShutdownRequest) MustSend() *vmServiceShutdownResponse {
 	rawURL := fmt.Sprintf("%s%s/shutdown", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -62075,14 +62431,26 @@ func (p *vmServiceStartRequest) Volatile(volatile bool) *vmServiceStartRequest {
 func (p *vmServiceStartRequest) Send() (*vmServiceStartResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/start", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.AuthorizedKey(p.authorizedKey)
-	actionBuilder.Filter(*p.filter)
-	actionBuilder.Pause(*p.pause)
-	actionBuilder.UseCloudInit(*p.useCloudInit)
-	actionBuilder.UseSysprep(*p.useSysprep)
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
+	if p.pause != nil {
+		actionBuilder.Pause(*p.pause)
+	}
+	if p.useCloudInit != nil {
+		actionBuilder.UseCloudInit(*p.useCloudInit)
+	}
+	if p.useSysprep != nil {
+		actionBuilder.UseSysprep(*p.useSysprep)
+	}
 	actionBuilder.Vm(p.vm)
-	actionBuilder.Volatile(*p.volatile)
+	if p.volatile != nil {
+		actionBuilder.Volatile(*p.volatile)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -62137,14 +62505,26 @@ func (p *vmServiceStartRequest) Send() (*vmServiceStartResponse, error) {
 func (p *vmServiceStartRequest) MustSend() *vmServiceStartResponse {
 	rawURL := fmt.Sprintf("%s%s/start", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.AuthorizedKey(p.authorizedKey)
-	actionBuilder.Filter(*p.filter)
-	actionBuilder.Pause(*p.pause)
-	actionBuilder.UseCloudInit(*p.useCloudInit)
-	actionBuilder.UseSysprep(*p.useSysprep)
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
+	if p.pause != nil {
+		actionBuilder.Pause(*p.pause)
+	}
+	if p.useCloudInit != nil {
+		actionBuilder.UseCloudInit(*p.useCloudInit)
+	}
+	if p.useSysprep != nil {
+		actionBuilder.UseSysprep(*p.useSysprep)
+	}
 	actionBuilder.Vm(p.vm)
-	actionBuilder.Volatile(*p.volatile)
+	if p.volatile != nil {
+		actionBuilder.Volatile(*p.volatile)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -62278,7 +62658,9 @@ func (p *vmServiceStopRequest) Async(async bool) *vmServiceStopRequest {
 func (p *vmServiceStopRequest) Send() (*vmServiceStopResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/stop", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -62333,7 +62715,9 @@ func (p *vmServiceStopRequest) Send() (*vmServiceStopResponse, error) {
 func (p *vmServiceStopRequest) MustSend() *vmServiceStopResponse {
 	rawURL := fmt.Sprintf("%s%s/stop", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -62466,7 +62850,9 @@ func (p *vmServiceSuspendRequest) Async(async bool) *vmServiceSuspendRequest {
 func (p *vmServiceSuspendRequest) Send() (*vmServiceSuspendResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/suspend", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -62521,7 +62907,9 @@ func (p *vmServiceSuspendRequest) Send() (*vmServiceSuspendResponse, error) {
 func (p *vmServiceSuspendRequest) MustSend() *vmServiceSuspendResponse {
 	rawURL := fmt.Sprintf("%s%s/suspend", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -62656,7 +63044,9 @@ func (p *vmServiceThawFilesystemsRequest) Async(async bool) *vmServiceThawFilesy
 func (p *vmServiceThawFilesystemsRequest) Send() (*vmServiceThawFilesystemsResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/thawfilesystems", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -62711,7 +63101,9 @@ func (p *vmServiceThawFilesystemsRequest) Send() (*vmServiceThawFilesystemsRespo
 func (p *vmServiceThawFilesystemsRequest) MustSend() *vmServiceThawFilesystemsResponse {
 	rawURL := fmt.Sprintf("%s%s/thawfilesystems", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -62872,7 +63264,9 @@ func (p *vmServiceTicketRequest) Ticket(ticket *Ticket) *vmServiceTicketRequest 
 func (p *vmServiceTicketRequest) Send() (*vmServiceTicketResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/ticket", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Ticket(p.ticket)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -62929,7 +63323,9 @@ func (p *vmServiceTicketRequest) Send() (*vmServiceTicketResponse, error) {
 func (p *vmServiceTicketRequest) MustSend() *vmServiceTicketResponse {
 	rawURL := fmt.Sprintf("%s%s/ticket", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Ticket(p.ticket)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -63127,9 +63523,15 @@ func (p *vmServiceExportToExportDomainRequest) StorageDomain(storageDomain *Stor
 func (p *vmServiceExportToExportDomainRequest) Send() (*vmServiceExportToExportDomainResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/toexportdomain", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DiscardSnapshots(*p.discardSnapshots)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.discardSnapshots != nil {
+		actionBuilder.DiscardSnapshots(*p.discardSnapshots)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -63185,9 +63587,15 @@ func (p *vmServiceExportToExportDomainRequest) Send() (*vmServiceExportToExportD
 func (p *vmServiceExportToExportDomainRequest) MustSend() *vmServiceExportToExportDomainResponse {
 	rawURL := fmt.Sprintf("%s%s/toexportdomain", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.DiscardSnapshots(*p.discardSnapshots)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.discardSnapshots != nil {
+		actionBuilder.DiscardSnapshots(*p.discardSnapshots)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -63323,11 +63731,21 @@ func (p *vmServiceExportToPathOnHostRequest) StorageDomain(storageDomain *Storag
 func (p *vmServiceExportToPathOnHostRequest) Send() (*vmServiceExportToPathOnHostResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/topathonhost", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Directory(*p.directory)
-	actionBuilder.DiscardSnapshots(*p.discardSnapshots)
-	actionBuilder.Exclusive(*p.exclusive)
-	actionBuilder.Filename(*p.filename)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.directory != nil {
+		actionBuilder.Directory(*p.directory)
+	}
+	if p.discardSnapshots != nil {
+		actionBuilder.DiscardSnapshots(*p.discardSnapshots)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
+	if p.filename != nil {
+		actionBuilder.Filename(*p.filename)
+	}
 	actionBuilder.Host(p.host)
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
@@ -63384,11 +63802,21 @@ func (p *vmServiceExportToPathOnHostRequest) Send() (*vmServiceExportToPathOnHos
 func (p *vmServiceExportToPathOnHostRequest) MustSend() *vmServiceExportToPathOnHostResponse {
 	rawURL := fmt.Sprintf("%s%s/topathonhost", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Directory(*p.directory)
-	actionBuilder.DiscardSnapshots(*p.discardSnapshots)
-	actionBuilder.Exclusive(*p.exclusive)
-	actionBuilder.Filename(*p.filename)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.directory != nil {
+		actionBuilder.Directory(*p.directory)
+	}
+	if p.discardSnapshots != nil {
+		actionBuilder.DiscardSnapshots(*p.discardSnapshots)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
+	if p.filename != nil {
+		actionBuilder.Filename(*p.filename)
+	}
 	actionBuilder.Host(p.host)
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
@@ -63490,7 +63918,9 @@ func (p *vmServiceUndoSnapshotRequest) Async(async bool) *vmServiceUndoSnapshotR
 func (p *vmServiceUndoSnapshotRequest) Send() (*vmServiceUndoSnapshotResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/undosnapshot", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -63545,7 +63975,9 @@ func (p *vmServiceUndoSnapshotRequest) Send() (*vmServiceUndoSnapshotResponse, e
 func (p *vmServiceUndoSnapshotRequest) MustSend() *vmServiceUndoSnapshotResponse {
 	rawURL := fmt.Sprintf("%s%s/undosnapshot", p.vmService.connection.URL(), p.vmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -64484,10 +64916,14 @@ func (p *imageServiceImportRequest) Template(template *Template) *imageServiceIm
 func (p *imageServiceImportRequest) Send() (*imageServiceImportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/import", p.imageService.connection.URL(), p.imageService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Disk(p.disk)
-	actionBuilder.ImportAsTemplate(*p.importAsTemplate)
+	if p.importAsTemplate != nil {
+		actionBuilder.ImportAsTemplate(*p.importAsTemplate)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	actionBuilder.Template(p.template)
 	action, err := actionBuilder.Build()
@@ -64544,10 +64980,14 @@ func (p *imageServiceImportRequest) Send() (*imageServiceImportResponse, error) 
 func (p *imageServiceImportRequest) MustSend() *imageServiceImportResponse {
 	rawURL := fmt.Sprintf("%s%s/import", p.imageService.connection.URL(), p.imageService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Cluster(p.cluster)
 	actionBuilder.Disk(p.disk)
-	actionBuilder.ImportAsTemplate(*p.importAsTemplate)
+	if p.importAsTemplate != nil {
+		actionBuilder.ImportAsTemplate(*p.importAsTemplate)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	actionBuilder.Template(p.template)
 	action, err := actionBuilder.Build()
@@ -66361,9 +66801,13 @@ func (p *storageServerConnectionServiceUpdateIscsiRequest) Force(force bool) *st
 func (p *storageServerConnectionServiceUpdateIscsiRequest) Send() (*storageServerConnectionServiceUpdateIscsiResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/iscsi", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Connection(p.connection)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -66419,9 +66863,13 @@ func (p *storageServerConnectionServiceUpdateIscsiRequest) Send() (*storageServe
 func (p *storageServerConnectionServiceUpdateIscsiRequest) MustSend() *storageServerConnectionServiceUpdateIscsiResponse {
 	rawURL := fmt.Sprintf("%s%s/iscsi", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Connection(p.connection)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -66548,9 +66996,13 @@ func (p *storageServerConnectionServiceUpdateLocalRequest) Force(force bool) *st
 func (p *storageServerConnectionServiceUpdateLocalRequest) Send() (*storageServerConnectionServiceUpdateLocalResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/local", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Connection(p.connection)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -66606,9 +67058,13 @@ func (p *storageServerConnectionServiceUpdateLocalRequest) Send() (*storageServe
 func (p *storageServerConnectionServiceUpdateLocalRequest) MustSend() *storageServerConnectionServiceUpdateLocalResponse {
 	rawURL := fmt.Sprintf("%s%s/local", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Connection(p.connection)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -66735,9 +67191,13 @@ func (p *storageServerConnectionServiceUpdateNfsRequest) Force(force bool) *stor
 func (p *storageServerConnectionServiceUpdateNfsRequest) Send() (*storageServerConnectionServiceUpdateNfsResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/nfs", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Connection(p.connection)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -66793,9 +67253,13 @@ func (p *storageServerConnectionServiceUpdateNfsRequest) Send() (*storageServerC
 func (p *storageServerConnectionServiceUpdateNfsRequest) MustSend() *storageServerConnectionServiceUpdateNfsResponse {
 	rawURL := fmt.Sprintf("%s%s/nfs", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Connection(p.connection)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -67342,9 +67806,13 @@ func (p *storageServerConnectionServiceUpdateVfsRequest) Force(force bool) *stor
 func (p *storageServerConnectionServiceUpdateVfsRequest) Send() (*storageServerConnectionServiceUpdateVfsResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/vfs", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Connection(p.connection)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -67400,9 +67868,13 @@ func (p *storageServerConnectionServiceUpdateVfsRequest) Send() (*storageServerC
 func (p *storageServerConnectionServiceUpdateVfsRequest) MustSend() *storageServerConnectionServiceUpdateVfsResponse {
 	rawURL := fmt.Sprintf("%s%s/vfs", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Connection(p.connection)
-	actionBuilder.Force(*p.force)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -69983,7 +70455,9 @@ func (p *vmGraphicsConsoleServiceProxyTicketRequest) Async(async bool) *vmGraphi
 func (p *vmGraphicsConsoleServiceProxyTicketRequest) Send() (*vmGraphicsConsoleServiceProxyTicketResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/proxyticket", p.vmGraphicsConsoleService.connection.URL(), p.vmGraphicsConsoleService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -70039,7 +70513,9 @@ func (p *vmGraphicsConsoleServiceProxyTicketRequest) Send() (*vmGraphicsConsoleS
 func (p *vmGraphicsConsoleServiceProxyTicketRequest) MustSend() *vmGraphicsConsoleServiceProxyTicketResponse {
 	rawURL := fmt.Sprintf("%s%s/proxyticket", p.vmGraphicsConsoleService.connection.URL(), p.vmGraphicsConsoleService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -83915,7 +84391,9 @@ func (p *systemServiceReloadConfigurationsRequest) Async(async bool) *systemServ
 func (p *systemServiceReloadConfigurationsRequest) Send() (*systemServiceReloadConfigurationsResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/reloadconfigurations", p.systemService.connection.URL(), p.systemService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -83970,7 +84448,9 @@ func (p *systemServiceReloadConfigurationsRequest) Send() (*systemServiceReloadC
 func (p *systemServiceReloadConfigurationsRequest) MustSend() *systemServiceReloadConfigurationsResponse {
 	rawURL := fmt.Sprintf("%s%s/reloadconfigurations", p.systemService.connection.URL(), p.systemService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -89468,11 +89948,19 @@ func (p *storageDomainVmServiceImportRequest) Vm(vm *Vm) *storageDomainVmService
 func (p *storageDomainVmServiceImportRequest) Send() (*storageDomainVmServiceImportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/import", p.storageDomainVmService.connection.URL(), p.storageDomainVmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Clone(*p.clone)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.CollapseSnapshots(*p.collapseSnapshots)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.collapseSnapshots != nil {
+		actionBuilder.CollapseSnapshots(*p.collapseSnapshots)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -89529,11 +90017,19 @@ func (p *storageDomainVmServiceImportRequest) Send() (*storageDomainVmServiceImp
 func (p *storageDomainVmServiceImportRequest) MustSend() *storageDomainVmServiceImportResponse {
 	rawURL := fmt.Sprintf("%s%s/import", p.storageDomainVmService.connection.URL(), p.storageDomainVmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Clone(*p.clone)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.CollapseSnapshots(*p.collapseSnapshots)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.collapseSnapshots != nil {
+		actionBuilder.CollapseSnapshots(*p.collapseSnapshots)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -89789,11 +90285,19 @@ func (p *storageDomainVmServiceRegisterRequest) VnicProfileMappingsOfAny(anys ..
 func (p *storageDomainVmServiceRegisterRequest) Send() (*storageDomainVmServiceRegisterResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/register", p.storageDomainVmService.connection.URL(), p.storageDomainVmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.AllowPartialImport(*p.allowPartialImport)
-	actionBuilder.Async(*p.async)
-	actionBuilder.Clone(*p.clone)
+	if p.allowPartialImport != nil {
+		actionBuilder.AllowPartialImport(*p.allowPartialImport)
+	}
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.ReassignBadMacs(*p.reassignBadMacs)
+	if p.reassignBadMacs != nil {
+		actionBuilder.ReassignBadMacs(*p.reassignBadMacs)
+	}
 	actionBuilder.RegistrationConfiguration(p.registrationConfiguration)
 	actionBuilder.Vm(p.vm)
 	actionBuilder.VnicProfileMappings(p.vnicProfileMappings)
@@ -89851,11 +90355,19 @@ func (p *storageDomainVmServiceRegisterRequest) Send() (*storageDomainVmServiceR
 func (p *storageDomainVmServiceRegisterRequest) MustSend() *storageDomainVmServiceRegisterResponse {
 	rawURL := fmt.Sprintf("%s%s/register", p.storageDomainVmService.connection.URL(), p.storageDomainVmService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.AllowPartialImport(*p.allowPartialImport)
-	actionBuilder.Async(*p.async)
-	actionBuilder.Clone(*p.clone)
+	if p.allowPartialImport != nil {
+		actionBuilder.AllowPartialImport(*p.allowPartialImport)
+	}
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.ReassignBadMacs(*p.reassignBadMacs)
+	if p.reassignBadMacs != nil {
+		actionBuilder.ReassignBadMacs(*p.reassignBadMacs)
+	}
 	actionBuilder.RegistrationConfiguration(p.registrationConfiguration)
 	actionBuilder.Vm(p.vm)
 	actionBuilder.VnicProfileMappings(p.vnicProfileMappings)
@@ -95129,10 +95641,14 @@ func (p *diskServiceCopyRequest) StorageDomain(storageDomain *StorageDomain) *di
 func (p *diskServiceCopyRequest) Send() (*diskServiceCopyResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/copy", p.diskService.connection.URL(), p.diskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Disk(p.disk)
 	actionBuilder.DiskProfile(p.diskProfile)
-	actionBuilder.Filter(*p.filter)
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.Quota(p.quota)
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
@@ -95189,10 +95705,14 @@ func (p *diskServiceCopyRequest) Send() (*diskServiceCopyResponse, error) {
 func (p *diskServiceCopyRequest) MustSend() *diskServiceCopyResponse {
 	rawURL := fmt.Sprintf("%s%s/copy", p.diskService.connection.URL(), p.diskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Disk(p.disk)
 	actionBuilder.DiskProfile(p.diskProfile)
-	actionBuilder.Filter(*p.filter)
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.Quota(p.quota)
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
@@ -95357,8 +95877,12 @@ func (p *diskServiceExportRequest) StorageDomain(storageDomain *StorageDomain) *
 func (p *diskServiceExportRequest) Send() (*diskServiceExportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/export", p.diskService.connection.URL(), p.diskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -95414,8 +95938,12 @@ func (p *diskServiceExportRequest) Send() (*diskServiceExportResponse, error) {
 func (p *diskServiceExportRequest) MustSend() *diskServiceExportResponse {
 	rawURL := fmt.Sprintf("%s%s/export", p.diskService.connection.URL(), p.diskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -95740,9 +96268,13 @@ func (p *diskServiceMoveRequest) StorageDomain(storageDomain *StorageDomain) *di
 func (p *diskServiceMoveRequest) Send() (*diskServiceMoveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/move", p.diskService.connection.URL(), p.diskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.DiskProfile(p.diskProfile)
-	actionBuilder.Filter(*p.filter)
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.Quota(p.quota)
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
@@ -95799,9 +96331,13 @@ func (p *diskServiceMoveRequest) Send() (*diskServiceMoveResponse, error) {
 func (p *diskServiceMoveRequest) MustSend() *diskServiceMoveResponse {
 	rawURL := fmt.Sprintf("%s%s/move", p.diskService.connection.URL(), p.diskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.DiskProfile(p.diskProfile)
-	actionBuilder.Filter(*p.filter)
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.Quota(p.quota)
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
@@ -100074,8 +100610,12 @@ func (p *storageDomainDiskServiceMoveRequest) StorageDomain(storageDomain *Stora
 func (p *storageDomainDiskServiceMoveRequest) Send() (*storageDomainDiskServiceMoveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/move", p.storageDomainDiskService.connection.URL(), p.storageDomainDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -100131,8 +100671,12 @@ func (p *storageDomainDiskServiceMoveRequest) Send() (*storageDomainDiskServiceM
 func (p *storageDomainDiskServiceMoveRequest) MustSend() *storageDomainDiskServiceMoveResponse {
 	rawURL := fmt.Sprintf("%s%s/move", p.storageDomainDiskService.connection.URL(), p.storageDomainDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -101016,7 +101560,9 @@ func (p *vmPoolServiceAllocateVmRequest) Async(async bool) *vmPoolServiceAllocat
 func (p *vmPoolServiceAllocateVmRequest) Send() (*vmPoolServiceAllocateVmResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/allocatevm", p.vmPoolService.connection.URL(), p.vmPoolService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -101071,7 +101617,9 @@ func (p *vmPoolServiceAllocateVmRequest) Send() (*vmPoolServiceAllocateVmRespons
 func (p *vmPoolServiceAllocateVmRequest) MustSend() *vmPoolServiceAllocateVmResponse {
 	rawURL := fmt.Sprintf("%s%s/allocatevm", p.vmPoolService.connection.URL(), p.vmPoolService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -106497,7 +107045,9 @@ func (p *eventsServiceUndeleteRequest) Async(async bool) *eventsServiceUndeleteR
 func (p *eventsServiceUndeleteRequest) Send() (*eventsServiceUndeleteResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/undelete", p.eventsService.connection.URL(), p.eventsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -106552,7 +107102,9 @@ func (p *eventsServiceUndeleteRequest) Send() (*eventsServiceUndeleteResponse, e
 func (p *eventsServiceUndeleteRequest) MustSend() *eventsServiceUndeleteResponse {
 	rawURL := fmt.Sprintf("%s%s/undelete", p.eventsService.connection.URL(), p.eventsService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -107335,7 +107887,9 @@ func (p *jobServiceClearRequest) Async(async bool) *jobServiceClearRequest {
 func (p *jobServiceClearRequest) Send() (*jobServiceClearResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/clear", p.jobService.connection.URL(), p.jobService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -107390,7 +107944,9 @@ func (p *jobServiceClearRequest) Send() (*jobServiceClearResponse, error) {
 func (p *jobServiceClearRequest) MustSend() *jobServiceClearResponse {
 	rawURL := fmt.Sprintf("%s%s/clear", p.jobService.connection.URL(), p.jobService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -107534,9 +108090,15 @@ func (p *jobServiceEndRequest) Succeeded(succeeded bool) *jobServiceEndRequest {
 func (p *jobServiceEndRequest) Send() (*jobServiceEndResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/end", p.jobService.connection.URL(), p.jobService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
-	actionBuilder.Succeeded(*p.succeeded)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
+	if p.succeeded != nil {
+		actionBuilder.Succeeded(*p.succeeded)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -107591,9 +108153,15 @@ func (p *jobServiceEndRequest) Send() (*jobServiceEndResponse, error) {
 func (p *jobServiceEndRequest) MustSend() *jobServiceEndResponse {
 	rawURL := fmt.Sprintf("%s%s/end", p.jobService.connection.URL(), p.jobService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
-	actionBuilder.Succeeded(*p.succeeded)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
+	if p.succeeded != nil {
+		actionBuilder.Succeeded(*p.succeeded)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -108514,7 +109082,9 @@ func (p *storageDomainServiceIsAttachedRequest) Host(host *Host) *storageDomainS
 func (p *storageDomainServiceIsAttachedRequest) Send() (*storageDomainServiceIsAttachedResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/isattached", p.storageDomainService.connection.URL(), p.storageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -108571,7 +109141,9 @@ func (p *storageDomainServiceIsAttachedRequest) Send() (*storageDomainServiceIsA
 func (p *storageDomainServiceIsAttachedRequest) MustSend() *storageDomainServiceIsAttachedResponse {
 	rawURL := fmt.Sprintf("%s%s/isattached", p.storageDomainService.connection.URL(), p.storageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Host(p.host)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -108944,7 +109516,9 @@ func (p *storageDomainServiceRefreshLunsRequest) LogicalUnitsOfAny(anys ...*Logi
 func (p *storageDomainServiceRefreshLunsRequest) Send() (*storageDomainServiceRefreshLunsResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/refreshluns", p.storageDomainService.connection.URL(), p.storageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.LogicalUnits(p.logicalUnits)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -109000,7 +109574,9 @@ func (p *storageDomainServiceRefreshLunsRequest) Send() (*storageDomainServiceRe
 func (p *storageDomainServiceRefreshLunsRequest) MustSend() *storageDomainServiceRefreshLunsResponse {
 	rawURL := fmt.Sprintf("%s%s/refreshluns", p.storageDomainService.connection.URL(), p.storageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.LogicalUnits(p.logicalUnits)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -109608,7 +110184,9 @@ func (p *storageDomainServiceUpdateOvfStoreRequest) Async(async bool) *storageDo
 func (p *storageDomainServiceUpdateOvfStoreRequest) Send() (*storageDomainServiceUpdateOvfStoreResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/updateovfstore", p.storageDomainService.connection.URL(), p.storageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -109663,7 +110241,9 @@ func (p *storageDomainServiceUpdateOvfStoreRequest) Send() (*storageDomainServic
 func (p *storageDomainServiceUpdateOvfStoreRequest) MustSend() *storageDomainServiceUpdateOvfStoreResponse {
 	rawURL := fmt.Sprintf("%s%s/updateovfstore", p.storageDomainService.connection.URL(), p.storageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -112033,7 +112613,9 @@ func (p *vmNicServiceActivateRequest) Async(async bool) *vmNicServiceActivateReq
 func (p *vmNicServiceActivateRequest) Send() (*vmNicServiceActivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/activate", p.vmNicService.connection.URL(), p.vmNicService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -112088,7 +112670,9 @@ func (p *vmNicServiceActivateRequest) Send() (*vmNicServiceActivateResponse, err
 func (p *vmNicServiceActivateRequest) MustSend() *vmNicServiceActivateResponse {
 	rawURL := fmt.Sprintf("%s%s/activate", p.vmNicService.connection.URL(), p.vmNicService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -112184,7 +112768,9 @@ func (p *vmNicServiceDeactivateRequest) Async(async bool) *vmNicServiceDeactivat
 func (p *vmNicServiceDeactivateRequest) Send() (*vmNicServiceDeactivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/deactivate", p.vmNicService.connection.URL(), p.vmNicService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -112239,7 +112825,9 @@ func (p *vmNicServiceDeactivateRequest) Send() (*vmNicServiceDeactivateResponse,
 func (p *vmNicServiceDeactivateRequest) MustSend() *vmNicServiceDeactivateResponse {
 	rawURL := fmt.Sprintf("%s%s/deactivate", p.vmNicService.connection.URL(), p.vmNicService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -113798,7 +114386,9 @@ func (p *externalProviderServiceTestConnectivityRequest) Async(async bool) *exte
 func (p *externalProviderServiceTestConnectivityRequest) Send() (*externalProviderServiceTestConnectivityResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.externalProviderService.connection.URL(), p.externalProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -113853,7 +114443,9 @@ func (p *externalProviderServiceTestConnectivityRequest) Send() (*externalProvid
 func (p *externalProviderServiceTestConnectivityRequest) MustSend() *externalProviderServiceTestConnectivityResponse {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.externalProviderService.connection.URL(), p.externalProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -115884,7 +116476,9 @@ func (p *attachedStorageDomainServiceActivateRequest) Async(async bool) *attache
 func (p *attachedStorageDomainServiceActivateRequest) Send() (*attachedStorageDomainServiceActivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/activate", p.attachedStorageDomainService.connection.URL(), p.attachedStorageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -115939,7 +116533,9 @@ func (p *attachedStorageDomainServiceActivateRequest) Send() (*attachedStorageDo
 func (p *attachedStorageDomainServiceActivateRequest) MustSend() *attachedStorageDomainServiceActivateResponse {
 	rawURL := fmt.Sprintf("%s%s/activate", p.attachedStorageDomainService.connection.URL(), p.attachedStorageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -116080,8 +116676,12 @@ func (p *attachedStorageDomainServiceDeactivateRequest) Force(force bool) *attac
 func (p *attachedStorageDomainServiceDeactivateRequest) Send() (*attachedStorageDomainServiceDeactivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/deactivate", p.attachedStorageDomainService.connection.URL(), p.attachedStorageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -116136,8 +116736,12 @@ func (p *attachedStorageDomainServiceDeactivateRequest) Send() (*attachedStorage
 func (p *attachedStorageDomainServiceDeactivateRequest) MustSend() *attachedStorageDomainServiceDeactivateResponse {
 	rawURL := fmt.Sprintf("%s%s/deactivate", p.attachedStorageDomainService.connection.URL(), p.attachedStorageDomainService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -119981,7 +120585,9 @@ func (p *externalHostProviderServiceTestConnectivityRequest) Async(async bool) *
 func (p *externalHostProviderServiceTestConnectivityRequest) Send() (*externalHostProviderServiceTestConnectivityResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.externalHostProviderService.connection.URL(), p.externalHostProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -120036,7 +120642,9 @@ func (p *externalHostProviderServiceTestConnectivityRequest) Send() (*externalHo
 func (p *externalHostProviderServiceTestConnectivityRequest) MustSend() *externalHostProviderServiceTestConnectivityResponse {
 	rawURL := fmt.Sprintf("%s%s/testconnectivity", p.externalHostProviderService.connection.URL(), p.externalHostProviderService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -121960,8 +122568,12 @@ func (p *templateDiskServiceCopyRequest) StorageDomain(storageDomain *StorageDom
 func (p *templateDiskServiceCopyRequest) Send() (*templateDiskServiceCopyResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/copy", p.templateDiskService.connection.URL(), p.templateDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -122017,8 +122629,12 @@ func (p *templateDiskServiceCopyRequest) Send() (*templateDiskServiceCopyRespons
 func (p *templateDiskServiceCopyRequest) MustSend() *templateDiskServiceCopyResponse {
 	rawURL := fmt.Sprintf("%s%s/copy", p.templateDiskService.connection.URL(), p.templateDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -122129,8 +122745,12 @@ func (p *templateDiskServiceExportRequest) StorageDomain(storageDomain *StorageD
 func (p *templateDiskServiceExportRequest) Send() (*templateDiskServiceExportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/export", p.templateDiskService.connection.URL(), p.templateDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -122186,8 +122806,12 @@ func (p *templateDiskServiceExportRequest) Send() (*templateDiskServiceExportRes
 func (p *templateDiskServiceExportRequest) MustSend() *templateDiskServiceExportResponse {
 	rawURL := fmt.Sprintf("%s%s/export", p.templateDiskService.connection.URL(), p.templateDiskService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Filter(*p.filter)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -126473,9 +127097,15 @@ func (p *glusterVolumeServiceRebalanceRequest) Force(force bool) *glusterVolumeS
 func (p *glusterVolumeServiceRebalanceRequest) Send() (*glusterVolumeServiceRebalanceResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/rebalance", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.FixLayout(*p.fixLayout)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.fixLayout != nil {
+		actionBuilder.FixLayout(*p.fixLayout)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -126530,9 +127160,15 @@ func (p *glusterVolumeServiceRebalanceRequest) Send() (*glusterVolumeServiceReba
 func (p *glusterVolumeServiceRebalanceRequest) MustSend() *glusterVolumeServiceRebalanceResponse {
 	rawURL := fmt.Sprintf("%s%s/rebalance", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.FixLayout(*p.fixLayout)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.fixLayout != nil {
+		actionBuilder.FixLayout(*p.fixLayout)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -126818,7 +127454,9 @@ func (p *glusterVolumeServiceResetAllOptionsRequest) Async(async bool) *glusterV
 func (p *glusterVolumeServiceResetAllOptionsRequest) Send() (*glusterVolumeServiceResetAllOptionsResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/resetalloptions", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -126873,7 +127511,9 @@ func (p *glusterVolumeServiceResetAllOptionsRequest) Send() (*glusterVolumeServi
 func (p *glusterVolumeServiceResetAllOptionsRequest) MustSend() *glusterVolumeServiceResetAllOptionsResponse {
 	rawURL := fmt.Sprintf("%s%s/resetalloptions", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -127009,8 +127649,12 @@ func (p *glusterVolumeServiceResetOptionRequest) Option(option *Option) *gluster
 func (p *glusterVolumeServiceResetOptionRequest) Send() (*glusterVolumeServiceResetOptionResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/resetoption", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	actionBuilder.Option(p.option)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -127066,8 +127710,12 @@ func (p *glusterVolumeServiceResetOptionRequest) Send() (*glusterVolumeServiceRe
 func (p *glusterVolumeServiceResetOptionRequest) MustSend() *glusterVolumeServiceResetOptionResponse {
 	rawURL := fmt.Sprintf("%s%s/resetoption", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	actionBuilder.Option(p.option)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -127212,7 +127860,9 @@ func (p *glusterVolumeServiceSetOptionRequest) Option(option *Option) *glusterVo
 func (p *glusterVolumeServiceSetOptionRequest) Send() (*glusterVolumeServiceSetOptionResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/setoption", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Option(p.option)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -127268,7 +127918,9 @@ func (p *glusterVolumeServiceSetOptionRequest) Send() (*glusterVolumeServiceSetO
 func (p *glusterVolumeServiceSetOptionRequest) MustSend() *glusterVolumeServiceSetOptionResponse {
 	rawURL := fmt.Sprintf("%s%s/setoption", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Option(p.option)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -127406,8 +128058,12 @@ func (p *glusterVolumeServiceStartRequest) Force(force bool) *glusterVolumeServi
 func (p *glusterVolumeServiceStartRequest) Send() (*glusterVolumeServiceStartResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/start", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -127462,8 +128118,12 @@ func (p *glusterVolumeServiceStartRequest) Send() (*glusterVolumeServiceStartRes
 func (p *glusterVolumeServiceStartRequest) MustSend() *glusterVolumeServiceStartResponse {
 	rawURL := fmt.Sprintf("%s%s/start", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -127579,7 +128239,9 @@ func (p *glusterVolumeServiceStartProfileRequest) Async(async bool) *glusterVolu
 func (p *glusterVolumeServiceStartProfileRequest) Send() (*glusterVolumeServiceStartProfileResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/startprofile", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -127634,7 +128296,9 @@ func (p *glusterVolumeServiceStartProfileRequest) Send() (*glusterVolumeServiceS
 func (p *glusterVolumeServiceStartProfileRequest) MustSend() *glusterVolumeServiceStartProfileResponse {
 	rawURL := fmt.Sprintf("%s%s/startprofile", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -127755,8 +128419,12 @@ func (p *glusterVolumeServiceStopRequest) Force(force bool) *glusterVolumeServic
 func (p *glusterVolumeServiceStopRequest) Send() (*glusterVolumeServiceStopResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/stop", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -127811,8 +128479,12 @@ func (p *glusterVolumeServiceStopRequest) Send() (*glusterVolumeServiceStopRespo
 func (p *glusterVolumeServiceStopRequest) MustSend() *glusterVolumeServiceStopResponse {
 	rawURL := fmt.Sprintf("%s%s/stop", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -127928,7 +128600,9 @@ func (p *glusterVolumeServiceStopProfileRequest) Async(async bool) *glusterVolum
 func (p *glusterVolumeServiceStopProfileRequest) Send() (*glusterVolumeServiceStopProfileResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/stopprofile", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -127983,7 +128657,9 @@ func (p *glusterVolumeServiceStopProfileRequest) Send() (*glusterVolumeServiceSt
 func (p *glusterVolumeServiceStopProfileRequest) MustSend() *glusterVolumeServiceStopProfileResponse {
 	rawURL := fmt.Sprintf("%s%s/stopprofile", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -128098,7 +128774,9 @@ func (p *glusterVolumeServiceStopRebalanceRequest) Async(async bool) *glusterVol
 func (p *glusterVolumeServiceStopRebalanceRequest) Send() (*glusterVolumeServiceStopRebalanceResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/stoprebalance", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -128153,7 +128831,9 @@ func (p *glusterVolumeServiceStopRebalanceRequest) Send() (*glusterVolumeService
 func (p *glusterVolumeServiceStopRebalanceRequest) MustSend() *glusterVolumeServiceStopRebalanceResponse {
 	rawURL := fmt.Sprintf("%s%s/stoprebalance", p.glusterVolumeService.connection.URL(), p.glusterVolumeService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -128350,7 +129030,9 @@ func (p *glusterBricksServiceActivateRequest) BricksOfAny(anys ...*GlusterBrick)
 func (p *glusterBricksServiceActivateRequest) Send() (*glusterBricksServiceActivateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/activate", p.glusterBricksService.connection.URL(), p.glusterBricksService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Bricks(p.bricks)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -128406,7 +129088,9 @@ func (p *glusterBricksServiceActivateRequest) Send() (*glusterBricksServiceActiv
 func (p *glusterBricksServiceActivateRequest) MustSend() *glusterBricksServiceActivateResponse {
 	rawURL := fmt.Sprintf("%s%s/activate", p.glusterBricksService.connection.URL(), p.glusterBricksService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Bricks(p.bricks)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -129108,7 +129792,9 @@ func (p *glusterBricksServiceMigrateRequest) BricksOfAny(anys ...*GlusterBrick) 
 func (p *glusterBricksServiceMigrateRequest) Send() (*glusterBricksServiceMigrateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/migrate", p.glusterBricksService.connection.URL(), p.glusterBricksService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Bricks(p.bricks)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -129164,7 +129850,9 @@ func (p *glusterBricksServiceMigrateRequest) Send() (*glusterBricksServiceMigrat
 func (p *glusterBricksServiceMigrateRequest) MustSend() *glusterBricksServiceMigrateResponse {
 	rawURL := fmt.Sprintf("%s%s/migrate", p.glusterBricksService.connection.URL(), p.glusterBricksService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Bricks(p.bricks)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -129566,7 +130254,9 @@ func (p *glusterBricksServiceStopMigrateRequest) BricksOfAny(anys ...*GlusterBri
 func (p *glusterBricksServiceStopMigrateRequest) Send() (*glusterBricksServiceStopMigrateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/stopmigrate", p.glusterBricksService.connection.URL(), p.glusterBricksService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Bricks(p.bricks)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -129622,7 +130312,9 @@ func (p *glusterBricksServiceStopMigrateRequest) Send() (*glusterBricksServiceSt
 func (p *glusterBricksServiceStopMigrateRequest) MustSend() *glusterBricksServiceStopMigrateResponse {
 	rawURL := fmt.Sprintf("%s%s/stopmigrate", p.glusterBricksService.connection.URL(), p.glusterBricksService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Bricks(p.bricks)
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -130022,7 +130714,9 @@ func (p *glusterHookServiceDisableRequest) Async(async bool) *glusterHookService
 func (p *glusterHookServiceDisableRequest) Send() (*glusterHookServiceDisableResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/disable", p.glusterHookService.connection.URL(), p.glusterHookService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -130077,7 +130771,9 @@ func (p *glusterHookServiceDisableRequest) Send() (*glusterHookServiceDisableRes
 func (p *glusterHookServiceDisableRequest) MustSend() *glusterHookServiceDisableResponse {
 	rawURL := fmt.Sprintf("%s%s/disable", p.glusterHookService.connection.URL(), p.glusterHookService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -130179,7 +130875,9 @@ func (p *glusterHookServiceEnableRequest) Async(async bool) *glusterHookServiceE
 func (p *glusterHookServiceEnableRequest) Send() (*glusterHookServiceEnableResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/enable", p.glusterHookService.connection.URL(), p.glusterHookService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -130234,7 +130932,9 @@ func (p *glusterHookServiceEnableRequest) Send() (*glusterHookServiceEnableRespo
 func (p *glusterHookServiceEnableRequest) MustSend() *glusterHookServiceEnableResponse {
 	rawURL := fmt.Sprintf("%s%s/enable", p.glusterHookService.connection.URL(), p.glusterHookService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -130671,9 +131371,13 @@ func (p *glusterHookServiceResolveRequest) ResolutionType(resolutionType string)
 func (p *glusterHookServiceResolveRequest) Send() (*glusterHookServiceResolveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/resolve", p.glusterHookService.connection.URL(), p.glusterHookService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.ResolutionType(*p.resolutionType)
+	if p.resolutionType != nil {
+		actionBuilder.ResolutionType(*p.resolutionType)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -130728,9 +131432,13 @@ func (p *glusterHookServiceResolveRequest) Send() (*glusterHookServiceResolveRes
 func (p *glusterHookServiceResolveRequest) MustSend() *glusterHookServiceResolveResponse {
 	rawURL := fmt.Sprintf("%s%s/resolve", p.glusterHookService.connection.URL(), p.glusterHookService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
 	actionBuilder.Host(p.host)
-	actionBuilder.ResolutionType(*p.resolutionType)
+	if p.resolutionType != nil {
+		actionBuilder.ResolutionType(*p.resolutionType)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -131893,8 +132601,12 @@ func (p *glusterBrickServiceReplaceRequest) Force(force bool) *glusterBrickServi
 func (p *glusterBrickServiceReplaceRequest) Send() (*glusterBrickServiceReplaceResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/replace", p.glusterBrickService.connection.URL(), p.glusterBrickService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -131949,8 +132661,12 @@ func (p *glusterBrickServiceReplaceRequest) Send() (*glusterBrickServiceReplaceR
 func (p *glusterBrickServiceReplaceRequest) MustSend() *glusterBrickServiceReplaceResponse {
 	rawURL := fmt.Sprintf("%s%s/replace", p.glusterBrickService.connection.URL(), p.glusterBrickService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
@@ -134010,10 +134726,16 @@ func (p *storageDomainTemplateServiceImportRequest) Vm(vm *Vm) *storageDomainTem
 func (p *storageDomainTemplateServiceImportRequest) Send() (*storageDomainTemplateServiceImportResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/import", p.storageDomainTemplateService.connection.URL(), p.storageDomainTemplateService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Clone(*p.clone)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	actionBuilder.Template(p.template)
 	actionBuilder.Vm(p.vm)
@@ -134071,10 +134793,16 @@ func (p *storageDomainTemplateServiceImportRequest) Send() (*storageDomainTempla
 func (p *storageDomainTemplateServiceImportRequest) MustSend() *storageDomainTemplateServiceImportResponse {
 	rawURL := fmt.Sprintf("%s%s/import", p.storageDomainTemplateService.connection.URL(), p.storageDomainTemplateService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Clone(*p.clone)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.StorageDomain(p.storageDomain)
 	actionBuilder.Template(p.template)
 	actionBuilder.Vm(p.vm)
@@ -134267,11 +134995,19 @@ func (p *storageDomainTemplateServiceRegisterRequest) VnicProfileMappingsOfAny(a
 func (p *storageDomainTemplateServiceRegisterRequest) Send() (*storageDomainTemplateServiceRegisterResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/register", p.storageDomainTemplateService.connection.URL(), p.storageDomainTemplateService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.AllowPartialImport(*p.allowPartialImport)
-	actionBuilder.Async(*p.async)
-	actionBuilder.Clone(*p.clone)
+	if p.allowPartialImport != nil {
+		actionBuilder.AllowPartialImport(*p.allowPartialImport)
+	}
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.RegistrationConfiguration(p.registrationConfiguration)
 	actionBuilder.Template(p.template)
 	actionBuilder.VnicProfileMappings(p.vnicProfileMappings)
@@ -134329,11 +135065,19 @@ func (p *storageDomainTemplateServiceRegisterRequest) Send() (*storageDomainTemp
 func (p *storageDomainTemplateServiceRegisterRequest) MustSend() *storageDomainTemplateServiceRegisterResponse {
 	rawURL := fmt.Sprintf("%s%s/register", p.storageDomainTemplateService.connection.URL(), p.storageDomainTemplateService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.AllowPartialImport(*p.allowPartialImport)
-	actionBuilder.Async(*p.async)
-	actionBuilder.Clone(*p.clone)
+	if p.allowPartialImport != nil {
+		actionBuilder.AllowPartialImport(*p.allowPartialImport)
+	}
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.clone != nil {
+		actionBuilder.Clone(*p.clone)
+	}
 	actionBuilder.Cluster(p.cluster)
-	actionBuilder.Exclusive(*p.exclusive)
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
 	actionBuilder.RegistrationConfiguration(p.registrationConfiguration)
 	actionBuilder.Template(p.template)
 	actionBuilder.VnicProfileMappings(p.vnicProfileMappings)
@@ -138559,9 +139303,15 @@ func (p *stepServiceEndRequest) Succeeded(succeeded bool) *stepServiceEndRequest
 func (p *stepServiceEndRequest) Send() (*stepServiceEndResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/end", p.stepService.connection.URL(), p.stepService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
-	actionBuilder.Succeeded(*p.succeeded)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
+	if p.succeeded != nil {
+		actionBuilder.Succeeded(*p.succeeded)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		return nil, err
@@ -138616,9 +139366,15 @@ func (p *stepServiceEndRequest) Send() (*stepServiceEndResponse, error) {
 func (p *stepServiceEndRequest) MustSend() *stepServiceEndResponse {
 	rawURL := fmt.Sprintf("%s%s/end", p.stepService.connection.URL(), p.stepService.path)
 	actionBuilder := NewActionBuilder()
-	actionBuilder.Async(*p.async)
-	actionBuilder.Force(*p.force)
-	actionBuilder.Succeeded(*p.succeeded)
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
+	if p.succeeded != nil {
+		actionBuilder.Succeeded(*p.succeeded)
+	}
 	action, err := actionBuilder.Build()
 	if err != nil {
 		panic(err)
