@@ -23,8 +23,8 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func addGroup() {
-	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
+func listOperationSystem() {
+	inputRawURL := "https://10.1.111.222/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
 		URL(inputRawURL).
@@ -47,23 +47,10 @@ func addGroup() {
 		}
 	}()
 
-	// Get the reference to the groups service
-	groupsService := conn.SystemService().GroupsService()
-
-	// Use the "add" method to add group from a directory service. Please note that domain name is name of the
-	// authorization provider
-	_, err = groupsService.Add().
-		Group(
-			ovirtsdk4.NewGroupBuilder().
-				Name("Developers").
-				Domain(
-					ovirtsdk4.NewDomainBuilder().
-						Name("internal-authz").
-						MustBuild()).
-				MustBuild()).
-		Send()
-	if err != nil {
-		fmt.Printf("Failed to add group, reason: %v\n", err)
-		return
+	ossService := conn.SystemService().OperatingSystemsService()
+	listResp := ossService.List().MustSend()
+	fmt.Printf("os are:\n")
+	for _, item := range listResp.MustOperatingSystem().Slice() {
+		fmt.Printf("id:%v, name:%v, href:%v\n", item.MustId(), item.MustName(), item.MustHref())
 	}
 }

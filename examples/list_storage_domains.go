@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func addGroup() {
+func listStorageDomains() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,23 +47,14 @@ func addGroup() {
 		}
 	}()
 
-	// Get the reference to the groups service
-	groupsService := conn.SystemService().GroupsService()
-
-	// Use the "add" method to add group from a directory service. Please note that domain name is name of the
-	// authorization provider
-	_, err = groupsService.Add().
-		Group(
-			ovirtsdk4.NewGroupBuilder().
-				Name("Developers").
-				Domain(
-					ovirtsdk4.NewDomainBuilder().
-						Name("internal-authz").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	sdsListResp, err := conn.SystemService().StorageDomainsService().List().Send()
 	if err != nil {
-		fmt.Printf("Failed to add group, reason: %v\n", err)
+		fmt.Printf("Failed to get storage domains, reason: %v\n", err)
 		return
 	}
+
+	for _, sds := range sdsListResp.MustStorageDomains().Slice() {
+		fmt.Printf("id: %v", sds.MustId())
+	}
+
 }

@@ -17,13 +17,14 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"time"
 
 	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
 )
 
-func addGroup() {
+func addDisk() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,23 +48,31 @@ func addGroup() {
 		}
 	}()
 
-	// Get the reference to the groups service
-	groupsService := conn.SystemService().GroupsService()
-
-	// Use the "add" method to add group from a directory service. Please note that domain name is name of the
-	// authorization provider
-	_, err = groupsService.Add().
-		Group(
-			ovirtsdk4.NewGroupBuilder().
-				Name("Developers").
-				Domain(
-					ovirtsdk4.NewDomainBuilder().
-						Name("internal-authz").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	diskBuilder := ovirtsdk4.NewDiskBuilder().
+		Name("joey_disk").
+		Format(ovirtsdk4.DISKFORMAT_COW).
+		ProvisionedSize(53687091200).
+		StorageDomainsOfAny(
+			ovirtsdk4.NewStorageDomainBuilder().
+				Id("cadbe661-0e35-4fcb-a70d-2b17e2559d9c").
+				MustBuild())
+	disk, err := diskBuilder.Build()
 	if err != nil {
-		fmt.Printf("Failed to add group, reason: %v\n", err)
+		fmt.Printf("error: %v", err)
 		return
 	}
+
+	var body bytes.Buffer
+	writer := ovirtsdk4.NewXMLWriter(&body)
+	err = ovirtsdk4.XMLDiskWriteOne(writer, disk, "")
+	writer.Flush()
+
+	fmt.Println("*********************" + body.String())
+
+	_, err = conn.SystemService().DisksService().Add().Disk(disk).Send()
+
+	if err != nil {
+		fmt.Printf("error is %v\n", err)
+	}
+
 }
