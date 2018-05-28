@@ -41,11 +41,11 @@ func XMLSeLinuxWriteMany(writer *XMLWriter, structSlice *SeLinuxSlice, plural, s
 	if singular == "" {
 		singular = "se_linux"
 	}
-	writer.WriteStart("", "se_linuxs", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSeLinuxWriteOne(writer, o, "se_linux")
+		XMLSeLinuxWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("se_linuxs")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -71,11 +71,11 @@ func XMLPmProxyWriteMany(writer *XMLWriter, structSlice *PmProxySlice, plural, s
 	if singular == "" {
 		singular = "pm_proxy"
 	}
-	writer.WriteStart("", "pm_proxies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLPmProxyWriteOne(writer, o, "pm_proxy")
+		XMLPmProxyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("pm_proxies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -104,11 +104,11 @@ func XMLMigrationBandwidthWriteMany(writer *XMLWriter, structSlice *MigrationBan
 	if singular == "" {
 		singular = "migration_bandwidth"
 	}
-	writer.WriteStart("", "migration_bandwidths", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLMigrationBandwidthWriteOne(writer, o, "migration_bandwidth")
+		XMLMigrationBandwidthWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("migration_bandwidths")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -138,11 +138,11 @@ func XMLVlanWriteMany(writer *XMLWriter, structSlice *VlanSlice, plural, singula
 	if singular == "" {
 		singular = "vlan"
 	}
-	writer.WriteStart("", "vlans", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVlanWriteOne(writer, o, "vlan")
+		XMLVlanWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vlans")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -193,11 +193,11 @@ func XMLSshWriteMany(writer *XMLWriter, structSlice *SshSlice, plural, singular 
 	if singular == "" {
 		singular = "ssh"
 	}
-	writer.WriteStart("", "sshs", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSshWriteOne(writer, o, "ssh")
+		XMLSshWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("sshs")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -242,11 +242,11 @@ func XMLIconWriteMany(writer *XMLWriter, structSlice *IconSlice, plural, singula
 	if singular == "" {
 		singular = "icon"
 	}
-	writer.WriteStart("", "icons", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLIconWriteOne(writer, o, "icon")
+		XMLIconWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("icons")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -290,11 +290,11 @@ func XMLHardwareInformationWriteMany(writer *XMLWriter, structSlice *HardwareInf
 	if singular == "" {
 		singular = "hardware_information"
 	}
-	writer.WriteStart("", "hardware_informations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHardwareInformationWriteOne(writer, o, "hardware_information")
+		XMLHardwareInformationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("hardware_informations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -326,11 +326,11 @@ func XMLCpuTopologyWriteMany(writer *XMLWriter, structSlice *CpuTopologySlice, p
 	if singular == "" {
 		singular = "cpu_topology"
 	}
-	writer.WriteStart("", "cpu_topologies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuTopologyWriteOne(writer, o, "cpu_topology")
+		XMLCpuTopologyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cpu_topologies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -393,11 +393,11 @@ func XMLVirtualNumaNodeWriteMany(writer *XMLWriter, structSlice *VirtualNumaNode
 	if singular == "" {
 		singular = "vm_numa_node"
 	}
-	writer.WriteStart("", "vm_numa_nodes", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVirtualNumaNodeWriteOne(writer, o, "vm_numa_node")
+		XMLVirtualNumaNodeWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vm_numa_nodes")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -448,11 +448,11 @@ func XMLLinkLayerDiscoveryProtocolElementWriteMany(writer *XMLWriter, structSlic
 	if singular == "" {
 		singular = "link_layer_discovery_protocol_element"
 	}
-	writer.WriteStart("", "link_layer_discovery_protocol_elements", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLLinkLayerDiscoveryProtocolElementWriteOne(writer, o, "link_layer_discovery_protocol_element")
+		XMLLinkLayerDiscoveryProtocolElementWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("link_layer_discovery_protocol_elements")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -484,11 +484,11 @@ func XMLAffinityRuleWriteMany(writer *XMLWriter, structSlice *AffinityRuleSlice,
 	if singular == "" {
 		singular = "affinity_rule"
 	}
-	writer.WriteStart("", "affinity_rules", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLAffinityRuleWriteOne(writer, o, "affinity_rule")
+		XMLAffinityRuleWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("affinity_rules")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -526,11 +526,11 @@ func XMLProfileDetailWriteMany(writer *XMLWriter, structSlice *ProfileDetailSlic
 	if singular == "" {
 		singular = "profile_detail"
 	}
-	writer.WriteStart("", "profile_details", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLProfileDetailWriteOne(writer, o, "profile_detail")
+		XMLProfileDetailWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("profile_details")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -571,11 +571,11 @@ func XMLAgentConfigurationWriteMany(writer *XMLWriter, structSlice *AgentConfigu
 	if singular == "" {
 		singular = "agent_configuration"
 	}
-	writer.WriteStart("", "agent_configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLAgentConfigurationWriteOne(writer, o, "agent_configuration")
+		XMLAgentConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("agent_configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -623,11 +623,11 @@ func XMLMacPoolWriteMany(writer *XMLWriter, structSlice *MacPoolSlice, plural, s
 	if singular == "" {
 		singular = "mac_pool"
 	}
-	writer.WriteStart("", "mac_pools", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLMacPoolWriteOne(writer, o, "mac_pool")
+		XMLMacPoolWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("mac_pools")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -681,11 +681,11 @@ func XMLCdromWriteMany(writer *XMLWriter, structSlice *CdromSlice, plural, singu
 	if singular == "" {
 		singular = "cdrom"
 	}
-	writer.WriteStart("", "cdroms", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCdromWriteOne(writer, o, "cdrom")
+		XMLCdromWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cdroms")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -835,11 +835,11 @@ func XMLClusterWriteMany(writer *XMLWriter, structSlice *ClusterSlice, plural, s
 	if singular == "" {
 		singular = "cluster"
 	}
-	writer.WriteStart("", "clusters", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLClusterWriteOne(writer, o, "cluster")
+		XMLClusterWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("clusters")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -868,11 +868,11 @@ func XMLRegistrationDomainMappingWriteMany(writer *XMLWriter, structSlice *Regis
 	if singular == "" {
 		singular = "registration_domain_mapping"
 	}
-	writer.WriteStart("", "registration_domain_mappings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationDomainMappingWriteOne(writer, o, "registration_domain_mapping")
+		XMLRegistrationDomainMappingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("registration_domain_mappings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -898,11 +898,11 @@ func XMLIoWriteMany(writer *XMLWriter, structSlice *IoSlice, plural, singular st
 	if singular == "" {
 		singular = "io"
 	}
-	writer.WriteStart("", "ios", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLIoWriteOne(writer, o, "io")
+		XMLIoWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("ios")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -931,11 +931,11 @@ func XMLTicketWriteMany(writer *XMLWriter, structSlice *TicketSlice, plural, sin
 	if singular == "" {
 		singular = "ticket"
 	}
-	writer.WriteStart("", "tickets", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLTicketWriteOne(writer, o, "ticket")
+		XMLTicketWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("tickets")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1082,11 +1082,11 @@ func XMLDiskSnapshotWriteMany(writer *XMLWriter, structSlice *DiskSnapshotSlice,
 	if singular == "" {
 		singular = "disk_snapshot"
 	}
-	writer.WriteStart("", "disk_snapshots", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDiskSnapshotWriteOne(writer, o, "disk_snapshot")
+		XMLDiskSnapshotWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("disk_snapshots")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1115,11 +1115,11 @@ func XMLVcpuPinWriteMany(writer *XMLWriter, structSlice *VcpuPinSlice, plural, s
 	if singular == "" {
 		singular = "vcpu_pin"
 	}
-	writer.WriteStart("", "vcpu_pins", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVcpuPinWriteOne(writer, o, "vcpu_pin")
+		XMLVcpuPinWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vcpu_pins")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1160,11 +1160,11 @@ func XMLGuestOperatingSystemWriteMany(writer *XMLWriter, structSlice *GuestOpera
 	if singular == "" {
 		singular = "guest_operating_system"
 	}
-	writer.WriteStart("", "guest_operating_systems", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGuestOperatingSystemWriteOne(writer, o, "guest_operating_system")
+		XMLGuestOperatingSystemWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("guest_operating_systems")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1227,11 +1227,11 @@ func XMLVnicProfileWriteMany(writer *XMLWriter, structSlice *VnicProfileSlice, p
 	if singular == "" {
 		singular = "vnic_profile"
 	}
-	writer.WriteStart("", "vnic_profiles", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVnicProfileWriteOne(writer, o, "vnic_profile")
+		XMLVnicProfileWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vnic_profiles")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1273,11 +1273,11 @@ func XMLApplicationWriteMany(writer *XMLWriter, structSlice *ApplicationSlice, p
 	if singular == "" {
 		singular = "application"
 	}
-	writer.WriteStart("", "applications", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLApplicationWriteOne(writer, o, "application")
+		XMLApplicationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("applications")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1322,11 +1322,11 @@ func XMLGlusterVolumeProfileDetailsWriteMany(writer *XMLWriter, structSlice *Glu
 	if singular == "" {
 		singular = "gluster_volume_profile_details"
 	}
-	writer.WriteStart("", "gluster_volume_profile_detailss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterVolumeProfileDetailsWriteOne(writer, o, "gluster_volume_profile_details")
+		XMLGlusterVolumeProfileDetailsWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("gluster_volume_profile_detailss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1395,11 +1395,11 @@ func XMLAgentWriteMany(writer *XMLWriter, structSlice *AgentSlice, plural, singu
 	if singular == "" {
 		singular = "agent"
 	}
-	writer.WriteStart("", "agents", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLAgentWriteOne(writer, o, "agent")
+		XMLAgentWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("agents")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1450,11 +1450,11 @@ func XMLGlusterServerHookWriteMany(writer *XMLWriter, structSlice *GlusterServer
 	if singular == "" {
 		singular = "server_hook"
 	}
-	writer.WriteStart("", "server_hooks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterServerHookWriteOne(writer, o, "server_hook")
+		XMLGlusterServerHookWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("server_hooks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1486,11 +1486,11 @@ func XMLProductInfoWriteMany(writer *XMLWriter, structSlice *ProductInfoSlice, p
 	if singular == "" {
 		singular = "product_info"
 	}
-	writer.WriteStart("", "product_infos", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLProductInfoWriteOne(writer, o, "product_info")
+		XMLProductInfoWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("product_infos")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1519,11 +1519,11 @@ func XMLDnsWriteMany(writer *XMLWriter, structSlice *DnsSlice, plural, singular 
 	if singular == "" {
 		singular = "dns"
 	}
-	writer.WriteStart("", "dnss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDnsWriteOne(writer, o, "dns")
+		XMLDnsWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("dnss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1685,11 +1685,11 @@ func XMLVmBaseWriteMany(writer *XMLWriter, structSlice *VmBaseSlice, plural, sin
 	if singular == "" {
 		singular = "vm_base"
 	}
-	writer.WriteStart("", "vm_bases", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmBaseWriteOne(writer, o, "vm_base")
+		XMLVmBaseWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vm_bases")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1731,11 +1731,11 @@ func XMLNetworkFilterWriteMany(writer *XMLWriter, structSlice *NetworkFilterSlic
 	if singular == "" {
 		singular = "network_filter"
 	}
-	writer.WriteStart("", "network_filters", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkFilterWriteOne(writer, o, "network_filter")
+		XMLNetworkFilterWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("network_filters")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1792,11 +1792,11 @@ func XMLQuotaClusterLimitWriteMany(writer *XMLWriter, structSlice *QuotaClusterL
 	if singular == "" {
 		singular = "quota_cluster_limit"
 	}
-	writer.WriteStart("", "quota_cluster_limits", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLQuotaClusterLimitWriteOne(writer, o, "quota_cluster_limit")
+		XMLQuotaClusterLimitWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("quota_cluster_limits")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1822,11 +1822,11 @@ func XMLBlockStatisticWriteMany(writer *XMLWriter, structSlice *BlockStatisticSl
 	if singular == "" {
 		singular = "block_statistic"
 	}
-	writer.WriteStart("", "block_statistics", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLBlockStatisticWriteOne(writer, o, "block_statistic")
+		XMLBlockStatisticWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("block_statistics")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1867,11 +1867,11 @@ func XMLApiWriteMany(writer *XMLWriter, structSlice *ApiSlice, plural, singular 
 	if singular == "" {
 		singular = "api"
 	}
-	writer.WriteStart("", "apis", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLApiWriteOne(writer, o, "api")
+		XMLApiWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("apis")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1912,11 +1912,11 @@ func XMLNicConfigurationWriteMany(writer *XMLWriter, structSlice *NicConfigurati
 	if singular == "" {
 		singular = "nic_configuration"
 	}
-	writer.WriteStart("", "nic_configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNicConfigurationWriteOne(writer, o, "nic_configuration")
+		XMLNicConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("nic_configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1942,11 +1942,11 @@ func XMLSkipIfSdActiveWriteMany(writer *XMLWriter, structSlice *SkipIfSdActiveSl
 	if singular == "" {
 		singular = "skip_if_sd_active"
 	}
-	writer.WriteStart("", "skip_if_sd_actives", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSkipIfSdActiveWriteOne(writer, o, "skip_if_sd_active")
+		XMLSkipIfSdActiveWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("skip_if_sd_actives")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -1991,11 +1991,11 @@ func XMLFilterWriteMany(writer *XMLWriter, structSlice *FilterSlice, plural, sin
 	if singular == "" {
 		singular = "filter"
 	}
-	writer.WriteStart("", "filters", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLFilterWriteOne(writer, o, "filter")
+		XMLFilterWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("filters")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2024,11 +2024,11 @@ func XMLHighAvailabilityWriteMany(writer *XMLWriter, structSlice *HighAvailabili
 	if singular == "" {
 		singular = "high_availability"
 	}
-	writer.WriteStart("", "high_availabilities", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHighAvailabilityWriteOne(writer, o, "high_availability")
+		XMLHighAvailabilityWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("high_availabilities")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2058,11 +2058,11 @@ func XMLMethodWriteMany(writer *XMLWriter, structSlice *MethodSlice, plural, sin
 	if singular == "" {
 		singular = "method"
 	}
-	writer.WriteStart("", "methods", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLMethodWriteOne(writer, o, "method")
+		XMLMethodWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("methods")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2091,11 +2091,11 @@ func XMLRegistrationAffinityLabelMappingWriteMany(writer *XMLWriter, structSlice
 	if singular == "" {
 		singular = "registration_affinity_label_mapping"
 	}
-	writer.WriteStart("", "registration_affinity_label_mappings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationAffinityLabelMappingWriteOne(writer, o, "registration_affinity_label_mapping")
+		XMLRegistrationAffinityLabelMappingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("registration_affinity_label_mappings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2130,11 +2130,11 @@ func XMLIpWriteMany(writer *XMLWriter, structSlice *IpSlice, plural, singular st
 	if singular == "" {
 		singular = "ip"
 	}
-	writer.WriteStart("", "ips", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLIpWriteOne(writer, o, "ip")
+		XMLIpWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("ips")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2163,11 +2163,11 @@ func XMLNfsProfileDetailWriteMany(writer *XMLWriter, structSlice *NfsProfileDeta
 	if singular == "" {
 		singular = "nfs_profile_detail"
 	}
-	writer.WriteStart("", "nfs_profile_details", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNfsProfileDetailWriteOne(writer, o, "nfs_profile_detail")
+		XMLNfsProfileDetailWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("nfs_profile_details")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2196,11 +2196,11 @@ func XMLRegistrationRoleMappingWriteMany(writer *XMLWriter, structSlice *Registr
 	if singular == "" {
 		singular = "registration_role_mapping"
 	}
-	writer.WriteStart("", "registration_role_mappings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationRoleMappingWriteOne(writer, o, "registration_role_mapping")
+		XMLRegistrationRoleMappingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("registration_role_mappings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2226,11 +2226,11 @@ func XMLEntityProfileDetailWriteMany(writer *XMLWriter, structSlice *EntityProfi
 	if singular == "" {
 		singular = "entity_profile_detail"
 	}
-	writer.WriteStart("", "entity_profile_details", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLEntityProfileDetailWriteOne(writer, o, "entity_profile_detail")
+		XMLEntityProfileDetailWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("entity_profile_details")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2356,11 +2356,11 @@ func XMLStorageDomainWriteMany(writer *XMLWriter, structSlice *StorageDomainSlic
 	if singular == "" {
 		singular = "storage_domain"
 	}
-	writer.WriteStart("", "storage_domains", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLStorageDomainWriteOne(writer, o, "storage_domain")
+		XMLStorageDomainWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("storage_domains")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2425,11 +2425,11 @@ func XMLDisplayWriteMany(writer *XMLWriter, structSlice *DisplaySlice, plural, s
 	if singular == "" {
 		singular = "display"
 	}
-	writer.WriteStart("", "displays", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDisplayWriteOne(writer, o, "display")
+		XMLDisplayWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("displays")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2519,11 +2519,11 @@ func XMLOpenStackNetworkProviderWriteMany(writer *XMLWriter, structSlice *OpenSt
 	if singular == "" {
 		singular = "openstack_network_provider"
 	}
-	writer.WriteStart("", "openstack_network_providers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackNetworkProviderWriteOne(writer, o, "openstack_network_provider")
+		XMLOpenStackNetworkProviderWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("openstack_network_providers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2565,11 +2565,11 @@ func XMLSystemOptionWriteMany(writer *XMLWriter, structSlice *SystemOptionSlice,
 	if singular == "" {
 		singular = "system_option"
 	}
-	writer.WriteStart("", "system_options", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSystemOptionWriteOne(writer, o, "system_option")
+		XMLSystemOptionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("system_options")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2598,11 +2598,11 @@ func XMLFopStatisticWriteMany(writer *XMLWriter, structSlice *FopStatisticSlice,
 	if singular == "" {
 		singular = "fop_statistic"
 	}
-	writer.WriteStart("", "fop_statistics", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLFopStatisticWriteOne(writer, o, "fop_statistic")
+		XMLFopStatisticWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("fop_statistics")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2674,11 +2674,11 @@ func XMLGlusterBrickAdvancedDetailsWriteMany(writer *XMLWriter, structSlice *Glu
 	if singular == "" {
 		singular = "gluster_brick_advanced_details"
 	}
-	writer.WriteStart("", "gluster_brick_advanced_detailss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterBrickAdvancedDetailsWriteOne(writer, o, "gluster_brick_advanced_details")
+		XMLGlusterBrickAdvancedDetailsWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("gluster_brick_advanced_detailss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2704,11 +2704,11 @@ func XMLStorageDomainLeaseWriteMany(writer *XMLWriter, structSlice *StorageDomai
 	if singular == "" {
 		singular = "storage_domain_lease"
 	}
-	writer.WriteStart("", "storage_domain_leases", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLStorageDomainLeaseWriteOne(writer, o, "storage_domain_lease")
+		XMLStorageDomainLeaseWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("storage_domain_leases")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2746,11 +2746,11 @@ func XMLHostedEngineWriteMany(writer *XMLWriter, structSlice *HostedEngineSlice,
 	if singular == "" {
 		singular = "hosted_engine"
 	}
-	writer.WriteStart("", "hosted_engines", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostedEngineWriteOne(writer, o, "hosted_engine")
+		XMLHostedEngineWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("hosted_engines")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2801,11 +2801,11 @@ func XMLQuotaStorageLimitWriteMany(writer *XMLWriter, structSlice *QuotaStorageL
 	if singular == "" {
 		singular = "quota_storage_limit"
 	}
-	writer.WriteStart("", "quota_storage_limits", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLQuotaStorageLimitWriteOne(writer, o, "quota_storage_limit")
+		XMLQuotaStorageLimitWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("quota_storage_limits")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2834,11 +2834,11 @@ func XMLRegistrationAffinityGroupMappingWriteMany(writer *XMLWriter, structSlice
 	if singular == "" {
 		singular = "registration_affinity_group_mapping"
 	}
-	writer.WriteStart("", "registration_affinity_group_mappings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationAffinityGroupMappingWriteOne(writer, o, "registration_affinity_group_mapping")
+		XMLRegistrationAffinityGroupMappingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("registration_affinity_group_mappings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2874,11 +2874,11 @@ func XMLVolumeGroupWriteMany(writer *XMLWriter, structSlice *VolumeGroupSlice, p
 	if singular == "" {
 		singular = "volume_group"
 	}
-	writer.WriteStart("", "volume_groups", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVolumeGroupWriteOne(writer, o, "volume_group")
+		XMLVolumeGroupWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("volume_groups")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2935,11 +2935,11 @@ func XMLGroupWriteMany(writer *XMLWriter, structSlice *GroupSlice, plural, singu
 	if singular == "" {
 		singular = "group"
 	}
-	writer.WriteStart("", "groups", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGroupWriteOne(writer, o, "group")
+		XMLGroupWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("groups")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -2968,11 +2968,11 @@ func XMLNetworkConfigurationWriteMany(writer *XMLWriter, structSlice *NetworkCon
 	if singular == "" {
 		singular = "network_configuration"
 	}
-	writer.WriteStart("", "network_configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkConfigurationWriteOne(writer, o, "network_configuration")
+		XMLNetworkConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("network_configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3004,11 +3004,11 @@ func XMLVnicProfileMappingWriteMany(writer *XMLWriter, structSlice *VnicProfileM
 	if singular == "" {
 		singular = "vnic_profile_mapping"
 	}
-	writer.WriteStart("", "vnic_profile_mappings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVnicProfileMappingWriteOne(writer, o, "vnic_profile_mapping")
+		XMLVnicProfileMappingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vnic_profile_mappings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3152,11 +3152,11 @@ func XMLDiskWriteMany(writer *XMLWriter, structSlice *DiskSlice, plural, singula
 	if singular == "" {
 		singular = "disk"
 	}
-	writer.WriteStart("", "disks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDiskWriteOne(writer, o, "disk")
+		XMLDiskWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("disks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3185,11 +3185,11 @@ func XMLApiSummaryItemWriteMany(writer *XMLWriter, structSlice *ApiSummaryItemSl
 	if singular == "" {
 		singular = "api_summary_item"
 	}
-	writer.WriteStart("", "api_summary_items", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLApiSummaryItemWriteOne(writer, o, "api_summary_item")
+		XMLApiSummaryItemWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("api_summary_items")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3243,11 +3243,11 @@ func XMLOpenstackVolumeAuthenticationKeyWriteMany(writer *XMLWriter, structSlice
 	if singular == "" {
 		singular = "openstack_volume_authentication_key"
 	}
-	writer.WriteStart("", "openstack_volume_authentication_keys", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenstackVolumeAuthenticationKeyWriteOne(writer, o, "openstack_volume_authentication_key")
+		XMLOpenstackVolumeAuthenticationKeyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("openstack_volume_authentication_keys")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3279,11 +3279,11 @@ func XMLOptionWriteMany(writer *XMLWriter, structSlice *OptionSlice, plural, sin
 	if singular == "" {
 		singular = "option"
 	}
-	writer.WriteStart("", "options", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOptionWriteOne(writer, o, "option")
+		XMLOptionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("options")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3328,11 +3328,11 @@ func XMLBalanceWriteMany(writer *XMLWriter, structSlice *BalanceSlice, plural, s
 	if singular == "" {
 		singular = "balance"
 	}
-	writer.WriteStart("", "balances", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLBalanceWriteOne(writer, o, "balance")
+		XMLBalanceWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("balances")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3419,11 +3419,11 @@ func XMLEventWriteMany(writer *XMLWriter, structSlice *EventSlice, plural, singu
 	if singular == "" {
 		singular = "event"
 	}
-	writer.WriteStart("", "events", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLEventWriteOne(writer, o, "event")
+		XMLEventWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("events")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3449,11 +3449,11 @@ func XMLKernelWriteMany(writer *XMLWriter, structSlice *KernelSlice, plural, sin
 	if singular == "" {
 		singular = "kernel"
 	}
-	writer.WriteStart("", "kernels", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLKernelWriteOne(writer, o, "kernel")
+		XMLKernelWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("kernels")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3527,11 +3527,11 @@ func XMLIscsiDetailsWriteMany(writer *XMLWriter, structSlice *IscsiDetailsSlice,
 	if singular == "" {
 		singular = "iscsi_details"
 	}
-	writer.WriteStart("", "iscsi_detailss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLIscsiDetailsWriteOne(writer, o, "iscsi_details")
+		XMLIscsiDetailsWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("iscsi_detailss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3579,11 +3579,11 @@ func XMLFileWriteMany(writer *XMLWriter, structSlice *FileSlice, plural, singula
 	if singular == "" {
 		singular = "file"
 	}
-	writer.WriteStart("", "files", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLFileWriteOne(writer, o, "file")
+		XMLFileWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("files")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3633,11 +3633,11 @@ func XMLCpuWriteMany(writer *XMLWriter, structSlice *CpuSlice, plural, singular 
 	if singular == "" {
 		singular = "cpu"
 	}
-	writer.WriteStart("", "cpus", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuWriteOne(writer, o, "cpu")
+		XMLCpuWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cpus")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3663,11 +3663,11 @@ func XMLPackageWriteMany(writer *XMLWriter, structSlice *PackageSlice, plural, s
 	if singular == "" {
 		singular = "package"
 	}
-	writer.WriteStart("", "packages", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLPackageWriteOne(writer, o, "package")
+		XMLPackageWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("packages")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3739,11 +3739,11 @@ func XMLImageTransferWriteMany(writer *XMLWriter, structSlice *ImageTransferSlic
 	if singular == "" {
 		singular = "image_transfer"
 	}
-	writer.WriteStart("", "image_transfers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLImageTransferWriteOne(writer, o, "image_transfer")
+		XMLImageTransferWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("image_transfers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3781,11 +3781,11 @@ func XMLMemoryPolicyWriteMany(writer *XMLWriter, structSlice *MemoryPolicySlice,
 	if singular == "" {
 		singular = "memory_policy"
 	}
-	writer.WriteStart("", "memory_policies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLMemoryPolicyWriteOne(writer, o, "memory_policy")
+		XMLMemoryPolicyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("memory_policies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3830,11 +3830,11 @@ func XMLAuthorizedKeyWriteMany(writer *XMLWriter, structSlice *AuthorizedKeySlic
 	if singular == "" {
 		singular = "authorized_key"
 	}
-	writer.WriteStart("", "authorized_keys", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLAuthorizedKeyWriteOne(writer, o, "authorized_key")
+		XMLAuthorizedKeyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("authorized_keys")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3863,11 +3863,11 @@ func XMLUsbWriteMany(writer *XMLWriter, structSlice *UsbSlice, plural, singular 
 	if singular == "" {
 		singular = "usb"
 	}
-	writer.WriteStart("", "usbs", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLUsbWriteOne(writer, o, "usb")
+		XMLUsbWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("usbs")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3936,11 +3936,11 @@ func XMLGlusterHookWriteMany(writer *XMLWriter, structSlice *GlusterHookSlice, p
 	if singular == "" {
 		singular = "gluster_hook"
 	}
-	writer.WriteStart("", "gluster_hooks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterHookWriteOne(writer, o, "gluster_hook")
+		XMLGlusterHookWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("gluster_hooks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -3979,11 +3979,11 @@ func XMLMigrationPolicyWriteMany(writer *XMLWriter, structSlice *MigrationPolicy
 	if singular == "" {
 		singular = "migration_policy"
 	}
-	writer.WriteStart("", "migration_policies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLMigrationPolicyWriteOne(writer, o, "migration_policy")
+		XMLMigrationPolicyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("migration_policies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4012,11 +4012,11 @@ func XMLIpAddressAssignmentWriteMany(writer *XMLWriter, structSlice *IpAddressAs
 	if singular == "" {
 		singular = "ip_address_assignment"
 	}
-	writer.WriteStart("", "ip_address_assignments", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLIpAddressAssignmentWriteOne(writer, o, "ip_address_assignment")
+		XMLIpAddressAssignmentWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("ip_address_assignments")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4064,11 +4064,11 @@ func XMLCpuProfileWriteMany(writer *XMLWriter, structSlice *CpuProfileSlice, plu
 	if singular == "" {
 		singular = "cpu_profile"
 	}
-	writer.WriteStart("", "cpu_profiles", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuProfileWriteOne(writer, o, "cpu_profile")
+		XMLCpuProfileWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cpu_profiles")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4097,11 +4097,11 @@ func XMLValueWriteMany(writer *XMLWriter, structSlice *ValueSlice, plural, singu
 	if singular == "" {
 		singular = "value"
 	}
-	writer.WriteStart("", "values", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLValueWriteOne(writer, o, "value")
+		XMLValueWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("values")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4158,11 +4158,11 @@ func XMLSchedulingPolicyWriteMany(writer *XMLWriter, structSlice *SchedulingPoli
 	if singular == "" {
 		singular = "scheduling_policy"
 	}
-	writer.WriteStart("", "scheduling_policies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSchedulingPolicyWriteOne(writer, o, "scheduling_policy")
+		XMLSchedulingPolicyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("scheduling_policies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4191,11 +4191,11 @@ func XMLRngDeviceWriteMany(writer *XMLWriter, structSlice *RngDeviceSlice, plura
 	if singular == "" {
 		singular = "rng_device"
 	}
-	writer.WriteStart("", "rng_devices", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRngDeviceWriteOne(writer, o, "rng_device")
+		XMLRngDeviceWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("rng_devices")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4221,11 +4221,11 @@ func XMLDnsResolverConfigurationWriteMany(writer *XMLWriter, structSlice *DnsRes
 	if singular == "" {
 		singular = "dns_resolver_configuration"
 	}
-	writer.WriteStart("", "dns_resolver_configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDnsResolverConfigurationWriteOne(writer, o, "dns_resolver_configuration")
+		XMLDnsResolverConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("dns_resolver_configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4269,11 +4269,11 @@ func XMLRegistrationConfigurationWriteMany(writer *XMLWriter, structSlice *Regis
 	if singular == "" {
 		singular = "registration_configuration"
 	}
-	writer.WriteStart("", "registration_configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationConfigurationWriteOne(writer, o, "registration_configuration")
+		XMLRegistrationConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("registration_configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4339,11 +4339,11 @@ func XMLKatelloErratumWriteMany(writer *XMLWriter, structSlice *KatelloErratumSl
 	if singular == "" {
 		singular = "katello_erratum"
 	}
-	writer.WriteStart("", "katello_errata", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLKatelloErratumWriteOne(writer, o, "katello_erratum")
+		XMLKatelloErratumWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("katello_errata")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4385,11 +4385,11 @@ func XMLBookmarkWriteMany(writer *XMLWriter, structSlice *BookmarkSlice, plural,
 	if singular == "" {
 		singular = "bookmark"
 	}
-	writer.WriteStart("", "bookmarks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLBookmarkWriteOne(writer, o, "bookmark")
+		XMLBookmarkWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("bookmarks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4431,11 +4431,11 @@ func XMLClusterFeatureWriteMany(writer *XMLWriter, structSlice *ClusterFeatureSl
 	if singular == "" {
 		singular = "cluster_feature"
 	}
-	writer.WriteStart("", "cluster_features", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLClusterFeatureWriteOne(writer, o, "cluster_feature")
+		XMLClusterFeatureWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cluster_features")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4467,11 +4467,11 @@ func XMLTemplateVersionWriteMany(writer *XMLWriter, structSlice *TemplateVersion
 	if singular == "" {
 		singular = "template_version"
 	}
-	writer.WriteStart("", "template_versions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLTemplateVersionWriteOne(writer, o, "template_version")
+		XMLTemplateVersionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("template_versions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4558,11 +4558,11 @@ func XMLGlusterBrickWriteMany(writer *XMLWriter, structSlice *GlusterBrickSlice,
 	if singular == "" {
 		singular = "brick"
 	}
-	writer.WriteStart("", "bricks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterBrickWriteOne(writer, o, "brick")
+		XMLGlusterBrickWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("bricks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4625,11 +4625,11 @@ func XMLJobWriteMany(writer *XMLWriter, structSlice *JobSlice, plural, singular 
 	if singular == "" {
 		singular = "job"
 	}
-	writer.WriteStart("", "jobs", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLJobWriteOne(writer, o, "job")
+		XMLJobWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("jobs")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4683,11 +4683,11 @@ func XMLExternalDiscoveredHostWriteMany(writer *XMLWriter, structSlice *External
 	if singular == "" {
 		singular = "external_discovered_host"
 	}
-	writer.WriteStart("", "external_discovered_hosts", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalDiscoveredHostWriteOne(writer, o, "external_discovered_host")
+		XMLExternalDiscoveredHostWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("external_discovered_hosts")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4759,11 +4759,11 @@ func XMLPermissionWriteMany(writer *XMLWriter, structSlice *PermissionSlice, plu
 	if singular == "" {
 		singular = "permission"
 	}
-	writer.WriteStart("", "permissions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLPermissionWriteOne(writer, o, "permission")
+		XMLPermissionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("permissions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4789,11 +4789,11 @@ func XMLVnicPassThroughWriteMany(writer *XMLWriter, structSlice *VnicPassThrough
 	if singular == "" {
 		singular = "vnic_pass_through"
 	}
-	writer.WriteStart("", "vnic_pass_throughs", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVnicPassThroughWriteOne(writer, o, "vnic_pass_through")
+		XMLVnicPassThroughWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vnic_pass_throughs")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4865,11 +4865,11 @@ func XMLGlusterVolumeWriteMany(writer *XMLWriter, structSlice *GlusterVolumeSlic
 	if singular == "" {
 		singular = "gluster_volume"
 	}
-	writer.WriteStart("", "gluster_volumes", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterVolumeWriteOne(writer, o, "gluster_volume")
+		XMLGlusterVolumeWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("gluster_volumes")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4898,11 +4898,11 @@ func XMLRegistrationLunMappingWriteMany(writer *XMLWriter, structSlice *Registra
 	if singular == "" {
 		singular = "registration_lun_mapping"
 	}
-	writer.WriteStart("", "registration_lun_mappings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationLunMappingWriteOne(writer, o, "registration_lun_mapping")
+		XMLRegistrationLunMappingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("registration_lun_mappings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4931,11 +4931,11 @@ func XMLPropertyWriteMany(writer *XMLWriter, structSlice *PropertySlice, plural,
 	if singular == "" {
 		singular = "property"
 	}
-	writer.WriteStart("", "properties", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLPropertyWriteOne(writer, o, "property")
+		XMLPropertyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("properties")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4967,11 +4967,11 @@ func XMLNumaNodePinWriteMany(writer *XMLWriter, structSlice *NumaNodePinSlice, p
 	if singular == "" {
 		singular = "numa_node_pin"
 	}
-	writer.WriteStart("", "numa_node_pins", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNumaNodePinWriteOne(writer, o, "numa_node_pin")
+		XMLNumaNodePinWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("numa_node_pins")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -4997,11 +4997,11 @@ func XMLProxyTicketWriteMany(writer *XMLWriter, structSlice *ProxyTicketSlice, p
 	if singular == "" {
 		singular = "proxy_ticket"
 	}
-	writer.WriteStart("", "proxy_tickets", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLProxyTicketWriteOne(writer, o, "proxy_ticket")
+		XMLProxyTicketWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("proxy_tickets")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5043,11 +5043,11 @@ func XMLOpenStackNetworkWriteMany(writer *XMLWriter, structSlice *OpenStackNetwo
 	if singular == "" {
 		singular = "openstack_network"
 	}
-	writer.WriteStart("", "openstack_networks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackNetworkWriteOne(writer, o, "openstack_network")
+		XMLOpenStackNetworkWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("openstack_networks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5101,11 +5101,11 @@ func XMLSessionWriteMany(writer *XMLWriter, structSlice *SessionSlice, plural, s
 	if singular == "" {
 		singular = "session"
 	}
-	writer.WriteStart("", "sessions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSessionWriteOne(writer, o, "session")
+		XMLSessionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("sessions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5159,11 +5159,11 @@ func XMLFloppyWriteMany(writer *XMLWriter, structSlice *FloppySlice, plural, sin
 	if singular == "" {
 		singular = "floppy"
 	}
-	writer.WriteStart("", "floppies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLFloppyWriteOne(writer, o, "floppy")
+		XMLFloppyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("floppies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5355,11 +5355,11 @@ func XMLInstanceTypeWriteMany(writer *XMLWriter, structSlice *InstanceTypeSlice,
 	if singular == "" {
 		singular = "instance_type"
 	}
-	writer.WriteStart("", "instance_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLInstanceTypeWriteOne(writer, o, "instance_type")
+		XMLInstanceTypeWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("instance_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5404,11 +5404,11 @@ func XMLSshPublicKeyWriteMany(writer *XMLWriter, structSlice *SshPublicKeySlice,
 	if singular == "" {
 		singular = "ssh_public_key"
 	}
-	writer.WriteStart("", "ssh_public_keys", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSshPublicKeyWriteOne(writer, o, "ssh_public_key")
+		XMLSshPublicKeyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("ssh_public_keys")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5452,11 +5452,11 @@ func XMLCloudInitWriteMany(writer *XMLWriter, structSlice *CloudInitSlice, plura
 	if singular == "" {
 		singular = "cloud_init"
 	}
-	writer.WriteStart("", "cloud_inits", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCloudInitWriteOne(writer, o, "cloud_init")
+		XMLCloudInitWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cloud_inits")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5491,11 +5491,11 @@ func XMLReportedConfigurationWriteMany(writer *XMLWriter, structSlice *ReportedC
 	if singular == "" {
 		singular = "reported_configuration"
 	}
-	writer.WriteStart("", "reported_configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLReportedConfigurationWriteOne(writer, o, "reported_configuration")
+		XMLReportedConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("reported_configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5540,11 +5540,11 @@ func XMLNetworkFilterParameterWriteMany(writer *XMLWriter, structSlice *NetworkF
 	if singular == "" {
 		singular = "network_filter_parameter"
 	}
-	writer.WriteStart("", "network_filter_parameters", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkFilterParameterWriteOne(writer, o, "network_filter_parameter")
+		XMLNetworkFilterParameterWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("network_filter_parameters")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5570,11 +5570,11 @@ func XMLMacWriteMany(writer *XMLWriter, structSlice *MacSlice, plural, singular 
 	if singular == "" {
 		singular = "mac"
 	}
-	writer.WriteStart("", "macs", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLMacWriteOne(writer, o, "mac")
+		XMLMacWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("macs")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5862,11 +5862,11 @@ func XMLSnapshotWriteMany(writer *XMLWriter, structSlice *SnapshotSlice, plural,
 	if singular == "" {
 		singular = "snapshot"
 	}
-	writer.WriteStart("", "snapshots", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSnapshotWriteOne(writer, o, "snapshot")
+		XMLSnapshotWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("snapshots")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5895,11 +5895,11 @@ func XMLRateWriteMany(writer *XMLWriter, structSlice *RateSlice, plural, singula
 	if singular == "" {
 		singular = "rate"
 	}
-	writer.WriteStart("", "rates", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRateWriteOne(writer, o, "rate")
+		XMLRateWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("rates")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5925,11 +5925,11 @@ func XMLBiosWriteMany(writer *XMLWriter, structSlice *BiosSlice, plural, singula
 	if singular == "" {
 		singular = "bios"
 	}
-	writer.WriteStart("", "bioss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLBiosWriteOne(writer, o, "bios")
+		XMLBiosWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("bioss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -5983,11 +5983,11 @@ func XMLVersionWriteMany(writer *XMLWriter, structSlice *VersionSlice, plural, s
 	if singular == "" {
 		singular = "version"
 	}
-	writer.WriteStart("", "versions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVersionWriteOne(writer, o, "version")
+		XMLVersionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("versions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6016,11 +6016,11 @@ func XMLSystemOptionValueWriteMany(writer *XMLWriter, structSlice *SystemOptionV
 	if singular == "" {
 		singular = "system_option_value"
 	}
-	writer.WriteStart("", "system_option_values", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSystemOptionValueWriteOne(writer, o, "system_option_value")
+		XMLSystemOptionValueWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("system_option_values")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6089,11 +6089,11 @@ func XMLDiskAttachmentWriteMany(writer *XMLWriter, structSlice *DiskAttachmentSl
 	if singular == "" {
 		singular = "disk_attachment"
 	}
-	writer.WriteStart("", "disk_attachments", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDiskAttachmentWriteOne(writer, o, "disk_attachment")
+		XMLDiskAttachmentWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("disk_attachments")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6141,11 +6141,11 @@ func XMLWeightWriteMany(writer *XMLWriter, structSlice *WeightSlice, plural, sin
 	if singular == "" {
 		singular = "weight"
 	}
-	writer.WriteStart("", "weights", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLWeightWriteOne(writer, o, "weight")
+		XMLWeightWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("weights")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6193,11 +6193,11 @@ func XMLDiskProfileWriteMany(writer *XMLWriter, structSlice *DiskProfileSlice, p
 	if singular == "" {
 		singular = "disk_profile"
 	}
-	writer.WriteStart("", "disk_profiles", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDiskProfileWriteOne(writer, o, "disk_profile")
+		XMLDiskProfileWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("disk_profiles")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6223,11 +6223,11 @@ func XMLGlusterBrickMemoryInfoWriteMany(writer *XMLWriter, structSlice *GlusterB
 	if singular == "" {
 		singular = "brick_memoryinfo"
 	}
-	writer.WriteStart("", "gluster_brick_memory_infos", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterBrickMemoryInfoWriteOne(writer, o, "brick_memoryinfo")
+		XMLGlusterBrickMemoryInfoWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("gluster_brick_memory_infos")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6320,11 +6320,11 @@ func XMLQosWriteMany(writer *XMLWriter, structSlice *QosSlice, plural, singular 
 	if singular == "" {
 		singular = "qos"
 	}
-	writer.WriteStart("", "qoss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLQosWriteOne(writer, o, "qos")
+		XMLQosWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("qoss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6356,11 +6356,11 @@ func XMLCpuTypeWriteMany(writer *XMLWriter, structSlice *CpuTypeSlice, plural, s
 	if singular == "" {
 		singular = "cpu_type"
 	}
-	writer.WriteStart("", "cpu_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuTypeWriteOne(writer, o, "cpu_type")
+		XMLCpuTypeWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cpu_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6450,11 +6450,11 @@ func XMLHostStorageWriteMany(writer *XMLWriter, structSlice *HostStorageSlice, p
 	if singular == "" {
 		singular = "host_storage"
 	}
-	writer.WriteStart("", "host_storages", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostStorageWriteOne(writer, o, "host_storage")
+		XMLHostStorageWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("host_storages")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6483,11 +6483,11 @@ func XMLTimeZoneWriteMany(writer *XMLWriter, structSlice *TimeZoneSlice, plural,
 	if singular == "" {
 		singular = "time_zone"
 	}
-	writer.WriteStart("", "time_zones", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLTimeZoneWriteOne(writer, o, "time_zone")
+		XMLTimeZoneWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("time_zones")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6535,11 +6535,11 @@ func XMLClusterLevelWriteMany(writer *XMLWriter, structSlice *ClusterLevelSlice,
 	if singular == "" {
 		singular = "cluster_level"
 	}
-	writer.WriteStart("", "cluster_levels", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLClusterLevelWriteOne(writer, o, "cluster_level")
+		XMLClusterLevelWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cluster_levels")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6623,11 +6623,11 @@ func XMLVmPoolWriteMany(writer *XMLWriter, structSlice *VmPoolSlice, plural, sin
 	if singular == "" {
 		singular = "vm_pool"
 	}
-	writer.WriteStart("", "vm_pools", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmPoolWriteOne(writer, o, "vm_pool")
+		XMLVmPoolWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vm_pools")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6702,11 +6702,11 @@ func XMLStepWriteMany(writer *XMLWriter, structSlice *StepSlice, plural, singula
 	if singular == "" {
 		singular = "step"
 	}
-	writer.WriteStart("", "steps", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLStepWriteOne(writer, o, "step")
+		XMLStepWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("steps")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6754,11 +6754,11 @@ func XMLImageWriteMany(writer *XMLWriter, structSlice *ImageSlice, plural, singu
 	if singular == "" {
 		singular = "image"
 	}
-	writer.WriteStart("", "images", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLImageWriteOne(writer, o, "image")
+		XMLImageWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("images")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6784,11 +6784,11 @@ func XMLTransparentHugePagesWriteMany(writer *XMLWriter, structSlice *Transparen
 	if singular == "" {
 		singular = "transparent_hugepages"
 	}
-	writer.WriteStart("", "transparent_huge_pagess", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLTransparentHugePagesWriteOne(writer, o, "transparent_hugepages")
+		XMLTransparentHugePagesWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("transparent_huge_pagess")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6835,11 +6835,11 @@ func XMLOperatingSystemWriteMany(writer *XMLWriter, structSlice *OperatingSystem
 	if singular == "" {
 		singular = "os"
 	}
-	writer.WriteStart("", "oss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOperatingSystemWriteOne(writer, o, "os")
+		XMLOperatingSystemWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("oss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6884,11 +6884,11 @@ func XMLUnmanagedNetworkWriteMany(writer *XMLWriter, structSlice *UnmanagedNetwo
 	if singular == "" {
 		singular = "unmanaged_network"
 	}
-	writer.WriteStart("", "unmanaged_networks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLUnmanagedNetworkWriteOne(writer, o, "unmanaged_network")
+		XMLUnmanagedNetworkWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("unmanaged_networks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6917,11 +6917,11 @@ func XMLCoreWriteMany(writer *XMLWriter, structSlice *CoreSlice, plural, singula
 	if singular == "" {
 		singular = "core"
 	}
-	writer.WriteStart("", "cores", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCoreWriteOne(writer, o, "core")
+		XMLCoreWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cores")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6960,11 +6960,11 @@ func XMLVendorWriteMany(writer *XMLWriter, structSlice *VendorSlice, plural, sin
 	if singular == "" {
 		singular = "vendor"
 	}
-	writer.WriteStart("", "vendors", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVendorWriteOne(writer, o, "vendor")
+		XMLVendorWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vendors")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -6993,11 +6993,11 @@ func XMLSpmWriteMany(writer *XMLWriter, structSlice *SpmSlice, plural, singular 
 	if singular == "" {
 		singular = "spm"
 	}
-	writer.WriteStart("", "spms", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSpmWriteOne(writer, o, "spm")
+		XMLSpmWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("spms")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7023,11 +7023,11 @@ func XMLSsoWriteMany(writer *XMLWriter, structSlice *SsoSlice, plural, singular 
 	if singular == "" {
 		singular = "sso"
 	}
-	writer.WriteStart("", "ssos", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSsoWriteOne(writer, o, "sso")
+		XMLSsoWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("ssos")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7113,11 +7113,11 @@ func XMLInitializationWriteMany(writer *XMLWriter, structSlice *InitializationSl
 	if singular == "" {
 		singular = "initialization"
 	}
-	writer.WriteStart("", "initializations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLInitializationWriteOne(writer, o, "initialization")
+		XMLInitializationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("initializations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7140,11 +7140,11 @@ func XMLPortMirroringWriteMany(writer *XMLWriter, structSlice *PortMirroringSlic
 	if singular == "" {
 		singular = "port_mirroring"
 	}
-	writer.WriteStart("", "port_mirrorings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLPortMirroringWriteOne(writer, o, "port_mirroring")
+		XMLPortMirroringWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("port_mirrorings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7170,11 +7170,11 @@ func XMLHostDevicePassthroughWriteMany(writer *XMLWriter, structSlice *HostDevic
 	if singular == "" {
 		singular = "host_device_passthrough"
 	}
-	writer.WriteStart("", "host_device_passthroughs", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostDevicePassthroughWriteOne(writer, o, "host_device_passthrough")
+		XMLHostDevicePassthroughWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("host_device_passthroughs")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7237,11 +7237,11 @@ func XMLGlusterMemoryPoolWriteMany(writer *XMLWriter, structSlice *GlusterMemory
 	if singular == "" {
 		singular = "memory_pool"
 	}
-	writer.WriteStart("", "memory_pools", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterMemoryPoolWriteOne(writer, o, "memory_pool")
+		XMLGlusterMemoryPoolWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("memory_pools")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7286,11 +7286,11 @@ func XMLOpenStackVolumeTypeWriteMany(writer *XMLWriter, structSlice *OpenStackVo
 	if singular == "" {
 		singular = "open_stack_volume_type"
 	}
-	writer.WriteStart("", "open_stack_volume_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackVolumeTypeWriteOne(writer, o, "open_stack_volume_type")
+		XMLOpenStackVolumeTypeWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("open_stack_volume_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7341,11 +7341,11 @@ func XMLStorageConnectionExtensionWriteMany(writer *XMLWriter, structSlice *Stor
 	if singular == "" {
 		singular = "storage_connection_extension"
 	}
-	writer.WriteStart("", "storage_connection_extensions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLStorageConnectionExtensionWriteOne(writer, o, "storage_connection_extension")
+		XMLStorageConnectionExtensionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("storage_connection_extensions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7374,11 +7374,11 @@ func XMLKsmWriteMany(writer *XMLWriter, structSlice *KsmSlice, plural, singular 
 	if singular == "" {
 		singular = "ksm"
 	}
-	writer.WriteStart("", "ksms", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLKsmWriteOne(writer, o, "ksm")
+		XMLKsmWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("ksms")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7570,11 +7570,11 @@ func XMLTemplateWriteMany(writer *XMLWriter, structSlice *TemplateSlice, plural,
 	if singular == "" {
 		singular = "template"
 	}
-	writer.WriteStart("", "templates", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLTemplateWriteOne(writer, o, "template")
+		XMLTemplateWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("templates")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7634,11 +7634,11 @@ func XMLOpenStackProviderWriteMany(writer *XMLWriter, structSlice *OpenStackProv
 	if singular == "" {
 		singular = "open_stack_provider"
 	}
-	writer.WriteStart("", "open_stack_providers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackProviderWriteOne(writer, o, "open_stack_provider")
+		XMLOpenStackProviderWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("open_stack_providers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7664,11 +7664,11 @@ func XMLErrorHandlingWriteMany(writer *XMLWriter, structSlice *ErrorHandlingSlic
 	if singular == "" {
 		singular = "error_handling"
 	}
-	writer.WriteStart("", "error_handlings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLErrorHandlingWriteOne(writer, o, "error_handling")
+		XMLErrorHandlingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("error_handlings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7728,11 +7728,11 @@ func XMLAffinityGroupWriteMany(writer *XMLWriter, structSlice *AffinityGroupSlic
 	if singular == "" {
 		singular = "affinity_group"
 	}
-	writer.WriteStart("", "affinity_groups", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLAffinityGroupWriteOne(writer, o, "affinity_group")
+		XMLAffinityGroupWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("affinity_groups")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7771,11 +7771,11 @@ func XMLIdentifiedWriteMany(writer *XMLWriter, structSlice *IdentifiedSlice, plu
 	if singular == "" {
 		singular = "identified"
 	}
-	writer.WriteStart("", "identifieds", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLIdentifiedWriteOne(writer, o, "identified")
+		XMLIdentifiedWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("identifieds")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7823,11 +7823,11 @@ func XMLDomainWriteMany(writer *XMLWriter, structSlice *DomainSlice, plural, sin
 	if singular == "" {
 		singular = "domain"
 	}
-	writer.WriteStart("", "domains", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDomainWriteOne(writer, o, "domain")
+		XMLDomainWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("domains")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7884,11 +7884,11 @@ func XMLExternalProviderWriteMany(writer *XMLWriter, structSlice *ExternalProvid
 	if singular == "" {
 		singular = "external_provider"
 	}
-	writer.WriteStart("", "external_providers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalProviderWriteOne(writer, o, "external_provider")
+		XMLExternalProviderWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("external_providers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -7954,11 +7954,11 @@ func XMLNetworkAttachmentWriteMany(writer *XMLWriter, structSlice *NetworkAttach
 	if singular == "" {
 		singular = "network_attachment"
 	}
-	writer.WriteStart("", "network_attachments", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkAttachmentWriteOne(writer, o, "network_attachment")
+		XMLNetworkAttachmentWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("network_attachments")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8009,11 +8009,11 @@ func XMLRoleWriteMany(writer *XMLWriter, structSlice *RoleSlice, plural, singula
 	if singular == "" {
 		singular = "role"
 	}
-	writer.WriteStart("", "roles", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRoleWriteOne(writer, o, "role")
+		XMLRoleWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("roles")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8075,11 +8075,11 @@ func XMLExternalVmImportWriteMany(writer *XMLWriter, structSlice *ExternalVmImpo
 	if singular == "" {
 		singular = "external_vm_import"
 	}
-	writer.WriteStart("", "external_vm_imports", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalVmImportWriteOne(writer, o, "external_vm_import")
+		XMLExternalVmImportWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("external_vm_imports")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8135,11 +8135,11 @@ func XMLPowerManagementWriteMany(writer *XMLWriter, structSlice *PowerManagement
 	if singular == "" {
 		singular = "power_management"
 	}
-	writer.WriteStart("", "power_managements", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLPowerManagementWriteOne(writer, o, "power_management")
+		XMLPowerManagementWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("power_managements")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8190,11 +8190,11 @@ func XMLReportedDeviceWriteMany(writer *XMLWriter, structSlice *ReportedDeviceSl
 	if singular == "" {
 		singular = "reported_device"
 	}
-	writer.WriteStart("", "reported_devices", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLReportedDeviceWriteOne(writer, o, "reported_device")
+		XMLReportedDeviceWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("reported_devices")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8242,11 +8242,11 @@ func XMLIscsiBondWriteMany(writer *XMLWriter, structSlice *IscsiBondSlice, plura
 	if singular == "" {
 		singular = "iscsi_bond"
 	}
-	writer.WriteStart("", "iscsi_bonds", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLIscsiBondWriteOne(writer, o, "iscsi_bond")
+		XMLIscsiBondWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("iscsi_bonds")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8288,11 +8288,11 @@ func XMLOpenStackImageWriteMany(writer *XMLWriter, structSlice *OpenStackImageSl
 	if singular == "" {
 		singular = "openstack_image"
 	}
-	writer.WriteStart("", "openstack_images", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackImageWriteOne(writer, o, "openstack_image")
+		XMLOpenStackImageWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("openstack_images")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8330,11 +8330,11 @@ func XMLFencingPolicyWriteMany(writer *XMLWriter, structSlice *FencingPolicySlic
 	if singular == "" {
 		singular = "fencing_policy"
 	}
-	writer.WriteStart("", "fencing_policies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLFencingPolicyWriteOne(writer, o, "fencing_policy")
+		XMLFencingPolicyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("fencing_policies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8418,11 +8418,11 @@ func XMLLogicalUnitWriteMany(writer *XMLWriter, structSlice *LogicalUnitSlice, p
 	if singular == "" {
 		singular = "logical_unit"
 	}
-	writer.WriteStart("", "logical_units", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLLogicalUnitWriteOne(writer, o, "logical_unit")
+		XMLLogicalUnitWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("logical_units")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8448,11 +8448,11 @@ func XMLConsoleWriteMany(writer *XMLWriter, structSlice *ConsoleSlice, plural, s
 	if singular == "" {
 		singular = "console"
 	}
-	writer.WriteStart("", "consoles", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLConsoleWriteOne(writer, o, "console")
+		XMLConsoleWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("consoles")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8503,11 +8503,11 @@ func XMLSchedulingPolicyUnitWriteMany(writer *XMLWriter, structSlice *Scheduling
 	if singular == "" {
 		singular = "scheduling_policy_unit"
 	}
-	writer.WriteStart("", "scheduling_policy_units", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSchedulingPolicyUnitWriteOne(writer, o, "scheduling_policy_unit")
+		XMLSchedulingPolicyUnitWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("scheduling_policy_units")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8618,11 +8618,11 @@ func XMLHostNicWriteMany(writer *XMLWriter, structSlice *HostNicSlice, plural, s
 	if singular == "" {
 		singular = "host_nic"
 	}
-	writer.WriteStart("", "host_nics", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostNicWriteOne(writer, o, "host_nic")
+		XMLHostNicWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("host_nics")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8670,11 +8670,11 @@ func XMLAffinityLabelWriteMany(writer *XMLWriter, structSlice *AffinityLabelSlic
 	if singular == "" {
 		singular = "affinity_label"
 	}
-	writer.WriteStart("", "affinity_labels", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLAffinityLabelWriteOne(writer, o, "affinity_label")
+		XMLAffinityLabelWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("affinity_labels")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8719,11 +8719,11 @@ func XMLExternalNetworkProviderConfigurationWriteMany(writer *XMLWriter, structS
 	if singular == "" {
 		singular = "external_network_provider_configuration"
 	}
-	writer.WriteStart("", "external_network_provider_configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalNetworkProviderConfigurationWriteOne(writer, o, "external_network_provider_configuration")
+		XMLExternalNetworkProviderConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("external_network_provider_configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8758,11 +8758,11 @@ func XMLGlusterClientWriteMany(writer *XMLWriter, structSlice *GlusterClientSlic
 	if singular == "" {
 		singular = "gluster_client"
 	}
-	writer.WriteStart("", "gluster_clients", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGlusterClientWriteOne(writer, o, "gluster_client")
+		XMLGlusterClientWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("gluster_clients")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8807,11 +8807,11 @@ func XMLNetworkLabelWriteMany(writer *XMLWriter, structSlice *NetworkLabelSlice,
 	if singular == "" {
 		singular = "network_label"
 	}
-	writer.WriteStart("", "network_labels", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkLabelWriteOne(writer, o, "network_label")
+		XMLNetworkLabelWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("network_labels")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8907,11 +8907,11 @@ func XMLNicWriteMany(writer *XMLWriter, structSlice *NicSlice, plural, singular 
 	if singular == "" {
 		singular = "nic"
 	}
-	writer.WriteStart("", "nics", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNicWriteOne(writer, o, "nic")
+		XMLNicWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("nics")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -8968,11 +8968,11 @@ func XMLNumaNodeWriteMany(writer *XMLWriter, structSlice *NumaNodeSlice, plural,
 	if singular == "" {
 		singular = "host_numa_node"
 	}
-	writer.WriteStart("", "host_numa_nodes", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNumaNodeWriteOne(writer, o, "host_numa_node")
+		XMLNumaNodeWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("host_numa_nodes")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9001,11 +9001,11 @@ func XMLSpecialObjectsWriteMany(writer *XMLWriter, structSlice *SpecialObjectsSl
 	if singular == "" {
 		singular = "special_objects"
 	}
-	writer.WriteStart("", "special_objectss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSpecialObjectsWriteOne(writer, o, "special_objects")
+		XMLSpecialObjectsWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("special_objectss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9037,11 +9037,11 @@ func XMLHostNicVirtualFunctionsConfigurationWriteMany(writer *XMLWriter, structS
 	if singular == "" {
 		singular = "host_nic_virtual_functions_configuration"
 	}
-	writer.WriteStart("", "host_nic_virtual_functions_configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostNicVirtualFunctionsConfigurationWriteOne(writer, o, "host_nic_virtual_functions_configuration")
+		XMLHostNicVirtualFunctionsConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("host_nic_virtual_functions_configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9070,11 +9070,11 @@ func XMLConfigurationWriteMany(writer *XMLWriter, structSlice *ConfigurationSlic
 	if singular == "" {
 		singular = "configuration"
 	}
-	writer.WriteStart("", "configurations", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLConfigurationWriteOne(writer, o, "configuration")
+		XMLConfigurationWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("configurations")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9109,11 +9109,11 @@ func XMLMigrationOptionsWriteMany(writer *XMLWriter, structSlice *MigrationOptio
 	if singular == "" {
 		singular = "migration"
 	}
-	writer.WriteStart("", "migration_optionss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLMigrationOptionsWriteOne(writer, o, "migration")
+		XMLMigrationOptionsWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("migration_optionss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9142,11 +9142,11 @@ func XMLRangeWriteMany(writer *XMLWriter, structSlice *RangeSlice, plural, singu
 	if singular == "" {
 		singular = "range"
 	}
-	writer.WriteStart("", "ranges", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRangeWriteOne(writer, o, "range")
+		XMLRangeWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("ranges")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9197,11 +9197,11 @@ func XMLExternalComputeResourceWriteMany(writer *XMLWriter, structSlice *Externa
 	if singular == "" {
 		singular = "external_compute_resource"
 	}
-	writer.WriteStart("", "external_compute_resources", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalComputeResourceWriteOne(writer, o, "external_compute_resource")
+		XMLExternalComputeResourceWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("external_compute_resources")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9240,11 +9240,11 @@ func XMLProductWriteMany(writer *XMLWriter, structSlice *ProductSlice, plural, s
 	if singular == "" {
 		singular = "product"
 	}
-	writer.WriteStart("", "products", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLProductWriteOne(writer, o, "product")
+		XMLProductWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("products")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9289,11 +9289,11 @@ func XMLPermitWriteMany(writer *XMLWriter, structSlice *PermitSlice, plural, sin
 	if singular == "" {
 		singular = "permit"
 	}
-	writer.WriteStart("", "permits", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLPermitWriteOne(writer, o, "permit")
+		XMLPermitWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("permits")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9328,11 +9328,11 @@ func XMLBondingWriteMany(writer *XMLWriter, structSlice *BondingSlice, plural, s
 	if singular == "" {
 		singular = "bonding"
 	}
-	writer.WriteStart("", "bondings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLBondingWriteOne(writer, o, "bonding")
+		XMLBondingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("bondings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9380,11 +9380,11 @@ func XMLHookWriteMany(writer *XMLWriter, structSlice *HookSlice, plural, singula
 	if singular == "" {
 		singular = "hook"
 	}
-	writer.WriteStart("", "hooks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHookWriteOne(writer, o, "hook")
+		XMLHookWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("hooks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9438,11 +9438,11 @@ func XMLOpenStackSubnetWriteMany(writer *XMLWriter, structSlice *OpenStackSubnet
 	if singular == "" {
 		singular = "openstack_subnet"
 	}
-	writer.WriteStart("", "openstack_subnets", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackSubnetWriteOne(writer, o, "openstack_subnet")
+		XMLOpenStackSubnetWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("openstack_subnets")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9471,11 +9471,11 @@ func XMLRegistrationClusterMappingWriteMany(writer *XMLWriter, structSlice *Regi
 	if singular == "" {
 		singular = "registration_cluster_mapping"
 	}
-	writer.WriteStart("", "registration_cluster_mappings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationClusterMappingWriteOne(writer, o, "registration_cluster_mapping")
+		XMLRegistrationClusterMappingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("registration_cluster_mappings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9553,11 +9553,11 @@ func XMLStatisticWriteMany(writer *XMLWriter, structSlice *StatisticSlice, plura
 	if singular == "" {
 		singular = "statistic"
 	}
-	writer.WriteStart("", "statistics", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLStatisticWriteOne(writer, o, "statistic")
+		XMLStatisticWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("statistics")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9629,11 +9629,11 @@ func XMLOpenStackVolumeProviderWriteMany(writer *XMLWriter, structSlice *OpenSta
 	if singular == "" {
 		singular = "openstack_volume_provider"
 	}
-	writer.WriteStart("", "openstack_volume_providers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackVolumeProviderWriteOne(writer, o, "openstack_volume_provider")
+		XMLOpenStackVolumeProviderWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("openstack_volume_providers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9662,11 +9662,11 @@ func XMLBrickProfileDetailWriteMany(writer *XMLWriter, structSlice *BrickProfile
 	if singular == "" {
 		singular = "brick_profile_detail"
 	}
-	writer.WriteStart("", "brick_profile_details", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLBrickProfileDetailWriteOne(writer, o, "brick_profile_detail")
+		XMLBrickProfileDetailWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("brick_profile_details")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9698,11 +9698,11 @@ func XMLCustomPropertyWriteMany(writer *XMLWriter, structSlice *CustomPropertySl
 	if singular == "" {
 		singular = "custom_property"
 	}
-	writer.WriteStart("", "custom_properties", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCustomPropertyWriteOne(writer, o, "custom_property")
+		XMLCustomPropertyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("custom_properties")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9756,11 +9756,11 @@ func XMLExternalHostGroupWriteMany(writer *XMLWriter, structSlice *ExternalHostG
 	if singular == "" {
 		singular = "external_host_group"
 	}
-	writer.WriteStart("", "external_host_groups", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalHostGroupWriteOne(writer, o, "external_host_group")
+		XMLExternalHostGroupWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("external_host_groups")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9841,11 +9841,11 @@ func XMLStorageConnectionWriteMany(writer *XMLWriter, structSlice *StorageConnec
 	if singular == "" {
 		singular = "storage_connection"
 	}
-	writer.WriteStart("", "storage_connections", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLStorageConnectionWriteOne(writer, o, "storage_connection")
+		XMLStorageConnectionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("storage_connections")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9896,11 +9896,11 @@ func XMLDeviceWriteMany(writer *XMLWriter, structSlice *DeviceSlice, plural, sin
 	if singular == "" {
 		singular = "device"
 	}
-	writer.WriteStart("", "devices", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDeviceWriteOne(writer, o, "device")
+		XMLDeviceWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("devices")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9929,11 +9929,11 @@ func XMLSkipIfConnectivityBrokenWriteMany(writer *XMLWriter, structSlice *SkipIf
 	if singular == "" {
 		singular = "skip_if_connectivity_broken"
 	}
-	writer.WriteStart("", "skip_if_connectivity_brokens", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSkipIfConnectivityBrokenWriteOne(writer, o, "skip_if_connectivity_broken")
+		XMLSkipIfConnectivityBrokenWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("skip_if_connectivity_brokens")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -9990,11 +9990,11 @@ func XMLWatchdogWriteMany(writer *XMLWriter, structSlice *WatchdogSlice, plural,
 	if singular == "" {
 		singular = "watchdog"
 	}
-	writer.WriteStart("", "watchdogs", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLWatchdogWriteOne(writer, o, "watchdog")
+		XMLWatchdogWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("watchdogs")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10054,11 +10054,11 @@ func XMLGraphicsConsoleWriteMany(writer *XMLWriter, structSlice *GraphicsConsole
 	if singular == "" {
 		singular = "graphics_console"
 	}
-	writer.WriteStart("", "graphics_consoles", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGraphicsConsoleWriteOne(writer, o, "graphics_console")
+		XMLGraphicsConsoleWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("graphics_consoles")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10139,11 +10139,11 @@ func XMLDataCenterWriteMany(writer *XMLWriter, structSlice *DataCenterSlice, plu
 	if singular == "" {
 		singular = "data_center"
 	}
-	writer.WriteStart("", "data_centers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLDataCenterWriteOne(writer, o, "data_center")
+		XMLDataCenterWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("data_centers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10215,11 +10215,11 @@ func XMLQuotaWriteMany(writer *XMLWriter, structSlice *QuotaSlice, plural, singu
 	if singular == "" {
 		singular = "quota"
 	}
-	writer.WriteStart("", "quotas", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLQuotaWriteOne(writer, o, "quota")
+		XMLQuotaWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("quotas")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10248,11 +10248,11 @@ func XMLVmPlacementPolicyWriteMany(writer *XMLWriter, structSlice *VmPlacementPo
 	if singular == "" {
 		singular = "vm_placement_policy"
 	}
-	writer.WriteStart("", "vm_placement_policies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmPlacementPolicyWriteOne(writer, o, "vm_placement_policy")
+		XMLVmPlacementPolicyWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vm_placement_policies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10284,11 +10284,11 @@ func XMLVmSummaryWriteMany(writer *XMLWriter, structSlice *VmSummarySlice, plura
 	if singular == "" {
 		singular = "vm_summary"
 	}
-	writer.WriteStart("", "vm_summaries", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmSummaryWriteOne(writer, o, "vm_summary")
+		XMLVmSummaryWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vm_summaries")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10314,11 +10314,11 @@ func XMLVirtioScsiWriteMany(writer *XMLWriter, structSlice *VirtioScsiSlice, plu
 	if singular == "" {
 		singular = "virtio_scsi"
 	}
-	writer.WriteStart("", "virtio_scsis", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVirtioScsiWriteOne(writer, o, "virtio_scsi")
+		XMLVirtioScsiWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("virtio_scsis")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10402,11 +10402,11 @@ func XMLUserWriteMany(writer *XMLWriter, structSlice *UserSlice, plural, singula
 	if singular == "" {
 		singular = "user"
 	}
-	writer.WriteStart("", "users", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLUserWriteOne(writer, o, "user")
+		XMLUserWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("users")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10432,11 +10432,11 @@ func XMLMemoryOverCommitWriteMany(writer *XMLWriter, structSlice *MemoryOverComm
 	if singular == "" {
 		singular = "memory_over_commit"
 	}
-	writer.WriteStart("", "memory_over_commits", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLMemoryOverCommitWriteOne(writer, o, "memory_over_commit")
+		XMLMemoryOverCommitWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("memory_over_commits")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10622,11 +10622,11 @@ func XMLHostWriteMany(writer *XMLWriter, structSlice *HostSlice, plural, singula
 	if singular == "" {
 		singular = "host"
 	}
-	writer.WriteStart("", "hosts", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostWriteOne(writer, o, "host")
+		XMLHostWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("hosts")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10674,11 +10674,11 @@ func XMLCertificateWriteMany(writer *XMLWriter, structSlice *CertificateSlice, p
 	if singular == "" {
 		singular = "certificate"
 	}
-	writer.WriteStart("", "certificates", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCertificateWriteOne(writer, o, "certificate")
+		XMLCertificateWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("certificates")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -10723,11 +10723,11 @@ func XMLOperatingSystemInfoWriteMany(writer *XMLWriter, structSlice *OperatingSy
 	if singular == "" {
 		singular = "operating_system"
 	}
-	writer.WriteStart("", "operation_systems", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOperatingSystemInfoWriteOne(writer, o, "operating_system")
+		XMLOperatingSystemInfoWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("operation_systems")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11000,11 +11000,11 @@ func XMLVmWriteMany(writer *XMLWriter, structSlice *VmSlice, plural, singular st
 	if singular == "" {
 		singular = "vm"
 	}
-	writer.WriteStart("", "vms", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLVmWriteOne(writer, o, "vm")
+		XMLVmWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("vms")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11076,11 +11076,11 @@ func XMLHostDeviceWriteMany(writer *XMLWriter, structSlice *HostDeviceSlice, plu
 	if singular == "" {
 		singular = "host_device"
 	}
-	writer.WriteStart("", "host_devices", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLHostDeviceWriteOne(writer, o, "host_device")
+		XMLHostDeviceWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("host_devices")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11125,11 +11125,11 @@ func XMLExternalHostWriteMany(writer *XMLWriter, structSlice *ExternalHostSlice,
 	if singular == "" {
 		singular = "external_host"
 	}
-	writer.WriteStart("", "external_hosts", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalHostWriteOne(writer, o, "external_host")
+		XMLExternalHostWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("external_hosts")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11158,11 +11158,11 @@ func XMLRegistrationVnicProfileMappingWriteMany(writer *XMLWriter, structSlice *
 	if singular == "" {
 		singular = "registration_vnic_profile_mapping"
 	}
-	writer.WriteStart("", "registration_vnic_profile_mappings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLRegistrationVnicProfileMappingWriteOne(writer, o, "registration_vnic_profile_mapping")
+		XMLRegistrationVnicProfileMappingWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("registration_vnic_profile_mappings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11197,11 +11197,11 @@ func XMLApiSummaryWriteMany(writer *XMLWriter, structSlice *ApiSummarySlice, plu
 	if singular == "" {
 		singular = "api_summary"
 	}
-	writer.WriteStart("", "api_summaries", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLApiSummaryWriteOne(writer, o, "api_summary")
+		XMLApiSummaryWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("api_summaries")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11227,11 +11227,11 @@ func XMLBootMenuWriteMany(writer *XMLWriter, structSlice *BootMenuSlice, plural,
 	if singular == "" {
 		singular = "boot_menu"
 	}
-	writer.WriteStart("", "boot_menus", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLBootMenuWriteOne(writer, o, "boot_menu")
+		XMLBootMenuWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("boot_menus")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11263,11 +11263,11 @@ func XMLPayloadWriteMany(writer *XMLWriter, structSlice *PayloadSlice, plural, s
 	if singular == "" {
 		singular = "payload"
 	}
-	writer.WriteStart("", "payloads", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLPayloadWriteOne(writer, o, "payload")
+		XMLPayloadWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("payloads")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11333,11 +11333,11 @@ func XMLOpenStackImageProviderWriteMany(writer *XMLWriter, structSlice *OpenStac
 	if singular == "" {
 		singular = "openstack_image_provider"
 	}
-	writer.WriteStart("", "openstack_image_providers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLOpenStackImageProviderWriteOne(writer, o, "openstack_image_provider")
+		XMLOpenStackImageProviderWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("openstack_image_providers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11430,11 +11430,11 @@ func XMLNetworkWriteMany(writer *XMLWriter, structSlice *NetworkSlice, plural, s
 	if singular == "" {
 		singular = "network"
 	}
-	writer.WriteStart("", "networks", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLNetworkWriteOne(writer, o, "network")
+		XMLNetworkWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("networks")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11491,11 +11491,11 @@ func XMLTagWriteMany(writer *XMLWriter, structSlice *TagSlice, plural, singular 
 	if singular == "" {
 		singular = "tag"
 	}
-	writer.WriteStart("", "tags", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLTagWriteOne(writer, o, "tag")
+		XMLTagWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("tags")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11521,11 +11521,11 @@ func XMLCpuTuneWriteMany(writer *XMLWriter, structSlice *CpuTuneSlice, plural, s
 	if singular == "" {
 		singular = "cpu_tune"
 	}
-	writer.WriteStart("", "cpu_tunes", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLCpuTuneWriteOne(writer, o, "cpu_tune")
+		XMLCpuTuneWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("cpu_tunes")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11554,11 +11554,11 @@ func XMLSerialNumberWriteMany(writer *XMLWriter, structSlice *SerialNumberSlice,
 	if singular == "" {
 		singular = "serial_number"
 	}
-	writer.WriteStart("", "serial_numbers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLSerialNumberWriteOne(writer, o, "serial_number")
+		XMLSerialNumberWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("serial_numbers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11584,11 +11584,11 @@ func XMLBootWriteMany(writer *XMLWriter, structSlice *BootSlice, plural, singula
 	if singular == "" {
 		singular = "boot"
 	}
-	writer.WriteStart("", "boots", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLBootWriteOne(writer, o, "boot")
+		XMLBootWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("boots")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11660,11 +11660,11 @@ func XMLExternalHostProviderWriteMany(writer *XMLWriter, structSlice *ExternalHo
 	if singular == "" {
 		singular = "external_host_provider"
 	}
-	writer.WriteStart("", "external_host_providers", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLExternalHostProviderWriteOne(writer, o, "external_host_provider")
+		XMLExternalHostProviderWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("external_host_providers")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11693,11 +11693,11 @@ func XMLFaultWriteMany(writer *XMLWriter, structSlice *FaultSlice, plural, singu
 	if singular == "" {
 		singular = "fault"
 	}
-	writer.WriteStart("", "faults", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLFaultWriteOne(writer, o, "fault")
+		XMLFaultWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("faults")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -11723,11 +11723,11 @@ func XMLGracePeriodWriteMany(writer *XMLWriter, structSlice *GracePeriodSlice, p
 	if singular == "" {
 		singular = "grace_period"
 	}
-	writer.WriteStart("", "grace_periods", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLGracePeriodWriteOne(writer, o, "grace_period")
+		XMLGracePeriodWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("grace_periods")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12000,11 +12000,11 @@ func XMLActionWriteMany(writer *XMLWriter, structSlice *ActionSlice, plural, sin
 	if singular == "" {
 		singular = "action"
 	}
-	writer.WriteStart("", "actions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
-		XMLActionWriteOne(writer, o, "action")
+		XMLActionWriteOne(writer, o, singular)
 	}
-	writer.WriteEnd("actions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12012,7 +12012,7 @@ func XMLIpVersionWriteOne(writer *XMLWriter, enum IpVersion, tag string) {
 	if tag == "" {
 		tag = "ip_version"
 	}
-	writer.WriteCharacter("ip_version", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLIpVersionWriteMany(writer *XMLWriter, enums []IpVersion, plural, singular string) error {
@@ -12022,11 +12022,11 @@ func XMLIpVersionWriteMany(writer *XMLWriter, enums []IpVersion, plural, singula
 	if singular == "" {
 		singular = "ip_version"
 	}
-	writer.WriteStart("", "ip_versions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("ip_version", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("ip_versions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12034,7 +12034,7 @@ func XMLPayloadEncodingWriteOne(writer *XMLWriter, enum PayloadEncoding, tag str
 	if tag == "" {
 		tag = "payload_encoding"
 	}
-	writer.WriteCharacter("payload_encoding", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLPayloadEncodingWriteMany(writer *XMLWriter, enums []PayloadEncoding, plural, singular string) error {
@@ -12044,11 +12044,11 @@ func XMLPayloadEncodingWriteMany(writer *XMLWriter, enums []PayloadEncoding, plu
 	if singular == "" {
 		singular = "payload_encoding"
 	}
-	writer.WriteStart("", "payload_encodings", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("payload_encoding", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("payload_encodings")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12056,7 +12056,7 @@ func XMLNetworkStatusWriteOne(writer *XMLWriter, enum NetworkStatus, tag string)
 	if tag == "" {
 		tag = "network_status"
 	}
-	writer.WriteCharacter("network_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLNetworkStatusWriteMany(writer *XMLWriter, enums []NetworkStatus, plural, singular string) error {
@@ -12066,11 +12066,11 @@ func XMLNetworkStatusWriteMany(writer *XMLWriter, enums []NetworkStatus, plural,
 	if singular == "" {
 		singular = "network_status"
 	}
-	writer.WriteStart("", "network_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("network_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("network_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12078,7 +12078,7 @@ func XMLHostProtocolWriteOne(writer *XMLWriter, enum HostProtocol, tag string) {
 	if tag == "" {
 		tag = "host_protocol"
 	}
-	writer.WriteCharacter("host_protocol", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLHostProtocolWriteMany(writer *XMLWriter, enums []HostProtocol, plural, singular string) error {
@@ -12088,11 +12088,11 @@ func XMLHostProtocolWriteMany(writer *XMLWriter, enums []HostProtocol, plural, s
 	if singular == "" {
 		singular = "host_protocol"
 	}
-	writer.WriteStart("", "host_protocols", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("host_protocol", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("host_protocols")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12100,7 +12100,7 @@ func XMLVmTypeWriteOne(writer *XMLWriter, enum VmType, tag string) {
 	if tag == "" {
 		tag = "vm_type"
 	}
-	writer.WriteCharacter("vm_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLVmTypeWriteMany(writer *XMLWriter, enums []VmType, plural, singular string) error {
@@ -12110,11 +12110,11 @@ func XMLVmTypeWriteMany(writer *XMLWriter, enums []VmType, plural, singular stri
 	if singular == "" {
 		singular = "vm_type"
 	}
-	writer.WriteStart("", "vm_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("vm_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("vm_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12122,7 +12122,7 @@ func XMLResolutionTypeWriteOne(writer *XMLWriter, enum ResolutionType, tag strin
 	if tag == "" {
 		tag = "resolution_type"
 	}
-	writer.WriteCharacter("resolution_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLResolutionTypeWriteMany(writer *XMLWriter, enums []ResolutionType, plural, singular string) error {
@@ -12132,11 +12132,11 @@ func XMLResolutionTypeWriteMany(writer *XMLWriter, enums []ResolutionType, plura
 	if singular == "" {
 		singular = "resolution_type"
 	}
-	writer.WriteStart("", "resolution_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("resolution_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("resolution_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12144,7 +12144,7 @@ func XMLKdumpStatusWriteOne(writer *XMLWriter, enum KdumpStatus, tag string) {
 	if tag == "" {
 		tag = "kdump_status"
 	}
-	writer.WriteCharacter("kdump_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLKdumpStatusWriteMany(writer *XMLWriter, enums []KdumpStatus, plural, singular string) error {
@@ -12154,11 +12154,11 @@ func XMLKdumpStatusWriteMany(writer *XMLWriter, enums []KdumpStatus, plural, sin
 	if singular == "" {
 		singular = "kdump_status"
 	}
-	writer.WriteStart("", "kdump_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("kdump_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("kdump_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12166,7 +12166,7 @@ func XMLEntityExternalStatusWriteOne(writer *XMLWriter, enum EntityExternalStatu
 	if tag == "" {
 		tag = "entity_external_status"
 	}
-	writer.WriteCharacter("entity_external_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLEntityExternalStatusWriteMany(writer *XMLWriter, enums []EntityExternalStatus, plural, singular string) error {
@@ -12176,11 +12176,11 @@ func XMLEntityExternalStatusWriteMany(writer *XMLWriter, enums []EntityExternalS
 	if singular == "" {
 		singular = "entity_external_status"
 	}
-	writer.WriteStart("", "entity_external_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("entity_external_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("entity_external_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12188,7 +12188,7 @@ func XMLCreationStatusWriteOne(writer *XMLWriter, enum CreationStatus, tag strin
 	if tag == "" {
 		tag = "creation_status"
 	}
-	writer.WriteCharacter("creation_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLCreationStatusWriteMany(writer *XMLWriter, enums []CreationStatus, plural, singular string) error {
@@ -12198,11 +12198,11 @@ func XMLCreationStatusWriteMany(writer *XMLWriter, enums []CreationStatus, plura
 	if singular == "" {
 		singular = "creation_status"
 	}
-	writer.WriteStart("", "creation_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("creation_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("creation_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12210,7 +12210,7 @@ func XMLHookStageWriteOne(writer *XMLWriter, enum HookStage, tag string) {
 	if tag == "" {
 		tag = "hook_stage"
 	}
-	writer.WriteCharacter("hook_stage", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLHookStageWriteMany(writer *XMLWriter, enums []HookStage, plural, singular string) error {
@@ -12220,11 +12220,11 @@ func XMLHookStageWriteMany(writer *XMLWriter, enums []HookStage, plural, singula
 	if singular == "" {
 		singular = "hook_stage"
 	}
-	writer.WriteStart("", "hook_stages", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("hook_stage", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("hook_stages")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12232,7 +12232,7 @@ func XMLStatisticUnitWriteOne(writer *XMLWriter, enum StatisticUnit, tag string)
 	if tag == "" {
 		tag = "statistic_unit"
 	}
-	writer.WriteCharacter("statistic_unit", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLStatisticUnitWriteMany(writer *XMLWriter, enums []StatisticUnit, plural, singular string) error {
@@ -12242,11 +12242,11 @@ func XMLStatisticUnitWriteMany(writer *XMLWriter, enums []StatisticUnit, plural,
 	if singular == "" {
 		singular = "statistic_unit"
 	}
-	writer.WriteStart("", "statistic_units", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("statistic_unit", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("statistic_units")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12254,7 +12254,7 @@ func XMLScsiGenericIOWriteOne(writer *XMLWriter, enum ScsiGenericIO, tag string)
 	if tag == "" {
 		tag = "scsi_generic_i_o"
 	}
-	writer.WriteCharacter("scsi_generic_i_o", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLScsiGenericIOWriteMany(writer *XMLWriter, enums []ScsiGenericIO, plural, singular string) error {
@@ -12264,11 +12264,11 @@ func XMLScsiGenericIOWriteMany(writer *XMLWriter, enums []ScsiGenericIO, plural,
 	if singular == "" {
 		singular = "scsi_generic_i_o"
 	}
-	writer.WriteStart("", "scsi_generic_i_os", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("scsi_generic_i_o", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("scsi_generic_i_os")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12276,7 +12276,7 @@ func XMLReportedDeviceTypeWriteOne(writer *XMLWriter, enum ReportedDeviceType, t
 	if tag == "" {
 		tag = "reported_device_type"
 	}
-	writer.WriteCharacter("reported_device_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLReportedDeviceTypeWriteMany(writer *XMLWriter, enums []ReportedDeviceType, plural, singular string) error {
@@ -12286,11 +12286,11 @@ func XMLReportedDeviceTypeWriteMany(writer *XMLWriter, enums []ReportedDeviceTyp
 	if singular == "" {
 		singular = "reported_device_type"
 	}
-	writer.WriteStart("", "reported_device_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("reported_device_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("reported_device_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12298,7 +12298,7 @@ func XMLPolicyUnitTypeWriteOne(writer *XMLWriter, enum PolicyUnitType, tag strin
 	if tag == "" {
 		tag = "policy_unit_type"
 	}
-	writer.WriteCharacter("policy_unit_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLPolicyUnitTypeWriteMany(writer *XMLWriter, enums []PolicyUnitType, plural, singular string) error {
@@ -12308,11 +12308,11 @@ func XMLPolicyUnitTypeWriteMany(writer *XMLWriter, enums []PolicyUnitType, plura
 	if singular == "" {
 		singular = "policy_unit_type"
 	}
-	writer.WriteStart("", "policy_unit_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("policy_unit_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("policy_unit_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12320,7 +12320,7 @@ func XMLWatchdogActionWriteOne(writer *XMLWriter, enum WatchdogAction, tag strin
 	if tag == "" {
 		tag = "watchdog_action"
 	}
-	writer.WriteCharacter("watchdog_action", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLWatchdogActionWriteMany(writer *XMLWriter, enums []WatchdogAction, plural, singular string) error {
@@ -12330,11 +12330,11 @@ func XMLWatchdogActionWriteMany(writer *XMLWriter, enums []WatchdogAction, plura
 	if singular == "" {
 		singular = "watchdog_action"
 	}
-	writer.WriteStart("", "watchdog_actions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("watchdog_action", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("watchdog_actions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12342,7 +12342,7 @@ func XMLArchitectureWriteOne(writer *XMLWriter, enum Architecture, tag string) {
 	if tag == "" {
 		tag = "architecture"
 	}
-	writer.WriteCharacter("architecture", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLArchitectureWriteMany(writer *XMLWriter, enums []Architecture, plural, singular string) error {
@@ -12352,11 +12352,11 @@ func XMLArchitectureWriteMany(writer *XMLWriter, enums []Architecture, plural, s
 	if singular == "" {
 		singular = "architecture"
 	}
-	writer.WriteStart("", "architectures", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("architecture", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("architectures")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12364,7 +12364,7 @@ func XMLPowerManagementStatusWriteOne(writer *XMLWriter, enum PowerManagementSta
 	if tag == "" {
 		tag = "power_management_status"
 	}
-	writer.WriteCharacter("power_management_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLPowerManagementStatusWriteMany(writer *XMLWriter, enums []PowerManagementStatus, plural, singular string) error {
@@ -12374,11 +12374,11 @@ func XMLPowerManagementStatusWriteMany(writer *XMLWriter, enums []PowerManagemen
 	if singular == "" {
 		singular = "power_management_status"
 	}
-	writer.WriteStart("", "power_management_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("power_management_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("power_management_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12386,7 +12386,7 @@ func XMLVnicPassThroughModeWriteOne(writer *XMLWriter, enum VnicPassThroughMode,
 	if tag == "" {
 		tag = "vnic_pass_through_mode"
 	}
-	writer.WriteCharacter("vnic_pass_through_mode", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLVnicPassThroughModeWriteMany(writer *XMLWriter, enums []VnicPassThroughMode, plural, singular string) error {
@@ -12396,11 +12396,11 @@ func XMLVnicPassThroughModeWriteMany(writer *XMLWriter, enums []VnicPassThroughM
 	if singular == "" {
 		singular = "vnic_pass_through_mode"
 	}
-	writer.WriteStart("", "vnic_pass_through_modes", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("vnic_pass_through_mode", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("vnic_pass_through_modes")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12408,7 +12408,7 @@ func XMLSnapshotStatusWriteOne(writer *XMLWriter, enum SnapshotStatus, tag strin
 	if tag == "" {
 		tag = "snapshot_status"
 	}
-	writer.WriteCharacter("snapshot_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLSnapshotStatusWriteMany(writer *XMLWriter, enums []SnapshotStatus, plural, singular string) error {
@@ -12418,11 +12418,11 @@ func XMLSnapshotStatusWriteMany(writer *XMLWriter, enums []SnapshotStatus, plura
 	if singular == "" {
 		singular = "snapshot_status"
 	}
-	writer.WriteStart("", "snapshot_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("snapshot_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("snapshot_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12430,7 +12430,7 @@ func XMLSnapshotTypeWriteOne(writer *XMLWriter, enum SnapshotType, tag string) {
 	if tag == "" {
 		tag = "snapshot_type"
 	}
-	writer.WriteCharacter("snapshot_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLSnapshotTypeWriteMany(writer *XMLWriter, enums []SnapshotType, plural, singular string) error {
@@ -12440,11 +12440,11 @@ func XMLSnapshotTypeWriteMany(writer *XMLWriter, enums []SnapshotType, plural, s
 	if singular == "" {
 		singular = "snapshot_type"
 	}
-	writer.WriteStart("", "snapshot_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("snapshot_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("snapshot_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12452,7 +12452,7 @@ func XMLGlusterStateWriteOne(writer *XMLWriter, enum GlusterState, tag string) {
 	if tag == "" {
 		tag = "gluster_state"
 	}
-	writer.WriteCharacter("gluster_state", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLGlusterStateWriteMany(writer *XMLWriter, enums []GlusterState, plural, singular string) error {
@@ -12462,11 +12462,11 @@ func XMLGlusterStateWriteMany(writer *XMLWriter, enums []GlusterState, plural, s
 	if singular == "" {
 		singular = "gluster_state"
 	}
-	writer.WriteStart("", "gluster_states", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("gluster_state", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("gluster_states")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12474,7 +12474,7 @@ func XMLFenceTypeWriteOne(writer *XMLWriter, enum FenceType, tag string) {
 	if tag == "" {
 		tag = "fence_type"
 	}
-	writer.WriteCharacter("fence_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLFenceTypeWriteMany(writer *XMLWriter, enums []FenceType, plural, singular string) error {
@@ -12484,11 +12484,11 @@ func XMLFenceTypeWriteMany(writer *XMLWriter, enums []FenceType, plural, singula
 	if singular == "" {
 		singular = "fence_type"
 	}
-	writer.WriteStart("", "fence_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("fence_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("fence_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12496,7 +12496,7 @@ func XMLVmPoolTypeWriteOne(writer *XMLWriter, enum VmPoolType, tag string) {
 	if tag == "" {
 		tag = "vm_pool_type"
 	}
-	writer.WriteCharacter("vm_pool_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLVmPoolTypeWriteMany(writer *XMLWriter, enums []VmPoolType, plural, singular string) error {
@@ -12506,11 +12506,11 @@ func XMLVmPoolTypeWriteMany(writer *XMLWriter, enums []VmPoolType, plural, singu
 	if singular == "" {
 		singular = "vm_pool_type"
 	}
-	writer.WriteStart("", "vm_pool_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("vm_pool_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("vm_pool_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12518,7 +12518,7 @@ func XMLStorageDomainStatusWriteOne(writer *XMLWriter, enum StorageDomainStatus,
 	if tag == "" {
 		tag = "storage_domain_status"
 	}
-	writer.WriteCharacter("storage_domain_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLStorageDomainStatusWriteMany(writer *XMLWriter, enums []StorageDomainStatus, plural, singular string) error {
@@ -12528,11 +12528,11 @@ func XMLStorageDomainStatusWriteMany(writer *XMLWriter, enums []StorageDomainSta
 	if singular == "" {
 		singular = "storage_domain_status"
 	}
-	writer.WriteStart("", "storage_domain_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("storage_domain_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("storage_domain_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12540,7 +12540,7 @@ func XMLGlusterVolumeTypeWriteOne(writer *XMLWriter, enum GlusterVolumeType, tag
 	if tag == "" {
 		tag = "gluster_volume_type"
 	}
-	writer.WriteCharacter("gluster_volume_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLGlusterVolumeTypeWriteMany(writer *XMLWriter, enums []GlusterVolumeType, plural, singular string) error {
@@ -12550,11 +12550,11 @@ func XMLGlusterVolumeTypeWriteMany(writer *XMLWriter, enums []GlusterVolumeType,
 	if singular == "" {
 		singular = "gluster_volume_type"
 	}
-	writer.WriteStart("", "gluster_volume_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("gluster_volume_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("gluster_volume_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12562,7 +12562,7 @@ func XMLNicStatusWriteOne(writer *XMLWriter, enum NicStatus, tag string) {
 	if tag == "" {
 		tag = "nic_status"
 	}
-	writer.WriteCharacter("nic_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLNicStatusWriteMany(writer *XMLWriter, enums []NicStatus, plural, singular string) error {
@@ -12572,11 +12572,11 @@ func XMLNicStatusWriteMany(writer *XMLWriter, enums []NicStatus, plural, singula
 	if singular == "" {
 		singular = "nic_status"
 	}
-	writer.WriteStart("", "nic_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("nic_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("nic_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12584,7 +12584,7 @@ func XMLStorageTypeWriteOne(writer *XMLWriter, enum StorageType, tag string) {
 	if tag == "" {
 		tag = "storage_type"
 	}
-	writer.WriteCharacter("storage_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLStorageTypeWriteMany(writer *XMLWriter, enums []StorageType, plural, singular string) error {
@@ -12594,11 +12594,11 @@ func XMLStorageTypeWriteMany(writer *XMLWriter, enums []StorageType, plural, sin
 	if singular == "" {
 		singular = "storage_type"
 	}
-	writer.WriteStart("", "storage_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("storage_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("storage_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12606,7 +12606,7 @@ func XMLHookContentTypeWriteOne(writer *XMLWriter, enum HookContentType, tag str
 	if tag == "" {
 		tag = "hook_content_type"
 	}
-	writer.WriteCharacter("hook_content_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLHookContentTypeWriteMany(writer *XMLWriter, enums []HookContentType, plural, singular string) error {
@@ -12616,11 +12616,11 @@ func XMLHookContentTypeWriteMany(writer *XMLWriter, enums []HookContentType, plu
 	if singular == "" {
 		singular = "hook_content_type"
 	}
-	writer.WriteStart("", "hook_content_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("hook_content_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("hook_content_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12628,7 +12628,7 @@ func XMLHostStatusWriteOne(writer *XMLWriter, enum HostStatus, tag string) {
 	if tag == "" {
 		tag = "host_status"
 	}
-	writer.WriteCharacter("host_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLHostStatusWriteMany(writer *XMLWriter, enums []HostStatus, plural, singular string) error {
@@ -12638,11 +12638,11 @@ func XMLHostStatusWriteMany(writer *XMLWriter, enums []HostStatus, plural, singu
 	if singular == "" {
 		singular = "host_status"
 	}
-	writer.WriteStart("", "host_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("host_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("host_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12650,7 +12650,7 @@ func XMLBootDeviceWriteOne(writer *XMLWriter, enum BootDevice, tag string) {
 	if tag == "" {
 		tag = "boot_device"
 	}
-	writer.WriteCharacter("boot_device", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLBootDeviceWriteMany(writer *XMLWriter, enums []BootDevice, plural, singular string) error {
@@ -12660,11 +12660,11 @@ func XMLBootDeviceWriteMany(writer *XMLWriter, enums []BootDevice, plural, singu
 	if singular == "" {
 		singular = "boot_device"
 	}
-	writer.WriteStart("", "boot_devices", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("boot_device", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("boot_devices")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12672,7 +12672,7 @@ func XMLNfsVersionWriteOne(writer *XMLWriter, enum NfsVersion, tag string) {
 	if tag == "" {
 		tag = "nfs_version"
 	}
-	writer.WriteCharacter("nfs_version", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLNfsVersionWriteMany(writer *XMLWriter, enums []NfsVersion, plural, singular string) error {
@@ -12682,11 +12682,11 @@ func XMLNfsVersionWriteMany(writer *XMLWriter, enums []NfsVersion, plural, singu
 	if singular == "" {
 		singular = "nfs_version"
 	}
-	writer.WriteStart("", "nfs_versions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("nfs_version", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("nfs_versions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12694,7 +12694,7 @@ func XMLVmStatusWriteOne(writer *XMLWriter, enum VmStatus, tag string) {
 	if tag == "" {
 		tag = "vm_status"
 	}
-	writer.WriteCharacter("vm_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLVmStatusWriteMany(writer *XMLWriter, enums []VmStatus, plural, singular string) error {
@@ -12704,11 +12704,11 @@ func XMLVmStatusWriteMany(writer *XMLWriter, enums []VmStatus, plural, singular 
 	if singular == "" {
 		singular = "vm_status"
 	}
-	writer.WriteStart("", "vm_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("vm_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("vm_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12716,7 +12716,7 @@ func XMLStorageFormatWriteOne(writer *XMLWriter, enum StorageFormat, tag string)
 	if tag == "" {
 		tag = "storage_format"
 	}
-	writer.WriteCharacter("storage_format", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLStorageFormatWriteMany(writer *XMLWriter, enums []StorageFormat, plural, singular string) error {
@@ -12726,11 +12726,11 @@ func XMLStorageFormatWriteMany(writer *XMLWriter, enums []StorageFormat, plural,
 	if singular == "" {
 		singular = "storage_format"
 	}
-	writer.WriteStart("", "storage_formats", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("storage_format", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("storage_formats")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12738,7 +12738,7 @@ func XMLSsoMethodWriteOne(writer *XMLWriter, enum SsoMethod, tag string) {
 	if tag == "" {
 		tag = "sso_method"
 	}
-	writer.WriteCharacter("sso_method", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLSsoMethodWriteMany(writer *XMLWriter, enums []SsoMethod, plural, singular string) error {
@@ -12748,11 +12748,11 @@ func XMLSsoMethodWriteMany(writer *XMLWriter, enums []SsoMethod, plural, singula
 	if singular == "" {
 		singular = "sso_method"
 	}
-	writer.WriteStart("", "sso_methods", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("sso_method", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("sso_methods")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12760,7 +12760,7 @@ func XMLMigrateOnErrorWriteOne(writer *XMLWriter, enum MigrateOnError, tag strin
 	if tag == "" {
 		tag = "migrate_on_error"
 	}
-	writer.WriteCharacter("migrate_on_error", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLMigrateOnErrorWriteMany(writer *XMLWriter, enums []MigrateOnError, plural, singular string) error {
@@ -12770,11 +12770,11 @@ func XMLMigrateOnErrorWriteMany(writer *XMLWriter, enums []MigrateOnError, plura
 	if singular == "" {
 		singular = "migrate_on_error"
 	}
-	writer.WriteStart("", "migrate_on_errors", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("migrate_on_error", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("migrate_on_errors")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12782,7 +12782,7 @@ func XMLVmStorageErrorResumeBehaviourWriteOne(writer *XMLWriter, enum VmStorageE
 	if tag == "" {
 		tag = "vm_storage_error_resume_behaviour"
 	}
-	writer.WriteCharacter("vm_storage_error_resume_behaviour", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLVmStorageErrorResumeBehaviourWriteMany(writer *XMLWriter, enums []VmStorageErrorResumeBehaviour, plural, singular string) error {
@@ -12792,11 +12792,11 @@ func XMLVmStorageErrorResumeBehaviourWriteMany(writer *XMLWriter, enums []VmStor
 	if singular == "" {
 		singular = "vm_storage_error_resume_behaviour"
 	}
-	writer.WriteStart("", "vm_storage_error_resume_behaviours", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("vm_storage_error_resume_behaviour", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("vm_storage_error_resume_behaviours")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12804,7 +12804,7 @@ func XMLRoleTypeWriteOne(writer *XMLWriter, enum RoleType, tag string) {
 	if tag == "" {
 		tag = "role_type"
 	}
-	writer.WriteCharacter("role_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLRoleTypeWriteMany(writer *XMLWriter, enums []RoleType, plural, singular string) error {
@@ -12814,11 +12814,11 @@ func XMLRoleTypeWriteMany(writer *XMLWriter, enums []RoleType, plural, singular 
 	if singular == "" {
 		singular = "role_type"
 	}
-	writer.WriteStart("", "role_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("role_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("role_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12826,7 +12826,7 @@ func XMLNumaTuneModeWriteOne(writer *XMLWriter, enum NumaTuneMode, tag string) {
 	if tag == "" {
 		tag = "numa_tune_mode"
 	}
-	writer.WriteCharacter("numa_tune_mode", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLNumaTuneModeWriteMany(writer *XMLWriter, enums []NumaTuneMode, plural, singular string) error {
@@ -12836,11 +12836,11 @@ func XMLNumaTuneModeWriteMany(writer *XMLWriter, enums []NumaTuneMode, plural, s
 	if singular == "" {
 		singular = "numa_tune_mode"
 	}
-	writer.WriteStart("", "numa_tune_modes", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("numa_tune_mode", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("numa_tune_modes")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12848,7 +12848,7 @@ func XMLSeLinuxModeWriteOne(writer *XMLWriter, enum SeLinuxMode, tag string) {
 	if tag == "" {
 		tag = "se_linux_mode"
 	}
-	writer.WriteCharacter("se_linux_mode", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLSeLinuxModeWriteMany(writer *XMLWriter, enums []SeLinuxMode, plural, singular string) error {
@@ -12858,11 +12858,11 @@ func XMLSeLinuxModeWriteMany(writer *XMLWriter, enums []SeLinuxMode, plural, sin
 	if singular == "" {
 		singular = "se_linux_mode"
 	}
-	writer.WriteStart("", "se_linux_modes", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("se_linux_mode", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("se_linux_modes")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12870,7 +12870,7 @@ func XMLImageTransferPhaseWriteOne(writer *XMLWriter, enum ImageTransferPhase, t
 	if tag == "" {
 		tag = "image_transfer_phase"
 	}
-	writer.WriteCharacter("image_transfer_phase", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLImageTransferPhaseWriteMany(writer *XMLWriter, enums []ImageTransferPhase, plural, singular string) error {
@@ -12880,11 +12880,11 @@ func XMLImageTransferPhaseWriteMany(writer *XMLWriter, enums []ImageTransferPhas
 	if singular == "" {
 		singular = "image_transfer_phase"
 	}
-	writer.WriteStart("", "image_transfer_phases", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("image_transfer_phase", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("image_transfer_phases")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12892,7 +12892,7 @@ func XMLVmDeviceTypeWriteOne(writer *XMLWriter, enum VmDeviceType, tag string) {
 	if tag == "" {
 		tag = "vm_device_type"
 	}
-	writer.WriteCharacter("vm_device_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLVmDeviceTypeWriteMany(writer *XMLWriter, enums []VmDeviceType, plural, singular string) error {
@@ -12902,11 +12902,11 @@ func XMLVmDeviceTypeWriteMany(writer *XMLWriter, enums []VmDeviceType, plural, s
 	if singular == "" {
 		singular = "vm_device_type"
 	}
-	writer.WriteStart("", "vm_device_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("vm_device_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("vm_device_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12914,7 +12914,7 @@ func XMLMessageBrokerTypeWriteOne(writer *XMLWriter, enum MessageBrokerType, tag
 	if tag == "" {
 		tag = "message_broker_type"
 	}
-	writer.WriteCharacter("message_broker_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLMessageBrokerTypeWriteMany(writer *XMLWriter, enums []MessageBrokerType, plural, singular string) error {
@@ -12924,11 +12924,11 @@ func XMLMessageBrokerTypeWriteMany(writer *XMLWriter, enums []MessageBrokerType,
 	if singular == "" {
 		singular = "message_broker_type"
 	}
-	writer.WriteStart("", "message_broker_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("message_broker_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("message_broker_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12936,7 +12936,7 @@ func XMLGraphicsTypeWriteOne(writer *XMLWriter, enum GraphicsType, tag string) {
 	if tag == "" {
 		tag = "graphics_type"
 	}
-	writer.WriteCharacter("graphics_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLGraphicsTypeWriteMany(writer *XMLWriter, enums []GraphicsType, plural, singular string) error {
@@ -12946,11 +12946,11 @@ func XMLGraphicsTypeWriteMany(writer *XMLWriter, enums []GraphicsType, plural, s
 	if singular == "" {
 		singular = "graphics_type"
 	}
-	writer.WriteStart("", "graphics_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("graphics_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("graphics_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12958,7 +12958,7 @@ func XMLCpuModeWriteOne(writer *XMLWriter, enum CpuMode, tag string) {
 	if tag == "" {
 		tag = "cpu_mode"
 	}
-	writer.WriteCharacter("cpu_mode", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLCpuModeWriteMany(writer *XMLWriter, enums []CpuMode, plural, singular string) error {
@@ -12968,11 +12968,11 @@ func XMLCpuModeWriteMany(writer *XMLWriter, enums []CpuMode, plural, singular st
 	if singular == "" {
 		singular = "cpu_mode"
 	}
-	writer.WriteStart("", "cpu_modes", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("cpu_mode", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("cpu_modes")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -12980,7 +12980,7 @@ func XMLExternalVmProviderTypeWriteOne(writer *XMLWriter, enum ExternalVmProvide
 	if tag == "" {
 		tag = "external_vm_provider_type"
 	}
-	writer.WriteCharacter("external_vm_provider_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLExternalVmProviderTypeWriteMany(writer *XMLWriter, enums []ExternalVmProviderType, plural, singular string) error {
@@ -12990,11 +12990,11 @@ func XMLExternalVmProviderTypeWriteMany(writer *XMLWriter, enums []ExternalVmPro
 	if singular == "" {
 		singular = "external_vm_provider_type"
 	}
-	writer.WriteStart("", "external_vm_provider_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("external_vm_provider_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("external_vm_provider_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13002,7 +13002,7 @@ func XMLLunStatusWriteOne(writer *XMLWriter, enum LunStatus, tag string) {
 	if tag == "" {
 		tag = "lun_status"
 	}
-	writer.WriteCharacter("lun_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLLunStatusWriteMany(writer *XMLWriter, enums []LunStatus, plural, singular string) error {
@@ -13012,11 +13012,11 @@ func XMLLunStatusWriteMany(writer *XMLWriter, enums []LunStatus, plural, singula
 	if singular == "" {
 		singular = "lun_status"
 	}
-	writer.WriteStart("", "lun_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("lun_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("lun_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13024,7 +13024,7 @@ func XMLDiskStorageTypeWriteOne(writer *XMLWriter, enum DiskStorageType, tag str
 	if tag == "" {
 		tag = "disk_storage_type"
 	}
-	writer.WriteCharacter("disk_storage_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLDiskStorageTypeWriteMany(writer *XMLWriter, enums []DiskStorageType, plural, singular string) error {
@@ -13034,11 +13034,11 @@ func XMLDiskStorageTypeWriteMany(writer *XMLWriter, enums []DiskStorageType, plu
 	if singular == "" {
 		singular = "disk_storage_type"
 	}
-	writer.WriteStart("", "disk_storage_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("disk_storage_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("disk_storage_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13046,7 +13046,7 @@ func XMLInheritableBooleanWriteOne(writer *XMLWriter, enum InheritableBoolean, t
 	if tag == "" {
 		tag = "inheritable_boolean"
 	}
-	writer.WriteCharacter("inheritable_boolean", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLInheritableBooleanWriteMany(writer *XMLWriter, enums []InheritableBoolean, plural, singular string) error {
@@ -13056,11 +13056,11 @@ func XMLInheritableBooleanWriteMany(writer *XMLWriter, enums []InheritableBoolea
 	if singular == "" {
 		singular = "inheritable_boolean"
 	}
-	writer.WriteStart("", "inheritable_booleans", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("inheritable_boolean", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("inheritable_booleans")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13068,7 +13068,7 @@ func XMLWatchdogModelWriteOne(writer *XMLWriter, enum WatchdogModel, tag string)
 	if tag == "" {
 		tag = "watchdog_model"
 	}
-	writer.WriteCharacter("watchdog_model", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLWatchdogModelWriteMany(writer *XMLWriter, enums []WatchdogModel, plural, singular string) error {
@@ -13078,11 +13078,11 @@ func XMLWatchdogModelWriteMany(writer *XMLWriter, enums []WatchdogModel, plural,
 	if singular == "" {
 		singular = "watchdog_model"
 	}
-	writer.WriteStart("", "watchdog_models", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("watchdog_model", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("watchdog_models")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13090,7 +13090,7 @@ func XMLStatisticKindWriteOne(writer *XMLWriter, enum StatisticKind, tag string)
 	if tag == "" {
 		tag = "statistic_kind"
 	}
-	writer.WriteCharacter("statistic_kind", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLStatisticKindWriteMany(writer *XMLWriter, enums []StatisticKind, plural, singular string) error {
@@ -13100,11 +13100,11 @@ func XMLStatisticKindWriteMany(writer *XMLWriter, enums []StatisticKind, plural,
 	if singular == "" {
 		singular = "statistic_kind"
 	}
-	writer.WriteStart("", "statistic_kinds", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("statistic_kind", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("statistic_kinds")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13112,7 +13112,7 @@ func XMLQcowVersionWriteOne(writer *XMLWriter, enum QcowVersion, tag string) {
 	if tag == "" {
 		tag = "qcow_version"
 	}
-	writer.WriteCharacter("qcow_version", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLQcowVersionWriteMany(writer *XMLWriter, enums []QcowVersion, plural, singular string) error {
@@ -13122,11 +13122,11 @@ func XMLQcowVersionWriteMany(writer *XMLWriter, enums []QcowVersion, plural, sin
 	if singular == "" {
 		singular = "qcow_version"
 	}
-	writer.WriteStart("", "qcow_versions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("qcow_version", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("qcow_versions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13134,7 +13134,7 @@ func XMLVmAffinityWriteOne(writer *XMLWriter, enum VmAffinity, tag string) {
 	if tag == "" {
 		tag = "vm_affinity"
 	}
-	writer.WriteCharacter("vm_affinity", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLVmAffinityWriteMany(writer *XMLWriter, enums []VmAffinity, plural, singular string) error {
@@ -13144,11 +13144,11 @@ func XMLVmAffinityWriteMany(writer *XMLWriter, enums []VmAffinity, plural, singu
 	if singular == "" {
 		singular = "vm_affinity"
 	}
-	writer.WriteStart("", "vm_affinities", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("vm_affinity", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("vm_affinities")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13156,7 +13156,7 @@ func XMLDataCenterStatusWriteOne(writer *XMLWriter, enum DataCenterStatus, tag s
 	if tag == "" {
 		tag = "data_center_status"
 	}
-	writer.WriteCharacter("data_center_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLDataCenterStatusWriteMany(writer *XMLWriter, enums []DataCenterStatus, plural, singular string) error {
@@ -13166,11 +13166,11 @@ func XMLDataCenterStatusWriteMany(writer *XMLWriter, enums []DataCenterStatus, p
 	if singular == "" {
 		singular = "data_center_status"
 	}
-	writer.WriteStart("", "data_center_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("data_center_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("data_center_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13178,7 +13178,7 @@ func XMLLogSeverityWriteOne(writer *XMLWriter, enum LogSeverity, tag string) {
 	if tag == "" {
 		tag = "log_severity"
 	}
-	writer.WriteCharacter("log_severity", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLLogSeverityWriteMany(writer *XMLWriter, enums []LogSeverity, plural, singular string) error {
@@ -13188,11 +13188,11 @@ func XMLLogSeverityWriteMany(writer *XMLWriter, enums []LogSeverity, plural, sin
 	if singular == "" {
 		singular = "log_severity"
 	}
-	writer.WriteStart("", "log_severities", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("log_severity", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("log_severities")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13200,7 +13200,7 @@ func XMLPmProxyTypeWriteOne(writer *XMLWriter, enum PmProxyType, tag string) {
 	if tag == "" {
 		tag = "pm_proxy_type"
 	}
-	writer.WriteCharacter("pm_proxy_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLPmProxyTypeWriteMany(writer *XMLWriter, enums []PmProxyType, plural, singular string) error {
@@ -13210,11 +13210,11 @@ func XMLPmProxyTypeWriteMany(writer *XMLWriter, enums []PmProxyType, plural, sin
 	if singular == "" {
 		singular = "pm_proxy_type"
 	}
-	writer.WriteStart("", "pm_proxy_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("pm_proxy_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("pm_proxy_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13222,7 +13222,7 @@ func XMLOsTypeWriteOne(writer *XMLWriter, enum OsType, tag string) {
 	if tag == "" {
 		tag = "os_type"
 	}
-	writer.WriteCharacter("os_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLOsTypeWriteMany(writer *XMLWriter, enums []OsType, plural, singular string) error {
@@ -13232,11 +13232,11 @@ func XMLOsTypeWriteMany(writer *XMLWriter, enums []OsType, plural, singular stri
 	if singular == "" {
 		singular = "os_type"
 	}
-	writer.WriteStart("", "os_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("os_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("os_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13244,7 +13244,7 @@ func XMLStorageDomainTypeWriteOne(writer *XMLWriter, enum StorageDomainType, tag
 	if tag == "" {
 		tag = "storage_domain_type"
 	}
-	writer.WriteCharacter("storage_domain_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLStorageDomainTypeWriteMany(writer *XMLWriter, enums []StorageDomainType, plural, singular string) error {
@@ -13254,11 +13254,11 @@ func XMLStorageDomainTypeWriteMany(writer *XMLWriter, enums []StorageDomainType,
 	if singular == "" {
 		singular = "storage_domain_type"
 	}
-	writer.WriteStart("", "storage_domain_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("storage_domain_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("storage_domain_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13266,7 +13266,7 @@ func XMLSwitchTypeWriteOne(writer *XMLWriter, enum SwitchType, tag string) {
 	if tag == "" {
 		tag = "switch_type"
 	}
-	writer.WriteCharacter("switch_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLSwitchTypeWriteMany(writer *XMLWriter, enums []SwitchType, plural, singular string) error {
@@ -13276,11 +13276,11 @@ func XMLSwitchTypeWriteMany(writer *XMLWriter, enums []SwitchType, plural, singu
 	if singular == "" {
 		singular = "switch_type"
 	}
-	writer.WriteStart("", "switch_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("switch_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("switch_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13288,7 +13288,7 @@ func XMLHookStatusWriteOne(writer *XMLWriter, enum HookStatus, tag string) {
 	if tag == "" {
 		tag = "hook_status"
 	}
-	writer.WriteCharacter("hook_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLHookStatusWriteMany(writer *XMLWriter, enums []HookStatus, plural, singular string) error {
@@ -13298,11 +13298,11 @@ func XMLHookStatusWriteMany(writer *XMLWriter, enums []HookStatus, plural, singu
 	if singular == "" {
 		singular = "hook_status"
 	}
-	writer.WriteStart("", "hook_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("hook_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("hook_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13310,7 +13310,7 @@ func XMLDiskContentTypeWriteOne(writer *XMLWriter, enum DiskContentType, tag str
 	if tag == "" {
 		tag = "disk_content_type"
 	}
-	writer.WriteCharacter("disk_content_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLDiskContentTypeWriteMany(writer *XMLWriter, enums []DiskContentType, plural, singular string) error {
@@ -13320,11 +13320,11 @@ func XMLDiskContentTypeWriteMany(writer *XMLWriter, enums []DiskContentType, plu
 	if singular == "" {
 		singular = "disk_content_type"
 	}
-	writer.WriteStart("", "disk_content_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("disk_content_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("disk_content_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13332,7 +13332,7 @@ func XMLFirewallTypeWriteOne(writer *XMLWriter, enum FirewallType, tag string) {
 	if tag == "" {
 		tag = "firewall_type"
 	}
-	writer.WriteCharacter("firewall_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLFirewallTypeWriteMany(writer *XMLWriter, enums []FirewallType, plural, singular string) error {
@@ -13342,11 +13342,11 @@ func XMLFirewallTypeWriteMany(writer *XMLWriter, enums []FirewallType, plural, s
 	if singular == "" {
 		singular = "firewall_type"
 	}
-	writer.WriteStart("", "firewall_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("firewall_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("firewall_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13354,7 +13354,7 @@ func XMLDiskFormatWriteOne(writer *XMLWriter, enum DiskFormat, tag string) {
 	if tag == "" {
 		tag = "disk_format"
 	}
-	writer.WriteCharacter("disk_format", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLDiskFormatWriteMany(writer *XMLWriter, enums []DiskFormat, plural, singular string) error {
@@ -13364,11 +13364,11 @@ func XMLDiskFormatWriteMany(writer *XMLWriter, enums []DiskFormat, plural, singu
 	if singular == "" {
 		singular = "disk_format"
 	}
-	writer.WriteStart("", "disk_formats", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("disk_format", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("disk_formats")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13376,7 +13376,7 @@ func XMLTransportTypeWriteOne(writer *XMLWriter, enum TransportType, tag string)
 	if tag == "" {
 		tag = "transport_type"
 	}
-	writer.WriteCharacter("transport_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLTransportTypeWriteMany(writer *XMLWriter, enums []TransportType, plural, singular string) error {
@@ -13386,11 +13386,11 @@ func XMLTransportTypeWriteMany(writer *XMLWriter, enums []TransportType, plural,
 	if singular == "" {
 		singular = "transport_type"
 	}
-	writer.WriteStart("", "transport_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("transport_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("transport_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13398,7 +13398,7 @@ func XMLAutoNumaStatusWriteOne(writer *XMLWriter, enum AutoNumaStatus, tag strin
 	if tag == "" {
 		tag = "auto_numa_status"
 	}
-	writer.WriteCharacter("auto_numa_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLAutoNumaStatusWriteMany(writer *XMLWriter, enums []AutoNumaStatus, plural, singular string) error {
@@ -13408,11 +13408,11 @@ func XMLAutoNumaStatusWriteMany(writer *XMLWriter, enums []AutoNumaStatus, plura
 	if singular == "" {
 		singular = "auto_numa_status"
 	}
-	writer.WriteStart("", "auto_numa_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("auto_numa_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("auto_numa_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13420,7 +13420,7 @@ func XMLImageTransferDirectionWriteOne(writer *XMLWriter, enum ImageTransferDire
 	if tag == "" {
 		tag = "image_transfer_direction"
 	}
-	writer.WriteCharacter("image_transfer_direction", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLImageTransferDirectionWriteMany(writer *XMLWriter, enums []ImageTransferDirection, plural, singular string) error {
@@ -13430,11 +13430,11 @@ func XMLImageTransferDirectionWriteMany(writer *XMLWriter, enums []ImageTransfer
 	if singular == "" {
 		singular = "image_transfer_direction"
 	}
-	writer.WriteStart("", "image_transfer_directions", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("image_transfer_direction", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("image_transfer_directions")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13442,7 +13442,7 @@ func XMLMigrationBandwidthAssignmentMethodWriteOne(writer *XMLWriter, enum Migra
 	if tag == "" {
 		tag = "migration_bandwidth_assignment_method"
 	}
-	writer.WriteCharacter("migration_bandwidth_assignment_method", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLMigrationBandwidthAssignmentMethodWriteMany(writer *XMLWriter, enums []MigrationBandwidthAssignmentMethod, plural, singular string) error {
@@ -13452,11 +13452,11 @@ func XMLMigrationBandwidthAssignmentMethodWriteMany(writer *XMLWriter, enums []M
 	if singular == "" {
 		singular = "migration_bandwidth_assignment_method"
 	}
-	writer.WriteStart("", "migration_bandwidth_assignment_methods", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("migration_bandwidth_assignment_method", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("migration_bandwidth_assignment_methods")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13464,7 +13464,7 @@ func XMLDiskTypeWriteOne(writer *XMLWriter, enum DiskType, tag string) {
 	if tag == "" {
 		tag = "disk_type"
 	}
-	writer.WriteCharacter("disk_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLDiskTypeWriteMany(writer *XMLWriter, enums []DiskType, plural, singular string) error {
@@ -13474,11 +13474,11 @@ func XMLDiskTypeWriteMany(writer *XMLWriter, enums []DiskType, plural, singular 
 	if singular == "" {
 		singular = "disk_type"
 	}
-	writer.WriteStart("", "disk_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("disk_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("disk_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13486,7 +13486,7 @@ func XMLBootProtocolWriteOne(writer *XMLWriter, enum BootProtocol, tag string) {
 	if tag == "" {
 		tag = "boot_protocol"
 	}
-	writer.WriteCharacter("boot_protocol", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLBootProtocolWriteMany(writer *XMLWriter, enums []BootProtocol, plural, singular string) error {
@@ -13496,11 +13496,11 @@ func XMLBootProtocolWriteMany(writer *XMLWriter, enums []BootProtocol, plural, s
 	if singular == "" {
 		singular = "boot_protocol"
 	}
-	writer.WriteStart("", "boot_protocols", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("boot_protocol", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("boot_protocols")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13508,7 +13508,7 @@ func XMLHostTypeWriteOne(writer *XMLWriter, enum HostType, tag string) {
 	if tag == "" {
 		tag = "host_type"
 	}
-	writer.WriteCharacter("host_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLHostTypeWriteMany(writer *XMLWriter, enums []HostType, plural, singular string) error {
@@ -13518,11 +13518,11 @@ func XMLHostTypeWriteMany(writer *XMLWriter, enums []HostType, plural, singular 
 	if singular == "" {
 		singular = "host_type"
 	}
-	writer.WriteStart("", "host_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("host_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("host_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13530,7 +13530,7 @@ func XMLNetworkUsageWriteOne(writer *XMLWriter, enum NetworkUsage, tag string) {
 	if tag == "" {
 		tag = "network_usage"
 	}
-	writer.WriteCharacter("network_usage", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLNetworkUsageWriteMany(writer *XMLWriter, enums []NetworkUsage, plural, singular string) error {
@@ -13540,11 +13540,11 @@ func XMLNetworkUsageWriteMany(writer *XMLWriter, enums []NetworkUsage, plural, s
 	if singular == "" {
 		singular = "network_usage"
 	}
-	writer.WriteStart("", "network_usages", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("network_usage", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("network_usages")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13552,7 +13552,7 @@ func XMLAccessProtocolWriteOne(writer *XMLWriter, enum AccessProtocol, tag strin
 	if tag == "" {
 		tag = "access_protocol"
 	}
-	writer.WriteCharacter("access_protocol", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLAccessProtocolWriteMany(writer *XMLWriter, enums []AccessProtocol, plural, singular string) error {
@@ -13562,11 +13562,11 @@ func XMLAccessProtocolWriteMany(writer *XMLWriter, enums []AccessProtocol, plura
 	if singular == "" {
 		singular = "access_protocol"
 	}
-	writer.WriteStart("", "access_protocols", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("access_protocol", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("access_protocols")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13574,7 +13574,7 @@ func XMLDiskInterfaceWriteOne(writer *XMLWriter, enum DiskInterface, tag string)
 	if tag == "" {
 		tag = "disk_interface"
 	}
-	writer.WriteCharacter("disk_interface", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLDiskInterfaceWriteMany(writer *XMLWriter, enums []DiskInterface, plural, singular string) error {
@@ -13584,11 +13584,11 @@ func XMLDiskInterfaceWriteMany(writer *XMLWriter, enums []DiskInterface, plural,
 	if singular == "" {
 		singular = "disk_interface"
 	}
-	writer.WriteStart("", "disk_interfaces", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("disk_interface", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("disk_interfaces")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13596,7 +13596,7 @@ func XMLQuotaModeTypeWriteOne(writer *XMLWriter, enum QuotaModeType, tag string)
 	if tag == "" {
 		tag = "quota_mode_type"
 	}
-	writer.WriteCharacter("quota_mode_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLQuotaModeTypeWriteMany(writer *XMLWriter, enums []QuotaModeType, plural, singular string) error {
@@ -13606,11 +13606,11 @@ func XMLQuotaModeTypeWriteMany(writer *XMLWriter, enums []QuotaModeType, plural,
 	if singular == "" {
 		singular = "quota_mode_type"
 	}
-	writer.WriteStart("", "quota_mode_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("quota_mode_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("quota_mode_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13618,7 +13618,7 @@ func XMLDisplayTypeWriteOne(writer *XMLWriter, enum DisplayType, tag string) {
 	if tag == "" {
 		tag = "display_type"
 	}
-	writer.WriteCharacter("display_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLDisplayTypeWriteMany(writer *XMLWriter, enums []DisplayType, plural, singular string) error {
@@ -13628,11 +13628,11 @@ func XMLDisplayTypeWriteMany(writer *XMLWriter, enums []DisplayType, plural, sin
 	if singular == "" {
 		singular = "display_type"
 	}
-	writer.WriteStart("", "display_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("display_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("display_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13640,7 +13640,7 @@ func XMLOpenStackNetworkProviderTypeWriteOne(writer *XMLWriter, enum OpenStackNe
 	if tag == "" {
 		tag = "open_stack_network_provider_type"
 	}
-	writer.WriteCharacter("open_stack_network_provider_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLOpenStackNetworkProviderTypeWriteMany(writer *XMLWriter, enums []OpenStackNetworkProviderType, plural, singular string) error {
@@ -13650,11 +13650,11 @@ func XMLOpenStackNetworkProviderTypeWriteMany(writer *XMLWriter, enums []OpenSta
 	if singular == "" {
 		singular = "open_stack_network_provider_type"
 	}
-	writer.WriteStart("", "open_stack_network_provider_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("open_stack_network_provider_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("open_stack_network_provider_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13662,7 +13662,7 @@ func XMLOpenstackVolumeAuthenticationKeyUsageTypeWriteOne(writer *XMLWriter, enu
 	if tag == "" {
 		tag = "openstack_volume_authentication_key_usage_type"
 	}
-	writer.WriteCharacter("openstack_volume_authentication_key_usage_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLOpenstackVolumeAuthenticationKeyUsageTypeWriteMany(writer *XMLWriter, enums []OpenstackVolumeAuthenticationKeyUsageType, plural, singular string) error {
@@ -13672,11 +13672,11 @@ func XMLOpenstackVolumeAuthenticationKeyUsageTypeWriteMany(writer *XMLWriter, en
 	if singular == "" {
 		singular = "openstack_volume_authentication_key_usage_type"
 	}
-	writer.WriteStart("", "openstack_volume_authentication_key_usage_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("openstack_volume_authentication_key_usage_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("openstack_volume_authentication_key_usage_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13684,7 +13684,7 @@ func XMLUsbTypeWriteOne(writer *XMLWriter, enum UsbType, tag string) {
 	if tag == "" {
 		tag = "usb_type"
 	}
-	writer.WriteCharacter("usb_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLUsbTypeWriteMany(writer *XMLWriter, enums []UsbType, plural, singular string) error {
@@ -13694,11 +13694,11 @@ func XMLUsbTypeWriteMany(writer *XMLWriter, enums []UsbType, plural, singular st
 	if singular == "" {
 		singular = "usb_type"
 	}
-	writer.WriteStart("", "usb_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("usb_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("usb_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13706,7 +13706,7 @@ func XMLNetworkPluginTypeWriteOne(writer *XMLWriter, enum NetworkPluginType, tag
 	if tag == "" {
 		tag = "network_plugin_type"
 	}
-	writer.WriteCharacter("network_plugin_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLNetworkPluginTypeWriteMany(writer *XMLWriter, enums []NetworkPluginType, plural, singular string) error {
@@ -13716,11 +13716,11 @@ func XMLNetworkPluginTypeWriteMany(writer *XMLWriter, enums []NetworkPluginType,
 	if singular == "" {
 		singular = "network_plugin_type"
 	}
-	writer.WriteStart("", "network_plugin_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("network_plugin_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("network_plugin_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13728,7 +13728,7 @@ func XMLNicInterfaceWriteOne(writer *XMLWriter, enum NicInterface, tag string) {
 	if tag == "" {
 		tag = "nic_interface"
 	}
-	writer.WriteCharacter("nic_interface", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLNicInterfaceWriteMany(writer *XMLWriter, enums []NicInterface, plural, singular string) error {
@@ -13738,11 +13738,11 @@ func XMLNicInterfaceWriteMany(writer *XMLWriter, enums []NicInterface, plural, s
 	if singular == "" {
 		singular = "nic_interface"
 	}
-	writer.WriteStart("", "nic_interfaces", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("nic_interface", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("nic_interfaces")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13750,7 +13750,7 @@ func XMLDiskStatusWriteOne(writer *XMLWriter, enum DiskStatus, tag string) {
 	if tag == "" {
 		tag = "disk_status"
 	}
-	writer.WriteCharacter("disk_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLDiskStatusWriteMany(writer *XMLWriter, enums []DiskStatus, plural, singular string) error {
@@ -13760,11 +13760,11 @@ func XMLDiskStatusWriteMany(writer *XMLWriter, enums []DiskStatus, plural, singu
 	if singular == "" {
 		singular = "disk_status"
 	}
-	writer.WriteStart("", "disk_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("disk_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("disk_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13772,7 +13772,7 @@ func XMLTemplateStatusWriteOne(writer *XMLWriter, enum TemplateStatus, tag strin
 	if tag == "" {
 		tag = "template_status"
 	}
-	writer.WriteCharacter("template_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLTemplateStatusWriteMany(writer *XMLWriter, enums []TemplateStatus, plural, singular string) error {
@@ -13782,11 +13782,11 @@ func XMLTemplateStatusWriteMany(writer *XMLWriter, enums []TemplateStatus, plura
 	if singular == "" {
 		singular = "template_status"
 	}
-	writer.WriteStart("", "template_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("template_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("template_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13794,7 +13794,7 @@ func XMLConfigurationTypeWriteOne(writer *XMLWriter, enum ConfigurationType, tag
 	if tag == "" {
 		tag = "configuration_type"
 	}
-	writer.WriteCharacter("configuration_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLConfigurationTypeWriteMany(writer *XMLWriter, enums []ConfigurationType, plural, singular string) error {
@@ -13804,11 +13804,11 @@ func XMLConfigurationTypeWriteMany(writer *XMLWriter, enums []ConfigurationType,
 	if singular == "" {
 		singular = "configuration_type"
 	}
-	writer.WriteStart("", "configuration_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("configuration_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("configuration_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13816,7 +13816,7 @@ func XMLRngSourceWriteOne(writer *XMLWriter, enum RngSource, tag string) {
 	if tag == "" {
 		tag = "rng_source"
 	}
-	writer.WriteCharacter("rng_source", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLRngSourceWriteMany(writer *XMLWriter, enums []RngSource, plural, singular string) error {
@@ -13826,11 +13826,11 @@ func XMLRngSourceWriteMany(writer *XMLWriter, enums []RngSource, plural, singula
 	if singular == "" {
 		singular = "rng_source"
 	}
-	writer.WriteStart("", "rng_sources", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("rng_source", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("rng_sources")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13838,7 +13838,7 @@ func XMLStepEnumWriteOne(writer *XMLWriter, enum StepEnum, tag string) {
 	if tag == "" {
 		tag = "step_enum"
 	}
-	writer.WriteCharacter("step_enum", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLStepEnumWriteMany(writer *XMLWriter, enums []StepEnum, plural, singular string) error {
@@ -13848,11 +13848,11 @@ func XMLStepEnumWriteMany(writer *XMLWriter, enums []StepEnum, plural, singular 
 	if singular == "" {
 		singular = "step_enum"
 	}
-	writer.WriteStart("", "step_enums", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("step_enum", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("step_enums")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13860,7 +13860,7 @@ func XMLSshAuthenticationMethodWriteOne(writer *XMLWriter, enum SshAuthenticatio
 	if tag == "" {
 		tag = "ssh_authentication_method"
 	}
-	writer.WriteCharacter("ssh_authentication_method", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLSshAuthenticationMethodWriteMany(writer *XMLWriter, enums []SshAuthenticationMethod, plural, singular string) error {
@@ -13870,11 +13870,11 @@ func XMLSshAuthenticationMethodWriteMany(writer *XMLWriter, enums []SshAuthentic
 	if singular == "" {
 		singular = "ssh_authentication_method"
 	}
-	writer.WriteStart("", "ssh_authentication_methods", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("ssh_authentication_method", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("ssh_authentication_methods")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13882,7 +13882,7 @@ func XMLSpmStatusWriteOne(writer *XMLWriter, enum SpmStatus, tag string) {
 	if tag == "" {
 		tag = "spm_status"
 	}
-	writer.WriteCharacter("spm_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLSpmStatusWriteMany(writer *XMLWriter, enums []SpmStatus, plural, singular string) error {
@@ -13892,11 +13892,11 @@ func XMLSpmStatusWriteMany(writer *XMLWriter, enums []SpmStatus, plural, singula
 	if singular == "" {
 		singular = "spm_status"
 	}
-	writer.WriteStart("", "spm_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("spm_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("spm_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13904,7 +13904,7 @@ func XMLJobStatusWriteOne(writer *XMLWriter, enum JobStatus, tag string) {
 	if tag == "" {
 		tag = "job_status"
 	}
-	writer.WriteCharacter("job_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLJobStatusWriteMany(writer *XMLWriter, enums []JobStatus, plural, singular string) error {
@@ -13914,11 +13914,11 @@ func XMLJobStatusWriteMany(writer *XMLWriter, enums []JobStatus, plural, singula
 	if singular == "" {
 		singular = "job_status"
 	}
-	writer.WriteStart("", "job_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("job_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("job_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13926,7 +13926,7 @@ func XMLQosTypeWriteOne(writer *XMLWriter, enum QosType, tag string) {
 	if tag == "" {
 		tag = "qos_type"
 	}
-	writer.WriteCharacter("qos_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLQosTypeWriteMany(writer *XMLWriter, enums []QosType, plural, singular string) error {
@@ -13936,11 +13936,11 @@ func XMLQosTypeWriteMany(writer *XMLWriter, enums []QosType, plural, singular st
 	if singular == "" {
 		singular = "qos_type"
 	}
-	writer.WriteStart("", "qos_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("qos_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("qos_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13948,7 +13948,7 @@ func XMLImageFileTypeWriteOne(writer *XMLWriter, enum ImageFileType, tag string)
 	if tag == "" {
 		tag = "image_file_type"
 	}
-	writer.WriteCharacter("image_file_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLImageFileTypeWriteMany(writer *XMLWriter, enums []ImageFileType, plural, singular string) error {
@@ -13958,11 +13958,11 @@ func XMLImageFileTypeWriteMany(writer *XMLWriter, enums []ImageFileType, plural,
 	if singular == "" {
 		singular = "image_file_type"
 	}
-	writer.WriteStart("", "image_file_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("image_file_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("image_file_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13970,7 +13970,7 @@ func XMLExternalSystemTypeWriteOne(writer *XMLWriter, enum ExternalSystemType, t
 	if tag == "" {
 		tag = "external_system_type"
 	}
-	writer.WriteCharacter("external_system_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLExternalSystemTypeWriteMany(writer *XMLWriter, enums []ExternalSystemType, plural, singular string) error {
@@ -13980,11 +13980,11 @@ func XMLExternalSystemTypeWriteMany(writer *XMLWriter, enums []ExternalSystemTyp
 	if singular == "" {
 		singular = "external_system_type"
 	}
-	writer.WriteStart("", "external_system_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("external_system_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("external_system_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -13992,7 +13992,7 @@ func XMLSerialNumberPolicyWriteOne(writer *XMLWriter, enum SerialNumberPolicy, t
 	if tag == "" {
 		tag = "serial_number_policy"
 	}
-	writer.WriteCharacter("serial_number_policy", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLSerialNumberPolicyWriteMany(writer *XMLWriter, enums []SerialNumberPolicy, plural, singular string) error {
@@ -14002,11 +14002,11 @@ func XMLSerialNumberPolicyWriteMany(writer *XMLWriter, enums []SerialNumberPolic
 	if singular == "" {
 		singular = "serial_number_policy"
 	}
-	writer.WriteStart("", "serial_number_policies", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("serial_number_policy", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("serial_number_policies")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -14014,7 +14014,7 @@ func XMLStepStatusWriteOne(writer *XMLWriter, enum StepStatus, tag string) {
 	if tag == "" {
 		tag = "step_status"
 	}
-	writer.WriteCharacter("step_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLStepStatusWriteMany(writer *XMLWriter, enums []StepStatus, plural, singular string) error {
@@ -14024,11 +14024,11 @@ func XMLStepStatusWriteMany(writer *XMLWriter, enums []StepStatus, plural, singu
 	if singular == "" {
 		singular = "step_status"
 	}
-	writer.WriteStart("", "step_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("step_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("step_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -14036,7 +14036,7 @@ func XMLExternalStatusWriteOne(writer *XMLWriter, enum ExternalStatus, tag strin
 	if tag == "" {
 		tag = "external_status"
 	}
-	writer.WriteCharacter("external_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLExternalStatusWriteMany(writer *XMLWriter, enums []ExternalStatus, plural, singular string) error {
@@ -14046,11 +14046,11 @@ func XMLExternalStatusWriteMany(writer *XMLWriter, enums []ExternalStatus, plura
 	if singular == "" {
 		singular = "external_status"
 	}
-	writer.WriteStart("", "external_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("external_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("external_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -14058,7 +14058,7 @@ func XMLValueTypeWriteOne(writer *XMLWriter, enum ValueType, tag string) {
 	if tag == "" {
 		tag = "value_type"
 	}
-	writer.WriteCharacter("value_type", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLValueTypeWriteMany(writer *XMLWriter, enums []ValueType, plural, singular string) error {
@@ -14068,11 +14068,11 @@ func XMLValueTypeWriteMany(writer *XMLWriter, enums []ValueType, plural, singula
 	if singular == "" {
 		singular = "value_type"
 	}
-	writer.WriteStart("", "value_types", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("value_type", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("value_types")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -14080,7 +14080,7 @@ func XMLGlusterHookStatusWriteOne(writer *XMLWriter, enum GlusterHookStatus, tag
 	if tag == "" {
 		tag = "gluster_hook_status"
 	}
-	writer.WriteCharacter("gluster_hook_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLGlusterHookStatusWriteMany(writer *XMLWriter, enums []GlusterHookStatus, plural, singular string) error {
@@ -14090,11 +14090,11 @@ func XMLGlusterHookStatusWriteMany(writer *XMLWriter, enums []GlusterHookStatus,
 	if singular == "" {
 		singular = "gluster_hook_status"
 	}
-	writer.WriteStart("", "gluster_hook_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("gluster_hook_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("gluster_hook_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -14102,7 +14102,7 @@ func XMLGlusterBrickStatusWriteOne(writer *XMLWriter, enum GlusterBrickStatus, t
 	if tag == "" {
 		tag = "gluster_brick_status"
 	}
-	writer.WriteCharacter("gluster_brick_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLGlusterBrickStatusWriteMany(writer *XMLWriter, enums []GlusterBrickStatus, plural, singular string) error {
@@ -14112,11 +14112,11 @@ func XMLGlusterBrickStatusWriteMany(writer *XMLWriter, enums []GlusterBrickStatu
 	if singular == "" {
 		singular = "gluster_brick_status"
 	}
-	writer.WriteStart("", "gluster_brick_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("gluster_brick_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("gluster_brick_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
 
@@ -14124,7 +14124,7 @@ func XMLGlusterVolumeStatusWriteOne(writer *XMLWriter, enum GlusterVolumeStatus,
 	if tag == "" {
 		tag = "gluster_volume_status"
 	}
-	writer.WriteCharacter("gluster_volume_status", string(enum))
+	writer.WriteCharacter(tag, string(enum))
 }
 
 func XMLGlusterVolumeStatusWriteMany(writer *XMLWriter, enums []GlusterVolumeStatus, plural, singular string) error {
@@ -14134,10 +14134,10 @@ func XMLGlusterVolumeStatusWriteMany(writer *XMLWriter, enums []GlusterVolumeSta
 	if singular == "" {
 		singular = "gluster_volume_status"
 	}
-	writer.WriteStart("", "gluster_volume_statuss", nil)
+	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
-		writer.WriteCharacter("gluster_volume_status", string(e))
+		writer.WriteCharacter(singular, string(e))
 	}
-	writer.WriteEnd("gluster_volume_statuss")
+	writer.WriteEnd(plural)
 	return nil
 }
