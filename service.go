@@ -51,6 +51,10 @@ func CheckFault(response *http.Response) error {
 	if err != nil {
 		return fmt.Errorf("Failed to read response, reason: %s", err.Error())
 	}
+	// Process empty response body
+	if len(resBytes) == 0 {
+		return BuildError(response, nil)
+	}
 
 	reader := NewXMLReader(resBytes)
 	fault, err := XMLFaultReadOne(reader, nil, "")
@@ -72,6 +76,10 @@ func CheckAction(response *http.Response) (*Action, error) {
 	resBytes, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to read response, reason: %s", err.Error())
+	}
+	// Process empty response body
+	if len(resBytes) == 0 {
+		return nil, BuildError(response, nil)
 	}
 
 	faultreader := NewXMLReader(resBytes)
