@@ -41,3 +41,37 @@ func (c *Connection) WaitForVM(vmID string, status VmStatus, timeout time.Durati
 
 	return nil
 }
+
+const DefaultDiskTimeout = 120 * time.Second
+
+func (c *Connection) WaitForDisk(diskID string, status DiskStatus, timeout time.Duration) error {
+	if timeout <= 0 {
+		timeout = DefaultDiskTimeout
+	}
+	if diskID == "" {
+		return fmt.Errorf("Invalid Disk ID")
+	}
+	diskService := c.SystemService().DisksService().DiskService(diskID)
+	for {
+		resp, err := diskService.Get().Send()
+		if err != nil {
+			return err
+		}
+		if timeout <= 0 {
+			return fmt.Errorf("Timeout for waiting for Disk to %v", status)
+		}
+
+		disk, ok := resp.Disk()
+		if !ok {
+			continue
+		}
+		if disk.MustStatus() == status {
+			break
+		}
+
+		timeout = timeout - DefaultInterval
+		time.Sleep(DefaultInterval)
+	}
+
+	return nil
+}
