@@ -177,7 +177,7 @@ func (writer *XMLWriter) WriteDates(name string, ts []time.Time) error {
 }
 
 func (writer *XMLWriter) FormatDate(t time.Time) string {
-	return t.Format("2006-01-02T15:04:05.999999")
+	return t.Format(time.RFC3339Nano)
 }
 
 func (writer *XMLWriter) EscapeString(s string) {

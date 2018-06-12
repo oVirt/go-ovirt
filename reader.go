@@ -234,7 +234,8 @@ func (reader *XMLReader) ReadTime(start *xml.StartElement) (time.Time, error) {
 		var t time.Time
 		return t, err
 	}
-	return time.Parse("2006-01-02T15:04:05.999999-07:00", str)
+	
+	return time.Parse(time.RFC3339Nano, str)
 }
 
 func (reader *XMLReader) ReadTimes(start *xml.StartElement) ([]time.Time, error) {
@@ -244,7 +245,7 @@ func (reader *XMLReader) ReadTimes(start *xml.StartElement) ([]time.Time, error)
 	}
 	var times []time.Time
 	for _, sv := range strs {
-		tv, err := time.Parse("2006-01-02T15:04:05.999999-07:00", sv)
+		tv, err := time.Parse(time.RFC3339Nano, sv)
 		if err != nil {
 			return nil, err
 		}
