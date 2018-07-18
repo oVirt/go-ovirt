@@ -166,15 +166,19 @@ func (c *Connection) getAccessToken() (string, error) {
 		// Build the URL and parameters required for the request:
 		url, parameters := c.buildSsoAuthRequest()
 		// Send the response and wait for the request:
-		response, err := c.getSsoResponse(url, parameters)
+		ssoResp, err := c.getSsoResponse(url, parameters)
 		if err != nil {
 			return "", err
 		}
 		// Top level array already handled in getSsoResponse() generically.
-		if len(response.SsoError) > 0 {
-			return "", fmt.Errorf("Error during SSO authentication %s: %s", response.SsoErrorCode, response.SsoError)
+		if ssoResp.SsoError != "" {
+			return "", &AuthError{
+				baseError{
+					Msg: fmt.Sprintf("Error during SSO authentication %s : %s", ssoResp.SsoErrorCode, ssoResp.SsoError),
+				},
+			}
 		}
-		c.ssoToken = response.AccessToken
+		c.ssoToken = ssoResp.AccessToken
 	}
 	return c.ssoToken, nil
 }
@@ -185,15 +189,19 @@ func (c *Connection) revokeAccessToken() error {
 	url, parameters := c.buildSsoRevokeRequest()
 
 	// Send the response and wait for the request:
-	response, err := c.getSsoResponse(url, parameters)
+	ssoResp, err := c.getSsoResponse(url, parameters)
 	if err != nil {
 		return err
 	}
 
-	// Top level array already handled in getSsoResponse() generically.
-	if len(response.SsoError) > 0 {
-		return fmt.Errorf("Error during SSO revoke %s: %s", response.SsoErrorCode, response.SsoError)
+	if ssoResp.SsoError != "" {
+		return &AuthError{
+			baseError{
+				Msg: fmt.Sprintf("Error during SSO token revoke %s : %s", ssoResp.SsoErrorCode, ssoResp.SsoError),
+			},
+		}
 	}
+
 	return nil
 }
 
