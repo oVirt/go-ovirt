@@ -244,3 +244,34 @@ func TestFaultReadOne(t *testing.T) {
 	assert.Equal("architectures", err2.ActualTag)
 	assert.Equal("fault", err2.ExpectedTag)
 }
+
+// To cover the issue: https://github.com/imjoey/ovirt-engine-sdk-go/issues/121
+func TestGlusterBrickReadMany(t *testing.T) {
+	assert := assert.New(t)
+	xmlstring := `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bricks>
+	<actions>
+		<link href="/ovirt-engine/api/clusters/5b6d20ce-00b5-019a-02d2-00000000037c/glustervolumes/c667523c-7b0d-4602-82ff-3a721e760835/glusterbricks/migrate" rel="migrate"/>
+		<link href="/ovirt-engine/api/clusters/5b6d20ce-00b5-019a-02d2-00000000037c/glustervolumes/c667523c-7b0d-4602-82ff-3a721e760835/glusterbricks/stopmigrate" rel="stopmigrate"/>
+		<link href="/ovirt-engine/api/clusters/5b6d20ce-00b5-019a-02d2-00000000037c/glustervolumes/c667523c-7b0d-4602-82ff-3a721e760835/glusterbricks/activate" rel="activate"/>
+	</actions>
+	<brick href="/ovirt-engine/api/clusters/5b6d20ce-00b5-019a-02d2-00000000037c/glustervolumes/c667523c-7b0d-4602-82ff-3a721e760835/glusterbricks/06de18a8-8534-4ce4-9328-ff487ac1355f" id="06de18a8-8534-4ce4-9328-ff487ac1355f">
+		<actions>
+			<link href="/ovirt-engine/api/clusters/5b6d20ce-00b5-019a-02d2-00000000037c/glustervolumes/c667523c-7b0d-4602-82ff-3a721e760835/glusterbricks/06de18a8-8534-4ce4-9328-ff487ac1355f/replace" rel="replace"/>
+		</actions>
+		<name>10.1.87.223:/tt112</name>
+		<link href="/ovirt-engine/api/clusters/5b6d20ce-00b5-019a-02d2-00000000037c/glustervolumes/c667523c-7b0d-4602-82ff-3a721e760835/glusterbricks/06de18a8-8534-4ce4-9328-ff487ac1355f/statistics" rel="statistics"/>
+		<brick_dir>/tt112</brick_dir>
+		<server_id>75b39f00-fa03-410c-b29c-db80cf162a87</server_id>
+		<status>up</status>
+		<gluster_volume href="/ovirt-engine/api/clusters/5b6d20ce-00b5-019a-02d2-00000000037c/glustervolumes/c667523c-7b0d-4602-82ff-3a721e760835" id="c667523c-7b0d-4602-82ff-3a721e760835"/>
+	</brick>
+</bricks>
+`
+	reader := NewXMLReader([]byte(xmlstring))
+	bricks, err := XMLGlusterBrickReadMany(reader, nil)
+	assert.Nil(err)
+	assert.NotNil(bricks)
+	assert.Equal(1, len(bricks.Slice()))
+
+}
