@@ -63,11 +63,11 @@ func addTag() {
 		return
 	}
 	tagAdded, _ := resp.Tag()
-	fmt.Printf("Tag with name-(%v) and desc-(%v) added successfuly\n",
+	fmt.Printf("Tag with name-(%v) and desc-(%v) added successfully\n",
 		tagAdded.MustName(), tagAdded.MustDescription())
 
-	// If tag added successfuly, print out:
-	// 		`Tag with name-(mytag) and desc-(mytag desc) added successfuly`
+	// If tag added successfully, print out:
+	// 		`Tag with name-(mytag) and desc-(mytag desc) added successfully`
 	// If failed due to duplicate name, print out:
 	// 		`Failed to create a tag, reason: Fault reason is "Operation Failed".
 	// 		Fault detail is "[The specified Tag name already exists.]".

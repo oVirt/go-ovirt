@@ -60,5 +60,5 @@ func addAffinityLabel() {
 		return
 	}
 	addedLabel, _ := resp.Label()
-	fmt.Printf("Affinity label with name (%v) added successfuly\n", addedLabel.MustName())
+	fmt.Printf("Affinity label with name (%v) added successfully\n", addedLabel.MustName())
 }

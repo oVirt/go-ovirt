@@ -99,5 +99,5 @@ func assignAffinityLabelToVM() {
 		fmt.Printf("Failed to assign affinity label to vm, reason: %v\n", err)
 		return
 	}
-	fmt.Printf("Assign affinity label (myaffinitylabel) to vm (%v) successfuly\n", vm.MustId())
+	fmt.Printf("Assign affinity label (myaffinitylabel) to vm (%v) successfully\n", vm.MustId())
 }
