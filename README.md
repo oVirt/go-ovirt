@@ -1,4 +1,6 @@
-# oVirt Go SDK [![Build Status](https://travis-ci.org/imjoey/ovirt-engine-sdk-go.svg?branch=master)](https://travis-ci.org/imjoey/ovirt-engine-sdk-go)
+# oVirt Go SDK 
+[![Build Status](https://travis-ci.org/imjoey/ovirt-engine-sdk-go.svg?branch=master)](https://travis-ci.org/imjoey/ovirt-engine-sdk-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/imjoey/go-ovirt)](https://goreportcard.com/report/github.com/imjoey/go-ovirt)
 
 ## Introduction
 
