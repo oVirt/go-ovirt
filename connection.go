@@ -60,10 +60,12 @@ func (c *Connection) URL() string {
 	return c.url.String()
 }
 
-// Test tests the connectivity with the server. If connectivity works correctly it returns a nil error. If there is any
-// connectivity problem it will return an error containing the reason as the message.
+// Test tests the connectivity with the server using the credentials provided in connection.
+// If connectivity works correctly and the credentials are valid, it returns a nil error, 
+// or it will return an error containing the reason as the message.
 func (c *Connection) Test() error {
-	return nil
+	_, err := c.authenticate()
+	return err
 }
 
 func (c *Connection) getHref(object Href) (string, bool) {
