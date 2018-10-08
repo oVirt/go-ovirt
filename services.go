@@ -9113,7 +9113,7 @@ func NewOpenstackImageProvidersService(connection *Connection, path string) *ope
 }
 
 //
-// Add a new OpenStack image provider to the system.
+// Adds a new OpenStack image provider to the system.
 //
 type openstackImageProvidersServiceAddRequest struct {
 	openstackImageProvidersService *openstackImageProvidersService
@@ -9227,7 +9227,7 @@ func (p *openstackImageProvidersServiceAddRequest) MustSend() *openstackImagePro
 }
 
 //
-// Add a new OpenStack image provider to the system.
+// Adds a new OpenStack image provider to the system.
 //
 type openstackImageProvidersServiceAddResponse struct {
 	provider *OpenStackImageProvider
@@ -9248,7 +9248,7 @@ func (p *openstackImageProvidersServiceAddResponse) MustProvider() *OpenStackIma
 }
 
 //
-// Add a new OpenStack image provider to the system.
+// Adds a new OpenStack image provider to the system.
 //
 func (p *openstackImageProvidersService) Add() *openstackImageProvidersServiceAddRequest {
 	return &openstackImageProvidersServiceAddRequest{openstackImageProvidersService: p}
@@ -9256,7 +9256,7 @@ func (p *openstackImageProvidersService) Add() *openstackImageProvidersServiceAd
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers isn't guaranteed.
+// The order of the returned list of providers is not guaranteed.
 //
 type openstackImageProvidersServiceListRequest struct {
 	openstackImageProvidersService *openstackImageProvidersService
@@ -9264,6 +9264,7 @@ type openstackImageProvidersServiceListRequest struct {
 	query                          map[string]string
 	follow                         *string
 	max                            *int64
+	search                         *string
 }
 
 func (p *openstackImageProvidersServiceListRequest) Header(key, value string) *openstackImageProvidersServiceListRequest {
@@ -9292,6 +9293,11 @@ func (p *openstackImageProvidersServiceListRequest) Max(max int64) *openstackIma
 	return p
 }
 
+func (p *openstackImageProvidersServiceListRequest) Search(search string) *openstackImageProvidersServiceListRequest {
+	p.search = &search
+	return p
+}
+
 func (p *openstackImageProvidersServiceListRequest) Send() (*openstackImageProvidersServiceListResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.openstackImageProvidersService.connection.URL(), p.openstackImageProvidersService.path)
 	values := make(url.Values)
@@ -9301,6 +9307,10 @@ func (p *openstackImageProvidersServiceListRequest) Send() (*openstackImageProvi
 
 	if p.max != nil {
 		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.search != nil {
+		values["search"] = []string{fmt.Sprintf("%v", *p.search)}
 	}
 
 	if p.query != nil {
@@ -9378,7 +9388,7 @@ func (p *openstackImageProvidersServiceListRequest) MustSend() *openstackImagePr
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers isn't guaranteed.
+// The order of the returned list of providers is not guaranteed.
 //
 type openstackImageProvidersServiceListResponse struct {
 	providers *OpenStackImageProviderSlice
@@ -9400,7 +9410,7 @@ func (p *openstackImageProvidersServiceListResponse) MustProviders() *OpenStackI
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers isn't guaranteed.
+// The order of the returned list of providers is not guaranteed.
 //
 func (p *openstackImageProvidersService) List() *openstackImageProvidersServiceListRequest {
 	return &openstackImageProvidersServiceListRequest{openstackImageProvidersService: p}
@@ -12473,7 +12483,7 @@ func NewOpenstackNetworkProvidersService(connection *Connection, path string) *o
 }
 
 //
-// The operation adds a new network provider to the system.
+// Adds a new network provider to the system.
 // If the `type` property is not present, a default value of `NEUTRON` will be used.
 //
 type openstackNetworkProvidersServiceAddRequest struct {
@@ -12588,7 +12598,7 @@ func (p *openstackNetworkProvidersServiceAddRequest) MustSend() *openstackNetwor
 }
 
 //
-// The operation adds a new network provider to the system.
+// Adds a new network provider to the system.
 // If the `type` property is not present, a default value of `NEUTRON` will be used.
 //
 type openstackNetworkProvidersServiceAddResponse struct {
@@ -12610,7 +12620,7 @@ func (p *openstackNetworkProvidersServiceAddResponse) MustProvider() *OpenStackN
 }
 
 //
-// The operation adds a new network provider to the system.
+// Adds a new network provider to the system.
 // If the `type` property is not present, a default value of `NEUTRON` will be used.
 //
 func (p *openstackNetworkProvidersService) Add() *openstackNetworkProvidersServiceAddRequest {
@@ -12619,7 +12629,7 @@ func (p *openstackNetworkProvidersService) Add() *openstackNetworkProvidersServi
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers isn't guaranteed.
+// The order of the returned list of providers is not guaranteed.
 //
 type openstackNetworkProvidersServiceListRequest struct {
 	openstackNetworkProvidersService *openstackNetworkProvidersService
@@ -12627,6 +12637,7 @@ type openstackNetworkProvidersServiceListRequest struct {
 	query                            map[string]string
 	follow                           *string
 	max                              *int64
+	search                           *string
 }
 
 func (p *openstackNetworkProvidersServiceListRequest) Header(key, value string) *openstackNetworkProvidersServiceListRequest {
@@ -12655,6 +12666,11 @@ func (p *openstackNetworkProvidersServiceListRequest) Max(max int64) *openstackN
 	return p
 }
 
+func (p *openstackNetworkProvidersServiceListRequest) Search(search string) *openstackNetworkProvidersServiceListRequest {
+	p.search = &search
+	return p
+}
+
 func (p *openstackNetworkProvidersServiceListRequest) Send() (*openstackNetworkProvidersServiceListResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.openstackNetworkProvidersService.connection.URL(), p.openstackNetworkProvidersService.path)
 	values := make(url.Values)
@@ -12664,6 +12680,10 @@ func (p *openstackNetworkProvidersServiceListRequest) Send() (*openstackNetworkP
 
 	if p.max != nil {
 		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.search != nil {
+		values["search"] = []string{fmt.Sprintf("%v", *p.search)}
 	}
 
 	if p.query != nil {
@@ -12741,7 +12761,7 @@ func (p *openstackNetworkProvidersServiceListRequest) MustSend() *openstackNetwo
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers isn't guaranteed.
+// The order of the returned list of providers is not guaranteed.
 //
 type openstackNetworkProvidersServiceListResponse struct {
 	providers *OpenStackNetworkProviderSlice
@@ -12763,14 +12783,14 @@ func (p *openstackNetworkProvidersServiceListResponse) MustProviders() *OpenStac
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers isn't guaranteed.
+// The order of the returned list of providers is not guaranteed.
 //
 func (p *openstackNetworkProvidersService) List() *openstackNetworkProvidersServiceListRequest {
 	return &openstackNetworkProvidersServiceListRequest{openstackNetworkProvidersService: p}
 }
 
 //
-// Reference to OpenStack network provider service.
+// Reference to the OpenStack network provider service.
 //
 func (op *openstackNetworkProvidersService) ProviderService(id string) *openstackNetworkProviderService {
 	return NewOpenstackNetworkProviderService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
@@ -12944,8 +12964,8 @@ func (p *openstackNetworkService) Get() *openstackNetworkServiceGetRequest {
 }
 
 //
-// This operation imports an external network into oVirt.
-// The network will be added to the data center specified.
+// This operation imports an external network into {product-name}.
+// The network will be added to the specified data center.
 //
 type openstackNetworkServiceImportRequest struct {
 	openstackNetworkService *openstackNetworkService
@@ -13063,15 +13083,15 @@ func (p *openstackNetworkServiceImportRequest) MustSend() *openstackNetworkServi
 }
 
 //
-// This operation imports an external network into oVirt.
-// The network will be added to the data center specified.
+// This operation imports an external network into {product-name}.
+// The network will be added to the specified data center.
 //
 type openstackNetworkServiceImportResponse struct {
 }
 
 //
-// This operation imports an external network into oVirt.
-// The network will be added to the data center specified.
+// This operation imports an external network into {product-name}.
+// The network will be added to the specified data center.
 //
 func (p *openstackNetworkService) Import() *openstackNetworkServiceImportRequest {
 	return &openstackNetworkServiceImportRequest{openstackNetworkService: p}
@@ -13320,7 +13340,7 @@ func (p *openstackVolumeProvidersService) Add() *openstackVolumeProvidersService
 
 //
 // Retrieves the list of volume providers.
-// The order of the returned list of volume providers isn't guaranteed.
+// The order of the returned list of volume providers is not guaranteed.
 //
 type openstackVolumeProvidersServiceListRequest struct {
 	openstackVolumeProvidersService *openstackVolumeProvidersService
@@ -13328,6 +13348,7 @@ type openstackVolumeProvidersServiceListRequest struct {
 	query                           map[string]string
 	follow                          *string
 	max                             *int64
+	search                          *string
 }
 
 func (p *openstackVolumeProvidersServiceListRequest) Header(key, value string) *openstackVolumeProvidersServiceListRequest {
@@ -13356,6 +13377,11 @@ func (p *openstackVolumeProvidersServiceListRequest) Max(max int64) *openstackVo
 	return p
 }
 
+func (p *openstackVolumeProvidersServiceListRequest) Search(search string) *openstackVolumeProvidersServiceListRequest {
+	p.search = &search
+	return p
+}
+
 func (p *openstackVolumeProvidersServiceListRequest) Send() (*openstackVolumeProvidersServiceListResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.openstackVolumeProvidersService.connection.URL(), p.openstackVolumeProvidersService.path)
 	values := make(url.Values)
@@ -13365,6 +13391,10 @@ func (p *openstackVolumeProvidersServiceListRequest) Send() (*openstackVolumePro
 
 	if p.max != nil {
 		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.search != nil {
+		values["search"] = []string{fmt.Sprintf("%v", *p.search)}
 	}
 
 	if p.query != nil {
@@ -13442,7 +13472,7 @@ func (p *openstackVolumeProvidersServiceListRequest) MustSend() *openstackVolume
 
 //
 // Retrieves the list of volume providers.
-// The order of the returned list of volume providers isn't guaranteed.
+// The order of the returned list of volume providers is not guaranteed.
 //
 type openstackVolumeProvidersServiceListResponse struct {
 	providers *OpenStackVolumeProviderSlice
@@ -13464,7 +13494,7 @@ func (p *openstackVolumeProvidersServiceListResponse) MustProviders() *OpenStack
 
 //
 // Retrieves the list of volume providers.
-// The order of the returned list of volume providers isn't guaranteed.
+// The order of the returned list of volume providers is not guaranteed.
 //
 func (p *openstackVolumeProvidersService) List() *openstackVolumeProvidersServiceListRequest {
 	return &openstackVolumeProvidersServiceListRequest{openstackVolumeProvidersService: p}
@@ -14794,6 +14824,144 @@ func (p *storageServerConnectionsServiceAddResponse) MustConnection() *StorageCo
 //
 func (p *storageServerConnectionsService) Add() *storageServerConnectionsServiceAddRequest {
 	return &storageServerConnectionsServiceAddRequest{storageServerConnectionsService: p}
+}
+
+//
+// Add a Glusterfs storage connection to the system.
+//
+type storageServerConnectionsServiceAddGlusterfsRequest struct {
+	storageServerConnectionsService *storageServerConnectionsService
+	header                          map[string]string
+	query                           map[string]string
+	connection                      *StorageConnection
+}
+
+func (p *storageServerConnectionsServiceAddGlusterfsRequest) Header(key, value string) *storageServerConnectionsServiceAddGlusterfsRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *storageServerConnectionsServiceAddGlusterfsRequest) Query(key, value string) *storageServerConnectionsServiceAddGlusterfsRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *storageServerConnectionsServiceAddGlusterfsRequest) Connection(connection *StorageConnection) *storageServerConnectionsServiceAddGlusterfsRequest {
+	p.connection = connection
+	return p
+}
+
+func (p *storageServerConnectionsServiceAddGlusterfsRequest) Send() (*storageServerConnectionsServiceAddGlusterfsResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/glusterfs", p.storageServerConnectionsService.connection.URL(), p.storageServerConnectionsService.path)
+	actionBuilder := NewActionBuilder()
+	actionBuilder.Connection(p.connection)
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.storageServerConnectionsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.storageServerConnectionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.storageServerConnectionsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.storageServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	action, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	result := action.MustConnection()
+	return &storageServerConnectionsServiceAddGlusterfsResponse{connection: result}, nil
+}
+
+func (p *storageServerConnectionsServiceAddGlusterfsRequest) MustSend() *storageServerConnectionsServiceAddGlusterfsResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Add a Glusterfs storage connection to the system.
+//
+type storageServerConnectionsServiceAddGlusterfsResponse struct {
+	connection *StorageConnection
+}
+
+func (p *storageServerConnectionsServiceAddGlusterfsResponse) Connection() (*StorageConnection, bool) {
+	if p.connection != nil {
+		return p.connection, true
+	}
+	return nil, false
+}
+
+func (p *storageServerConnectionsServiceAddGlusterfsResponse) MustConnection() *StorageConnection {
+	if p.connection == nil {
+		panic("connection in response does not exist")
+	}
+	return p.connection
+}
+
+//
+// Add a Glusterfs storage connection to the system.
+//
+func (p *storageServerConnectionsService) AddGlusterfs() *storageServerConnectionsServiceAddGlusterfsRequest {
+	return &storageServerConnectionsServiceAddGlusterfsRequest{storageServerConnectionsService: p}
 }
 
 //
@@ -16572,6 +16740,139 @@ type vmDiskServiceMoveResponse struct {
 //
 func (p *vmDiskService) Move() *vmDiskServiceMoveRequest {
 	return &vmDiskServiceMoveRequest{vmDiskService: p}
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+type vmDiskServiceReduceRequest struct {
+	vmDiskService *vmDiskService
+	header        map[string]string
+	query         map[string]string
+	async         *bool
+}
+
+func (p *vmDiskServiceReduceRequest) Header(key, value string) *vmDiskServiceReduceRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *vmDiskServiceReduceRequest) Query(key, value string) *vmDiskServiceReduceRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *vmDiskServiceReduceRequest) Async(async bool) *vmDiskServiceReduceRequest {
+	p.async = &async
+	return p
+}
+
+func (p *vmDiskServiceReduceRequest) Send() (*vmDiskServiceReduceResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/reduce", p.vmDiskService.connection.URL(), p.vmDiskService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.vmDiskService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.vmDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.vmDiskService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.vmDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(vmDiskServiceReduceResponse), nil
+}
+
+func (p *vmDiskServiceReduceRequest) MustSend() *vmDiskServiceReduceResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+type vmDiskServiceReduceResponse struct {
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+func (p *vmDiskService) Reduce() *vmDiskServiceReduceRequest {
+	return &vmDiskServiceReduceRequest{vmDiskService: p}
 }
 
 //
@@ -18977,6 +19278,7 @@ func NewVnicProfilesService(connection *Connection, path string) *vnicProfilesSe
 // Please note that there is a default network filter to each VNIC profile.
 // For more details of how the default network filter is calculated please refer to
 // the documentation in <<services/network_filters,NetworkFilters>>.
+// NOTE: The automatically created vNIC profile for the external network will be without network filter.
 // The output of creating a new VNIC profile depends in the  body  arguments that were given.
 // In case no network filter was given, the default network filter will be configured. For example:
 // [source,xml]
@@ -19143,6 +19445,7 @@ func (p *vnicProfilesServiceAddRequest) MustSend() *vnicProfilesServiceAddRespon
 // Please note that there is a default network filter to each VNIC profile.
 // For more details of how the default network filter is calculated please refer to
 // the documentation in <<services/network_filters,NetworkFilters>>.
+// NOTE: The automatically created vNIC profile for the external network will be without network filter.
 // The output of creating a new VNIC profile depends in the  body  arguments that were given.
 // In case no network filter was given, the default network filter will be configured. For example:
 // [source,xml]
@@ -19216,6 +19519,7 @@ func (p *vnicProfilesServiceAddResponse) MustProfile() *VnicProfile {
 // Please note that there is a default network filter to each VNIC profile.
 // For more details of how the default network filter is calculated please refer to
 // the documentation in <<services/network_filters,NetworkFilters>>.
+// NOTE: The automatically created vNIC profile for the external network will be without network filter.
 // The output of creating a new VNIC profile depends in the  body  arguments that were given.
 // In case no network filter was given, the default network filter will be configured. For example:
 // [source,xml]
@@ -23838,6 +24142,12 @@ func (p *userService) Remove() *userServiceRemoveRequest {
 
 //
 //
+func (op *userService) GroupsService() *domainUserGroupsService {
+	return NewDomainUserGroupsService(op.connection, fmt.Sprintf("%s/groups", op.path))
+}
+
+//
+//
 func (op *userService) PermissionsService() *assignedPermissionsService {
 	return NewAssignedPermissionsService(op.connection, fmt.Sprintf("%s/permissions", op.path))
 }
@@ -23866,6 +24176,12 @@ func (op *userService) TagsService() *assignedTagsService {
 func (op *userService) Service(path string) (Service, error) {
 	if path == "" {
 		return op, nil
+	}
+	if path == "groups" {
+		return op.GroupsService(), nil
+	}
+	if strings.HasPrefix(path, "groups/") {
+		return op.GroupsService().Service(path[7:])
 	}
 	if path == "permissions" {
 		return op.PermissionsService(), nil
@@ -24605,6 +24921,173 @@ func (op *domainsService) Service(path string) (Service, error) {
 
 func (op *domainsService) String() string {
 	return fmt.Sprintf("domainsService:%s", op.path)
+}
+
+//
+// A service that shows a user's group membership in the AAA extension.
+//
+type domainUserGroupsService struct {
+	baseService
+}
+
+func NewDomainUserGroupsService(connection *Connection, path string) *domainUserGroupsService {
+	var result domainUserGroupsService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Returns the list of groups that the user is a member of.
+//
+type domainUserGroupsServiceListRequest struct {
+	domainUserGroupsService *domainUserGroupsService
+	header                  map[string]string
+	query                   map[string]string
+	follow                  *string
+}
+
+func (p *domainUserGroupsServiceListRequest) Header(key, value string) *domainUserGroupsServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *domainUserGroupsServiceListRequest) Query(key, value string) *domainUserGroupsServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *domainUserGroupsServiceListRequest) Follow(follow string) *domainUserGroupsServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *domainUserGroupsServiceListRequest) Send() (*domainUserGroupsServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.domainUserGroupsService.connection.URL(), p.domainUserGroupsService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.domainUserGroupsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.domainUserGroupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.domainUserGroupsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.domainUserGroupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.domainUserGroupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLGroupReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &domainUserGroupsServiceListResponse{groups: result}, nil
+}
+
+func (p *domainUserGroupsServiceListRequest) MustSend() *domainUserGroupsServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Returns the list of groups that the user is a member of.
+//
+type domainUserGroupsServiceListResponse struct {
+	groups *GroupSlice
+}
+
+func (p *domainUserGroupsServiceListResponse) Groups() (*GroupSlice, bool) {
+	if p.groups != nil {
+		return p.groups, true
+	}
+	return nil, false
+}
+
+func (p *domainUserGroupsServiceListResponse) MustGroups() *GroupSlice {
+	if p.groups == nil {
+		panic("groups in response does not exist")
+	}
+	return p.groups
+}
+
+//
+// Returns the list of groups that the user is a member of.
+//
+func (p *domainUserGroupsService) List() *domainUserGroupsServiceListRequest {
+	return &domainUserGroupsServiceListRequest{domainUserGroupsService: p}
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *domainUserGroupsService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *domainUserGroupsService) String() string {
+	return fmt.Sprintf("domainUserGroupsService:%s", op.path)
 }
 
 //
@@ -30930,6 +31413,11 @@ func (p *networkService) Get() *networkServiceGetRequest {
 // ----
 // DELETE /ovirt-engine/api/datacenters/123/networks/456
 // ----
+// NOTE: To remove an external logical network, the network has to be removed directly from its provider by
+// https://developer.openstack.org/api-ref/network[OpenStack Networking API].
+// The entity representing the external network inside {product-name} is removed automatically,
+// if <<types/open_stack_network_provider/attributes/auto_sync,`auto_sync`>> is enabled for the provider,
+// otherwise the entity has to be removed using this method.
 //
 type networkServiceRemoveRequest struct {
 	networkService *networkService
@@ -31049,6 +31537,11 @@ func (p *networkServiceRemoveRequest) MustSend() *networkServiceRemoveResponse {
 // ----
 // DELETE /ovirt-engine/api/datacenters/123/networks/456
 // ----
+// NOTE: To remove an external logical network, the network has to be removed directly from its provider by
+// https://developer.openstack.org/api-ref/network[OpenStack Networking API].
+// The entity representing the external network inside {product-name} is removed automatically,
+// if <<types/open_stack_network_provider/attributes/auto_sync,`auto_sync`>> is enabled for the provider,
+// otherwise the entity has to be removed using this method.
 //
 type networkServiceRemoveResponse struct {
 }
@@ -31068,6 +31561,11 @@ type networkServiceRemoveResponse struct {
 // ----
 // DELETE /ovirt-engine/api/datacenters/123/networks/456
 // ----
+// NOTE: To remove an external logical network, the network has to be removed directly from its provider by
+// https://developer.openstack.org/api-ref/network[OpenStack Networking API].
+// The entity representing the external network inside {product-name} is removed automatically,
+// if <<types/open_stack_network_provider/attributes/auto_sync,`auto_sync`>> is enabled for the provider,
+// otherwise the entity has to be removed using this method.
 //
 func (p *networkService) Remove() *networkServiceRemoveRequest {
 	return &networkServiceRemoveRequest{networkService: p}
@@ -39195,6 +39693,157 @@ func (p *clusterService) ResetEmulatedMachine() *clusterServiceResetEmulatedMach
 }
 
 //
+// Synchronizes all networks on the cluster.
+// [source]
+// ----
+// POST /ovirt-engine/api/clusters/123/syncallnetworks
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action/>
+// ----
+//
+type clusterServiceSyncAllNetworksRequest struct {
+	clusterService *clusterService
+	header         map[string]string
+	query          map[string]string
+	async          *bool
+}
+
+func (p *clusterServiceSyncAllNetworksRequest) Header(key, value string) *clusterServiceSyncAllNetworksRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *clusterServiceSyncAllNetworksRequest) Query(key, value string) *clusterServiceSyncAllNetworksRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *clusterServiceSyncAllNetworksRequest) Async(async bool) *clusterServiceSyncAllNetworksRequest {
+	p.async = &async
+	return p
+}
+
+func (p *clusterServiceSyncAllNetworksRequest) Send() (*clusterServiceSyncAllNetworksResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/syncallnetworks", p.clusterService.connection.URL(), p.clusterService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.clusterService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.clusterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.clusterService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.clusterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(clusterServiceSyncAllNetworksResponse), nil
+}
+
+func (p *clusterServiceSyncAllNetworksRequest) MustSend() *clusterServiceSyncAllNetworksResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Synchronizes all networks on the cluster.
+// [source]
+// ----
+// POST /ovirt-engine/api/clusters/123/syncallnetworks
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action/>
+// ----
+//
+type clusterServiceSyncAllNetworksResponse struct {
+}
+
+//
+// Synchronizes all networks on the cluster.
+// [source]
+// ----
+// POST /ovirt-engine/api/clusters/123/syncallnetworks
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action/>
+// ----
+//
+func (p *clusterService) SyncAllNetworks() *clusterServiceSyncAllNetworksRequest {
+	return &clusterServiceSyncAllNetworksRequest{clusterService: p}
+}
+
+//
 // Updates information about the cluster.
 // Only the specified fields are updated; others remain unchanged.
 // For example, to update the cluster's CPU:
@@ -44553,7 +45202,7 @@ func NewTemplateService(connection *Connection, path string) *templateService {
 
 //
 // Exports a template to the data center export domain.
-// For example, the operation can be facilitated using the following request:
+// For example, send the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/templates/123/export
@@ -44684,7 +45333,7 @@ func (p *templateServiceExportRequest) MustSend() *templateServiceExportResponse
 
 //
 // Exports a template to the data center export domain.
-// For example, the operation can be facilitated using the following request:
+// For example, send the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/templates/123/export
@@ -44703,7 +45352,7 @@ type templateServiceExportResponse struct {
 
 //
 // Exports a template to the data center export domain.
-// For example, the operation can be facilitated using the following request:
+// For example, send the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/templates/123/export
@@ -45002,10 +45651,297 @@ func (p *templateService) Remove() *templateServiceRemoveRequest {
 }
 
 //
+// Exports a template to an export domain.
+//
+type templateServiceExportToExportDomainRequest struct {
+	templateService *templateService
+	header          map[string]string
+	query           map[string]string
+	exclusive       *bool
+	storageDomain   *StorageDomain
+}
+
+func (p *templateServiceExportToExportDomainRequest) Header(key, value string) *templateServiceExportToExportDomainRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *templateServiceExportToExportDomainRequest) Query(key, value string) *templateServiceExportToExportDomainRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *templateServiceExportToExportDomainRequest) Exclusive(exclusive bool) *templateServiceExportToExportDomainRequest {
+	p.exclusive = &exclusive
+	return p
+}
+
+func (p *templateServiceExportToExportDomainRequest) StorageDomain(storageDomain *StorageDomain) *templateServiceExportToExportDomainRequest {
+	p.storageDomain = storageDomain
+	return p
+}
+
+func (p *templateServiceExportToExportDomainRequest) Send() (*templateServiceExportToExportDomainResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/toexportdomain", p.templateService.connection.URL(), p.templateService.path)
+	actionBuilder := NewActionBuilder()
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
+	actionBuilder.StorageDomain(p.storageDomain)
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.templateService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.templateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.templateService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.templateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(templateServiceExportToExportDomainResponse), nil
+}
+
+func (p *templateServiceExportToExportDomainRequest) MustSend() *templateServiceExportToExportDomainResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Exports a template to an export domain.
+//
+type templateServiceExportToExportDomainResponse struct {
+}
+
+//
+// Exports a template to an export domain.
+//
+func (p *templateService) ExportToExportDomain() *templateServiceExportToExportDomainRequest {
+	return &templateServiceExportToExportDomainRequest{templateService: p}
+}
+
+//
+// Exports a template as an OVA file to a given path on a specified host.
+//
+type templateServiceExportToPathOnHostRequest struct {
+	templateService *templateService
+	header          map[string]string
+	query           map[string]string
+	directory       *string
+	exclusive       *bool
+	filename        *string
+	host            *Host
+	storageDomain   *StorageDomain
+}
+
+func (p *templateServiceExportToPathOnHostRequest) Header(key, value string) *templateServiceExportToPathOnHostRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *templateServiceExportToPathOnHostRequest) Query(key, value string) *templateServiceExportToPathOnHostRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *templateServiceExportToPathOnHostRequest) Directory(directory string) *templateServiceExportToPathOnHostRequest {
+	p.directory = &directory
+	return p
+}
+
+func (p *templateServiceExportToPathOnHostRequest) Exclusive(exclusive bool) *templateServiceExportToPathOnHostRequest {
+	p.exclusive = &exclusive
+	return p
+}
+
+func (p *templateServiceExportToPathOnHostRequest) Filename(filename string) *templateServiceExportToPathOnHostRequest {
+	p.filename = &filename
+	return p
+}
+
+func (p *templateServiceExportToPathOnHostRequest) Host(host *Host) *templateServiceExportToPathOnHostRequest {
+	p.host = host
+	return p
+}
+
+func (p *templateServiceExportToPathOnHostRequest) StorageDomain(storageDomain *StorageDomain) *templateServiceExportToPathOnHostRequest {
+	p.storageDomain = storageDomain
+	return p
+}
+
+func (p *templateServiceExportToPathOnHostRequest) Send() (*templateServiceExportToPathOnHostResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/topathonhost", p.templateService.connection.URL(), p.templateService.path)
+	actionBuilder := NewActionBuilder()
+	if p.directory != nil {
+		actionBuilder.Directory(*p.directory)
+	}
+	if p.exclusive != nil {
+		actionBuilder.Exclusive(*p.exclusive)
+	}
+	if p.filename != nil {
+		actionBuilder.Filename(*p.filename)
+	}
+	actionBuilder.Host(p.host)
+	actionBuilder.StorageDomain(p.storageDomain)
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.templateService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.templateService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.templateService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.templateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(templateServiceExportToPathOnHostResponse), nil
+}
+
+func (p *templateServiceExportToPathOnHostRequest) MustSend() *templateServiceExportToPathOnHostResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Exports a template as an OVA file to a given path on a specified host.
+//
+type templateServiceExportToPathOnHostResponse struct {
+}
+
+//
+// Exports a template as an OVA file to a given path on a specified host.
+//
+func (p *templateService) ExportToPathOnHost() *templateServiceExportToPathOnHostRequest {
+	return &templateServiceExportToPathOnHostRequest{templateService: p}
+}
+
+//
 // Updates the template.
 // The `name`, `description`, `type`, `memory`, `cpu`, `topology`, `os`, `high_availability`, `display`,
-// `stateless`, `usb` and `timezone` elements can be updated after a template has been created.
-// For example, to update a template to so that it has 1 GiB of memory send a request like this:
+// `stateless`, `usb`, and `timezone` elements can be updated after a template has been created.
+// For example, to update a template so that it has 1 GiB of memory send a request like this:
 // [source]
 // ----
 // PUT /ovirt-engine/api/templates/123
@@ -45152,8 +46088,8 @@ func (p *templateServiceUpdateRequest) MustSend() *templateServiceUpdateResponse
 //
 // Updates the template.
 // The `name`, `description`, `type`, `memory`, `cpu`, `topology`, `os`, `high_availability`, `display`,
-// `stateless`, `usb` and `timezone` elements can be updated after a template has been created.
-// For example, to update a template to so that it has 1 GiB of memory send a request like this:
+// `stateless`, `usb`, and `timezone` elements can be updated after a template has been created.
+// For example, to update a template so that it has 1 GiB of memory send a request like this:
 // [source]
 // ----
 // PUT /ovirt-engine/api/templates/123
@@ -45197,8 +46133,8 @@ func (p *templateServiceUpdateResponse) MustTemplate() *Template {
 //
 // Updates the template.
 // The `name`, `description`, `type`, `memory`, `cpu`, `topology`, `os`, `high_availability`, `display`,
-// `stateless`, `usb` and `timezone` elements can be updated after a template has been created.
-// For example, to update a template to so that it has 1 GiB of memory send a request like this:
+// `stateless`, `usb`, and `timezone` elements can be updated after a template has been created.
+// For example, to update a template so that it has 1 GiB of memory send a request like this:
 // [source]
 // ----
 // PUT /ovirt-engine/api/templates/123
@@ -45226,14 +46162,14 @@ func (p *templateService) Update() *templateServiceUpdateRequest {
 }
 
 //
-// Returns a reference to the service that manages the CDROMs that are associated with the template.
+// Returns a reference to the service that manages the CD-ROMs that are associated with the template.
 //
 func (op *templateService) CdromsService() *templateCdromsService {
 	return NewTemplateCdromsService(op.connection, fmt.Sprintf("%s/cdroms", op.path))
 }
 
 //
-// Reference to the service that manages a specific
+// Returns a reference to the service that manages a specific
 // disk attachment of the template.
 //
 func (op *templateService) DiskAttachmentsService() *templateDiskAttachmentsService {
@@ -55554,6 +56490,162 @@ func (p *storageServerConnectionService) Get() *storageServerConnectionServiceGe
 }
 
 //
+// Update the specified Glusterfs storage connection in the system.
+//
+type storageServerConnectionServiceUpdateGlusterfsRequest struct {
+	storageServerConnectionService *storageServerConnectionService
+	header                         map[string]string
+	query                          map[string]string
+	async                          *bool
+	connection                     *StorageConnection
+	force                          *bool
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsRequest) Header(key, value string) *storageServerConnectionServiceUpdateGlusterfsRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsRequest) Query(key, value string) *storageServerConnectionServiceUpdateGlusterfsRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsRequest) Async(async bool) *storageServerConnectionServiceUpdateGlusterfsRequest {
+	p.async = &async
+	return p
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsRequest) Connection(connection *StorageConnection) *storageServerConnectionServiceUpdateGlusterfsRequest {
+	p.connection = connection
+	return p
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsRequest) Force(force bool) *storageServerConnectionServiceUpdateGlusterfsRequest {
+	p.force = &force
+	return p
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsRequest) Send() (*storageServerConnectionServiceUpdateGlusterfsResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/glusterfs", p.storageServerConnectionService.connection.URL(), p.storageServerConnectionService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	actionBuilder.Connection(p.connection)
+	if p.force != nil {
+		actionBuilder.Force(*p.force)
+	}
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.storageServerConnectionService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.storageServerConnectionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.storageServerConnectionService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.storageServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	action, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	result := action.MustConnection()
+	return &storageServerConnectionServiceUpdateGlusterfsResponse{connection: result}, nil
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsRequest) MustSend() *storageServerConnectionServiceUpdateGlusterfsResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Update the specified Glusterfs storage connection in the system.
+//
+type storageServerConnectionServiceUpdateGlusterfsResponse struct {
+	connection *StorageConnection
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsResponse) Connection() (*StorageConnection, bool) {
+	if p.connection != nil {
+		return p.connection, true
+	}
+	return nil, false
+}
+
+func (p *storageServerConnectionServiceUpdateGlusterfsResponse) MustConnection() *StorageConnection {
+	if p.connection == nil {
+		panic("connection in response does not exist")
+	}
+	return p.connection
+}
+
+//
+// Update the specified Glusterfs storage connection in the system.
+//
+func (p *storageServerConnectionService) UpdateGlusterfs() *storageServerConnectionServiceUpdateGlusterfsRequest {
+	return &storageServerConnectionServiceUpdateGlusterfsRequest{storageServerConnectionService: p}
+}
+
+//
 // Update the specified iSCSI storage connection in the system.
 //
 type storageServerConnectionServiceUpdateIscsiRequest struct {
@@ -55866,7 +56958,7 @@ func (p *storageServerConnectionService) UpdateLocal() *storageServerConnectionS
 }
 
 //
-// Update the specified nfs storage connection in the system.
+// Update the specified NFS storage connection in the system.
 //
 type storageServerConnectionServiceUpdateNfsRequest struct {
 	storageServerConnectionService *storageServerConnectionService
@@ -55994,7 +57086,7 @@ func (p *storageServerConnectionServiceUpdateNfsRequest) MustSend() *storageServ
 }
 
 //
-// Update the specified nfs storage connection in the system.
+// Update the specified NFS storage connection in the system.
 //
 type storageServerConnectionServiceUpdateNfsResponse struct {
 	connection *StorageConnection
@@ -56015,7 +57107,7 @@ func (p *storageServerConnectionServiceUpdateNfsResponse) MustConnection() *Stor
 }
 
 //
-// Update the specified nfs storage connection in the system.
+// Update the specified NFS storage connection in the system.
 //
 func (p *storageServerConnectionService) UpdateNfs() *storageServerConnectionServiceUpdateNfsRequest {
 	return &storageServerConnectionServiceUpdateNfsRequest{storageServerConnectionService: p}
@@ -56158,7 +57250,7 @@ func (p *storageServerConnectionService) Remove() *storageServerConnectionServic
 
 //
 // Updates the storage connection.
-// For example, to change the address of the storage server send a request like this:
+// For example, to change the address of an NFS storage server, send a request like this:
 // [source,xml]
 // ----
 // PUT /ovirt-engine/api/storageconnections/123
@@ -56168,9 +57260,19 @@ func (p *storageServerConnectionService) Remove() *storageServerConnectionServic
 // ----
 // <storage_connection>
 //   <address>mynewnfs.example.com</address>
-//   <host>
-//     <name>myhost</name>
-//   </host>
+// </storage_connection>
+// ----
+// To change the connection of an iSCSI storage server, send a request like this:
+// [source,xml]
+// ----
+// PUT /ovirt-engine/api/storageconnections/123
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <storage_connection>
+//   <port>3260</port>
+//   <target>iqn.2017-01.com.myhost:444</target>
 // </storage_connection>
 // ----
 //
@@ -56307,7 +57409,7 @@ func (p *storageServerConnectionServiceUpdateRequest) MustSend() *storageServerC
 
 //
 // Updates the storage connection.
-// For example, to change the address of the storage server send a request like this:
+// For example, to change the address of an NFS storage server, send a request like this:
 // [source,xml]
 // ----
 // PUT /ovirt-engine/api/storageconnections/123
@@ -56317,9 +57419,19 @@ func (p *storageServerConnectionServiceUpdateRequest) MustSend() *storageServerC
 // ----
 // <storage_connection>
 //   <address>mynewnfs.example.com</address>
-//   <host>
-//     <name>myhost</name>
-//   </host>
+// </storage_connection>
+// ----
+// To change the connection of an iSCSI storage server, send a request like this:
+// [source,xml]
+// ----
+// PUT /ovirt-engine/api/storageconnections/123
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <storage_connection>
+//   <port>3260</port>
+//   <target>iqn.2017-01.com.myhost:444</target>
 // </storage_connection>
 // ----
 //
@@ -56343,7 +57455,7 @@ func (p *storageServerConnectionServiceUpdateResponse) MustConnection() *Storage
 
 //
 // Updates the storage connection.
-// For example, to change the address of the storage server send a request like this:
+// For example, to change the address of an NFS storage server, send a request like this:
 // [source,xml]
 // ----
 // PUT /ovirt-engine/api/storageconnections/123
@@ -56353,9 +57465,19 @@ func (p *storageServerConnectionServiceUpdateResponse) MustConnection() *Storage
 // ----
 // <storage_connection>
 //   <address>mynewnfs.example.com</address>
-//   <host>
-//     <name>myhost</name>
-//   </host>
+// </storage_connection>
+// ----
+// To change the connection of an iSCSI storage server, send a request like this:
+// [source,xml]
+// ----
+// PUT /ovirt-engine/api/storageconnections/123
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <storage_connection>
+//   <port>3260</port>
+//   <target>iqn.2017-01.com.myhost:444</target>
 // </storage_connection>
 // ----
 //
@@ -56364,7 +57486,7 @@ func (p *storageServerConnectionService) Update() *storageServerConnectionServic
 }
 
 //
-// Update the specified vfs storage connection in the system.
+// Update the specified VFS storage connection in the system.
 //
 type storageServerConnectionServiceUpdateVfsRequest struct {
 	storageServerConnectionService *storageServerConnectionService
@@ -56492,7 +57614,7 @@ func (p *storageServerConnectionServiceUpdateVfsRequest) MustSend() *storageServ
 }
 
 //
-// Update the specified vfs storage connection in the system.
+// Update the specified VFS storage connection in the system.
 //
 type storageServerConnectionServiceUpdateVfsResponse struct {
 	connection *StorageConnection
@@ -56513,7 +57635,7 @@ func (p *storageServerConnectionServiceUpdateVfsResponse) MustConnection() *Stor
 }
 
 //
-// Update the specified vfs storage connection in the system.
+// Update the specified VFS storage connection in the system.
 //
 func (p *storageServerConnectionService) UpdateVfs() *storageServerConnectionServiceUpdateVfsRequest {
 	return &storageServerConnectionServiceUpdateVfsRequest{storageServerConnectionService: p}
@@ -64775,7 +65897,7 @@ func (op *diskProfileService) String() string {
 }
 
 //
-// Manages the set of storage domains of the system.
+// Manages the set of storage domains in the system.
 //
 type storageDomainsService struct {
 	baseService
@@ -64790,18 +65912,18 @@ func NewStorageDomainsService(connection *Connection, path string) *storageDomai
 
 //
 // Adds a new storage domain.
-// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host` and `storage`
-// attributes. Identify the `host` attribute with the `id` or `name` attributes. In oVirt 3.6 and later you can
-// enable the wipe after delete option by default on the storage domain. To configure this, specify
+// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host`, and `storage`
+// attributes. Identify the `host` attribute with the `id` or `name` attributes. In {product-name} 3.6 and
+// later you can enable the wipe after delete option by default on the storage domain. To configure this, specify
 // `wipe_after_delete` in the POST request. This option can be edited after the domain is created, but doing so will
 // not change the wipe after delete property of disks that already exist.
-// To add a new storage domain with specified `name`, `type`, `storage.type`, `storage.address` and `storage.path`
-// and by using a host with an id `123`, send a request as follows:
+// To add a new storage domain with specified `name`, `type`, `storage.type`, `storage.address`, and `storage.path`,
+// and using a host with an id `123`, send a request like this:
 // [source]
 // ----
 // POST /ovirt-engine/api/storageDomains
 // ----
-// With a request body as follows:
+// With a request body like this:
 // [source,xml]
 // ----
 // <storage_domain>
@@ -64965,18 +66087,18 @@ func (p *storageDomainsServiceAddRequest) MustSend() *storageDomainsServiceAddRe
 
 //
 // Adds a new storage domain.
-// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host` and `storage`
-// attributes. Identify the `host` attribute with the `id` or `name` attributes. In oVirt 3.6 and later you can
-// enable the wipe after delete option by default on the storage domain. To configure this, specify
+// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host`, and `storage`
+// attributes. Identify the `host` attribute with the `id` or `name` attributes. In {product-name} 3.6 and
+// later you can enable the wipe after delete option by default on the storage domain. To configure this, specify
 // `wipe_after_delete` in the POST request. This option can be edited after the domain is created, but doing so will
 // not change the wipe after delete property of disks that already exist.
-// To add a new storage domain with specified `name`, `type`, `storage.type`, `storage.address` and `storage.path`
-// and by using a host with an id `123`, send a request as follows:
+// To add a new storage domain with specified `name`, `type`, `storage.type`, `storage.address`, and `storage.path`,
+// and using a host with an id `123`, send a request like this:
 // [source]
 // ----
 // POST /ovirt-engine/api/storageDomains
 // ----
-// With a request body as follows:
+// With a request body like this:
 // [source,xml]
 // ----
 // <storage_domain>
@@ -65047,18 +66169,18 @@ func (p *storageDomainsServiceAddResponse) MustStorageDomain() *StorageDomain {
 
 //
 // Adds a new storage domain.
-// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host` and `storage`
-// attributes. Identify the `host` attribute with the `id` or `name` attributes. In oVirt 3.6 and later you can
-// enable the wipe after delete option by default on the storage domain. To configure this, specify
+// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host`, and `storage`
+// attributes. Identify the `host` attribute with the `id` or `name` attributes. In {product-name} 3.6 and
+// later you can enable the wipe after delete option by default on the storage domain. To configure this, specify
 // `wipe_after_delete` in the POST request. This option can be edited after the domain is created, but doing so will
 // not change the wipe after delete property of disks that already exist.
-// To add a new storage domain with specified `name`, `type`, `storage.type`, `storage.address` and `storage.path`
-// and by using a host with an id `123`, send a request as follows:
+// To add a new storage domain with specified `name`, `type`, `storage.type`, `storage.address`, and `storage.path`,
+// and using a host with an id `123`, send a request like this:
 // [source]
 // ----
 // POST /ovirt-engine/api/storageDomains
 // ----
-// With a request body as follows:
+// With a request body like this:
 // [source,xml]
 // ----
 // <storage_domain>
@@ -65390,7 +66512,7 @@ func (p *storageDomainsService) AddByPath() *storageDomainsServiceAddByPathReque
 }
 
 //
-// Add a new storage domain to the system using a direct lun.
+// Add a new storage domain to the system using a direct LUN.
 //
 type storageDomainsServiceAddDirectLunRequest struct {
 	storageDomainsService *storageDomainsService
@@ -65500,7 +66622,7 @@ func (p *storageDomainsServiceAddDirectLunRequest) MustSend() *storageDomainsSer
 }
 
 //
-// Add a new storage domain to the system using a direct lun.
+// Add a new storage domain to the system using a direct LUN.
 //
 type storageDomainsServiceAddDirectLunResponse struct {
 	storageDomain *StorageDomain
@@ -65521,14 +66643,14 @@ func (p *storageDomainsServiceAddDirectLunResponse) MustStorageDomain() *Storage
 }
 
 //
-// Add a new storage domain to the system using a direct lun.
+// Add a new storage domain to the system using a direct LUN.
 //
 func (p *storageDomainsService) AddDirectLun() *storageDomainsServiceAddDirectLunRequest {
 	return &storageDomainsServiceAddDirectLunRequest{storageDomainsService: p}
 }
 
 //
-// Add a new storage domain to the system using the gluster or posixfs storage.
+// Add a new storage domain to the system using Gluster or POSIX FS storage.
 //
 type storageDomainsServiceAddGlusterOrPostfsRequest struct {
 	storageDomainsService *storageDomainsService
@@ -65638,7 +66760,7 @@ func (p *storageDomainsServiceAddGlusterOrPostfsRequest) MustSend() *storageDoma
 }
 
 //
-// Add a new storage domain to the system using the gluster or posixfs storage.
+// Add a new storage domain to the system using Gluster or POSIX FS storage.
 //
 type storageDomainsServiceAddGlusterOrPostfsResponse struct {
 	storageDomain *StorageDomain
@@ -65659,14 +66781,14 @@ func (p *storageDomainsServiceAddGlusterOrPostfsResponse) MustStorageDomain() *S
 }
 
 //
-// Add a new storage domain to the system using the gluster or posixfs storage.
+// Add a new storage domain to the system using Gluster or POSIX FS storage.
 //
 func (p *storageDomainsService) AddGlusterOrPostfs() *storageDomainsServiceAddGlusterOrPostfsRequest {
 	return &storageDomainsServiceAddGlusterOrPostfsRequest{storageDomainsService: p}
 }
 
 //
-// Returns the list of storage domains of the system.
+// Returns the list of storage domains in the system.
 // The order of the returned list of storage domains is guaranteed only if the `sortby` clause is included
 // in the `search` parameter.
 //
@@ -65819,7 +66941,7 @@ func (p *storageDomainsServiceListRequest) MustSend() *storageDomainsServiceList
 }
 
 //
-// Returns the list of storage domains of the system.
+// Returns the list of storage domains in the system.
 // The order of the returned list of storage domains is guaranteed only if the `sortby` clause is included
 // in the `search` parameter.
 //
@@ -65842,7 +66964,7 @@ func (p *storageDomainsServiceListResponse) MustStorageDomains() *StorageDomainS
 }
 
 //
-// Returns the list of storage domains of the system.
+// Returns the list of storage domains in the system.
 // The order of the returned list of storage domains is guaranteed only if the `sortby` clause is included
 // in the `search` parameter.
 //
@@ -65851,7 +66973,7 @@ func (p *storageDomainsService) List() *storageDomainsServiceListRequest {
 }
 
 //
-// Add a new storage domain to the system using the storage on the localhost at the given path.
+// Add a new storage domain to the system using the storage on the local host at the given path.
 //
 type storageDomainsServiceAddLocalRequest struct {
 	storageDomainsService *storageDomainsService
@@ -65961,7 +67083,7 @@ func (p *storageDomainsServiceAddLocalRequest) MustSend() *storageDomainsService
 }
 
 //
-// Add a new storage domain to the system using the storage on the localhost at the given path.
+// Add a new storage domain to the system using the storage on the local host at the given path.
 //
 type storageDomainsServiceAddLocalResponse struct {
 	storageDomain *StorageDomain
@@ -65982,7 +67104,7 @@ func (p *storageDomainsServiceAddLocalResponse) MustStorageDomain() *StorageDoma
 }
 
 //
-// Add a new storage domain to the system using the storage on the localhost at the given path.
+// Add a new storage domain to the system using the storage on the local host at the given path.
 //
 func (p *storageDomainsService) AddLocal() *storageDomainsServiceAddLocalRequest {
 	return &storageDomainsServiceAddLocalRequest{storageDomainsService: p}
@@ -80021,6 +81143,7 @@ type diskServiceGetRequest struct {
 	diskService *diskService
 	header      map[string]string
 	query       map[string]string
+	allContent  *bool
 	follow      *string
 }
 
@@ -80040,6 +81163,11 @@ func (p *diskServiceGetRequest) Query(key, value string) *diskServiceGetRequest 
 	return p
 }
 
+func (p *diskServiceGetRequest) AllContent(allContent bool) *diskServiceGetRequest {
+	p.allContent = &allContent
+	return p
+}
+
 func (p *diskServiceGetRequest) Follow(follow string) *diskServiceGetRequest {
 	p.follow = &follow
 	return p
@@ -80048,6 +81176,10 @@ func (p *diskServiceGetRequest) Follow(follow string) *diskServiceGetRequest {
 func (p *diskServiceGetRequest) Send() (*diskServiceGetResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.diskService.connection.URL(), p.diskService.path)
 	values := make(url.Values)
+	if p.allContent != nil {
+		values["all_content"] = []string{fmt.Sprintf("%v", *p.allContent)}
+	}
+
 	if p.follow != nil {
 		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
 	}
@@ -80389,6 +81521,139 @@ type diskServiceMoveResponse struct {
 //
 func (p *diskService) Move() *diskServiceMoveRequest {
 	return &diskServiceMoveRequest{diskService: p}
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+type diskServiceReduceRequest struct {
+	diskService *diskService
+	header      map[string]string
+	query       map[string]string
+	async       *bool
+}
+
+func (p *diskServiceReduceRequest) Header(key, value string) *diskServiceReduceRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *diskServiceReduceRequest) Query(key, value string) *diskServiceReduceRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *diskServiceReduceRequest) Async(async bool) *diskServiceReduceRequest {
+	p.async = &async
+	return p
+}
+
+func (p *diskServiceReduceRequest) Send() (*diskServiceReduceResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/reduce", p.diskService.connection.URL(), p.diskService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.diskService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.diskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.diskService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(diskServiceReduceResponse), nil
+}
+
+func (p *diskServiceReduceRequest) MustSend() *diskServiceReduceResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+type diskServiceReduceResponse struct {
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+func (p *diskService) Reduce() *diskServiceReduceRequest {
+	return &diskServiceReduceRequest{diskService: p}
 }
 
 //
@@ -81189,6 +82454,8 @@ func (p *vmNumaNodeService) Get() *vmNumaNodeServiceGetRequest {
 // ----
 // DELETE /ovirt-engine/api/vms/123/numanodes/456
 // ----
+// NOTE: It's required to remove the numa nodes from the highest index
+// first.
 //
 type vmNumaNodeServiceRemoveRequest struct {
 	vmNumaNodeService *vmNumaNodeService
@@ -81300,6 +82567,8 @@ func (p *vmNumaNodeServiceRemoveRequest) MustSend() *vmNumaNodeServiceRemoveResp
 // ----
 // DELETE /ovirt-engine/api/vms/123/numanodes/456
 // ----
+// NOTE: It's required to remove the numa nodes from the highest index
+// first.
 //
 type vmNumaNodeServiceRemoveResponse struct {
 }
@@ -81311,6 +82580,8 @@ type vmNumaNodeServiceRemoveResponse struct {
 // ----
 // DELETE /ovirt-engine/api/vms/123/numanodes/456
 // ----
+// NOTE: It's required to remove the numa nodes from the highest index
+// first.
 //
 func (p *vmNumaNodeService) Remove() *vmNumaNodeServiceRemoveRequest {
 	return &vmNumaNodeServiceRemoveRequest{vmNumaNodeService: p}
@@ -83938,6 +85209,139 @@ type storageDomainDiskServiceMoveResponse struct {
 //
 func (p *storageDomainDiskService) Move() *storageDomainDiskServiceMoveRequest {
 	return &storageDomainDiskServiceMoveRequest{storageDomainDiskService: p}
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+type storageDomainDiskServiceReduceRequest struct {
+	storageDomainDiskService *storageDomainDiskService
+	header                   map[string]string
+	query                    map[string]string
+	async                    *bool
+}
+
+func (p *storageDomainDiskServiceReduceRequest) Header(key, value string) *storageDomainDiskServiceReduceRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *storageDomainDiskServiceReduceRequest) Query(key, value string) *storageDomainDiskServiceReduceRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *storageDomainDiskServiceReduceRequest) Async(async bool) *storageDomainDiskServiceReduceRequest {
+	p.async = &async
+	return p
+}
+
+func (p *storageDomainDiskServiceReduceRequest) Send() (*storageDomainDiskServiceReduceResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/reduce", p.storageDomainDiskService.connection.URL(), p.storageDomainDiskService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.storageDomainDiskService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.storageDomainDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.storageDomainDiskService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.storageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(storageDomainDiskServiceReduceResponse), nil
+}
+
+func (p *storageDomainDiskServiceReduceRequest) MustSend() *storageDomainDiskServiceReduceResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+type storageDomainDiskServiceReduceResponse struct {
+}
+
+//
+// Reduces the size of the disk image.
+// Invokes _reduce_ on the logical volume (i.e. this is only applicable for block storage domains).
+// This is applicable for floating disks and disks attached to non-running virtual machines.
+// There is no need to specify the size as the optimal size is calculated automatically.
+//
+func (p *storageDomainDiskService) Reduce() *storageDomainDiskServiceReduceRequest {
+	return &storageDomainDiskServiceReduceRequest{storageDomainDiskService: p}
 }
 
 //
@@ -90757,6 +92161,7 @@ func NewStorageDomainService(connection *Connection, path string) *storageDomain
 }
 
 //
+// Retrieves the description of the storage domain.
 //
 type storageDomainServiceGetRequest struct {
 	storageDomainService *storageDomainService
@@ -90877,6 +92282,7 @@ func (p *storageDomainServiceGetRequest) MustSend() *storageDomainServiceGetResp
 }
 
 //
+// Retrieves the description of the storage domain.
 //
 type storageDomainServiceGetResponse struct {
 	storageDomain *StorageDomain
@@ -90897,6 +92303,7 @@ func (p *storageDomainServiceGetResponse) MustStorageDomain() *StorageDomain {
 }
 
 //
+// Retrieves the description of the storage domain.
 //
 func (p *storageDomainService) Get() *storageDomainServiceGetRequest {
 	return &storageDomainServiceGetRequest{storageDomainService: p}
@@ -92437,16 +93844,31 @@ func (op *assignedVnicProfilesService) String() string {
 // of the <<services/image_transfers>> service, stating the image to transfer
 // data to/from.
 // After doing that, the transfer is managed by this service.
-// E.g., for uploading/downloading a disk with id `52cb593f-837c-4633-a444-35a0a0383706`:
 // *Using oVirt's Python's SDK:*
+// Uploading a `disk` with id `123` (on a random host in the data center):
 // [source,python]
 // ----
 // transfers_service = system_service.image_transfers_service()
 // transfer = transfers_service.add(
 //    types.ImageTransfer(
-//       image=types.Image(
-//          id='52cb593f-837c-4633-a444-35a0a0383706'
+//       disk=types.Disk(
+//          id='123'
 //       )
+//    )
+// )
+// ----
+// Uploading a `disk` with id `123` on `host` id `456`:
+// [source,python]
+// ----
+// transfers_service = system_service.image_transfers_service()
+// transfer = transfers_service.add(
+//    types.ImageTransfer(
+//       disk=types.Disk(
+//          id='123'
+//       ),
+//       host=types.Host(
+//          id='456'
+//      )
 //    )
 // )
 // ----
@@ -92459,8 +93881,8 @@ func (op *assignedVnicProfilesService) String() string {
 // transfers_service = system_service.image_transfers_service()
 // transfer = transfers_service.add(
 //    types.ImageTransfer(
-//       image=types.Image(
-//          id='52cb593f-837c-4633-a444-35a0a0383706'
+//       disk=types.Disk(
+//          id='123'
 //       ),
 //       direction=types.ImageTransferDirection.DOWNLOAD
 //    )
@@ -92658,6 +94080,121 @@ func NewImageTransferService(connection *Connection, path string) *imageTransfer
 	result.connection = connection
 	result.path = path
 	return &result
+}
+
+//
+// Cancel the image transfer session. This terminates the transfer operation and removes the partial image.
+//
+type imageTransferServiceCancelRequest struct {
+	imageTransferService *imageTransferService
+	header               map[string]string
+	query                map[string]string
+}
+
+func (p *imageTransferServiceCancelRequest) Header(key, value string) *imageTransferServiceCancelRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *imageTransferServiceCancelRequest) Query(key, value string) *imageTransferServiceCancelRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *imageTransferServiceCancelRequest) Send() (*imageTransferServiceCancelResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/cancel", p.imageTransferService.connection.URL(), p.imageTransferService.path)
+	actionBuilder := NewActionBuilder()
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.imageTransferService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.imageTransferService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.imageTransferService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.imageTransferService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransferService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(imageTransferServiceCancelResponse), nil
+}
+
+func (p *imageTransferServiceCancelRequest) MustSend() *imageTransferServiceCancelResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Cancel the image transfer session. This terminates the transfer operation and removes the partial image.
+//
+type imageTransferServiceCancelResponse struct {
+}
+
+//
+// Cancel the image transfer session. This terminates the transfer operation and removes the partial image.
+//
+func (p *imageTransferService) Cancel() *imageTransferServiceCancelRequest {
+	return &imageTransferServiceCancelRequest{imageTransferService: p}
 }
 
 //
@@ -98973,7 +100510,7 @@ func NewExternalHostProvidersService(connection *Connection, path string) *exter
 }
 
 //
-// Add a new external host provider to the system.
+// Adds a new external host provider to the system.
 //
 type externalHostProvidersServiceAddRequest struct {
 	externalHostProvidersService *externalHostProvidersService
@@ -99087,7 +100624,7 @@ func (p *externalHostProvidersServiceAddRequest) MustSend() *externalHostProvide
 }
 
 //
-// Add a new external host provider to the system.
+// Adds a new external host provider to the system.
 //
 type externalHostProvidersServiceAddResponse struct {
 	provider *ExternalHostProvider
@@ -99108,7 +100645,7 @@ func (p *externalHostProvidersServiceAddResponse) MustProvider() *ExternalHostPr
 }
 
 //
-// Add a new external host provider to the system.
+// Adds a new external host provider to the system.
 //
 func (p *externalHostProvidersService) Add() *externalHostProvidersServiceAddRequest {
 	return &externalHostProvidersServiceAddRequest{externalHostProvidersService: p}
@@ -99116,7 +100653,7 @@ func (p *externalHostProvidersService) Add() *externalHostProvidersServiceAddReq
 
 //
 // Returns the list of external host providers.
-// The order of the returned list of host providers isn't guaranteed.
+// The order of the returned list of host providers is not guaranteed.
 //
 type externalHostProvidersServiceListRequest struct {
 	externalHostProvidersService *externalHostProvidersService
@@ -99124,6 +100661,7 @@ type externalHostProvidersServiceListRequest struct {
 	query                        map[string]string
 	follow                       *string
 	max                          *int64
+	search                       *string
 }
 
 func (p *externalHostProvidersServiceListRequest) Header(key, value string) *externalHostProvidersServiceListRequest {
@@ -99152,6 +100690,11 @@ func (p *externalHostProvidersServiceListRequest) Max(max int64) *externalHostPr
 	return p
 }
 
+func (p *externalHostProvidersServiceListRequest) Search(search string) *externalHostProvidersServiceListRequest {
+	p.search = &search
+	return p
+}
+
 func (p *externalHostProvidersServiceListRequest) Send() (*externalHostProvidersServiceListResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.externalHostProvidersService.connection.URL(), p.externalHostProvidersService.path)
 	values := make(url.Values)
@@ -99161,6 +100704,10 @@ func (p *externalHostProvidersServiceListRequest) Send() (*externalHostProviders
 
 	if p.max != nil {
 		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.search != nil {
+		values["search"] = []string{fmt.Sprintf("%v", *p.search)}
 	}
 
 	if p.query != nil {
@@ -99238,7 +100785,7 @@ func (p *externalHostProvidersServiceListRequest) MustSend() *externalHostProvid
 
 //
 // Returns the list of external host providers.
-// The order of the returned list of host providers isn't guaranteed.
+// The order of the returned list of host providers is not guaranteed.
 //
 type externalHostProvidersServiceListResponse struct {
 	providers *ExternalHostProviderSlice
@@ -99260,7 +100807,7 @@ func (p *externalHostProvidersServiceListResponse) MustProviders() *ExternalHost
 
 //
 // Returns the list of external host providers.
-// The order of the returned list of host providers isn't guaranteed.
+// The order of the returned list of host providers is not guaranteed.
 //
 func (p *externalHostProvidersService) List() *externalHostProvidersServiceListRequest {
 	return &externalHostProvidersServiceListRequest{externalHostProvidersService: p}
@@ -103252,6 +104799,318 @@ func (p *templatesServiceAddResponse) MustTemplate() *Template {
 //
 func (p *templatesService) Add() *templatesServiceAddRequest {
 	return &templatesServiceAddRequest{templatesService: p}
+}
+
+//
+// Add a virtual machine template to the system from a configuration. Requires the configuration type, the configuration data, and the target cluster.
+//
+type templatesServiceAddFromConfigurationRequest struct {
+	templatesService *templatesService
+	header           map[string]string
+	query            map[string]string
+	clonePermissions *bool
+	seal             *bool
+	template         *Template
+}
+
+func (p *templatesServiceAddFromConfigurationRequest) Header(key, value string) *templatesServiceAddFromConfigurationRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *templatesServiceAddFromConfigurationRequest) Query(key, value string) *templatesServiceAddFromConfigurationRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *templatesServiceAddFromConfigurationRequest) ClonePermissions(clonePermissions bool) *templatesServiceAddFromConfigurationRequest {
+	p.clonePermissions = &clonePermissions
+	return p
+}
+
+func (p *templatesServiceAddFromConfigurationRequest) Seal(seal bool) *templatesServiceAddFromConfigurationRequest {
+	p.seal = &seal
+	return p
+}
+
+func (p *templatesServiceAddFromConfigurationRequest) Template(template *Template) *templatesServiceAddFromConfigurationRequest {
+	p.template = template
+	return p
+}
+
+func (p *templatesServiceAddFromConfigurationRequest) Send() (*templatesServiceAddFromConfigurationResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/fromconfiguration", p.templatesService.connection.URL(), p.templatesService.path)
+	actionBuilder := NewActionBuilder()
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
+	if p.seal != nil {
+		actionBuilder.Seal(*p.seal)
+	}
+	actionBuilder.Template(p.template)
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.templatesService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.templatesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.templatesService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.templatesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templatesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	action, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	result := action.MustTemplate()
+	return &templatesServiceAddFromConfigurationResponse{template: result}, nil
+}
+
+func (p *templatesServiceAddFromConfigurationRequest) MustSend() *templatesServiceAddFromConfigurationResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Add a virtual machine template to the system from a configuration. Requires the configuration type, the configuration data, and the target cluster.
+//
+type templatesServiceAddFromConfigurationResponse struct {
+	template *Template
+}
+
+func (p *templatesServiceAddFromConfigurationResponse) Template() (*Template, bool) {
+	if p.template != nil {
+		return p.template, true
+	}
+	return nil, false
+}
+
+func (p *templatesServiceAddFromConfigurationResponse) MustTemplate() *Template {
+	if p.template == nil {
+		panic("template in response does not exist")
+	}
+	return p.template
+}
+
+//
+// Add a virtual machine template to the system from a configuration. Requires the configuration type, the configuration data, and the target cluster.
+//
+func (p *templatesService) AddFromConfiguration() *templatesServiceAddFromConfigurationRequest {
+	return &templatesServiceAddFromConfigurationRequest{templatesService: p}
+}
+
+//
+// Add a virtual machine template to the system from an existing virtual machine.
+//
+type templatesServiceAddFromVmRequest struct {
+	templatesService *templatesService
+	header           map[string]string
+	query            map[string]string
+	clonePermissions *bool
+	seal             *bool
+	template         *Template
+}
+
+func (p *templatesServiceAddFromVmRequest) Header(key, value string) *templatesServiceAddFromVmRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *templatesServiceAddFromVmRequest) Query(key, value string) *templatesServiceAddFromVmRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *templatesServiceAddFromVmRequest) ClonePermissions(clonePermissions bool) *templatesServiceAddFromVmRequest {
+	p.clonePermissions = &clonePermissions
+	return p
+}
+
+func (p *templatesServiceAddFromVmRequest) Seal(seal bool) *templatesServiceAddFromVmRequest {
+	p.seal = &seal
+	return p
+}
+
+func (p *templatesServiceAddFromVmRequest) Template(template *Template) *templatesServiceAddFromVmRequest {
+	p.template = template
+	return p
+}
+
+func (p *templatesServiceAddFromVmRequest) Send() (*templatesServiceAddFromVmResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/fromvm", p.templatesService.connection.URL(), p.templatesService.path)
+	actionBuilder := NewActionBuilder()
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
+	if p.seal != nil {
+		actionBuilder.Seal(*p.seal)
+	}
+	actionBuilder.Template(p.template)
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.templatesService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.templatesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.templatesService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.templatesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templatesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	action, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	result := action.MustTemplate()
+	return &templatesServiceAddFromVmResponse{template: result}, nil
+}
+
+func (p *templatesServiceAddFromVmRequest) MustSend() *templatesServiceAddFromVmResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Add a virtual machine template to the system from an existing virtual machine.
+//
+type templatesServiceAddFromVmResponse struct {
+	template *Template
+}
+
+func (p *templatesServiceAddFromVmResponse) Template() (*Template, bool) {
+	if p.template != nil {
+		return p.template, true
+	}
+	return nil, false
+}
+
+func (p *templatesServiceAddFromVmResponse) MustTemplate() *Template {
+	if p.template == nil {
+		panic("template in response does not exist")
+	}
+	return p.template
+}
+
+//
+// Add a virtual machine template to the system from an existing virtual machine.
+//
+func (p *templatesService) AddFromVm() *templatesServiceAddFromVmRequest {
+	return &templatesServiceAddFromVmRequest{templatesService: p}
 }
 
 //
