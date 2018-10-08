@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/http/httputil"
 	"net/url"
 	"strings"
 )
@@ -176,6 +177,17 @@ func (p *jobsServiceAddRequest) Send() (*jobsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.jobsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.jobsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -423,6 +435,17 @@ func (p *jobsServiceListRequest) Send() (*jobsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.jobsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.jobsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -661,6 +684,17 @@ func (p *dataCentersServiceAddRequest) Send() (*dataCentersServiceAddResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCentersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCentersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -907,6 +941,17 @@ func (p *dataCentersServiceListRequest) Send() (*dataCentersServiceListResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCentersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCentersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -1172,6 +1217,17 @@ func (p *permissionServiceGetRequest) Send() (*permissionServiceGetResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.permissionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.permissionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -1297,6 +1353,17 @@ func (p *permissionServiceRemoveRequest) Send() (*permissionServiceRemoveRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.permissionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.permissionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -1439,6 +1506,17 @@ func (p *storageServiceGetRequest) Send() (*storageServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -1607,6 +1685,17 @@ func (p *assignedTagsServiceAddRequest) Send() (*assignedTagsServiceAddResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedTagsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedTagsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -1782,6 +1871,17 @@ func (p *assignedTagsServiceListRequest) Send() (*assignedTagsServiceListRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedTagsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedTagsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -1979,6 +2079,17 @@ func (p *linkLayerDiscoveryProtocolServiceListRequest) Send() (*linkLayerDiscove
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.linkLayerDiscoveryProtocolService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.linkLayerDiscoveryProtocolService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -2184,6 +2295,17 @@ func (p *systemPermissionsServiceAddRequest) Send() (*systemPermissionsServiceAd
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -2408,6 +2530,17 @@ func (p *systemPermissionsServiceAddClusterPermissionRequest) Send() (*systemPer
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -2535,6 +2668,17 @@ func (p *systemPermissionsServiceAddDataCenterPermissionRequest) Send() (*system
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -2662,6 +2806,17 @@ func (p *systemPermissionsServiceAddGroupLevelRequest) Send() (*systemPermission
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -2789,6 +2944,17 @@ func (p *systemPermissionsServiceAddHostPermissionRequest) Send() (*systemPermis
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -2930,6 +3096,17 @@ func (p *systemPermissionsServiceListRequest) Send() (*systemPermissionsServiceL
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -3104,6 +3281,17 @@ func (p *systemPermissionsServiceAddStorageDomainPermissionRequest) Send() (*sys
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -3231,6 +3419,17 @@ func (p *systemPermissionsServiceAddTemplatePermissionRequest) Send() (*systemPe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -3358,6 +3557,17 @@ func (p *systemPermissionsServiceAddUserLevelRequest) Send() (*systemPermissions
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -3485,6 +3695,17 @@ func (p *systemPermissionsServiceAddVmPermissionRequest) Send() (*systemPermissi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -3612,6 +3833,17 @@ func (p *systemPermissionsServiceAddVmPoolPermissionRequest) Send() (*systemPerm
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -3776,6 +4008,17 @@ func (p *schedulingPoliciesServiceAddRequest) Send() (*schedulingPoliciesService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.schedulingPoliciesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.schedulingPoliciesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -3925,6 +4168,17 @@ func (p *schedulingPoliciesServiceListRequest) Send() (*schedulingPoliciesServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.schedulingPoliciesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.schedulingPoliciesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -4093,6 +4347,17 @@ func (p *clusterNetworkServiceGetRequest) Send() (*clusterNetworkServiceGetRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -4211,6 +4476,17 @@ func (p *clusterNetworkServiceRemoveRequest) Send() (*clusterNetworkServiceRemov
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -4322,6 +4598,17 @@ func (p *clusterNetworkServiceUpdateRequest) Send() (*clusterNetworkServiceUpdat
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -4483,6 +4770,17 @@ func (p *templateCdromServiceGetRequest) Send() (*templateCdromServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateCdromService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateCdromService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -4652,6 +4950,17 @@ func (p *networkAttachmentsServiceAddRequest) Send() (*networkAttachmentsService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkAttachmentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkAttachmentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -4791,6 +5100,17 @@ func (p *networkAttachmentsServiceListRequest) Send() (*networkAttachmentsServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkAttachmentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkAttachmentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -4957,6 +5277,17 @@ func (p *unmanagedNetworkServiceGetRequest) Send() (*unmanagedNetworkServiceGetR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.unmanagedNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.unmanagedNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -5082,6 +5413,17 @@ func (p *unmanagedNetworkServiceRemoveRequest) Send() (*unmanagedNetworkServiceR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.unmanagedNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.unmanagedNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -5227,6 +5569,17 @@ func (p *snapshotNicsServiceListRequest) Send() (*snapshotNicsServiceListRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotNicsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotNicsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -5420,6 +5773,17 @@ func (p *hostStorageServiceListRequest) Send() (*hostStorageServiceListResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostStorageService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostStorageService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -5643,6 +6007,17 @@ func (p *tagsServiceAddRequest) Send() (*tagsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.tagsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.tagsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -5857,6 +6232,17 @@ func (p *tagsServiceListRequest) Send() (*tagsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.tagsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.tagsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -6156,6 +6542,17 @@ func (p *hostsServiceAddRequest) Send() (*hostsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -6451,6 +6848,17 @@ func (p *hostsServiceListRequest) Send() (*hostsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -6641,6 +7049,17 @@ func (p *hostsServiceAddUsingRootPasswordRequest) Send() (*hostsServiceAddUsingR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -6786,6 +7205,17 @@ func (p *hostsServiceAddUsingSshRequest) Send() (*hostsServiceAddUsingSshRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -6948,6 +7378,17 @@ func (p *balancesServiceAddRequest) Send() (*balancesServiceAddResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.balancesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.balancesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -7097,6 +7538,17 @@ func (p *balancesServiceListRequest) Send() (*balancesServiceListResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.balancesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.balancesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -7263,6 +7715,17 @@ func (p *diskSnapshotServiceGetRequest) Send() (*diskSnapshotServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskSnapshotService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskSnapshotService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -7388,6 +7851,17 @@ func (p *diskSnapshotServiceRemoveRequest) Send() (*diskSnapshotServiceRemoveRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskSnapshotService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskSnapshotService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -7520,6 +7994,17 @@ func (p *storageDomainServerConnectionServiceGetRequest) Send() (*storageDomainS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -7646,6 +8131,17 @@ func (p *storageDomainServerConnectionServiceRemoveRequest) Send() (*storageDoma
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -7783,6 +8279,17 @@ func (p *openstackSubnetsServiceAddRequest) Send() (*openstackSubnetsServiceAddR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackSubnetsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackSubnetsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -7920,6 +8427,17 @@ func (p *openstackSubnetsServiceListRequest) Send() (*openstackSubnetsServiceLis
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackSubnetsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackSubnetsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -8086,6 +8604,17 @@ func (p *openstackVolumeTypeServiceGetRequest) Send() (*openstackVolumeTypeServi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeTypeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeTypeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -8238,6 +8767,17 @@ func (p *openstackVolumeAuthenticationKeyServiceGetRequest) Send() (*openstackVo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeAuthenticationKeyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeAuthenticationKeyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -8363,6 +8903,17 @@ func (p *openstackVolumeAuthenticationKeyServiceRemoveRequest) Send() (*openstac
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeAuthenticationKeyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeAuthenticationKeyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -8472,6 +9023,17 @@ func (p *openstackVolumeAuthenticationKeyServiceUpdateRequest) Send() (*openstac
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeAuthenticationKeyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeAuthenticationKeyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -8630,6 +9192,17 @@ func (p *openstackImageProvidersServiceAddRequest) Send() (*openstackImageProvid
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -8769,6 +9342,17 @@ func (p *openstackImageProvidersServiceListRequest) Send() (*openstackImageProvi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -8935,6 +9519,17 @@ func (p *openstackImageProviderServiceGetRequest) Send() (*openstackImageProvide
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -9075,6 +9670,17 @@ func (p *openstackImageProviderServiceImportCertificatesRequest) Send() (*openst
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -9179,6 +9785,17 @@ func (p *openstackImageProviderServiceRemoveRequest) Send() (*openstackImageProv
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -9298,6 +9915,17 @@ func (p *openstackImageProviderServiceTestConnectivityRequest) Send() (*openstac
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -9426,6 +10054,17 @@ func (p *openstackImageProviderServiceUpdateRequest) Send() (*openstackImageProv
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -9605,6 +10244,17 @@ func (p *openstackImageServiceGetRequest) Send() (*openstackImageServiceGetRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -9794,6 +10444,17 @@ func (p *openstackImageServiceImportRequest) Send() (*openstackImageServiceImpor
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImageService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImageService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -9973,6 +10634,17 @@ func (p *openstackVolumeTypesServiceListRequest) Send() (*openstackVolumeTypesSe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeTypesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeTypesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -10139,6 +10811,17 @@ func (p *openstackSubnetServiceGetRequest) Send() (*openstackSubnetServiceGetRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackSubnetService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackSubnetService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -10264,6 +10947,17 @@ func (p *openstackSubnetServiceRemoveRequest) Send() (*openstackSubnetServiceRem
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackSubnetService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackSubnetService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -10408,6 +11102,17 @@ func (p *openstackNetworksServiceListRequest) Send() (*openstackNetworksServiceL
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -10574,6 +11279,17 @@ func (p *openstackVolumeProviderServiceGetRequest) Send() (*openstackVolumeProvi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -10714,6 +11430,17 @@ func (p *openstackVolumeProviderServiceImportCertificatesRequest) Send() (*opens
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -10828,6 +11555,17 @@ func (p *openstackVolumeProviderServiceRemoveRequest) Send() (*openstackVolumePr
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -10947,6 +11685,17 @@ func (p *openstackVolumeProviderServiceTestConnectivityRequest) Send() (*opensta
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -11075,6 +11824,17 @@ func (p *openstackVolumeProviderServiceUpdateRequest) Send() (*openstackVolumePr
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -11278,6 +12038,17 @@ func (p *openstackImagesServiceListRequest) Send() (*openstackImagesServiceListR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackImagesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackImagesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -11449,6 +12220,17 @@ func (p *openstackVolumeAuthenticationKeysServiceAddRequest) Send() (*openstackV
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeAuthenticationKeysService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeAuthenticationKeysService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -11588,6 +12370,17 @@ func (p *openstackVolumeAuthenticationKeysServiceListRequest) Send() (*openstack
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeAuthenticationKeysService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeAuthenticationKeysService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -11760,6 +12553,17 @@ func (p *openstackNetworkProvidersServiceAddRequest) Send() (*openstackNetworkPr
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -11901,6 +12705,17 @@ func (p *openstackNetworkProvidersServiceListRequest) Send() (*openstackNetworkP
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -12068,6 +12883,17 @@ func (p *openstackNetworkServiceGetRequest) Send() (*openstackNetworkServiceGetR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -12210,6 +13036,17 @@ func (p *openstackNetworkServiceImportRequest) Send() (*openstackNetworkServiceI
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -12379,6 +13216,17 @@ func (p *openstackVolumeProvidersServiceAddRequest) Send() (*openstackVolumeProv
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -12558,6 +13406,17 @@ func (p *openstackVolumeProvidersServiceListRequest) Send() (*openstackVolumePro
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackVolumeProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackVolumeProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -12731,6 +13590,17 @@ func (p *openstackNetworkProviderServiceGetRequest) Send() (*openstackNetworkPro
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -12883,6 +13753,17 @@ func (p *openstackNetworkProviderServiceImportCertificatesRequest) Send() (*open
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -12993,6 +13874,17 @@ func (p *openstackNetworkProviderServiceRemoveRequest) Send() (*openstackNetwork
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -13124,6 +14016,17 @@ func (p *openstackNetworkProviderServiceTestConnectivityRequest) Send() (*openst
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -13269,6 +14172,17 @@ func (p *openstackNetworkProviderServiceUpdateRequest) Send() (*openstackNetwork
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.openstackNetworkProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.openstackNetworkProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -13483,6 +14397,17 @@ func (p *assignedCpuProfileServiceGetRequest) Send() (*assignedCpuProfileService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedCpuProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedCpuProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -13608,6 +14533,17 @@ func (p *assignedCpuProfileServiceRemoveRequest) Send() (*assignedCpuProfileServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedCpuProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedCpuProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -13762,6 +14698,17 @@ func (p *storageServerConnectionsServiceAddRequest) Send() (*storageServerConnec
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -13932,6 +14879,17 @@ func (p *storageServerConnectionsServiceAddIscsiRequest) Send() (*storageServerC
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -14064,6 +15022,17 @@ func (p *storageServerConnectionsServiceListRequest) Send() (*storageServerConne
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -14200,6 +15169,17 @@ func (p *storageServerConnectionsServiceAddLocalRequest) Send() (*storageServerC
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -14327,6 +15307,17 @@ func (p *storageServerConnectionsServiceAddNfsRequest) Send() (*storageServerCon
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -14454,6 +15445,17 @@ func (p *storageServerConnectionsServiceAddVfsRequest) Send() (*storageServerCon
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -14619,6 +15621,17 @@ func (p *copyableServiceCopyRequest) Send() (*copyableServiceCopyResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.copyableService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.copyableService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -14781,6 +15794,17 @@ func (p *vmSessionsServiceListRequest) Send() (*vmSessionsServiceListResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmSessionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmSessionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -14996,6 +16020,17 @@ func (p *vmDiskServiceActivateRequest) Send() (*vmDiskServiceActivateResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -15106,6 +16141,17 @@ func (p *vmDiskServiceDeactivateRequest) Send() (*vmDiskServiceDeactivateRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -15225,6 +16271,17 @@ func (p *vmDiskServiceExportRequest) Send() (*vmDiskServiceExportResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -15327,6 +16384,17 @@ func (p *vmDiskServiceGetRequest) Send() (*vmDiskServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -15469,6 +16537,17 @@ func (p *vmDiskServiceMoveRequest) Send() (*vmDiskServiceMoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -15575,6 +16654,17 @@ func (p *vmDiskServiceRemoveRequest) Send() (*vmDiskServiceRemoveResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -15701,6 +16791,17 @@ func (p *vmDiskServiceUpdateRequest) Send() (*vmDiskServiceUpdateResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -15895,6 +16996,17 @@ func (p *hostDeviceServiceGetRequest) Send() (*hostDeviceServiceGetResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -16081,6 +17193,17 @@ func (p *assignedVnicProfileServiceGetRequest) Send() (*assignedVnicProfileServi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedVnicProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedVnicProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -16206,6 +17329,17 @@ func (p *assignedVnicProfileServiceRemoveRequest) Send() (*assignedVnicProfileSe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedVnicProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedVnicProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -16350,6 +17484,17 @@ func (p *cpuProfileServiceGetRequest) Send() (*cpuProfileServiceGetResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.cpuProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.cpuProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -16475,6 +17620,17 @@ func (p *cpuProfileServiceRemoveRequest) Send() (*cpuProfileServiceRemoveRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.cpuProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.cpuProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -16594,6 +17750,17 @@ func (p *cpuProfileServiceUpdateRequest) Send() (*cpuProfileServiceUpdateRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.cpuProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.cpuProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -16762,6 +17929,17 @@ func (p *dataCenterNetworkServiceGetRequest) Send() (*dataCenterNetworkServiceGe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCenterNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCenterNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -16880,6 +18058,17 @@ func (p *dataCenterNetworkServiceRemoveRequest) Send() (*dataCenterNetworkServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCenterNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCenterNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -16991,6 +18180,17 @@ func (p *dataCenterNetworkServiceUpdateRequest) Send() (*dataCenterNetworkServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCenterNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCenterNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -17198,6 +18398,17 @@ func (p *networkFiltersServiceListRequest) Send() (*networkFiltersServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkFiltersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkFiltersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -17374,6 +18585,17 @@ func (p *schedulingPolicyUnitServiceGetRequest) Send() (*schedulingPolicyUnitSer
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.schedulingPolicyUnitService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.schedulingPolicyUnitService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -17499,6 +18721,17 @@ func (p *schedulingPolicyUnitServiceRemoveRequest) Send() (*schedulingPolicyUnit
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.schedulingPolicyUnitService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.schedulingPolicyUnitService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -17633,6 +18866,17 @@ func (p *externalNetworkProviderConfigurationServiceGetRequest) Send() (*externa
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalNetworkProviderConfigurationService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalNetworkProviderConfigurationService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -17844,6 +19088,17 @@ func (p *vnicProfilesServiceAddRequest) Send() (*vnicProfilesServiceAddResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vnicProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vnicProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -18087,6 +19342,17 @@ func (p *vnicProfilesServiceListRequest) Send() (*vnicProfilesServiceListRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vnicProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vnicProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -18259,6 +19525,17 @@ func (p *assignedAffinityLabelsServiceAddRequest) Send() (*assignedAffinityLabel
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedAffinityLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedAffinityLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -18388,6 +19665,17 @@ func (p *assignedAffinityLabelsServiceListRequest) Send() (*assignedAffinityLabe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedAffinityLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedAffinityLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -18556,6 +19844,17 @@ func (p *iscsiBondServiceGetRequest) Send() (*iscsiBondServiceGetResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.iscsiBondService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.iscsiBondService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -18687,6 +19986,17 @@ func (p *iscsiBondServiceRemoveRequest) Send() (*iscsiBondServiceRemoveResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.iscsiBondService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.iscsiBondService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -18832,6 +20142,17 @@ func (p *iscsiBondServiceUpdateRequest) Send() (*iscsiBondServiceUpdateResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.iscsiBondService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.iscsiBondService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -19048,6 +20369,17 @@ func (p *storageDomainContentDiskServiceGetRequest) Send() (*storageDomainConten
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainContentDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainContentDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -19200,6 +20532,17 @@ func (p *networkAttachmentServiceGetRequest) Send() (*networkAttachmentServiceGe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -19325,6 +20668,17 @@ func (p *networkAttachmentServiceRemoveRequest) Send() (*networkAttachmentServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -19444,6 +20798,17 @@ func (p *networkAttachmentServiceUpdateRequest) Send() (*networkAttachmentServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -19598,6 +20963,17 @@ func (p *vmReportedDeviceServiceGetRequest) Send() (*vmReportedDeviceServiceGetR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmReportedDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmReportedDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -19750,6 +21126,17 @@ func (p *snapshotDiskServiceGetRequest) Send() (*snapshotDiskServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -19949,6 +21336,17 @@ func (p *storageDomainVmsServiceListRequest) Send() (*storageDomainVmsServiceLis
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainVmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainVmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -20197,6 +21595,17 @@ func (p *instanceTypesServiceAddRequest) Send() (*instanceTypesServiceAddRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -20512,6 +21921,17 @@ func (p *instanceTypesServiceListRequest) Send() (*instanceTypesServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -20731,6 +22151,17 @@ func (p *domainUsersServiceListRequest) Send() (*domainUsersServiceListResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.domainUsersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.domainUsersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -20938,6 +22369,17 @@ func (p *domainGroupServiceGetRequest) Send() (*domainGroupServiceGetResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.domainGroupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.domainGroupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -21122,6 +22564,17 @@ func (p *domainGroupsServiceListRequest) Send() (*domainGroupsServiceListRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.domainGroupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.domainGroupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -21310,6 +22763,17 @@ func (p *groupServiceGetRequest) Send() (*groupServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.groupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.groupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -21480,6 +22944,17 @@ func (p *groupServiceRemoveRequest) Send() (*groupServiceRemoveResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.groupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.groupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -21664,6 +23139,17 @@ func (p *sshPublicKeysServiceAddRequest) Send() (*sshPublicKeysServiceAddRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.sshPublicKeysService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.sshPublicKeysService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -21834,6 +23320,17 @@ func (p *sshPublicKeysServiceListRequest) Send() (*sshPublicKeysServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.sshPublicKeysService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.sshPublicKeysService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -22096,6 +23593,17 @@ func (p *userServiceGetRequest) Send() (*userServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.userService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.userService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -22278,6 +23786,17 @@ func (p *userServiceRemoveRequest) Send() (*userServiceRemoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.userService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.userService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -22489,6 +24008,17 @@ func (p *groupsServiceAddRequest) Send() (*groupsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.groupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.groupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -22702,6 +24232,17 @@ func (p *groupsServiceListRequest) Send() (*groupsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.groupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.groupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -22943,6 +24484,17 @@ func (p *domainsServiceListRequest) Send() (*domainsServiceListResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.domainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.domainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -23144,6 +24696,17 @@ func (p *sshPublicKeyServiceGetRequest) Send() (*sshPublicKeyServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.sshPublicKeyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.sshPublicKeyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -23269,6 +24832,17 @@ func (p *sshPublicKeyServiceRemoveRequest) Send() (*sshPublicKeyServiceRemoveRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.sshPublicKeyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.sshPublicKeyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -23387,6 +24961,17 @@ func (p *sshPublicKeyServiceUpdateRequest) Send() (*sshPublicKeyServiceUpdateRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.sshPublicKeyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.sshPublicKeyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -23575,6 +25160,17 @@ func (p *usersServiceAddRequest) Send() (*usersServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.usersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.usersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -23820,6 +25416,17 @@ func (p *usersServiceListRequest) Send() (*usersServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.usersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.usersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -24054,6 +25661,17 @@ func (p *domainUserServiceGetRequest) Send() (*domainUserServiceGetResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.domainUserService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.domainUserService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -24261,6 +25879,17 @@ func (p *domainServiceGetRequest) Send() (*domainServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.domainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.domainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -24473,6 +26102,17 @@ func (p *affinityLabelServiceGetRequest) Send() (*affinityLabelServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -24592,6 +26232,17 @@ func (p *affinityLabelServiceRemoveRequest) Send() (*affinityLabelServiceRemoveR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -24706,6 +26357,17 @@ func (p *affinityLabelServiceUpdateRequest) Send() (*affinityLabelServiceUpdateR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -24889,6 +26551,17 @@ func (p *hostNicServiceGetRequest) Send() (*hostNicServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -25034,6 +26707,17 @@ func (p *hostNicServiceUpdateVirtualFunctionsConfigurationRequest) Send() (*host
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -25274,6 +26958,17 @@ func (p *attachedStorageDomainDiskServiceCopyRequest) Send() (*attachedStorageDo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -25394,6 +27089,17 @@ func (p *attachedStorageDomainDiskServiceExportRequest) Send() (*attachedStorage
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -25505,6 +27211,17 @@ func (p *attachedStorageDomainDiskServiceGetRequest) Send() (*attachedStorageDom
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -25660,6 +27377,17 @@ func (p *attachedStorageDomainDiskServiceMoveRequest) Send() (*attachedStorageDo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -25770,6 +27498,17 @@ func (p *attachedStorageDomainDiskServiceRegisterRequest) Send() (*attachedStora
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -25868,6 +27607,17 @@ func (p *attachedStorageDomainDiskServiceRemoveRequest) Send() (*attachedStorage
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -25984,6 +27734,17 @@ func (p *attachedStorageDomainDiskServiceSparsifyRequest) Send() (*attachedStora
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -26101,6 +27862,17 @@ func (p *attachedStorageDomainDiskServiceUpdateRequest) Send() (*attachedStorage
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -26287,6 +28059,17 @@ func (p *instanceTypeNicServiceGetRequest) Send() (*instanceTypeNicServiceGetRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -26415,6 +28198,17 @@ func (p *instanceTypeNicServiceRemoveRequest) Send() (*instanceTypeNicServiceRem
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -26536,6 +28330,17 @@ func (p *instanceTypeNicServiceUpdateRequest) Send() (*instanceTypeNicServiceUpd
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -26696,6 +28501,17 @@ func (p *affinityLabelsServiceAddRequest) Send() (*affinityLabelsServiceAddRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -26837,6 +28653,17 @@ func (p *affinityLabelsServiceListRequest) Send() (*affinityLabelsServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -27004,6 +28831,17 @@ func (p *templateWatchdogServiceGetRequest) Send() (*templateWatchdogServiceGetR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -27129,6 +28967,17 @@ func (p *templateWatchdogServiceRemoveRequest) Send() (*templateWatchdogServiceR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -27248,6 +29097,17 @@ func (p *templateWatchdogServiceUpdateRequest) Send() (*templateWatchdogServiceU
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -27560,6 +29420,17 @@ func (p *vmsServiceAddRequest) Send() (*vmsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -27980,6 +29851,17 @@ func (p *vmsServiceAddFromConfigurationRequest) Send() (*vmsServiceAddFromConfig
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -28125,6 +30007,17 @@ func (p *vmsServiceAddFromScratchRequest) Send() (*vmsServiceAddFromScratchRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -28270,6 +30163,17 @@ func (p *vmsServiceAddFromSnapshotRequest) Send() (*vmsServiceAddFromSnapshotRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -28443,6 +30347,17 @@ func (p *vmsServiceListRequest) Send() (*vmsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -28669,6 +30584,17 @@ func (p *filesServiceListRequest) Send() (*filesServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.filesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.filesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -28883,6 +30809,17 @@ func (p *networkServiceGetRequest) Send() (*networkServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -29068,6 +31005,17 @@ func (p *networkServiceRemoveRequest) Send() (*networkServiceRemoveResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -29242,6 +31190,17 @@ func (p *networkServiceUpdateRequest) Send() (*networkServiceUpdateResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -29513,6 +31472,17 @@ func (p *iscsiBondsServiceAddRequest) Send() (*iscsiBondsServiceAddResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.iscsiBondsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.iscsiBondsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -29692,6 +31662,17 @@ func (p *iscsiBondsServiceListRequest) Send() (*iscsiBondsServiceListResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.iscsiBondsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.iscsiBondsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -29871,6 +31852,17 @@ func (p *hostDevicesServiceListRequest) Send() (*hostDevicesServiceListResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostDevicesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostDevicesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -30050,6 +32042,17 @@ func (p *vmReportedDevicesServiceListRequest) Send() (*vmReportedDevicesServiceL
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmReportedDevicesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmReportedDevicesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -30243,6 +32246,17 @@ func (p *vmHostDeviceServiceGetRequest) Send() (*vmHostDeviceServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmHostDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmHostDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -30429,6 +32443,17 @@ func (p *vmHostDeviceServiceRemoveRequest) Send() (*vmHostDeviceServiceRemoveRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmHostDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmHostDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -30584,6 +32609,17 @@ func (p *filtersServiceAddRequest) Send() (*filtersServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.filtersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.filtersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -30733,6 +32769,17 @@ func (p *filtersServiceListRequest) Send() (*filtersServiceListResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.filtersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.filtersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -30929,6 +32976,17 @@ func (p *quotaStorageLimitsServiceAddRequest) Send() (*quotaStorageLimitsService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaStorageLimitsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaStorageLimitsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -31118,6 +33176,17 @@ func (p *quotaStorageLimitsServiceListRequest) Send() (*quotaStorageLimitsServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaStorageLimitsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaStorageLimitsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -31294,6 +33363,17 @@ func (p *schedulingPolicyServiceGetRequest) Send() (*schedulingPolicyServiceGetR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.schedulingPolicyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.schedulingPolicyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -31419,6 +33499,17 @@ func (p *schedulingPolicyServiceRemoveRequest) Send() (*schedulingPolicyServiceR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.schedulingPolicyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.schedulingPolicyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -31538,6 +33629,17 @@ func (p *schedulingPolicyServiceUpdateRequest) Send() (*schedulingPolicyServiceU
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.schedulingPolicyService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.schedulingPolicyService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -31738,6 +33840,17 @@ func (p *hostServiceActivateRequest) Send() (*hostServiceActivateResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -31866,6 +33979,17 @@ func (p *hostServiceApproveRequest) Send() (*hostServiceApproveResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -31996,6 +34120,17 @@ func (p *hostServiceCommitNetConfigRequest) Send() (*hostServiceCommitNetConfigR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -32157,6 +34292,17 @@ func (p *hostServiceDeactivateRequest) Send() (*hostServiceDeactivateResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -32271,6 +34417,17 @@ func (p *hostServiceEnrollCertificateRequest) Send() (*hostServiceEnrollCertific
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -32417,6 +34574,17 @@ func (p *hostServiceFenceRequest) Send() (*hostServiceFenceResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -32599,6 +34767,17 @@ func (p *hostServiceForceSelectSpmRequest) Send() (*hostServiceForceSelectSpmRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -32746,6 +34925,17 @@ func (p *hostServiceGetRequest) Send() (*hostServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -32982,6 +35172,17 @@ func (p *hostServiceInstallRequest) Send() (*hostServiceInstallResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -33213,6 +35414,17 @@ func (p *hostServiceIscsiDiscoverRequest) Send() (*hostServiceIscsiDiscoverRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -33418,6 +35630,17 @@ func (p *hostServiceIscsiLoginRequest) Send() (*hostServiceIscsiLoginResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -33531,6 +35754,17 @@ func (p *hostServiceRefreshRequest) Send() (*hostServiceRefreshResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -33650,6 +35884,17 @@ func (p *hostServiceRemoveRequest) Send() (*hostServiceRemoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -34067,6 +36312,17 @@ func (p *hostServiceSetupNetworksRequest) Send() (*hostServiceSetupNetworksRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -34489,6 +36745,17 @@ func (p *hostServiceSyncAllNetworksRequest) Send() (*hostServiceSyncAllNetworksR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -34628,6 +36895,17 @@ func (p *hostServiceUnregisteredStorageDomainsDiscoverRequest) Send() (*hostServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -34778,6 +37056,17 @@ func (p *hostServiceUpdateRequest) Send() (*hostServiceUpdateResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -34960,6 +37249,17 @@ func (p *hostServiceUpgradeRequest) Send() (*hostServiceUpgradeResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -35067,6 +37367,17 @@ func (p *hostServiceUpgradeCheckRequest) Send() (*hostServiceUpgradeCheckRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -35201,6 +37512,17 @@ func (p *hostServiceApproveUsingRootPasswordRequest) Send() (*hostServiceApprove
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -35367,6 +37689,17 @@ func (p *hostServiceInstallUsingRootPasswordRequest) Send() (*hostServiceInstall
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -35489,6 +37822,17 @@ func (p *hostServiceUpdateUsingRootPasswordRequest) Send() (*hostServiceUpdateUs
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -35633,6 +37977,17 @@ func (p *hostServiceApproveUsingSshRequest) Send() (*hostServiceApproveUsingSshR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -35799,6 +38154,17 @@ func (p *hostServiceInstallUsingSshRequest) Send() (*hostServiceInstallUsingSshR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -35921,6 +38287,17 @@ func (p *hostServiceUpdateUsingSshRequest) Send() (*hostServiceUpdateUsingSshRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -36353,6 +38730,17 @@ func (p *clusterServiceGetRequest) Send() (*clusterServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -36635,6 +39023,17 @@ func (p *clusterServiceRemoveRequest) Send() (*clusterServiceRemoveResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -36758,6 +39157,17 @@ func (p *clusterServiceResetEmulatedMachineRequest) Send() (*clusterServiceReset
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -36889,6 +39299,17 @@ func (p *clusterServiceUpdateRequest) Send() (*clusterServiceUpdateResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -37212,6 +39633,17 @@ func (p *vmHostDevicesServiceAddRequest) Send() (*vmHostDevicesServiceAddRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmHostDevicesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmHostDevicesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -37385,6 +39817,17 @@ func (p *vmHostDevicesServiceListRequest) Send() (*vmHostDevicesServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmHostDevicesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmHostDevicesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -37552,6 +39995,17 @@ func (p *fileServiceGetRequest) Send() (*fileServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.fileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.fileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -37704,6 +40158,17 @@ func (p *assignedDiskProfileServiceGetRequest) Send() (*assignedDiskProfileServi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedDiskProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedDiskProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -37829,6 +40294,17 @@ func (p *assignedDiskProfileServiceRemoveRequest) Send() (*assignedDiskProfileSe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedDiskProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedDiskProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -37965,6 +40441,17 @@ func (p *diskProfilesServiceAddRequest) Send() (*diskProfilesServiceAddResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -38104,6 +40591,17 @@ func (p *diskProfilesServiceListRequest) Send() (*diskProfilesServiceListRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -38322,6 +40820,17 @@ func (p *operatingSystemsServiceListRequest) Send() (*operatingSystemsServiceLis
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.operatingSystemsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.operatingSystemsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -38508,6 +41017,17 @@ func (p *storageDomainDisksServiceAddRequest) Send() (*storageDomainDisksService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -38667,6 +41187,17 @@ func (p *storageDomainDisksServiceListRequest) Send() (*storageDomainDisksServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -38838,6 +41369,17 @@ func (p *vmGraphicsConsolesServiceAddRequest) Send() (*vmGraphicsConsolesService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmGraphicsConsolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmGraphicsConsolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -38993,6 +41535,17 @@ func (p *vmGraphicsConsolesServiceListRequest) Send() (*vmGraphicsConsolesServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmGraphicsConsolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmGraphicsConsolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -39172,6 +41725,17 @@ func (p *statisticServiceGetRequest) Send() (*statisticServiceGetResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.statisticService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.statisticService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -39347,6 +41911,17 @@ func (p *schedulingPolicyUnitsServiceListRequest) Send() (*schedulingPolicyUnits
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.schedulingPolicyUnitsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.schedulingPolicyUnitsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -39520,6 +42095,17 @@ func (p *affinityLabelVmsServiceAddRequest) Send() (*affinityLabelVmsServiceAddR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelVmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelVmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -39649,6 +42235,17 @@ func (p *affinityLabelVmsServiceListRequest) Send() (*affinityLabelVmsServiceLis
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelVmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelVmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -39863,6 +42460,17 @@ func (p *vmNicsServiceAddRequest) Send() (*vmNicsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNicsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNicsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -40086,6 +42694,17 @@ func (p *vmNicsServiceListRequest) Send() (*vmNicsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNicsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNicsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -40260,6 +42879,17 @@ func (p *moveableServiceMoveRequest) Send() (*moveableServiceMoveResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.moveableService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.moveableService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -40415,6 +43045,17 @@ func (p *eventServiceGetRequest) Send() (*eventServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.eventService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.eventService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -40596,6 +43237,17 @@ func (p *eventServiceRemoveRequest) Send() (*eventServiceRemoveResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.eventService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.eventService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -40740,6 +43392,17 @@ func (p *snapshotServiceGetRequest) Send() (*snapshotServiceGetResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -40875,6 +43538,17 @@ func (p *snapshotServiceRemoveRequest) Send() (*snapshotServiceRemoveResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -41024,6 +43698,17 @@ func (p *snapshotServiceRestoreRequest) Send() (*snapshotServiceRestoreResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -41217,6 +43902,17 @@ func (p *templateNicsServiceAddRequest) Send() (*templateNicsServiceAddResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateNicsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateNicsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -41356,6 +44052,17 @@ func (p *templateNicsServiceListRequest) Send() (*templateNicsServiceListRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateNicsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateNicsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -41548,6 +44255,17 @@ func (p *macPoolsServiceAddRequest) Send() (*macPoolsServiceAddResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.macPoolsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.macPoolsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -41731,6 +44449,17 @@ func (p *macPoolsServiceListRequest) Send() (*macPoolsServiceListResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.macPoolsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.macPoolsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -41927,6 +44656,17 @@ func (p *templateServiceExportRequest) Send() (*templateServiceExportResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -42068,6 +44808,17 @@ func (p *templateServiceGetRequest) Send() (*templateServiceGetResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -42200,6 +44951,17 @@ func (p *templateServiceRemoveRequest) Send() (*templateServiceRemoveResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -42353,6 +45115,17 @@ func (p *templateServiceUpdateRequest) Send() (*templateServiceUpdateResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -42662,6 +45435,17 @@ func (p *affinityGroupVmsServiceAddRequest) Send() (*affinityGroupVmsServiceAddR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityGroupVmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityGroupVmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -42821,6 +45605,17 @@ func (p *affinityGroupVmsServiceListRequest) Send() (*affinityGroupVmsServiceLis
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityGroupVmsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityGroupVmsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -43028,6 +45823,17 @@ func (p *imageTransfersServiceAddRequest) Send() (*imageTransfersServiceAddRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransfersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransfersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -43227,6 +46033,17 @@ func (p *imageTransfersServiceAddForDiskRequest) Send() (*imageTransfersServiceA
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransfersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransfersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -43351,6 +46168,17 @@ func (p *imageTransfersServiceAddForImageRequest) Send() (*imageTransfersService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransfersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransfersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -43475,6 +46303,17 @@ func (p *imageTransfersServiceAddForSnapshotRequest) Send() (*imageTransfersServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransfersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransfersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -43596,6 +46435,17 @@ func (p *imageTransfersServiceListRequest) Send() (*imageTransfersServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransfersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransfersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -43770,6 +46620,17 @@ func (p *affinityLabelHostServiceGetRequest) Send() (*affinityLabelHostServiceGe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelHostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelHostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -43888,6 +46749,17 @@ func (p *affinityLabelHostServiceRemoveRequest) Send() (*affinityLabelHostServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelHostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelHostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -44026,6 +46898,17 @@ func (p *storageDomainServerConnectionsServiceAddRequest) Send() (*storageDomain
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -44163,6 +47046,17 @@ func (p *storageDomainServerConnectionsServiceListRequest) Send() (*storageDomai
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainServerConnectionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainServerConnectionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -44332,6 +47226,17 @@ func (p *vmDisksServiceAddRequest) Send() (*vmDisksServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -44469,6 +47374,17 @@ func (p *vmDisksServiceListRequest) Send() (*vmDisksServiceListResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -44655,6 +47571,17 @@ func (p *vmPoolsServiceAddRequest) Send() (*vmPoolsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmPoolsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmPoolsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -44869,6 +47796,17 @@ func (p *vmPoolsServiceListRequest) Send() (*vmPoolsServiceListResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmPoolsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmPoolsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -45097,6 +48035,17 @@ func (p *vmCdromServiceGetRequest) Send() (*vmCdromServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmCdromService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmCdromService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -45311,6 +48260,17 @@ func (p *vmCdromServiceUpdateRequest) Send() (*vmCdromServiceUpdateResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmCdromService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmCdromService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -45566,6 +48526,17 @@ func (p *storageDomainTemplatesServiceListRequest) Send() (*storageDomainTemplat
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainTemplatesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainTemplatesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -45732,6 +48703,17 @@ func (p *quotaStorageLimitServiceGetRequest) Send() (*quotaStorageLimitServiceGe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaStorageLimitService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaStorageLimitService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -45857,6 +48839,17 @@ func (p *quotaStorageLimitServiceRemoveRequest) Send() (*quotaStorageLimitServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaStorageLimitService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaStorageLimitService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -46002,6 +48995,17 @@ func (p *tagServiceGetRequest) Send() (*tagServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.tagService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.tagService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -46156,6 +49160,17 @@ func (p *tagServiceRemoveRequest) Send() (*tagServiceRemoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.tagService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.tagService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -46306,6 +49321,17 @@ func (p *tagServiceUpdateRequest) Send() (*tagServiceUpdateResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.tagService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.tagService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -46521,6 +49547,17 @@ func (p *vmServiceCancelMigrationRequest) Send() (*vmServiceCancelMigrationRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -46660,6 +49697,17 @@ func (p *vmServiceCloneRequest) Send() (*vmServiceCloneResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -46772,6 +49820,17 @@ func (p *vmServiceCommitSnapshotRequest) Send() (*vmServiceCommitSnapshotRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -46897,6 +49956,17 @@ func (p *vmServiceDetachRequest) Send() (*vmServiceDetachResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -47089,6 +50159,17 @@ func (p *vmServiceExportRequest) Send() (*vmServiceExportResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -47282,6 +50363,17 @@ func (p *vmServiceFreezeFilesystemsRequest) Send() (*vmServiceFreezeFilesystemsR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -47441,6 +50533,17 @@ func (p *vmServiceGetRequest) Send() (*vmServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -47591,6 +50694,17 @@ func (p *vmServiceLogonRequest) Send() (*vmServiceLogonResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -47753,6 +50867,17 @@ func (p *vmServiceMaintenanceRequest) Send() (*vmServiceMaintenanceResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -47925,6 +51050,17 @@ func (p *vmServiceMigrateRequest) Send() (*vmServiceMigrateResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -48111,6 +51247,17 @@ func (p *vmServicePreviewSnapshotRequest) Send() (*vmServicePreviewSnapshotRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -48243,6 +51390,17 @@ func (p *vmServiceRebootRequest) Send() (*vmServiceRebootResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -48395,6 +51553,17 @@ func (p *vmServiceRemoveRequest) Send() (*vmServiceRemoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -48520,6 +51689,17 @@ func (p *vmServiceReorderMacAddressesRequest) Send() (*vmServiceReorderMacAddres
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -48642,6 +51822,17 @@ func (p *vmServiceShutdownRequest) Send() (*vmServiceShutdownResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -48848,6 +52039,17 @@ func (p *vmServiceStartRequest) Send() (*vmServiceStartResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -48996,6 +52198,17 @@ func (p *vmServiceStopRequest) Send() (*vmServiceStopResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -49143,6 +52356,17 @@ func (p *vmServiceSuspendRequest) Send() (*vmServiceSuspendResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -49292,6 +52516,17 @@ func (p *vmServiceThawFilesystemsRequest) Send() (*vmServiceThawFilesystemsRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -49468,6 +52703,17 @@ func (p *vmServiceTicketRequest) Send() (*vmServiceTicketResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -49686,6 +52932,17 @@ func (p *vmServiceExportToExportDomainRequest) Send() (*vmServiceExportToExportD
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -49849,6 +53106,17 @@ func (p *vmServiceExportToPathOnHostRequest) Send() (*vmServiceExportToPathOnHos
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -49963,6 +53231,17 @@ func (p *vmServiceUndoSnapshotRequest) Send() (*vmServiceUndoSnapshotResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -50093,6 +53372,17 @@ func (p *vmServiceUpdateRequest) Send() (*vmServiceUpdateResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -50444,6 +53734,17 @@ func (p *hostHookServiceGetRequest) Send() (*hostHookServiceGetResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostHookService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostHookService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -50596,6 +53897,17 @@ func (p *imageServiceGetRequest) Send() (*imageServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -50777,6 +54089,17 @@ func (p *imageServiceImportRequest) Send() (*imageServiceImportResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -50948,6 +54271,17 @@ func (p *qossServiceAddRequest) Send() (*qossServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.qossService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.qossService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -51130,6 +54464,17 @@ func (p *qossServiceListRequest) Send() (*qossServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.qossService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.qossService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -51337,6 +54682,17 @@ func (p *bookmarkServiceGetRequest) Send() (*bookmarkServiceGetResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.bookmarkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.bookmarkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -51494,6 +54850,17 @@ func (p *bookmarkServiceRemoveRequest) Send() (*bookmarkServiceRemoveResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.bookmarkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.bookmarkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -51638,6 +55005,17 @@ func (p *bookmarkServiceUpdateRequest) Send() (*bookmarkServiceUpdateResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.bookmarkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.bookmarkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -51818,6 +55196,17 @@ func (p *networkLabelServiceGetRequest) Send() (*networkLabelServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -51949,6 +55338,17 @@ func (p *networkLabelServiceRemoveRequest) Send() (*networkLabelServiceRemoveRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -52093,6 +55493,17 @@ func (p *storageServerConnectionServiceGetRequest) Send() (*storageServerConnect
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -52243,6 +55654,17 @@ func (p *storageServerConnectionServiceUpdateIscsiRequest) Send() (*storageServe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -52388,6 +55810,17 @@ func (p *storageServerConnectionServiceUpdateLocalRequest) Send() (*storageServe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -52533,6 +55966,17 @@ func (p *storageServerConnectionServiceUpdateNfsRequest) Send() (*storageServerC
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -52666,6 +56110,17 @@ func (p *storageServerConnectionServiceRemoveRequest) Send() (*storageServerConn
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -52816,6 +56271,17 @@ func (p *storageServerConnectionServiceUpdateRequest) Send() (*storageServerConn
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -52998,6 +56464,17 @@ func (p *storageServerConnectionServiceUpdateVfsRequest) Send() (*storageServerC
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -53160,6 +56637,17 @@ func (p *clusterNetworksServiceAddRequest) Send() (*clusterNetworksServiceAddRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterNetworksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterNetworksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -53319,6 +56807,17 @@ func (p *clusterNetworksServiceListRequest) Send() (*clusterNetworksServiceListR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterNetworksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterNetworksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -53489,6 +56988,17 @@ func (p *clusterExternalProvidersServiceListRequest) Send() (*clusterExternalPro
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterExternalProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterExternalProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -53658,6 +57168,17 @@ func (p *snapshotCdromsServiceListRequest) Send() (*snapshotCdromsServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotCdromsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotCdromsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -53839,6 +57360,17 @@ func (p *externalProviderCertificateServiceGetRequest) Send() (*externalProvider
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalProviderCertificateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalProviderCertificateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -54073,6 +57605,17 @@ func (p *snapshotsServiceAddRequest) Send() (*snapshotsServiceAddResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -54320,6 +57863,17 @@ func (p *snapshotsServiceListRequest) Send() (*snapshotsServiceListResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -54486,6 +58040,17 @@ func (p *hostNumaNodeServiceGetRequest) Send() (*hostNumaNodeServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostNumaNodeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostNumaNodeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -54651,6 +58216,17 @@ func (p *templateGraphicsConsoleServiceGetRequest) Send() (*templateGraphicsCons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -54779,6 +58355,17 @@ func (p *templateGraphicsConsoleServiceRemoveRequest) Send() (*templateGraphicsC
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -54930,6 +58517,17 @@ func (p *vmGraphicsConsoleServiceGetRequest) Send() (*vmGraphicsConsoleServiceGe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -55077,6 +58675,17 @@ func (p *vmGraphicsConsoleServiceProxyTicketRequest) Send() (*vmGraphicsConsoleS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -55259,6 +58868,17 @@ func (p *vmGraphicsConsoleServiceRemoteViewerConnectionFileRequest) Send() (*vmG
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -55509,6 +59129,17 @@ func (p *vmGraphicsConsoleServiceRemoveRequest) Send() (*vmGraphicsConsoleServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -55638,6 +59269,17 @@ func (p *vmGraphicsConsoleServiceTicketRequest) Send() (*vmGraphicsConsoleServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -55815,6 +59457,17 @@ func (p *quotaClusterLimitServiceGetRequest) Send() (*quotaClusterLimitServiceGe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaClusterLimitService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaClusterLimitService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -55940,6 +59593,17 @@ func (p *quotaClusterLimitServiceRemoveRequest) Send() (*quotaClusterLimitServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaClusterLimitService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaClusterLimitService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -56089,6 +59753,17 @@ func (p *qosServiceGetRequest) Send() (*qosServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.qosService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.qosService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -56253,6 +59928,17 @@ func (p *qosServiceRemoveRequest) Send() (*qosServiceRemoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.qosService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.qosService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -56405,6 +60091,17 @@ func (p *qosServiceUpdateRequest) Send() (*qosServiceUpdateResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.qosService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.qosService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -56618,6 +60315,17 @@ func (p *hostNicsServiceListRequest) Send() (*hostNicsServiceListResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostNicsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostNicsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -56788,6 +60496,17 @@ func (p *externalNetworkProviderConfigurationsServiceListRequest) Send() (*exter
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalNetworkProviderConfigurationsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalNetworkProviderConfigurationsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -56954,6 +60673,17 @@ func (p *templateNicServiceGetRequest) Send() (*templateNicServiceGetResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -57079,6 +60809,17 @@ func (p *templateNicServiceRemoveRequest) Send() (*templateNicServiceRemoveRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -57198,6 +60939,17 @@ func (p *templateNicServiceUpdateRequest) Send() (*templateNicServiceUpdateRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -57369,6 +61121,17 @@ func (p *bookmarksServiceAddRequest) Send() (*bookmarksServiceAddResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.bookmarksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.bookmarksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -57550,6 +61313,17 @@ func (p *bookmarksServiceListRequest) Send() (*bookmarksServiceListResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.bookmarksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.bookmarksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -57766,6 +61540,17 @@ func (p *snapshotDisksServiceListRequest) Send() (*snapshotDisksServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -57936,6 +61721,17 @@ func (p *assignedCpuProfilesServiceAddRequest) Send() (*assignedCpuProfilesServi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedCpuProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedCpuProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -58075,6 +61871,17 @@ func (p *assignedCpuProfilesServiceListRequest) Send() (*assignedCpuProfilesServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedCpuProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedCpuProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -58260,6 +62067,17 @@ func (p *nicNetworkFilterParametersServiceAddRequest) Send() (*nicNetworkFilterP
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.nicNetworkFilterParametersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.nicNetworkFilterParametersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -58417,6 +62235,17 @@ func (p *nicNetworkFilterParametersServiceListRequest) Send() (*nicNetworkFilter
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.nicNetworkFilterParametersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.nicNetworkFilterParametersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -58586,6 +62415,17 @@ func (p *templateDiskAttachmentServiceGetRequest) Send() (*templateDiskAttachmen
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateDiskAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateDiskAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -58731,6 +62571,17 @@ func (p *templateDiskAttachmentServiceRemoveRequest) Send() (*templateDiskAttach
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateDiskAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateDiskAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -58879,6 +62730,17 @@ func (p *virtualFunctionAllowedNetworkServiceGetRequest) Send() (*virtualFunctio
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.virtualFunctionAllowedNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.virtualFunctionAllowedNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -59004,6 +62866,17 @@ func (p *virtualFunctionAllowedNetworkServiceRemoveRequest) Send() (*virtualFunc
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.virtualFunctionAllowedNetworkService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.virtualFunctionAllowedNetworkService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -59153,6 +63026,17 @@ func (p *networkLabelsServiceAddRequest) Send() (*networkLabelsServiceAddRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -59316,6 +63200,17 @@ func (p *networkLabelsServiceListRequest) Send() (*networkLabelsServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -59524,6 +63419,17 @@ func (p *clustersServiceAddRequest) Send() (*clustersServiceAddResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clustersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clustersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -59768,6 +63674,17 @@ func (p *clustersServiceListRequest) Send() (*clustersServiceListResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clustersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clustersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -59940,6 +63857,17 @@ func (p *assignedAffinityLabelServiceGetRequest) Send() (*assignedAffinityLabelS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedAffinityLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedAffinityLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -60058,6 +63986,17 @@ func (p *assignedAffinityLabelServiceRemoveRequest) Send() (*assignedAffinityLab
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedAffinityLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedAffinityLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -60202,6 +64141,17 @@ func (p *weightServiceGetRequest) Send() (*weightServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.weightService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.weightService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -60327,6 +64277,17 @@ func (p *weightServiceRemoveRequest) Send() (*weightServiceRemoveResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.weightService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.weightService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -60459,6 +64420,17 @@ func (p *diskProfileServiceGetRequest) Send() (*diskProfileServiceGetResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -60584,6 +64556,17 @@ func (p *diskProfileServiceRemoveRequest) Send() (*diskProfileServiceRemoveRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -60703,6 +64686,17 @@ func (p *diskProfileServiceUpdateRequest) Send() (*diskProfileServiceUpdateRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -60935,6 +64929,17 @@ func (p *storageDomainsServiceAddRequest) Send() (*storageDomainsServiceAddRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -61191,6 +65196,17 @@ func (p *storageDomainsServiceAddBlockDomainRequest) Send() (*storageDomainsServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -61318,6 +65334,17 @@ func (p *storageDomainsServiceAddByPathRequest) Send() (*storageDomainsServiceAd
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -61445,6 +65472,17 @@ func (p *storageDomainsServiceAddDirectLunRequest) Send() (*storageDomainsServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -61572,6 +65610,17 @@ func (p *storageDomainsServiceAddGlusterOrPostfsRequest) Send() (*storageDomains
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -61735,6 +65784,17 @@ func (p *storageDomainsServiceListRequest) Send() (*storageDomainsServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -61873,6 +65933,17 @@ func (p *storageDomainsServiceAddLocalRequest) Send() (*storageDomainsServiceAdd
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -62046,6 +66117,17 @@ func (p *clusterEnabledFeaturesServiceAddRequest) Send() (*clusterEnabledFeature
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterEnabledFeaturesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterEnabledFeaturesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -62209,6 +66291,17 @@ func (p *clusterEnabledFeaturesServiceListRequest) Send() (*clusterEnabledFeatur
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterEnabledFeaturesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterEnabledFeaturesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -62405,6 +66498,17 @@ func (p *snapshotCdromServiceGetRequest) Send() (*snapshotCdromServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotCdromService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotCdromService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -62562,6 +66666,17 @@ func (p *quotaClusterLimitsServiceAddRequest) Send() (*quotaClusterLimitsService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaClusterLimitsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaClusterLimitsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -62701,6 +66816,17 @@ func (p *quotaClusterLimitsServiceListRequest) Send() (*quotaClusterLimitsServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaClusterLimitsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaClusterLimitsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -62872,6 +66998,17 @@ func (p *fenceAgentsServiceAddRequest) Send() (*fenceAgentsServiceAddResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.fenceAgentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.fenceAgentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -63030,6 +67167,17 @@ func (p *fenceAgentsServiceListRequest) Send() (*fenceAgentsServiceListResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.fenceAgentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.fenceAgentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -63237,6 +67385,17 @@ func (p *instanceTypeWatchdogServiceGetRequest) Send() (*instanceTypeWatchdogSer
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -63365,6 +67524,17 @@ func (p *instanceTypeWatchdogServiceRemoveRequest) Send() (*instanceTypeWatchdog
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -63486,6 +67656,17 @@ func (p *instanceTypeWatchdogServiceUpdateRequest) Send() (*instanceTypeWatchdog
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -63690,6 +67871,17 @@ func (p *assignedPermissionsServiceAddRequest) Send() (*assignedPermissionsServi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -63914,6 +68106,17 @@ func (p *assignedPermissionsServiceAddClusterPermissionRequest) Send() (*assigne
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -64041,6 +68244,17 @@ func (p *assignedPermissionsServiceAddDataCenterPermissionRequest) Send() (*assi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -64168,6 +68382,17 @@ func (p *assignedPermissionsServiceAddGroupLevelRequest) Send() (*assignedPermis
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -64295,6 +68520,17 @@ func (p *assignedPermissionsServiceAddHostPermissionRequest) Send() (*assignedPe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -64436,6 +68672,17 @@ func (p *assignedPermissionsServiceListRequest) Send() (*assignedPermissionsServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -64610,6 +68857,17 @@ func (p *assignedPermissionsServiceAddStorageDomainPermissionRequest) Send() (*a
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -64737,6 +68995,17 @@ func (p *assignedPermissionsServiceAddTemplatePermissionRequest) Send() (*assign
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -64864,6 +69133,17 @@ func (p *assignedPermissionsServiceAddUserLevelRequest) Send() (*assignedPermiss
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -64991,6 +69271,17 @@ func (p *assignedPermissionsServiceAddVmPermissionRequest) Send() (*assignedPerm
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -65118,6 +69409,17 @@ func (p *assignedPermissionsServiceAddVmPoolPermissionRequest) Send() (*assigned
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedPermissionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedPermissionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -65292,6 +69594,17 @@ func (p *permitServiceGetRequest) Send() (*permitServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.permitService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.permitService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -65450,6 +69763,17 @@ func (p *permitServiceRemoveRequest) Send() (*permitServiceRemoveResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.permitService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.permitService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -65666,6 +69990,17 @@ func (p *systemServiceGetRequest) Send() (*systemServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -65947,6 +70282,17 @@ func (p *systemServiceReloadConfigurationsRequest) Send() (*systemServiceReloadC
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -66555,6 +70901,17 @@ func (p *vmWatchdogServiceGetRequest) Send() (*vmWatchdogServiceGetResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -66688,6 +71045,17 @@ func (p *vmWatchdogServiceRemoveRequest) Send() (*vmWatchdogServiceRemoveRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -66837,6 +71205,17 @@ func (p *vmWatchdogServiceUpdateRequest) Send() (*vmWatchdogServiceUpdateRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmWatchdogService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmWatchdogService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -67039,6 +71418,17 @@ func (p *unmanagedNetworksServiceListRequest) Send() (*unmanagedNetworksServiceL
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.unmanagedNetworksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.unmanagedNetworksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -67217,6 +71607,17 @@ func (p *hostNumaNodesServiceListRequest) Send() (*hostNumaNodesServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostNumaNodesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostNumaNodesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -67393,6 +71794,17 @@ func (p *filterServiceGetRequest) Send() (*filterServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.filterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.filterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -67518,6 +71930,17 @@ func (p *filterServiceRemoveRequest) Send() (*filterServiceRemoveResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.filterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.filterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -67650,6 +72073,17 @@ func (p *storageServerConnectionExtensionServiceGetRequest) Send() (*storageServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionExtensionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionExtensionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -67775,6 +72209,17 @@ func (p *storageServerConnectionExtensionServiceRemoveRequest) Send() (*storageS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionExtensionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionExtensionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -67908,6 +72353,17 @@ func (p *storageServerConnectionExtensionServiceUpdateRequest) Send() (*storageS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionExtensionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionExtensionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -68136,6 +72592,17 @@ func (p *dataCenterServiceGetRequest) Send() (*dataCenterServiceGetResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCenterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCenterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -68352,6 +72819,17 @@ func (p *dataCenterServiceRemoveRequest) Send() (*dataCenterServiceRemoveRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCenterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCenterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -68507,6 +72985,17 @@ func (p *dataCenterServiceUpdateRequest) Send() (*dataCenterServiceUpdateRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCenterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCenterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -68812,6 +73301,17 @@ func (p *clusterFeaturesServiceListRequest) Send() (*clusterFeaturesServiceListR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterFeaturesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterFeaturesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -69033,6 +73533,17 @@ func (p *externalVmImportsServiceAddRequest) Send() (*externalVmImportsServiceAd
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalVmImportsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalVmImportsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -69245,6 +73756,17 @@ func (p *hostHooksServiceListRequest) Send() (*hostHooksServiceListResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.hostHooksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.hostHooksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -69424,6 +73946,17 @@ func (p *diskSnapshotsServiceListRequest) Send() (*diskSnapshotsServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskSnapshotsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskSnapshotsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -69594,6 +74127,17 @@ func (p *instanceTypeGraphicsConsolesServiceAddRequest) Send() (*instanceTypeGra
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeGraphicsConsolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeGraphicsConsolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -69733,6 +74277,17 @@ func (p *instanceTypeGraphicsConsolesServiceListRequest) Send() (*instanceTypeGr
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeGraphicsConsolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeGraphicsConsolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -69907,6 +74462,17 @@ func (p *affinityLabelHostsServiceAddRequest) Send() (*affinityLabelHostsService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelHostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelHostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -70036,6 +74602,17 @@ func (p *affinityLabelHostsServiceListRequest) Send() (*affinityLabelHostsServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelHostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelHostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -70204,6 +74781,17 @@ func (p *storageDomainVmServiceGetRequest) Send() (*storageDomainVmServiceGetRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainVmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainVmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -70439,6 +75027,17 @@ func (p *storageDomainVmServiceImportRequest) Send() (*storageDomainVmServiceImp
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainVmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainVmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -70720,6 +75319,17 @@ func (p *storageDomainVmServiceRegisterRequest) Send() (*storageDomainVmServiceR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainVmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainVmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -70828,6 +75438,17 @@ func (p *storageDomainVmServiceRemoveRequest) Send() (*storageDomainVmServiceRem
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainVmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainVmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -71014,6 +75635,17 @@ func (p *quotaServiceGetRequest) Send() (*quotaServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -71182,6 +75814,17 @@ func (p *quotaServiceRemoveRequest) Send() (*quotaServiceRemoveResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -71333,6 +75976,17 @@ func (p *quotaServiceUpdateRequest) Send() (*quotaServiceUpdateResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotaService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotaService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -71570,6 +76224,17 @@ func (p *clusterLevelsServiceListRequest) Send() (*clusterLevelsServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterLevelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterLevelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -71779,6 +76444,17 @@ func (p *clusterFeatureServiceGetRequest) Send() (*clusterFeatureServiceGetRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterFeatureService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterFeatureService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -72000,6 +76676,17 @@ func (p *diskAttachmentsServiceAddRequest) Send() (*diskAttachmentsServiceAddRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskAttachmentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskAttachmentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -72201,6 +76888,17 @@ func (p *diskAttachmentsServiceListRequest) Send() (*diskAttachmentsServiceListR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskAttachmentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskAttachmentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -72336,6 +77034,17 @@ func (p *diskAttachmentsServiceAddProvidingDiskIdRequest) Send() (*diskAttachmen
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskAttachmentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskAttachmentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -72460,6 +77169,17 @@ func (p *diskAttachmentsServiceAddSignature1Request) Send() (*diskAttachmentsSer
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskAttachmentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskAttachmentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -72618,6 +77338,17 @@ func (p *affinityGroupVmServiceRemoveRequest) Send() (*affinityGroupVmServiceRem
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityGroupVmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityGroupVmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -72772,6 +77503,17 @@ func (p *attachedStorageDomainDisksServiceAddRequest) Send() (*attachedStorageDo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -72920,6 +77662,17 @@ func (p *attachedStorageDomainDisksServiceListRequest) Send() (*attachedStorageD
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -73101,6 +77854,17 @@ func (p *permitsServiceAddRequest) Send() (*permitsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.permitsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.permitsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -73281,6 +78045,17 @@ func (p *permitsServiceListRequest) Send() (*permitsServiceListResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.permitsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.permitsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -73488,6 +78263,17 @@ func (p *vnicProfileServiceGetRequest) Send() (*vnicProfileServiceGetResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vnicProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vnicProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -73616,6 +78402,17 @@ func (p *vnicProfileServiceRemoveRequest) Send() (*vnicProfileServiceRemoveRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vnicProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vnicProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -73737,6 +78534,17 @@ func (p *vnicProfileServiceUpdateRequest) Send() (*vnicProfileServiceUpdateRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vnicProfileService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vnicProfileService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -73907,6 +78715,17 @@ func (p *templateWatchdogsServiceAddRequest) Send() (*templateWatchdogsServiceAd
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateWatchdogsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateWatchdogsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -74046,6 +78865,17 @@ func (p *templateWatchdogsServiceListRequest) Send() (*templateWatchdogsServiceL
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateWatchdogsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateWatchdogsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -74235,6 +79065,17 @@ func (p *vmApplicationsServiceListRequest) Send() (*vmApplicationsServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmApplicationsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmApplicationsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -74406,6 +79247,17 @@ func (p *templateDiskAttachmentsServiceListRequest) Send() (*templateDiskAttachm
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateDiskAttachmentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateDiskAttachmentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -74574,6 +79426,17 @@ func (p *instanceTypeGraphicsConsoleServiceGetRequest) Send() (*instanceTypeGrap
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -74702,6 +79565,17 @@ func (p *instanceTypeGraphicsConsoleServiceRemoveRequest) Send() (*instanceTypeG
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeGraphicsConsoleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeGraphicsConsoleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -74909,6 +79783,17 @@ func (p *diskServiceCopyRequest) Send() (*diskServiceCopyResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -75090,6 +79975,17 @@ func (p *diskServiceExportRequest) Send() (*diskServiceExportResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -75195,6 +80091,17 @@ func (p *diskServiceGetRequest) Send() (*diskServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -75389,6 +80296,17 @@ func (p *diskServiceMoveRequest) Send() (*diskServiceMoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -75572,6 +80490,17 @@ func (p *diskServiceRefreshLunRequest) Send() (*diskServiceRefreshLunResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -75709,6 +80638,17 @@ func (p *diskServiceRemoveRequest) Send() (*diskServiceRemoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -75820,6 +80760,17 @@ func (p *diskServiceSparsifyRequest) Send() (*diskServiceSparsifyResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -75951,6 +80902,17 @@ func (p *diskServiceUpdateRequest) Send() (*diskServiceUpdateResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -76160,6 +81122,17 @@ func (p *vmNumaNodeServiceGetRequest) Send() (*vmNumaNodeServiceGetResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNumaNodeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNumaNodeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -76291,6 +81264,17 @@ func (p *vmNumaNodeServiceRemoveRequest) Send() (*vmNumaNodeServiceRemoveRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNumaNodeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNumaNodeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -76438,6 +81422,17 @@ func (p *vmNumaNodeServiceUpdateRequest) Send() (*vmNumaNodeServiceUpdateRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNumaNodeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNumaNodeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -76635,6 +81630,17 @@ func (p *affinityGroupServiceGetRequest) Send() (*affinityGroupServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityGroupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityGroupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -76785,6 +81791,17 @@ func (p *affinityGroupServiceRemoveRequest) Send() (*affinityGroupServiceRemoveR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityGroupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityGroupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -76914,6 +81931,17 @@ func (p *affinityGroupServiceUpdateRequest) Send() (*affinityGroupServiceUpdateR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityGroupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityGroupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -77100,6 +82128,17 @@ func (p *quotasServiceAddRequest) Send() (*quotasServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotasService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotasService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -77263,6 +82302,17 @@ func (p *quotasServiceListRequest) Send() (*quotasServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.quotasService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.quotasService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -77463,6 +82513,17 @@ func (p *storageDomainContentDisksServiceListRequest) Send() (*storageDomainCont
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainContentDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainContentDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -77646,6 +82707,17 @@ func (p *networkFilterServiceGetRequest) Send() (*networkFilterServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networkFilterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networkFilterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -77814,6 +82886,17 @@ func (p *iconServiceGetRequest) Send() (*iconServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.iconService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.iconService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -78004,6 +83087,17 @@ func (p *templateDisksServiceListRequest) Send() (*templateDisksServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -78183,6 +83277,17 @@ func (p *imagesServiceListRequest) Send() (*imagesServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imagesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imagesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -78371,6 +83476,17 @@ func (p *storageDomainDiskServiceCopyRequest) Send() (*storageDomainDiskServiceC
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -78491,6 +83607,17 @@ func (p *storageDomainDiskServiceExportRequest) Send() (*storageDomainDiskServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -78602,6 +83729,17 @@ func (p *storageDomainDiskServiceGetRequest) Send() (*storageDomainDiskServiceGe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -78757,6 +83895,17 @@ func (p *storageDomainDiskServiceMoveRequest) Send() (*storageDomainDiskServiceM
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -78861,6 +84010,17 @@ func (p *storageDomainDiskServiceRemoveRequest) Send() (*storageDomainDiskServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -78977,6 +84137,17 @@ func (p *storageDomainDiskServiceSparsifyRequest) Send() (*storageDomainDiskServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -79094,6 +84265,17 @@ func (p *storageDomainDiskServiceUpdateRequest) Send() (*storageDomainDiskServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -79292,6 +84474,17 @@ func (p *assignedRolesServiceListRequest) Send() (*assignedRolesServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedRolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedRolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -79479,6 +84672,17 @@ func (p *vmPoolServiceAllocateVmRequest) Send() (*vmPoolServiceAllocateVmRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmPoolService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmPoolService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -79638,6 +84842,17 @@ func (p *vmPoolServiceGetRequest) Send() (*vmPoolServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmPoolService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmPoolService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -79818,6 +85033,17 @@ func (p *vmPoolServiceRemoveRequest) Send() (*vmPoolServiceRemoveResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmPoolService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmPoolService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -79964,6 +85190,17 @@ func (p *vmPoolServiceUpdateRequest) Send() (*vmPoolServiceUpdateResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmPoolService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmPoolService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -80185,6 +85422,17 @@ func (p *storageServerConnectionExtensionsServiceAddRequest) Send() (*storageSer
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionExtensionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionExtensionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -80356,6 +85604,17 @@ func (p *storageServerConnectionExtensionsServiceListRequest) Send() (*storageSe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageServerConnectionExtensionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageServerConnectionExtensionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -80525,6 +85784,17 @@ func (p *virtualFunctionAllowedNetworksServiceAddRequest) Send() (*virtualFuncti
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.virtualFunctionAllowedNetworksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.virtualFunctionAllowedNetworksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -80662,6 +85932,17 @@ func (p *virtualFunctionAllowedNetworksServiceListRequest) Send() (*virtualFunct
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.virtualFunctionAllowedNetworksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.virtualFunctionAllowedNetworksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -80832,6 +86113,17 @@ func (p *cpuProfilesServiceAddRequest) Send() (*cpuProfilesServiceAddResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.cpuProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.cpuProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -80971,6 +86263,17 @@ func (p *cpuProfilesServiceListRequest) Send() (*cpuProfilesServiceListResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.cpuProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.cpuProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -81150,6 +86453,17 @@ func (p *templateCdromsServiceListRequest) Send() (*templateCdromsServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateCdromsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateCdromsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -81336,6 +86650,17 @@ func (p *fenceAgentServiceGetRequest) Send() (*fenceAgentServiceGetResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.fenceAgentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.fenceAgentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -81502,6 +86827,17 @@ func (p *fenceAgentServiceRemoveRequest) Send() (*fenceAgentServiceRemoveRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.fenceAgentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.fenceAgentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -81631,6 +86967,17 @@ func (p *fenceAgentServiceUpdateRequest) Send() (*fenceAgentServiceUpdateRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.fenceAgentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.fenceAgentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -81785,6 +87132,17 @@ func (p *snapshotNicServiceGetRequest) Send() (*snapshotNicServiceGetResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.snapshotNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.snapshotNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -81954,6 +87312,17 @@ func (p *diskAttachmentServiceGetRequest) Send() (*diskAttachmentServiceGetRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -82119,6 +87488,17 @@ func (p *diskAttachmentServiceRemoveRequest) Send() (*diskAttachmentServiceRemov
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -82258,6 +87638,17 @@ func (p *diskAttachmentServiceUpdateRequest) Send() (*diskAttachmentServiceUpdat
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.diskAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.diskAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -82444,6 +87835,17 @@ func (p *affinityLabelVmServiceGetRequest) Send() (*affinityLabelVmServiceGetRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelVmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelVmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -82562,6 +87964,17 @@ func (p *affinityLabelVmServiceRemoveRequest) Send() (*affinityLabelVmServiceRem
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityLabelVmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityLabelVmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -82726,6 +88139,17 @@ func (p *clusterLevelServiceGetRequest) Send() (*clusterLevelServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterLevelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterLevelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -82951,6 +88375,17 @@ func (p *instanceTypeNicsServiceAddRequest) Send() (*instanceTypeNicsServiceAddR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeNicsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeNicsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -83100,6 +88535,17 @@ func (p *instanceTypeNicsServiceListRequest) Send() (*instanceTypeNicsServiceLis
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeNicsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeNicsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -83300,6 +88746,17 @@ func (p *eventsServiceAddRequest) Send() (*eventsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.eventsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.eventsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -83568,6 +89025,17 @@ func (p *eventsServiceListRequest) Send() (*eventsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.eventsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.eventsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -83787,6 +89255,17 @@ func (p *eventsServiceUndeleteRequest) Send() (*eventsServiceUndeleteResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.eventsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.eventsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -83975,6 +89454,17 @@ func (p *networksServiceAddRequest) Send() (*networksServiceAddResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -84240,6 +89730,17 @@ func (p *networksServiceListRequest) Send() (*networksServiceListResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.networksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.networksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -84479,6 +89980,17 @@ func (p *jobServiceClearRequest) Send() (*jobServiceClearResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.jobService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.jobService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -84643,6 +90155,17 @@ func (p *jobServiceEndRequest) Send() (*jobServiceEndResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.jobService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.jobService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -84797,6 +90320,17 @@ func (p *jobServiceGetRequest) Send() (*jobServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.jobService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.jobService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -85053,6 +90587,17 @@ func (p *systemOptionServiceGetRequest) Send() (*systemOptionServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.systemOptionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.systemOptionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -85297,6 +90842,17 @@ func (p *storageDomainServiceGetRequest) Send() (*storageDomainServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -85440,6 +90996,17 @@ func (p *storageDomainServiceIsAttachedRequest) Send() (*storageDomainServiceIsA
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -85599,6 +91166,17 @@ func (p *storageDomainServiceReduceLunsRequest) Send() (*storageDomainServiceRed
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -85784,6 +91362,17 @@ func (p *storageDomainServiceRefreshLunsRequest) Send() (*storageDomainServiceRe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -85964,6 +91553,17 @@ func (p *storageDomainServiceRemoveRequest) Send() (*storageDomainServiceRemoveR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -86117,6 +91717,17 @@ func (p *storageDomainServiceUpdateRequest) Send() (*storageDomainServiceUpdateR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -86301,6 +91912,17 @@ func (p *storageDomainServiceUpdateOvfStoreRequest) Send() (*storageDomainServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -86571,6 +92193,17 @@ func (p *assignedVnicProfilesServiceAddRequest) Send() (*assignedVnicProfilesSer
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedVnicProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedVnicProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -86710,6 +92343,17 @@ func (p *assignedVnicProfilesServiceListRequest) Send() (*assignedVnicProfilesSe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedVnicProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedVnicProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -87092,6 +92736,17 @@ func (p *imageTransferServiceExtendRequest) Send() (*imageTransferServiceExtendR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransferService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransferService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -87200,6 +92855,17 @@ func (p *imageTransferServiceFinalizeRequest) Send() (*imageTransferServiceFinal
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransferService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransferService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -87313,6 +92979,17 @@ func (p *imageTransferServiceGetRequest) Send() (*imageTransferServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransferService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransferService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -87440,6 +93117,17 @@ func (p *imageTransferServicePauseRequest) Send() (*imageTransferServicePauseRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransferService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransferService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -87554,6 +93242,17 @@ func (p *imageTransferServiceResumeRequest) Send() (*imageTransferServiceResumeR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.imageTransferService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.imageTransferService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -87721,6 +93420,17 @@ func (p *roleServiceGetRequest) Send() (*roleServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.roleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.roleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -87884,6 +93594,17 @@ func (p *roleServiceRemoveRequest) Send() (*roleServiceRemoveResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.roleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.roleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -88031,6 +93752,17 @@ func (p *roleServiceUpdateRequest) Send() (*roleServiceUpdateResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.roleService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.roleService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -88238,6 +93970,17 @@ func (p *vmNicServiceActivateRequest) Send() (*vmNicServiceActivateResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -88348,6 +94091,17 @@ func (p *vmNicServiceDeactivateRequest) Send() (*vmNicServiceDeactivateResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -88450,6 +94204,17 @@ func (p *vmNicServiceGetRequest) Send() (*vmNicServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -88590,6 +94355,17 @@ func (p *vmNicServiceRemoveRequest) Send() (*vmNicServiceRemoveResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -88763,6 +94539,17 @@ func (p *vmNicServiceUpdateRequest) Send() (*vmNicServiceUpdateResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNicService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNicService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -89003,6 +94790,17 @@ func (p *operatingSystemServiceGetRequest) Send() (*operatingSystemServiceGetRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.operatingSystemService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.operatingSystemService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -89160,6 +94958,17 @@ func (p *attachedStorageDomainsServiceAddRequest) Send() (*attachedStorageDomain
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -89299,6 +95108,17 @@ func (p *attachedStorageDomainsServiceListRequest) Send() (*attachedStorageDomai
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -89481,6 +95301,17 @@ func (p *externalProviderServiceImportCertificatesRequest) Send() (*externalProv
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -89599,6 +95430,17 @@ func (p *externalProviderServiceTestConnectivityRequest) Send() (*externalProvid
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -89765,6 +95607,17 @@ func (p *vmApplicationServiceGetRequest) Send() (*vmApplicationServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmApplicationService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmApplicationService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -89923,6 +95776,17 @@ func (p *weightsServiceAddRequest) Send() (*weightsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.weightsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.weightsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -90072,6 +95936,17 @@ func (p *weightsServiceListRequest) Send() (*weightsServiceListResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.weightsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.weightsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -90298,6 +96173,17 @@ func (p *statisticsServiceListRequest) Send() (*statisticsServiceListResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.statisticsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.statisticsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -90584,6 +96470,17 @@ func (p *affinityGroupsServiceAddRequest) Send() (*affinityGroupsServiceAddRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityGroupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityGroupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -90761,6 +96658,17 @@ func (p *affinityGroupsServiceListRequest) Send() (*affinityGroupsServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.affinityGroupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.affinityGroupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -90943,6 +96851,17 @@ func (p *assignedTagServiceGetRequest) Send() (*assignedTagServiceGetResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedTagService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedTagService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -91101,6 +97020,17 @@ func (p *assignedTagServiceRemoveRequest) Send() (*assignedTagServiceRemoveRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedTagService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedTagService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -91263,6 +97193,17 @@ func (p *attachedStorageDomainServiceActivateRequest) Send() (*attachedStorageDo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -91421,6 +97362,17 @@ func (p *attachedStorageDomainServiceDeactivateRequest) Send() (*attachedStorage
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -91553,6 +97505,17 @@ func (p *attachedStorageDomainServiceGetRequest) Send() (*attachedStorageDomainS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -91678,6 +97641,17 @@ func (p *attachedStorageDomainServiceRemoveRequest) Send() (*attachedStorageDoma
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.attachedStorageDomainService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.attachedStorageDomainService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -91862,6 +97836,17 @@ func (p *katelloErrataServiceListRequest) Send() (*katelloErrataServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.katelloErrataService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.katelloErrataService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -92116,6 +98101,17 @@ func (p *externalHostGroupsServiceListRequest) Send() (*externalHostGroupsServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostGroupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostGroupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -92350,6 +98346,17 @@ func (p *katelloErratumServiceGetRequest) Send() (*katelloErratumServiceGetRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.katelloErratumService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.katelloErratumService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -92591,6 +98598,17 @@ func (p *externalDiscoveredHostsServiceListRequest) Send() (*externalDiscoveredH
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalDiscoveredHostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalDiscoveredHostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -92833,6 +98851,17 @@ func (p *externalHostGroupServiceGetRequest) Send() (*externalHostGroupServiceGe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostGroupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostGroupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -93023,6 +99052,17 @@ func (p *externalHostProvidersServiceAddRequest) Send() (*externalHostProvidersS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -93162,6 +99202,17 @@ func (p *externalHostProvidersServiceListRequest) Send() (*externalHostProviders
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostProvidersService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostProvidersService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -93348,6 +99399,17 @@ func (p *externalComputeResourceServiceGetRequest) Send() (*externalComputeResou
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalComputeResourceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalComputeResourceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -93566,6 +99628,17 @@ func (p *externalComputeResourcesServiceListRequest) Send() (*externalComputeRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalComputeResourcesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalComputeResourcesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -93769,6 +99842,17 @@ func (p *externalHostServiceGetRequest) Send() (*externalHostServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -93941,6 +100025,17 @@ func (p *externalDiscoveredHostServiceGetRequest) Send() (*externalDiscoveredHos
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalDiscoveredHostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalDiscoveredHostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -94151,6 +100246,17 @@ func (p *externalHostProviderServiceGetRequest) Send() (*externalHostProviderSer
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -94325,6 +100431,17 @@ func (p *externalHostProviderServiceImportCertificatesRequest) Send() (*external
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -94429,6 +100546,17 @@ func (p *externalHostProviderServiceRemoveRequest) Send() (*externalHostProvider
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -94548,6 +100676,17 @@ func (p *externalHostProviderServiceTestConnectivityRequest) Send() (*externalHo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -94676,6 +100815,17 @@ func (p *externalHostProviderServiceUpdateRequest) Send() (*externalHostProvider
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostProviderService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostProviderService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -94931,6 +101081,17 @@ func (p *engineKatelloErrataServiceListRequest) Send() (*engineKatelloErrataServ
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.engineKatelloErrataService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.engineKatelloErrataService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -95163,6 +101324,17 @@ func (p *externalHostsServiceListRequest) Send() (*externalHostsServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalHostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalHostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -95332,6 +101504,17 @@ func (p *storageDomainVmDiskAttachmentsServiceListRequest) Send() (*storageDomai
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainVmDiskAttachmentsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainVmDiskAttachmentsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -95501,6 +101684,17 @@ func (p *nicNetworkFilterParameterServiceGetRequest) Send() (*nicNetworkFilterPa
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.nicNetworkFilterParameterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.nicNetworkFilterParameterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -95625,6 +101819,17 @@ func (p *nicNetworkFilterParameterServiceRemoveRequest) Send() (*nicNetworkFilte
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.nicNetworkFilterParameterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.nicNetworkFilterParameterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -95762,6 +101967,17 @@ func (p *nicNetworkFilterParameterServiceUpdateRequest) Send() (*nicNetworkFilte
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.nicNetworkFilterParameterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.nicNetworkFilterParameterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -95944,6 +102160,17 @@ func (p *vmSessionServiceGetRequest) Send() (*vmSessionServiceGetResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmSessionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmSessionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -96121,6 +102348,17 @@ func (p *templateDiskServiceCopyRequest) Send() (*templateDiskServiceCopyRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -96249,6 +102487,17 @@ func (p *templateDiskServiceExportRequest) Send() (*templateDiskServiceExportRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -96351,6 +102600,17 @@ func (p *templateDiskServiceGetRequest) Send() (*templateDiskServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -96476,6 +102736,17 @@ func (p *templateDiskServiceRemoveRequest) Send() (*templateDiskServiceRemoveRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -96729,6 +103000,17 @@ func (p *templatesServiceAddRequest) Send() (*templatesServiceAddResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templatesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templatesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -97096,6 +103378,17 @@ func (p *templatesServiceListRequest) Send() (*templatesServiceListResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templatesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templatesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -97277,6 +103570,17 @@ func (p *storageDomainVmDiskAttachmentServiceGetRequest) Send() (*storageDomainV
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainVmDiskAttachmentService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainVmDiskAttachmentService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -97448,6 +103752,17 @@ func (p *dataCenterNetworksServiceAddRequest) Send() (*dataCenterNetworksService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCenterNetworksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCenterNetworksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -97611,6 +103926,17 @@ func (p *dataCenterNetworksServiceListRequest) Send() (*dataCenterNetworksServic
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.dataCenterNetworksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.dataCenterNetworksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -97804,6 +104130,17 @@ func (p *vmNumaNodesServiceAddRequest) Send() (*vmNumaNodesServiceAddResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNumaNodesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNumaNodesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -97987,6 +104324,17 @@ func (p *vmNumaNodesServiceListRequest) Send() (*vmNumaNodesServiceListResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmNumaNodesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmNumaNodesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -98176,6 +104524,17 @@ func (p *vmWatchdogsServiceAddRequest) Send() (*vmWatchdogsServiceAddResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmWatchdogsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmWatchdogsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -98351,6 +104710,17 @@ func (p *vmWatchdogsServiceListRequest) Send() (*vmWatchdogsServiceListResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmWatchdogsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmWatchdogsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -98522,6 +104892,17 @@ func (p *instanceTypeWatchdogsServiceAddRequest) Send() (*instanceTypeWatchdogsS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeWatchdogsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeWatchdogsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -98671,6 +105052,17 @@ func (p *instanceTypeWatchdogsServiceListRequest) Send() (*instanceTypeWatchdogs
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeWatchdogsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeWatchdogsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -98875,6 +105267,17 @@ func (p *stepsServiceAddRequest) Send() (*stepsServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.stepsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.stepsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -99104,6 +105507,17 @@ func (p *stepsServiceListRequest) Send() (*stepsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.stepsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.stepsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -99357,6 +105771,17 @@ func (p *glusterVolumeServiceGetRequest) Send() (*glusterVolumeServiceGetRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -99562,6 +105987,17 @@ func (p *glusterVolumeServiceGetProfileStatisticsRequest) Send() (*glusterVolume
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -99730,6 +106166,17 @@ func (p *glusterVolumeServiceRebalanceRequest) Send() (*glusterVolumeServiceReba
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -99858,6 +106305,17 @@ func (p *glusterVolumeServiceRemoveRequest) Send() (*glusterVolumeServiceRemoveR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -99990,6 +106448,17 @@ func (p *glusterVolumeServiceResetAllOptionsRequest) Send() (*glusterVolumeServi
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -100144,6 +106613,17 @@ func (p *glusterVolumeServiceResetOptionRequest) Send() (*glusterVolumeServiceRe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -100303,6 +106783,17 @@ func (p *glusterVolumeServiceSetOptionRequest) Send() (*glusterVolumeServiceSetO
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -100457,6 +106948,17 @@ func (p *glusterVolumeServiceStartRequest) Send() (*glusterVolumeServiceStartRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -100587,6 +107089,17 @@ func (p *glusterVolumeServiceStartProfileRequest) Send() (*glusterVolumeServiceS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -100725,6 +107238,17 @@ func (p *glusterVolumeServiceStopRequest) Send() (*glusterVolumeServiceStopRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -100855,6 +107379,17 @@ func (p *glusterVolumeServiceStopProfileRequest) Send() (*glusterVolumeServiceSt
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -100984,6 +107519,17 @@ func (p *glusterVolumeServiceStopRebalanceRequest) Send() (*glusterVolumeService
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -101196,6 +107742,17 @@ func (p *glusterBricksServiceActivateRequest) Send() (*glusterBricksServiceActiv
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBricksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBricksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -101388,6 +107945,17 @@ func (p *glusterBricksServiceAddRequest) Send() (*glusterBricksServiceAddRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBricksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBricksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -101586,6 +108154,17 @@ func (p *glusterBricksServiceListRequest) Send() (*glusterBricksServiceListRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBricksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBricksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -101807,6 +108386,17 @@ func (p *glusterBricksServiceMigrateRequest) Send() (*glusterBricksServiceMigrat
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBricksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBricksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -101997,6 +108587,17 @@ func (p *glusterBricksServiceRemoveRequest) Send() (*glusterBricksServiceRemoveR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBricksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBricksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -102179,6 +108780,17 @@ func (p *glusterBricksServiceStopMigrateRequest) Send() (*glusterBricksServiceSt
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBricksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBricksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -102367,6 +108979,17 @@ func (p *glusterHooksServiceListRequest) Send() (*glusterHooksServiceListRespons
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterHooksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterHooksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -102543,6 +109166,17 @@ func (p *glusterHookServiceDisableRequest) Send() (*glusterHookServiceDisableRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterHookService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterHookService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -102659,6 +109293,17 @@ func (p *glusterHookServiceEnableRequest) Send() (*glusterHookServiceEnableRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterHookService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterHookService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -102765,6 +109410,17 @@ func (p *glusterHookServiceGetRequest) Send() (*glusterHookServiceGetResponse, e
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterHookService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterHookService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -102891,6 +109547,17 @@ func (p *glusterHookServiceRemoveRequest) Send() (*glusterHookServiceRemoveRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterHookService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterHookService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -103029,6 +109696,17 @@ func (p *glusterHookServiceResolveRequest) Send() (*glusterHookServiceResolveRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterHookService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterHookService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -103207,6 +109885,17 @@ func (p *glusterVolumesServiceAddRequest) Send() (*glusterVolumesServiceAddRespo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -103432,6 +110121,17 @@ func (p *glusterVolumesServiceListRequest) Send() (*glusterVolumesServiceListRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterVolumesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterVolumesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -103655,6 +110355,17 @@ func (p *glusterBrickServiceGetRequest) Send() (*glusterBrickServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBrickService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBrickService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -103875,6 +110586,17 @@ func (p *glusterBrickServiceRemoveRequest) Send() (*glusterBrickServiceRemoveRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBrickService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBrickService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -104019,6 +110741,17 @@ func (p *glusterBrickServiceReplaceRequest) Send() (*glusterBrickServiceReplaceR
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.glusterBrickService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.glusterBrickService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -104168,6 +110901,17 @@ func (p *macPoolServiceGetRequest) Send() (*macPoolServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.macPoolService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.macPoolService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -104299,6 +111043,17 @@ func (p *macPoolServiceRemoveRequest) Send() (*macPoolServiceRemoveResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.macPoolService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.macPoolService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -104455,6 +111210,17 @@ func (p *macPoolServiceUpdateRequest) Send() (*macPoolServiceUpdateResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.macPoolService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.macPoolService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -104687,6 +111453,17 @@ func (p *iconsServiceListRequest) Send() (*iconsServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.iconsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.iconsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -104910,6 +111687,17 @@ func (p *externalProviderCertificatesServiceListRequest) Send() (*externalProvid
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.externalProviderCertificatesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.externalProviderCertificatesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -105128,6 +111916,17 @@ func (p *rolesServiceAddRequest) Send() (*rolesServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.rolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.rolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -105323,6 +112122,17 @@ func (p *rolesServiceListRequest) Send() (*rolesServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.rolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.rolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -105526,6 +112336,17 @@ func (p *storageDomainTemplateServiceGetRequest) Send() (*storageDomainTemplateS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainTemplateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainTemplateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -105726,6 +112547,17 @@ func (p *storageDomainTemplateServiceImportRequest) Send() (*storageDomainTempla
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainTemplateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainTemplateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -105943,6 +112775,17 @@ func (p *storageDomainTemplateServiceRegisterRequest) Send() (*storageDomainTemp
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainTemplateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainTemplateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -106049,6 +112892,17 @@ func (p *storageDomainTemplateServiceRemoveRequest) Send() (*storageDomainTempla
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.storageDomainTemplateService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.storageDomainTemplateService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -106358,6 +113212,17 @@ func (p *disksServiceAddRequest) Send() (*disksServiceAddResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.disksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.disksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -106787,6 +113652,17 @@ func (p *disksServiceListRequest) Send() (*disksServiceListResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.disksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.disksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -106979,6 +113855,17 @@ func (p *disksServiceAddLunRequest) Send() (*disksServiceAddLunResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.disksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.disksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -107106,6 +113993,17 @@ func (p *disksServiceAddOnStorageDomainRequest) Send() (*disksServiceAddOnStorag
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.disksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.disksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	action, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -107268,6 +114166,17 @@ func (p *assignedDiskProfilesServiceAddRequest) Send() (*assignedDiskProfilesSer
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedDiskProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedDiskProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -107407,6 +114316,17 @@ func (p *assignedDiskProfilesServiceListRequest) Send() (*assignedDiskProfilesSe
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.assignedDiskProfilesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.assignedDiskProfilesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -107578,6 +114498,17 @@ func (p *instanceTypeServiceGetRequest) Send() (*instanceTypeServiceGetResponse,
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -107720,6 +114651,17 @@ func (p *instanceTypeServiceRemoveRequest) Send() (*instanceTypeServiceRemoveRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -107876,6 +114818,17 @@ func (p *instanceTypeServiceUpdateRequest) Send() (*instanceTypeServiceUpdateRes
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.instanceTypeService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.instanceTypeService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -108126,6 +115079,17 @@ func (p *balanceServiceGetRequest) Send() (*balanceServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.balanceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.balanceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -108251,6 +115215,17 @@ func (p *balanceServiceRemoveRequest) Send() (*balanceServiceRemoveResponse, err
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.balanceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.balanceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -108387,6 +115362,17 @@ func (p *templateGraphicsConsolesServiceAddRequest) Send() (*templateGraphicsCon
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateGraphicsConsolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateGraphicsConsolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -108526,6 +115512,17 @@ func (p *templateGraphicsConsolesServiceListRequest) Send() (*templateGraphicsCo
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.templateGraphicsConsolesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.templateGraphicsConsolesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -108702,6 +115699,17 @@ func (p *vmCdromsServiceAddRequest) Send() (*vmCdromsServiceAddResponse, error) 
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmCdromsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmCdromsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
 		return nil, CheckFault(resp)
 	}
@@ -108841,6 +115849,17 @@ func (p *vmCdromsServiceListRequest) Send() (*vmCdromsServiceListResponse, error
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.vmCdromsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.vmCdromsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -109022,6 +116041,17 @@ func (p *clusterEnabledFeatureServiceGetRequest) Send() (*clusterEnabledFeatureS
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterEnabledFeatureService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterEnabledFeatureService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -109169,6 +116199,17 @@ func (p *clusterEnabledFeatureServiceRemoveRequest) Send() (*clusterEnabledFeatu
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.clusterEnabledFeatureService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.clusterEnabledFeatureService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
@@ -109355,6 +116396,17 @@ func (p *stepServiceEndRequest) Send() (*stepServiceEndResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.stepService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.stepService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	_, errCheckAction := CheckAction(resp)
 	if errCheckAction != nil {
 		return nil, errCheckAction
@@ -109509,6 +116561,17 @@ func (p *stepServiceGetRequest) Send() (*stepServiceGetResponse, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if p.stepService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.stepService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
 	if !Contains(resp.StatusCode, []int{200}) {
 		return nil, CheckFault(resp)
 	}
