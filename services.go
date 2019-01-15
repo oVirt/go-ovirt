@@ -6395,9 +6395,9 @@ func NewHostsService(connection *Connection, path string) *HostsService {
 
 //
 // Creates a new host.
-// The host is created based on the attributes of the `host` parameter. The `name`, `address` and `root_password`
+// The host is created based on the attributes of the `host` parameter. The `name`, `address`, and `root_password`
 // properties are required.
-// For example, to add a host send the following request:
+// For example, to add a host, send the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts
@@ -6413,18 +6413,18 @@ func NewHostsService(connection *Connection, path string) *HostsService {
 // ----
 // NOTE: The `root_password` element is only included in the client-provided initial representation and is not
 // exposed in the representations returned from subsequent requests.
-// IMPORTANT: Since version 4.1.2 of the engine when a host is newly added we override the host firewall
-// definitions by default.
+// IMPORTANT: Since version 4.1.2 of the engine, when a host is newly added, the host's firewall
+// definitions are overridden by default.
 // To add a hosted engine host, use the optional `deploy_hosted_engine` parameter:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts?deploy_hosted_engine=true
 // ----
-// If the cluster has a default external network provider which is supported for automatic deployment,
+// If the cluster has a default external network provider that is supported for automatic deployment,
 // the external network provider is deployed when adding the host.
 // Only external network providers for OVN are supported for the automatic deployment.
-// To deploy an external network provider that differs to what is defined in the clusters, overwrite the external
-// network provider when adding hosts by sending a request like this:
+// To deploy an external network provider other than the one defined in the clusters, overwrite the external
+// network provider when adding hosts, by sending the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts
@@ -6578,9 +6578,9 @@ func (p *HostsServiceAddRequest) MustSend() *HostsServiceAddResponse {
 
 //
 // Creates a new host.
-// The host is created based on the attributes of the `host` parameter. The `name`, `address` and `root_password`
+// The host is created based on the attributes of the `host` parameter. The `name`, `address`, and `root_password`
 // properties are required.
-// For example, to add a host send the following request:
+// For example, to add a host, send the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts
@@ -6596,18 +6596,18 @@ func (p *HostsServiceAddRequest) MustSend() *HostsServiceAddResponse {
 // ----
 // NOTE: The `root_password` element is only included in the client-provided initial representation and is not
 // exposed in the representations returned from subsequent requests.
-// IMPORTANT: Since version 4.1.2 of the engine when a host is newly added we override the host firewall
-// definitions by default.
+// IMPORTANT: Since version 4.1.2 of the engine, when a host is newly added, the host's firewall
+// definitions are overridden by default.
 // To add a hosted engine host, use the optional `deploy_hosted_engine` parameter:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts?deploy_hosted_engine=true
 // ----
-// If the cluster has a default external network provider which is supported for automatic deployment,
+// If the cluster has a default external network provider that is supported for automatic deployment,
 // the external network provider is deployed when adding the host.
 // Only external network providers for OVN are supported for the automatic deployment.
-// To deploy an external network provider that differs to what is defined in the clusters, overwrite the external
-// network provider when adding hosts by sending a request like this:
+// To deploy an external network provider other than the one defined in the clusters, overwrite the external
+// network provider when adding hosts, by sending the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts
@@ -6648,9 +6648,9 @@ func (p *HostsServiceAddResponse) MustHost() *Host {
 
 //
 // Creates a new host.
-// The host is created based on the attributes of the `host` parameter. The `name`, `address` and `root_password`
+// The host is created based on the attributes of the `host` parameter. The `name`, `address`, and `root_password`
 // properties are required.
-// For example, to add a host send the following request:
+// For example, to add a host, send the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts
@@ -6666,18 +6666,18 @@ func (p *HostsServiceAddResponse) MustHost() *Host {
 // ----
 // NOTE: The `root_password` element is only included in the client-provided initial representation and is not
 // exposed in the representations returned from subsequent requests.
-// IMPORTANT: Since version 4.1.2 of the engine when a host is newly added we override the host firewall
-// definitions by default.
+// IMPORTANT: Since version 4.1.2 of the engine, when a host is newly added, the host's firewall
+// definitions are overridden by default.
 // To add a hosted engine host, use the optional `deploy_hosted_engine` parameter:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts?deploy_hosted_engine=true
 // ----
-// If the cluster has a default external network provider which is supported for automatic deployment,
+// If the cluster has a default external network provider that is supported for automatic deployment,
 // the external network provider is deployed when adding the host.
 // Only external network providers for OVN are supported for the automatic deployment.
-// To deploy an external network provider that differs to what is defined in the clusters, overwrite the external
-// network provider when adding hosts by sending a request like this:
+// To deploy an external network provider other than the one defined in the clusters, overwrite the external
+// network provider when adding hosts, by sending the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/hosts
@@ -6708,7 +6708,7 @@ func (p *HostsService) Add() *HostsServiceAddRequest {
 // ....
 // GET /ovirt-engine/api/hosts
 // ....
-// The response body will be something like this:
+// The response body will be similar to this:
 // [source,xml]
 // ----
 // <hosts>
@@ -6725,15 +6725,16 @@ func (p *HostsService) Add() *HostsServiceAddRequest {
 // the `search` parameter.
 //
 type HostsServiceListRequest struct {
-	HostsService  *HostsService
-	header        map[string]string
-	query         map[string]string
-	allContent    *bool
-	caseSensitive *bool
-	filter        *bool
-	follow        *string
-	max           *int64
-	search        *string
+	HostsService      *HostsService
+	header            map[string]string
+	query             map[string]string
+	allContent        *bool
+	caseSensitive     *bool
+	filter            *bool
+	follow            *string
+	max               *int64
+	migrationTargetOf *string
+	search            *string
 }
 
 func (p *HostsServiceListRequest) Header(key, value string) *HostsServiceListRequest {
@@ -6777,6 +6778,11 @@ func (p *HostsServiceListRequest) Max(max int64) *HostsServiceListRequest {
 	return p
 }
 
+func (p *HostsServiceListRequest) MigrationTargetOf(migrationTargetOf string) *HostsServiceListRequest {
+	p.migrationTargetOf = &migrationTargetOf
+	return p
+}
+
 func (p *HostsServiceListRequest) Search(search string) *HostsServiceListRequest {
 	p.search = &search
 	return p
@@ -6803,6 +6809,10 @@ func (p *HostsServiceListRequest) Send() (*HostsServiceListResponse, error) {
 
 	if p.max != nil {
 		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.migrationTargetOf != nil {
+		values["migration_target_of"] = []string{fmt.Sprintf("%v", *p.migrationTargetOf)}
 	}
 
 	if p.search != nil {
@@ -6888,7 +6898,7 @@ func (p *HostsServiceListRequest) MustSend() *HostsServiceListResponse {
 // ....
 // GET /ovirt-engine/api/hosts
 // ....
-// The response body will be something like this:
+// The response body will be similar to this:
 // [source,xml]
 // ----
 // <hosts>
@@ -6928,7 +6938,7 @@ func (p *HostsServiceListResponse) MustHosts() *HostSlice {
 // ....
 // GET /ovirt-engine/api/hosts
 // ....
-// The response body will be something like this:
+// The response body will be similar to this:
 // [source,xml]
 // ----
 // <hosts>
@@ -9113,7 +9123,7 @@ func NewOpenstackImageProvidersService(connection *Connection, path string) *Ope
 }
 
 //
-// Adds a new OpenStack image provider to the system.
+// Add a new OpenStack image provider to the system.
 //
 type OpenstackImageProvidersServiceAddRequest struct {
 	OpenstackImageProvidersService *OpenstackImageProvidersService
@@ -9227,7 +9237,7 @@ func (p *OpenstackImageProvidersServiceAddRequest) MustSend() *OpenstackImagePro
 }
 
 //
-// Adds a new OpenStack image provider to the system.
+// Add a new OpenStack image provider to the system.
 //
 type OpenstackImageProvidersServiceAddResponse struct {
 	provider *OpenStackImageProvider
@@ -9248,7 +9258,7 @@ func (p *OpenstackImageProvidersServiceAddResponse) MustProvider() *OpenStackIma
 }
 
 //
-// Adds a new OpenStack image provider to the system.
+// Add a new OpenStack image provider to the system.
 //
 func (p *OpenstackImageProvidersService) Add() *OpenstackImageProvidersServiceAddRequest {
 	return &OpenstackImageProvidersServiceAddRequest{OpenstackImageProvidersService: p}
@@ -9256,7 +9266,7 @@ func (p *OpenstackImageProvidersService) Add() *OpenstackImageProvidersServiceAd
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers is not guaranteed.
+// The order of the returned list of providers isn't guaranteed.
 //
 type OpenstackImageProvidersServiceListRequest struct {
 	OpenstackImageProvidersService *OpenstackImageProvidersService
@@ -9388,7 +9398,7 @@ func (p *OpenstackImageProvidersServiceListRequest) MustSend() *OpenstackImagePr
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers is not guaranteed.
+// The order of the returned list of providers isn't guaranteed.
 //
 type OpenstackImageProvidersServiceListResponse struct {
 	providers *OpenStackImageProviderSlice
@@ -9410,7 +9420,7 @@ func (p *OpenstackImageProvidersServiceListResponse) MustProviders() *OpenStackI
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers is not guaranteed.
+// The order of the returned list of providers isn't guaranteed.
 //
 func (p *OpenstackImageProvidersService) List() *OpenstackImageProvidersServiceListRequest {
 	return &OpenstackImageProvidersServiceListRequest{OpenstackImageProvidersService: p}
@@ -12483,7 +12493,7 @@ func NewOpenstackNetworkProvidersService(connection *Connection, path string) *O
 }
 
 //
-// Adds a new network provider to the system.
+// The operation adds a new network provider to the system.
 // If the `type` property is not present, a default value of `NEUTRON` will be used.
 //
 type OpenstackNetworkProvidersServiceAddRequest struct {
@@ -12598,7 +12608,7 @@ func (p *OpenstackNetworkProvidersServiceAddRequest) MustSend() *OpenstackNetwor
 }
 
 //
-// Adds a new network provider to the system.
+// The operation adds a new network provider to the system.
 // If the `type` property is not present, a default value of `NEUTRON` will be used.
 //
 type OpenstackNetworkProvidersServiceAddResponse struct {
@@ -12620,7 +12630,7 @@ func (p *OpenstackNetworkProvidersServiceAddResponse) MustProvider() *OpenStackN
 }
 
 //
-// Adds a new network provider to the system.
+// The operation adds a new network provider to the system.
 // If the `type` property is not present, a default value of `NEUTRON` will be used.
 //
 func (p *OpenstackNetworkProvidersService) Add() *OpenstackNetworkProvidersServiceAddRequest {
@@ -12629,7 +12639,7 @@ func (p *OpenstackNetworkProvidersService) Add() *OpenstackNetworkProvidersServi
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers is not guaranteed.
+// The order of the returned list of providers isn't guaranteed.
 //
 type OpenstackNetworkProvidersServiceListRequest struct {
 	OpenstackNetworkProvidersService *OpenstackNetworkProvidersService
@@ -12761,7 +12771,7 @@ func (p *OpenstackNetworkProvidersServiceListRequest) MustSend() *OpenstackNetwo
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers is not guaranteed.
+// The order of the returned list of providers isn't guaranteed.
 //
 type OpenstackNetworkProvidersServiceListResponse struct {
 	providers *OpenStackNetworkProviderSlice
@@ -12783,14 +12793,14 @@ func (p *OpenstackNetworkProvidersServiceListResponse) MustProviders() *OpenStac
 
 //
 // Returns the list of providers.
-// The order of the returned list of providers is not guaranteed.
+// The order of the returned list of providers isn't guaranteed.
 //
 func (p *OpenstackNetworkProvidersService) List() *OpenstackNetworkProvidersServiceListRequest {
 	return &OpenstackNetworkProvidersServiceListRequest{OpenstackNetworkProvidersService: p}
 }
 
 //
-// Reference to the OpenStack network provider service.
+// Reference to OpenStack network provider service.
 //
 func (op *OpenstackNetworkProvidersService) ProviderService(id string) *OpenstackNetworkProviderService {
 	return NewOpenstackNetworkProviderService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
@@ -13340,7 +13350,7 @@ func (p *OpenstackVolumeProvidersService) Add() *OpenstackVolumeProvidersService
 
 //
 // Retrieves the list of volume providers.
-// The order of the returned list of volume providers is not guaranteed.
+// The order of the returned list of volume providers isn't guaranteed.
 //
 type OpenstackVolumeProvidersServiceListRequest struct {
 	OpenstackVolumeProvidersService *OpenstackVolumeProvidersService
@@ -13472,7 +13482,7 @@ func (p *OpenstackVolumeProvidersServiceListRequest) MustSend() *OpenstackVolume
 
 //
 // Retrieves the list of volume providers.
-// The order of the returned list of volume providers is not guaranteed.
+// The order of the returned list of volume providers isn't guaranteed.
 //
 type OpenstackVolumeProvidersServiceListResponse struct {
 	providers *OpenStackVolumeProviderSlice
@@ -13494,7 +13504,7 @@ func (p *OpenstackVolumeProvidersServiceListResponse) MustProviders() *OpenStack
 
 //
 // Retrieves the list of volume providers.
-// The order of the returned list of volume providers is not guaranteed.
+// The order of the returned list of volume providers isn't guaranteed.
 //
 func (p *OpenstackVolumeProvidersService) List() *OpenstackVolumeProvidersServiceListRequest {
 	return &OpenstackVolumeProvidersServiceListRequest{OpenstackVolumeProvidersService: p}
@@ -29812,6 +29822,7 @@ type VmsServiceAddRequest struct {
 	query            map[string]string
 	clone            *bool
 	clonePermissions *bool
+	filter           *bool
 	vm               *Vm
 }
 
@@ -29841,6 +29852,11 @@ func (p *VmsServiceAddRequest) ClonePermissions(clonePermissions bool) *VmsServi
 	return p
 }
 
+func (p *VmsServiceAddRequest) Filter(filter bool) *VmsServiceAddRequest {
+	p.filter = &filter
+	return p
+}
+
 func (p *VmsServiceAddRequest) Vm(vm *Vm) *VmsServiceAddRequest {
 	p.vm = vm
 	return p
@@ -29855,6 +29871,10 @@ func (p *VmsServiceAddRequest) Send() (*VmsServiceAddResponse, error) {
 
 	if p.clonePermissions != nil {
 		values["clone_permissions"] = []string{fmt.Sprintf("%v", *p.clonePermissions)}
+	}
+
+	if p.filter != nil {
+		values["filter"] = []string{fmt.Sprintf("%v", *p.filter)}
 	}
 
 	if p.query != nil {
@@ -30242,6 +30262,7 @@ type VmsServiceAddFromConfigurationRequest struct {
 	query            map[string]string
 	clone            *bool
 	clonePermissions *bool
+	filter           *bool
 	vm               *Vm
 }
 
@@ -30271,6 +30292,11 @@ func (p *VmsServiceAddFromConfigurationRequest) ClonePermissions(clonePermission
 	return p
 }
 
+func (p *VmsServiceAddFromConfigurationRequest) Filter(filter bool) *VmsServiceAddFromConfigurationRequest {
+	p.filter = &filter
+	return p
+}
+
 func (p *VmsServiceAddFromConfigurationRequest) Vm(vm *Vm) *VmsServiceAddFromConfigurationRequest {
 	p.vm = vm
 	return p
@@ -30284,6 +30310,9 @@ func (p *VmsServiceAddFromConfigurationRequest) Send() (*VmsServiceAddFromConfig
 	}
 	if p.clonePermissions != nil {
 		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
 	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -30398,6 +30427,7 @@ type VmsServiceAddFromScratchRequest struct {
 	query            map[string]string
 	clone            *bool
 	clonePermissions *bool
+	filter           *bool
 	vm               *Vm
 }
 
@@ -30427,6 +30457,11 @@ func (p *VmsServiceAddFromScratchRequest) ClonePermissions(clonePermissions bool
 	return p
 }
 
+func (p *VmsServiceAddFromScratchRequest) Filter(filter bool) *VmsServiceAddFromScratchRequest {
+	p.filter = &filter
+	return p
+}
+
 func (p *VmsServiceAddFromScratchRequest) Vm(vm *Vm) *VmsServiceAddFromScratchRequest {
 	p.vm = vm
 	return p
@@ -30440,6 +30475,9 @@ func (p *VmsServiceAddFromScratchRequest) Send() (*VmsServiceAddFromScratchRespo
 	}
 	if p.clonePermissions != nil {
 		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
 	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -30554,6 +30592,7 @@ type VmsServiceAddFromSnapshotRequest struct {
 	query            map[string]string
 	clone            *bool
 	clonePermissions *bool
+	filter           *bool
 	vm               *Vm
 }
 
@@ -30583,6 +30622,11 @@ func (p *VmsServiceAddFromSnapshotRequest) ClonePermissions(clonePermissions boo
 	return p
 }
 
+func (p *VmsServiceAddFromSnapshotRequest) Filter(filter bool) *VmsServiceAddFromSnapshotRequest {
+	p.filter = &filter
+	return p
+}
+
 func (p *VmsServiceAddFromSnapshotRequest) Vm(vm *Vm) *VmsServiceAddFromSnapshotRequest {
 	p.vm = vm
 	return p
@@ -30596,6 +30640,9 @@ func (p *VmsServiceAddFromSnapshotRequest) Send() (*VmsServiceAddFromSnapshotRes
 	}
 	if p.clonePermissions != nil {
 		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
+	if p.filter != nil {
+		actionBuilder.Filter(*p.filter)
 	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -31600,6 +31647,7 @@ func (p *NetworkService) Remove() *NetworkServiceRemoveRequest {
 //   <mtu>1500</mtu>
 // </network>
 // ----
+// NOTE: Updating external networks is not propagated to the provider.
 //
 type NetworkServiceUpdateRequest struct {
 	NetworkService *NetworkService
@@ -31751,6 +31799,7 @@ func (p *NetworkServiceUpdateRequest) MustSend() *NetworkServiceUpdateResponse {
 //   <mtu>1500</mtu>
 // </network>
 // ----
+// NOTE: Updating external networks is not propagated to the provider.
 //
 type NetworkServiceUpdateResponse struct {
 	network *Network
@@ -31799,6 +31848,7 @@ func (p *NetworkServiceUpdateResponse) MustNetwork() *Network {
 //   <mtu>1500</mtu>
 // </network>
 // ----
+// NOTE: Updating external networks is not propagated to the provider.
 //
 func (p *NetworkService) Update() *NetworkServiceUpdateRequest {
 	return &NetworkServiceUpdateRequest{NetworkService: p}
@@ -34535,6 +34585,11 @@ func (p *HostService) Approve() *HostServiceApproveRequest {
 // ----
 // <action/>
 // ----
+// IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
+// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// configuration is automatically saved in the {hypervisor-name} upon completing the setup and
+// re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
+// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
 //
 type HostServiceCommitNetConfigRequest struct {
 	HostService *HostService
@@ -34661,6 +34716,11 @@ func (p *HostServiceCommitNetConfigRequest) MustSend() *HostServiceCommitNetConf
 // ----
 // <action/>
 // ----
+// IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
+// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// configuration is automatically saved in the {hypervisor-name} upon completing the setup and
+// re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
+// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
 //
 type HostServiceCommitNetConfigResponse struct {
 }
@@ -34682,6 +34742,11 @@ type HostServiceCommitNetConfigResponse struct {
 // ----
 // <action/>
 // ----
+// IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
+// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// configuration is automatically saved in the {hypervisor-name} upon completing the setup and
+// re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
+// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
 //
 func (p *HostService) CommitNetConfig() *HostServiceCommitNetConfigRequest {
 	return &HostServiceCommitNetConfigRequest{HostService: p}
@@ -36604,6 +36669,11 @@ func (p *HostService) Remove() *HostServiceRemoveRequest {
 // ----
 // IMPORTANT: To make sure that the network configuration has been saved in the host, and that it will be applied
 // when the host is rebooted, remember to call <<services/host/methods/commit_net_config, commitnetconfig>>.
+// IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
+// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// configuration is automatically saved in the {hypervisor-name} upon completing the setup and
+// re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
+// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
 //
 type HostServiceSetupNetworksRequest struct {
 	HostService                    *HostService
@@ -36611,6 +36681,7 @@ type HostServiceSetupNetworksRequest struct {
 	query                          map[string]string
 	async                          *bool
 	checkConnectivity              *bool
+	commitOnSuccess                *bool
 	connectivityTimeout            *int64
 	modifiedBonds                  *HostNicSlice
 	modifiedLabels                 *NetworkLabelSlice
@@ -36644,6 +36715,11 @@ func (p *HostServiceSetupNetworksRequest) Async(async bool) *HostServiceSetupNet
 
 func (p *HostServiceSetupNetworksRequest) CheckConnectivity(checkConnectivity bool) *HostServiceSetupNetworksRequest {
 	p.checkConnectivity = &checkConnectivity
+	return p
+}
+
+func (p *HostServiceSetupNetworksRequest) CommitOnSuccess(commitOnSuccess bool) *HostServiceSetupNetworksRequest {
+	p.commitOnSuccess = &commitOnSuccess
 	return p
 }
 
@@ -36751,6 +36827,9 @@ func (p *HostServiceSetupNetworksRequest) Send() (*HostServiceSetupNetworksRespo
 	}
 	if p.checkConnectivity != nil {
 		actionBuilder.CheckConnectivity(*p.checkConnectivity)
+	}
+	if p.commitOnSuccess != nil {
+		actionBuilder.CommitOnSuccess(*p.commitOnSuccess)
 	}
 	if p.connectivityTimeout != nil {
 		actionBuilder.ConnectivityTimeout(*p.connectivityTimeout)
@@ -36988,6 +37067,11 @@ func (p *HostServiceSetupNetworksRequest) MustSend() *HostServiceSetupNetworksRe
 // ----
 // IMPORTANT: To make sure that the network configuration has been saved in the host, and that it will be applied
 // when the host is rebooted, remember to call <<services/host/methods/commit_net_config, commitnetconfig>>.
+// IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
+// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// configuration is automatically saved in the {hypervisor-name} upon completing the setup and
+// re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
+// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
 //
 type HostServiceSetupNetworksResponse struct {
 }
@@ -37144,6 +37228,11 @@ type HostServiceSetupNetworksResponse struct {
 // ----
 // IMPORTANT: To make sure that the network configuration has been saved in the host, and that it will be applied
 // when the host is rebooted, remember to call <<services/host/methods/commit_net_config, commitnetconfig>>.
+// IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
+// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// configuration is automatically saved in the {hypervisor-name} upon completing the setup and
+// re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
+// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
 //
 func (p *HostService) SetupNetworks() *HostServiceSetupNetworksRequest {
 	return &HostServiceSetupNetworksRequest{HostService: p}
@@ -39090,7 +39179,7 @@ func NewClusterService(connection *Connection, path string) *ClusterService {
 //   <ballooning_enabled>false</ballooning_enabled>
 //   <cpu>
 //     <architecture>x86_64</architecture>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <error_handling>
 //     <on_error>migrate</on_error>
@@ -39286,7 +39375,7 @@ func (p *ClusterServiceGetRequest) MustSend() *ClusterServiceGetResponse {
 //   <ballooning_enabled>false</ballooning_enabled>
 //   <cpu>
 //     <architecture>x86_64</architecture>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <error_handling>
 //     <on_error>migrate</on_error>
@@ -39382,7 +39471,7 @@ func (p *ClusterServiceGetResponse) MustCluster() *Cluster {
 //   <ballooning_enabled>false</ballooning_enabled>
 //   <cpu>
 //     <architecture>x86_64</architecture>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <error_handling>
 //     <on_error>migrate</on_error>
@@ -64438,7 +64527,7 @@ func NewClustersService(connection *Connection, path string) *ClustersService {
 // <cluster>
 //   <name>mycluster</name>
 //   <cpu>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <data_center id="123"/>
 // </cluster>
@@ -64455,7 +64544,7 @@ func NewClustersService(connection *Connection, path string) *ClustersService {
 // <cluster>
 //   <name>mycluster</name>
 //   <cpu>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <data_center id="123"/>
 //   <external_network_providers>
@@ -64589,7 +64678,7 @@ func (p *ClustersServiceAddRequest) MustSend() *ClustersServiceAddResponse {
 // <cluster>
 //   <name>mycluster</name>
 //   <cpu>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <data_center id="123"/>
 // </cluster>
@@ -64606,7 +64695,7 @@ func (p *ClustersServiceAddRequest) MustSend() *ClustersServiceAddResponse {
 // <cluster>
 //   <name>mycluster</name>
 //   <cpu>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <data_center id="123"/>
 //   <external_network_providers>
@@ -64647,7 +64736,7 @@ func (p *ClustersServiceAddResponse) MustCluster() *Cluster {
 // <cluster>
 //   <name>mycluster</name>
 //   <cpu>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <data_center id="123"/>
 // </cluster>
@@ -64664,7 +64753,7 @@ func (p *ClustersServiceAddResponse) MustCluster() *Cluster {
 // <cluster>
 //   <name>mycluster</name>
 //   <cpu>
-//     <type>Intel Penryn Family</type>
+//     <type>Intel Nehalem Family</type>
 //   </cpu>
 //   <data_center id="123"/>
 //   <external_network_providers>
@@ -74792,7 +74881,7 @@ func NewHostHooksService(connection *Connection, path string) *HostHooksService 
 
 //
 // Returns the list of hooks configured for the host.
-// The order of the returned list of hooks isn't guranteed.
+// The order of the returned list of hooks is random.
 //
 type HostHooksServiceListRequest struct {
 	HostHooksService *HostHooksService
@@ -74914,7 +75003,7 @@ func (p *HostHooksServiceListRequest) MustSend() *HostHooksServiceListResponse {
 
 //
 // Returns the list of hooks configured for the host.
-// The order of the returned list of hooks isn't guranteed.
+// The order of the returned list of hooks is random.
 //
 type HostHooksServiceListResponse struct {
 	hooks *HookSlice
@@ -74936,7 +75025,7 @@ func (p *HostHooksServiceListResponse) MustHooks() *HookSlice {
 
 //
 // Returns the list of hooks configured for the host.
-// The order of the returned list of hooks isn't guranteed.
+// The order of the returned list of hooks is random.
 //
 func (p *HostHooksService) List() *HostHooksServiceListRequest {
 	return &HostHooksServiceListRequest{HostHooksService: p}
@@ -80759,7 +80848,7 @@ func NewDiskService(connection *Connection, path string) *DiskService {
 
 //
 // This operation copies a disk to the specified storage domain.
-// For example, copy of a disk can be facilitated using the following request:
+// For example, a disk can be copied using the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/disks/123/copy
@@ -80774,9 +80863,9 @@ func NewDiskService(connection *Connection, path string) *DiskService {
 //   </disk>
 // </action>
 // ----
-// If the disk profile or the quota used currently by the disk aren't defined for the new storage domain, then they
-// can be explicitly specified. If they aren't then the first available disk profile and the default quota are used.
-// For example, to explicitly use disk profile `987` and quota `753` send a request body like this:
+// If the disk profile or the quota currently used by the disk are not defined for the new storage domain, they
+// can be explicitly specified. If they are not specified, the first available disk profile and the default quota are used.
+// For example, to specify disk profile `987` and quota `753`, send a request body like this:
 // [source,xml]
 // ----
 // <action>
@@ -80933,7 +81022,7 @@ func (p *DiskServiceCopyRequest) MustSend() *DiskServiceCopyResponse {
 
 //
 // This operation copies a disk to the specified storage domain.
-// For example, copy of a disk can be facilitated using the following request:
+// For example, a disk can be copied using the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/disks/123/copy
@@ -80948,9 +81037,9 @@ func (p *DiskServiceCopyRequest) MustSend() *DiskServiceCopyResponse {
 //   </disk>
 // </action>
 // ----
-// If the disk profile or the quota used currently by the disk aren't defined for the new storage domain, then they
-// can be explicitly specified. If they aren't then the first available disk profile and the default quota are used.
-// For example, to explicitly use disk profile `987` and quota `753` send a request body like this:
+// If the disk profile or the quota currently used by the disk are not defined for the new storage domain, they
+// can be explicitly specified. If they are not specified, the first available disk profile and the default quota are used.
+// For example, to specify disk profile `987` and quota `753`, send a request body like this:
 // [source,xml]
 // ----
 // <action>
@@ -80965,7 +81054,7 @@ type DiskServiceCopyResponse struct {
 
 //
 // This operation copies a disk to the specified storage domain.
-// For example, copy of a disk can be facilitated using the following request:
+// For example, a disk can be copied using the following request:
 // [source]
 // ----
 // POST /ovirt-engine/api/disks/123/copy
@@ -80980,9 +81069,9 @@ type DiskServiceCopyResponse struct {
 //   </disk>
 // </action>
 // ----
-// If the disk profile or the quota used currently by the disk aren't defined for the new storage domain, then they
-// can be explicitly specified. If they aren't then the first available disk profile and the default quota are used.
-// For example, to explicitly use disk profile `987` and quota `753` send a request body like this:
+// If the disk profile or the quota currently used by the disk are not defined for the new storage domain, they
+// can be explicitly specified. If they are not specified, the first available disk profile and the default quota are used.
+// For example, to specify disk profile `987` and quota `753`, send a request body like this:
 // [source,xml]
 // ----
 // <action>
@@ -82075,7 +82164,7 @@ func (p *DiskService) Sparsify() *DiskServiceSparsifyRequest {
 //
 // This operation updates the disk with the appropriate parameters.
 // The only field that can be updated is `qcow_version`.
-// For example, update disk can be facilitated using the following request:
+// For example, disk update can be done using the following request:
 // [source]
 // ----
 // PUT /ovirt-engine/api/disks/123
@@ -82087,7 +82176,7 @@ func (p *DiskService) Sparsify() *DiskServiceSparsifyRequest {
 //   <qcow_version>qcow2_v3</qcow_version>
 // </disk>
 // ----
-// Since the backend operation is asynchronous the disk element which will be returned
+// Since the backend operation is asynchronous, the disk element that is returned
 // to the user might not be synced with the changed properties.
 //
 type DiskServiceUpdateRequest struct {
@@ -82204,7 +82293,7 @@ func (p *DiskServiceUpdateRequest) MustSend() *DiskServiceUpdateResponse {
 //
 // This operation updates the disk with the appropriate parameters.
 // The only field that can be updated is `qcow_version`.
-// For example, update disk can be facilitated using the following request:
+// For example, disk update can be done using the following request:
 // [source]
 // ----
 // PUT /ovirt-engine/api/disks/123
@@ -82216,7 +82305,7 @@ func (p *DiskServiceUpdateRequest) MustSend() *DiskServiceUpdateResponse {
 //   <qcow_version>qcow2_v3</qcow_version>
 // </disk>
 // ----
-// Since the backend operation is asynchronous the disk element which will be returned
+// Since the backend operation is asynchronous, the disk element that is returned
 // to the user might not be synced with the changed properties.
 //
 type DiskServiceUpdateResponse struct {
@@ -82240,7 +82329,7 @@ func (p *DiskServiceUpdateResponse) MustDisk() *Disk {
 //
 // This operation updates the disk with the appropriate parameters.
 // The only field that can be updated is `qcow_version`.
-// For example, update disk can be facilitated using the following request:
+// For example, disk update can be done using the following request:
 // [source]
 // ----
 // PUT /ovirt-engine/api/disks/123
@@ -82252,7 +82341,7 @@ func (p *DiskServiceUpdateResponse) MustDisk() *Disk {
 //   <qcow_version>qcow2_v3</qcow_version>
 // </disk>
 // ----
-// Since the backend operation is asynchronous the disk element which will be returned
+// Since the backend operation is asynchronous, the disk element that is returned
 // to the user might not be synced with the changed properties.
 //
 func (p *DiskService) Update() *DiskServiceUpdateRequest {
@@ -87581,7 +87670,7 @@ func (p *CpuProfilesService) Add() *CpuProfilesServiceAddRequest {
 
 //
 // Returns the list of CPU profiles of the system.
-// The order of the returned list of CPU profiles isn't guranteed.
+// The order of the returned list of CPU profiles is random.
 //
 type CpuProfilesServiceListRequest struct {
 	CpuProfilesService *CpuProfilesService
@@ -87703,7 +87792,7 @@ func (p *CpuProfilesServiceListRequest) MustSend() *CpuProfilesServiceListRespon
 
 //
 // Returns the list of CPU profiles of the system.
-// The order of the returned list of CPU profiles isn't guranteed.
+// The order of the returned list of CPU profiles is random.
 //
 type CpuProfilesServiceListResponse struct {
 	profile *CpuProfileSlice
@@ -87725,7 +87814,7 @@ func (p *CpuProfilesServiceListResponse) MustProfile() *CpuProfileSlice {
 
 //
 // Returns the list of CPU profiles of the system.
-// The order of the returned list of CPU profiles isn't guranteed.
+// The order of the returned list of CPU profiles is random.
 //
 func (p *CpuProfilesService) List() *CpuProfilesServiceListRequest {
 	return &CpuProfilesServiceListRequest{CpuProfilesService: p}
@@ -89453,7 +89542,7 @@ func NewClusterLevelService(connection *Connection, path string) *ClusterLevelSe
 // <cluster_level id="3.6">
 //   <cpu_types>
 //     <cpu_type>
-//       <name>Intel Conroe Family</name>
+//       <name>Intel Nehalem Family</name>
 //       <level>3</level>
 //       <architecture>x86_64</architecture>
 //     </cpu_type>
@@ -89591,7 +89680,7 @@ func (p *ClusterLevelServiceGetRequest) MustSend() *ClusterLevelServiceGetRespon
 // <cluster_level id="3.6">
 //   <cpu_types>
 //     <cpu_type>
-//       <name>Intel Conroe Family</name>
+//       <name>Intel Nehalem Family</name>
 //       <level>3</level>
 //       <architecture>x86_64</architecture>
 //     </cpu_type>
@@ -89639,7 +89728,7 @@ func (p *ClusterLevelServiceGetResponse) MustLevel() *ClusterLevel {
 // <cluster_level id="3.6">
 //   <cpu_types>
 //     <cpu_type>
-//       <name>Intel Conroe Family</name>
+//       <name>Intel Nehalem Family</name>
 //       <level>3</level>
 //       <architecture>x86_64</architecture>
 //     </cpu_type>
@@ -100510,7 +100599,7 @@ func NewExternalHostProvidersService(connection *Connection, path string) *Exter
 }
 
 //
-// Adds a new external host provider to the system.
+// Add a new external host provider to the system.
 //
 type ExternalHostProvidersServiceAddRequest struct {
 	ExternalHostProvidersService *ExternalHostProvidersService
@@ -100624,7 +100713,7 @@ func (p *ExternalHostProvidersServiceAddRequest) MustSend() *ExternalHostProvide
 }
 
 //
-// Adds a new external host provider to the system.
+// Add a new external host provider to the system.
 //
 type ExternalHostProvidersServiceAddResponse struct {
 	provider *ExternalHostProvider
@@ -100645,7 +100734,7 @@ func (p *ExternalHostProvidersServiceAddResponse) MustProvider() *ExternalHostPr
 }
 
 //
-// Adds a new external host provider to the system.
+// Add a new external host provider to the system.
 //
 func (p *ExternalHostProvidersService) Add() *ExternalHostProvidersServiceAddRequest {
 	return &ExternalHostProvidersServiceAddRequest{ExternalHostProvidersService: p}
@@ -100653,7 +100742,7 @@ func (p *ExternalHostProvidersService) Add() *ExternalHostProvidersServiceAddReq
 
 //
 // Returns the list of external host providers.
-// The order of the returned list of host providers is not guaranteed.
+// The order of the returned list of host providers isn't guaranteed.
 //
 type ExternalHostProvidersServiceListRequest struct {
 	ExternalHostProvidersService *ExternalHostProvidersService
@@ -100785,7 +100874,7 @@ func (p *ExternalHostProvidersServiceListRequest) MustSend() *ExternalHostProvid
 
 //
 // Returns the list of external host providers.
-// The order of the returned list of host providers is not guaranteed.
+// The order of the returned list of host providers isn't guaranteed.
 //
 type ExternalHostProvidersServiceListResponse struct {
 	providers *ExternalHostProviderSlice
@@ -100807,7 +100896,7 @@ func (p *ExternalHostProvidersServiceListResponse) MustProviders() *ExternalHost
 
 //
 // Returns the list of external host providers.
-// The order of the returned list of host providers is not guaranteed.
+// The order of the returned list of host providers isn't guaranteed.
 //
 func (p *ExternalHostProvidersService) List() *ExternalHostProvidersServiceListRequest {
 	return &ExternalHostProvidersServiceListRequest{ExternalHostProvidersService: p}
@@ -104368,6 +104457,18 @@ func NewTemplatesService(connection *Connection, path string) *TemplatesService 
 //   <vm id="123"/>
 // </template>
 // ----
+// Since version 4.3, in order to create virtual machine template from a snapshot send a request body like this:
+// [source,xml]
+// ----
+// <template>
+//   <name>mytemplate</name>
+//   <vm id="123">
+//     <snapshots>
+//       <snapshot id="456"/>
+//     </snapshots>
+//   </vm>
+// </template>
+// ----
 // The disks of the template can be customized, making some of their characteristics different from the disks of the
 // original virtual machine. To do so use the `vm.disk_attachments` attribute, specifying the identifier of the disk
 // of the original virtual machine and the characteristics that you want to change. For example, if the original
@@ -104598,6 +104699,18 @@ func (p *TemplatesServiceAddRequest) MustSend() *TemplatesServiceAddResponse {
 //   <vm id="123"/>
 // </template>
 // ----
+// Since version 4.3, in order to create virtual machine template from a snapshot send a request body like this:
+// [source,xml]
+// ----
+// <template>
+//   <name>mytemplate</name>
+//   <vm id="123">
+//     <snapshots>
+//       <snapshot id="456"/>
+//     </snapshots>
+//   </vm>
+// </template>
+// ----
 // The disks of the template can be customized, making some of their characteristics different from the disks of the
 // original virtual machine. To do so use the `vm.disk_attachments` attribute, specifying the identifier of the disk
 // of the original virtual machine and the characteristics that you want to change. For example, if the original
@@ -104713,6 +104826,18 @@ func (p *TemplatesServiceAddResponse) MustTemplate() *Template {
 // <template>
 //   <name>mytemplate</name>
 //   <vm id="123"/>
+// </template>
+// ----
+// Since version 4.3, in order to create virtual machine template from a snapshot send a request body like this:
+// [source,xml]
+// ----
+// <template>
+//   <name>mytemplate</name>
+//   <vm id="123">
+//     <snapshots>
+//       <snapshot id="456"/>
+//     </snapshots>
+//   </vm>
 // </template>
 // ----
 // The disks of the template can be customized, making some of their characteristics different from the disks of the
@@ -105111,6 +105236,162 @@ func (p *TemplatesServiceAddFromVmResponse) MustTemplate() *Template {
 //
 func (p *TemplatesService) AddFromVm() *TemplatesServiceAddFromVmRequest {
 	return &TemplatesServiceAddFromVmRequest{TemplatesService: p}
+}
+
+//
+// Add a virtual machine template to the system from a snapshot.
+//
+type TemplatesServiceAddFromVmSnapshotRequest struct {
+	TemplatesService *TemplatesService
+	header           map[string]string
+	query            map[string]string
+	clonePermissions *bool
+	seal             *bool
+	template         *Template
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotRequest) Header(key, value string) *TemplatesServiceAddFromVmSnapshotRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotRequest) Query(key, value string) *TemplatesServiceAddFromVmSnapshotRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotRequest) ClonePermissions(clonePermissions bool) *TemplatesServiceAddFromVmSnapshotRequest {
+	p.clonePermissions = &clonePermissions
+	return p
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotRequest) Seal(seal bool) *TemplatesServiceAddFromVmSnapshotRequest {
+	p.seal = &seal
+	return p
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotRequest) Template(template *Template) *TemplatesServiceAddFromVmSnapshotRequest {
+	p.template = template
+	return p
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotRequest) Send() (*TemplatesServiceAddFromVmSnapshotResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/fromvmsnapshot", p.TemplatesService.connection.URL(), p.TemplatesService.path)
+	actionBuilder := NewActionBuilder()
+	if p.clonePermissions != nil {
+		actionBuilder.ClonePermissions(*p.clonePermissions)
+	}
+	if p.seal != nil {
+		actionBuilder.Seal(*p.seal)
+	}
+	actionBuilder.Template(p.template)
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.TemplatesService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.TemplatesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.TemplatesService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.TemplatesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.TemplatesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	action, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	result := action.MustTemplate()
+	return &TemplatesServiceAddFromVmSnapshotResponse{template: result}, nil
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotRequest) MustSend() *TemplatesServiceAddFromVmSnapshotResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Add a virtual machine template to the system from a snapshot.
+//
+type TemplatesServiceAddFromVmSnapshotResponse struct {
+	template *Template
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotResponse) Template() (*Template, bool) {
+	if p.template != nil {
+		return p.template, true
+	}
+	return nil, false
+}
+
+func (p *TemplatesServiceAddFromVmSnapshotResponse) MustTemplate() *Template {
+	if p.template == nil {
+		panic("template in response does not exist")
+	}
+	return p.template
+}
+
+//
+// Add a virtual machine template to the system from a snapshot.
+//
+func (p *TemplatesService) AddFromVmSnapshot() *TemplatesServiceAddFromVmSnapshotRequest {
+	return &TemplatesServiceAddFromVmSnapshotRequest{TemplatesService: p}
 }
 
 //

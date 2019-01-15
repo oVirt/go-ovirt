@@ -1666,6 +1666,8 @@ type Cluster struct {
 	haReservation                    *bool
 	id                               *string
 	ksm                              *Ksm
+	logMaxMemoryUsedThreshold        *int64
+	logMaxMemoryUsedThresholdType    *LogMaxMemoryUsedThresholdType
 	macPool                          *MacPool
 	maintenanceReasonRequired        *bool
 	managementNetwork                *Network
@@ -2072,6 +2074,44 @@ func (p *Cluster) MustKsm() *Ksm {
 		panic("the ksm must not be nil, please use Ksm() function instead")
 	}
 	return p.ksm
+}
+
+func (p *Cluster) SetLogMaxMemoryUsedThreshold(attr int64) {
+	p.logMaxMemoryUsedThreshold = &attr
+}
+
+func (p *Cluster) LogMaxMemoryUsedThreshold() (int64, bool) {
+	if p.logMaxMemoryUsedThreshold != nil {
+		return *p.logMaxMemoryUsedThreshold, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *Cluster) MustLogMaxMemoryUsedThreshold() int64 {
+	if p.logMaxMemoryUsedThreshold == nil {
+		panic("the logMaxMemoryUsedThreshold must not be nil, please use LogMaxMemoryUsedThreshold() function instead")
+	}
+	return *p.logMaxMemoryUsedThreshold
+}
+
+func (p *Cluster) SetLogMaxMemoryUsedThresholdType(attr LogMaxMemoryUsedThresholdType) {
+	p.logMaxMemoryUsedThresholdType = &attr
+}
+
+func (p *Cluster) LogMaxMemoryUsedThresholdType() (LogMaxMemoryUsedThresholdType, bool) {
+	if p.logMaxMemoryUsedThresholdType != nil {
+		return *p.logMaxMemoryUsedThresholdType, true
+	}
+	var zero LogMaxMemoryUsedThresholdType
+	return zero, false
+}
+
+func (p *Cluster) MustLogMaxMemoryUsedThresholdType() LogMaxMemoryUsedThresholdType {
+	if p.logMaxMemoryUsedThresholdType == nil {
+		panic("the logMaxMemoryUsedThresholdType must not be nil, please use LogMaxMemoryUsedThresholdType() function instead")
+	}
+	return *p.logMaxMemoryUsedThresholdType
 }
 
 func (p *Cluster) SetMacPool(attr *MacPool) {
@@ -6440,6 +6480,7 @@ type StorageDomain struct {
 	Struct
 	available                  *int64
 	backup                     *bool
+	blockSize                  *int64
 	comment                    *string
 	committed                  *int64
 	criticalSpaceActionBlocker *int64
@@ -6509,6 +6550,25 @@ func (p *StorageDomain) MustBackup() bool {
 		panic("the backup must not be nil, please use Backup() function instead")
 	}
 	return *p.backup
+}
+
+func (p *StorageDomain) SetBlockSize(attr int64) {
+	p.blockSize = &attr
+}
+
+func (p *StorageDomain) BlockSize() (int64, bool) {
+	if p.blockSize != nil {
+		return *p.blockSize, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *StorageDomain) MustBlockSize() int64 {
+	if p.blockSize == nil {
+		panic("the blockSize must not be nil, please use BlockSize() function instead")
+	}
+	return *p.blockSize
 }
 
 func (p *StorageDomain) SetComment(attr string) {
@@ -17080,6 +17140,7 @@ type Snapshot struct {
 	deleteProtected             *bool
 	description                 *string
 	diskAttachments             *DiskAttachmentSlice
+	disks                       *DiskSlice
 	display                     *Display
 	domain                      *Domain
 	externalHostProvider        *ExternalHostProvider
@@ -17499,6 +17560,24 @@ func (p *Snapshot) MustDiskAttachments() *DiskAttachmentSlice {
 		panic("the diskAttachments must not be nil, please use DiskAttachments() function instead")
 	}
 	return p.diskAttachments
+}
+
+func (p *Snapshot) SetDisks(attr *DiskSlice) {
+	p.disks = attr
+}
+
+func (p *Snapshot) Disks() (*DiskSlice, bool) {
+	if p.disks != nil {
+		return p.disks, true
+	}
+	return nil, false
+}
+
+func (p *Snapshot) MustDisks() *DiskSlice {
+	if p.disks == nil {
+		panic("the disks must not be nil, please use Disks() function instead")
+	}
+	return p.disks
 }
 
 func (p *Snapshot) SetDisplay(attr *Display) {
@@ -18816,6 +18895,7 @@ func (p *Rate) MustPeriod() int64 {
 type Bios struct {
 	Struct
 	bootMenu *BootMenu
+	type_    *BiosType
 }
 
 func (p *Bios) SetBootMenu(attr *BootMenu) {
@@ -18834,6 +18914,25 @@ func (p *Bios) MustBootMenu() *BootMenu {
 		panic("the bootMenu must not be nil, please use BootMenu() function instead")
 	}
 	return p.bootMenu
+}
+
+func (p *Bios) SetType(attr BiosType) {
+	p.type_ = &attr
+}
+
+func (p *Bios) Type() (BiosType, bool) {
+	if p.type_ != nil {
+		return *p.type_, true
+	}
+	var zero BiosType
+	return zero, false
+}
+
+func (p *Bios) MustType() BiosType {
+	if p.type_ == nil {
+		panic("the type_ must not be nil, please use Type() function instead")
+	}
+	return *p.type_
 }
 
 type Version struct {
@@ -20160,27 +20259,30 @@ func (p *CpuType) MustName() string {
 
 type HostStorage struct {
 	Struct
-	address      *string
-	comment      *string
-	description  *string
-	host         *Host
-	id           *string
-	logicalUnits *LogicalUnitSlice
-	mountOptions *string
-	name         *string
-	nfsRetrans   *int64
-	nfsTimeo     *int64
-	nfsVersion   *NfsVersion
-	overrideLuns *bool
-	password     *string
-	path         *string
-	port         *int64
-	portal       *string
-	target       *string
-	type_        *StorageType
-	username     *string
-	vfsType      *string
-	volumeGroup  *VolumeGroup
+	address                *string
+	comment                *string
+	description            *string
+	driverName             *string
+	driverOptions          *PropertySlice
+	driverSensitiveOptions *PropertySlice
+	host                   *Host
+	id                     *string
+	logicalUnits           *LogicalUnitSlice
+	mountOptions           *string
+	name                   *string
+	nfsRetrans             *int64
+	nfsTimeo               *int64
+	nfsVersion             *NfsVersion
+	overrideLuns           *bool
+	password               *string
+	path                   *string
+	port                   *int64
+	portal                 *string
+	target                 *string
+	type_                  *StorageType
+	username               *string
+	vfsType                *string
+	volumeGroup            *VolumeGroup
 }
 
 func (p *HostStorage) SetAddress(attr string) {
@@ -20238,6 +20340,61 @@ func (p *HostStorage) MustDescription() string {
 		panic("the description must not be nil, please use Description() function instead")
 	}
 	return *p.description
+}
+
+func (p *HostStorage) SetDriverName(attr string) {
+	p.driverName = &attr
+}
+
+func (p *HostStorage) DriverName() (string, bool) {
+	if p.driverName != nil {
+		return *p.driverName, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *HostStorage) MustDriverName() string {
+	if p.driverName == nil {
+		panic("the driverName must not be nil, please use DriverName() function instead")
+	}
+	return *p.driverName
+}
+
+func (p *HostStorage) SetDriverOptions(attr *PropertySlice) {
+	p.driverOptions = attr
+}
+
+func (p *HostStorage) DriverOptions() (*PropertySlice, bool) {
+	if p.driverOptions != nil {
+		return p.driverOptions, true
+	}
+	return nil, false
+}
+
+func (p *HostStorage) MustDriverOptions() *PropertySlice {
+	if p.driverOptions == nil {
+		panic("the driverOptions must not be nil, please use DriverOptions() function instead")
+	}
+	return p.driverOptions
+}
+
+func (p *HostStorage) SetDriverSensitiveOptions(attr *PropertySlice) {
+	p.driverSensitiveOptions = attr
+}
+
+func (p *HostStorage) DriverSensitiveOptions() (*PropertySlice, bool) {
+	if p.driverSensitiveOptions != nil {
+		return p.driverSensitiveOptions, true
+	}
+	return nil, false
+}
+
+func (p *HostStorage) MustDriverSensitiveOptions() *PropertySlice {
+	if p.driverSensitiveOptions == nil {
+		panic("the driverSensitiveOptions must not be nil, please use DriverSensitiveOptions() function instead")
+	}
+	return p.driverSensitiveOptions
 }
 
 func (p *HostStorage) SetHost(attr *Host) {
@@ -22109,27 +22266,28 @@ func (p *Sso) MustMethods() *MethodSlice {
 
 type Initialization struct {
 	Struct
-	activeDirectoryOu *string
-	authorizedSshKeys *string
-	cloudInit         *CloudInit
-	configuration     *Configuration
-	customScript      *string
-	dnsSearch         *string
-	dnsServers        *string
-	domain            *string
-	hostName          *string
-	inputLocale       *string
-	nicConfigurations *NicConfigurationSlice
-	orgName           *string
-	regenerateIds     *bool
-	regenerateSshKeys *bool
-	rootPassword      *string
-	systemLocale      *string
-	timezone          *string
-	uiLanguage        *string
-	userLocale        *string
-	userName          *string
-	windowsLicenseKey *string
+	activeDirectoryOu        *string
+	authorizedSshKeys        *string
+	cloudInit                *CloudInit
+	cloudInitNetworkProtocol *CloudInitNetworkProtocol
+	configuration            *Configuration
+	customScript             *string
+	dnsSearch                *string
+	dnsServers               *string
+	domain                   *string
+	hostName                 *string
+	inputLocale              *string
+	nicConfigurations        *NicConfigurationSlice
+	orgName                  *string
+	regenerateIds            *bool
+	regenerateSshKeys        *bool
+	rootPassword             *string
+	systemLocale             *string
+	timezone                 *string
+	uiLanguage               *string
+	userLocale               *string
+	userName                 *string
+	windowsLicenseKey        *string
 }
 
 func (p *Initialization) SetActiveDirectoryOu(attr string) {
@@ -22186,6 +22344,25 @@ func (p *Initialization) MustCloudInit() *CloudInit {
 		panic("the cloudInit must not be nil, please use CloudInit() function instead")
 	}
 	return p.cloudInit
+}
+
+func (p *Initialization) SetCloudInitNetworkProtocol(attr CloudInitNetworkProtocol) {
+	p.cloudInitNetworkProtocol = &attr
+}
+
+func (p *Initialization) CloudInitNetworkProtocol() (CloudInitNetworkProtocol, bool) {
+	if p.cloudInitNetworkProtocol != nil {
+		return *p.cloudInitNetworkProtocol, true
+	}
+	var zero CloudInitNetworkProtocol
+	return zero, false
+}
+
+func (p *Initialization) MustCloudInitNetworkProtocol() CloudInitNetworkProtocol {
+	if p.cloudInitNetworkProtocol == nil {
+		panic("the cloudInitNetworkProtocol must not be nil, please use CloudInitNetworkProtocol() function instead")
+	}
+	return *p.cloudInitNetworkProtocol
 }
 
 func (p *Initialization) SetConfiguration(attr *Configuration) {
@@ -33019,6 +33196,7 @@ type Host struct {
 	unmanagedNetworks                     *UnmanagedNetworkSlice
 	updateAvailable                       *bool
 	version                               *Version
+	vgpuPlacement                         *VgpuPlacement
 }
 
 func (p *Host) SetAddress(attr string) {
@@ -34011,6 +34189,25 @@ func (p *Host) MustVersion() *Version {
 		panic("the version must not be nil, please use Version() function instead")
 	}
 	return p.version
+}
+
+func (p *Host) SetVgpuPlacement(attr VgpuPlacement) {
+	p.vgpuPlacement = &attr
+}
+
+func (p *Host) VgpuPlacement() (VgpuPlacement, bool) {
+	if p.vgpuPlacement != nil {
+		return *p.vgpuPlacement, true
+	}
+	var zero VgpuPlacement
+	return zero, false
+}
+
+func (p *Host) MustVgpuPlacement() VgpuPlacement {
+	if p.vgpuPlacement == nil {
+		panic("the vgpuPlacement must not be nil, please use VgpuPlacement() function instead")
+	}
+	return *p.vgpuPlacement
 }
 
 type Certificate struct {
@@ -37901,6 +38098,7 @@ type Action struct {
 	cluster                        *Cluster
 	collapseSnapshots              *bool
 	comment                        *string
+	commitOnSuccess                *bool
 	connection                     *StorageConnection
 	connectivityTimeout            *int64
 	dataCenter                     *DataCenter
@@ -38195,6 +38393,25 @@ func (p *Action) MustComment() string {
 		panic("the comment must not be nil, please use Comment() function instead")
 	}
 	return *p.comment
+}
+
+func (p *Action) SetCommitOnSuccess(attr bool) {
+	p.commitOnSuccess = &attr
+}
+
+func (p *Action) CommitOnSuccess() (bool, bool) {
+	if p.commitOnSuccess != nil {
+		return *p.commitOnSuccess, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Action) MustCommitOnSuccess() bool {
+	if p.commitOnSuccess == nil {
+		panic("the commitOnSuccess must not be nil, please use CommitOnSuccess() function instead")
+	}
+	return *p.commitOnSuccess
 }
 
 func (p *Action) SetConnection(attr *StorageConnection) {
@@ -46664,6 +46881,24 @@ func (builder *ClusterBuilder) KsmBuilder(attrBuilder *KsmBuilder) *ClusterBuild
 	return builder.Ksm(attr)
 }
 
+func (builder *ClusterBuilder) LogMaxMemoryUsedThreshold(attr int64) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.cluster.SetLogMaxMemoryUsedThreshold(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) LogMaxMemoryUsedThresholdType(attr LogMaxMemoryUsedThresholdType) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.cluster.SetLogMaxMemoryUsedThresholdType(attr)
+	return builder
+}
+
 func (builder *ClusterBuilder) MacPool(attr *MacPool) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -51376,6 +51611,15 @@ func (builder *StorageDomainBuilder) Backup(attr bool) *StorageDomainBuilder {
 	}
 
 	builder.storageDomain.SetBackup(attr)
+	return builder
+}
+
+func (builder *StorageDomainBuilder) BlockSize(attr int64) *StorageDomainBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.storageDomain.SetBlockSize(attr)
 	return builder
 }
 
@@ -62504,6 +62748,47 @@ func (builder *SnapshotBuilder) DiskAttachmentsBuilderOfAny(anyBuilders ...DiskA
 	return builder
 }
 
+func (builder *SnapshotBuilder) Disks(attr *DiskSlice) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.snapshot.SetDisks(attr)
+	return builder
+}
+
+func (builder *SnapshotBuilder) DisksOfAny(anys ...*Disk) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.snapshot.disks == nil {
+		builder.snapshot.disks = new(DiskSlice)
+	}
+	builder.snapshot.disks.slice = append(builder.snapshot.disks.slice, anys...)
+	return builder
+}
+
+func (builder *SnapshotBuilder) DisksBuilderOfAny(anyBuilders ...DiskBuilder) *SnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DisksOfAny(attr)
+	}
+	return builder
+}
+
 func (builder *SnapshotBuilder) Display(attr *Display) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -64174,6 +64459,15 @@ func (builder *BiosBuilder) BootMenuBuilder(attrBuilder *BootMenuBuilder) *BiosB
 	return builder.BootMenu(attr)
 }
 
+func (builder *BiosBuilder) Type(attr BiosType) *BiosBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.bios.SetType(attr)
+	return builder
+}
+
 func (builder *BiosBuilder) Href(href string) *BiosBuilder {
 	if builder.err != nil {
 		return builder
@@ -65271,6 +65565,97 @@ func (builder *HostStorageBuilder) Description(attr string) *HostStorageBuilder 
 	}
 
 	builder.hostStorage.SetDescription(attr)
+	return builder
+}
+
+func (builder *HostStorageBuilder) DriverName(attr string) *HostStorageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.hostStorage.SetDriverName(attr)
+	return builder
+}
+
+func (builder *HostStorageBuilder) DriverOptions(attr *PropertySlice) *HostStorageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.hostStorage.SetDriverOptions(attr)
+	return builder
+}
+
+func (builder *HostStorageBuilder) DriverOptionsOfAny(anys ...*Property) *HostStorageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.hostStorage.driverOptions == nil {
+		builder.hostStorage.driverOptions = new(PropertySlice)
+	}
+	builder.hostStorage.driverOptions.slice = append(builder.hostStorage.driverOptions.slice, anys...)
+	return builder
+}
+
+func (builder *HostStorageBuilder) DriverOptionsBuilderOfAny(anyBuilders ...PropertyBuilder) *HostStorageBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DriverOptionsOfAny(attr)
+	}
+	return builder
+}
+
+func (builder *HostStorageBuilder) DriverSensitiveOptions(attr *PropertySlice) *HostStorageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.hostStorage.SetDriverSensitiveOptions(attr)
+	return builder
+}
+
+func (builder *HostStorageBuilder) DriverSensitiveOptionsOfAny(anys ...*Property) *HostStorageBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.hostStorage.driverSensitiveOptions == nil {
+		builder.hostStorage.driverSensitiveOptions = new(PropertySlice)
+	}
+	builder.hostStorage.driverSensitiveOptions.slice = append(builder.hostStorage.driverSensitiveOptions.slice, anys...)
+	return builder
+}
+
+func (builder *HostStorageBuilder) DriverSensitiveOptionsBuilderOfAny(anyBuilders ...PropertyBuilder) *HostStorageBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DriverSensitiveOptionsOfAny(attr)
+	}
 	return builder
 }
 
@@ -67065,6 +67450,15 @@ func (builder *InitializationBuilder) CloudInitBuilder(attrBuilder *CloudInitBui
 		return builder
 	}
 	return builder.CloudInit(attr)
+}
+
+func (builder *InitializationBuilder) CloudInitNetworkProtocol(attr CloudInitNetworkProtocol) *InitializationBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.initialization.SetCloudInitNetworkProtocol(attr)
+	return builder
 }
 
 func (builder *InitializationBuilder) Configuration(attr *Configuration) *InitializationBuilder {
@@ -79377,6 +79771,15 @@ func (builder *HostBuilder) VersionBuilder(attrBuilder *VersionBuilder) *HostBui
 	return builder.Version(attr)
 }
 
+func (builder *HostBuilder) VgpuPlacement(attr VgpuPlacement) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.host.SetVgpuPlacement(attr)
+	return builder
+}
+
 func (builder *HostBuilder) Href(href string) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -84108,6 +84511,15 @@ func (builder *ActionBuilder) Comment(attr string) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) CommitOnSuccess(attr bool) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetCommitOnSuccess(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) Connection(attr *StorageConnection) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -85602,6 +86014,13 @@ const (
 	PAYLOADENCODING_PLAINTEXT PayloadEncoding = "plaintext"
 )
 
+type VgpuPlacement string
+
+const (
+	VGPUPLACEMENT_CONSOLIDATED VgpuPlacement = "consolidated"
+	VGPUPLACEMENT_SEPARATED    VgpuPlacement = "separated"
+)
+
 type NetworkStatus string
 
 const (
@@ -85740,6 +86159,13 @@ const (
 	SNAPSHOTSTATUS_OK         SnapshotStatus = "ok"
 )
 
+type LogMaxMemoryUsedThresholdType string
+
+const (
+	LOGMAXMEMORYUSEDTHRESHOLDTYPE_ABSOLUTE_VALUE_IN_MB LogMaxMemoryUsedThresholdType = "absolute_value_in_mb"
+	LOGMAXMEMORYUSEDTHRESHOLDTYPE_PERCENTAGE           LogMaxMemoryUsedThresholdType = "percentage"
+)
+
 type SnapshotType string
 
 const (
@@ -85747,6 +86173,13 @@ const (
 	SNAPSHOTTYPE_PREVIEW   SnapshotType = "preview"
 	SNAPSHOTTYPE_REGULAR   SnapshotType = "regular"
 	SNAPSHOTTYPE_STATELESS SnapshotType = "stateless"
+)
+
+type CloudInitNetworkProtocol string
+
+const (
+	CLOUDINITNETWORKPROTOCOL_ENI                CloudInitNetworkProtocol = "eni"
+	CLOUDINITNETWORKPROTOCOL_OPENSTACK_METADATA CloudInitNetworkProtocol = "openstack_metadata"
 )
 
 type GlusterState string
@@ -85813,14 +86246,15 @@ const (
 type StorageType string
 
 const (
-	STORAGETYPE_CINDER    StorageType = "cinder"
-	STORAGETYPE_FCP       StorageType = "fcp"
-	STORAGETYPE_GLANCE    StorageType = "glance"
-	STORAGETYPE_GLUSTERFS StorageType = "glusterfs"
-	STORAGETYPE_ISCSI     StorageType = "iscsi"
-	STORAGETYPE_LOCALFS   StorageType = "localfs"
-	STORAGETYPE_NFS       StorageType = "nfs"
-	STORAGETYPE_POSIXFS   StorageType = "posixfs"
+	STORAGETYPE_CINDER                StorageType = "cinder"
+	STORAGETYPE_FCP                   StorageType = "fcp"
+	STORAGETYPE_GLANCE                StorageType = "glance"
+	STORAGETYPE_GLUSTERFS             StorageType = "glusterfs"
+	STORAGETYPE_ISCSI                 StorageType = "iscsi"
+	STORAGETYPE_LOCALFS               StorageType = "localfs"
+	STORAGETYPE_MANAGED_BLOCK_STORAGE StorageType = "managed_block_storage"
+	STORAGETYPE_NFS                   StorageType = "nfs"
+	STORAGETYPE_POSIXFS               StorageType = "posixfs"
 )
 
 type HookContentType string
@@ -85896,6 +86330,7 @@ const (
 	STORAGEFORMAT_V2 StorageFormat = "v2"
 	STORAGEFORMAT_V3 StorageFormat = "v3"
 	STORAGEFORMAT_V4 StorageFormat = "v4"
+	STORAGEFORMAT_V5 StorageFormat = "v5"
 )
 
 type SsoMethod string
@@ -86007,9 +86442,10 @@ const (
 type DiskStorageType string
 
 const (
-	DISKSTORAGETYPE_CINDER DiskStorageType = "cinder"
-	DISKSTORAGETYPE_IMAGE  DiskStorageType = "image"
-	DISKSTORAGETYPE_LUN    DiskStorageType = "lun"
+	DISKSTORAGETYPE_CINDER                DiskStorageType = "cinder"
+	DISKSTORAGETYPE_IMAGE                 DiskStorageType = "image"
+	DISKSTORAGETYPE_LUN                   DiskStorageType = "lun"
+	DISKSTORAGETYPE_MANAGED_BLOCK_STORAGE DiskStorageType = "managed_block_storage"
 )
 
 type InheritableBoolean string
@@ -86107,11 +86543,12 @@ const (
 type StorageDomainType string
 
 const (
-	STORAGEDOMAINTYPE_DATA   StorageDomainType = "data"
-	STORAGEDOMAINTYPE_EXPORT StorageDomainType = "export"
-	STORAGEDOMAINTYPE_IMAGE  StorageDomainType = "image"
-	STORAGEDOMAINTYPE_ISO    StorageDomainType = "iso"
-	STORAGEDOMAINTYPE_VOLUME StorageDomainType = "volume"
+	STORAGEDOMAINTYPE_DATA                  StorageDomainType = "data"
+	STORAGEDOMAINTYPE_EXPORT                StorageDomainType = "export"
+	STORAGEDOMAINTYPE_IMAGE                 StorageDomainType = "image"
+	STORAGEDOMAINTYPE_ISO                   StorageDomainType = "iso"
+	STORAGEDOMAINTYPE_MANAGED_BLOCK_STORAGE StorageDomainType = "managed_block_storage"
+	STORAGEDOMAINTYPE_VOLUME                StorageDomainType = "volume"
 )
 
 type SwitchType string
@@ -86231,6 +86668,7 @@ type DiskInterface string
 
 const (
 	DISKINTERFACE_IDE         DiskInterface = "ide"
+	DISKINTERFACE_SATA        DiskInterface = "sata"
 	DISKINTERFACE_SPAPR_VSCSI DiskInterface = "spapr_vscsi"
 	DISKINTERFACE_VIRTIO      DiskInterface = "virtio"
 	DISKINTERFACE_VIRTIO_SCSI DiskInterface = "virtio_scsi"
@@ -86343,6 +86781,15 @@ const (
 	SPMSTATUS_CONTENDING SpmStatus = "contending"
 	SPMSTATUS_NONE       SpmStatus = "none"
 	SPMSTATUS_SPM        SpmStatus = "spm"
+)
+
+type BiosType string
+
+const (
+	BIOSTYPE_I440FX_SEA_BIOS BiosType = "i440fx_sea_bios"
+	BIOSTYPE_Q35_OVMF        BiosType = "q35_ovmf"
+	BIOSTYPE_Q35_SEA_BIOS    BiosType = "q35_sea_bios"
+	BIOSTYPE_Q35_SECURE_BOOT BiosType = "q35_secure_boot"
 )
 
 type JobStatus string

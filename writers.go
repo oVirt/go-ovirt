@@ -764,6 +764,12 @@ func XMLClusterWriteOne(writer *XMLWriter, object *Cluster, tag string) error {
 	if r, ok := object.Ksm(); ok {
 		XMLKsmWriteOne(writer, r, "ksm")
 	}
+	if r, ok := object.LogMaxMemoryUsedThreshold(); ok {
+		writer.WriteInt64("log_max_memory_used_threshold", r)
+	}
+	if r, ok := object.LogMaxMemoryUsedThresholdType(); ok {
+		XMLLogMaxMemoryUsedThresholdTypeWriteOne(writer, r, "log_max_memory_used_threshold_type")
+	}
 	if r, ok := object.MacPool(); ok {
 		XMLMacPoolWriteOne(writer, r, "mac_pool")
 	}
@@ -2257,6 +2263,9 @@ func XMLStorageDomainWriteOne(writer *XMLWriter, object *StorageDomain, tag stri
 	}
 	if r, ok := object.Backup(); ok {
 		writer.WriteBool("backup", r)
+	}
+	if r, ok := object.BlockSize(); ok {
+		writer.WriteInt64("block_size", r)
 	}
 	if r, ok := object.Comment(); ok {
 		writer.WriteCharacter("comment", r)
@@ -5668,6 +5677,9 @@ func XMLSnapshotWriteOne(writer *XMLWriter, object *Snapshot, tag string) error 
 	if r, ok := object.DiskAttachments(); ok {
 		XMLDiskAttachmentWriteMany(writer, r, "disk_attachments", "disk_attachment")
 	}
+	if r, ok := object.Disks(); ok {
+		XMLDiskWriteMany(writer, r, "disks", "disk")
+	}
 	if r, ok := object.Display(); ok {
 		XMLDisplayWriteOne(writer, r, "display")
 	}
@@ -5934,6 +5946,9 @@ func XMLBiosWriteOne(writer *XMLWriter, object *Bios, tag string) error {
 	writer.WriteStart("", tag, nil)
 	if r, ok := object.BootMenu(); ok {
 		XMLBootMenuWriteOne(writer, r, "boot_menu")
+	}
+	if r, ok := object.Type(); ok {
+		XMLBiosTypeWriteOne(writer, r, "type")
 	}
 	writer.WriteEnd(tag)
 	return nil
@@ -6408,6 +6423,15 @@ func XMLHostStorageWriteOne(writer *XMLWriter, object *HostStorage, tag string) 
 	}
 	if r, ok := object.Description(); ok {
 		writer.WriteCharacter("description", r)
+	}
+	if r, ok := object.DriverName(); ok {
+		writer.WriteCharacter("driver_name", r)
+	}
+	if r, ok := object.DriverOptions(); ok {
+		XMLPropertyWriteMany(writer, r, "driver_options", "property")
+	}
+	if r, ok := object.DriverSensitiveOptions(); ok {
+		XMLPropertyWriteMany(writer, r, "driver_sensitive_options", "property")
 	}
 	if r, ok := object.Host(); ok {
 		XMLHostWriteOne(writer, r, "host")
@@ -7068,6 +7092,9 @@ func XMLInitializationWriteOne(writer *XMLWriter, object *Initialization, tag st
 	}
 	if r, ok := object.CloudInit(); ok {
 		XMLCloudInitWriteOne(writer, r, "cloud_init")
+	}
+	if r, ok := object.CloudInitNetworkProtocol(); ok {
+		XMLCloudInitNetworkProtocolWriteOne(writer, r, "cloud_init_network_protocol")
 	}
 	if r, ok := object.Configuration(); ok {
 		XMLConfigurationWriteOne(writer, r, "configuration")
@@ -10641,6 +10668,9 @@ func XMLHostWriteOne(writer *XMLWriter, object *Host, tag string) error {
 	if r, ok := object.Version(); ok {
 		XMLVersionWriteOne(writer, r, "version")
 	}
+	if r, ok := object.VgpuPlacement(); ok {
+		XMLVgpuPlacementWriteOne(writer, r, "vgpu_placement")
+	}
 	writer.WriteEnd(tag)
 	return nil
 }
@@ -11818,6 +11848,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	if r, ok := object.Comment(); ok {
 		writer.WriteCharacter("comment", r)
 	}
+	if r, ok := object.CommitOnSuccess(); ok {
+		writer.WriteBool("commit_on_success", r)
+	}
 	if r, ok := object.Connection(); ok {
 		XMLStorageConnectionWriteOne(writer, r, "connection")
 	}
@@ -12082,6 +12115,28 @@ func XMLPayloadEncodingWriteMany(writer *XMLWriter, enums []PayloadEncoding, plu
 	}
 	if singular == "" {
 		singular = "payload_encoding"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLVgpuPlacementWriteOne(writer *XMLWriter, enum VgpuPlacement, tag string) {
+	if tag == "" {
+		tag = "vgpu_placement"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLVgpuPlacementWriteMany(writer *XMLWriter, enums []VgpuPlacement, plural, singular string) error {
+	if plural == "" {
+		plural = "vgpu_placements"
+	}
+	if singular == "" {
+		singular = "vgpu_placement"
 	}
 	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
@@ -12465,6 +12520,28 @@ func XMLSnapshotStatusWriteMany(writer *XMLWriter, enums []SnapshotStatus, plura
 	return nil
 }
 
+func XMLLogMaxMemoryUsedThresholdTypeWriteOne(writer *XMLWriter, enum LogMaxMemoryUsedThresholdType, tag string) {
+	if tag == "" {
+		tag = "log_max_memory_used_threshold_type"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLLogMaxMemoryUsedThresholdTypeWriteMany(writer *XMLWriter, enums []LogMaxMemoryUsedThresholdType, plural, singular string) error {
+	if plural == "" {
+		plural = "log_max_memory_used_threshold_types"
+	}
+	if singular == "" {
+		singular = "log_max_memory_used_threshold_type"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
 func XMLSnapshotTypeWriteOne(writer *XMLWriter, enum SnapshotType, tag string) {
 	if tag == "" {
 		tag = "snapshot_type"
@@ -12478,6 +12555,28 @@ func XMLSnapshotTypeWriteMany(writer *XMLWriter, enums []SnapshotType, plural, s
 	}
 	if singular == "" {
 		singular = "snapshot_type"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLCloudInitNetworkProtocolWriteOne(writer *XMLWriter, enum CloudInitNetworkProtocol, tag string) {
+	if tag == "" {
+		tag = "cloud_init_network_protocol"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLCloudInitNetworkProtocolWriteMany(writer *XMLWriter, enums []CloudInitNetworkProtocol, plural, singular string) error {
+	if plural == "" {
+		plural = "cloud_init_network_protocols"
+	}
+	if singular == "" {
+		singular = "cloud_init_network_protocol"
 	}
 	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
@@ -13930,6 +14029,28 @@ func XMLSpmStatusWriteMany(writer *XMLWriter, enums []SpmStatus, plural, singula
 	}
 	if singular == "" {
 		singular = "spm_status"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLBiosTypeWriteOne(writer *XMLWriter, enum BiosType, tag string) {
+	if tag == "" {
+		tag = "bios_type"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLBiosTypeWriteMany(writer *XMLWriter, enums []BiosType, plural, singular string) error {
+	if plural == "" {
+		plural = "bios_types"
+	}
+	if singular == "" {
+		singular = "bios_type"
 	}
 	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
