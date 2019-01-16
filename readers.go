@@ -2327,19 +2327,6 @@ func XMLClusterReadOne(reader *XMLReader, start *xml.StartElement, expectedTag s
 					return nil, err
 				}
 				builder.Ksm(v)
-			case "log_max_memory_used_threshold":
-				v, err := reader.ReadInt64(&t)
-				if err != nil {
-					return nil, err
-				}
-				builder.LogMaxMemoryUsedThreshold(v)
-			case "log_max_memory_used_threshold_type":
-				vp, err := XMLLogMaxMemoryUsedThresholdTypeReadOne(reader, &t)
-				v := *vp
-				if err != nil {
-					return nil, err
-				}
-				builder.LogMaxMemoryUsedThresholdType(v)
 			case "mac_pool":
 				v, err := XMLMacPoolReadOne(reader, &t, "mac_pool")
 				if err != nil {
@@ -6965,12 +6952,6 @@ func XMLStorageDomainReadOne(reader *XMLReader, start *xml.StartElement, expecte
 					return nil, err
 				}
 				builder.Backup(v)
-			case "block_size":
-				v, err := reader.ReadInt64(&t)
-				if err != nil {
-					return nil, err
-				}
-				builder.BlockSize(v)
 			case "comment":
 				v, err := reader.ReadString(&t)
 				if err != nil {
@@ -17340,12 +17321,6 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.DiskAttachments(v)
-			case "disks":
-				v, err := XMLDiskReadMany(reader, &t)
-				if err != nil {
-					return nil, err
-				}
-				builder.Disks(v)
 			case "display":
 				v, err := XMLDisplayReadOne(reader, &t, "display")
 				if err != nil {
@@ -17810,11 +17785,6 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 				one.diskAttachments = new(DiskAttachmentSlice)
 			}
 			one.diskAttachments.href = link.href
-		case "disks":
-			if one.disks == nil {
-				one.disks = new(DiskSlice)
-			}
-			one.disks.href = link.href
 		case "floppies":
 			if one.floppies == nil {
 				one.floppies = new(FloppySlice)
@@ -18088,13 +18058,6 @@ func XMLBiosReadOne(reader *XMLReader, start *xml.StartElement, expectedTag stri
 					return nil, err
 				}
 				builder.BootMenu(v)
-			case "type":
-				vp, err := XMLBiosTypeReadOne(reader, &t)
-				v := *vp
-				if err != nil {
-					return nil, err
-				}
-				builder.Type(v)
 			case "link":
 				var rel, href string
 				for _, attr := range t.Attr {
@@ -19537,24 +19500,6 @@ func XMLHostStorageReadOne(reader *XMLReader, start *xml.StartElement, expectedT
 					return nil, err
 				}
 				builder.Description(v)
-			case "driver_name":
-				v, err := reader.ReadString(&t)
-				if err != nil {
-					return nil, err
-				}
-				builder.DriverName(v)
-			case "driver_options":
-				v, err := XMLPropertyReadMany(reader, &t)
-				if err != nil {
-					return nil, err
-				}
-				builder.DriverOptions(v)
-			case "driver_sensitive_options":
-				v, err := XMLPropertyReadMany(reader, &t)
-				if err != nil {
-					return nil, err
-				}
-				builder.DriverSensitiveOptions(v)
 			case "host":
 				v, err := XMLHostReadOne(reader, &t, "host")
 				if err != nil {
@@ -21608,13 +21553,6 @@ func XMLInitializationReadOne(reader *XMLReader, start *xml.StartElement, expect
 					return nil, err
 				}
 				builder.CloudInit(v)
-			case "cloud_init_network_protocol":
-				vp, err := XMLCloudInitNetworkProtocolReadOne(reader, &t)
-				v := *vp
-				if err != nil {
-					return nil, err
-				}
-				builder.CloudInitNetworkProtocol(v)
 			case "configuration":
 				v, err := XMLConfigurationReadOne(reader, &t, "configuration")
 				if err != nil {
@@ -32290,13 +32228,6 @@ func XMLHostReadOne(reader *XMLReader, start *xml.StartElement, expectedTag stri
 					return nil, err
 				}
 				builder.Version(v)
-			case "vgpu_placement":
-				vp, err := XMLVgpuPlacementReadOne(reader, &t)
-				v := *vp
-				if err != nil {
-					return nil, err
-				}
-				builder.VgpuPlacement(v)
 			case "link":
 				var rel, href string
 				for _, attr := range t.Attr {
@@ -35903,12 +35834,6 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.Comment(v)
-			case "commit_on_success":
-				v, err := reader.ReadBool(&t)
-				if err != nil {
-					return nil, err
-				}
-				builder.CommitOnSuccess(v)
 			case "connection":
 				v, err := XMLStorageConnectionReadOne(reader, &t, "connection")
 				if err != nil {
@@ -36512,62 +36437,6 @@ func XMLPayloadEncodingReadMany(reader *XMLReader, start *xml.StartElement) ([]P
 				return nil, err
 			}
 			results = append(results, PayloadEncoding(one))
-		case xml.EndElement:
-			depth--
-		}
-	}
-	return results, nil
-}
-
-func XMLVgpuPlacementReadOne(reader *XMLReader, start *xml.StartElement) (*VgpuPlacement, error) {
-	if start == nil {
-		st, err := reader.FindStartElement()
-		if err != nil {
-			if err == io.EOF {
-				return nil, nil
-			}
-			return nil, err
-		}
-		start = st
-	}
-	s, err := reader.ReadString(start)
-	if err != nil {
-		return nil, err
-	}
-	result := new(VgpuPlacement)
-	*result = VgpuPlacement(s)
-	return result, nil
-}
-
-func XMLVgpuPlacementReadMany(reader *XMLReader, start *xml.StartElement) ([]VgpuPlacement, error) {
-	if start == nil {
-		st, err := reader.FindStartElement()
-		if err != nil {
-			if err == io.EOF {
-				return nil, nil
-			}
-			return nil, err
-		}
-		start = st
-	}
-	var results []VgpuPlacement
-	depth := 1
-	for depth > 0 {
-		t, err := reader.Next()
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, err
-		}
-		t = xml.CopyToken(t)
-		switch t := t.(type) {
-		case xml.StartElement:
-			one, err := reader.ReadString(&t)
-			if err != nil {
-				return nil, err
-			}
-			results = append(results, VgpuPlacement(one))
 		case xml.EndElement:
 			depth--
 		}
@@ -37527,62 +37396,6 @@ func XMLSnapshotStatusReadMany(reader *XMLReader, start *xml.StartElement) ([]Sn
 	return results, nil
 }
 
-func XMLLogMaxMemoryUsedThresholdTypeReadOne(reader *XMLReader, start *xml.StartElement) (*LogMaxMemoryUsedThresholdType, error) {
-	if start == nil {
-		st, err := reader.FindStartElement()
-		if err != nil {
-			if err == io.EOF {
-				return nil, nil
-			}
-			return nil, err
-		}
-		start = st
-	}
-	s, err := reader.ReadString(start)
-	if err != nil {
-		return nil, err
-	}
-	result := new(LogMaxMemoryUsedThresholdType)
-	*result = LogMaxMemoryUsedThresholdType(s)
-	return result, nil
-}
-
-func XMLLogMaxMemoryUsedThresholdTypeReadMany(reader *XMLReader, start *xml.StartElement) ([]LogMaxMemoryUsedThresholdType, error) {
-	if start == nil {
-		st, err := reader.FindStartElement()
-		if err != nil {
-			if err == io.EOF {
-				return nil, nil
-			}
-			return nil, err
-		}
-		start = st
-	}
-	var results []LogMaxMemoryUsedThresholdType
-	depth := 1
-	for depth > 0 {
-		t, err := reader.Next()
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, err
-		}
-		t = xml.CopyToken(t)
-		switch t := t.(type) {
-		case xml.StartElement:
-			one, err := reader.ReadString(&t)
-			if err != nil {
-				return nil, err
-			}
-			results = append(results, LogMaxMemoryUsedThresholdType(one))
-		case xml.EndElement:
-			depth--
-		}
-	}
-	return results, nil
-}
-
 func XMLSnapshotTypeReadOne(reader *XMLReader, start *xml.StartElement) (*SnapshotType, error) {
 	if start == nil {
 		st, err := reader.FindStartElement()
@@ -37632,62 +37445,6 @@ func XMLSnapshotTypeReadMany(reader *XMLReader, start *xml.StartElement) ([]Snap
 				return nil, err
 			}
 			results = append(results, SnapshotType(one))
-		case xml.EndElement:
-			depth--
-		}
-	}
-	return results, nil
-}
-
-func XMLCloudInitNetworkProtocolReadOne(reader *XMLReader, start *xml.StartElement) (*CloudInitNetworkProtocol, error) {
-	if start == nil {
-		st, err := reader.FindStartElement()
-		if err != nil {
-			if err == io.EOF {
-				return nil, nil
-			}
-			return nil, err
-		}
-		start = st
-	}
-	s, err := reader.ReadString(start)
-	if err != nil {
-		return nil, err
-	}
-	result := new(CloudInitNetworkProtocol)
-	*result = CloudInitNetworkProtocol(s)
-	return result, nil
-}
-
-func XMLCloudInitNetworkProtocolReadMany(reader *XMLReader, start *xml.StartElement) ([]CloudInitNetworkProtocol, error) {
-	if start == nil {
-		st, err := reader.FindStartElement()
-		if err != nil {
-			if err == io.EOF {
-				return nil, nil
-			}
-			return nil, err
-		}
-		start = st
-	}
-	var results []CloudInitNetworkProtocol
-	depth := 1
-	for depth > 0 {
-		t, err := reader.Next()
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, err
-		}
-		t = xml.CopyToken(t)
-		switch t := t.(type) {
-		case xml.StartElement:
-			one, err := reader.ReadString(&t)
-			if err != nil {
-				return nil, err
-			}
-			results = append(results, CloudInitNetworkProtocol(one))
 		case xml.EndElement:
 			depth--
 		}
@@ -41384,62 +41141,6 @@ func XMLSpmStatusReadMany(reader *XMLReader, start *xml.StartElement) ([]SpmStat
 				return nil, err
 			}
 			results = append(results, SpmStatus(one))
-		case xml.EndElement:
-			depth--
-		}
-	}
-	return results, nil
-}
-
-func XMLBiosTypeReadOne(reader *XMLReader, start *xml.StartElement) (*BiosType, error) {
-	if start == nil {
-		st, err := reader.FindStartElement()
-		if err != nil {
-			if err == io.EOF {
-				return nil, nil
-			}
-			return nil, err
-		}
-		start = st
-	}
-	s, err := reader.ReadString(start)
-	if err != nil {
-		return nil, err
-	}
-	result := new(BiosType)
-	*result = BiosType(s)
-	return result, nil
-}
-
-func XMLBiosTypeReadMany(reader *XMLReader, start *xml.StartElement) ([]BiosType, error) {
-	if start == nil {
-		st, err := reader.FindStartElement()
-		if err != nil {
-			if err == io.EOF {
-				return nil, nil
-			}
-			return nil, err
-		}
-		start = st
-	}
-	var results []BiosType
-	depth := 1
-	for depth > 0 {
-		t, err := reader.Next()
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, err
-		}
-		t = xml.CopyToken(t)
-		switch t := t.(type) {
-		case xml.StartElement:
-			one, err := reader.ReadString(&t)
-			if err != nil {
-				return nil, err
-			}
-			results = append(results, BiosType(one))
 		case xml.EndElement:
 			depth--
 		}
