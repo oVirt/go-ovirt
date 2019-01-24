@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	ovirtsdk4 "gopkg.in/imjoey/go-ovirt.v4"
+	ovirtsdk4 "github.com/imjoey/go-ovirt"
 )
 
 func changeVMCd() {
