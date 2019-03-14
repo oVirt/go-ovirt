@@ -245,7 +245,7 @@ func TestFaultReadOne(t *testing.T) {
 	assert.Equal("fault", err2.ExpectedTag)
 }
 
-// To cover the issue: https://github.com/imjoey/ovirt-engine-sdk-go/issues/121
+// To cover the issue: https://github.com/oVirt/ovirt-engine-sdk-go/issues/121
 func TestGlusterBrickReadMany(t *testing.T) {
 	assert := assert.New(t)
 	xmlstring := `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
