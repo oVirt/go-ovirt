@@ -2597,6 +2597,7 @@ type DiskSnapshot struct {
 	active              *bool
 	actualSize          *int64
 	alias               *string
+	backup              *DiskBackup
 	bootable            *bool
 	comment             *string
 	contentType         *DiskContentType
@@ -2691,6 +2692,25 @@ func (p *DiskSnapshot) MustAlias() string {
 		panic("the alias must not be nil, please use Alias() function instead")
 	}
 	return *p.alias
+}
+
+func (p *DiskSnapshot) SetBackup(attr DiskBackup) {
+	p.backup = &attr
+}
+
+func (p *DiskSnapshot) Backup() (DiskBackup, bool) {
+	if p.backup != nil {
+		return *p.backup, true
+	}
+	var zero DiskBackup
+	return zero, false
+}
+
+func (p *DiskSnapshot) MustBackup() DiskBackup {
+	if p.backup == nil {
+		panic("the backup must not be nil, please use Backup() function instead")
+	}
+	return *p.backup
 }
 
 func (p *DiskSnapshot) SetBootable(attr bool) {
@@ -3424,6 +3444,208 @@ func (p *VcpuPin) MustVcpu() int64 {
 		panic("the vcpu must not be nil, please use Vcpu() function instead")
 	}
 	return *p.vcpu
+}
+
+type Backup struct {
+	Struct
+	comment          *string
+	creationDate     *time.Time
+	description      *string
+	disks            *DiskSlice
+	fromCheckpointId *string
+	id               *string
+	name             *string
+	phase            *BackupPhase
+	toCheckpointId   *string
+	vm               *Vm
+}
+
+func (p *Backup) SetComment(attr string) {
+	p.comment = &attr
+}
+
+func (p *Backup) Comment() (string, bool) {
+	if p.comment != nil {
+		return *p.comment, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Backup) MustComment() string {
+	if p.comment == nil {
+		panic("the comment must not be nil, please use Comment() function instead")
+	}
+	return *p.comment
+}
+
+func (p *Backup) SetCreationDate(attr time.Time) {
+	p.creationDate = &attr
+}
+
+func (p *Backup) CreationDate() (time.Time, bool) {
+	if p.creationDate != nil {
+		return *p.creationDate, true
+	}
+	var zero time.Time
+	return zero, false
+}
+
+func (p *Backup) MustCreationDate() time.Time {
+	if p.creationDate == nil {
+		panic("the creationDate must not be nil, please use CreationDate() function instead")
+	}
+	return *p.creationDate
+}
+
+func (p *Backup) SetDescription(attr string) {
+	p.description = &attr
+}
+
+func (p *Backup) Description() (string, bool) {
+	if p.description != nil {
+		return *p.description, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Backup) MustDescription() string {
+	if p.description == nil {
+		panic("the description must not be nil, please use Description() function instead")
+	}
+	return *p.description
+}
+
+func (p *Backup) SetDisks(attr *DiskSlice) {
+	p.disks = attr
+}
+
+func (p *Backup) Disks() (*DiskSlice, bool) {
+	if p.disks != nil {
+		return p.disks, true
+	}
+	return nil, false
+}
+
+func (p *Backup) MustDisks() *DiskSlice {
+	if p.disks == nil {
+		panic("the disks must not be nil, please use Disks() function instead")
+	}
+	return p.disks
+}
+
+func (p *Backup) SetFromCheckpointId(attr string) {
+	p.fromCheckpointId = &attr
+}
+
+func (p *Backup) FromCheckpointId() (string, bool) {
+	if p.fromCheckpointId != nil {
+		return *p.fromCheckpointId, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Backup) MustFromCheckpointId() string {
+	if p.fromCheckpointId == nil {
+		panic("the fromCheckpointId must not be nil, please use FromCheckpointId() function instead")
+	}
+	return *p.fromCheckpointId
+}
+
+func (p *Backup) SetId(attr string) {
+	p.id = &attr
+}
+
+func (p *Backup) Id() (string, bool) {
+	if p.id != nil {
+		return *p.id, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Backup) MustId() string {
+	if p.id == nil {
+		panic("the id must not be nil, please use Id() function instead")
+	}
+	return *p.id
+}
+
+func (p *Backup) SetName(attr string) {
+	p.name = &attr
+}
+
+func (p *Backup) Name() (string, bool) {
+	if p.name != nil {
+		return *p.name, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Backup) MustName() string {
+	if p.name == nil {
+		panic("the name must not be nil, please use Name() function instead")
+	}
+	return *p.name
+}
+
+func (p *Backup) SetPhase(attr BackupPhase) {
+	p.phase = &attr
+}
+
+func (p *Backup) Phase() (BackupPhase, bool) {
+	if p.phase != nil {
+		return *p.phase, true
+	}
+	var zero BackupPhase
+	return zero, false
+}
+
+func (p *Backup) MustPhase() BackupPhase {
+	if p.phase == nil {
+		panic("the phase must not be nil, please use Phase() function instead")
+	}
+	return *p.phase
+}
+
+func (p *Backup) SetToCheckpointId(attr string) {
+	p.toCheckpointId = &attr
+}
+
+func (p *Backup) ToCheckpointId() (string, bool) {
+	if p.toCheckpointId != nil {
+		return *p.toCheckpointId, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Backup) MustToCheckpointId() string {
+	if p.toCheckpointId == nil {
+		panic("the toCheckpointId must not be nil, please use ToCheckpointId() function instead")
+	}
+	return *p.toCheckpointId
+}
+
+func (p *Backup) SetVm(attr *Vm) {
+	p.vm = attr
+}
+
+func (p *Backup) Vm() (*Vm, bool) {
+	if p.vm != nil {
+		return p.vm, true
+	}
+	return nil, false
+}
+
+func (p *Backup) MustVm() *Vm {
+	if p.vm == nil {
+		panic("the vm must not be nil, please use Vm() function instead")
+	}
+	return p.vm
 }
 
 type GuestOperatingSystem struct {
@@ -9057,6 +9279,7 @@ type Disk struct {
 	active              *bool
 	actualSize          *int64
 	alias               *string
+	backup              *DiskBackup
 	bootable            *bool
 	comment             *string
 	contentType         *DiskContentType
@@ -9150,6 +9373,25 @@ func (p *Disk) MustAlias() string {
 		panic("the alias must not be nil, please use Alias() function instead")
 	}
 	return *p.alias
+}
+
+func (p *Disk) SetBackup(attr DiskBackup) {
+	p.backup = &attr
+}
+
+func (p *Disk) Backup() (DiskBackup, bool) {
+	if p.backup != nil {
+		return *p.backup, true
+	}
+	var zero DiskBackup
+	return zero, false
+}
+
+func (p *Disk) MustBackup() DiskBackup {
+	if p.backup == nil {
+		panic("the backup must not be nil, please use Backup() function instead")
+	}
+	return *p.backup
 }
 
 func (p *Disk) SetBootable(attr bool) {
@@ -11351,10 +11593,12 @@ func (p *Package) MustName() string {
 type ImageTransfer struct {
 	Struct
 	active            *bool
+	backup            *Backup
 	comment           *string
 	description       *string
 	direction         *ImageTransferDirection
 	disk              *Disk
+	format            *DiskFormat
 	host              *Host
 	id                *string
 	image             *Image
@@ -11385,6 +11629,24 @@ func (p *ImageTransfer) MustActive() bool {
 		panic("the active must not be nil, please use Active() function instead")
 	}
 	return *p.active
+}
+
+func (p *ImageTransfer) SetBackup(attr *Backup) {
+	p.backup = attr
+}
+
+func (p *ImageTransfer) Backup() (*Backup, bool) {
+	if p.backup != nil {
+		return p.backup, true
+	}
+	return nil, false
+}
+
+func (p *ImageTransfer) MustBackup() *Backup {
+	if p.backup == nil {
+		panic("the backup must not be nil, please use Backup() function instead")
+	}
+	return p.backup
 }
 
 func (p *ImageTransfer) SetComment(attr string) {
@@ -11460,6 +11722,25 @@ func (p *ImageTransfer) MustDisk() *Disk {
 		panic("the disk must not be nil, please use Disk() function instead")
 	}
 	return p.disk
+}
+
+func (p *ImageTransfer) SetFormat(attr DiskFormat) {
+	p.format = &attr
+}
+
+func (p *ImageTransfer) Format() (DiskFormat, bool) {
+	if p.format != nil {
+		return *p.format, true
+	}
+	var zero DiskFormat
+	return zero, false
+}
+
+func (p *ImageTransfer) MustFormat() DiskFormat {
+	if p.format == nil {
+		panic("the format must not be nil, please use Format() function instead")
+	}
+	return *p.format
 }
 
 func (p *ImageTransfer) SetHost(attr *Host) {
@@ -20262,7 +20543,6 @@ type HostStorage struct {
 	address                *string
 	comment                *string
 	description            *string
-	driverName             *string
 	driverOptions          *PropertySlice
 	driverSensitiveOptions *PropertySlice
 	host                   *Host
@@ -20340,25 +20620,6 @@ func (p *HostStorage) MustDescription() string {
 		panic("the description must not be nil, please use Description() function instead")
 	}
 	return *p.description
-}
-
-func (p *HostStorage) SetDriverName(attr string) {
-	p.driverName = &attr
-}
-
-func (p *HostStorage) DriverName() (string, bool) {
-	if p.driverName != nil {
-		return *p.driverName, true
-	}
-	var zero string
-	return zero, false
-}
-
-func (p *HostStorage) MustDriverName() string {
-	if p.driverName == nil {
-		panic("the driverName must not be nil, please use DriverName() function instead")
-	}
-	return *p.driverName
 }
 
 func (p *HostStorage) SetDriverOptions(attr *PropertySlice) {
@@ -38086,6 +38347,7 @@ func (p *GracePeriod) MustExpiry() int64 {
 
 type Action struct {
 	Struct
+	activate                       *bool
 	allowPartialImport             *bool
 	async                          *bool
 	attachment                     *DiskAttachment
@@ -38170,6 +38432,25 @@ type Action struct {
 	vm                             *Vm
 	vnicProfileMappings            *VnicProfileMappingSlice
 	volatile                       *bool
+}
+
+func (p *Action) SetActivate(attr bool) {
+	p.activate = &attr
+}
+
+func (p *Action) Activate() (bool, bool) {
+	if p.activate != nil {
+		return *p.activate, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Action) MustActivate() bool {
+	if p.activate == nil {
+		panic("the activate must not be nil, please use Activate() function instead")
+	}
+	return *p.activate
 }
 
 func (p *Action) SetAllowPartialImport(attr bool) {
@@ -40226,6 +40507,30 @@ func (op *VcpuPinSlice) Slice() []*VcpuPin {
 }
 
 func (op *VcpuPinSlice) SetSlice(slice []*VcpuPin) {
+	op.slice = slice
+}
+
+type BackupSlice struct {
+	href  *string
+	slice []*Backup
+}
+
+func (op *BackupSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *BackupSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *BackupSlice) Slice() []*Backup {
+	return op.slice
+}
+
+func (op *BackupSlice) SetSlice(slice []*Backup) {
 	op.slice = slice
 }
 
@@ -47569,6 +47874,15 @@ func (builder *DiskSnapshotBuilder) Alias(attr string) *DiskSnapshotBuilder {
 	return builder
 }
 
+func (builder *DiskSnapshotBuilder) Backup(attr DiskBackup) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.diskSnapshot.SetBackup(attr)
+	return builder
+}
+
 func (builder *DiskSnapshotBuilder) Bootable(attr bool) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -48271,6 +48585,177 @@ func (builder *VcpuPinBuilder) MustBuild() *VcpuPin {
 		panic(fmt.Sprintf("Failed to build VcpuPin instance, reason: %v", builder.err))
 	}
 	return builder.vcpuPin
+}
+
+type BackupBuilder struct {
+	backup *Backup
+	err    error
+}
+
+func NewBackupBuilder() *BackupBuilder {
+	return &BackupBuilder{backup: &Backup{}, err: nil}
+}
+
+func (builder *BackupBuilder) Comment(attr string) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetComment(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) CreationDate(attr time.Time) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetCreationDate(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) Description(attr string) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetDescription(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) Disks(attr *DiskSlice) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetDisks(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) DisksOfAny(anys ...*Disk) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.backup.disks == nil {
+		builder.backup.disks = new(DiskSlice)
+	}
+	builder.backup.disks.slice = append(builder.backup.disks.slice, anys...)
+	return builder
+}
+
+func (builder *BackupBuilder) DisksBuilderOfAny(anyBuilders ...DiskBuilder) *BackupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DisksOfAny(attr)
+	}
+	return builder
+}
+
+func (builder *BackupBuilder) FromCheckpointId(attr string) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetFromCheckpointId(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) Id(attr string) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetId(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) Name(attr string) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetName(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) Phase(attr BackupPhase) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetPhase(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) ToCheckpointId(attr string) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetToCheckpointId(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) Vm(attr *Vm) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetVm(attr)
+	return builder
+}
+
+func (builder *BackupBuilder) VmBuilder(attrBuilder *VmBuilder) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
+}
+
+func (builder *BackupBuilder) Href(href string) *BackupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.backup.SetHref(href)
+	return builder
+}
+
+func (builder *BackupBuilder) Build() (*Backup, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.backup, nil
+}
+
+func (builder *BackupBuilder) MustBuild() *Backup {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Backup instance, reason: %v", builder.err))
+	}
+	return builder.backup
 }
 
 type GuestOperatingSystemBuilder struct {
@@ -54263,6 +54748,15 @@ func (builder *DiskBuilder) Alias(attr string) *DiskBuilder {
 	return builder
 }
 
+func (builder *DiskBuilder) Backup(attr DiskBackup) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.disk.SetBackup(attr)
+	return builder
+}
+
 func (builder *DiskBuilder) Bootable(attr bool) *DiskBuilder {
 	if builder.err != nil {
 		return builder
@@ -56174,6 +56668,32 @@ func (builder *ImageTransferBuilder) Active(attr bool) *ImageTransferBuilder {
 	return builder
 }
 
+func (builder *ImageTransferBuilder) Backup(attr *Backup) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.imageTransfer.SetBackup(attr)
+	return builder
+}
+
+func (builder *ImageTransferBuilder) BackupBuilder(attrBuilder *BackupBuilder) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Backup(attr)
+}
+
 func (builder *ImageTransferBuilder) Comment(attr string) *ImageTransferBuilder {
 	if builder.err != nil {
 		return builder
@@ -56225,6 +56745,15 @@ func (builder *ImageTransferBuilder) DiskBuilder(attrBuilder *DiskBuilder) *Imag
 		return builder
 	}
 	return builder.Disk(attr)
+}
+
+func (builder *ImageTransferBuilder) Format(attr DiskFormat) *ImageTransferBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.imageTransfer.SetFormat(attr)
+	return builder
 }
 
 func (builder *ImageTransferBuilder) Host(attr *Host) *ImageTransferBuilder {
@@ -65565,15 +66094,6 @@ func (builder *HostStorageBuilder) Description(attr string) *HostStorageBuilder 
 	}
 
 	builder.hostStorage.SetDescription(attr)
-	return builder
-}
-
-func (builder *HostStorageBuilder) DriverName(attr string) *HostStorageBuilder {
-	if builder.err != nil {
-		return builder
-	}
-
-	builder.hostStorage.SetDriverName(attr)
 	return builder
 }
 
@@ -84288,6 +84808,15 @@ func NewActionBuilder() *ActionBuilder {
 	return &ActionBuilder{action: &Action{}, err: nil}
 }
 
+func (builder *ActionBuilder) Activate(attr bool) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetActivate(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) AllowPartialImport(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -86339,12 +86868,28 @@ const (
 	SSOMETHOD_GUEST_AGENT SsoMethod = "guest_agent"
 )
 
+type DiskBackup string
+
+const (
+	DISKBACKUP_INCREMENTAL DiskBackup = "incremental"
+	DISKBACKUP_NONE        DiskBackup = "none"
+)
+
 type MigrateOnError string
 
 const (
 	MIGRATEONERROR_DO_NOT_MIGRATE           MigrateOnError = "do_not_migrate"
 	MIGRATEONERROR_MIGRATE                  MigrateOnError = "migrate"
 	MIGRATEONERROR_MIGRATE_HIGHLY_AVAILABLE MigrateOnError = "migrate_highly_available"
+)
+
+type BackupPhase string
+
+const (
+	BACKUPPHASE_FINALIZING   BackupPhase = "finalizing"
+	BACKUPPHASE_INITIALIZING BackupPhase = "initializing"
+	BACKUPPHASE_READY        BackupPhase = "ready"
+	BACKUPPHASE_STARTING     BackupPhase = "starting"
 )
 
 type VmStorageErrorResumeBehaviour string

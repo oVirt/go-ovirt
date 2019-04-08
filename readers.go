@@ -3005,6 +3005,13 @@ func XMLDiskSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expected
 					return nil, err
 				}
 				builder.Alias(v)
+			case "backup":
+				vp, err := XMLDiskBackupReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.Backup(v)
 			case "bootable":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -3432,6 +3439,187 @@ func XMLVcpuPinReadMany(reader *XMLReader, start *xml.StartElement) (*VcpuPinSli
 			switch t.Name.Local {
 			case "vcpu_pin":
 				one, err := XMLVcpuPinReadOne(reader, &t, "vcpu_pin")
+				if err != nil {
+					return nil, err
+				}
+				if one != nil {
+					result.slice = append(result.slice, one)
+				}
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return &result, nil
+}
+
+func XMLBackupReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string) (*Backup, error) {
+	builder := NewBackupBuilder()
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	if expectedTag == "" {
+		expectedTag = "backup"
+	}
+	if start.Name.Local != expectedTag {
+		return nil, XMLTagNotMatchError{start.Name.Local, expectedTag}
+	}
+	// Process the attributes
+	for _, attr := range start.Attr {
+		name := attr.Name.Local
+		value := attr.Value
+		switch name {
+		case "id":
+			builder.Id(value)
+		case "href":
+			builder.Href(value)
+		}
+	}
+	var links []Link
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "comment":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Comment(v)
+			case "creation_date":
+				v, err := reader.ReadTime(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.CreationDate(v)
+			case "description":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Description(v)
+			case "disks":
+				v, err := XMLDiskReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Disks(v)
+			case "from_checkpoint_id":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.FromCheckpointId(v)
+			case "name":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Name(v)
+			case "phase":
+				vp, err := XMLBackupPhaseReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.Phase(v)
+			case "to_checkpoint_id":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.ToCheckpointId(v)
+			case "vm":
+				v, err := XMLVmReadOne(reader, &t, "vm")
+				if err != nil {
+					return nil, err
+				}
+				builder.Vm(v)
+			case "link":
+				var rel, href string
+				for _, attr := range t.Attr {
+					name := attr.Name.Local
+					value := attr.Value
+					switch name {
+					case "href":
+						href = value
+					case "rel":
+						rel = value
+					}
+				}
+				if rel != "" && href != "" {
+					links = append(links, Link{&href, &rel})
+				}
+				// <link> just has attributes, so must skip manually
+				reader.Skip()
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	one, err := builder.Build()
+	if err != nil {
+		return nil, err
+	}
+	for _, link := range links {
+		switch *link.rel {
+		case "disks":
+			if one.disks == nil {
+				one.disks = new(DiskSlice)
+			}
+			one.disks.href = link.href
+		} // end of switch
+	} // end of for-links
+	return one, nil
+}
+
+func XMLBackupReadMany(reader *XMLReader, start *xml.StartElement) (*BackupSlice, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var result BackupSlice
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "backup":
+				one, err := XMLBackupReadOne(reader, &t, "backup")
 				if err != nil {
 					return nil, err
 				}
@@ -9406,6 +9594,13 @@ func XMLDiskReadOne(reader *XMLReader, start *xml.StartElement, expectedTag stri
 					return nil, err
 				}
 				builder.Alias(v)
+			case "backup":
+				vp, err := XMLDiskBackupReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.Backup(v)
 			case "bootable":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -11344,6 +11539,12 @@ func XMLImageTransferReadOne(reader *XMLReader, start *xml.StartElement, expecte
 					return nil, err
 				}
 				builder.Active(v)
+			case "backup":
+				v, err := XMLBackupReadOne(reader, &t, "backup")
+				if err != nil {
+					return nil, err
+				}
+				builder.Backup(v)
 			case "comment":
 				v, err := reader.ReadString(&t)
 				if err != nil {
@@ -11369,6 +11570,13 @@ func XMLImageTransferReadOne(reader *XMLReader, start *xml.StartElement, expecte
 					return nil, err
 				}
 				builder.Disk(v)
+			case "format":
+				vp, err := XMLDiskFormatReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.Format(v)
 			case "host":
 				v, err := XMLHostReadOne(reader, &t, "host")
 				if err != nil {
@@ -19537,12 +19745,6 @@ func XMLHostStorageReadOne(reader *XMLReader, start *xml.StartElement, expectedT
 					return nil, err
 				}
 				builder.Description(v)
-			case "driver_name":
-				v, err := reader.ReadString(&t)
-				if err != nil {
-					return nil, err
-				}
-				builder.DriverName(v)
 			case "driver_options":
 				v, err := XMLPropertyReadMany(reader, &t)
 				if err != nil {
@@ -26164,6 +26366,16 @@ func XMLHostNicReadOne(reader *XMLReader, start *xml.StartElement, expectedTag s
 	}
 	for _, link := range links {
 		switch *link.rel {
+		case "networklabels":
+			if one.networkLabels == nil {
+				one.networkLabels = new(NetworkLabelSlice)
+			}
+			one.networkLabels.href = link.href
+		case "statistics":
+			if one.statistics == nil {
+				one.statistics = new(StatisticSlice)
+			}
+			one.statistics.href = link.href
 		} // end of switch
 	} // end of for-links
 	return one, nil
@@ -35831,6 +36043,12 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 		switch t := t.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
+			case "activate":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Activate(v)
 			case "allow_partial_import":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -38479,6 +38697,62 @@ func XMLSsoMethodReadMany(reader *XMLReader, start *xml.StartElement) ([]SsoMeth
 	return results, nil
 }
 
+func XMLDiskBackupReadOne(reader *XMLReader, start *xml.StartElement) (*DiskBackup, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	s, err := reader.ReadString(start)
+	if err != nil {
+		return nil, err
+	}
+	result := new(DiskBackup)
+	*result = DiskBackup(s)
+	return result, nil
+}
+
+func XMLDiskBackupReadMany(reader *XMLReader, start *xml.StartElement) ([]DiskBackup, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var results []DiskBackup
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			one, err := reader.ReadString(&t)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, DiskBackup(one))
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return results, nil
+}
+
 func XMLMigrateOnErrorReadOne(reader *XMLReader, start *xml.StartElement) (*MigrateOnError, error) {
 	if start == nil {
 		st, err := reader.FindStartElement()
@@ -38528,6 +38802,62 @@ func XMLMigrateOnErrorReadMany(reader *XMLReader, start *xml.StartElement) ([]Mi
 				return nil, err
 			}
 			results = append(results, MigrateOnError(one))
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return results, nil
+}
+
+func XMLBackupPhaseReadOne(reader *XMLReader, start *xml.StartElement) (*BackupPhase, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	s, err := reader.ReadString(start)
+	if err != nil {
+		return nil, err
+	}
+	result := new(BackupPhase)
+	*result = BackupPhase(s)
+	return result, nil
+}
+
+func XMLBackupPhaseReadMany(reader *XMLReader, start *xml.StartElement) ([]BackupPhase, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var results []BackupPhase
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			one, err := reader.ReadString(&t)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, BackupPhase(one))
 		case xml.EndElement:
 			depth--
 		}

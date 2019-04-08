@@ -969,6 +969,9 @@ func XMLDiskSnapshotWriteOne(writer *XMLWriter, object *DiskSnapshot, tag string
 	if r, ok := object.Alias(); ok {
 		writer.WriteCharacter("alias", r)
 	}
+	if r, ok := object.Backup(); ok {
+		XMLDiskBackupWriteOne(writer, r, "backup")
+	}
 	if r, ok := object.Bootable(); ok {
 		writer.WriteBool("bootable", r)
 	}
@@ -1124,6 +1127,67 @@ func XMLVcpuPinWriteMany(writer *XMLWriter, structSlice *VcpuPinSlice, plural, s
 	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
 		XMLVcpuPinWriteOne(writer, o, singular)
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLBackupWriteOne(writer *XMLWriter, object *Backup, tag string) error {
+	if object == nil {
+		return fmt.Errorf("input object pointer is nil")
+	}
+	if tag == "" {
+		tag = "backup"
+	}
+	var attrs map[string]string
+	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
+		attrs["id"] = r
+	}
+	writer.WriteStart("", tag, attrs)
+	if r, ok := object.Comment(); ok {
+		writer.WriteCharacter("comment", r)
+	}
+	if r, ok := object.CreationDate(); ok {
+		writer.WriteDate("creation_date", r)
+	}
+	if r, ok := object.Description(); ok {
+		writer.WriteCharacter("description", r)
+	}
+	if r, ok := object.Disks(); ok {
+		XMLDiskWriteMany(writer, r, "disks", "disk")
+	}
+	if r, ok := object.FromCheckpointId(); ok {
+		writer.WriteCharacter("from_checkpoint_id", r)
+	}
+	if r, ok := object.Name(); ok {
+		writer.WriteCharacter("name", r)
+	}
+	if r, ok := object.Phase(); ok {
+		XMLBackupPhaseWriteOne(writer, r, "phase")
+	}
+	if r, ok := object.ToCheckpointId(); ok {
+		writer.WriteCharacter("to_checkpoint_id", r)
+	}
+	if r, ok := object.Vm(); ok {
+		XMLVmWriteOne(writer, r, "vm")
+	}
+	writer.WriteEnd(tag)
+	return nil
+}
+
+func XMLBackupWriteMany(writer *XMLWriter, structSlice *BackupSlice, plural, singular string) error {
+	if plural == "" {
+		plural = "backups"
+	}
+	if singular == "" {
+		singular = "backup"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, o := range structSlice.Slice() {
+		XMLBackupWriteOne(writer, o, singular)
 	}
 	writer.WriteEnd(plural)
 	return nil
@@ -3057,6 +3121,9 @@ func XMLDiskWriteOne(writer *XMLWriter, object *Disk, tag string) error {
 	if r, ok := object.Alias(); ok {
 		writer.WriteCharacter("alias", r)
 	}
+	if r, ok := object.Backup(); ok {
+		XMLDiskBackupWriteOne(writer, r, "backup")
+	}
 	if r, ok := object.Bootable(); ok {
 		writer.WriteBool("bootable", r)
 	}
@@ -3710,6 +3777,9 @@ func XMLImageTransferWriteOne(writer *XMLWriter, object *ImageTransfer, tag stri
 	if r, ok := object.Active(); ok {
 		writer.WriteBool("active", r)
 	}
+	if r, ok := object.Backup(); ok {
+		XMLBackupWriteOne(writer, r, "backup")
+	}
 	if r, ok := object.Comment(); ok {
 		writer.WriteCharacter("comment", r)
 	}
@@ -3721,6 +3791,9 @@ func XMLImageTransferWriteOne(writer *XMLWriter, object *ImageTransfer, tag stri
 	}
 	if r, ok := object.Disk(); ok {
 		XMLDiskWriteOne(writer, r, "disk")
+	}
+	if r, ok := object.Format(); ok {
+		XMLDiskFormatWriteOne(writer, r, "format")
 	}
 	if r, ok := object.Host(); ok {
 		XMLHostWriteOne(writer, r, "host")
@@ -6423,9 +6496,6 @@ func XMLHostStorageWriteOne(writer *XMLWriter, object *HostStorage, tag string) 
 	}
 	if r, ok := object.Description(); ok {
 		writer.WriteCharacter("description", r)
-	}
-	if r, ok := object.DriverName(); ok {
-		writer.WriteCharacter("driver_name", r)
 	}
 	if r, ok := object.DriverOptions(); ok {
 		XMLPropertyWriteMany(writer, r, "driver_options", "property")
@@ -11812,6 +11882,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
+	if r, ok := object.Activate(); ok {
+		writer.WriteBool("activate", r)
+	}
 	if r, ok := object.AllowPartialImport(); ok {
 		writer.WriteBool("allow_partial_import", r)
 	}
@@ -12894,6 +12967,28 @@ func XMLSsoMethodWriteMany(writer *XMLWriter, enums []SsoMethod, plural, singula
 	return nil
 }
 
+func XMLDiskBackupWriteOne(writer *XMLWriter, enum DiskBackup, tag string) {
+	if tag == "" {
+		tag = "disk_backup"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLDiskBackupWriteMany(writer *XMLWriter, enums []DiskBackup, plural, singular string) error {
+	if plural == "" {
+		plural = "disk_backups"
+	}
+	if singular == "" {
+		singular = "disk_backup"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
 func XMLMigrateOnErrorWriteOne(writer *XMLWriter, enum MigrateOnError, tag string) {
 	if tag == "" {
 		tag = "migrate_on_error"
@@ -12907,6 +13002,28 @@ func XMLMigrateOnErrorWriteMany(writer *XMLWriter, enums []MigrateOnError, plura
 	}
 	if singular == "" {
 		singular = "migrate_on_error"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLBackupPhaseWriteOne(writer *XMLWriter, enum BackupPhase, tag string) {
+	if tag == "" {
+		tag = "backup_phase"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLBackupPhaseWriteMany(writer *XMLWriter, enums []BackupPhase, plural, singular string) error {
+	if plural == "" {
+		plural = "backup_phases"
+	}
+	if singular == "" {
+		singular = "backup_phase"
 	}
 	writer.WriteStart("", plural, nil)
 	for _, e := range enums {

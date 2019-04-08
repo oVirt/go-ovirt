@@ -6380,6 +6380,193 @@ func (op *TagsService) String() string {
 }
 
 //
+//
+type VmBackupDisksService struct {
+	BaseService
+}
+
+func NewVmBackupDisksService(connection *Connection, path string) *VmBackupDisksService {
+	var result VmBackupDisksService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Returns the list of disks in backup.
+//
+type VmBackupDisksServiceListRequest struct {
+	VmBackupDisksService *VmBackupDisksService
+	header               map[string]string
+	query                map[string]string
+	follow               *string
+	max                  *int64
+}
+
+func (p *VmBackupDisksServiceListRequest) Header(key, value string) *VmBackupDisksServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupDisksServiceListRequest) Query(key, value string) *VmBackupDisksServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupDisksServiceListRequest) Follow(follow string) *VmBackupDisksServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *VmBackupDisksServiceListRequest) Max(max int64) *VmBackupDisksServiceListRequest {
+	p.max = &max
+	return p
+}
+
+func (p *VmBackupDisksServiceListRequest) Send() (*VmBackupDisksServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmBackupDisksService.connection.URL(), p.VmBackupDisksService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.max != nil {
+		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupDisksService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupDisksService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupDisksService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupDisksService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupDisksService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLDiskReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &VmBackupDisksServiceListResponse{disks: result}, nil
+}
+
+func (p *VmBackupDisksServiceListRequest) MustSend() *VmBackupDisksServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Returns the list of disks in backup.
+//
+type VmBackupDisksServiceListResponse struct {
+	disks *DiskSlice
+}
+
+func (p *VmBackupDisksServiceListResponse) Disks() (*DiskSlice, bool) {
+	if p.disks != nil {
+		return p.disks, true
+	}
+	return nil, false
+}
+
+func (p *VmBackupDisksServiceListResponse) MustDisks() *DiskSlice {
+	if p.disks == nil {
+		panic("disks in response does not exist")
+	}
+	return p.disks
+}
+
+//
+// Returns the list of disks in backup.
+//
+func (p *VmBackupDisksService) List() *VmBackupDisksServiceListRequest {
+	return &VmBackupDisksServiceListRequest{VmBackupDisksService: p}
+}
+
+//
+// A reference to the service that manages a specific disk.
+//
+func (op *VmBackupDisksService) DiskService(id string) *VmBackupDiskService {
+	return NewVmBackupDiskService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *VmBackupDisksService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	index := strings.Index(path, "/")
+	if index == -1 {
+		return op.DiskService(path), nil
+	}
+	return op.DiskService(path[:index]).Service(path[index+1:])
+}
+
+func (op *VmBackupDisksService) String() string {
+	return fmt.Sprintf("VmBackupDisksService:%s", op.path)
+}
+
+//
 // A service that manages hosts.
 //
 type HostsService struct {
@@ -6449,6 +6636,7 @@ type HostsServiceAddRequest struct {
 	HostsService         *HostsService
 	header               map[string]string
 	query                map[string]string
+	activate             *bool
 	deployHostedEngine   *bool
 	host                 *Host
 	undeployHostedEngine *bool
@@ -6470,6 +6658,11 @@ func (p *HostsServiceAddRequest) Query(key, value string) *HostsServiceAddReques
 	return p
 }
 
+func (p *HostsServiceAddRequest) Activate(activate bool) *HostsServiceAddRequest {
+	p.activate = &activate
+	return p
+}
+
 func (p *HostsServiceAddRequest) DeployHostedEngine(deployHostedEngine bool) *HostsServiceAddRequest {
 	p.deployHostedEngine = &deployHostedEngine
 	return p
@@ -6488,6 +6681,10 @@ func (p *HostsServiceAddRequest) UndeployHostedEngine(undeployHostedEngine bool)
 func (p *HostsServiceAddRequest) Send() (*HostsServiceAddResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.HostsService.connection.URL(), p.HostsService.path)
 	values := make(url.Values)
+	if p.activate != nil {
+		values["activate"] = []string{fmt.Sprintf("%v", *p.activate)}
+	}
+
 	if p.deployHostedEngine != nil {
 		values["deploy_hosted_engine"] = []string{fmt.Sprintf("%v", *p.deployHostedEngine)}
 	}
@@ -6965,6 +7162,7 @@ type HostsServiceAddUsingRootPasswordRequest struct {
 	HostsService         *HostsService
 	header               map[string]string
 	query                map[string]string
+	activate             *bool
 	deployHostedEngine   *bool
 	host                 *Host
 	undeployHostedEngine *bool
@@ -6986,6 +7184,11 @@ func (p *HostsServiceAddUsingRootPasswordRequest) Query(key, value string) *Host
 	return p
 }
 
+func (p *HostsServiceAddUsingRootPasswordRequest) Activate(activate bool) *HostsServiceAddUsingRootPasswordRequest {
+	p.activate = &activate
+	return p
+}
+
 func (p *HostsServiceAddUsingRootPasswordRequest) DeployHostedEngine(deployHostedEngine bool) *HostsServiceAddUsingRootPasswordRequest {
 	p.deployHostedEngine = &deployHostedEngine
 	return p
@@ -7004,6 +7207,9 @@ func (p *HostsServiceAddUsingRootPasswordRequest) UndeployHostedEngine(undeployH
 func (p *HostsServiceAddUsingRootPasswordRequest) Send() (*HostsServiceAddUsingRootPasswordResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.HostsService.connection.URL(), p.HostsService.path)
 	actionBuilder := NewActionBuilder()
+	if p.activate != nil {
+		actionBuilder.Activate(*p.activate)
+	}
 	if p.deployHostedEngine != nil {
 		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
 	}
@@ -7121,6 +7327,7 @@ type HostsServiceAddUsingSshRequest struct {
 	HostsService         *HostsService
 	header               map[string]string
 	query                map[string]string
+	activate             *bool
 	deployHostedEngine   *bool
 	host                 *Host
 	undeployHostedEngine *bool
@@ -7142,6 +7349,11 @@ func (p *HostsServiceAddUsingSshRequest) Query(key, value string) *HostsServiceA
 	return p
 }
 
+func (p *HostsServiceAddUsingSshRequest) Activate(activate bool) *HostsServiceAddUsingSshRequest {
+	p.activate = &activate
+	return p
+}
+
 func (p *HostsServiceAddUsingSshRequest) DeployHostedEngine(deployHostedEngine bool) *HostsServiceAddUsingSshRequest {
 	p.deployHostedEngine = &deployHostedEngine
 	return p
@@ -7160,6 +7372,9 @@ func (p *HostsServiceAddUsingSshRequest) UndeployHostedEngine(undeployHostedEngi
 func (p *HostsServiceAddUsingSshRequest) Send() (*HostsServiceAddUsingSshResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.HostsService.connection.URL(), p.HostsService.path)
 	actionBuilder := NewActionBuilder()
+	if p.activate != nil {
+		actionBuilder.Activate(*p.activate)
+	}
 	if p.deployHostedEngine != nil {
 		actionBuilder.DeployHostedEngine(*p.deployHostedEngine)
 	}
@@ -34290,6 +34505,172 @@ func (op *SchedulingPolicyService) String() string {
 }
 
 //
+//
+type VmBackupDiskService struct {
+	BaseService
+}
+
+func NewVmBackupDiskService(connection *Connection, path string) *VmBackupDiskService {
+	var result VmBackupDiskService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Retrieves the description of the disk.
+//
+type VmBackupDiskServiceGetRequest struct {
+	VmBackupDiskService *VmBackupDiskService
+	header              map[string]string
+	query               map[string]string
+	follow              *string
+}
+
+func (p *VmBackupDiskServiceGetRequest) Header(key, value string) *VmBackupDiskServiceGetRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupDiskServiceGetRequest) Query(key, value string) *VmBackupDiskServiceGetRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupDiskServiceGetRequest) Follow(follow string) *VmBackupDiskServiceGetRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *VmBackupDiskServiceGetRequest) Send() (*VmBackupDiskServiceGetResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmBackupDiskService.connection.URL(), p.VmBackupDiskService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupDiskService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupDiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupDiskService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupDiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupDiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLDiskReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &VmBackupDiskServiceGetResponse{disk: result}, nil
+}
+
+func (p *VmBackupDiskServiceGetRequest) MustSend() *VmBackupDiskServiceGetResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Retrieves the description of the disk.
+//
+type VmBackupDiskServiceGetResponse struct {
+	disk *Disk
+}
+
+func (p *VmBackupDiskServiceGetResponse) Disk() (*Disk, bool) {
+	if p.disk != nil {
+		return p.disk, true
+	}
+	return nil, false
+}
+
+func (p *VmBackupDiskServiceGetResponse) MustDisk() *Disk {
+	if p.disk == nil {
+		panic("disk in response does not exist")
+	}
+	return p.disk
+}
+
+//
+// Retrieves the description of the disk.
+//
+func (p *VmBackupDiskService) Get() *VmBackupDiskServiceGetRequest {
+	return &VmBackupDiskServiceGetRequest{VmBackupDiskService: p}
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *VmBackupDiskService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *VmBackupDiskService) String() string {
+	return fmt.Sprintf("VmBackupDiskService:%s", op.path)
+}
+
+//
 // A service to manage a host.
 //
 type HostService struct {
@@ -34435,6 +34816,7 @@ type HostServiceApproveRequest struct {
 	HostService *HostService
 	header      map[string]string
 	query       map[string]string
+	activate    *bool
 	async       *bool
 	cluster     *Cluster
 	host        *Host
@@ -34456,6 +34838,11 @@ func (p *HostServiceApproveRequest) Query(key, value string) *HostServiceApprove
 	return p
 }
 
+func (p *HostServiceApproveRequest) Activate(activate bool) *HostServiceApproveRequest {
+	p.activate = &activate
+	return p
+}
+
 func (p *HostServiceApproveRequest) Async(async bool) *HostServiceApproveRequest {
 	p.async = &async
 	return p
@@ -34474,6 +34861,9 @@ func (p *HostServiceApproveRequest) Host(host *Host) *HostServiceApproveRequest 
 func (p *HostServiceApproveRequest) Send() (*HostServiceApproveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/approve", p.HostService.connection.URL(), p.HostService.path)
 	actionBuilder := NewActionBuilder()
+	if p.activate != nil {
+		actionBuilder.Activate(*p.activate)
+	}
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
 	}
@@ -35607,6 +35997,7 @@ type HostServiceInstallRequest struct {
 	HostService          *HostService
 	header               map[string]string
 	query                map[string]string
+	activate             *bool
 	async                *bool
 	deployHostedEngine   *bool
 	host                 *Host
@@ -35629,6 +36020,11 @@ func (p *HostServiceInstallRequest) Query(key, value string) *HostServiceInstall
 		p.query = make(map[string]string)
 	}
 	p.query[key] = value
+	return p
+}
+
+func (p *HostServiceInstallRequest) Activate(activate bool) *HostServiceInstallRequest {
+	p.activate = &activate
 	return p
 }
 
@@ -35670,6 +36066,9 @@ func (p *HostServiceInstallRequest) UndeployHostedEngine(undeployHostedEngine bo
 func (p *HostServiceInstallRequest) Send() (*HostServiceInstallResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/install", p.HostService.connection.URL(), p.HostService.path)
 	actionBuilder := NewActionBuilder()
+	if p.activate != nil {
+		actionBuilder.Activate(*p.activate)
+	}
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
 	}
@@ -38000,13 +38399,12 @@ func (p *HostService) UpgradeCheck() *HostServiceUpgradeCheckRequest {
 }
 
 //
-// Approve the specified host to be added to the engine by using the root password (deprecated verb). This
-// occurs when the host registers itself with the engine.
 //
 type HostServiceApproveUsingRootPasswordRequest struct {
 	HostService *HostService
 	header      map[string]string
 	query       map[string]string
+	activate    *bool
 	async       *bool
 	cluster     *Cluster
 	host        *Host
@@ -38028,6 +38426,11 @@ func (p *HostServiceApproveUsingRootPasswordRequest) Query(key, value string) *H
 	return p
 }
 
+func (p *HostServiceApproveUsingRootPasswordRequest) Activate(activate bool) *HostServiceApproveUsingRootPasswordRequest {
+	p.activate = &activate
+	return p
+}
+
 func (p *HostServiceApproveUsingRootPasswordRequest) Async(async bool) *HostServiceApproveUsingRootPasswordRequest {
 	p.async = &async
 	return p
@@ -38046,6 +38449,9 @@ func (p *HostServiceApproveUsingRootPasswordRequest) Host(host *Host) *HostServi
 func (p *HostServiceApproveUsingRootPasswordRequest) Send() (*HostServiceApproveUsingRootPasswordResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.HostService.connection.URL(), p.HostService.path)
 	actionBuilder := NewActionBuilder()
+	if p.activate != nil {
+		actionBuilder.Activate(*p.activate)
+	}
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
 	}
@@ -38126,15 +38532,11 @@ func (p *HostServiceApproveUsingRootPasswordRequest) MustSend() *HostServiceAppr
 }
 
 //
-// Approve the specified host to be added to the engine by using the root password (deprecated verb). This
-// occurs when the host registers itself with the engine.
 //
 type HostServiceApproveUsingRootPasswordResponse struct {
 }
 
 //
-// Approve the specified host to be added to the engine by using the root password (deprecated verb). This
-// occurs when the host registers itself with the engine.
 //
 func (p *HostService) ApproveUsingRootPassword() *HostServiceApproveUsingRootPasswordRequest {
 	return &HostServiceApproveUsingRootPasswordRequest{HostService: p}
@@ -38148,6 +38550,7 @@ type HostServiceInstallUsingRootPasswordRequest struct {
 	HostService          *HostService
 	header               map[string]string
 	query                map[string]string
+	activate             *bool
 	async                *bool
 	deployHostedEngine   *bool
 	host                 *Host
@@ -38170,6 +38573,11 @@ func (p *HostServiceInstallUsingRootPasswordRequest) Query(key, value string) *H
 		p.query = make(map[string]string)
 	}
 	p.query[key] = value
+	return p
+}
+
+func (p *HostServiceInstallUsingRootPasswordRequest) Activate(activate bool) *HostServiceInstallUsingRootPasswordRequest {
+	p.activate = &activate
 	return p
 }
 
@@ -38211,6 +38619,9 @@ func (p *HostServiceInstallUsingRootPasswordRequest) UndeployHostedEngine(undepl
 func (p *HostServiceInstallUsingRootPasswordRequest) Send() (*HostServiceInstallUsingRootPasswordResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingrootpassword", p.HostService.connection.URL(), p.HostService.path)
 	actionBuilder := NewActionBuilder()
+	if p.activate != nil {
+		actionBuilder.Activate(*p.activate)
+	}
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
 	}
@@ -38472,6 +38883,7 @@ type HostServiceApproveUsingSshRequest struct {
 	HostService *HostService
 	header      map[string]string
 	query       map[string]string
+	activate    *bool
 	async       *bool
 	cluster     *Cluster
 	host        *Host
@@ -38493,6 +38905,11 @@ func (p *HostServiceApproveUsingSshRequest) Query(key, value string) *HostServic
 	return p
 }
 
+func (p *HostServiceApproveUsingSshRequest) Activate(activate bool) *HostServiceApproveUsingSshRequest {
+	p.activate = &activate
+	return p
+}
+
 func (p *HostServiceApproveUsingSshRequest) Async(async bool) *HostServiceApproveUsingSshRequest {
 	p.async = &async
 	return p
@@ -38511,6 +38928,9 @@ func (p *HostServiceApproveUsingSshRequest) Host(host *Host) *HostServiceApprove
 func (p *HostServiceApproveUsingSshRequest) Send() (*HostServiceApproveUsingSshResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.HostService.connection.URL(), p.HostService.path)
 	actionBuilder := NewActionBuilder()
+	if p.activate != nil {
+		actionBuilder.Activate(*p.activate)
+	}
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
 	}
@@ -38613,6 +39033,7 @@ type HostServiceInstallUsingSshRequest struct {
 	HostService          *HostService
 	header               map[string]string
 	query                map[string]string
+	activate             *bool
 	async                *bool
 	deployHostedEngine   *bool
 	host                 *Host
@@ -38635,6 +39056,11 @@ func (p *HostServiceInstallUsingSshRequest) Query(key, value string) *HostServic
 		p.query = make(map[string]string)
 	}
 	p.query[key] = value
+	return p
+}
+
+func (p *HostServiceInstallUsingSshRequest) Activate(activate bool) *HostServiceInstallUsingSshRequest {
+	p.activate = &activate
 	return p
 }
 
@@ -38676,6 +39102,9 @@ func (p *HostServiceInstallUsingSshRequest) UndeployHostedEngine(undeployHostedE
 func (p *HostServiceInstallUsingSshRequest) Send() (*HostServiceInstallUsingSshResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/usingssh", p.HostService.connection.URL(), p.HostService.path)
 	actionBuilder := NewActionBuilder()
+	if p.activate != nil {
+		actionBuilder.Activate(*p.activate)
+	}
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
 	}
@@ -39200,7 +39629,6 @@ func NewClusterService(connection *Connection, path string) *ClusterService {
 //     <enabled>true</enabled>
 //     <merge_across_nodes>true</merge_across_nodes>
 //   </ksm>
-//   <maintenance_reason_required>false</maintenance_reason_required>
 //   <memory_policy>
 //     <over_commit>
 //       <percent>100</percent>
@@ -39216,7 +39644,6 @@ func NewClusterService(connection *Connection, path string) *ClusterService {
 //     </bandwidth>
 //     <compressed>inherit</compressed>
 //   </migration>
-//   <optional_reason>false</optional_reason>
 //   <required_rng_sources>
 //     <required_rng_source>random</required_rng_source>
 //   </required_rng_sources>
@@ -39396,7 +39823,6 @@ func (p *ClusterServiceGetRequest) MustSend() *ClusterServiceGetResponse {
 //     <enabled>true</enabled>
 //     <merge_across_nodes>true</merge_across_nodes>
 //   </ksm>
-//   <maintenance_reason_required>false</maintenance_reason_required>
 //   <memory_policy>
 //     <over_commit>
 //       <percent>100</percent>
@@ -39412,7 +39838,6 @@ func (p *ClusterServiceGetRequest) MustSend() *ClusterServiceGetResponse {
 //     </bandwidth>
 //     <compressed>inherit</compressed>
 //   </migration>
-//   <optional_reason>false</optional_reason>
 //   <required_rng_sources>
 //     <required_rng_source>random</required_rng_source>
 //   </required_rng_sources>
@@ -39492,7 +39917,6 @@ func (p *ClusterServiceGetResponse) MustCluster() *Cluster {
 //     <enabled>true</enabled>
 //     <merge_across_nodes>true</merge_across_nodes>
 //   </ksm>
-//   <maintenance_reason_required>false</maintenance_reason_required>
 //   <memory_policy>
 //     <over_commit>
 //       <percent>100</percent>
@@ -39508,7 +39932,6 @@ func (p *ClusterServiceGetResponse) MustCluster() *Cluster {
 //     </bandwidth>
 //     <compressed>inherit</compressed>
 //   </migration>
-//   <optional_reason>false</optional_reason>
 //   <required_rng_sources>
 //     <required_rng_source>random</required_rng_source>
 //   </required_rng_sources>
@@ -41644,6 +42067,435 @@ func (op *OperatingSystemsService) Service(path string) (Service, error) {
 
 func (op *OperatingSystemsService) String() string {
 	return fmt.Sprintf("OperatingSystemsService:%s", op.path)
+}
+
+//
+// Lists the backups of a virtual machine.
+//
+type VmBackupsService struct {
+	BaseService
+}
+
+func NewVmBackupsService(connection *Connection, path string) *VmBackupsService {
+	var result VmBackupsService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Adds a new backup entity to a virtual machine.
+// For example, to start a new incremental backup of a virtual machine
+// since checkpoint id `previous-checkpoint-uuid`, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// <backup>
+//   <from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//   <disks>
+//       <disk id="disk-uuid" />
+//       ...
+//   </disks>
+// </backup>
+// ----
+// The response body:
+// [source,xml]
+// ----
+// <backup id="backup-uuid">
+//     <from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//     <to_checkpoint_id>new-checkpoint-uuid</to_checkpoint_id>
+//     <disks>
+//         <disk id="disk-uuid" />
+//         ...
+//         ...
+//     </disks>
+//     <status>initializing</status>
+//     <creation_date>
+// </backup>
+// ----
+//
+type VmBackupsServiceAddRequest struct {
+	VmBackupsService *VmBackupsService
+	header           map[string]string
+	query            map[string]string
+	backup           *Backup
+}
+
+func (p *VmBackupsServiceAddRequest) Header(key, value string) *VmBackupsServiceAddRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupsServiceAddRequest) Query(key, value string) *VmBackupsServiceAddRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupsServiceAddRequest) Backup(backup *Backup) *VmBackupsServiceAddRequest {
+	p.backup = backup
+	return p
+}
+
+func (p *VmBackupsServiceAddRequest) Send() (*VmBackupsServiceAddResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmBackupsService.connection.URL(), p.VmBackupsService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLBackupWriteOne(writer, p.backup, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLBackupReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &VmBackupsServiceAddResponse{backup: result}, nil
+}
+
+func (p *VmBackupsServiceAddRequest) MustSend() *VmBackupsServiceAddResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Adds a new backup entity to a virtual machine.
+// For example, to start a new incremental backup of a virtual machine
+// since checkpoint id `previous-checkpoint-uuid`, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// <backup>
+//   <from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//   <disks>
+//       <disk id="disk-uuid" />
+//       ...
+//   </disks>
+// </backup>
+// ----
+// The response body:
+// [source,xml]
+// ----
+// <backup id="backup-uuid">
+//     <from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//     <to_checkpoint_id>new-checkpoint-uuid</to_checkpoint_id>
+//     <disks>
+//         <disk id="disk-uuid" />
+//         ...
+//         ...
+//     </disks>
+//     <status>initializing</status>
+//     <creation_date>
+// </backup>
+// ----
+//
+type VmBackupsServiceAddResponse struct {
+	backup *Backup
+}
+
+func (p *VmBackupsServiceAddResponse) Backup() (*Backup, bool) {
+	if p.backup != nil {
+		return p.backup, true
+	}
+	return nil, false
+}
+
+func (p *VmBackupsServiceAddResponse) MustBackup() *Backup {
+	if p.backup == nil {
+		panic("backup in response does not exist")
+	}
+	return p.backup
+}
+
+//
+// Adds a new backup entity to a virtual machine.
+// For example, to start a new incremental backup of a virtual machine
+// since checkpoint id `previous-checkpoint-uuid`, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// <backup>
+//   <from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//   <disks>
+//       <disk id="disk-uuid" />
+//       ...
+//   </disks>
+// </backup>
+// ----
+// The response body:
+// [source,xml]
+// ----
+// <backup id="backup-uuid">
+//     <from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//     <to_checkpoint_id>new-checkpoint-uuid</to_checkpoint_id>
+//     <disks>
+//         <disk id="disk-uuid" />
+//         ...
+//         ...
+//     </disks>
+//     <status>initializing</status>
+//     <creation_date>
+// </backup>
+// ----
+//
+func (p *VmBackupsService) Add() *VmBackupsServiceAddRequest {
+	return &VmBackupsServiceAddRequest{VmBackupsService: p}
+}
+
+//
+// The list of virtual machine backups.
+//
+type VmBackupsServiceListRequest struct {
+	VmBackupsService *VmBackupsService
+	header           map[string]string
+	query            map[string]string
+	follow           *string
+	max              *int64
+}
+
+func (p *VmBackupsServiceListRequest) Header(key, value string) *VmBackupsServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupsServiceListRequest) Query(key, value string) *VmBackupsServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupsServiceListRequest) Follow(follow string) *VmBackupsServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *VmBackupsServiceListRequest) Max(max int64) *VmBackupsServiceListRequest {
+	p.max = &max
+	return p
+}
+
+func (p *VmBackupsServiceListRequest) Send() (*VmBackupsServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmBackupsService.connection.URL(), p.VmBackupsService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.max != nil {
+		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLBackupReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &VmBackupsServiceListResponse{backups: result}, nil
+}
+
+func (p *VmBackupsServiceListRequest) MustSend() *VmBackupsServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// The list of virtual machine backups.
+//
+type VmBackupsServiceListResponse struct {
+	backups *BackupSlice
+}
+
+func (p *VmBackupsServiceListResponse) Backups() (*BackupSlice, bool) {
+	if p.backups != nil {
+		return p.backups, true
+	}
+	return nil, false
+}
+
+func (p *VmBackupsServiceListResponse) MustBackups() *BackupSlice {
+	if p.backups == nil {
+		panic("backups in response does not exist")
+	}
+	return p.backups
+}
+
+//
+// The list of virtual machine backups.
+//
+func (p *VmBackupsService) List() *VmBackupsServiceListRequest {
+	return &VmBackupsServiceListRequest{VmBackupsService: p}
+}
+
+//
+// Returns a reference to the service that manages a specific VM backup.
+//
+func (op *VmBackupsService) BackupService(id string) *VmBackupService {
+	return NewVmBackupService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *VmBackupsService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	index := strings.Index(path, "/")
+	if index == -1 {
+		return op.BackupService(path), nil
+	}
+	return op.BackupService(path[:index]).Service(path[index+1:])
+}
+
+func (op *VmBackupsService) String() string {
+	return fmt.Sprintf("VmBackupsService:%s", op.path)
 }
 
 //
@@ -54473,6 +55325,13 @@ func (op *VmService) ApplicationsService() *VmApplicationsService {
 }
 
 //
+// List of backups of this virtual machine.
+//
+func (op *VmService) BackupsService() *VmBackupsService {
+	return NewVmBackupsService(op.connection, fmt.Sprintf("%s/backups", op.path))
+}
+
+//
 //
 func (op *VmService) CdromsService() *VmCdromsService {
 	return NewVmCdromsService(op.connection, fmt.Sprintf("%s/cdroms", op.path))
@@ -54578,6 +55437,12 @@ func (op *VmService) Service(path string) (Service, error) {
 	}
 	if strings.HasPrefix(path, "applications/") {
 		return op.ApplicationsService().Service(path[13:])
+	}
+	if path == "backups" {
+		return op.BackupsService(), nil
+	}
+	if strings.HasPrefix(path, "backups/") {
+		return op.BackupsService().Service(path[8:])
 	}
 	if path == "cdroms" {
 		return op.CdromsService(), nil
@@ -95497,6 +96362,304 @@ func (op *RoleService) Service(path string) (Service, error) {
 
 func (op *RoleService) String() string {
 	return fmt.Sprintf("RoleService:%s", op.path)
+}
+
+//
+// A service managing a backup of a virtual machines.
+//
+type VmBackupService struct {
+	BaseService
+}
+
+func NewVmBackupService(connection *Connection, path string) *VmBackupService {
+	var result VmBackupService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+//
+type VmBackupServiceFinalizeRequest struct {
+	VmBackupService *VmBackupService
+	header          map[string]string
+	query           map[string]string
+}
+
+func (p *VmBackupServiceFinalizeRequest) Header(key, value string) *VmBackupServiceFinalizeRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupServiceFinalizeRequest) Query(key, value string) *VmBackupServiceFinalizeRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupServiceFinalizeRequest) Send() (*VmBackupServiceFinalizeResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/finalize", p.VmBackupService.connection.URL(), p.VmBackupService.path)
+	actionBuilder := NewActionBuilder()
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(VmBackupServiceFinalizeResponse), nil
+}
+
+func (p *VmBackupServiceFinalizeRequest) MustSend() *VmBackupServiceFinalizeResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+//
+type VmBackupServiceFinalizeResponse struct {
+}
+
+//
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+//
+func (p *VmBackupService) Finalize() *VmBackupServiceFinalizeRequest {
+	return &VmBackupServiceFinalizeRequest{VmBackupService: p}
+}
+
+//
+// Returns information about the virtual machine backup.
+//
+type VmBackupServiceGetRequest struct {
+	VmBackupService *VmBackupService
+	header          map[string]string
+	query           map[string]string
+	follow          *string
+}
+
+func (p *VmBackupServiceGetRequest) Header(key, value string) *VmBackupServiceGetRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Query(key, value string) *VmBackupServiceGetRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Follow(follow string) *VmBackupServiceGetRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Send() (*VmBackupServiceGetResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmBackupService.connection.URL(), p.VmBackupService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLBackupReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &VmBackupServiceGetResponse{backup: result}, nil
+}
+
+func (p *VmBackupServiceGetRequest) MustSend() *VmBackupServiceGetResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Returns information about the virtual machine backup.
+//
+type VmBackupServiceGetResponse struct {
+	backup *Backup
+}
+
+func (p *VmBackupServiceGetResponse) Backup() (*Backup, bool) {
+	if p.backup != nil {
+		return p.backup, true
+	}
+	return nil, false
+}
+
+func (p *VmBackupServiceGetResponse) MustBackup() *Backup {
+	if p.backup == nil {
+		panic("backup in response does not exist")
+	}
+	return p.backup
+}
+
+//
+// Returns information about the virtual machine backup.
+//
+func (p *VmBackupService) Get() *VmBackupServiceGetRequest {
+	return &VmBackupServiceGetRequest{VmBackupService: p}
+}
+
+//
+// A reference to the service that lists the disks in backup.
+//
+func (op *VmBackupService) DisksService() *VmBackupDisksService {
+	return NewVmBackupDisksService(op.connection, fmt.Sprintf("%s/disks", op.path))
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *VmBackupService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	if path == "disks" {
+		return op.DisksService(), nil
+	}
+	if strings.HasPrefix(path, "disks/") {
+		return op.DisksService().Service(path[6:])
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *VmBackupService) String() string {
+	return fmt.Sprintf("VmBackupService:%s", op.path)
 }
 
 //
