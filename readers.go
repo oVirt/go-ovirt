@@ -36511,6 +36511,13 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.UndeployHostedEngine(v)
+			case "upgrade_action":
+				vp, err := XMLClusterUpgradeActionReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.UpgradeAction(v)
 			case "use_cloud_init":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -37682,6 +37689,62 @@ func XMLVnicPassThroughModeReadMany(reader *XMLReader, start *xml.StartElement) 
 				return nil, err
 			}
 			results = append(results, VnicPassThroughMode(one))
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return results, nil
+}
+
+func XMLClusterUpgradeActionReadOne(reader *XMLReader, start *xml.StartElement) (*ClusterUpgradeAction, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	s, err := reader.ReadString(start)
+	if err != nil {
+		return nil, err
+	}
+	result := new(ClusterUpgradeAction)
+	*result = ClusterUpgradeAction(s)
+	return result, nil
+}
+
+func XMLClusterUpgradeActionReadMany(reader *XMLReader, start *xml.StartElement) ([]ClusterUpgradeAction, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var results []ClusterUpgradeAction
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			one, err := reader.ReadString(&t)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, ClusterUpgradeAction(one))
 		case xml.EndElement:
 			depth--
 		}

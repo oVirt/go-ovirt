@@ -38426,6 +38426,7 @@ type Action struct {
 	template                       *Template
 	ticket                         *Ticket
 	undeployHostedEngine           *bool
+	upgradeAction                  *ClusterUpgradeAction
 	useCloudInit                   *bool
 	useSysprep                     *bool
 	virtualFunctionsConfiguration  *HostNicVirtualFunctionsConfiguration
@@ -39893,6 +39894,25 @@ func (p *Action) MustUndeployHostedEngine() bool {
 		panic("the undeployHostedEngine must not be nil, please use UndeployHostedEngine() function instead")
 	}
 	return *p.undeployHostedEngine
+}
+
+func (p *Action) SetUpgradeAction(attr ClusterUpgradeAction) {
+	p.upgradeAction = &attr
+}
+
+func (p *Action) UpgradeAction() (ClusterUpgradeAction, bool) {
+	if p.upgradeAction != nil {
+		return *p.upgradeAction, true
+	}
+	var zero ClusterUpgradeAction
+	return zero, false
+}
+
+func (p *Action) MustUpgradeAction() ClusterUpgradeAction {
+	if p.upgradeAction == nil {
+		panic("the upgradeAction must not be nil, please use UpgradeAction() function instead")
+	}
+	return *p.upgradeAction
 }
 
 func (p *Action) SetUseCloudInit(attr bool) {
@@ -86386,6 +86406,15 @@ func (builder *ActionBuilder) UndeployHostedEngine(attr bool) *ActionBuilder {
 	return builder
 }
 
+func (builder *ActionBuilder) UpgradeAction(attr ClusterUpgradeAction) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetUpgradeAction(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) UseCloudInit(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -86678,6 +86707,13 @@ type VnicPassThroughMode string
 const (
 	VNICPASSTHROUGHMODE_DISABLED VnicPassThroughMode = "disabled"
 	VNICPASSTHROUGHMODE_ENABLED  VnicPassThroughMode = "enabled"
+)
+
+type ClusterUpgradeAction string
+
+const (
+	CLUSTERUPGRADEACTION_FINISH ClusterUpgradeAction = "finish"
+	CLUSTERUPGRADEACTION_START  ClusterUpgradeAction = "start"
 )
 
 type SnapshotStatus string
@@ -87114,11 +87150,15 @@ const (
 type DiskContentType string
 
 const (
-	DISKCONTENTTYPE_DATA                   DiskContentType = "data"
-	DISKCONTENTTYPE_ISO                    DiskContentType = "iso"
-	DISKCONTENTTYPE_MEMORY_DUMP_VOLUME     DiskContentType = "memory_dump_volume"
-	DISKCONTENTTYPE_MEMORY_METADATA_VOLUME DiskContentType = "memory_metadata_volume"
-	DISKCONTENTTYPE_OVF_STORE              DiskContentType = "ovf_store"
+	DISKCONTENTTYPE_DATA                        DiskContentType = "data"
+	DISKCONTENTTYPE_HOSTED_ENGINE               DiskContentType = "hosted_engine"
+	DISKCONTENTTYPE_HOSTED_ENGINE_CONFIGURATION DiskContentType = "hosted_engine_configuration"
+	DISKCONTENTTYPE_HOSTED_ENGINE_METADATA      DiskContentType = "hosted_engine_metadata"
+	DISKCONTENTTYPE_HOSTED_ENGINE_SANLOCK       DiskContentType = "hosted_engine_sanlock"
+	DISKCONTENTTYPE_ISO                         DiskContentType = "iso"
+	DISKCONTENTTYPE_MEMORY_DUMP_VOLUME          DiskContentType = "memory_dump_volume"
+	DISKCONTENTTYPE_MEMORY_METADATA_VOLUME      DiskContentType = "memory_metadata_volume"
+	DISKCONTENTTYPE_OVF_STORE                   DiskContentType = "ovf_store"
 )
 
 type FirewallType string

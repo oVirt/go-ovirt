@@ -36777,6 +36777,7 @@ type HostServiceRemoveRequest struct {
 	header      map[string]string
 	query       map[string]string
 	async       *bool
+	force       *bool
 }
 
 func (p *HostServiceRemoveRequest) Header(key, value string) *HostServiceRemoveRequest {
@@ -36800,11 +36801,20 @@ func (p *HostServiceRemoveRequest) Async(async bool) *HostServiceRemoveRequest {
 	return p
 }
 
+func (p *HostServiceRemoveRequest) Force(force bool) *HostServiceRemoveRequest {
+	p.force = &force
+	return p
+}
+
 func (p *HostServiceRemoveRequest) Send() (*HostServiceRemoveResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.HostService.connection.URL(), p.HostService.path)
 	values := make(url.Values)
 	if p.async != nil {
 		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.force != nil {
+		values["force"] = []string{fmt.Sprintf("%v", *p.force)}
 	}
 
 	if p.query != nil {
@@ -40550,6 +40560,184 @@ func (p *ClusterServiceUpdateResponse) MustCluster() *Cluster {
 //
 func (p *ClusterService) Update() *ClusterServiceUpdateRequest {
 	return &ClusterServiceUpdateRequest{ClusterService: p}
+}
+
+//
+// Start or finish upgrade process for the cluster based on the action value. This action marks the cluster for
+// upgrade or clears the upgrade running flag on the cluster based on the action value which takes values of
+// start or stop.
+// [source]
+// ----
+// POST /ovirt-engine/api/clusters/123/upgrade
+// ----
+// With a request body like this to mark the cluster for upgrade:
+// [source,xml]
+// ----
+// <action>
+//     <upgrade_action>
+//         start
+//     </upgrade_action>
+// </action>
+// ----
+//
+type ClusterServiceUpgradeRequest struct {
+	ClusterService *ClusterService
+	header         map[string]string
+	query          map[string]string
+	async          *bool
+	upgradeAction  *ClusterUpgradeAction
+}
+
+func (p *ClusterServiceUpgradeRequest) Header(key, value string) *ClusterServiceUpgradeRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *ClusterServiceUpgradeRequest) Query(key, value string) *ClusterServiceUpgradeRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *ClusterServiceUpgradeRequest) Async(async bool) *ClusterServiceUpgradeRequest {
+	p.async = &async
+	return p
+}
+
+func (p *ClusterServiceUpgradeRequest) UpgradeAction(upgradeAction ClusterUpgradeAction) *ClusterServiceUpgradeRequest {
+	p.upgradeAction = &upgradeAction
+	return p
+}
+
+func (p *ClusterServiceUpgradeRequest) Send() (*ClusterServiceUpgradeResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/upgrade", p.ClusterService.connection.URL(), p.ClusterService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	if p.upgradeAction != nil {
+		actionBuilder.UpgradeAction(*p.upgradeAction)
+	}
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.ClusterService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.ClusterService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.ClusterService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.ClusterService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.ClusterService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(ClusterServiceUpgradeResponse), nil
+}
+
+func (p *ClusterServiceUpgradeRequest) MustSend() *ClusterServiceUpgradeResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Start or finish upgrade process for the cluster based on the action value. This action marks the cluster for
+// upgrade or clears the upgrade running flag on the cluster based on the action value which takes values of
+// start or stop.
+// [source]
+// ----
+// POST /ovirt-engine/api/clusters/123/upgrade
+// ----
+// With a request body like this to mark the cluster for upgrade:
+// [source,xml]
+// ----
+// <action>
+//     <upgrade_action>
+//         start
+//     </upgrade_action>
+// </action>
+// ----
+//
+type ClusterServiceUpgradeResponse struct {
+}
+
+//
+// Start or finish upgrade process for the cluster based on the action value. This action marks the cluster for
+// upgrade or clears the upgrade running flag on the cluster based on the action value which takes values of
+// start or stop.
+// [source]
+// ----
+// POST /ovirt-engine/api/clusters/123/upgrade
+// ----
+// With a request body like this to mark the cluster for upgrade:
+// [source,xml]
+// ----
+// <action>
+//     <upgrade_action>
+//         start
+//     </upgrade_action>
+// </action>
+// ----
+//
+func (p *ClusterService) Upgrade() *ClusterServiceUpgradeRequest {
+	return &ClusterServiceUpgradeRequest{ClusterService: p}
 }
 
 //

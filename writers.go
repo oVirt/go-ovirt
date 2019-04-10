@@ -12116,6 +12116,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	if r, ok := object.UndeployHostedEngine(); ok {
 		writer.WriteBool("undeploy_hosted_engine", r)
 	}
+	if r, ok := object.UpgradeAction(); ok {
+		XMLClusterUpgradeActionWriteOne(writer, r, "upgrade_action")
+	}
 	if r, ok := object.UseCloudInit(); ok {
 		writer.WriteBool("use_cloud_init", r)
 	}
@@ -12562,6 +12565,28 @@ func XMLVnicPassThroughModeWriteMany(writer *XMLWriter, enums []VnicPassThroughM
 	}
 	if singular == "" {
 		singular = "vnic_pass_through_mode"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLClusterUpgradeActionWriteOne(writer *XMLWriter, enum ClusterUpgradeAction, tag string) {
+	if tag == "" {
+		tag = "cluster_upgrade_action"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLClusterUpgradeActionWriteMany(writer *XMLWriter, enums []ClusterUpgradeAction, plural, singular string) error {
+	if plural == "" {
+		plural = "cluster_upgrade_actions"
+	}
+	if singular == "" {
+		singular = "cluster_upgrade_action"
 	}
 	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
