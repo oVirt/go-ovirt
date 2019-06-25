@@ -2,6 +2,21 @@
 
 This document describes the relevant changes between releases of the SDK.
 
+== 4.3.5 / Jun 25 2019
+
+Update to model 4.4.2.
+
+  New features:
+
+* Allow setting a disk ScsiGenericIO to disabled
+  https://bugzilla.redhat.com/1714834[1714834].
+
+* Treat image transfers cancelled by user/system differently
+  https://bugzilla.redhat.com/1533362[1533362].
+
+Leverage `go module` for dependency management.
+
+
 == 4.3.4 / May 23 2019
 Add v before tag names.
 
