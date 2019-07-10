@@ -2,6 +2,13 @@
 
 This document describes the relevant changes between releases of the SDK.
 
+== 4.3.6 / Jul 10 2019
+
+Bug fixes:
+
+* The commit ID tagged for version 4.3.5 is incorrect, release 4.3.6 for a quick fix
+  Bug-Url: https://github.com/oVirt/ovirt-engine-sdk-go/issues/169[#169]
+
 == 4.3.5 / Jun 25 2019
 
 Update to model 4.4.2.
