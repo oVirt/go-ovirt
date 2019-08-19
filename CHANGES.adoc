@@ -2,6 +2,39 @@
 
 This document describes the relevant changes between releases of the SDK.
 
+== 4.3.7 / Aug 19 2019
+
+Update to model 4.4.6.
+
+New features:
+
+* Introduce API for Event-Notifications
+  http://bugzilla.redhat.com/1700338[1700338].
+
+* Added AffinityGroupHostsService
+  https://bugzilla.redhat.com/1652064[1652064].
+
+* Add new option to remove SerialNumberPolicy
+  https://bugzilla.redhat.com/1607414[1607414].
+
+* Add services for labels in affinity groups
+  https://bugzilla.redhat.com/1680499[1680499].
+
+* It should be possible to specify exact v4.0 as NFS version
+  https://bugzilla.redhat.com/1690026[1690026].
+
+* Add priority to AffinityGroup type
+  https://bugzilla.redhat.com/1680498[1680498].
+
+* Add allContent to HostNic Services
+  https://bugzilla.redhat.com/1718141[1718141].
+
+Deprecations:
+
+* Announce the depreciation of Neutron agent configuration
+  https://bugzilla.redhat.com/1638675[1638675].
+
+
 == 4.3.6 / Jul 10 2019
 
 Bug fixes:

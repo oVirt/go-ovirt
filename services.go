@@ -3279,6 +3279,336 @@ func (op *ClustersService) String() string {
 }
 
 //
+// A service to manage a specific event-subscription in the system.
+//
+type EventSubscriptionService struct {
+	BaseService
+}
+
+func NewEventSubscriptionService(connection *Connection, path string) *EventSubscriptionService {
+	var result EventSubscriptionService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Gets the information about the event-subscription.
+// For example to retrieve the information about the subscription of user '123' to
+// the event 'vm_console_detected':
+// ....
+// GET /ovirt-engine/api/users/123/vm_console_detected
+// ....
+// [source,xml]
+// ----
+// <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/vm_console_detected">
+//   <event>vm_console_detected</event>
+//   <notification_method>smtp</notification_method>
+//   <user href="/ovirt-engine/api/users/123" id="123"/>
+//   <address>a@b.com</address>
+// </event-subscription>
+// ----
+//
+type EventSubscriptionServiceGetRequest struct {
+	EventSubscriptionService *EventSubscriptionService
+	header                   map[string]string
+	query                    map[string]string
+}
+
+func (p *EventSubscriptionServiceGetRequest) Header(key, value string) *EventSubscriptionServiceGetRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *EventSubscriptionServiceGetRequest) Query(key, value string) *EventSubscriptionServiceGetRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *EventSubscriptionServiceGetRequest) Send() (*EventSubscriptionServiceGetResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.EventSubscriptionService.connection.URL(), p.EventSubscriptionService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.EventSubscriptionService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.EventSubscriptionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.EventSubscriptionService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.EventSubscriptionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.EventSubscriptionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLEventSubscriptionReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &EventSubscriptionServiceGetResponse{eventSubscription: result}, nil
+}
+
+func (p *EventSubscriptionServiceGetRequest) MustSend() *EventSubscriptionServiceGetResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Gets the information about the event-subscription.
+// For example to retrieve the information about the subscription of user '123' to
+// the event 'vm_console_detected':
+// ....
+// GET /ovirt-engine/api/users/123/vm_console_detected
+// ....
+// [source,xml]
+// ----
+// <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/vm_console_detected">
+//   <event>vm_console_detected</event>
+//   <notification_method>smtp</notification_method>
+//   <user href="/ovirt-engine/api/users/123" id="123"/>
+//   <address>a@b.com</address>
+// </event-subscription>
+// ----
+//
+type EventSubscriptionServiceGetResponse struct {
+	eventSubscription *EventSubscription
+}
+
+func (p *EventSubscriptionServiceGetResponse) EventSubscription() (*EventSubscription, bool) {
+	if p.eventSubscription != nil {
+		return p.eventSubscription, true
+	}
+	return nil, false
+}
+
+func (p *EventSubscriptionServiceGetResponse) MustEventSubscription() *EventSubscription {
+	if p.eventSubscription == nil {
+		panic("eventSubscription in response does not exist")
+	}
+	return p.eventSubscription
+}
+
+//
+// Gets the information about the event-subscription.
+// For example to retrieve the information about the subscription of user '123' to
+// the event 'vm_console_detected':
+// ....
+// GET /ovirt-engine/api/users/123/vm_console_detected
+// ....
+// [source,xml]
+// ----
+// <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/vm_console_detected">
+//   <event>vm_console_detected</event>
+//   <notification_method>smtp</notification_method>
+//   <user href="/ovirt-engine/api/users/123" id="123"/>
+//   <address>a@b.com</address>
+// </event-subscription>
+// ----
+//
+func (p *EventSubscriptionService) Get() *EventSubscriptionServiceGetRequest {
+	return &EventSubscriptionServiceGetRequest{EventSubscriptionService: p}
+}
+
+//
+// Removes the event-subscription from the system.
+// For example to remove user 123's subscription to `vm_console_detected` event:
+// ....
+// DELETE /ovirt-engine/api/users/123/vm_console_detected
+// ....
+//
+type EventSubscriptionServiceRemoveRequest struct {
+	EventSubscriptionService *EventSubscriptionService
+	header                   map[string]string
+	query                    map[string]string
+	async                    *bool
+}
+
+func (p *EventSubscriptionServiceRemoveRequest) Header(key, value string) *EventSubscriptionServiceRemoveRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *EventSubscriptionServiceRemoveRequest) Query(key, value string) *EventSubscriptionServiceRemoveRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *EventSubscriptionServiceRemoveRequest) Async(async bool) *EventSubscriptionServiceRemoveRequest {
+	p.async = &async
+	return p
+}
+
+func (p *EventSubscriptionServiceRemoveRequest) Send() (*EventSubscriptionServiceRemoveResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.EventSubscriptionService.connection.URL(), p.EventSubscriptionService.path)
+	values := make(url.Values)
+	if p.async != nil {
+		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("DELETE", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.EventSubscriptionService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.EventSubscriptionService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.EventSubscriptionService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.EventSubscriptionService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.EventSubscriptionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	_, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	return new(EventSubscriptionServiceRemoveResponse), nil
+}
+
+func (p *EventSubscriptionServiceRemoveRequest) MustSend() *EventSubscriptionServiceRemoveResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Removes the event-subscription from the system.
+// For example to remove user 123's subscription to `vm_console_detected` event:
+// ....
+// DELETE /ovirt-engine/api/users/123/vm_console_detected
+// ....
+//
+type EventSubscriptionServiceRemoveResponse struct {
+}
+
+//
+// Removes the event-subscription from the system.
+// For example to remove user 123's subscription to `vm_console_detected` event:
+// ....
+// DELETE /ovirt-engine/api/users/123/vm_console_detected
+// ....
+//
+func (p *EventSubscriptionService) Remove() *EventSubscriptionServiceRemoveRequest {
+	return &EventSubscriptionServiceRemoveRequest{EventSubscriptionService: p}
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *EventSubscriptionService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *EventSubscriptionService) String() string {
+	return fmt.Sprintf("EventSubscriptionService:%s", op.path)
+}
+
+//
 //
 type WeightsService struct {
 	BaseService
@@ -42222,6 +42552,369 @@ func (op *StorageServerConnectionService) String() string {
 }
 
 //
+// This service manages a collection of all virtual machine labels assigned to an affinity group.
+//
+type AffinityGroupVmLabelsService struct {
+	BaseService
+}
+
+func NewAffinityGroupVmLabelsService(connection *Connection, path string) *AffinityGroupVmLabelsService {
+	var result AffinityGroupVmLabelsService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Adds a virtual machine label to the affinity group.
+// For example, to add the label `789` to the affinity group `456` of cluster `123`,
+// send a request like this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/vmlabels
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <affinity_label id="789"/>
+// ----
+//
+type AffinityGroupVmLabelsServiceAddRequest struct {
+	AffinityGroupVmLabelsService *AffinityGroupVmLabelsService
+	header                       map[string]string
+	query                        map[string]string
+	label                        *AffinityLabel
+}
+
+func (p *AffinityGroupVmLabelsServiceAddRequest) Header(key, value string) *AffinityGroupVmLabelsServiceAddRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupVmLabelsServiceAddRequest) Query(key, value string) *AffinityGroupVmLabelsServiceAddRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupVmLabelsServiceAddRequest) Label(label *AffinityLabel) *AffinityGroupVmLabelsServiceAddRequest {
+	p.label = label
+	return p
+}
+
+func (p *AffinityGroupVmLabelsServiceAddRequest) Send() (*AffinityGroupVmLabelsServiceAddResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupVmLabelsService.connection.URL(), p.AffinityGroupVmLabelsService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLAffinityLabelWriteOne(writer, p.label, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupVmLabelsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupVmLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupVmLabelsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupVmLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupVmLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLAffinityLabelReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &AffinityGroupVmLabelsServiceAddResponse{label: result}, nil
+}
+
+func (p *AffinityGroupVmLabelsServiceAddRequest) MustSend() *AffinityGroupVmLabelsServiceAddResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Adds a virtual machine label to the affinity group.
+// For example, to add the label `789` to the affinity group `456` of cluster `123`,
+// send a request like this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/vmlabels
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <affinity_label id="789"/>
+// ----
+//
+type AffinityGroupVmLabelsServiceAddResponse struct {
+	label *AffinityLabel
+}
+
+func (p *AffinityGroupVmLabelsServiceAddResponse) Label() (*AffinityLabel, bool) {
+	if p.label != nil {
+		return p.label, true
+	}
+	return nil, false
+}
+
+func (p *AffinityGroupVmLabelsServiceAddResponse) MustLabel() *AffinityLabel {
+	if p.label == nil {
+		panic("label in response does not exist")
+	}
+	return p.label
+}
+
+//
+// Adds a virtual machine label to the affinity group.
+// For example, to add the label `789` to the affinity group `456` of cluster `123`,
+// send a request like this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/vmlabels
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <affinity_label id="789"/>
+// ----
+//
+func (p *AffinityGroupVmLabelsService) Add() *AffinityGroupVmLabelsServiceAddRequest {
+	return &AffinityGroupVmLabelsServiceAddRequest{AffinityGroupVmLabelsService: p}
+}
+
+//
+// List all virtual machine labels assigned to this affinity group.
+// The order of the returned labels isn't guaranteed.
+//
+type AffinityGroupVmLabelsServiceListRequest struct {
+	AffinityGroupVmLabelsService *AffinityGroupVmLabelsService
+	header                       map[string]string
+	query                        map[string]string
+	follow                       *string
+	max                          *int64
+}
+
+func (p *AffinityGroupVmLabelsServiceListRequest) Header(key, value string) *AffinityGroupVmLabelsServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupVmLabelsServiceListRequest) Query(key, value string) *AffinityGroupVmLabelsServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupVmLabelsServiceListRequest) Follow(follow string) *AffinityGroupVmLabelsServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *AffinityGroupVmLabelsServiceListRequest) Max(max int64) *AffinityGroupVmLabelsServiceListRequest {
+	p.max = &max
+	return p
+}
+
+func (p *AffinityGroupVmLabelsServiceListRequest) Send() (*AffinityGroupVmLabelsServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupVmLabelsService.connection.URL(), p.AffinityGroupVmLabelsService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.max != nil {
+		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupVmLabelsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupVmLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupVmLabelsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupVmLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupVmLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLAffinityLabelReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &AffinityGroupVmLabelsServiceListResponse{labels: result}, nil
+}
+
+func (p *AffinityGroupVmLabelsServiceListRequest) MustSend() *AffinityGroupVmLabelsServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// List all virtual machine labels assigned to this affinity group.
+// The order of the returned labels isn't guaranteed.
+//
+type AffinityGroupVmLabelsServiceListResponse struct {
+	labels *AffinityLabelSlice
+}
+
+func (p *AffinityGroupVmLabelsServiceListResponse) Labels() (*AffinityLabelSlice, bool) {
+	if p.labels != nil {
+		return p.labels, true
+	}
+	return nil, false
+}
+
+func (p *AffinityGroupVmLabelsServiceListResponse) MustLabels() *AffinityLabelSlice {
+	if p.labels == nil {
+		panic("labels in response does not exist")
+	}
+	return p.labels
+}
+
+//
+// List all virtual machine labels assigned to this affinity group.
+// The order of the returned labels isn't guaranteed.
+//
+func (p *AffinityGroupVmLabelsService) List() *AffinityGroupVmLabelsServiceListRequest {
+	return &AffinityGroupVmLabelsServiceListRequest{AffinityGroupVmLabelsService: p}
+}
+
+//
+// Access the service that manages the virtual machine label assignment to this affinity group.
+//
+func (op *AffinityGroupVmLabelsService) LabelService(id string) *AffinityGroupVmLabelService {
+	return NewAffinityGroupVmLabelService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *AffinityGroupVmLabelsService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	index := strings.Index(path, "/")
+	if index == -1 {
+		return op.LabelService(path), nil
+	}
+	return op.LabelService(path[:index]).Service(path[index+1:])
+}
+
+func (op *AffinityGroupVmLabelsService) String() string {
+	return fmt.Sprintf("AffinityGroupVmLabelsService:%s", op.path)
+}
+
+//
 // Manages the set of _quality of service_ configurations available in a data center.
 //
 type QossService struct {
@@ -61011,6 +61704,7 @@ type HostNicsServiceListRequest struct {
 	HostNicsService *HostNicsService
 	header          map[string]string
 	query           map[string]string
+	allContent      *bool
 	follow          *string
 	max             *int64
 }
@@ -61031,6 +61725,11 @@ func (p *HostNicsServiceListRequest) Query(key, value string) *HostNicsServiceLi
 	return p
 }
 
+func (p *HostNicsServiceListRequest) AllContent(allContent bool) *HostNicsServiceListRequest {
+	p.allContent = &allContent
+	return p
+}
+
 func (p *HostNicsServiceListRequest) Follow(follow string) *HostNicsServiceListRequest {
 	p.follow = &follow
 	return p
@@ -61044,6 +61743,10 @@ func (p *HostNicsServiceListRequest) Max(max int64) *HostNicsServiceListRequest 
 func (p *HostNicsServiceListRequest) Send() (*HostNicsServiceListResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.HostNicsService.connection.URL(), p.HostNicsService.path)
 	values := make(url.Values)
+	if p.allContent != nil {
+		values["all_content"] = []string{fmt.Sprintf("%v", *p.allContent)}
+	}
+
 	if p.follow != nil {
 		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
 	}
@@ -61178,6 +61881,153 @@ func (op *HostNicsService) Service(path string) (Service, error) {
 
 func (op *HostNicsService) String() string {
 	return fmt.Sprintf("HostNicsService:%s", op.path)
+}
+
+//
+// This service manages a single host to affinity group assignment.
+//
+type AffinityGroupHostService struct {
+	BaseService
+}
+
+func NewAffinityGroupHostService(connection *Connection, path string) *AffinityGroupHostService {
+	var result AffinityGroupHostService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Remove host from the affinity group.
+//
+type AffinityGroupHostServiceRemoveRequest struct {
+	AffinityGroupHostService *AffinityGroupHostService
+	header                   map[string]string
+	query                    map[string]string
+	async                    *bool
+}
+
+func (p *AffinityGroupHostServiceRemoveRequest) Header(key, value string) *AffinityGroupHostServiceRemoveRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostServiceRemoveRequest) Query(key, value string) *AffinityGroupHostServiceRemoveRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostServiceRemoveRequest) Async(async bool) *AffinityGroupHostServiceRemoveRequest {
+	p.async = &async
+	return p
+}
+
+func (p *AffinityGroupHostServiceRemoveRequest) Send() (*AffinityGroupHostServiceRemoveResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupHostService.connection.URL(), p.AffinityGroupHostService.path)
+	values := make(url.Values)
+	if p.async != nil {
+		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("DELETE", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupHostService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupHostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupHostService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupHostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupHostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	_, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	return new(AffinityGroupHostServiceRemoveResponse), nil
+}
+
+func (p *AffinityGroupHostServiceRemoveRequest) MustSend() *AffinityGroupHostServiceRemoveResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Remove host from the affinity group.
+//
+type AffinityGroupHostServiceRemoveResponse struct {
+}
+
+//
+// Remove host from the affinity group.
+//
+func (p *AffinityGroupHostService) Remove() *AffinityGroupHostServiceRemoveRequest {
+	return &AffinityGroupHostServiceRemoveRequest{AffinityGroupHostService: p}
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *AffinityGroupHostService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *AffinityGroupHostService) String() string {
+	return fmt.Sprintf("AffinityGroupHostService:%s", op.path)
 }
 
 //
@@ -72395,6 +73245,13 @@ func (p *UserService) Remove() *UserServiceRemoveRequest {
 }
 
 //
+// List of event-subscriptions for this user.
+//
+func (op *UserService) EventSubscriptionsService() *EventSubscriptionsService {
+	return NewEventSubscriptionsService(op.connection, fmt.Sprintf("%s/eventsubscriptions", op.path))
+}
+
+//
 //
 func (op *UserService) GroupsService() *DomainUserGroupsService {
 	return NewDomainUserGroupsService(op.connection, fmt.Sprintf("%s/groups", op.path))
@@ -72430,6 +73287,12 @@ func (op *UserService) TagsService() *AssignedTagsService {
 func (op *UserService) Service(path string) (Service, error) {
 	if path == "" {
 		return op, nil
+	}
+	if path == "eventsubscriptions" {
+		return op.EventSubscriptionsService(), nil
+	}
+	if strings.HasPrefix(path, "eventsubscriptions/") {
+		return op.EventSubscriptionsService().Service(path[19:])
 	}
 	if path == "groups" {
 		return op.GroupsService(), nil
@@ -80499,6 +81362,153 @@ func (op *VirtualFunctionAllowedNetworkService) Service(path string) (Service, e
 
 func (op *VirtualFunctionAllowedNetworkService) String() string {
 	return fmt.Sprintf("VirtualFunctionAllowedNetworkService:%s", op.path)
+}
+
+//
+// This service manages a single virtual machine label assigned to an affinity group.
+//
+type AffinityGroupVmLabelService struct {
+	BaseService
+}
+
+func NewAffinityGroupVmLabelService(connection *Connection, path string) *AffinityGroupVmLabelService {
+	var result AffinityGroupVmLabelService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Remove this label from the affinity group.
+//
+type AffinityGroupVmLabelServiceRemoveRequest struct {
+	AffinityGroupVmLabelService *AffinityGroupVmLabelService
+	header                      map[string]string
+	query                       map[string]string
+	async                       *bool
+}
+
+func (p *AffinityGroupVmLabelServiceRemoveRequest) Header(key, value string) *AffinityGroupVmLabelServiceRemoveRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupVmLabelServiceRemoveRequest) Query(key, value string) *AffinityGroupVmLabelServiceRemoveRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupVmLabelServiceRemoveRequest) Async(async bool) *AffinityGroupVmLabelServiceRemoveRequest {
+	p.async = &async
+	return p
+}
+
+func (p *AffinityGroupVmLabelServiceRemoveRequest) Send() (*AffinityGroupVmLabelServiceRemoveResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupVmLabelService.connection.URL(), p.AffinityGroupVmLabelService.path)
+	values := make(url.Values)
+	if p.async != nil {
+		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("DELETE", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupVmLabelService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupVmLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupVmLabelService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupVmLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupVmLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	_, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	return new(AffinityGroupVmLabelServiceRemoveResponse), nil
+}
+
+func (p *AffinityGroupVmLabelServiceRemoveRequest) MustSend() *AffinityGroupVmLabelServiceRemoveResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Remove this label from the affinity group.
+//
+type AffinityGroupVmLabelServiceRemoveResponse struct {
+}
+
+//
+// Remove this label from the affinity group.
+//
+func (p *AffinityGroupVmLabelService) Remove() *AffinityGroupVmLabelServiceRemoveRequest {
+	return &AffinityGroupVmLabelServiceRemoveRequest{AffinityGroupVmLabelService: p}
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *AffinityGroupVmLabelService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *AffinityGroupVmLabelService) String() string {
+	return fmt.Sprintf("AffinityGroupVmLabelService:%s", op.path)
 }
 
 //
@@ -94204,6 +95214,369 @@ func (op *InstanceTypeGraphicsConsolesService) String() string {
 }
 
 //
+// This service manages a collection of all host labels assigned to an affinity group.
+//
+type AffinityGroupHostLabelsService struct {
+	BaseService
+}
+
+func NewAffinityGroupHostLabelsService(connection *Connection, path string) *AffinityGroupHostLabelsService {
+	var result AffinityGroupHostLabelsService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Adds a host label to the affinity group.
+// For example, to add the label `789` to the affinity group `456` of cluster `123`,
+// send a request like this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/hostlabels
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <affinity_label id="789"/>
+// ----
+//
+type AffinityGroupHostLabelsServiceAddRequest struct {
+	AffinityGroupHostLabelsService *AffinityGroupHostLabelsService
+	header                         map[string]string
+	query                          map[string]string
+	label                          *AffinityLabel
+}
+
+func (p *AffinityGroupHostLabelsServiceAddRequest) Header(key, value string) *AffinityGroupHostLabelsServiceAddRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostLabelsServiceAddRequest) Query(key, value string) *AffinityGroupHostLabelsServiceAddRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostLabelsServiceAddRequest) Label(label *AffinityLabel) *AffinityGroupHostLabelsServiceAddRequest {
+	p.label = label
+	return p
+}
+
+func (p *AffinityGroupHostLabelsServiceAddRequest) Send() (*AffinityGroupHostLabelsServiceAddResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupHostLabelsService.connection.URL(), p.AffinityGroupHostLabelsService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLAffinityLabelWriteOne(writer, p.label, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupHostLabelsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupHostLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupHostLabelsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupHostLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupHostLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLAffinityLabelReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &AffinityGroupHostLabelsServiceAddResponse{label: result}, nil
+}
+
+func (p *AffinityGroupHostLabelsServiceAddRequest) MustSend() *AffinityGroupHostLabelsServiceAddResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Adds a host label to the affinity group.
+// For example, to add the label `789` to the affinity group `456` of cluster `123`,
+// send a request like this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/hostlabels
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <affinity_label id="789"/>
+// ----
+//
+type AffinityGroupHostLabelsServiceAddResponse struct {
+	label *AffinityLabel
+}
+
+func (p *AffinityGroupHostLabelsServiceAddResponse) Label() (*AffinityLabel, bool) {
+	if p.label != nil {
+		return p.label, true
+	}
+	return nil, false
+}
+
+func (p *AffinityGroupHostLabelsServiceAddResponse) MustLabel() *AffinityLabel {
+	if p.label == nil {
+		panic("label in response does not exist")
+	}
+	return p.label
+}
+
+//
+// Adds a host label to the affinity group.
+// For example, to add the label `789` to the affinity group `456` of cluster `123`,
+// send a request like this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/hostlabels
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <affinity_label id="789"/>
+// ----
+//
+func (p *AffinityGroupHostLabelsService) Add() *AffinityGroupHostLabelsServiceAddRequest {
+	return &AffinityGroupHostLabelsServiceAddRequest{AffinityGroupHostLabelsService: p}
+}
+
+//
+// List all host labels assigned to this affinity group.
+// The order of the returned labels isn't guaranteed.
+//
+type AffinityGroupHostLabelsServiceListRequest struct {
+	AffinityGroupHostLabelsService *AffinityGroupHostLabelsService
+	header                         map[string]string
+	query                          map[string]string
+	follow                         *string
+	max                            *int64
+}
+
+func (p *AffinityGroupHostLabelsServiceListRequest) Header(key, value string) *AffinityGroupHostLabelsServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostLabelsServiceListRequest) Query(key, value string) *AffinityGroupHostLabelsServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostLabelsServiceListRequest) Follow(follow string) *AffinityGroupHostLabelsServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *AffinityGroupHostLabelsServiceListRequest) Max(max int64) *AffinityGroupHostLabelsServiceListRequest {
+	p.max = &max
+	return p
+}
+
+func (p *AffinityGroupHostLabelsServiceListRequest) Send() (*AffinityGroupHostLabelsServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupHostLabelsService.connection.URL(), p.AffinityGroupHostLabelsService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.max != nil {
+		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupHostLabelsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupHostLabelsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupHostLabelsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupHostLabelsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupHostLabelsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLAffinityLabelReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &AffinityGroupHostLabelsServiceListResponse{labels: result}, nil
+}
+
+func (p *AffinityGroupHostLabelsServiceListRequest) MustSend() *AffinityGroupHostLabelsServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// List all host labels assigned to this affinity group.
+// The order of the returned labels isn't guaranteed.
+//
+type AffinityGroupHostLabelsServiceListResponse struct {
+	labels *AffinityLabelSlice
+}
+
+func (p *AffinityGroupHostLabelsServiceListResponse) Labels() (*AffinityLabelSlice, bool) {
+	if p.labels != nil {
+		return p.labels, true
+	}
+	return nil, false
+}
+
+func (p *AffinityGroupHostLabelsServiceListResponse) MustLabels() *AffinityLabelSlice {
+	if p.labels == nil {
+		panic("labels in response does not exist")
+	}
+	return p.labels
+}
+
+//
+// List all host labels assigned to this affinity group.
+// The order of the returned labels isn't guaranteed.
+//
+func (p *AffinityGroupHostLabelsService) List() *AffinityGroupHostLabelsServiceListRequest {
+	return &AffinityGroupHostLabelsServiceListRequest{AffinityGroupHostLabelsService: p}
+}
+
+//
+// Access the service that manages the host label assignment to this affinity group.
+//
+func (op *AffinityGroupHostLabelsService) LabelService(id string) *AffinityGroupHostLabelService {
+	return NewAffinityGroupHostLabelService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *AffinityGroupHostLabelsService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	index := strings.Index(path, "/")
+	if index == -1 {
+		return op.LabelService(path), nil
+	}
+	return op.LabelService(path[:index]).Service(path[index+1:])
+}
+
+func (op *AffinityGroupHostLabelsService) String() string {
+	return fmt.Sprintf("AffinityGroupHostLabelsService:%s", op.path)
+}
+
+//
 //
 type WeightService struct {
 	BaseService
@@ -101273,6 +102646,453 @@ func (op *AttachedStorageDomainsService) Service(path string) (Service, error) {
 
 func (op *AttachedStorageDomainsService) String() string {
 	return fmt.Sprintf("AttachedStorageDomainsService:%s", op.path)
+}
+
+//
+// Represents a service to manage collection of event-subscription of a user.
+//
+type EventSubscriptionsService struct {
+	BaseService
+}
+
+func NewEventSubscriptionsService(connection *Connection, path string) *EventSubscriptionsService {
+	var result EventSubscriptionsService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Add a new event-subscription to the system.
+// An event-subscription is always added in the context of a user. For example, to add new
+// event-subscription for `host_high_cpu_use` for user `123`, and have the notification
+// sent to the e-mail address: `a@b.com`, send a request like this:
+// .... POST /ovirt-engine/api/users/123/eventsubscriptions ....
+// With a request body like this:
+// [source,xml]
+// ----
+// <event_subscription>
+//     <event>host_high_cpu_use</event>
+//     <address>a@b.com</address>
+// </event_subscription>
+// -----
+// The event name will become the ID of the new event-subscription entity:
+// GET .../api/users/123/eventsubscriptions/host_high_cpu_use
+// Note that no user id is provided in the request body. This is because the user-id (in this case 123)
+// is already known to the API from the context. Note also that event-subscription entity contains
+// notification-method field, but it is not provided either in the request body. This is because currently
+// it's always set to SMTP as SNMP notifications are still unsupported by the API layer.
+//
+type EventSubscriptionsServiceAddRequest struct {
+	EventSubscriptionsService *EventSubscriptionsService
+	header                    map[string]string
+	query                     map[string]string
+	eventSubscription         *EventSubscription
+}
+
+func (p *EventSubscriptionsServiceAddRequest) Header(key, value string) *EventSubscriptionsServiceAddRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *EventSubscriptionsServiceAddRequest) Query(key, value string) *EventSubscriptionsServiceAddRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *EventSubscriptionsServiceAddRequest) EventSubscription(eventSubscription *EventSubscription) *EventSubscriptionsServiceAddRequest {
+	p.eventSubscription = eventSubscription
+	return p
+}
+
+func (p *EventSubscriptionsServiceAddRequest) Send() (*EventSubscriptionsServiceAddResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.EventSubscriptionsService.connection.URL(), p.EventSubscriptionsService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLEventSubscriptionWriteOne(writer, p.eventSubscription, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.EventSubscriptionsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.EventSubscriptionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.EventSubscriptionsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.EventSubscriptionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.EventSubscriptionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLEventSubscriptionReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &EventSubscriptionsServiceAddResponse{eventSubscription: result}, nil
+}
+
+func (p *EventSubscriptionsServiceAddRequest) MustSend() *EventSubscriptionsServiceAddResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Add a new event-subscription to the system.
+// An event-subscription is always added in the context of a user. For example, to add new
+// event-subscription for `host_high_cpu_use` for user `123`, and have the notification
+// sent to the e-mail address: `a@b.com`, send a request like this:
+// .... POST /ovirt-engine/api/users/123/eventsubscriptions ....
+// With a request body like this:
+// [source,xml]
+// ----
+// <event_subscription>
+//     <event>host_high_cpu_use</event>
+//     <address>a@b.com</address>
+// </event_subscription>
+// -----
+// The event name will become the ID of the new event-subscription entity:
+// GET .../api/users/123/eventsubscriptions/host_high_cpu_use
+// Note that no user id is provided in the request body. This is because the user-id (in this case 123)
+// is already known to the API from the context. Note also that event-subscription entity contains
+// notification-method field, but it is not provided either in the request body. This is because currently
+// it's always set to SMTP as SNMP notifications are still unsupported by the API layer.
+//
+type EventSubscriptionsServiceAddResponse struct {
+	eventSubscription *EventSubscription
+}
+
+func (p *EventSubscriptionsServiceAddResponse) EventSubscription() (*EventSubscription, bool) {
+	if p.eventSubscription != nil {
+		return p.eventSubscription, true
+	}
+	return nil, false
+}
+
+func (p *EventSubscriptionsServiceAddResponse) MustEventSubscription() *EventSubscription {
+	if p.eventSubscription == nil {
+		panic("eventSubscription in response does not exist")
+	}
+	return p.eventSubscription
+}
+
+//
+// Add a new event-subscription to the system.
+// An event-subscription is always added in the context of a user. For example, to add new
+// event-subscription for `host_high_cpu_use` for user `123`, and have the notification
+// sent to the e-mail address: `a@b.com`, send a request like this:
+// .... POST /ovirt-engine/api/users/123/eventsubscriptions ....
+// With a request body like this:
+// [source,xml]
+// ----
+// <event_subscription>
+//     <event>host_high_cpu_use</event>
+//     <address>a@b.com</address>
+// </event_subscription>
+// -----
+// The event name will become the ID of the new event-subscription entity:
+// GET .../api/users/123/eventsubscriptions/host_high_cpu_use
+// Note that no user id is provided in the request body. This is because the user-id (in this case 123)
+// is already known to the API from the context. Note also that event-subscription entity contains
+// notification-method field, but it is not provided either in the request body. This is because currently
+// it's always set to SMTP as SNMP notifications are still unsupported by the API layer.
+//
+func (p *EventSubscriptionsService) Add() *EventSubscriptionsServiceAddRequest {
+	return &EventSubscriptionsServiceAddRequest{EventSubscriptionsService: p}
+}
+
+//
+// List the event-subscriptions for the provided user
+// For example to list event-subscriptions for user `123`:
+// ....
+// GET /ovirt-engine/api/users/123/event-subscriptions
+// ....
+// [source,xml]
+// ----
+// <event-subscriptions>
+//   <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/host_install_failed">
+//     <event>host_install_failed</event>
+//     <notification_method>smtp</notification_method>
+//     <user href="/ovirt-engine/api/users/123" id="123"/>
+//     <address>a@b.com</address>
+//   </event-subscription>
+//   <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/vm_paused">
+//     <event>vm_paused</event>
+//     <notification_method>smtp</notification_method>
+//     <user href="/ovirt-engine/api/users/123" id="123"/>
+//     <address>a@b.com</address>
+//   </event-subscription>
+// </event-subscriptions>
+// ----
+//
+type EventSubscriptionsServiceListRequest struct {
+	EventSubscriptionsService *EventSubscriptionsService
+	header                    map[string]string
+	query                     map[string]string
+	follow                    *string
+	max                       *int64
+}
+
+func (p *EventSubscriptionsServiceListRequest) Header(key, value string) *EventSubscriptionsServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *EventSubscriptionsServiceListRequest) Query(key, value string) *EventSubscriptionsServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *EventSubscriptionsServiceListRequest) Follow(follow string) *EventSubscriptionsServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *EventSubscriptionsServiceListRequest) Max(max int64) *EventSubscriptionsServiceListRequest {
+	p.max = &max
+	return p
+}
+
+func (p *EventSubscriptionsServiceListRequest) Send() (*EventSubscriptionsServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.EventSubscriptionsService.connection.URL(), p.EventSubscriptionsService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.max != nil {
+		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.EventSubscriptionsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.EventSubscriptionsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.EventSubscriptionsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.EventSubscriptionsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.EventSubscriptionsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLEventSubscriptionReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &EventSubscriptionsServiceListResponse{eventSubscriptions: result}, nil
+}
+
+func (p *EventSubscriptionsServiceListRequest) MustSend() *EventSubscriptionsServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// List the event-subscriptions for the provided user
+// For example to list event-subscriptions for user `123`:
+// ....
+// GET /ovirt-engine/api/users/123/event-subscriptions
+// ....
+// [source,xml]
+// ----
+// <event-subscriptions>
+//   <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/host_install_failed">
+//     <event>host_install_failed</event>
+//     <notification_method>smtp</notification_method>
+//     <user href="/ovirt-engine/api/users/123" id="123"/>
+//     <address>a@b.com</address>
+//   </event-subscription>
+//   <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/vm_paused">
+//     <event>vm_paused</event>
+//     <notification_method>smtp</notification_method>
+//     <user href="/ovirt-engine/api/users/123" id="123"/>
+//     <address>a@b.com</address>
+//   </event-subscription>
+// </event-subscriptions>
+// ----
+//
+type EventSubscriptionsServiceListResponse struct {
+	eventSubscriptions *EventSubscriptionSlice
+}
+
+func (p *EventSubscriptionsServiceListResponse) EventSubscriptions() (*EventSubscriptionSlice, bool) {
+	if p.eventSubscriptions != nil {
+		return p.eventSubscriptions, true
+	}
+	return nil, false
+}
+
+func (p *EventSubscriptionsServiceListResponse) MustEventSubscriptions() *EventSubscriptionSlice {
+	if p.eventSubscriptions == nil {
+		panic("eventSubscriptions in response does not exist")
+	}
+	return p.eventSubscriptions
+}
+
+//
+// List the event-subscriptions for the provided user
+// For example to list event-subscriptions for user `123`:
+// ....
+// GET /ovirt-engine/api/users/123/event-subscriptions
+// ....
+// [source,xml]
+// ----
+// <event-subscriptions>
+//   <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/host_install_failed">
+//     <event>host_install_failed</event>
+//     <notification_method>smtp</notification_method>
+//     <user href="/ovirt-engine/api/users/123" id="123"/>
+//     <address>a@b.com</address>
+//   </event-subscription>
+//   <event-subscription href="/ovirt-engine/api/users/123/event-subscriptions/vm_paused">
+//     <event>vm_paused</event>
+//     <notification_method>smtp</notification_method>
+//     <user href="/ovirt-engine/api/users/123" id="123"/>
+//     <address>a@b.com</address>
+//   </event-subscription>
+// </event-subscriptions>
+// ----
+//
+func (p *EventSubscriptionsService) List() *EventSubscriptionsServiceListRequest {
+	return &EventSubscriptionsServiceListRequest{EventSubscriptionsService: p}
+}
+
+//
+// Reference to the service that manages a specific event-subscription.
+//
+func (op *EventSubscriptionsService) EventSubscriptionService(id string) *EventSubscriptionService {
+	return NewEventSubscriptionService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *EventSubscriptionsService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	index := strings.Index(path, "/")
+	if index == -1 {
+		return op.EventSubscriptionService(path), nil
+	}
+	return op.EventSubscriptionService(path[:index]).Service(path[index+1:])
+}
+
+func (op *EventSubscriptionsService) String() string {
+	return fmt.Sprintf("EventSubscriptionsService:%s", op.path)
 }
 
 //
@@ -109108,6 +110928,369 @@ func (op *SnapshotDiskService) String() string {
 }
 
 //
+// This service manages a collection of all hosts assigned to an affinity group.
+//
+type AffinityGroupHostsService struct {
+	BaseService
+}
+
+func NewAffinityGroupHostsService(connection *Connection, path string) *AffinityGroupHostsService {
+	var result AffinityGroupHostsService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Adds a host to the affinity group.
+// For example, to add the host `789` to the affinity group `456` of cluster `123`, send a request like
+// this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/hosts
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <host id="789"/>
+// ----
+//
+type AffinityGroupHostsServiceAddRequest struct {
+	AffinityGroupHostsService *AffinityGroupHostsService
+	header                    map[string]string
+	query                     map[string]string
+	host                      *Host
+}
+
+func (p *AffinityGroupHostsServiceAddRequest) Header(key, value string) *AffinityGroupHostsServiceAddRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostsServiceAddRequest) Query(key, value string) *AffinityGroupHostsServiceAddRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostsServiceAddRequest) Host(host *Host) *AffinityGroupHostsServiceAddRequest {
+	p.host = host
+	return p
+}
+
+func (p *AffinityGroupHostsServiceAddRequest) Send() (*AffinityGroupHostsServiceAddResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupHostsService.connection.URL(), p.AffinityGroupHostsService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLHostWriteOne(writer, p.host, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupHostsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupHostsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupHostsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupHostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupHostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLHostReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &AffinityGroupHostsServiceAddResponse{host: result}, nil
+}
+
+func (p *AffinityGroupHostsServiceAddRequest) MustSend() *AffinityGroupHostsServiceAddResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Adds a host to the affinity group.
+// For example, to add the host `789` to the affinity group `456` of cluster `123`, send a request like
+// this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/hosts
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <host id="789"/>
+// ----
+//
+type AffinityGroupHostsServiceAddResponse struct {
+	host *Host
+}
+
+func (p *AffinityGroupHostsServiceAddResponse) Host() (*Host, bool) {
+	if p.host != nil {
+		return p.host, true
+	}
+	return nil, false
+}
+
+func (p *AffinityGroupHostsServiceAddResponse) MustHost() *Host {
+	if p.host == nil {
+		panic("host in response does not exist")
+	}
+	return p.host
+}
+
+//
+// Adds a host to the affinity group.
+// For example, to add the host `789` to the affinity group `456` of cluster `123`, send a request like
+// this:
+// ....
+// POST /ovirt-engine/api/clusters/123/affinitygroups/456/hosts
+// ....
+// With the following body:
+// [source,xml]
+// ----
+// <host id="789"/>
+// ----
+//
+func (p *AffinityGroupHostsService) Add() *AffinityGroupHostsServiceAddRequest {
+	return &AffinityGroupHostsServiceAddRequest{AffinityGroupHostsService: p}
+}
+
+//
+// List all hosts assigned to this affinity group.
+// The order of the returned hosts isn't guaranteed.
+//
+type AffinityGroupHostsServiceListRequest struct {
+	AffinityGroupHostsService *AffinityGroupHostsService
+	header                    map[string]string
+	query                     map[string]string
+	follow                    *string
+	max                       *int64
+}
+
+func (p *AffinityGroupHostsServiceListRequest) Header(key, value string) *AffinityGroupHostsServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostsServiceListRequest) Query(key, value string) *AffinityGroupHostsServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostsServiceListRequest) Follow(follow string) *AffinityGroupHostsServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *AffinityGroupHostsServiceListRequest) Max(max int64) *AffinityGroupHostsServiceListRequest {
+	p.max = &max
+	return p
+}
+
+func (p *AffinityGroupHostsServiceListRequest) Send() (*AffinityGroupHostsServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupHostsService.connection.URL(), p.AffinityGroupHostsService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.max != nil {
+		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupHostsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupHostsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupHostsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupHostsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupHostsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLHostReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &AffinityGroupHostsServiceListResponse{hosts: result}, nil
+}
+
+func (p *AffinityGroupHostsServiceListRequest) MustSend() *AffinityGroupHostsServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// List all hosts assigned to this affinity group.
+// The order of the returned hosts isn't guaranteed.
+//
+type AffinityGroupHostsServiceListResponse struct {
+	hosts *HostSlice
+}
+
+func (p *AffinityGroupHostsServiceListResponse) Hosts() (*HostSlice, bool) {
+	if p.hosts != nil {
+		return p.hosts, true
+	}
+	return nil, false
+}
+
+func (p *AffinityGroupHostsServiceListResponse) MustHosts() *HostSlice {
+	if p.hosts == nil {
+		panic("hosts in response does not exist")
+	}
+	return p.hosts
+}
+
+//
+// List all hosts assigned to this affinity group.
+// The order of the returned hosts isn't guaranteed.
+//
+func (p *AffinityGroupHostsService) List() *AffinityGroupHostsServiceListRequest {
+	return &AffinityGroupHostsServiceListRequest{AffinityGroupHostsService: p}
+}
+
+//
+// Access the service that manages the host assignment to this affinity group.
+//
+func (op *AffinityGroupHostsService) HostService(id string) *AffinityGroupHostService {
+	return NewAffinityGroupHostService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *AffinityGroupHostsService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	index := strings.Index(path, "/")
+	if index == -1 {
+		return op.HostService(path), nil
+	}
+	return op.HostService(path[:index]).Service(path[index+1:])
+}
+
+func (op *AffinityGroupHostsService) String() string {
+	return fmt.Sprintf("AffinityGroupHostsService:%s", op.path)
+}
+
+//
 // Manages the CDROM devices of a virtual machine.
 // Currently virtual machines have exactly one CDROM device. No new devices can be added, and the existing one can't
 // be removed, thus there are no `add` or `remove` methods. Changing and ejecting CDROM disks is done with the
@@ -114723,6 +116906,153 @@ func (op *InstanceTypeNicService) String() string {
 }
 
 //
+// This service manages a single host label assigned to an affinity group.
+//
+type AffinityGroupHostLabelService struct {
+	BaseService
+}
+
+func NewAffinityGroupHostLabelService(connection *Connection, path string) *AffinityGroupHostLabelService {
+	var result AffinityGroupHostLabelService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Remove this label from the affinity group.
+//
+type AffinityGroupHostLabelServiceRemoveRequest struct {
+	AffinityGroupHostLabelService *AffinityGroupHostLabelService
+	header                        map[string]string
+	query                         map[string]string
+	async                         *bool
+}
+
+func (p *AffinityGroupHostLabelServiceRemoveRequest) Header(key, value string) *AffinityGroupHostLabelServiceRemoveRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostLabelServiceRemoveRequest) Query(key, value string) *AffinityGroupHostLabelServiceRemoveRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *AffinityGroupHostLabelServiceRemoveRequest) Async(async bool) *AffinityGroupHostLabelServiceRemoveRequest {
+	p.async = &async
+	return p
+}
+
+func (p *AffinityGroupHostLabelServiceRemoveRequest) Send() (*AffinityGroupHostLabelServiceRemoveResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.AffinityGroupHostLabelService.connection.URL(), p.AffinityGroupHostLabelService.path)
+	values := make(url.Values)
+	if p.async != nil {
+		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("DELETE", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.AffinityGroupHostLabelService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.AffinityGroupHostLabelService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.AffinityGroupHostLabelService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.AffinityGroupHostLabelService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.AffinityGroupHostLabelService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	_, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	return new(AffinityGroupHostLabelServiceRemoveResponse), nil
+}
+
+func (p *AffinityGroupHostLabelServiceRemoveRequest) MustSend() *AffinityGroupHostLabelServiceRemoveResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Remove this label from the affinity group.
+//
+type AffinityGroupHostLabelServiceRemoveResponse struct {
+}
+
+//
+// Remove this label from the affinity group.
+//
+func (p *AffinityGroupHostLabelService) Remove() *AffinityGroupHostLabelServiceRemoveRequest {
+	return &AffinityGroupHostLabelServiceRemoveRequest{AffinityGroupHostLabelService: p}
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *AffinityGroupHostLabelService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *AffinityGroupHostLabelService) String() string {
+	return fmt.Sprintf("AffinityGroupHostLabelService:%s", op.path)
+}
+
+//
 // Manages the set of snapshots of a storage domain or virtual machine.
 //
 type SnapshotsService struct {
@@ -118263,6 +120593,33 @@ func (p *AffinityGroupService) Update() *AffinityGroupServiceUpdateRequest {
 
 //
 // Returns a reference to the service that manages the
+// list of all host labels attached to this affinity
+// group.
+//
+func (op *AffinityGroupService) HostLabelsService() *AffinityGroupHostLabelsService {
+	return NewAffinityGroupHostLabelsService(op.connection, fmt.Sprintf("%s/hostlabels", op.path))
+}
+
+//
+// Returns a reference to the service that manages the
+// list of all hosts attached to this affinity
+// group.
+//
+func (op *AffinityGroupService) HostsService() *AffinityGroupHostsService {
+	return NewAffinityGroupHostsService(op.connection, fmt.Sprintf("%s/hosts", op.path))
+}
+
+//
+// Returns a reference to the service that manages the
+// list of all virtual machine labels attached to this affinity
+// group.
+//
+func (op *AffinityGroupService) VmLabelsService() *AffinityGroupVmLabelsService {
+	return NewAffinityGroupVmLabelsService(op.connection, fmt.Sprintf("%s/vmlabels", op.path))
+}
+
+//
+// Returns a reference to the service that manages the
 // list of all virtual machines attached to this affinity
 // group.
 //
@@ -118276,6 +120633,24 @@ func (op *AffinityGroupService) VmsService() *AffinityGroupVmsService {
 func (op *AffinityGroupService) Service(path string) (Service, error) {
 	if path == "" {
 		return op, nil
+	}
+	if path == "hostlabels" {
+		return op.HostLabelsService(), nil
+	}
+	if strings.HasPrefix(path, "hostlabels/") {
+		return op.HostLabelsService().Service(path[11:])
+	}
+	if path == "hosts" {
+		return op.HostsService(), nil
+	}
+	if strings.HasPrefix(path, "hosts/") {
+		return op.HostsService().Service(path[6:])
+	}
+	if path == "vmlabels" {
+		return op.VmLabelsService(), nil
+	}
+	if strings.HasPrefix(path, "vmlabels/") {
+		return op.VmLabelsService().Service(path[9:])
 	}
 	if path == "vms" {
 		return op.VmsService(), nil
@@ -119178,6 +121553,7 @@ type HostNicServiceGetRequest struct {
 	HostNicService *HostNicService
 	header         map[string]string
 	query          map[string]string
+	allContent     *bool
 	follow         *string
 }
 
@@ -119197,6 +121573,11 @@ func (p *HostNicServiceGetRequest) Query(key, value string) *HostNicServiceGetRe
 	return p
 }
 
+func (p *HostNicServiceGetRequest) AllContent(allContent bool) *HostNicServiceGetRequest {
+	p.allContent = &allContent
+	return p
+}
+
 func (p *HostNicServiceGetRequest) Follow(follow string) *HostNicServiceGetRequest {
 	p.follow = &follow
 	return p
@@ -119205,6 +121586,10 @@ func (p *HostNicServiceGetRequest) Follow(follow string) *HostNicServiceGetReque
 func (p *HostNicServiceGetRequest) Send() (*HostNicServiceGetResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.HostNicService.connection.URL(), p.HostNicService.path)
 	values := make(url.Values)
+	if p.allContent != nil {
+		values["all_content"] = []string{fmt.Sprintf("%v", *p.allContent)}
+	}
+
 	if p.follow != nil {
 		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
 	}

@@ -20,6 +20,169 @@ import (
 	"time"
 )
 
+type EventSubscription struct {
+	Struct
+	address            *string
+	comment            *string
+	description        *string
+	event              *NotifiableEvent
+	id                 *string
+	name               *string
+	notificationMethod *NotificationMethod
+	user               *User
+}
+
+func (p *EventSubscription) SetAddress(attr string) {
+	p.address = &attr
+}
+
+func (p *EventSubscription) Address() (string, bool) {
+	if p.address != nil {
+		return *p.address, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *EventSubscription) MustAddress() string {
+	if p.address == nil {
+		panic("the address must not be nil, please use Address() function instead")
+	}
+	return *p.address
+}
+
+func (p *EventSubscription) SetComment(attr string) {
+	p.comment = &attr
+}
+
+func (p *EventSubscription) Comment() (string, bool) {
+	if p.comment != nil {
+		return *p.comment, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *EventSubscription) MustComment() string {
+	if p.comment == nil {
+		panic("the comment must not be nil, please use Comment() function instead")
+	}
+	return *p.comment
+}
+
+func (p *EventSubscription) SetDescription(attr string) {
+	p.description = &attr
+}
+
+func (p *EventSubscription) Description() (string, bool) {
+	if p.description != nil {
+		return *p.description, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *EventSubscription) MustDescription() string {
+	if p.description == nil {
+		panic("the description must not be nil, please use Description() function instead")
+	}
+	return *p.description
+}
+
+func (p *EventSubscription) SetEvent(attr NotifiableEvent) {
+	p.event = &attr
+}
+
+func (p *EventSubscription) Event() (NotifiableEvent, bool) {
+	if p.event != nil {
+		return *p.event, true
+	}
+	var zero NotifiableEvent
+	return zero, false
+}
+
+func (p *EventSubscription) MustEvent() NotifiableEvent {
+	if p.event == nil {
+		panic("the event must not be nil, please use Event() function instead")
+	}
+	return *p.event
+}
+
+func (p *EventSubscription) SetId(attr string) {
+	p.id = &attr
+}
+
+func (p *EventSubscription) Id() (string, bool) {
+	if p.id != nil {
+		return *p.id, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *EventSubscription) MustId() string {
+	if p.id == nil {
+		panic("the id must not be nil, please use Id() function instead")
+	}
+	return *p.id
+}
+
+func (p *EventSubscription) SetName(attr string) {
+	p.name = &attr
+}
+
+func (p *EventSubscription) Name() (string, bool) {
+	if p.name != nil {
+		return *p.name, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *EventSubscription) MustName() string {
+	if p.name == nil {
+		panic("the name must not be nil, please use Name() function instead")
+	}
+	return *p.name
+}
+
+func (p *EventSubscription) SetNotificationMethod(attr NotificationMethod) {
+	p.notificationMethod = &attr
+}
+
+func (p *EventSubscription) NotificationMethod() (NotificationMethod, bool) {
+	if p.notificationMethod != nil {
+		return *p.notificationMethod, true
+	}
+	var zero NotificationMethod
+	return zero, false
+}
+
+func (p *EventSubscription) MustNotificationMethod() NotificationMethod {
+	if p.notificationMethod == nil {
+		panic("the notificationMethod must not be nil, please use NotificationMethod() function instead")
+	}
+	return *p.notificationMethod
+}
+
+func (p *EventSubscription) SetUser(attr *User) {
+	p.user = attr
+}
+
+func (p *EventSubscription) User() (*User, bool) {
+	if p.user != nil {
+		return p.user, true
+	}
+	return nil, false
+}
+
+func (p *EventSubscription) MustUser() *User {
+	if p.user == nil {
+		panic("the user must not be nil, please use User() function instead")
+	}
+	return p.user
+}
+
 type CustomProperty struct {
 	Struct
 	name   *string
@@ -29994,13 +30157,14 @@ func (p *HostNic) MustVlan() *Vlan {
 
 type AffinityLabel struct {
 	Struct
-	comment     *string
-	description *string
-	hosts       *HostSlice
-	id          *string
-	name        *string
-	readOnly    *bool
-	vms         *VmSlice
+	comment                  *string
+	description              *string
+	hasImplicitAffinityGroup *bool
+	hosts                    *HostSlice
+	id                       *string
+	name                     *string
+	readOnly                 *bool
+	vms                      *VmSlice
 }
 
 func (p *AffinityLabel) SetComment(attr string) {
@@ -30039,6 +30203,25 @@ func (p *AffinityLabel) MustDescription() string {
 		panic("the description must not be nil, please use Description() function instead")
 	}
 	return *p.description
+}
+
+func (p *AffinityLabel) SetHasImplicitAffinityGroup(attr bool) {
+	p.hasImplicitAffinityGroup = &attr
+}
+
+func (p *AffinityLabel) HasImplicitAffinityGroup() (bool, bool) {
+	if p.hasImplicitAffinityGroup != nil {
+		return *p.hasImplicitAffinityGroup, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *AffinityLabel) MustHasImplicitAffinityGroup() bool {
+	if p.hasImplicitAffinityGroup == nil {
+		panic("the hasImplicitAffinityGroup must not be nil, please use HasImplicitAffinityGroup() function instead")
+	}
+	return *p.hasImplicitAffinityGroup
 }
 
 func (p *AffinityLabel) SetHosts(attr *HostSlice) {
@@ -34016,11 +34199,14 @@ type AffinityGroup struct {
 	comment     *string
 	description *string
 	enforcing   *bool
+	hostLabels  *AffinityLabelSlice
 	hosts       *HostSlice
 	hostsRule   *AffinityRule
 	id          *string
 	name        *string
 	positive    *bool
+	priority    *float64
+	vmLabels    *AffinityLabelSlice
 	vms         *VmSlice
 	vmsRule     *AffinityRule
 }
@@ -34098,6 +34284,24 @@ func (p *AffinityGroup) MustEnforcing() bool {
 		panic("the enforcing must not be nil, please use Enforcing() function instead")
 	}
 	return *p.enforcing
+}
+
+func (p *AffinityGroup) SetHostLabels(attr *AffinityLabelSlice) {
+	p.hostLabels = attr
+}
+
+func (p *AffinityGroup) HostLabels() (*AffinityLabelSlice, bool) {
+	if p.hostLabels != nil {
+		return p.hostLabels, true
+	}
+	return nil, false
+}
+
+func (p *AffinityGroup) MustHostLabels() *AffinityLabelSlice {
+	if p.hostLabels == nil {
+		panic("the hostLabels must not be nil, please use HostLabels() function instead")
+	}
+	return p.hostLabels
 }
 
 func (p *AffinityGroup) SetHosts(attr *HostSlice) {
@@ -34191,6 +34395,43 @@ func (p *AffinityGroup) MustPositive() bool {
 		panic("the positive must not be nil, please use Positive() function instead")
 	}
 	return *p.positive
+}
+
+func (p *AffinityGroup) SetPriority(attr float64) {
+	p.priority = &attr
+}
+
+func (p *AffinityGroup) Priority() (float64, bool) {
+	if p.priority != nil {
+		return *p.priority, true
+	}
+	var zero float64
+	return zero, false
+}
+
+func (p *AffinityGroup) MustPriority() float64 {
+	if p.priority == nil {
+		panic("the priority must not be nil, please use Priority() function instead")
+	}
+	return *p.priority
+}
+
+func (p *AffinityGroup) SetVmLabels(attr *AffinityLabelSlice) {
+	p.vmLabels = attr
+}
+
+func (p *AffinityGroup) VmLabels() (*AffinityLabelSlice, bool) {
+	if p.vmLabels != nil {
+		return p.vmLabels, true
+	}
+	return nil, false
+}
+
+func (p *AffinityGroup) MustVmLabels() *AffinityLabelSlice {
+	if p.vmLabels == nil {
+		panic("the vmLabels must not be nil, please use VmLabels() function instead")
+	}
+	return p.vmLabels
 }
 
 func (p *AffinityGroup) SetVms(attr *VmSlice) {
@@ -40046,6 +40287,30 @@ func (p *Action) MustVolatile() bool {
 	return *p.volatile
 }
 
+type EventSubscriptionSlice struct {
+	href  *string
+	slice []*EventSubscription
+}
+
+func (op *EventSubscriptionSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *EventSubscriptionSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *EventSubscriptionSlice) Slice() []*EventSubscription {
+	return op.slice
+}
+
+func (op *EventSubscriptionSlice) SetSlice(slice []*EventSubscription) {
+	op.slice = slice
+}
+
 type CustomPropertySlice struct {
 	href  *string
 	slice []*CustomProperty
@@ -45108,6 +45373,127 @@ func (op *ActionSlice) Slice() []*Action {
 
 func (op *ActionSlice) SetSlice(slice []*Action) {
 	op.slice = slice
+}
+
+type EventSubscriptionBuilder struct {
+	eventSubscription *EventSubscription
+	err               error
+}
+
+func NewEventSubscriptionBuilder() *EventSubscriptionBuilder {
+	return &EventSubscriptionBuilder{eventSubscription: &EventSubscription{}, err: nil}
+}
+
+func (builder *EventSubscriptionBuilder) Address(attr string) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetAddress(attr)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) Comment(attr string) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetComment(attr)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) Description(attr string) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetDescription(attr)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) Event(attr NotifiableEvent) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetEvent(attr)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) Id(attr string) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetId(attr)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) Name(attr string) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetName(attr)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) NotificationMethod(attr NotificationMethod) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetNotificationMethod(attr)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) User(attr *User) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetUser(attr)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) UserBuilder(attrBuilder *UserBuilder) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.User(attr)
+}
+
+func (builder *EventSubscriptionBuilder) Href(href string) *EventSubscriptionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.eventSubscription.SetHref(href)
+	return builder
+}
+
+func (builder *EventSubscriptionBuilder) Build() (*EventSubscription, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.eventSubscription, nil
+}
+
+func (builder *EventSubscriptionBuilder) MustBuild() *EventSubscription {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build EventSubscription instance, reason: %v", builder.err))
+	}
+	return builder.eventSubscription
 }
 
 type CustomPropertyBuilder struct {
@@ -76117,6 +76503,15 @@ func (builder *AffinityLabelBuilder) Description(attr string) *AffinityLabelBuil
 	return builder
 }
 
+func (builder *AffinityLabelBuilder) HasImplicitAffinityGroup(attr bool) *AffinityLabelBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.affinityLabel.SetHasImplicitAffinityGroup(attr)
+	return builder
+}
+
 func (builder *AffinityLabelBuilder) Hosts(attr *HostSlice) *AffinityLabelBuilder {
 	if builder.err != nil {
 		return builder
@@ -80264,6 +80659,47 @@ func (builder *AffinityGroupBuilder) Enforcing(attr bool) *AffinityGroupBuilder 
 	return builder
 }
 
+func (builder *AffinityGroupBuilder) HostLabels(attr *AffinityLabelSlice) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.affinityGroup.SetHostLabels(attr)
+	return builder
+}
+
+func (builder *AffinityGroupBuilder) HostLabelsOfAny(anys ...*AffinityLabel) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.affinityGroup.hostLabels == nil {
+		builder.affinityGroup.hostLabels = new(AffinityLabelSlice)
+	}
+	builder.affinityGroup.hostLabels.slice = append(builder.affinityGroup.hostLabels.slice, anys...)
+	return builder
+}
+
+func (builder *AffinityGroupBuilder) HostLabelsBuilderOfAny(anyBuilders ...AffinityLabelBuilder) *AffinityGroupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.HostLabelsOfAny(attr)
+	}
+	return builder
+}
+
 func (builder *AffinityGroupBuilder) Hosts(attr *HostSlice) *AffinityGroupBuilder {
 	if builder.err != nil {
 		return builder
@@ -80355,6 +80791,56 @@ func (builder *AffinityGroupBuilder) Positive(attr bool) *AffinityGroupBuilder {
 	}
 
 	builder.affinityGroup.SetPositive(attr)
+	return builder
+}
+
+func (builder *AffinityGroupBuilder) Priority(attr float64) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.affinityGroup.SetPriority(attr)
+	return builder
+}
+
+func (builder *AffinityGroupBuilder) VmLabels(attr *AffinityLabelSlice) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.affinityGroup.SetVmLabels(attr)
+	return builder
+}
+
+func (builder *AffinityGroupBuilder) VmLabelsOfAny(anys ...*AffinityLabel) *AffinityGroupBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.affinityGroup.vmLabels == nil {
+		builder.affinityGroup.vmLabels = new(AffinityLabelSlice)
+	}
+	builder.affinityGroup.vmLabels.slice = append(builder.affinityGroup.vmLabels.slice, anys...)
+	return builder
+}
+
+func (builder *AffinityGroupBuilder) VmLabelsBuilderOfAny(anyBuilders ...AffinityLabelBuilder) *AffinityGroupBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.VmLabelsOfAny(attr)
+	}
 	return builder
 }
 
@@ -86708,6 +87194,7 @@ type SerialNumberPolicy string
 const (
 	SERIALNUMBERPOLICY_CUSTOM SerialNumberPolicy = "custom"
 	SERIALNUMBERPOLICY_HOST   SerialNumberPolicy = "host"
+	SERIALNUMBERPOLICY_NONE   SerialNumberPolicy = "none"
 	SERIALNUMBERPOLICY_VM     SerialNumberPolicy = "vm"
 )
 
@@ -86849,6 +87336,7 @@ const (
 	NFSVERSION_AUTO NfsVersion = "auto"
 	NFSVERSION_V3   NfsVersion = "v3"
 	NFSVERSION_V4   NfsVersion = "v4"
+	NFSVERSION_V4_0 NfsVersion = "v4_0"
 	NFSVERSION_V4_1 NfsVersion = "v4_1"
 	NFSVERSION_V4_2 NfsVersion = "v4_2"
 )
@@ -86921,6 +87409,13 @@ type GraphicsType string
 const (
 	GRAPHICSTYPE_SPICE GraphicsType = "spice"
 	GRAPHICSTYPE_VNC   GraphicsType = "vnc"
+)
+
+type NotificationMethod string
+
+const (
+	NOTIFICATIONMETHOD_SMTP NotificationMethod = "smtp"
+	NOTIFICATIONMETHOD_SNMP NotificationMethod = "snmp"
 )
 
 type PolicyUnitType string
@@ -87398,6 +87893,165 @@ const (
 	SNAPSHOTTYPE_PREVIEW   SnapshotType = "preview"
 	SNAPSHOTTYPE_REGULAR   SnapshotType = "regular"
 	SNAPSHOTTYPE_STATELESS SnapshotType = "stateless"
+)
+
+type NotifiableEvent string
+
+const (
+	NOTIFIABLEEVENT_CLUSTER_ALERT_HA_RESERVATION                           NotifiableEvent = "cluster_alert_ha_reservation"
+	NOTIFIABLEEVENT_CLUSTER_ALERT_HA_RESERVATION_DOWN                      NotifiableEvent = "cluster_alert_ha_reservation_down"
+	NOTIFIABLEEVENT_DWH_ERROR                                              NotifiableEvent = "dwh_error"
+	NOTIFIABLEEVENT_DWH_STOPPED                                            NotifiableEvent = "dwh_stopped"
+	NOTIFIABLEEVENT_ENGINE_BACKUP_COMPLETED                                NotifiableEvent = "engine_backup_completed"
+	NOTIFIABLEEVENT_ENGINE_BACKUP_FAILED                                   NotifiableEvent = "engine_backup_failed"
+	NOTIFIABLEEVENT_ENGINE_BACKUP_STARTED                                  NotifiableEvent = "engine_backup_started"
+	NOTIFIABLEEVENT_ENGINE_CA_CERTIFICATION_HAS_EXPIRED                    NotifiableEvent = "engine_ca_certification_has_expired"
+	NOTIFIABLEEVENT_ENGINE_CA_CERTIFICATION_IS_ABOUT_TO_EXPIRE             NotifiableEvent = "engine_ca_certification_is_about_to_expire"
+	NOTIFIABLEEVENT_ENGINE_CERTIFICATION_HAS_EXPIRED                       NotifiableEvent = "engine_certification_has_expired"
+	NOTIFIABLEEVENT_ENGINE_CERTIFICATION_IS_ABOUT_TO_EXPIRE                NotifiableEvent = "engine_certification_is_about_to_expire"
+	NOTIFIABLEEVENT_ENGINE_STOP                                            NotifiableEvent = "engine_stop"
+	NOTIFIABLEEVENT_GLUSTER_BRICK_STATUS_CHANGED                           NotifiableEvent = "gluster_brick_status_changed"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_ADD_FAILED                                NotifiableEvent = "gluster_hook_add_failed"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_ADDED                                     NotifiableEvent = "gluster_hook_added"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_CONFLICT_DETECTED                         NotifiableEvent = "gluster_hook_conflict_detected"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_DETECTED_DELETE                           NotifiableEvent = "gluster_hook_detected_delete"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_DETECTED_NEW                              NotifiableEvent = "gluster_hook_detected_new"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_DISABLE                                   NotifiableEvent = "gluster_hook_disable"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_DISABLE_FAILED                            NotifiableEvent = "gluster_hook_disable_failed"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_ENABLE                                    NotifiableEvent = "gluster_hook_enable"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_ENABLE_FAILED                             NotifiableEvent = "gluster_hook_enable_failed"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_REMOVE_FAILED                             NotifiableEvent = "gluster_hook_remove_failed"
+	NOTIFIABLEEVENT_GLUSTER_HOOK_REMOVED                                   NotifiableEvent = "gluster_hook_removed"
+	NOTIFIABLEEVENT_GLUSTER_SERVER_ADD_FAILED                              NotifiableEvent = "gluster_server_add_failed"
+	NOTIFIABLEEVENT_GLUSTER_SERVER_REMOVE                                  NotifiableEvent = "gluster_server_remove"
+	NOTIFIABLEEVENT_GLUSTER_SERVER_REMOVE_FAILED                           NotifiableEvent = "gluster_server_remove_failed"
+	NOTIFIABLEEVENT_GLUSTER_SERVICE_RESTART_FAILED                         NotifiableEvent = "gluster_service_restart_failed"
+	NOTIFIABLEEVENT_GLUSTER_SERVICE_RESTARTED                              NotifiableEvent = "gluster_service_restarted"
+	NOTIFIABLEEVENT_GLUSTER_SERVICE_START_FAILED                           NotifiableEvent = "gluster_service_start_failed"
+	NOTIFIABLEEVENT_GLUSTER_SERVICE_STARTED                                NotifiableEvent = "gluster_service_started"
+	NOTIFIABLEEVENT_GLUSTER_SERVICE_STOP_FAILED                            NotifiableEvent = "gluster_service_stop_failed"
+	NOTIFIABLEEVENT_GLUSTER_SERVICE_STOPPED                                NotifiableEvent = "gluster_service_stopped"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_ADD_BRICK                               NotifiableEvent = "gluster_volume_add_brick"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_ADD_BRICK_FAILED                        NotifiableEvent = "gluster_volume_add_brick_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_ALL_SNAPSHOTS_DELETE_FAILED             NotifiableEvent = "gluster_volume_all_snapshots_delete_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_ALL_SNAPSHOTS_DELETED                   NotifiableEvent = "gluster_volume_all_snapshots_deleted"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_BRICK_REPLACED                          NotifiableEvent = "gluster_volume_brick_replaced"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_CONFIRMED_SPACE_LOW                     NotifiableEvent = "gluster_volume_confirmed_space_low"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_CREATE                                  NotifiableEvent = "gluster_volume_create"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_CREATE_FAILED                           NotifiableEvent = "gluster_volume_create_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_DELETE                                  NotifiableEvent = "gluster_volume_delete"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_DELETE_FAILED                           NotifiableEvent = "gluster_volume_delete_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_MIGRATE_BRICK_DATA_FINISHED             NotifiableEvent = "gluster_volume_migrate_brick_data_finished"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_OPTION_ADDED                            NotifiableEvent = "gluster_volume_option_added"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_OPTION_MODIFIED                         NotifiableEvent = "gluster_volume_option_modified"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_OPTION_SET_FAILED                       NotifiableEvent = "gluster_volume_option_set_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_OPTIONS_RESET                           NotifiableEvent = "gluster_volume_options_reset"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_OPTIONS_RESET_ALL                       NotifiableEvent = "gluster_volume_options_reset_all"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_OPTIONS_RESET_FAILED                    NotifiableEvent = "gluster_volume_options_reset_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_PROFILE_START                           NotifiableEvent = "gluster_volume_profile_start"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_PROFILE_START_FAILED                    NotifiableEvent = "gluster_volume_profile_start_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_PROFILE_STOP                            NotifiableEvent = "gluster_volume_profile_stop"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_PROFILE_STOP_FAILED                     NotifiableEvent = "gluster_volume_profile_stop_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REBALANCE_FINISHED                      NotifiableEvent = "gluster_volume_rebalance_finished"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REBALANCE_NOT_FOUND_FROM_CLI            NotifiableEvent = "gluster_volume_rebalance_not_found_from_cli"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REBALANCE_START                         NotifiableEvent = "gluster_volume_rebalance_start"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REBALANCE_START_DETECTED_FROM_CLI       NotifiableEvent = "gluster_volume_rebalance_start_detected_from_cli"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REBALANCE_START_FAILED                  NotifiableEvent = "gluster_volume_rebalance_start_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REBALANCE_STOP                          NotifiableEvent = "gluster_volume_rebalance_stop"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REBALANCE_STOP_FAILED                   NotifiableEvent = "gluster_volume_rebalance_stop_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REMOVE_BRICKS                           NotifiableEvent = "gluster_volume_remove_bricks"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REMOVE_BRICKS_FAILED                    NotifiableEvent = "gluster_volume_remove_bricks_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REMOVE_BRICKS_STOP                      NotifiableEvent = "gluster_volume_remove_bricks_stop"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REMOVE_BRICKS_STOP_FAILED               NotifiableEvent = "gluster_volume_remove_bricks_stop_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REPLACE_BRICK_FAILED                    NotifiableEvent = "gluster_volume_replace_brick_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REPLACE_BRICK_START                     NotifiableEvent = "gluster_volume_replace_brick_start"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_REPLACE_BRICK_START_FAILED              NotifiableEvent = "gluster_volume_replace_brick_start_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_ACTIVATE_FAILED                NotifiableEvent = "gluster_volume_snapshot_activate_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_ACTIVATED                      NotifiableEvent = "gluster_volume_snapshot_activated"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_CREATE_FAILED                  NotifiableEvent = "gluster_volume_snapshot_create_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_CREATED                        NotifiableEvent = "gluster_volume_snapshot_created"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_DEACTIVATE_FAILED              NotifiableEvent = "gluster_volume_snapshot_deactivate_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_DEACTIVATED                    NotifiableEvent = "gluster_volume_snapshot_deactivated"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_DELETE_FAILED                  NotifiableEvent = "gluster_volume_snapshot_delete_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_DELETED                        NotifiableEvent = "gluster_volume_snapshot_deleted"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_RESTORE_FAILED                 NotifiableEvent = "gluster_volume_snapshot_restore_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_SNAPSHOT_RESTORED                       NotifiableEvent = "gluster_volume_snapshot_restored"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_START                                   NotifiableEvent = "gluster_volume_start"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_START_FAILED                            NotifiableEvent = "gluster_volume_start_failed"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_STOP                                    NotifiableEvent = "gluster_volume_stop"
+	NOTIFIABLEEVENT_GLUSTER_VOLUME_STOP_FAILED                             NotifiableEvent = "gluster_volume_stop_failed"
+	NOTIFIABLEEVENT_HA_VM_FAILED                                           NotifiableEvent = "ha_vm_failed"
+	NOTIFIABLEEVENT_HA_VM_RESTART_FAILED                                   NotifiableEvent = "ha_vm_restart_failed"
+	NOTIFIABLEEVENT_HOST_ACTIVATE_FAILED                                   NotifiableEvent = "host_activate_failed"
+	NOTIFIABLEEVENT_HOST_ACTIVATE_MANUAL_HA                                NotifiableEvent = "host_activate_manual_ha"
+	NOTIFIABLEEVENT_HOST_APPROVE_FAILED                                    NotifiableEvent = "host_approve_failed"
+	NOTIFIABLEEVENT_HOST_BOND_SLAVE_STATE_DOWN                             NotifiableEvent = "host_bond_slave_state_down"
+	NOTIFIABLEEVENT_HOST_CERTIFICATION_HAS_EXPIRED                         NotifiableEvent = "host_certification_has_expired"
+	NOTIFIABLEEVENT_HOST_CERTIFICATION_IS_ABOUT_TO_EXPIRE                  NotifiableEvent = "host_certification_is_about_to_expire"
+	NOTIFIABLEEVENT_HOST_FAILURE                                           NotifiableEvent = "host_failure"
+	NOTIFIABLEEVENT_HOST_HIGH_CPU_USE                                      NotifiableEvent = "host_high_cpu_use"
+	NOTIFIABLEEVENT_HOST_HIGH_MEM_USE                                      NotifiableEvent = "host_high_mem_use"
+	NOTIFIABLEEVENT_HOST_HIGH_SWAP_USE                                     NotifiableEvent = "host_high_swap_use"
+	NOTIFIABLEEVENT_HOST_INITIATED_RUN_VM_FAILED                           NotifiableEvent = "host_initiated_run_vm_failed"
+	NOTIFIABLEEVENT_HOST_INSTALL_FAILED                                    NotifiableEvent = "host_install_failed"
+	NOTIFIABLEEVENT_HOST_INTERFACE_HIGH_NETWORK_USE                        NotifiableEvent = "host_interface_high_network_use"
+	NOTIFIABLEEVENT_HOST_INTERFACE_STATE_DOWN                              NotifiableEvent = "host_interface_state_down"
+	NOTIFIABLEEVENT_HOST_LOW_MEM                                           NotifiableEvent = "host_low_mem"
+	NOTIFIABLEEVENT_HOST_LOW_SWAP                                          NotifiableEvent = "host_low_swap"
+	NOTIFIABLEEVENT_HOST_RECOVER_FAILED                                    NotifiableEvent = "host_recover_failed"
+	NOTIFIABLEEVENT_HOST_SET_NONOPERATIONAL                                NotifiableEvent = "host_set_nonoperational"
+	NOTIFIABLEEVENT_HOST_SET_NONOPERATIONAL_DOMAIN                         NotifiableEvent = "host_set_nonoperational_domain"
+	NOTIFIABLEEVENT_HOST_SET_NONOPERATIONAL_IFACE_DOWN                     NotifiableEvent = "host_set_nonoperational_iface_down"
+	NOTIFIABLEEVENT_HOST_SLOW_STORAGE_RESPONSE_TIME                        NotifiableEvent = "host_slow_storage_response_time"
+	NOTIFIABLEEVENT_HOST_TIME_DRIFT_ALERT                                  NotifiableEvent = "host_time_drift_alert"
+	NOTIFIABLEEVENT_HOST_UNTRUSTED                                         NotifiableEvent = "host_untrusted"
+	NOTIFIABLEEVENT_HOST_UPDATES_ARE_AVAILABLE                             NotifiableEvent = "host_updates_are_available"
+	NOTIFIABLEEVENT_HOST_UPDATES_ARE_AVAILABLE_WITH_PACKAGES               NotifiableEvent = "host_updates_are_available_with_packages"
+	NOTIFIABLEEVENT_IMPORTEXPORT_IMPORT_TEMPLATE_FROM_TRUSTED_TO_UNTRUSTED NotifiableEvent = "importexport_import_template_from_trusted_to_untrusted"
+	NOTIFIABLEEVENT_IMPORTEXPORT_IMPORT_TEMPLATE_FROM_UNTRUSTED_TO_TRUSTED NotifiableEvent = "importexport_import_template_from_untrusted_to_trusted"
+	NOTIFIABLEEVENT_IMPORTEXPORT_IMPORT_VM_FROM_TRUSTED_TO_UNTRUSTED       NotifiableEvent = "importexport_import_vm_from_trusted_to_untrusted"
+	NOTIFIABLEEVENT_IMPORTEXPORT_IMPORT_VM_FROM_UNTRUSTED_TO_TRUSTED       NotifiableEvent = "importexport_import_vm_from_untrusted_to_trusted"
+	NOTIFIABLEEVENT_IRS_CONFIRMED_DISK_SPACE_LOW                           NotifiableEvent = "irs_confirmed_disk_space_low"
+	NOTIFIABLEEVENT_IRS_DISK_SPACE_LOW                                     NotifiableEvent = "irs_disk_space_low"
+	NOTIFIABLEEVENT_IRS_DISK_SPACE_LOW_ERROR                               NotifiableEvent = "irs_disk_space_low_error"
+	NOTIFIABLEEVENT_IRS_FAILURE                                            NotifiableEvent = "irs_failure"
+	NOTIFIABLEEVENT_MAC_ADDRESS_IS_EXTERNAL                                NotifiableEvent = "mac_address_is_external"
+	NOTIFIABLEEVENT_NETWORK_UPDATE_DISPLAY_FOR_CLUSTER_WITH_ACTIVE_VM      NotifiableEvent = "network_update_display_for_cluster_with_active_vm"
+	NOTIFIABLEEVENT_NETWORK_UPDATE_DISPLAY_FOR_HOST_WITH_ACTIVE_VM         NotifiableEvent = "network_update_display_for_host_with_active_vm"
+	NOTIFIABLEEVENT_NUMBER_OF_LVS_ON_STORAGE_DOMAIN_EXCEEDED_THRESHOLD     NotifiableEvent = "number_of_lvs_on_storage_domain_exceeded_threshold"
+	NOTIFIABLEEVENT_REMOVE_GLUSTER_VOLUME_BRICKS_NOT_FOUND_FROM_CLI        NotifiableEvent = "remove_gluster_volume_bricks_not_found_from_cli"
+	NOTIFIABLEEVENT_START_REMOVING_GLUSTER_VOLUME_BRICKS                   NotifiableEvent = "start_removing_gluster_volume_bricks"
+	NOTIFIABLEEVENT_START_REMOVING_GLUSTER_VOLUME_BRICKS_DETECTED_FROM_CLI NotifiableEvent = "start_removing_gluster_volume_bricks_detected_from_cli"
+	NOTIFIABLEEVENT_START_REMOVING_GLUSTER_VOLUME_BRICKS_FAILED            NotifiableEvent = "start_removing_gluster_volume_bricks_failed"
+	NOTIFIABLEEVENT_SYSTEM_CHANGE_STORAGE_POOL_STATUS_NO_HOST_FOR_SPM      NotifiableEvent = "system_change_storage_pool_status_no_host_for_spm"
+	NOTIFIABLEEVENT_SYSTEM_DEACTIVATED_STORAGE_DOMAIN                      NotifiableEvent = "system_deactivated_storage_domain"
+	NOTIFIABLEEVENT_USER_ADD_VM_FROM_TRUSTED_TO_UNTRUSTED                  NotifiableEvent = "user_add_vm_from_trusted_to_untrusted"
+	NOTIFIABLEEVENT_USER_ADD_VM_FROM_UNTRUSTED_TO_TRUSTED                  NotifiableEvent = "user_add_vm_from_untrusted_to_trusted"
+	NOTIFIABLEEVENT_USER_ADD_VM_TEMPLATE_FROM_TRUSTED_TO_UNTRUSTED         NotifiableEvent = "user_add_vm_template_from_trusted_to_untrusted"
+	NOTIFIABLEEVENT_USER_ADD_VM_TEMPLATE_FROM_UNTRUSTED_TO_TRUSTED         NotifiableEvent = "user_add_vm_template_from_untrusted_to_trusted"
+	NOTIFIABLEEVENT_USER_HOST_MAINTENANCE                                  NotifiableEvent = "user_host_maintenance"
+	NOTIFIABLEEVENT_USER_HOST_MAINTENANCE_MANUAL_HA                        NotifiableEvent = "user_host_maintenance_manual_ha"
+	NOTIFIABLEEVENT_USER_HOST_MAINTENANCE_MIGRATION_FAILED                 NotifiableEvent = "user_host_maintenance_migration_failed"
+	NOTIFIABLEEVENT_USER_UPDATE_VM_FROM_TRUSTED_TO_UNTRUSTED               NotifiableEvent = "user_update_vm_from_trusted_to_untrusted"
+	NOTIFIABLEEVENT_USER_UPDATE_VM_FROM_UNTRUSTED_TO_TRUSTED               NotifiableEvent = "user_update_vm_from_untrusted_to_trusted"
+	NOTIFIABLEEVENT_USER_UPDATE_VM_TEMPLATE_FROM_TRUSTED_TO_UNTRUSTED      NotifiableEvent = "user_update_vm_template_from_trusted_to_untrusted"
+	NOTIFIABLEEVENT_USER_UPDATE_VM_TEMPLATE_FROM_UNTRUSTED_TO_TRUSTED      NotifiableEvent = "user_update_vm_template_from_untrusted_to_trusted"
+	NOTIFIABLEEVENT_VM_CONSOLE_CONNECTED                                   NotifiableEvent = "vm_console_connected"
+	NOTIFIABLEEVENT_VM_CONSOLE_DISCONNECTED                                NotifiableEvent = "vm_console_disconnected"
+	NOTIFIABLEEVENT_VM_DOWN_ERROR                                          NotifiableEvent = "vm_down_error"
+	NOTIFIABLEEVENT_VM_FAILURE                                             NotifiableEvent = "vm_failure"
+	NOTIFIABLEEVENT_VM_MIGRATION_FAILED                                    NotifiableEvent = "vm_migration_failed"
+	NOTIFIABLEEVENT_VM_MIGRATION_START                                     NotifiableEvent = "vm_migration_start"
+	NOTIFIABLEEVENT_VM_MIGRATION_TO_SERVER_FAILED                          NotifiableEvent = "vm_migration_to_server_failed"
+	NOTIFIABLEEVENT_VM_NOT_RESPONDING                                      NotifiableEvent = "vm_not_responding"
+	NOTIFIABLEEVENT_VM_PAUSED                                              NotifiableEvent = "vm_paused"
+	NOTIFIABLEEVENT_VM_PAUSED_EIO                                          NotifiableEvent = "vm_paused_eio"
+	NOTIFIABLEEVENT_VM_PAUSED_ENOSPC                                       NotifiableEvent = "vm_paused_enospc"
+	NOTIFIABLEEVENT_VM_PAUSED_EPERM                                        NotifiableEvent = "vm_paused_eperm"
+	NOTIFIABLEEVENT_VM_PAUSED_ERROR                                        NotifiableEvent = "vm_paused_error"
+	NOTIFIABLEEVENT_VM_RECOVERED_FROM_PAUSE_ERROR                          NotifiableEvent = "vm_recovered_from_pause_error"
+	NOTIFIABLEEVENT_VM_SET_TICKET                                          NotifiableEvent = "vm_set_ticket"
+	NOTIFIABLEEVENT_VM_STATUS_RESTORED                                     NotifiableEvent = "vm_status_restored"
 )
 
 type ClusterUpgradeAction string

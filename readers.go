@@ -21,6 +21,171 @@ import (
 	"strconv"
 )
 
+func XMLEventSubscriptionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string) (*EventSubscription, error) {
+	builder := NewEventSubscriptionBuilder()
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	if expectedTag == "" {
+		expectedTag = "event_subscription"
+	}
+	if start.Name.Local != expectedTag {
+		return nil, XMLTagNotMatchError{start.Name.Local, expectedTag}
+	}
+	// Process the attributes
+	for _, attr := range start.Attr {
+		name := attr.Name.Local
+		value := attr.Value
+		switch name {
+		case "id":
+			builder.Id(value)
+		case "href":
+			builder.Href(value)
+		}
+	}
+	var links []Link
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "address":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Address(v)
+			case "comment":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Comment(v)
+			case "description":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Description(v)
+			case "event":
+				vp, err := XMLNotifiableEventReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.Event(v)
+			case "name":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Name(v)
+			case "notification_method":
+				vp, err := XMLNotificationMethodReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.NotificationMethod(v)
+			case "user":
+				v, err := XMLUserReadOne(reader, &t, "user")
+				if err != nil {
+					return nil, err
+				}
+				builder.User(v)
+			case "link":
+				var rel, href string
+				for _, attr := range t.Attr {
+					name := attr.Name.Local
+					value := attr.Value
+					switch name {
+					case "href":
+						href = value
+					case "rel":
+						rel = value
+					}
+				}
+				if rel != "" && href != "" {
+					links = append(links, Link{&href, &rel})
+				}
+				// <link> just has attributes, so must skip manually
+				reader.Skip()
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	one, err := builder.Build()
+	if err != nil {
+		return nil, err
+	}
+	for _, link := range links {
+		switch *link.rel {
+		} // end of switch
+	} // end of for-links
+	return one, nil
+}
+
+func XMLEventSubscriptionReadMany(reader *XMLReader, start *xml.StartElement) (*EventSubscriptionSlice, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var result EventSubscriptionSlice
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "event_subscription":
+				one, err := XMLEventSubscriptionReadOne(reader, &t, "event_subscription")
+				if err != nil {
+					return nil, err
+				}
+				if one != nil {
+					result.slice = append(result.slice, one)
+				}
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return &result, nil
+}
+
 func XMLCustomPropertyReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string) (*CustomProperty, error) {
 	builder := NewCustomPropertyBuilder()
 	if start == nil {
@@ -28367,6 +28532,12 @@ func XMLAffinityLabelReadOne(reader *XMLReader, start *xml.StartElement, expecte
 					return nil, err
 				}
 				builder.Description(v)
+			case "has_implicit_affinity_group":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.HasImplicitAffinityGroup(v)
 			case "hosts":
 				v, err := XMLHostReadMany(reader, &t)
 				if err != nil {
@@ -31442,6 +31613,12 @@ func XMLAffinityGroupReadOne(reader *XMLReader, start *xml.StartElement, expecte
 					return nil, err
 				}
 				builder.Enforcing(v)
+			case "host_labels":
+				v, err := XMLAffinityLabelReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.HostLabels(v)
 			case "hosts":
 				v, err := XMLHostReadMany(reader, &t)
 				if err != nil {
@@ -31466,6 +31643,18 @@ func XMLAffinityGroupReadOne(reader *XMLReader, start *xml.StartElement, expecte
 					return nil, err
 				}
 				builder.Positive(v)
+			case "priority":
+				v, err := reader.ReadFloat64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Priority(v)
+			case "vm_labels":
+				v, err := XMLAffinityLabelReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.VmLabels(v)
 			case "vms":
 				v, err := XMLVmReadMany(reader, &t)
 				if err != nil {
@@ -31508,11 +31697,21 @@ func XMLAffinityGroupReadOne(reader *XMLReader, start *xml.StartElement, expecte
 	}
 	for _, link := range links {
 		switch *link.rel {
+		case "hostlabels":
+			if one.hostLabels == nil {
+				one.hostLabels = new(AffinityLabelSlice)
+			}
+			one.hostLabels.href = link.href
 		case "hosts":
 			if one.hosts == nil {
 				one.hosts = new(HostSlice)
 			}
 			one.hosts.href = link.href
+		case "vmlabels":
+			if one.vmLabels == nil {
+				one.vmLabels = new(AffinityLabelSlice)
+			}
+			one.vmLabels.href = link.href
 		case "vms":
 			if one.vms == nil {
 				one.vms = new(VmSlice)
@@ -38542,6 +38741,62 @@ func XMLGraphicsTypeReadMany(reader *XMLReader, start *xml.StartElement) ([]Grap
 	return results, nil
 }
 
+func XMLNotificationMethodReadOne(reader *XMLReader, start *xml.StartElement) (*NotificationMethod, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	s, err := reader.ReadString(start)
+	if err != nil {
+		return nil, err
+	}
+	result := new(NotificationMethod)
+	*result = NotificationMethod(s)
+	return result, nil
+}
+
+func XMLNotificationMethodReadMany(reader *XMLReader, start *xml.StartElement) ([]NotificationMethod, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var results []NotificationMethod
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			one, err := reader.ReadString(&t)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, NotificationMethod(one))
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return results, nil
+}
+
 func XMLPolicyUnitTypeReadOne(reader *XMLReader, start *xml.StartElement) (*PolicyUnitType, error) {
 	if start == nil {
 		st, err := reader.FindStartElement()
@@ -41727,6 +41982,62 @@ func XMLSnapshotTypeReadMany(reader *XMLReader, start *xml.StartElement) ([]Snap
 				return nil, err
 			}
 			results = append(results, SnapshotType(one))
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return results, nil
+}
+
+func XMLNotifiableEventReadOne(reader *XMLReader, start *xml.StartElement) (*NotifiableEvent, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	s, err := reader.ReadString(start)
+	if err != nil {
+		return nil, err
+	}
+	result := new(NotifiableEvent)
+	*result = NotifiableEvent(s)
+	return result, nil
+}
+
+func XMLNotifiableEventReadMany(reader *XMLReader, start *xml.StartElement) ([]NotifiableEvent, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var results []NotifiableEvent
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			one, err := reader.ReadString(&t)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, NotifiableEvent(one))
 		case xml.EndElement:
 			depth--
 		}

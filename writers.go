@@ -19,6 +19,61 @@ import (
 	"fmt"
 )
 
+func XMLEventSubscriptionWriteOne(writer *XMLWriter, object *EventSubscription, tag string) error {
+	if object == nil {
+		return fmt.Errorf("input object pointer is nil")
+	}
+	if tag == "" {
+		tag = "event_subscription"
+	}
+	var attrs map[string]string
+	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
+		attrs["id"] = r
+	}
+	writer.WriteStart("", tag, attrs)
+	if r, ok := object.Address(); ok {
+		writer.WriteCharacter("address", r)
+	}
+	if r, ok := object.Comment(); ok {
+		writer.WriteCharacter("comment", r)
+	}
+	if r, ok := object.Description(); ok {
+		writer.WriteCharacter("description", r)
+	}
+	if r, ok := object.Event(); ok {
+		XMLNotifiableEventWriteOne(writer, r, "event")
+	}
+	if r, ok := object.Name(); ok {
+		writer.WriteCharacter("name", r)
+	}
+	if r, ok := object.NotificationMethod(); ok {
+		XMLNotificationMethodWriteOne(writer, r, "notification_method")
+	}
+	if r, ok := object.User(); ok {
+		XMLUserWriteOne(writer, r, "user")
+	}
+	writer.WriteEnd(tag)
+	return nil
+}
+
+func XMLEventSubscriptionWriteMany(writer *XMLWriter, structSlice *EventSubscriptionSlice, plural, singular string) error {
+	if plural == "" {
+		plural = "event_subscriptions"
+	}
+	if singular == "" {
+		singular = "event_subscription"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, o := range structSlice.Slice() {
+		XMLEventSubscriptionWriteOne(writer, o, singular)
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
 func XMLCustomPropertyWriteOne(writer *XMLWriter, object *CustomProperty, tag string) error {
 	if object == nil {
 		return fmt.Errorf("input object pointer is nil")
@@ -9357,6 +9412,9 @@ func XMLAffinityLabelWriteOne(writer *XMLWriter, object *AffinityLabel, tag stri
 	if r, ok := object.Description(); ok {
 		writer.WriteCharacter("description", r)
 	}
+	if r, ok := object.HasImplicitAffinityGroup(); ok {
+		writer.WriteBool("has_implicit_affinity_group", r)
+	}
 	if r, ok := object.Hosts(); ok {
 		XMLHostWriteMany(writer, r, "hosts", "host")
 	}
@@ -10414,6 +10472,9 @@ func XMLAffinityGroupWriteOne(writer *XMLWriter, object *AffinityGroup, tag stri
 	if r, ok := object.Enforcing(); ok {
 		writer.WriteBool("enforcing", r)
 	}
+	if r, ok := object.HostLabels(); ok {
+		XMLAffinityLabelWriteMany(writer, r, "host_labels", "affinity_label")
+	}
 	if r, ok := object.Hosts(); ok {
 		XMLHostWriteMany(writer, r, "hosts", "host")
 	}
@@ -10425,6 +10486,12 @@ func XMLAffinityGroupWriteOne(writer *XMLWriter, object *AffinityGroup, tag stri
 	}
 	if r, ok := object.Positive(); ok {
 		writer.WriteBool("positive", r)
+	}
+	if r, ok := object.Priority(); ok {
+		writer.WriteFloat64("priority", r)
+	}
+	if r, ok := object.VmLabels(); ok {
+		XMLAffinityLabelWriteMany(writer, r, "vm_labels", "affinity_label")
 	}
 	if r, ok := object.Vms(); ok {
 		XMLVmWriteMany(writer, r, "vms", "vm")
@@ -12907,6 +12974,28 @@ func XMLGraphicsTypeWriteMany(writer *XMLWriter, enums []GraphicsType, plural, s
 	return nil
 }
 
+func XMLNotificationMethodWriteOne(writer *XMLWriter, enum NotificationMethod, tag string) {
+	if tag == "" {
+		tag = "notification_method"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLNotificationMethodWriteMany(writer *XMLWriter, enums []NotificationMethod, plural, singular string) error {
+	if plural == "" {
+		plural = "notification_methods"
+	}
+	if singular == "" {
+		singular = "notification_method"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
 func XMLPolicyUnitTypeWriteOne(writer *XMLWriter, enum PolicyUnitType, tag string) {
 	if tag == "" {
 		tag = "policy_unit_type"
@@ -14152,6 +14241,28 @@ func XMLSnapshotTypeWriteMany(writer *XMLWriter, enums []SnapshotType, plural, s
 	}
 	if singular == "" {
 		singular = "snapshot_type"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLNotifiableEventWriteOne(writer *XMLWriter, enum NotifiableEvent, tag string) {
+	if tag == "" {
+		tag = "notifiable_event"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLNotifiableEventWriteMany(writer *XMLWriter, enums []NotifiableEvent, plural, singular string) error {
+	if plural == "" {
+		plural = "notifiable_events"
+	}
+	if singular == "" {
+		singular = "notifiable_event"
 	}
 	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
