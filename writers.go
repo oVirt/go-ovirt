@@ -4332,6 +4332,9 @@ func XMLClusterWriteOne(writer *XMLWriter, object *Cluster, tag string) error {
 	if r, ok := object.BallooningEnabled(); ok {
 		writer.WriteBool("ballooning_enabled", r)
 	}
+	if r, ok := object.BiosType(); ok {
+		XMLBiosTypeWriteOne(writer, r, "bios_type")
+	}
 	if r, ok := object.Comment(); ok {
 		writer.WriteCharacter("comment", r)
 	}
@@ -5808,6 +5811,9 @@ func XMLEventWriteOne(writer *XMLWriter, object *Event, tag string) error {
 	}
 	if r, ok := object.Index(); ok {
 		writer.WriteInt64("index", r)
+	}
+	if r, ok := object.LogOnHost(); ok {
+		writer.WriteBool("log_on_host", r)
 	}
 	if r, ok := object.Name(); ok {
 		writer.WriteCharacter("name", r)
@@ -12182,6 +12188,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	}
 	if r, ok := object.Ticket(); ok {
 		XMLTicketWriteOne(writer, r, "ticket")
+	}
+	if r, ok := object.Timeout(); ok {
+		writer.WriteInt64("timeout", r)
 	}
 	if r, ok := object.UndeployHostedEngine(); ok {
 		writer.WriteBool("undeploy_hosted_engine", r)

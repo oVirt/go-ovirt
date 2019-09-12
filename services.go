@@ -54205,7 +54205,7 @@ func (p *HostService) Get() *HostServiceGetRequest {
 // ' \
 // "https://engine.example.com/ovirt-engine/api/hosts/123"
 // ----
-// Example of installing a host, using `curl` and JSON, with hosted engine components:
+// Example of installing a host using `curl` and JSON with hosted engine components:
 // [source,bash]
 // ----
 // curl \
@@ -54224,7 +54224,7 @@ func (p *HostService) Get() *HostServiceGetRequest {
 // ' \
 // "https://engine.example.com/ovirt-engine/api/hosts/123?deploy_hosted_engine=true"
 // ----
-// IMPORTANT: Since version 4.1.2 of the engine when a host is reinstalled we override the host firewall
+// IMPORTANT: Since version 4.1.2 of the engine, when a host is reinstalled we override the host firewall
 // definitions by default.
 //
 type HostServiceInstallRequest struct {
@@ -54417,7 +54417,7 @@ func (p *HostServiceInstallRequest) MustSend() *HostServiceInstallResponse {
 // ' \
 // "https://engine.example.com/ovirt-engine/api/hosts/123"
 // ----
-// Example of installing a host, using `curl` and JSON, with hosted engine components:
+// Example of installing a host using `curl` and JSON with hosted engine components:
 // [source,bash]
 // ----
 // curl \
@@ -54436,7 +54436,7 @@ func (p *HostServiceInstallRequest) MustSend() *HostServiceInstallResponse {
 // ' \
 // "https://engine.example.com/ovirt-engine/api/hosts/123?deploy_hosted_engine=true"
 // ----
-// IMPORTANT: Since version 4.1.2 of the engine when a host is reinstalled we override the host firewall
+// IMPORTANT: Since version 4.1.2 of the engine, when a host is reinstalled we override the host firewall
 // definitions by default.
 //
 type HostServiceInstallResponse struct {
@@ -54465,7 +54465,7 @@ type HostServiceInstallResponse struct {
 // ' \
 // "https://engine.example.com/ovirt-engine/api/hosts/123"
 // ----
-// Example of installing a host, using `curl` and JSON, with hosted engine components:
+// Example of installing a host using `curl` and JSON with hosted engine components:
 // [source,bash]
 // ----
 // curl \
@@ -54484,7 +54484,7 @@ type HostServiceInstallResponse struct {
 // ' \
 // "https://engine.example.com/ovirt-engine/api/hosts/123?deploy_hosted_engine=true"
 // ----
-// IMPORTANT: Since version 4.1.2 of the engine when a host is reinstalled we override the host firewall
+// IMPORTANT: Since version 4.1.2 of the engine, when a host is reinstalled we override the host firewall
 // definitions by default.
 //
 func (p *HostService) Install() *HostServiceInstallRequest {
@@ -55243,7 +55243,7 @@ func (p *HostService) Remove() *HostServiceRemoveRequest {
 // <options name="miimon" value="100"/>
 // <ip address="192.168.122.10" netmask="255.255.255.0"/>
 // ----
-// Using the Python SDK the same can be done with the following code:
+// The same thing can be done using the Python SDK with the following code:
 // [source,python]
 // ----
 // # Find the service that manages the collection of hosts:
@@ -55641,7 +55641,7 @@ func (p *HostServiceSetupNetworksRequest) MustSend() *HostServiceSetupNetworksRe
 // <options name="miimon" value="100"/>
 // <ip address="192.168.122.10" netmask="255.255.255.0"/>
 // ----
-// Using the Python SDK the same can be done with the following code:
+// The same thing can be done using the Python SDK with the following code:
 // [source,python]
 // ----
 // # Find the service that manages the collection of hosts:
@@ -55802,7 +55802,7 @@ type HostServiceSetupNetworksResponse struct {
 // <options name="miimon" value="100"/>
 // <ip address="192.168.122.10" netmask="255.255.255.0"/>
 // ----
-// Using the Python SDK the same can be done with the following code:
+// The same thing can be done using the Python SDK with the following code:
 // [source,python]
 // ----
 // # Find the service that manages the collection of hosts:
@@ -56386,6 +56386,7 @@ type HostServiceUpgradeRequest struct {
 	async       *bool
 	image       *string
 	reboot      *bool
+	timeout     *int64
 }
 
 func (p *HostServiceUpgradeRequest) Header(key, value string) *HostServiceUpgradeRequest {
@@ -56419,6 +56420,11 @@ func (p *HostServiceUpgradeRequest) Reboot(reboot bool) *HostServiceUpgradeReque
 	return p
 }
 
+func (p *HostServiceUpgradeRequest) Timeout(timeout int64) *HostServiceUpgradeRequest {
+	p.timeout = &timeout
+	return p
+}
+
 func (p *HostServiceUpgradeRequest) Send() (*HostServiceUpgradeResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/upgrade", p.HostService.connection.URL(), p.HostService.path)
 	actionBuilder := NewActionBuilder()
@@ -56430,6 +56436,9 @@ func (p *HostServiceUpgradeRequest) Send() (*HostServiceUpgradeResponse, error) 
 	}
 	if p.reboot != nil {
 		actionBuilder.Reboot(*p.reboot)
+	}
+	if p.timeout != nil {
+		actionBuilder.Timeout(*p.timeout)
 	}
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -102667,7 +102676,9 @@ func NewEventSubscriptionsService(connection *Connection, path string) *EventSub
 // An event-subscription is always added in the context of a user. For example, to add new
 // event-subscription for `host_high_cpu_use` for user `123`, and have the notification
 // sent to the e-mail address: `a@b.com`, send a request like this:
-// .... POST /ovirt-engine/api/users/123/eventsubscriptions ....
+// ....
+// POST /ovirt-engine/api/users/123/eventsubscriptions
+// ....
 // With a request body like this:
 // [source,xml]
 // ----
@@ -102675,7 +102686,7 @@ func NewEventSubscriptionsService(connection *Connection, path string) *EventSub
 //     <event>host_high_cpu_use</event>
 //     <address>a@b.com</address>
 // </event_subscription>
-// -----
+// ----
 // The event name will become the ID of the new event-subscription entity:
 // GET .../api/users/123/eventsubscriptions/host_high_cpu_use
 // Note that no user id is provided in the request body. This is because the user-id (in this case 123)
@@ -102799,7 +102810,9 @@ func (p *EventSubscriptionsServiceAddRequest) MustSend() *EventSubscriptionsServ
 // An event-subscription is always added in the context of a user. For example, to add new
 // event-subscription for `host_high_cpu_use` for user `123`, and have the notification
 // sent to the e-mail address: `a@b.com`, send a request like this:
-// .... POST /ovirt-engine/api/users/123/eventsubscriptions ....
+// ....
+// POST /ovirt-engine/api/users/123/eventsubscriptions
+// ....
 // With a request body like this:
 // [source,xml]
 // ----
@@ -102807,7 +102820,7 @@ func (p *EventSubscriptionsServiceAddRequest) MustSend() *EventSubscriptionsServ
 //     <event>host_high_cpu_use</event>
 //     <address>a@b.com</address>
 // </event_subscription>
-// -----
+// ----
 // The event name will become the ID of the new event-subscription entity:
 // GET .../api/users/123/eventsubscriptions/host_high_cpu_use
 // Note that no user id is provided in the request body. This is because the user-id (in this case 123)
@@ -102838,7 +102851,9 @@ func (p *EventSubscriptionsServiceAddResponse) MustEventSubscription() *EventSub
 // An event-subscription is always added in the context of a user. For example, to add new
 // event-subscription for `host_high_cpu_use` for user `123`, and have the notification
 // sent to the e-mail address: `a@b.com`, send a request like this:
-// .... POST /ovirt-engine/api/users/123/eventsubscriptions ....
+// ....
+// POST /ovirt-engine/api/users/123/eventsubscriptions
+// ....
 // With a request body like this:
 // [source,xml]
 // ----
@@ -102846,7 +102861,7 @@ func (p *EventSubscriptionsServiceAddResponse) MustEventSubscription() *EventSub
 //     <event>host_high_cpu_use</event>
 //     <address>a@b.com</address>
 // </event_subscription>
-// -----
+// ----
 // The event name will become the ID of the new event-subscription entity:
 // GET .../api/users/123/eventsubscriptions/host_high_cpu_use
 // Note that no user id is provided in the request body. This is because the user-id (in this case 123)
@@ -102859,7 +102874,7 @@ func (p *EventSubscriptionsService) Add() *EventSubscriptionsServiceAddRequest {
 }
 
 //
-// List the event-subscriptions for the provided user
+// List the event-subscriptions for the provided user.
 // For example to list event-subscriptions for user `123`:
 // ....
 // GET /ovirt-engine/api/users/123/event-subscriptions
@@ -103001,7 +103016,7 @@ func (p *EventSubscriptionsServiceListRequest) MustSend() *EventSubscriptionsSer
 }
 
 //
-// List the event-subscriptions for the provided user
+// List the event-subscriptions for the provided user.
 // For example to list event-subscriptions for user `123`:
 // ....
 // GET /ovirt-engine/api/users/123/event-subscriptions
@@ -103043,7 +103058,7 @@ func (p *EventSubscriptionsServiceListResponse) MustEventSubscriptions() *EventS
 }
 
 //
-// List the event-subscriptions for the provided user
+// List the event-subscriptions for the provided user.
 // For example to list event-subscriptions for user `123`:
 // ....
 // GET /ovirt-engine/api/users/123/event-subscriptions

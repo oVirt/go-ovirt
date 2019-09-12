@@ -13421,6 +13421,13 @@ func XMLClusterReadOne(reader *XMLReader, start *xml.StartElement, expectedTag s
 					return nil, err
 				}
 				builder.BallooningEnabled(v)
+			case "bios_type":
+				vp, err := XMLBiosTypeReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.BiosType(v)
 			case "comment":
 				v, err := reader.ReadString(&t)
 				if err != nil {
@@ -17918,6 +17925,12 @@ func XMLEventReadOne(reader *XMLReader, start *xml.StartElement, expectedTag str
 					return nil, err
 				}
 				builder.Index(v)
+			case "log_on_host":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.LogOnHost(v)
 			case "name":
 				v, err := reader.ReadString(&t)
 				if err != nil {
@@ -36710,6 +36723,12 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.Ticket(v)
+			case "timeout":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Timeout(v)
 			case "undeploy_hosted_engine":
 				v, err := reader.ReadBool(&t)
 				if err != nil {

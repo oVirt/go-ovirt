@@ -12746,6 +12746,7 @@ type Cluster struct {
 	Struct
 	affinityGroups                   *AffinityGroupSlice
 	ballooningEnabled                *bool
+	biosType                         *BiosType
 	comment                          *string
 	cpu                              *Cpu
 	cpuProfiles                      *CpuProfileSlice
@@ -12824,6 +12825,25 @@ func (p *Cluster) MustBallooningEnabled() bool {
 		panic("the ballooningEnabled must not be nil, please use BallooningEnabled() function instead")
 	}
 	return *p.ballooningEnabled
+}
+
+func (p *Cluster) SetBiosType(attr BiosType) {
+	p.biosType = &attr
+}
+
+func (p *Cluster) BiosType() (BiosType, bool) {
+	if p.biosType != nil {
+		return *p.biosType, true
+	}
+	var zero BiosType
+	return zero, false
+}
+
+func (p *Cluster) MustBiosType() BiosType {
+	if p.biosType == nil {
+		panic("the biosType must not be nil, please use BiosType() function instead")
+	}
+	return *p.biosType
 }
 
 func (p *Cluster) SetComment(attr string) {
@@ -17185,6 +17205,7 @@ type Event struct {
 	host          *Host
 	id            *string
 	index         *int64
+	logOnHost     *bool
 	name          *string
 	origin        *string
 	severity      *LogSeverity
@@ -17418,6 +17439,25 @@ func (p *Event) MustIndex() int64 {
 		panic("the index must not be nil, please use Index() function instead")
 	}
 	return *p.index
+}
+
+func (p *Event) SetLogOnHost(attr bool) {
+	p.logOnHost = &attr
+}
+
+func (p *Event) LogOnHost() (bool, bool) {
+	if p.logOnHost != nil {
+		return *p.logOnHost, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Event) MustLogOnHost() bool {
+	if p.logOnHost == nil {
+		panic("the logOnHost must not be nil, please use LogOnHost() function instead")
+	}
+	return *p.logOnHost
 }
 
 func (p *Event) SetName(attr string) {
@@ -38667,6 +38707,7 @@ type Action struct {
 	synchronizedNetworkAttachments *NetworkAttachmentSlice
 	template                       *Template
 	ticket                         *Ticket
+	timeout                        *int64
 	undeployHostedEngine           *bool
 	upgradeAction                  *ClusterUpgradeAction
 	useCloudInit                   *bool
@@ -40136,6 +40177,25 @@ func (p *Action) MustTicket() *Ticket {
 		panic("the ticket must not be nil, please use Ticket() function instead")
 	}
 	return p.ticket
+}
+
+func (p *Action) SetTimeout(attr int64) {
+	p.timeout = &attr
+}
+
+func (p *Action) Timeout() (int64, bool) {
+	if p.timeout != nil {
+		return *p.timeout, true
+	}
+	var zero int64
+	return zero, false
+}
+
+func (p *Action) MustTimeout() int64 {
+	if p.timeout == nil {
+		panic("the timeout must not be nil, please use Timeout() function instead")
+	}
+	return *p.timeout
 }
 
 func (p *Action) SetUndeployHostedEngine(attr bool) {
@@ -58037,6 +58097,15 @@ func (builder *ClusterBuilder) BallooningEnabled(attr bool) *ClusterBuilder {
 	return builder
 }
 
+func (builder *ClusterBuilder) BiosType(attr BiosType) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.cluster.SetBiosType(attr)
+	return builder
+}
+
 func (builder *ClusterBuilder) Comment(attr string) *ClusterBuilder {
 	if builder.err != nil {
 		return builder
@@ -62378,6 +62447,15 @@ func (builder *EventBuilder) Index(attr int64) *EventBuilder {
 	}
 
 	builder.event.SetIndex(attr)
+	return builder
+}
+
+func (builder *EventBuilder) LogOnHost(attr bool) *EventBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.event.SetLogOnHost(attr)
 	return builder
 }
 
@@ -86912,6 +86990,15 @@ func (builder *ActionBuilder) TicketBuilder(attrBuilder *TicketBuilder) *ActionB
 	return builder.Ticket(attr)
 }
 
+func (builder *ActionBuilder) Timeout(attr int64) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetTimeout(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) UndeployHostedEngine(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -87725,6 +87812,7 @@ const (
 type BiosType string
 
 const (
+	BIOSTYPE_CLUSTER_DEFAULT BiosType = "cluster_default"
 	BIOSTYPE_I440FX_SEA_BIOS BiosType = "i440fx_sea_bios"
 	BIOSTYPE_Q35_OVMF        BiosType = "q35_ovmf"
 	BIOSTYPE_Q35_SEA_BIOS    BiosType = "q35_sea_bios"

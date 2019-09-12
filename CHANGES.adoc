@@ -2,6 +2,25 @@
 
 This document describes the relevant changes between releases of the SDK.
 
+== 4.3.8 / Sep 12 2019
+
+Update to model 4.4.7.
+
+New features:
+
+* Echo external event to oVirt log on host.
+
+* Cluster-wide BIOS Type default
+
+* Add timeout to host upgrade
+  https://bugzilla.redhat.com/1728617[1728617].
+
+Deprecations:
+
+* Drop ovirt node legacy support
+  https://bugzilla.redhat.com/1718790[1718790].
+
+
 == 4.3.7 / Aug 19 2019
 
 Update to model 4.4.6.
