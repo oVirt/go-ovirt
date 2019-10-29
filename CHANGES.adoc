@@ -2,6 +2,35 @@
 
 This document describes the relevant changes between releases of the SDK.
 
+== 4.3.9 / Oct 29 2019
+
+Update to model 4.4.10.
+
+New features:
+
+* Added properties for user type.
+  
+* Add HOST_CERTIFICATE_HAS_INVALID_SAN event
+  https://bugzilla.redhat.com/1763084[1763084].
+
+* Add the support for stop and shutdown
+  https://bugzilla.redhat.com/1450351[1450351].
+
+* Add copyhostnetworks method
+  https://bugzilla.redhat.com/1627465[1627465].
+
+* Add encrypted to migration options
+  https://bugzilla.redhat.com/1739557[1739557].
+
+* Add maintenance_after_restart to host fence action.
+  https://bugzilla.redhat.com/1574443[1574443].
+
+Deprecations:
+
+* Deprecate linux boot params
+  https://bugzilla.redhat.com/1732437[1732437].
+
+
 == 4.3.8 / Sep 12 2019
 
 Update to model 4.4.7.
