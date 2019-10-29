@@ -53377,6 +53377,173 @@ func (p *HostService) CommitNetConfig() *HostServiceCommitNetConfigRequest {
 }
 
 //
+// Copy the network configuration of the specified host to current host.
+// To copy networks from another host, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/hosts/123/copyhostnetworks
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//    <sourceHost id="456" />
+// </action>
+// ----
+//
+type HostServiceCopyHostNetworksRequest struct {
+	HostService *HostService
+	header      map[string]string
+	query       map[string]string
+	async       *bool
+	sourceHost  *Host
+}
+
+func (p *HostServiceCopyHostNetworksRequest) Header(key, value string) *HostServiceCopyHostNetworksRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *HostServiceCopyHostNetworksRequest) Query(key, value string) *HostServiceCopyHostNetworksRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *HostServiceCopyHostNetworksRequest) Async(async bool) *HostServiceCopyHostNetworksRequest {
+	p.async = &async
+	return p
+}
+
+func (p *HostServiceCopyHostNetworksRequest) SourceHost(sourceHost *Host) *HostServiceCopyHostNetworksRequest {
+	p.sourceHost = sourceHost
+	return p
+}
+
+func (p *HostServiceCopyHostNetworksRequest) Send() (*HostServiceCopyHostNetworksResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/copyhostnetworks", p.HostService.connection.URL(), p.HostService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	actionBuilder.SourceHost(p.sourceHost)
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.HostService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.HostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.HostService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.HostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.HostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(HostServiceCopyHostNetworksResponse), nil
+}
+
+func (p *HostServiceCopyHostNetworksRequest) MustSend() *HostServiceCopyHostNetworksResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Copy the network configuration of the specified host to current host.
+// To copy networks from another host, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/hosts/123/copyhostnetworks
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//    <sourceHost id="456" />
+// </action>
+// ----
+//
+type HostServiceCopyHostNetworksResponse struct {
+}
+
+//
+// Copy the network configuration of the specified host to current host.
+// To copy networks from another host, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/hosts/123/copyhostnetworks
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//    <sourceHost id="456" />
+// </action>
+// ----
+//
+func (p *HostService) CopyHostNetworks() *HostServiceCopyHostNetworksRequest {
+	return &HostServiceCopyHostNetworksRequest{HostService: p}
+}
+
+//
 // Deactivates the host to perform maintenance tasks.
 //
 type HostServiceDeactivateRequest struct {
@@ -53671,11 +53838,12 @@ func (p *HostService) EnrollCertificate() *HostServiceEnrollCertificateRequest {
 // ----
 //
 type HostServiceFenceRequest struct {
-	HostService *HostService
-	header      map[string]string
-	query       map[string]string
-	async       *bool
-	fenceType   *string
+	HostService             *HostService
+	header                  map[string]string
+	query                   map[string]string
+	async                   *bool
+	fenceType               *string
+	maintenanceAfterRestart *bool
 }
 
 func (p *HostServiceFenceRequest) Header(key, value string) *HostServiceFenceRequest {
@@ -53704,6 +53872,11 @@ func (p *HostServiceFenceRequest) FenceType(fenceType string) *HostServiceFenceR
 	return p
 }
 
+func (p *HostServiceFenceRequest) MaintenanceAfterRestart(maintenanceAfterRestart bool) *HostServiceFenceRequest {
+	p.maintenanceAfterRestart = &maintenanceAfterRestart
+	return p
+}
+
 func (p *HostServiceFenceRequest) Send() (*HostServiceFenceResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/fence", p.HostService.connection.URL(), p.HostService.path)
 	actionBuilder := NewActionBuilder()
@@ -53712,6 +53885,9 @@ func (p *HostServiceFenceRequest) Send() (*HostServiceFenceResponse, error) {
 	}
 	if p.fenceType != nil {
 		actionBuilder.FenceType(*p.fenceType)
+	}
+	if p.maintenanceAfterRestart != nil {
+		actionBuilder.MaintenanceAfterRestart(*p.maintenanceAfterRestart)
 	}
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -73254,6 +73430,202 @@ func (p *UserService) Remove() *UserServiceRemoveRequest {
 }
 
 //
+// Updates information about the user.
+// Only the `user_options` field can be updated.
+// For example, to update user options:
+// [source]
+// ----
+// PUT /ovirt-engine/api/users/123
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <user>
+//    <user_options>
+//       <property>
+//          <name>test</name>
+//          <value>test1</value>
+//       </property>
+//    </user_options>
+// </user>
+// ----
+//
+type UserServiceUpdateRequest struct {
+	UserService *UserService
+	header      map[string]string
+	query       map[string]string
+	user        *User
+}
+
+func (p *UserServiceUpdateRequest) Header(key, value string) *UserServiceUpdateRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *UserServiceUpdateRequest) Query(key, value string) *UserServiceUpdateRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *UserServiceUpdateRequest) User(user *User) *UserServiceUpdateRequest {
+	p.user = user
+	return p
+}
+
+func (p *UserServiceUpdateRequest) Send() (*UserServiceUpdateResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.UserService.connection.URL(), p.UserService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLUserWriteOne(writer, p.user, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("PUT", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.UserService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.UserService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.UserService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.UserService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.UserService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLUserReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &UserServiceUpdateResponse{user: result}, nil
+}
+
+func (p *UserServiceUpdateRequest) MustSend() *UserServiceUpdateResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Updates information about the user.
+// Only the `user_options` field can be updated.
+// For example, to update user options:
+// [source]
+// ----
+// PUT /ovirt-engine/api/users/123
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <user>
+//    <user_options>
+//       <property>
+//          <name>test</name>
+//          <value>test1</value>
+//       </property>
+//    </user_options>
+// </user>
+// ----
+//
+type UserServiceUpdateResponse struct {
+	user *User
+}
+
+func (p *UserServiceUpdateResponse) User() (*User, bool) {
+	if p.user != nil {
+		return p.user, true
+	}
+	return nil, false
+}
+
+func (p *UserServiceUpdateResponse) MustUser() *User {
+	if p.user == nil {
+		panic("user in response does not exist")
+	}
+	return p.user
+}
+
+//
+// Updates information about the user.
+// Only the `user_options` field can be updated.
+// For example, to update user options:
+// [source]
+// ----
+// PUT /ovirt-engine/api/users/123
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <user>
+//    <user_options>
+//       <property>
+//          <name>test</name>
+//          <value>test1</value>
+//       </property>
+//    </user_options>
+// </user>
+// ----
+//
+func (p *UserService) Update() *UserServiceUpdateRequest {
+	return &UserServiceUpdateRequest{UserService: p}
+}
+
+//
 // List of event-subscriptions for this user.
 //
 func (op *UserService) EventSubscriptionsService() *EventSubscriptionsService {
@@ -91051,6 +91423,7 @@ type VmServiceShutdownRequest struct {
 	header    map[string]string
 	query     map[string]string
 	async     *bool
+	reason    *string
 }
 
 func (p *VmServiceShutdownRequest) Header(key, value string) *VmServiceShutdownRequest {
@@ -91074,11 +91447,19 @@ func (p *VmServiceShutdownRequest) Async(async bool) *VmServiceShutdownRequest {
 	return p
 }
 
+func (p *VmServiceShutdownRequest) Reason(reason string) *VmServiceShutdownRequest {
+	p.reason = &reason
+	return p
+}
+
 func (p *VmServiceShutdownRequest) Send() (*VmServiceShutdownResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/shutdown", p.VmService.connection.URL(), p.VmService.path)
 	actionBuilder := NewActionBuilder()
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
+	}
+	if p.reason != nil {
+		actionBuilder.Reason(*p.reason)
 	}
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -91427,6 +91808,7 @@ type VmServiceStopRequest struct {
 	header    map[string]string
 	query     map[string]string
 	async     *bool
+	reason    *string
 }
 
 func (p *VmServiceStopRequest) Header(key, value string) *VmServiceStopRequest {
@@ -91450,11 +91832,19 @@ func (p *VmServiceStopRequest) Async(async bool) *VmServiceStopRequest {
 	return p
 }
 
+func (p *VmServiceStopRequest) Reason(reason string) *VmServiceStopRequest {
+	p.reason = &reason
+	return p
+}
+
 func (p *VmServiceStopRequest) Send() (*VmServiceStopResponse, error) {
 	rawURL := fmt.Sprintf("%s%s/stop", p.VmService.connection.URL(), p.VmService.path)
 	actionBuilder := NewActionBuilder()
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
+	}
+	if p.reason != nil {
+		actionBuilder.Reason(*p.reason)
 	}
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -108654,9 +109044,13 @@ func (p *DiskService) Sparsify() *DiskServiceSparsifyRequest {
 }
 
 //
-// This operation updates the disk with the appropriate parameters.
-// The only field that can be updated is `qcow_version`.
-// For example, disk update can be done using the following request:
+// Updates the parameters of the specified disk.
+// This operation allows updating the following floating disk properties:
+// * For Image disks: `size`, `alias`, `description`, `wipe_after_delete`, `shareable`, `backup` and `disk_profile`.
+// * For LUN disks: `alias`, `description` and `shareable`.
+// * For Cinder and Managed Block disks: `size`, `alias` and `description`.
+// * For VM attached disks, the `qcow_version` can also be updated.
+// For example, a disk's update can be done by using the following request:
 // [source]
 // ----
 // PUT /ovirt-engine/api/disks/123
@@ -108666,6 +109060,8 @@ func (p *DiskService) Sparsify() *DiskServiceSparsifyRequest {
 // ----
 // <disk>
 //   <qcow_version>qcow2_v3</qcow_version>
+//   <alias>new-alias</alias>
+//   <description>new-desc</description>
 // </disk>
 // ----
 // Since the backend operation is asynchronous, the disk element that is returned
@@ -108783,9 +109179,13 @@ func (p *DiskServiceUpdateRequest) MustSend() *DiskServiceUpdateResponse {
 }
 
 //
-// This operation updates the disk with the appropriate parameters.
-// The only field that can be updated is `qcow_version`.
-// For example, disk update can be done using the following request:
+// Updates the parameters of the specified disk.
+// This operation allows updating the following floating disk properties:
+// * For Image disks: `size`, `alias`, `description`, `wipe_after_delete`, `shareable`, `backup` and `disk_profile`.
+// * For LUN disks: `alias`, `description` and `shareable`.
+// * For Cinder and Managed Block disks: `size`, `alias` and `description`.
+// * For VM attached disks, the `qcow_version` can also be updated.
+// For example, a disk's update can be done by using the following request:
 // [source]
 // ----
 // PUT /ovirt-engine/api/disks/123
@@ -108795,6 +109195,8 @@ func (p *DiskServiceUpdateRequest) MustSend() *DiskServiceUpdateResponse {
 // ----
 // <disk>
 //   <qcow_version>qcow2_v3</qcow_version>
+//   <alias>new-alias</alias>
+//   <description>new-desc</description>
 // </disk>
 // ----
 // Since the backend operation is asynchronous, the disk element that is returned
@@ -108819,9 +109221,13 @@ func (p *DiskServiceUpdateResponse) MustDisk() *Disk {
 }
 
 //
-// This operation updates the disk with the appropriate parameters.
-// The only field that can be updated is `qcow_version`.
-// For example, disk update can be done using the following request:
+// Updates the parameters of the specified disk.
+// This operation allows updating the following floating disk properties:
+// * For Image disks: `size`, `alias`, `description`, `wipe_after_delete`, `shareable`, `backup` and `disk_profile`.
+// * For LUN disks: `alias`, `description` and `shareable`.
+// * For Cinder and Managed Block disks: `size`, `alias` and `description`.
+// * For VM attached disks, the `qcow_version` can also be updated.
+// For example, a disk's update can be done by using the following request:
 // [source]
 // ----
 // PUT /ovirt-engine/api/disks/123
@@ -108831,6 +109237,8 @@ func (p *DiskServiceUpdateResponse) MustDisk() *Disk {
 // ----
 // <disk>
 //   <qcow_version>qcow2_v3</qcow_version>
+//   <alias>new-alias</alias>
+//   <description>new-desc</description>
 // </disk>
 // ----
 // Since the backend operation is asynchronous, the disk element that is returned

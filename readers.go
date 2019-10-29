@@ -15027,6 +15027,12 @@ func XMLUserReadOne(reader *XMLReader, start *xml.StartElement, expectedTag stri
 					return nil, err
 				}
 				builder.UserName(v)
+			case "user_options":
+				v, err := XMLPropertyReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.UserOptions(v)
 			case "link":
 				var rel, href string
 				for _, attr := range t.Attr {
@@ -18110,6 +18116,13 @@ func XMLMigrationOptionsReadOne(reader *XMLReader, start *xml.StartElement, expe
 					return nil, err
 				}
 				builder.Compressed(v)
+			case "encrypted":
+				vp, err := XMLInheritableBooleanReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.Encrypted(v)
 			case "policy":
 				v, err := XMLMigrationPolicyReadOne(reader, &t, "policy")
 				if err != nil {
@@ -36519,6 +36532,12 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.LogicalUnits(v)
+			case "maintenance_after_restart":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.MaintenanceAfterRestart(v)
 			case "maintenance_enabled":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -36669,6 +36688,12 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.Snapshot(v)
+			case "source_host":
+				v, err := XMLHostReadOne(reader, &t, "source_host")
+				if err != nil {
+					return nil, err
+				}
+				builder.SourceHost(v)
 			case "ssh":
 				v, err := XMLSshReadOne(reader, &t, "ssh")
 				if err != nil {

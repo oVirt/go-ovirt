@@ -4892,6 +4892,9 @@ func XMLUserWriteOne(writer *XMLWriter, object *User, tag string) error {
 	if r, ok := object.UserName(); ok {
 		writer.WriteCharacter("user_name", r)
 	}
+	if r, ok := object.UserOptions(); ok {
+		XMLPropertyWriteMany(writer, r, "user_options", "property")
+	}
 	writer.WriteEnd(tag)
 	return nil
 }
@@ -5874,6 +5877,9 @@ func XMLMigrationOptionsWriteOne(writer *XMLWriter, object *MigrationOptions, ta
 	}
 	if r, ok := object.Compressed(); ok {
 		XMLInheritableBooleanWriteOne(writer, r, "compressed")
+	}
+	if r, ok := object.Encrypted(); ok {
+		XMLInheritableBooleanWriteOne(writer, r, "encrypted")
 	}
 	if r, ok := object.Policy(); ok {
 		XMLMigrationPolicyWriteOne(writer, r, "policy")
@@ -12087,6 +12093,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	if r, ok := object.LogicalUnits(); ok {
 		XMLLogicalUnitWriteMany(writer, r, "logical_units", "logical_unit")
 	}
+	if r, ok := object.MaintenanceAfterRestart(); ok {
+		writer.WriteBool("maintenance_after_restart", r)
+	}
 	if r, ok := object.MaintenanceEnabled(); ok {
 		writer.WriteBool("maintenance_enabled", r)
 	}
@@ -12161,6 +12170,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	}
 	if r, ok := object.Snapshot(); ok {
 		XMLSnapshotWriteOne(writer, r, "snapshot")
+	}
+	if r, ok := object.SourceHost(); ok {
+		XMLHostWriteOne(writer, r, "source_host")
 	}
 	if r, ok := object.Ssh(); ok {
 		XMLSshWriteOne(writer, r, "ssh")

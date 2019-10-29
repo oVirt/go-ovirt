@@ -14606,6 +14606,7 @@ type User struct {
 	sshPublicKeys *SshPublicKeySlice
 	tags          *TagSlice
 	userName      *string
+	userOptions   *PropertySlice
 }
 
 func (p *User) SetComment(attr string) {
@@ -14961,6 +14962,24 @@ func (p *User) MustUserName() string {
 		panic("the userName must not be nil, please use UserName() function instead")
 	}
 	return *p.userName
+}
+
+func (p *User) SetUserOptions(attr *PropertySlice) {
+	p.userOptions = attr
+}
+
+func (p *User) UserOptions() (*PropertySlice, bool) {
+	if p.userOptions != nil {
+		return p.userOptions, true
+	}
+	return nil, false
+}
+
+func (p *User) MustUserOptions() *PropertySlice {
+	if p.userOptions == nil {
+		panic("the userOptions must not be nil, please use UserOptions() function instead")
+	}
+	return p.userOptions
 }
 
 type Core struct {
@@ -17613,6 +17632,7 @@ type MigrationOptions struct {
 	autoConverge *InheritableBoolean
 	bandwidth    *MigrationBandwidth
 	compressed   *InheritableBoolean
+	encrypted    *InheritableBoolean
 	policy       *MigrationPolicy
 }
 
@@ -17670,6 +17690,25 @@ func (p *MigrationOptions) MustCompressed() InheritableBoolean {
 		panic("the compressed must not be nil, please use Compressed() function instead")
 	}
 	return *p.compressed
+}
+
+func (p *MigrationOptions) SetEncrypted(attr InheritableBoolean) {
+	p.encrypted = &attr
+}
+
+func (p *MigrationOptions) Encrypted() (InheritableBoolean, bool) {
+	if p.encrypted != nil {
+		return *p.encrypted, true
+	}
+	var zero InheritableBoolean
+	return zero, false
+}
+
+func (p *MigrationOptions) MustEncrypted() InheritableBoolean {
+	if p.encrypted == nil {
+		panic("the encrypted must not be nil, please use Encrypted() function instead")
+	}
+	return *p.encrypted
 }
 
 func (p *MigrationOptions) SetPolicy(attr *MigrationPolicy) {
@@ -38673,6 +38712,7 @@ type Action struct {
 	job                            *Job
 	lease                          *StorageDomainLease
 	logicalUnits                   *LogicalUnitSlice
+	maintenanceAfterRestart        *bool
 	maintenanceEnabled             *bool
 	migrateVmsInAffinityClosure    *bool
 	modifiedBonds                  *HostNicSlice
@@ -38698,6 +38738,7 @@ type Action struct {
 	rootPassword                   *string
 	seal                           *bool
 	snapshot                       *Snapshot
+	sourceHost                     *Host
 	ssh                            *Ssh
 	status                         *string
 	stopGlusterService             *bool
@@ -39552,6 +39593,25 @@ func (p *Action) MustLogicalUnits() *LogicalUnitSlice {
 	return p.logicalUnits
 }
 
+func (p *Action) SetMaintenanceAfterRestart(attr bool) {
+	p.maintenanceAfterRestart = &attr
+}
+
+func (p *Action) MaintenanceAfterRestart() (bool, bool) {
+	if p.maintenanceAfterRestart != nil {
+		return *p.maintenanceAfterRestart, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Action) MustMaintenanceAfterRestart() bool {
+	if p.maintenanceAfterRestart == nil {
+		panic("the maintenanceAfterRestart must not be nil, please use MaintenanceAfterRestart() function instead")
+	}
+	return *p.maintenanceAfterRestart
+}
+
 func (p *Action) SetMaintenanceEnabled(attr bool) {
 	p.maintenanceEnabled = &attr
 }
@@ -40012,6 +40072,24 @@ func (p *Action) MustSnapshot() *Snapshot {
 		panic("the snapshot must not be nil, please use Snapshot() function instead")
 	}
 	return p.snapshot
+}
+
+func (p *Action) SetSourceHost(attr *Host) {
+	p.sourceHost = attr
+}
+
+func (p *Action) SourceHost() (*Host, bool) {
+	if p.sourceHost != nil {
+		return p.sourceHost, true
+	}
+	return nil, false
+}
+
+func (p *Action) MustSourceHost() *Host {
+	if p.sourceHost == nil {
+		panic("the sourceHost must not be nil, please use SourceHost() function instead")
+	}
+	return p.sourceHost
 }
 
 func (p *Action) SetSsh(attr *Ssh) {
@@ -60144,6 +60222,47 @@ func (builder *UserBuilder) UserName(attr string) *UserBuilder {
 	return builder
 }
 
+func (builder *UserBuilder) UserOptions(attr *PropertySlice) *UserBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.user.SetUserOptions(attr)
+	return builder
+}
+
+func (builder *UserBuilder) UserOptionsOfAny(anys ...*Property) *UserBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.user.userOptions == nil {
+		builder.user.userOptions = new(PropertySlice)
+	}
+	builder.user.userOptions.slice = append(builder.user.userOptions.slice, anys...)
+	return builder
+}
+
+func (builder *UserBuilder) UserOptionsBuilderOfAny(anyBuilders ...PropertyBuilder) *UserBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.UserOptionsOfAny(attr)
+	}
+	return builder
+}
+
 func (builder *UserBuilder) Href(href string) *UserBuilder {
 	if builder.err != nil {
 		return builder
@@ -62672,6 +62791,15 @@ func (builder *MigrationOptionsBuilder) Compressed(attr InheritableBoolean) *Mig
 	}
 
 	builder.migrationOptions.SetCompressed(attr)
+	return builder
+}
+
+func (builder *MigrationOptionsBuilder) Encrypted(attr InheritableBoolean) *MigrationOptionsBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.migrationOptions.SetEncrypted(attr)
 	return builder
 }
 
@@ -86241,6 +86369,15 @@ func (builder *ActionBuilder) LogicalUnitsBuilderOfAny(anyBuilders ...LogicalUni
 	return builder
 }
 
+func (builder *ActionBuilder) MaintenanceAfterRestart(attr bool) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetMaintenanceAfterRestart(attr)
+	return builder
+}
+
 func (builder *ActionBuilder) MaintenanceEnabled(attr bool) *ActionBuilder {
 	if builder.err != nil {
 		return builder
@@ -86775,6 +86912,32 @@ func (builder *ActionBuilder) SnapshotBuilder(attrBuilder *SnapshotBuilder) *Act
 		return builder
 	}
 	return builder.Snapshot(attr)
+}
+
+func (builder *ActionBuilder) SourceHost(attr *Host) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetSourceHost(attr)
+	return builder
+}
+
+func (builder *ActionBuilder) SourceHostBuilder(attrBuilder *HostBuilder) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.SourceHost(attr)
 }
 
 func (builder *ActionBuilder) Ssh(attr *Ssh) *ActionBuilder {
@@ -88074,6 +88237,7 @@ const (
 	NOTIFIABLEEVENT_HOST_ACTIVATE_MANUAL_HA                                NotifiableEvent = "host_activate_manual_ha"
 	NOTIFIABLEEVENT_HOST_APPROVE_FAILED                                    NotifiableEvent = "host_approve_failed"
 	NOTIFIABLEEVENT_HOST_BOND_SLAVE_STATE_DOWN                             NotifiableEvent = "host_bond_slave_state_down"
+	NOTIFIABLEEVENT_HOST_CERTIFICATE_HAS_INVALID_SAN                       NotifiableEvent = "host_certificate_has_invalid_san"
 	NOTIFIABLEEVENT_HOST_CERTIFICATION_HAS_EXPIRED                         NotifiableEvent = "host_certification_has_expired"
 	NOTIFIABLEEVENT_HOST_CERTIFICATION_IS_ABOUT_TO_EXPIRE                  NotifiableEvent = "host_certification_is_about_to_expire"
 	NOTIFIABLEEVENT_HOST_FAILURE                                           NotifiableEvent = "host_failure"
