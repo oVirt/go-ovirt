@@ -2,6 +2,20 @@
 
 This document describes the relevant changes between releases of the SDK.
 
+== 4.4.0 / Jan 4 2020
+
+Update to model 4.4.11
+
+New features:
+
+* Added 'discardSnapshots', 'storageDomain' params to VM clone
+
+* Added MDevType type and mDevTypes() to HostDevice
+
+* Add disk download example
+  https://github.com/oVirt/ovirt-engine-sdk-go/pull/188[GitHub-188]
+
+
 == 4.3.9 / Oct 29 2019
 
 Update to model 4.4.10.
