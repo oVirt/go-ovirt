@@ -6957,7 +6957,7 @@ func XMLBootWriteOne(writer *XMLWriter, object *Boot, tag string) error {
 	}
 	writer.WriteStart("", tag, nil)
 	if r, ok := object.Devices(); ok {
-		XMLBootDeviceWriteMany(writer, r, "devices", "boot_device")
+		XMLBootDeviceWriteMany(writer, r, "devices", "device")
 	}
 	writer.WriteEnd(tag)
 	return nil
@@ -7243,7 +7243,7 @@ func XMLNetworkWriteOne(writer *XMLWriter, object *Network, tag string) error {
 		writer.WriteBool("stp", r)
 	}
 	if r, ok := object.Usages(); ok {
-		XMLNetworkUsageWriteMany(writer, r, "usages", "network_usage")
+		XMLNetworkUsageWriteMany(writer, r, "usages", "usage")
 	}
 	if r, ok := object.Vlan(); ok {
 		XMLVlanWriteOne(writer, r, "vlan")
@@ -7476,7 +7476,7 @@ func XMLHardwareInformationWriteOne(writer *XMLWriter, object *HardwareInformati
 		writer.WriteCharacter("serial_number", r)
 	}
 	if r, ok := object.SupportedRngSources(); ok {
-		XMLRngSourceWriteMany(writer, r, "supported_rng_sources", "rng_source")
+		XMLRngSourceWriteMany(writer, r, "supported_rng_sources", "supported_rng_source")
 	}
 	if r, ok := object.Uuid(); ok {
 		writer.WriteCharacter("uuid", r)
@@ -9878,7 +9878,7 @@ func XMLClusterWriteOne(writer *XMLWriter, object *Cluster, tag string) error {
 		XMLPermissionWriteMany(writer, r, "permissions", "permission")
 	}
 	if r, ok := object.RequiredRngSources(); ok {
-		XMLRngSourceWriteMany(writer, r, "required_rng_sources", "rng_source")
+		XMLRngSourceWriteMany(writer, r, "required_rng_sources", "required_rng_source")
 	}
 	if r, ok := object.SchedulingPolicy(); ok {
 		XMLSchedulingPolicyWriteOne(writer, r, "scheduling_policy")

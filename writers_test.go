@@ -36,3 +36,29 @@ func TestCpuWriteOne(t *testing.T) {
 		string(b.Bytes()))
 
 }
+
+func TestBootDevice(t *testing.T) {
+	assert := assert.New(t)
+	var b bytes.Buffer
+	writer := NewXMLWriter(&b)
+	boot, err := NewBootBuilder().DevicesOfAny("network").Build()
+	assert.Nil(err)
+	err = XMLBootWriteOne(writer, boot, "")
+	assert.Nil(err)
+	writer.Flush()
+	assert.Equal("<boot><devices><device>network</device></devices></boot>",
+		string(b.Bytes()))
+}
+
+func TestBootDevices(t *testing.T) {
+	assert := assert.New(t)
+	var b bytes.Buffer
+	writer := NewXMLWriter(&b)
+	boot, err := NewBootBuilder().DevicesOfAny("network", "hd").Build()
+	assert.Nil(err)
+	err = XMLBootWriteOne(writer, boot, "")
+	assert.Nil(err)
+	writer.Flush()
+	assert.Equal("<boot><devices><device>network</device><device>hd</device></devices></boot>",
+		string(b.Bytes()))
+}
