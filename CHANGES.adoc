@@ -2,6 +2,14 @@
 
 This document describes the relevant changes between releases of the SDK.
 
+== 4.4.1 / Jan 31 2020
+
+Bug fixes:
+
+* Fix to replace incorrect XML tag names for lists of enums
+ Bug-Url: https://github.com/oVirt/ovirt-engine-sdk-go/issues/192[#192]
+
+
 == 4.4.0 / Jan 4 2020
 
 Update to model 4.4.11
