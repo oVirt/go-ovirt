@@ -69,8 +69,21 @@ func (c *Connection) URL() string {
 // Test tests the connectivity with the server using the credentials provided in connection.
 // If connectivity works correctly and the credentials are valid, it returns a nil error,
 // or it will return an error containing the reason as the message.
+// If the authentication fails because the oauth token is no longer valid it will
+// try to re-authenticate, to renew the token.
 func (c *Connection) Test() error {
-	_, err := c.authenticate()
+	options, err := http.NewRequest(http.MethodOptions, "", nil)
+	if err != nil {
+		// shouldn't fail to construct a request, but report anyway.
+		return err
+	}
+	// a simple http OPTIONS request is the lightest method to test auth.
+	_, err = c.client.Do(options)
+	if err != nil {
+		// failed, then clear state.
+		c.ssoToken = ""
+	}
+	_, err = c.authenticate()
 	return err
 }
 
