@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 huihui0311 <huihui.fu@cs2c.com.cn>.
+// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "github.com/ovirt/go-ovirt"
 )
 
-func addCluster() {
+func pageVms() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,29 +47,29 @@ func addCluster() {
 		}
 	}()
 
+	// Get the reference to the vm service:
+	vmsService := conn.SystemService().VmsService()
 
-	// Get the reference to the clusters service:
-	clustersService := conn.SystemService().ClustersService()
+	// List the vm page by page:
+	size := int64(1)
+	index := int64(1)
+	for {
+		pageIndex := fmt.Sprintf("page %v", index)
+		vmsResp, err := vmsService.List().Search(pageIndex).Max(size).Send()
+		if err != nil {
+			fmt.Printf("Failed to get vm list, reason: %v\n", err)
+			return
+		}
+		if len(vmsResp.MustVms().Slice()) == 0 {
+			break
+		}
 
-	// Use the "add" method to create a cluster:
-	_, err = clustersService.Add().
-		Cluster(
-			ovirtsdk4.NewClusterBuilder().
-				Name("mycluster").
-				Description("My cluster").
-				Cpu(
-					ovirtsdk4.NewCpuBuilder().
-						Architecture(ovirtsdk4.ARCHITECTURE_X86_64).
-						Type("Intel Conroe Family").
-						MustBuild()).
-				DataCenter(
-					ovirtsdk4.NewDataCenterBuilder().
-						Name("mydc").
-						MustBuild()).
-				MustBuild()).
-		Send()
-	if err != nil {
-		fmt.Printf("Failed to add cluster, reason: %v\n", err)
-		return
+		for _, vm := range vmsResp.MustVms().Slice() {
+			fmt.Printf("Vm name: %v\n", vm.MustName())
+		}
+
+		index += int64(1)
+		fmt.Printf("Index: %v\n", index)
 	}
+
 }

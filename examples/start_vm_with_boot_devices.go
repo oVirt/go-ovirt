@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 huihui0311 <huihui.fu@cs2c.com.cn>.
+// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "github.com/ovirt/go-ovirt"
 )
 
-func addCluster() {
+func startVmWithBootDevices() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,29 +47,47 @@ func addCluster() {
 		}
 	}()
 
+	// Get the reference to the "vms" service:
+	vmsService := conn.SystemService().VmsService()
 
-	// Get the reference to the clusters service:
-	clustersService := conn.SystemService().ClustersService()
+	// Find the virtual machine:
+	vmsResp, err := vmsService.List().Search("name=myvm").Send()
+	if err != nil {
+		fmt.Printf("Failed to get vm list, reason: %v\n", err)
+		return
+	}
 
-	// Use the "add" method to create a cluster:
-	_, err = clustersService.Add().
-		Cluster(
-			ovirtsdk4.NewClusterBuilder().
-				Name("mycluster").
-				Description("My cluster").
-				Cpu(
-					ovirtsdk4.NewCpuBuilder().
-						Architecture(ovirtsdk4.ARCHITECTURE_X86_64).
-						Type("Intel Conroe Family").
-						MustBuild()).
-				DataCenter(
-					ovirtsdk4.NewDataCenterBuilder().
-						Name("mydc").
+	// Locate the service that manages the virtual machine, as that is where
+	// the action methods are defined:
+	vm := vmsResp.MustVms().Slice()[0]
+	vmService := vmsService.VmService(vm.MustId())
+
+	// Call the "start" method of the service to start it with
+	// additional properties in a run once configuration
+	vmService.Start().
+		Vm(
+			ovirtsdk4.NewVmBuilder().
+				Os(
+					ovirtsdk4.NewOperatingSystemBuilder().
+						Boot(
+							ovirtsdk4.NewBootBuilder().
+								DevicesOfAny(
+									ovirtsdk4.BOOTDEVICE_NETWORK,
+									ovirtsdk4.BOOTDEVICE_CDROM).
+								MustBuild()).
 						MustBuild()).
 				MustBuild()).
 		Send()
-	if err != nil {
-		fmt.Printf("Failed to add cluster, reason: %v\n", err)
-		return
+
+	// Wait till the virtual machine is up:
+	for {
+		time.Sleep(5 * time.Second)
+		vmResp, _ := vmService.Get().Send()
+		if vm, ok := vmResp.Vm(); ok {
+			if vm.MustStatus() == ovirtsdk4.VMSTATUS_UP {
+				break
+			}
+		}
 	}
+
 }

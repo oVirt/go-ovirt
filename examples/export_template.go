@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 huihui0311 <huihui.fu@cs2c.com.cn>.
+// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "github.com/ovirt/go-ovirt"
 )
 
-func addCluster() {
+func exportTemplate() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,29 +47,25 @@ func addCluster() {
 		}
 	}()
 
+	// Get a reference to the template service:
+	templatesService := conn.SystemService().TemplatesService()
 
-	// Get the reference to the clusters service:
-	clustersService := conn.SystemService().ClustersService()
-
-	// Use the "add" method to create a cluster:
-	_, err = clustersService.Add().
-		Cluster(
-			ovirtsdk4.NewClusterBuilder().
-				Name("mycluster").
-				Description("My cluster").
-				Cpu(
-					ovirtsdk4.NewCpuBuilder().
-						Architecture(ovirtsdk4.ARCHITECTURE_X86_64).
-						Type("Intel Conroe Family").
-						MustBuild()).
-				DataCenter(
-					ovirtsdk4.NewDataCenterBuilder().
-						Name("mydc").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	//# Look up fot the template by name:
+	templateResp, err := templatesService.List().Search("name=mytemplate").Send()
 	if err != nil {
-		fmt.Printf("Failed to add cluster, reason: %v\n", err)
+		fmt.Printf("Failed to search template list, reason: %v\n", err)
 		return
 	}
+	templateSlice, _ := templateResp.Templates()
+	template := templateSlice.Slice()[0]
+
+	templateService := templatesService.TemplateService(template.MustId())
+
+	storageDomain := &ovirtsdk4.StorageDomain{}
+	storageDomain.SetName("myexport")
+	templateService.Export().
+		Exclusive(true).
+		StorageDomain(storageDomain).
+		Send()
+
 }

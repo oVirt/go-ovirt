@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 huihui0311 <huihui.fu@cs2c.com.cn>.
+// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "github.com/ovirt/go-ovirt"
 )
 
-func addCluster() {
+func sparsifyDisk() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,29 +47,35 @@ func addCluster() {
 		}
 	}()
 
+	// Get the reference to the "disks" service:
+	disksService := conn.SystemService().DisksService()
 
-	// Get the reference to the clusters service:
-	clustersService := conn.SystemService().ClustersService()
-
-	// Use the "add" method to create a cluster:
-	_, err = clustersService.Add().
-		Cluster(
-			ovirtsdk4.NewClusterBuilder().
-				Name("mycluster").
-				Description("My cluster").
-				Cpu(
-					ovirtsdk4.NewCpuBuilder().
-						Architecture(ovirtsdk4.ARCHITECTURE_X86_64).
-						Type("Intel Conroe Family").
-						MustBuild()).
-				DataCenter(
-					ovirtsdk4.NewDataCenterBuilder().
-						Name("mydc").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	// Find the virtual machine:
+	disksResp, err := disksService.List().Search("name=mydisk").Send()
 	if err != nil {
-		fmt.Printf("Failed to add cluster, reason: %v\n", err)
+		fmt.Printf("Failed to get vm list, reason: %v\n", err)
 		return
 	}
+
+	//# Find the disk we want to sparsify:
+	//# Locate the service that manage the disk we want to sparsify:
+	disk := disksResp.MustDisks().Slice()[0]
+	diskService := disksService.DiskService(disk.MustId())
+
+	// Sparsify the disk. Note that the virtual machine where the disk is attached
+	// must not be running so the sparsification is executed. If the virtual
+	// machine will be running the sparsify operation will fail:
+	diskService.Sparsify().Send()
+
+	// Wait till the disk is ok:
+	for {
+		time.Sleep(5 * time.Second)
+		diskResp, _ := diskService.Get().Send()
+		if disk, ok := diskResp.Disk(); ok {
+			if disk.MustStatus() == ovirtsdk4.DISKSTATUS_OK {
+				break
+			}
+		}
+	}
+
 }

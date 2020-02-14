@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 huihui0311 <huihui.fu@cs2c.com.cn>.
+// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "github.com/ovirt/go-ovirt"
 )
 
-func addCluster() {
+func exportVmAsOva() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,29 +47,34 @@ func addCluster() {
 		}
 	}()
 
+	// Get a reference to the vm service:
+	vmsService := conn.SystemService().VmsService()
 
-	// Get the reference to the clusters service:
-	clustersService := conn.SystemService().ClustersService()
-
-	// Use the "add" method to create a cluster:
-	_, err = clustersService.Add().
-		Cluster(
-			ovirtsdk4.NewClusterBuilder().
-				Name("mycluster").
-				Description("My cluster").
-				Cpu(
-					ovirtsdk4.NewCpuBuilder().
-						Architecture(ovirtsdk4.ARCHITECTURE_X86_64).
-						Type("Intel Conroe Family").
-						MustBuild()).
-				DataCenter(
-					ovirtsdk4.NewDataCenterBuilder().
-						Name("mydc").
-						MustBuild()).
-				MustBuild()).
-		Send()
+	//# Look up fot the vm by name:
+	vmResp, err := vmsService.List().Search("name=myvm").Send()
 	if err != nil {
-		fmt.Printf("Failed to add cluster, reason: %v\n", err)
+		fmt.Printf("Failed to search vm list, reason: %v\n", err)
 		return
 	}
+	vmSlice, _ := vmResp.Vms()
+	vm := vmSlice.Slice()[0]
+
+	vmService := vmsService.VmService(vm.MustId())
+
+	// Find the host
+	hostsService := conn.SystemService().HostsService()
+	hostResp, err := hostsService.List().Search("name=myhost").Send()
+	if err != nil {
+		fmt.Printf("Failed to search host list, reason: %v\n", err)
+		return
+	}
+	hostSlice, _ := hostResp.Hosts()
+	host := hostSlice.Slice()[0]
+
+	vmService.ExportToPathOnHost().
+		Host(host).
+		Directory("/tmp").
+		Filename("myvm2.ova").
+		Send()
+
 }

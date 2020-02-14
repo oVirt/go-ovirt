@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 huihui0311 <huihui.fu@cs2c.com.cn>.
+// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "github.com/ovirt/go-ovirt"
 )
 
-func addCluster() {
+func addRole() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,29 +47,36 @@ func addCluster() {
 		}
 	}()
 
+	// Get the reference to the roles service:
+	rolesService := conn.SystemService().RolesService()
 
-	// Get the reference to the clusters service:
-	clustersService := conn.SystemService().ClustersService()
-
-	// Use the "add" method to create a cluster:
-	_, err = clustersService.Add().
-		Cluster(
-			ovirtsdk4.NewClusterBuilder().
-				Name("mycluster").
-				Description("My cluster").
-				Cpu(
-					ovirtsdk4.NewCpuBuilder().
-						Architecture(ovirtsdk4.ARCHITECTURE_X86_64).
-						Type("Intel Conroe Family").
-						MustBuild()).
-				DataCenter(
-					ovirtsdk4.NewDataCenterBuilder().
-						Name("mydc").
-						MustBuild()).
+	// Use the "add" method to create a role:
+	permitSlice := &ovirtsdk4.PermitSlice{}
+	permitSlice.SetSlice(genPermits([]string{"1", "1300"}))
+	_, err = rolesService.Add().
+		Role(
+			ovirtsdk4.NewRoleBuilder().
+				Name("myrole").
+				Description("My role").
+				Administrative(false).
+				Permits(permitSlice).
 				MustBuild()).
 		Send()
 	if err != nil {
-		fmt.Printf("Failed to add cluster, reason: %v\n", err)
+		fmt.Printf("Failed to add role, reason: %v\n", err)
 		return
 	}
+}
+
+func genPermits(ids []string) []*ovirtsdk4.Permit {
+	permits := make([]*ovirtsdk4.Permit, 0)
+	for _, id := range ids {
+		if id == "" {
+			continue
+		}
+		permit := &ovirtsdk4.Permit{}
+		permit.SetId(id)
+		permits = append(permits, permit)
+	}
+	return permits
 }

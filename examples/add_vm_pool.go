@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 huihui0311 <huihui.fu@cs2c.com.cn>.
+// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "github.com/ovirt/go-ovirt"
 )
 
-func addCluster() {
+func addVmPool() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,29 +47,31 @@ func addCluster() {
 		}
 	}()
 
+	// Get the reference to the vm pools service:
+	vmPoolsService := conn.SystemService().VmPoolsService()
 
-	// Get the reference to the clusters service:
-	clustersService := conn.SystemService().ClustersService()
-
-	// Use the "add" method to create a cluster:
-	_, err = clustersService.Add().
-		Cluster(
-			ovirtsdk4.NewClusterBuilder().
-				Name("mycluster").
-				Description("My cluster").
-				Cpu(
-					ovirtsdk4.NewCpuBuilder().
-						Architecture(ovirtsdk4.ARCHITECTURE_X86_64).
-						Type("Intel Conroe Family").
+	// Use the "add" method to create a vmPool:
+	_, err = vmPoolsService.Add().
+		Pool(
+			ovirtsdk4.NewVmPoolBuilder().
+				Name("myVmPool").
+				Description("My vmPool").
+				Cluster(
+					ovirtsdk4.NewClusterBuilder().
+						Name("mycluster").
 						MustBuild()).
-				DataCenter(
-					ovirtsdk4.NewDataCenterBuilder().
-						Name("mydc").
+				Template(
+					ovirtsdk4.NewTemplateBuilder().
+						Name("mytemplate").
 						MustBuild()).
+				Size(3).
+				PrestartedVms(1).
+				MaxUserVms(1).
+				Type(ovirtsdk4.VMPOOLTYPE_AUTOMATIC).
 				MustBuild()).
 		Send()
 	if err != nil {
-		fmt.Printf("Failed to add cluster, reason: %v\n", err)
+		fmt.Printf("Failed to add vmPool, reason: %v\n", err)
 		return
 	}
 }

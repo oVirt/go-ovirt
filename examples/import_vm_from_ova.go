@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 huihui0311 <huihui.fu@cs2c.com.cn>.
+// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 	ovirtsdk4 "github.com/ovirt/go-ovirt"
 )
 
-func addCluster() {
+func importVmFromOVa() {
 	inputRawURL := "https://10.1.111.229/ovirt-engine/api"
 
 	conn, err := ovirtsdk4.NewConnectionBuilder().
@@ -47,29 +47,35 @@ func addCluster() {
 		}
 	}()
 
+	// Get the reference to the service that manages import of external
+	//virtual machines:
+	importsService := conn.SystemService().ExternalVmImportsService()
 
-	// Get the reference to the clusters service:
-	clustersService := conn.SystemService().ClustersService()
-
-	// Use the "add" method to create a cluster:
-	_, err = clustersService.Add().
-		Cluster(
-			ovirtsdk4.NewClusterBuilder().
-				Name("mycluster").
-				Description("My cluster").
-				Cpu(
-					ovirtsdk4.NewCpuBuilder().
-						Architecture(ovirtsdk4.ARCHITECTURE_X86_64).
-						Type("Intel Conroe Family").
+	// Initiate the import of VM 'myvm' from ova:
+	importsService.Add().
+		Import(
+			ovirtsdk4.NewExternalVmImportBuilder().
+				Name("myvm").
+				Provider(ovirtsdk4.EXTERNALVMPROVIDERTYPE_KVM).
+				Url("ova:///myvms/my.ova").
+				Cluster(
+					ovirtsdk4.NewClusterBuilder().
+						Name("mycluster").
 						MustBuild()).
-				DataCenter(
-					ovirtsdk4.NewDataCenterBuilder().
-						Name("mydc").
+				StorageDomain(
+					ovirtsdk4.NewStorageDomainBuilder().
+						Name("mydata").
 						MustBuild()).
+				Host(
+					ovirtsdk4.NewHostBuilder().
+						Name("myhost").
+						MustBuild()).
+				DriversIso(
+					ovirtsdk4.NewFileBuilder().
+						Id("virtio-win.iso").
+						MustBuild()).
+				Sparse(true).
 				MustBuild()).
 		Send()
-	if err != nil {
-		fmt.Printf("Failed to add cluster, reason: %v\n", err)
-		return
-	}
+
 }
