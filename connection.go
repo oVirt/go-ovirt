@@ -72,19 +72,30 @@ func (c *Connection) URL() string {
 // If the authentication fails because the oauth token is no longer valid it will
 // try to re-authenticate, to renew the token.
 func (c *Connection) Test() error {
-	options, err := http.NewRequest(http.MethodOptions, "", nil)
-	if err != nil {
-		// shouldn't fail to construct a request, but report anyway.
-		return err
-	}
-	// a simple http OPTIONS request is the lightest method to test auth.
-	_, err = c.client.Do(options)
-	if err != nil {
+	statusCode, err := c.testToken()
+	if err != nil || statusCode == http.StatusUnauthorized {
 		// failed, then clear state.
 		c.ssoToken = ""
 	}
 	_, err = c.authenticate()
 	return err
+}
+
+// testToken tries a minimal request, using the existing token. Returns the status
+// code and an error.
+func (c *Connection) testToken() (int, error) {
+	// a simple http OPTIONS request is the lightest method to test auth.
+	options, err := http.NewRequest(http.MethodOptions, c.url.String(), nil)
+	// add auth token to the request
+	options.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.ssoToken))
+	if err != nil {
+		// shouldn't fail to construct a request, but report anyway.
+		return 0, err
+	}
+	res, err := c.client.Do(options)
+	defer res.Body.Close()
+
+	return res.StatusCode, err
 }
 
 func (c *Connection) getHref(object Href) (string, bool) {
