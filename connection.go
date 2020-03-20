@@ -47,6 +47,7 @@ type Connection struct {
 	token    string
 	insecure bool
 	caFile   string
+	caCert   []byte
 	headers  map[string]string
 	// Debug options
 	logFunc LogFunc
@@ -260,13 +261,19 @@ func (c *Connection) getSsoResponse(inputURL *url.URL, parameters map[string]str
 			if _, err := os.Stat(c.caFile); os.IsNotExist(err) {
 				return nil, fmt.Errorf("The CA File '%s' doesn't exist", c.caFile)
 			}
-			pool := x509.NewCertPool()
 			caCerts, err := ioutil.ReadFile(c.caFile)
 			if err != nil {
 				return nil, err
 			}
-			if !pool.AppendCertsFromPEM(caCerts) {
+			pool, err := createCertPool(caCerts)
+			if err != nil {
 				return nil, fmt.Errorf("Failed to parse CA Certificate in file '%s'", c.caFile)
+			}
+			tlsConfig.RootCAs = pool
+		} else if len(c.caCert) > 0 {
+			pool, err := createCertPool(c.caCert)
+			if err != nil {
+				return nil, err
 			}
 			tlsConfig.RootCAs = pool
 		}
@@ -476,6 +483,16 @@ func (connBuilder *ConnectionBuilder) CAFile(caFilePath string) *ConnectionBuild
 	return connBuilder
 }
 
+// CACert sets the caCert field for `Connection` instance
+func (connBuilder *ConnectionBuilder) CACert(caCert []byte) *ConnectionBuilder {
+	// If already has errors, just return
+	if connBuilder.err != nil {
+		return connBuilder
+	}
+	connBuilder.conn.caCert = caCert
+	return connBuilder
+}
+
 // Headers sets a map of custom HTTP headers to be added to each HTTP request
 func (connBuilder *ConnectionBuilder) Headers(headers map[string]string) *ConnectionBuilder {
 	// If already has errors, just return
@@ -547,13 +564,19 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 			if _, err := os.Stat(connBuilder.conn.caFile); os.IsNotExist(err) {
 				return nil, fmt.Errorf("The ca file '%s' doesn't exist", connBuilder.conn.caFile)
 			}
-			pool := x509.NewCertPool()
 			caCerts, err := ioutil.ReadFile(connBuilder.conn.caFile)
 			if err != nil {
 				return nil, err
 			}
-			if !pool.AppendCertsFromPEM(caCerts) {
+			pool, err := createCertPool(caCerts)
+			if err != nil {
 				return nil, fmt.Errorf("Failed to parse CA Certificate in file '%s'", connBuilder.conn.caFile)
+			}
+			tlsConfig.RootCAs = pool
+		} else if len(connBuilder.conn.caCert) > 0 {
+			pool, err := createCertPool(connBuilder.conn.caCert)
+			if err != nil {
+				return nil, err
 			}
 			tlsConfig.RootCAs = pool
 		}
@@ -568,4 +591,12 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 		},
 	}
 	return connBuilder.conn, nil
+}
+
+func createCertPool(caCerts []byte) (*x509.CertPool, error) {
+	pool := x509.NewCertPool()
+	if !pool.AppendCertsFromPEM(caCerts) {
+		return nil, fmt.Errorf("Failed to parse CA Certificate")
+	}
+	return pool, nil
 }
