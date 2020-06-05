@@ -275,3 +275,103 @@ func TestGlusterBrickReadMany(t *testing.T) {
 	assert.Equal(1, len(bricks.Slice()))
 
 }
+
+func TestNetworkReadOne(t *testing.T) {
+	assert := assert.New(t)
+	xmlstring := `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<network href="/ovirt-engine/api/clusters/ee0a136a-941d-11ea-bdb1-525400d65c05/networks/bf9915f3-c4e8-400b-9d38-17e6772bcd5d" id="bf9915f3-c4e8-400b-9d38-17e6772bcd5d">
+	<name>ocp</name>
+	<description/>
+	<comment/>
+	<display>false</display>
+	<dns_resolver_configuration>
+		<name_servers>
+			<name_server>8.8.8.8</name_server>
+		</name_servers>
+	</dns_resolver_configuration>
+	<mtu>0</mtu>
+	<required>true</required>
+	<status>non_operational</status>
+	<stp>false</stp>
+	<usages>
+	<usage>vm</usage>
+	</usages>
+	<vdsm_name>ocp</vdsm_name>
+	<cluster href="/ovirt-engine/api/clusters/ee0a136a-941d-11ea-bdb1-525400d65c05" id="ee0a136a-941d-11ea-bdb1-525400d65c05"/>
+	<data_center href="/ovirt-engine/api/datacenters/ee081c4a-941d-11ea-9cf8-525400d65c05" id="ee081c4a-941d-11ea-9cf8-525400d65c05"/>
+</network>
+`
+
+	reader := NewXMLReader([]byte(xmlstring))
+	network, err := XMLNetworkReadOne(reader, nil, "")
+	assert.Nil(err)
+	mtu, ok := network.Mtu()
+	assert.True(ok)
+	assert.Equal(int64(0), mtu)
+}
+
+func TestNetworkReadMany(t *testing.T) {
+	assert := assert.New(t)
+	xmlstring := `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<networks>
+	<network href="/ovirt-engine/api/clusters/ee0a136a-941d-11ea-bdb1-525400d65c05/networks/acfcf2fa-dd36-4047-9da9-5e349516a679" id="acfcf2fa-dd36-4047-9da9-5e349516a679">
+		<name>lab</name>
+		<description>Lab network</description>
+		<comment/>
+		<display>false</display>
+		<mtu>0</mtu>
+		<required>true</required>
+		<status>non_operational</status>
+		<stp>false</stp>
+		<usages>
+		<usage>vm</usage>
+		</usages>
+		<vdsm_name>lab</vdsm_name>
+		<cluster href="/ovirt-engine/api/clusters/ee0a136a-941d-11ea-bdb1-525400d65c05" id="ee0a136a-941d-11ea-bdb1-525400d65c05"/>
+		<data_center href="/ovirt-engine/api/datacenters/ee081c4a-941d-11ea-9cf8-525400d65c05" id="ee081c4a-941d-11ea-9cf8-525400d65c05"/>
+	</network>
+	<network href="/ovirt-engine/api/clusters/ee0a136a-941d-11ea-bdb1-525400d65c05/networks/bf9915f3-c4e8-400b-9d38-17e6772bcd5d" id="bf9915f3-c4e8-400b-9d38-17e6772bcd5d">
+		<name>ocp</name>
+		<description/>
+		<comment/>
+		<display>false</display>
+		<dns_resolver_configuration>
+			<name_servers>
+				<name_server>8.8.8.8</name_server>
+			</name_servers>
+		</dns_resolver_configuration>
+		<mtu>0</mtu>
+		<required>true</required>
+		<status>non_operational</status>
+		<stp>false</stp>
+		<usages>
+		<usage>vm</usage>
+		</usages>
+		<vdsm_name>ocp</vdsm_name>
+		<cluster href="/ovirt-engine/api/clusters/ee0a136a-941d-11ea-bdb1-525400d65c05" id="ee0a136a-941d-11ea-bdb1-525400d65c05"/>
+		<data_center href="/ovirt-engine/api/datacenters/ee081c4a-941d-11ea-9cf8-525400d65c05" id="ee081c4a-941d-11ea-9cf8-525400d65c05"/>
+	</network>
+	<network href="/ovirt-engine/api/clusters/ee0a136a-941d-11ea-bdb1-525400d65c05/networks/d73e5b4c-f527-4057-b071-65b60302286c" id="d73e5b4c-f527-4057-b071-65b60302286c">
+		<name>ocpnr</name>
+		<description/>
+		<comment/>
+		<display>false</display>
+		<mtu>0</mtu>
+		<required>true</required>
+		<status>non_operational</status>
+		<stp>false</stp>
+		<usages>
+		<usage>vm</usage>
+		</usages>
+		<vdsm_name>ocpnr</vdsm_name>
+		<cluster href="/ovirt-engine/api/clusters/ee0a136a-941d-11ea-bdb1-525400d65c05" id="ee0a136a-941d-11ea-bdb1-525400d65c05"/>
+		<data_center href="/ovirt-engine/api/datacenters/ee081c4a-941d-11ea-9cf8-525400d65c05" id="ee081c4a-941d-11ea-9cf8-525400d65c05"/>
+	</network>
+</networks>
+`
+	reader := NewXMLReader([]byte(xmlstring))
+	networks, err := XMLNetworkReadMany(reader, nil)
+	assert.Nil(err)
+	assert.NotNil(networks)
+	assert.Equal(3, len(networks.Slice()))
+}
