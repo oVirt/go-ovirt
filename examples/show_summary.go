@@ -49,7 +49,7 @@ func showSummary() {
 
 	// Get API information from the root service:
 	api := conn.SystemService().Get().MustSend().MustApi()
-	fmt.Printf("Version: %v\n", api.MustProductInfo().MustVersion())
+	fmt.Printf("Version: %v\n", api.MustProductInfo().MustVersion().MustFullVersion())
 	fmt.Printf("Hosts: %v\n", api.MustSummary().MustHosts().MustTotal())
 	fmt.Printf("StorageDomain: %v\n", api.MustSummary().MustStorageDomains().MustTotal())
 	fmt.Printf("Users: %v\n", api.MustSummary().MustUsers().MustTotal())
