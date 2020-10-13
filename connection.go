@@ -151,6 +151,10 @@ func (c *Connection) FollowLink(object Href) (interface{}, error) {
 		requestCaller = serviceValue.MethodByName("Get").Call([]reflect.Value{})[0]
 	}
 	callerResponse := requestCaller.MethodByName("Send").Call([]reflect.Value{})[0]
+	if callerResponse.IsNil() {
+		return nil, errors.New("Could not get response")
+	}
+
 	// Get the method index, which is not the Must version
 	methodIndex := 0
 	callerResponseType := callerResponse.Type()
