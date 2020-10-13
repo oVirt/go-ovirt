@@ -5144,6 +5144,7 @@ type MacPool struct {
 	description     *string
 	id              *string
 	name            *string
+	permissions     *PermissionSlice
 	ranges          *RangeSlice
 }
 
@@ -5261,6 +5262,24 @@ func (p *MacPool) MustName() string {
 	return *p.name
 }
 
+func (p *MacPool) SetPermissions(attr *PermissionSlice) {
+	p.permissions = attr
+}
+
+func (p *MacPool) Permissions() (*PermissionSlice, bool) {
+	if p.permissions != nil {
+		return p.permissions, true
+	}
+	return nil, false
+}
+
+func (p *MacPool) MustPermissions() *PermissionSlice {
+	if p.permissions == nil {
+		panic("the permissions must not be nil, please use Permissions() function instead")
+	}
+	return p.permissions
+}
+
 func (p *MacPool) SetRanges(attr *RangeSlice) {
 	p.ranges = attr
 }
@@ -5324,9 +5343,29 @@ func (p *VmPlacementPolicy) MustHosts() *HostSlice {
 
 type ProductInfo struct {
 	Struct
+	id      *string
 	name    *string
 	vendor  *string
 	version *Version
+}
+
+func (p *ProductInfo) SetId(attr string) {
+	p.id = &attr
+}
+
+func (p *ProductInfo) Id() (string, bool) {
+	if p.id != nil {
+		return *p.id, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ProductInfo) MustId() string {
+	if p.id == nil {
+		panic("the id must not be nil, please use Id() function instead")
+	}
+	return *p.id
 }
 
 func (p *ProductInfo) SetName(attr string) {
@@ -7445,7 +7484,7 @@ type ImageTransfer struct {
 	name              *string
 	phase             *ImageTransferPhase
 	proxyUrl          *string
-	signedTicket      *string
+	shallow           *bool
 	snapshot          *DiskSnapshot
 	transferUrl       *string
 	transferred       *int64
@@ -7713,23 +7752,23 @@ func (p *ImageTransfer) MustProxyUrl() string {
 	return *p.proxyUrl
 }
 
-func (p *ImageTransfer) SetSignedTicket(attr string) {
-	p.signedTicket = &attr
+func (p *ImageTransfer) SetShallow(attr bool) {
+	p.shallow = &attr
 }
 
-func (p *ImageTransfer) SignedTicket() (string, bool) {
-	if p.signedTicket != nil {
-		return *p.signedTicket, true
+func (p *ImageTransfer) Shallow() (bool, bool) {
+	if p.shallow != nil {
+		return *p.shallow, true
 	}
-	var zero string
+	var zero bool
 	return zero, false
 }
 
-func (p *ImageTransfer) MustSignedTicket() string {
-	if p.signedTicket == nil {
-		panic("the signedTicket must not be nil, please use SignedTicket() function instead")
+func (p *ImageTransfer) MustShallow() bool {
+	if p.shallow == nil {
+		panic("the shallow must not be nil, please use Shallow() function instead")
 	}
-	return *p.signedTicket
+	return *p.shallow
 }
 
 func (p *ImageTransfer) SetSnapshot(attr *DiskSnapshot) {
@@ -22133,6 +22172,7 @@ type Network struct {
 	name                            *string
 	networkLabels                   *NetworkLabelSlice
 	permissions                     *PermissionSlice
+	portIsolation                   *bool
 	profileRequired                 *bool
 	qos                             *Qos
 	required                        *bool
@@ -22400,6 +22440,25 @@ func (p *Network) MustPermissions() *PermissionSlice {
 		panic("the permissions must not be nil, please use Permissions() function instead")
 	}
 	return p.permissions
+}
+
+func (p *Network) SetPortIsolation(attr bool) {
+	p.portIsolation = &attr
+}
+
+func (p *Network) PortIsolation() (bool, bool) {
+	if p.portIsolation != nil {
+		return *p.portIsolation, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Network) MustPortIsolation() bool {
+	if p.portIsolation == nil {
+		panic("the portIsolation must not be nil, please use PortIsolation() function instead")
+	}
+	return *p.portIsolation
 }
 
 func (p *Network) SetProfileRequired(attr bool) {
@@ -23349,6 +23408,168 @@ func (p *HardwareInformation) MustVersion() string {
 		panic("the version must not be nil, please use Version() function instead")
 	}
 	return *p.version
+}
+
+type Checkpoint struct {
+	Struct
+	comment      *string
+	creationDate *time.Time
+	description  *string
+	disks        *DiskSlice
+	id           *string
+	name         *string
+	parentId     *string
+	vm           *Vm
+}
+
+func (p *Checkpoint) SetComment(attr string) {
+	p.comment = &attr
+}
+
+func (p *Checkpoint) Comment() (string, bool) {
+	if p.comment != nil {
+		return *p.comment, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Checkpoint) MustComment() string {
+	if p.comment == nil {
+		panic("the comment must not be nil, please use Comment() function instead")
+	}
+	return *p.comment
+}
+
+func (p *Checkpoint) SetCreationDate(attr time.Time) {
+	p.creationDate = &attr
+}
+
+func (p *Checkpoint) CreationDate() (time.Time, bool) {
+	if p.creationDate != nil {
+		return *p.creationDate, true
+	}
+	var zero time.Time
+	return zero, false
+}
+
+func (p *Checkpoint) MustCreationDate() time.Time {
+	if p.creationDate == nil {
+		panic("the creationDate must not be nil, please use CreationDate() function instead")
+	}
+	return *p.creationDate
+}
+
+func (p *Checkpoint) SetDescription(attr string) {
+	p.description = &attr
+}
+
+func (p *Checkpoint) Description() (string, bool) {
+	if p.description != nil {
+		return *p.description, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Checkpoint) MustDescription() string {
+	if p.description == nil {
+		panic("the description must not be nil, please use Description() function instead")
+	}
+	return *p.description
+}
+
+func (p *Checkpoint) SetDisks(attr *DiskSlice) {
+	p.disks = attr
+}
+
+func (p *Checkpoint) Disks() (*DiskSlice, bool) {
+	if p.disks != nil {
+		return p.disks, true
+	}
+	return nil, false
+}
+
+func (p *Checkpoint) MustDisks() *DiskSlice {
+	if p.disks == nil {
+		panic("the disks must not be nil, please use Disks() function instead")
+	}
+	return p.disks
+}
+
+func (p *Checkpoint) SetId(attr string) {
+	p.id = &attr
+}
+
+func (p *Checkpoint) Id() (string, bool) {
+	if p.id != nil {
+		return *p.id, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Checkpoint) MustId() string {
+	if p.id == nil {
+		panic("the id must not be nil, please use Id() function instead")
+	}
+	return *p.id
+}
+
+func (p *Checkpoint) SetName(attr string) {
+	p.name = &attr
+}
+
+func (p *Checkpoint) Name() (string, bool) {
+	if p.name != nil {
+		return *p.name, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Checkpoint) MustName() string {
+	if p.name == nil {
+		panic("the name must not be nil, please use Name() function instead")
+	}
+	return *p.name
+}
+
+func (p *Checkpoint) SetParentId(attr string) {
+	p.parentId = &attr
+}
+
+func (p *Checkpoint) ParentId() (string, bool) {
+	if p.parentId != nil {
+		return *p.parentId, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Checkpoint) MustParentId() string {
+	if p.parentId == nil {
+		panic("the parentId must not be nil, please use ParentId() function instead")
+	}
+	return *p.parentId
+}
+
+func (p *Checkpoint) SetVm(attr *Vm) {
+	p.vm = attr
+}
+
+func (p *Checkpoint) Vm() (*Vm, bool) {
+	if p.vm != nil {
+		return p.vm, true
+	}
+	return nil, false
+}
+
+func (p *Checkpoint) MustVm() *Vm {
+	if p.vm == nil {
+		panic("the vm must not be nil, please use Vm() function instead")
+	}
+	return p.vm
 }
 
 type Balance struct {
@@ -27744,6 +27965,8 @@ type DiskSnapshot struct {
 	description         *string
 	disk                *Disk
 	diskProfile         *DiskProfile
+	diskSnapshots       *DiskSnapshotSlice
+	externalDisk        *string
 	format              *DiskFormat
 	id                  *string
 	imageId             *string
@@ -27754,6 +27977,7 @@ type DiskSnapshot struct {
 	lunStorage          *HostStorage
 	name                *string
 	openstackVolumeType *OpenStackVolumeType
+	parent              *DiskSnapshot
 	permissions         *PermissionSlice
 	propagateErrors     *bool
 	provisionedSize     *int64
@@ -27965,6 +28189,43 @@ func (p *DiskSnapshot) MustDiskProfile() *DiskProfile {
 	return p.diskProfile
 }
 
+func (p *DiskSnapshot) SetDiskSnapshots(attr *DiskSnapshotSlice) {
+	p.diskSnapshots = attr
+}
+
+func (p *DiskSnapshot) DiskSnapshots() (*DiskSnapshotSlice, bool) {
+	if p.diskSnapshots != nil {
+		return p.diskSnapshots, true
+	}
+	return nil, false
+}
+
+func (p *DiskSnapshot) MustDiskSnapshots() *DiskSnapshotSlice {
+	if p.diskSnapshots == nil {
+		panic("the diskSnapshots must not be nil, please use DiskSnapshots() function instead")
+	}
+	return p.diskSnapshots
+}
+
+func (p *DiskSnapshot) SetExternalDisk(attr string) {
+	p.externalDisk = &attr
+}
+
+func (p *DiskSnapshot) ExternalDisk() (string, bool) {
+	if p.externalDisk != nil {
+		return *p.externalDisk, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *DiskSnapshot) MustExternalDisk() string {
+	if p.externalDisk == nil {
+		panic("the externalDisk must not be nil, please use ExternalDisk() function instead")
+	}
+	return *p.externalDisk
+}
+
 func (p *DiskSnapshot) SetFormat(attr DiskFormat) {
 	p.format = &attr
 }
@@ -28150,6 +28411,24 @@ func (p *DiskSnapshot) MustOpenstackVolumeType() *OpenStackVolumeType {
 		panic("the openstackVolumeType must not be nil, please use OpenstackVolumeType() function instead")
 	}
 	return p.openstackVolumeType
+}
+
+func (p *DiskSnapshot) SetParent(attr *DiskSnapshot) {
+	p.parent = attr
+}
+
+func (p *DiskSnapshot) Parent() (*DiskSnapshot, bool) {
+	if p.parent != nil {
+		return p.parent, true
+	}
+	return nil, false
+}
+
+func (p *DiskSnapshot) MustParent() *DiskSnapshot {
+	if p.parent == nil {
+		panic("the parent must not be nil, please use Parent() function instead")
+	}
+	return p.parent
 }
 
 func (p *DiskSnapshot) SetPermissions(attr *PermissionSlice) {
@@ -29112,6 +29391,8 @@ type Disk struct {
 	contentType         *DiskContentType
 	description         *string
 	diskProfile         *DiskProfile
+	diskSnapshots       *DiskSnapshotSlice
+	externalDisk        *string
 	format              *DiskFormat
 	id                  *string
 	imageId             *string
@@ -29313,6 +29594,43 @@ func (p *Disk) MustDiskProfile() *DiskProfile {
 		panic("the diskProfile must not be nil, please use DiskProfile() function instead")
 	}
 	return p.diskProfile
+}
+
+func (p *Disk) SetDiskSnapshots(attr *DiskSnapshotSlice) {
+	p.diskSnapshots = attr
+}
+
+func (p *Disk) DiskSnapshots() (*DiskSnapshotSlice, bool) {
+	if p.diskSnapshots != nil {
+		return p.diskSnapshots, true
+	}
+	return nil, false
+}
+
+func (p *Disk) MustDiskSnapshots() *DiskSnapshotSlice {
+	if p.diskSnapshots == nil {
+		panic("the diskSnapshots must not be nil, please use DiskSnapshots() function instead")
+	}
+	return p.diskSnapshots
+}
+
+func (p *Disk) SetExternalDisk(attr string) {
+	p.externalDisk = &attr
+}
+
+func (p *Disk) ExternalDisk() (string, bool) {
+	if p.externalDisk != nil {
+		return *p.externalDisk, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *Disk) MustExternalDisk() string {
+	if p.externalDisk == nil {
+		panic("the externalDisk must not be nil, please use ExternalDisk() function instead")
+	}
+	return *p.externalDisk
 }
 
 func (p *Disk) SetFormat(attr DiskFormat) {
@@ -30799,6 +31117,7 @@ type Cluster struct {
 	tunnelMigration                  *bool
 	version                          *Version
 	virtService                      *bool
+	vncEncryption                    *bool
 }
 
 func (p *Cluster) SetAffinityGroups(attr *AffinityGroupSlice) {
@@ -31610,6 +31929,25 @@ func (p *Cluster) MustVirtService() bool {
 		panic("the virtService must not be nil, please use VirtService() function instead")
 	}
 	return *p.virtService
+}
+
+func (p *Cluster) SetVncEncryption(attr bool) {
+	p.vncEncryption = &attr
+}
+
+func (p *Cluster) VncEncryption() (bool, bool) {
+	if p.vncEncryption != nil {
+		return *p.vncEncryption, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Cluster) MustVncEncryption() bool {
+	if p.vncEncryption == nil {
+		panic("the vncEncryption must not be nil, please use VncEncryption() function instead")
+	}
+	return *p.vncEncryption
 }
 
 type GlusterBrickMemoryInfo struct {
@@ -36907,6 +37245,7 @@ type Host struct {
 	port                                  *int64
 	powerManagement                       *PowerManagement
 	protocol                              *HostProtocol
+	reinstallationRequired                *bool
 	rootPassword                          *string
 	seLinux                               *SeLinux
 	spm                                   *Spm
@@ -37623,6 +37962,25 @@ func (p *Host) MustProtocol() HostProtocol {
 		panic("the protocol must not be nil, please use Protocol() function instead")
 	}
 	return *p.protocol
+}
+
+func (p *Host) SetReinstallationRequired(attr bool) {
+	p.reinstallationRequired = &attr
+}
+
+func (p *Host) ReinstallationRequired() (bool, bool) {
+	if p.reinstallationRequired != nil {
+		return *p.reinstallationRequired, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Host) MustReinstallationRequired() bool {
+	if p.reinstallationRequired == nil {
+		panic("the reinstallationRequired must not be nil, please use ReinstallationRequired() function instead")
+	}
+	return *p.reinstallationRequired
 }
 
 func (p *Host) SetRootPassword(attr string) {
@@ -38775,6 +39133,7 @@ type Action struct {
 	async                          *bool
 	attachment                     *DiskAttachment
 	authorizedKey                  *AuthorizedKey
+	autoPinningPolicy              *AutoPinningPolicy
 	bricks                         *GlusterBrickSlice
 	certificates                   *CertificateSlice
 	checkConnectivity              *bool
@@ -38955,6 +39314,25 @@ func (p *Action) MustAuthorizedKey() *AuthorizedKey {
 		panic("the authorizedKey must not be nil, please use AuthorizedKey() function instead")
 	}
 	return p.authorizedKey
+}
+
+func (p *Action) SetAutoPinningPolicy(attr AutoPinningPolicy) {
+	p.autoPinningPolicy = &attr
+}
+
+func (p *Action) AutoPinningPolicy() (AutoPinningPolicy, bool) {
+	if p.autoPinningPolicy != nil {
+		return *p.autoPinningPolicy, true
+	}
+	var zero AutoPinningPolicy
+	return zero, false
+}
+
+func (p *Action) MustAutoPinningPolicy() AutoPinningPolicy {
+	if p.autoPinningPolicy == nil {
+		panic("the autoPinningPolicy must not be nil, please use AutoPinningPolicy() function instead")
+	}
+	return *p.autoPinningPolicy
 }
 
 func (p *Action) SetBricks(attr *GlusterBrickSlice) {
@@ -43853,6 +44231,30 @@ func (op *HardwareInformationSlice) Slice() []*HardwareInformation {
 }
 
 func (op *HardwareInformationSlice) SetSlice(slice []*HardwareInformation) {
+	op.slice = slice
+}
+
+type CheckpointSlice struct {
+	href  *string
+	slice []*Checkpoint
+}
+
+func (op *CheckpointSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *CheckpointSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *CheckpointSlice) Slice() []*Checkpoint {
+	return op.slice
+}
+
+func (op *CheckpointSlice) SetSlice(slice []*Checkpoint) {
 	op.slice = slice
 }
 
@@ -51151,6 +51553,47 @@ func (builder *MacPoolBuilder) Name(attr string) *MacPoolBuilder {
 	return builder
 }
 
+func (builder *MacPoolBuilder) Permissions(attr *PermissionSlice) *MacPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.macPool.SetPermissions(attr)
+	return builder
+}
+
+func (builder *MacPoolBuilder) PermissionsOfAny(anys ...*Permission) *MacPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.macPool.permissions == nil {
+		builder.macPool.permissions = new(PermissionSlice)
+	}
+	builder.macPool.permissions.slice = append(builder.macPool.permissions.slice, anys...)
+	return builder
+}
+
+func (builder *MacPoolBuilder) PermissionsBuilderOfAny(anyBuilders ...PermissionBuilder) *MacPoolBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.PermissionsOfAny(attr)
+	}
+	return builder
+}
+
 func (builder *MacPoolBuilder) Ranges(attr *RangeSlice) *MacPoolBuilder {
 	if builder.err != nil {
 		return builder
@@ -51304,6 +51747,15 @@ type ProductInfoBuilder struct {
 
 func NewProductInfoBuilder() *ProductInfoBuilder {
 	return &ProductInfoBuilder{productInfo: &ProductInfo{}, err: nil}
+}
+
+func (builder *ProductInfoBuilder) Id(attr string) *ProductInfoBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.productInfo.SetId(attr)
+	return builder
 }
 
 func (builder *ProductInfoBuilder) Name(attr string) *ProductInfoBuilder {
@@ -53482,12 +53934,12 @@ func (builder *ImageTransferBuilder) ProxyUrl(attr string) *ImageTransferBuilder
 	return builder
 }
 
-func (builder *ImageTransferBuilder) SignedTicket(attr string) *ImageTransferBuilder {
+func (builder *ImageTransferBuilder) Shallow(attr bool) *ImageTransferBuilder {
 	if builder.err != nil {
 		return builder
 	}
 
-	builder.imageTransfer.SetSignedTicket(attr)
+	builder.imageTransfer.SetShallow(attr)
 	return builder
 }
 
@@ -68847,6 +69299,15 @@ func (builder *NetworkBuilder) PermissionsBuilderOfAny(anyBuilders ...Permission
 	return builder
 }
 
+func (builder *NetworkBuilder) PortIsolation(attr bool) *NetworkBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.network.SetPortIsolation(attr)
+	return builder
+}
+
 func (builder *NetworkBuilder) ProfileRequired(attr bool) *NetworkBuilder {
 	if builder.err != nil {
 		return builder
@@ -69883,6 +70344,159 @@ func (builder *HardwareInformationBuilder) MustBuild() *HardwareInformation {
 		panic(fmt.Sprintf("Failed to build HardwareInformation instance, reason: %v", builder.err))
 	}
 	return builder.hardwareInformation
+}
+
+type CheckpointBuilder struct {
+	checkpoint *Checkpoint
+	err        error
+}
+
+func NewCheckpointBuilder() *CheckpointBuilder {
+	return &CheckpointBuilder{checkpoint: &Checkpoint{}, err: nil}
+}
+
+func (builder *CheckpointBuilder) Comment(attr string) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetComment(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) CreationDate(attr time.Time) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetCreationDate(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) Description(attr string) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetDescription(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) Disks(attr *DiskSlice) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetDisks(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) DisksOfAny(anys ...*Disk) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.checkpoint.disks == nil {
+		builder.checkpoint.disks = new(DiskSlice)
+	}
+	builder.checkpoint.disks.slice = append(builder.checkpoint.disks.slice, anys...)
+	return builder
+}
+
+func (builder *CheckpointBuilder) DisksBuilderOfAny(anyBuilders ...DiskBuilder) *CheckpointBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DisksOfAny(attr)
+	}
+	return builder
+}
+
+func (builder *CheckpointBuilder) Id(attr string) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetId(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) Name(attr string) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetName(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) ParentId(attr string) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetParentId(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) Vm(attr *Vm) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetVm(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) VmBuilder(attrBuilder *VmBuilder) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Vm(attr)
+}
+
+func (builder *CheckpointBuilder) Href(href string) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetHref(href)
+	return builder
+}
+
+func (builder *CheckpointBuilder) Build() (*Checkpoint, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.checkpoint, nil
+}
+
+func (builder *CheckpointBuilder) MustBuild() *Checkpoint {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build Checkpoint instance, reason: %v", builder.err))
+	}
+	return builder.checkpoint
 }
 
 type BalanceBuilder struct {
@@ -74178,6 +74792,56 @@ func (builder *DiskSnapshotBuilder) DiskProfileBuilder(attrBuilder *DiskProfileB
 	return builder.DiskProfile(attr)
 }
 
+func (builder *DiskSnapshotBuilder) DiskSnapshots(attr *DiskSnapshotSlice) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.diskSnapshot.SetDiskSnapshots(attr)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) DiskSnapshotsOfAny(anys ...*DiskSnapshot) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.diskSnapshot.diskSnapshots == nil {
+		builder.diskSnapshot.diskSnapshots = new(DiskSnapshotSlice)
+	}
+	builder.diskSnapshot.diskSnapshots.slice = append(builder.diskSnapshot.diskSnapshots.slice, anys...)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) DiskSnapshotsBuilderOfAny(anyBuilders ...DiskSnapshotBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiskSnapshotsOfAny(attr)
+	}
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) ExternalDisk(attr string) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.diskSnapshot.SetExternalDisk(attr)
+	return builder
+}
+
 func (builder *DiskSnapshotBuilder) Format(attr DiskFormat) *DiskSnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -74317,6 +74981,32 @@ func (builder *DiskSnapshotBuilder) OpenstackVolumeTypeBuilder(attrBuilder *Open
 		return builder
 	}
 	return builder.OpenstackVolumeType(attr)
+}
+
+func (builder *DiskSnapshotBuilder) Parent(attr *DiskSnapshot) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.diskSnapshot.SetParent(attr)
+	return builder
+}
+
+func (builder *DiskSnapshotBuilder) ParentBuilder(attrBuilder *DiskSnapshotBuilder) *DiskSnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Parent(attr)
 }
 
 func (builder *DiskSnapshotBuilder) Permissions(attr *PermissionSlice) *DiskSnapshotBuilder {
@@ -75499,6 +76189,56 @@ func (builder *DiskBuilder) DiskProfileBuilder(attrBuilder *DiskProfileBuilder) 
 		return builder
 	}
 	return builder.DiskProfile(attr)
+}
+
+func (builder *DiskBuilder) DiskSnapshots(attr *DiskSnapshotSlice) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.disk.SetDiskSnapshots(attr)
+	return builder
+}
+
+func (builder *DiskBuilder) DiskSnapshotsOfAny(anys ...*DiskSnapshot) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if builder.disk.diskSnapshots == nil {
+		builder.disk.diskSnapshots = new(DiskSnapshotSlice)
+	}
+	builder.disk.diskSnapshots.slice = append(builder.disk.diskSnapshots.slice, anys...)
+	return builder
+}
+
+func (builder *DiskBuilder) DiskSnapshotsBuilderOfAny(anyBuilders ...DiskSnapshotBuilder) *DiskBuilder {
+	if builder.err != nil || len(anyBuilders) == 0 {
+		return builder
+	}
+
+	for _, b := range anyBuilders {
+		if b.err != nil {
+			builder.err = b.err
+			return builder
+		}
+		attr, err := b.Build()
+		if err != nil {
+			builder.err = b.err
+			return builder
+		}
+		builder.DiskSnapshotsOfAny(attr)
+	}
+	return builder
+}
+
+func (builder *DiskBuilder) ExternalDisk(attr string) *DiskBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.disk.SetExternalDisk(attr)
+	return builder
 }
 
 func (builder *DiskBuilder) Format(attr DiskFormat) *DiskBuilder {
@@ -77902,6 +78642,15 @@ func (builder *ClusterBuilder) VirtService(attr bool) *ClusterBuilder {
 	}
 
 	builder.cluster.SetVirtService(attr)
+	return builder
+}
+
+func (builder *ClusterBuilder) VncEncryption(attr bool) *ClusterBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.cluster.SetVncEncryption(attr)
 	return builder
 }
 
@@ -84397,6 +85146,15 @@ func (builder *HostBuilder) Protocol(attr HostProtocol) *HostBuilder {
 	return builder
 }
 
+func (builder *HostBuilder) ReinstallationRequired(attr bool) *HostBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.host.SetReinstallationRequired(attr)
+	return builder
+}
+
 func (builder *HostBuilder) RootPassword(attr string) *HostBuilder {
 	if builder.err != nil {
 		return builder
@@ -85893,6 +86651,15 @@ func (builder *ActionBuilder) AuthorizedKeyBuilder(attrBuilder *AuthorizedKeyBui
 		return builder
 	}
 	return builder.AuthorizedKey(attr)
+}
+
+func (builder *ActionBuilder) AutoPinningPolicy(attr AutoPinningPolicy) *ActionBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.action.SetAutoPinningPolicy(attr)
+	return builder
 }
 
 func (builder *ActionBuilder) Bricks(attr *GlusterBrickSlice) *ActionBuilder {
@@ -88043,6 +88810,14 @@ const (
 	QOSTYPE_HOSTNETWORK QosType = "hostnetwork"
 	QOSTYPE_NETWORK     QosType = "network"
 	QOSTYPE_STORAGE     QosType = "storage"
+)
+
+type AutoPinningPolicy string
+
+const (
+	AUTOPINNINGPOLICY_ADJUST   AutoPinningPolicy = "adjust"
+	AUTOPINNINGPOLICY_DISABLED AutoPinningPolicy = "disabled"
+	AUTOPINNINGPOLICY_EXISTING AutoPinningPolicy = "existing"
 )
 
 type StepEnum string
