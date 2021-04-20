@@ -15900,6 +15900,12 @@ func XMLInstanceTypeReadOne(reader *XMLReader, start *xml.StartElement, expected
 					return nil, err
 				}
 				builder.TimeZone(v)
+			case "tpm_enabled":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.TpmEnabled(v)
 			case "tunnel_migration":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -20290,6 +20296,12 @@ func XMLNicReadOne(reader *XMLReader, start *xml.StartElement, expectedTag strin
 					return nil, err
 				}
 				builder.Statistics(v)
+			case "synced":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Synced(v)
 			case "template":
 				v, err := XMLTemplateReadOne(reader, &t, "template")
 				if err != nil {
@@ -28798,6 +28810,12 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.TimeZone(v)
+			case "tpm_enabled":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.TpmEnabled(v)
 			case "tunnel_migration":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -31800,6 +31818,12 @@ func XMLTemplateReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.TimeZone(v)
+			case "tpm_enabled":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.TpmEnabled(v)
 			case "tunnel_migration":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -34598,6 +34622,12 @@ func XMLVmReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string
 					return nil, err
 				}
 				builder.TimeZone(v)
+			case "tpm_enabled":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.TpmEnabled(v)
 			case "tunnel_migration":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -35100,6 +35130,12 @@ func XMLVmBaseReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.TimeZone(v)
+			case "tpm_enabled":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.TpmEnabled(v)
 			case "tunnel_migration":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -35470,6 +35506,12 @@ func XMLVmPoolReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.Template(v)
+			case "tpm_enabled":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.TpmEnabled(v)
 			case "type":
 				vp, err := XMLVmPoolTypeReadOne(reader, &t)
 				v := *vp
@@ -35878,6 +35920,12 @@ func XMLVnicProfileReadOne(reader *XMLReader, start *xml.StartElement, expectedT
 					return nil, err
 				}
 				builder.Description(v)
+			case "failover":
+				v, err := XMLVnicProfileReadOne(reader, &t, "failover")
+				if err != nil {
+					return nil, err
+				}
+				builder.Failover(v)
 			case "migratable":
 				v, err := reader.ReadBool(&t)
 				if err != nil {

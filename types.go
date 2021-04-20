@@ -17023,6 +17023,7 @@ type InstanceType struct {
 	storageErrorResumeBehaviour  *VmStorageErrorResumeBehaviour
 	tags                         *TagSlice
 	timeZone                     *TimeZone
+	tpmEnabled                   *bool
 	tunnelMigration              *bool
 	type_                        *VmType
 	usb                          *Usb
@@ -17931,6 +17932,25 @@ func (p *InstanceType) MustTimeZone() *TimeZone {
 		panic("the timeZone must not be nil, please use TimeZone() function instead")
 	}
 	return p.timeZone
+}
+
+func (p *InstanceType) SetTpmEnabled(attr bool) {
+	p.tpmEnabled = &attr
+}
+
+func (p *InstanceType) TpmEnabled() (bool, bool) {
+	if p.tpmEnabled != nil {
+		return *p.tpmEnabled, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *InstanceType) MustTpmEnabled() bool {
+	if p.tpmEnabled == nil {
+		panic("the tpmEnabled must not be nil, please use TpmEnabled() function instead")
+	}
+	return *p.tpmEnabled
 }
 
 func (p *InstanceType) SetTunnelMigration(attr bool) {
@@ -21643,6 +21663,7 @@ type Nic struct {
 	plugged                        *bool
 	reportedDevices                *ReportedDeviceSlice
 	statistics                     *StatisticSlice
+	synced                         *bool
 	template                       *Template
 	virtualFunctionAllowedLabels   *NetworkLabelSlice
 	virtualFunctionAllowedNetworks *NetworkSlice
@@ -21964,6 +21985,25 @@ func (p *Nic) MustStatistics() *StatisticSlice {
 		panic("the statistics must not be nil, please use Statistics() function instead")
 	}
 	return p.statistics
+}
+
+func (p *Nic) SetSynced(attr bool) {
+	p.synced = &attr
+}
+
+func (p *Nic) Synced() (bool, bool) {
+	if p.synced != nil {
+		return *p.synced, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Nic) MustSynced() bool {
+	if p.synced == nil {
+		panic("the synced must not be nil, please use Synced() function instead")
+	}
+	return *p.synced
 }
 
 func (p *Nic) SetTemplate(attr *Template) {
@@ -28707,6 +28747,7 @@ type Snapshot struct {
 	tags                         *TagSlice
 	template                     *Template
 	timeZone                     *TimeZone
+	tpmEnabled                   *bool
 	tunnelMigration              *bool
 	type_                        *VmType
 	usb                          *Usb
@@ -30205,6 +30246,25 @@ func (p *Snapshot) MustTimeZone() *TimeZone {
 		panic("the timeZone must not be nil, please use TimeZone() function instead")
 	}
 	return p.timeZone
+}
+
+func (p *Snapshot) SetTpmEnabled(attr bool) {
+	p.tpmEnabled = &attr
+}
+
+func (p *Snapshot) TpmEnabled() (bool, bool) {
+	if p.tpmEnabled != nil {
+		return *p.tpmEnabled, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Snapshot) MustTpmEnabled() bool {
+	if p.tpmEnabled == nil {
+		panic("the tpmEnabled must not be nil, please use TpmEnabled() function instead")
+	}
+	return *p.tpmEnabled
 }
 
 func (p *Snapshot) SetTunnelMigration(attr bool) {
@@ -33077,6 +33137,7 @@ type Template struct {
 	storageErrorResumeBehaviour  *VmStorageErrorResumeBehaviour
 	tags                         *TagSlice
 	timeZone                     *TimeZone
+	tpmEnabled                   *bool
 	tunnelMigration              *bool
 	type_                        *VmType
 	usb                          *Usb
@@ -33985,6 +34046,25 @@ func (p *Template) MustTimeZone() *TimeZone {
 		panic("the timeZone must not be nil, please use TimeZone() function instead")
 	}
 	return p.timeZone
+}
+
+func (p *Template) SetTpmEnabled(attr bool) {
+	p.tpmEnabled = &attr
+}
+
+func (p *Template) TpmEnabled() (bool, bool) {
+	if p.tpmEnabled != nil {
+		return *p.tpmEnabled, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Template) MustTpmEnabled() bool {
+	if p.tpmEnabled == nil {
+		panic("the tpmEnabled must not be nil, please use TpmEnabled() function instead")
+	}
+	return *p.tpmEnabled
 }
 
 func (p *Template) SetTunnelMigration(attr bool) {
@@ -35755,6 +35835,7 @@ type Vm struct {
 	tags                         *TagSlice
 	template                     *Template
 	timeZone                     *TimeZone
+	tpmEnabled                   *bool
 	tunnelMigration              *bool
 	type_                        *VmType
 	usb                          *Usb
@@ -37160,6 +37241,25 @@ func (p *Vm) MustTimeZone() *TimeZone {
 	return p.timeZone
 }
 
+func (p *Vm) SetTpmEnabled(attr bool) {
+	p.tpmEnabled = &attr
+}
+
+func (p *Vm) TpmEnabled() (bool, bool) {
+	if p.tpmEnabled != nil {
+		return *p.tpmEnabled, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *Vm) MustTpmEnabled() bool {
+	if p.tpmEnabled == nil {
+		panic("the tpmEnabled must not be nil, please use TpmEnabled() function instead")
+	}
+	return *p.tpmEnabled
+}
+
 func (p *Vm) SetTunnelMigration(attr bool) {
 	p.tunnelMigration = &attr
 }
@@ -37352,6 +37452,7 @@ type VmBase struct {
 	storageDomain                *StorageDomain
 	storageErrorResumeBehaviour  *VmStorageErrorResumeBehaviour
 	timeZone                     *TimeZone
+	tpmEnabled                   *bool
 	tunnelMigration              *bool
 	type_                        *VmType
 	usb                          *Usb
@@ -38132,6 +38233,25 @@ func (p *VmBase) MustTimeZone() *TimeZone {
 	return p.timeZone
 }
 
+func (p *VmBase) SetTpmEnabled(attr bool) {
+	p.tpmEnabled = &attr
+}
+
+func (p *VmBase) TpmEnabled() (bool, bool) {
+	if p.tpmEnabled != nil {
+		return *p.tpmEnabled, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *VmBase) MustTpmEnabled() bool {
+	if p.tpmEnabled == nil {
+		panic("the tpmEnabled must not be nil, please use TpmEnabled() function instead")
+	}
+	return *p.tpmEnabled
+}
+
 func (p *VmBase) SetTunnelMigration(attr bool) {
 	p.tunnelMigration = &attr
 }
@@ -38286,6 +38406,7 @@ type VmPool struct {
 	soundcardEnabled         *bool
 	stateful                 *bool
 	template                 *Template
+	tpmEnabled               *bool
 	type_                    *VmPoolType
 	useLatestTemplateVersion *bool
 	vm                       *Vm
@@ -38589,6 +38710,25 @@ func (p *VmPool) MustTemplate() *Template {
 	return p.template
 }
 
+func (p *VmPool) SetTpmEnabled(attr bool) {
+	p.tpmEnabled = &attr
+}
+
+func (p *VmPool) TpmEnabled() (bool, bool) {
+	if p.tpmEnabled != nil {
+		return *p.tpmEnabled, true
+	}
+	var zero bool
+	return zero, false
+}
+
+func (p *VmPool) MustTpmEnabled() bool {
+	if p.tpmEnabled == nil {
+		panic("the tpmEnabled must not be nil, please use TpmEnabled() function instead")
+	}
+	return *p.tpmEnabled
+}
+
 func (p *VmPool) SetType(attr VmPoolType) {
 	p.type_ = &attr
 }
@@ -38738,6 +38878,7 @@ type VnicProfile struct {
 	comment          *string
 	customProperties *CustomPropertySlice
 	description      *string
+	failover         *VnicProfile
 	id               *string
 	migratable       *bool
 	name             *string
@@ -38803,6 +38944,24 @@ func (p *VnicProfile) MustDescription() string {
 		panic("the description must not be nil, please use Description() function instead")
 	}
 	return *p.description
+}
+
+func (p *VnicProfile) SetFailover(attr *VnicProfile) {
+	p.failover = attr
+}
+
+func (p *VnicProfile) Failover() (*VnicProfile, bool) {
+	if p.failover != nil {
+		return p.failover, true
+	}
+	return nil, false
+}
+
+func (p *VnicProfile) MustFailover() *VnicProfile {
+	if p.failover == nil {
+		panic("the failover must not be nil, please use Failover() function instead")
+	}
+	return p.failover
 }
 
 func (p *VnicProfile) SetId(attr string) {
@@ -64441,6 +64600,15 @@ func (builder *InstanceTypeBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder
 	return builder.TimeZone(attr)
 }
 
+func (builder *InstanceTypeBuilder) TpmEnabled(attr bool) *InstanceTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.instanceType.SetTpmEnabled(attr)
+	return builder
+}
+
 func (builder *InstanceTypeBuilder) TunnelMigration(attr bool) *InstanceTypeBuilder {
 	if builder.err != nil {
 		return builder
@@ -68401,6 +68569,15 @@ func (builder *NicBuilder) StatisticsBuilderOfAny(anyBuilders ...StatisticBuilde
 		}
 		builder.StatisticsOfAny(attr)
 	}
+	return builder
+}
+
+func (builder *NicBuilder) Synced(attr bool) *NicBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.nic.SetSynced(attr)
 	return builder
 }
 
@@ -77336,6 +77513,15 @@ func (builder *SnapshotBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *S
 	return builder.TimeZone(attr)
 }
 
+func (builder *SnapshotBuilder) TpmEnabled(attr bool) *SnapshotBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.snapshot.SetTpmEnabled(attr)
+	return builder
+}
+
 func (builder *SnapshotBuilder) TunnelMigration(attr bool) *SnapshotBuilder {
 	if builder.err != nil {
 		return builder
@@ -81199,6 +81385,15 @@ func (builder *TemplateBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *T
 	return builder.TimeZone(attr)
 }
 
+func (builder *TemplateBuilder) TpmEnabled(attr bool) *TemplateBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.template.SetTpmEnabled(attr)
+	return builder
+}
+
 func (builder *TemplateBuilder) TunnelMigration(attr bool) *TemplateBuilder {
 	if builder.err != nil {
 		return builder
@@ -84769,6 +84964,15 @@ func (builder *VmBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *VmBuild
 	return builder.TimeZone(attr)
 }
 
+func (builder *VmBuilder) TpmEnabled(attr bool) *VmBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.vm.SetTpmEnabled(attr)
+	return builder
+}
+
 func (builder *VmBuilder) TunnelMigration(attr bool) *VmBuilder {
 	if builder.err != nil {
 		return builder
@@ -85774,6 +85978,15 @@ func (builder *VmBaseBuilder) TimeZoneBuilder(attrBuilder *TimeZoneBuilder) *VmB
 	return builder.TimeZone(attr)
 }
 
+func (builder *VmBaseBuilder) TpmEnabled(attr bool) *VmBaseBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.vmBase.SetTpmEnabled(attr)
+	return builder
+}
+
 func (builder *VmBaseBuilder) TunnelMigration(attr bool) *VmBaseBuilder {
 	if builder.err != nil {
 		return builder
@@ -86228,6 +86441,15 @@ func (builder *VmPoolBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *VmP
 	return builder.Template(attr)
 }
 
+func (builder *VmPoolBuilder) TpmEnabled(attr bool) *VmPoolBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.vmPool.SetTpmEnabled(attr)
+	return builder
+}
+
 func (builder *VmPoolBuilder) Type(attr VmPoolType) *VmPoolBuilder {
 	if builder.err != nil {
 		return builder
@@ -86461,6 +86683,32 @@ func (builder *VnicProfileBuilder) Description(attr string) *VnicProfileBuilder 
 
 	builder.vnicProfile.SetDescription(attr)
 	return builder
+}
+
+func (builder *VnicProfileBuilder) Failover(attr *VnicProfile) *VnicProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.vnicProfile.SetFailover(attr)
+	return builder
+}
+
+func (builder *VnicProfileBuilder) FailoverBuilder(attrBuilder *VnicProfileBuilder) *VnicProfileBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Failover(attr)
 }
 
 func (builder *VnicProfileBuilder) Id(attr string) *VnicProfileBuilder {

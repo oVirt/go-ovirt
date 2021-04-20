@@ -5321,6 +5321,9 @@ func XMLInstanceTypeWriteOne(writer *XMLWriter, object *InstanceType, tag string
 	if r, ok := object.TimeZone(); ok {
 		XMLTimeZoneWriteOne(writer, r, "time_zone")
 	}
+	if r, ok := object.TpmEnabled(); ok {
+		writer.WriteBool("tpm_enabled", r)
+	}
 	if r, ok := object.TunnelMigration(); ok {
 		writer.WriteBool("tunnel_migration", r)
 	}
@@ -6729,6 +6732,9 @@ func XMLNicWriteOne(writer *XMLWriter, object *Nic, tag string) error {
 	}
 	if r, ok := object.Statistics(); ok {
 		XMLStatisticWriteMany(writer, r, "statistics", "statistic")
+	}
+	if r, ok := object.Synced(); ok {
+		writer.WriteBool("synced", r)
 	}
 	if r, ok := object.Template(); ok {
 		XMLTemplateWriteOne(writer, r, "template")
@@ -9484,6 +9490,9 @@ func XMLSnapshotWriteOne(writer *XMLWriter, object *Snapshot, tag string) error 
 	if r, ok := object.TimeZone(); ok {
 		XMLTimeZoneWriteOne(writer, r, "time_zone")
 	}
+	if r, ok := object.TpmEnabled(); ok {
+		writer.WriteBool("tpm_enabled", r)
+	}
 	if r, ok := object.TunnelMigration(); ok {
 		writer.WriteBool("tunnel_migration", r)
 	}
@@ -10499,6 +10508,9 @@ func XMLTemplateWriteOne(writer *XMLWriter, object *Template, tag string) error 
 	if r, ok := object.TimeZone(); ok {
 		XMLTimeZoneWriteOne(writer, r, "time_zone")
 	}
+	if r, ok := object.TpmEnabled(); ok {
+		writer.WriteBool("tpm_enabled", r)
+	}
 	if r, ok := object.TunnelMigration(); ok {
 		writer.WriteBool("tunnel_migration", r)
 	}
@@ -11440,6 +11452,9 @@ func XMLVmWriteOne(writer *XMLWriter, object *Vm, tag string) error {
 	if r, ok := object.TimeZone(); ok {
 		XMLTimeZoneWriteOne(writer, r, "time_zone")
 	}
+	if r, ok := object.TpmEnabled(); ok {
+		writer.WriteBool("tpm_enabled", r)
+	}
 	if r, ok := object.TunnelMigration(); ok {
 		writer.WriteBool("tunnel_migration", r)
 	}
@@ -11621,6 +11636,9 @@ func XMLVmBaseWriteOne(writer *XMLWriter, object *VmBase, tag string) error {
 	if r, ok := object.TimeZone(); ok {
 		XMLTimeZoneWriteOne(writer, r, "time_zone")
 	}
+	if r, ok := object.TpmEnabled(); ok {
+		writer.WriteBool("tpm_enabled", r)
+	}
 	if r, ok := object.TunnelMigration(); ok {
 		writer.WriteBool("tunnel_migration", r)
 	}
@@ -11748,6 +11766,9 @@ func XMLVmPoolWriteOne(writer *XMLWriter, object *VmPool, tag string) error {
 	if r, ok := object.Template(); ok {
 		XMLTemplateWriteOne(writer, r, "template")
 	}
+	if r, ok := object.TpmEnabled(); ok {
+		writer.WriteBool("tpm_enabled", r)
+	}
 	if r, ok := object.Type(); ok {
 		XMLVmPoolTypeWriteOne(writer, r, "type")
 	}
@@ -11865,6 +11886,9 @@ func XMLVnicProfileWriteOne(writer *XMLWriter, object *VnicProfile, tag string) 
 	}
 	if r, ok := object.Description(); ok {
 		writer.WriteCharacter("description", r)
+	}
+	if r, ok := object.Failover(); ok {
+		XMLVnicProfileWriteOne(writer, r, "failover")
 	}
 	if r, ok := object.Migratable(); ok {
 		writer.WriteBool("migratable", r)

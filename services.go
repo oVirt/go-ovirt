@@ -34979,6 +34979,237 @@ func (p *HostService) Deactivate() *HostServiceDeactivateRequest {
 }
 
 //
+// Discovers iSCSI targets on the host, using the initiator details.
+// Returns a list of IscsiDetails objects containing the discovered data.
+// For example, to discover iSCSI targets available in `myiscsi.example.com`,
+// from host `123`, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/hosts/123/discoveriscsi
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//   <iscsi>
+//     <address>myiscsi.example.com</address>
+//   </iscsi>
+// </action>
+// ----
+// The result will be like this:
+// [source,xml]
+// ----
+// <discovered_targets>
+//   <iscsi_details>
+//     <address>10.35.1.72</address>
+//     <port>3260</port>
+//     <portal>10.35.1.72:3260,1</portal>
+//     <target>iqn.2015-08.com.tgt:444</target>
+//   </iscsi_details>
+// </discovered_targets>
+// ----
+//
+type HostServiceDiscoverIscsiRequest struct {
+	HostService *HostService
+	header      map[string]string
+	query       map[string]string
+	async       *bool
+	iscsi       *IscsiDetails
+}
+
+func (p *HostServiceDiscoverIscsiRequest) Header(key, value string) *HostServiceDiscoverIscsiRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *HostServiceDiscoverIscsiRequest) Query(key, value string) *HostServiceDiscoverIscsiRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *HostServiceDiscoverIscsiRequest) Async(async bool) *HostServiceDiscoverIscsiRequest {
+	p.async = &async
+	return p
+}
+
+func (p *HostServiceDiscoverIscsiRequest) Iscsi(iscsi *IscsiDetails) *HostServiceDiscoverIscsiRequest {
+	p.iscsi = iscsi
+	return p
+}
+
+func (p *HostServiceDiscoverIscsiRequest) Send() (*HostServiceDiscoverIscsiResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/discoveriscsi", p.HostService.connection.URL(), p.HostService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	actionBuilder.Iscsi(p.iscsi)
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.HostService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.HostService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.HostService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.HostService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.HostService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	action, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	result := action.MustDiscoveredTargets()
+	return &HostServiceDiscoverIscsiResponse{discoveredTargets: result}, nil
+}
+
+func (p *HostServiceDiscoverIscsiRequest) MustSend() *HostServiceDiscoverIscsiResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Discovers iSCSI targets on the host, using the initiator details.
+// Returns a list of IscsiDetails objects containing the discovered data.
+// For example, to discover iSCSI targets available in `myiscsi.example.com`,
+// from host `123`, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/hosts/123/discoveriscsi
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//   <iscsi>
+//     <address>myiscsi.example.com</address>
+//   </iscsi>
+// </action>
+// ----
+// The result will be like this:
+// [source,xml]
+// ----
+// <discovered_targets>
+//   <iscsi_details>
+//     <address>10.35.1.72</address>
+//     <port>3260</port>
+//     <portal>10.35.1.72:3260,1</portal>
+//     <target>iqn.2015-08.com.tgt:444</target>
+//   </iscsi_details>
+// </discovered_targets>
+// ----
+//
+type HostServiceDiscoverIscsiResponse struct {
+	discoveredTargets *IscsiDetailsSlice
+}
+
+func (p *HostServiceDiscoverIscsiResponse) DiscoveredTargets() (*IscsiDetailsSlice, bool) {
+	if p.discoveredTargets != nil {
+		return p.discoveredTargets, true
+	}
+	return nil, false
+}
+
+func (p *HostServiceDiscoverIscsiResponse) MustDiscoveredTargets() *IscsiDetailsSlice {
+	if p.discoveredTargets == nil {
+		panic("discoveredTargets in response does not exist")
+	}
+	return p.discoveredTargets
+}
+
+//
+// Discovers iSCSI targets on the host, using the initiator details.
+// Returns a list of IscsiDetails objects containing the discovered data.
+// For example, to discover iSCSI targets available in `myiscsi.example.com`,
+// from host `123`, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/hosts/123/discoveriscsi
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//   <iscsi>
+//     <address>myiscsi.example.com</address>
+//   </iscsi>
+// </action>
+// ----
+// The result will be like this:
+// [source,xml]
+// ----
+// <discovered_targets>
+//   <iscsi_details>
+//     <address>10.35.1.72</address>
+//     <port>3260</port>
+//     <portal>10.35.1.72:3260,1</portal>
+//     <target>iqn.2015-08.com.tgt:444</target>
+//   </iscsi_details>
+// </discovered_targets>
+// ----
+//
+func (p *HostService) DiscoverIscsi() *HostServiceDiscoverIscsiRequest {
+	return &HostServiceDiscoverIscsiRequest{HostService: p}
+}
+
+//
 // Enrolls the certificate of the host. Useful in case you get a warning that it is about to expire or has already
 // expired.
 //
@@ -35973,7 +36204,10 @@ func (p *HostService) Install() *HostServiceInstallRequest {
 }
 
 //
+// This method has been deprecated since Engine version 4.4.6.
+// DiscoverIscsi should be used instead.
 // Discovers iSCSI targets on the host, using the initiator details.
+// Returns an array of strings containing the discovered data.
 // For example, to discover iSCSI targets available in `myiscsi.example.com`,
 // from host `123`, send a request like this:
 // [source]
@@ -35988,18 +36222,6 @@ func (p *HostService) Install() *HostServiceInstallRequest {
 //     <address>myiscsi.example.com</address>
 //   </iscsi>
 // </action>
-// ----
-// The result will be like this:
-// [source,xml]
-// ----
-// <discovered_targets>
-//   <iscsi_details>
-//     <address>10.35.1.72</address>
-//     <port>3260</port>
-//     <portal>10.35.1.72:3260,1</portal>
-//     <target>iqn.2015-08.com.tgt:444</target>
-//   </iscsi_details>
-// </discovered_targets>
 // ----
 //
 type HostServiceIscsiDiscoverRequest struct {
@@ -36119,7 +36341,10 @@ func (p *HostServiceIscsiDiscoverRequest) MustSend() *HostServiceIscsiDiscoverRe
 }
 
 //
+// This method has been deprecated since Engine version 4.4.6.
+// DiscoverIscsi should be used instead.
 // Discovers iSCSI targets on the host, using the initiator details.
+// Returns an array of strings containing the discovered data.
 // For example, to discover iSCSI targets available in `myiscsi.example.com`,
 // from host `123`, send a request like this:
 // [source]
@@ -36135,36 +36360,9 @@ func (p *HostServiceIscsiDiscoverRequest) MustSend() *HostServiceIscsiDiscoverRe
 //   </iscsi>
 // </action>
 // ----
-// The result will be like this:
-// [source,xml]
-// ----
-// <discovered_targets>
-//   <iscsi_details>
-//     <address>10.35.1.72</address>
-//     <port>3260</port>
-//     <portal>10.35.1.72:3260,1</portal>
-//     <target>iqn.2015-08.com.tgt:444</target>
-//   </iscsi_details>
-// </discovered_targets>
-// ----
 //
 type HostServiceIscsiDiscoverResponse struct {
-	discoveredTargets *IscsiDetailsSlice
-	iscsiTargets      []string
-}
-
-func (p *HostServiceIscsiDiscoverResponse) DiscoveredTargets() (*IscsiDetailsSlice, bool) {
-	if p.discoveredTargets != nil {
-		return p.discoveredTargets, true
-	}
-	return nil, false
-}
-
-func (p *HostServiceIscsiDiscoverResponse) MustDiscoveredTargets() *IscsiDetailsSlice {
-	if p.discoveredTargets == nil {
-		panic("discoveredTargets in response does not exist")
-	}
-	return p.discoveredTargets
+	iscsiTargets []string
 }
 
 func (p *HostServiceIscsiDiscoverResponse) IscsiTargets() ([]string, bool) {
@@ -36182,7 +36380,10 @@ func (p *HostServiceIscsiDiscoverResponse) MustIscsiTargets() []string {
 }
 
 //
+// This method has been deprecated since Engine version 4.4.6.
+// DiscoverIscsi should be used instead.
 // Discovers iSCSI targets on the host, using the initiator details.
+// Returns an array of strings containing the discovered data.
 // For example, to discover iSCSI targets available in `myiscsi.example.com`,
 // from host `123`, send a request like this:
 // [source]
@@ -36197,18 +36398,6 @@ func (p *HostServiceIscsiDiscoverResponse) MustIscsiTargets() []string {
 //     <address>myiscsi.example.com</address>
 //   </iscsi>
 // </action>
-// ----
-// The result will be like this:
-// [source,xml]
-// ----
-// <discovered_targets>
-//   <iscsi_details>
-//     <address>10.35.1.72</address>
-//     <port>3260</port>
-//     <portal>10.35.1.72:3260,1</portal>
-//     <target>iqn.2015-08.com.tgt:444</target>
-//   </iscsi_details>
-// </discovered_targets>
 // ----
 //
 func (p *HostService) IscsiDiscover() *HostServiceIscsiDiscoverRequest {
@@ -99288,6 +99477,163 @@ func (p *VmService) ReorderMacAddresses() *VmServiceReorderMacAddressesRequest {
 }
 
 //
+// Sends a reset request to a virtual machine.
+// For example:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/reset
+// ----
+// The reset action does not take any action specific parameters; therefore, the request body should contain an
+// empty `action`:
+// [source,xml]
+// ----
+// <action/>
+// ----
+//
+type VmServiceResetRequest struct {
+	VmService *VmService
+	header    map[string]string
+	query     map[string]string
+	async     *bool
+}
+
+func (p *VmServiceResetRequest) Header(key, value string) *VmServiceResetRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmServiceResetRequest) Query(key, value string) *VmServiceResetRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmServiceResetRequest) Async(async bool) *VmServiceResetRequest {
+	p.async = &async
+	return p
+}
+
+func (p *VmServiceResetRequest) Send() (*VmServiceResetResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/reset", p.VmService.connection.URL(), p.VmService.path)
+	actionBuilder := NewActionBuilder()
+	if p.async != nil {
+		actionBuilder.Async(*p.async)
+	}
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(VmServiceResetResponse), nil
+}
+
+func (p *VmServiceResetRequest) MustSend() *VmServiceResetResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Sends a reset request to a virtual machine.
+// For example:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/reset
+// ----
+// The reset action does not take any action specific parameters; therefore, the request body should contain an
+// empty `action`:
+// [source,xml]
+// ----
+// <action/>
+// ----
+//
+type VmServiceResetResponse struct {
+}
+
+//
+// Sends a reset request to a virtual machine.
+// For example:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/reset
+// ----
+// The reset action does not take any action specific parameters; therefore, the request body should contain an
+// empty `action`:
+// [source,xml]
+// ----
+// <action/>
+// ----
+//
+func (p *VmService) Reset() *VmServiceResetRequest {
+	return &VmServiceResetRequest{VmService: p}
+}
+
+//
 // This operation sends a shutdown request to a virtual machine.
 // For example:
 // [source]
@@ -109122,214 +109468,6 @@ func (p *UserOptionService) Remove() *UserOptionServiceRemoveRequest {
 }
 
 //
-// Replaces an existing property of type JSON with a new one.
-// Example request(for user with identifier `123` and option with identifier `456`):
-// [source]
-// ----
-// PUT /ovirt-engine/api/users/123/options/456
-// ----
-// Payload:
-// [source,xml]
-// ----
-// <user_option>
-//   <name>SomeName</name>
-//   <content>{"new" : "JSON"}</content>
-// </user_option>
-// ----
-// The result will be the following XML document:
-// [source,xml]
-// ----
-// <user_option href="/ovirt-engine/api/users/123/options/789" id="789">
-//   <name>SomeName</name>
-//   <content>{"new" : "JSON"}</content>
-//   <user href="/ovirt-engine/api/users/123" id="123"/>
-// </user_option>
-// ----
-//
-type UserOptionServiceUpdateRequest struct {
-	UserOptionService *UserOptionService
-	header            map[string]string
-	query             map[string]string
-	option            *UserOption
-}
-
-func (p *UserOptionServiceUpdateRequest) Header(key, value string) *UserOptionServiceUpdateRequest {
-	if p.header == nil {
-		p.header = make(map[string]string)
-	}
-	p.header[key] = value
-	return p
-}
-
-func (p *UserOptionServiceUpdateRequest) Query(key, value string) *UserOptionServiceUpdateRequest {
-	if p.query == nil {
-		p.query = make(map[string]string)
-	}
-	p.query[key] = value
-	return p
-}
-
-func (p *UserOptionServiceUpdateRequest) Option(option *UserOption) *UserOptionServiceUpdateRequest {
-	p.option = option
-	return p
-}
-
-func (p *UserOptionServiceUpdateRequest) Send() (*UserOptionServiceUpdateResponse, error) {
-	rawURL := fmt.Sprintf("%s%s", p.UserOptionService.connection.URL(), p.UserOptionService.path)
-	values := make(url.Values)
-	if p.query != nil {
-		for k, v := range p.query {
-			values[k] = []string{v}
-		}
-	}
-	if len(values) > 0 {
-		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
-	}
-	var body bytes.Buffer
-	writer := NewXMLWriter(&body)
-	err := XMLUserOptionWriteOne(writer, p.option, "")
-	if err != nil {
-		return nil, err
-	}
-	writer.Flush()
-	req, err := http.NewRequest("PUT", rawURL, &body)
-	if err != nil {
-		return nil, err
-	}
-
-	for hk, hv := range p.UserOptionService.connection.headers {
-		req.Header.Add(hk, hv)
-	}
-
-	if p.header != nil {
-		for hk, hv := range p.header {
-			req.Header.Add(hk, hv)
-		}
-	}
-
-	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
-	req.Header.Add("Version", "4")
-	req.Header.Add("Content-Type", "application/xml")
-	req.Header.Add("Accept", "application/xml")
-	// get OAuth access token
-	token, err := p.UserOptionService.connection.authenticate()
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
-	// Send the request and wait for the response
-	resp, err := p.UserOptionService.connection.client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if p.UserOptionService.connection.logFunc != nil {
-		dumpReq, err := httputil.DumpRequestOut(req, true)
-		if err != nil {
-			return nil, err
-		}
-		dumpResp, err := httputil.DumpResponse(resp, true)
-		if err != nil {
-			return nil, err
-		}
-		p.UserOptionService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
-	}
-	if !Contains(resp.StatusCode, []int{200}) {
-		return nil, CheckFault(resp)
-	}
-	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
-	if errReadBody != nil {
-		return nil, errReadBody
-	}
-	reader := NewXMLReader(respBodyBytes)
-	result, err := XMLUserOptionReadOne(reader, nil, "")
-	if err != nil {
-		return nil, err
-	}
-	return &UserOptionServiceUpdateResponse{option: result}, nil
-}
-
-func (p *UserOptionServiceUpdateRequest) MustSend() *UserOptionServiceUpdateResponse {
-	if v, err := p.Send(); err != nil {
-		panic(err)
-	} else {
-		return v
-	}
-}
-
-//
-// Replaces an existing property of type JSON with a new one.
-// Example request(for user with identifier `123` and option with identifier `456`):
-// [source]
-// ----
-// PUT /ovirt-engine/api/users/123/options/456
-// ----
-// Payload:
-// [source,xml]
-// ----
-// <user_option>
-//   <name>SomeName</name>
-//   <content>{"new" : "JSON"}</content>
-// </user_option>
-// ----
-// The result will be the following XML document:
-// [source,xml]
-// ----
-// <user_option href="/ovirt-engine/api/users/123/options/789" id="789">
-//   <name>SomeName</name>
-//   <content>{"new" : "JSON"}</content>
-//   <user href="/ovirt-engine/api/users/123" id="123"/>
-// </user_option>
-// ----
-//
-type UserOptionServiceUpdateResponse struct {
-	option *UserOption
-}
-
-func (p *UserOptionServiceUpdateResponse) Option() (*UserOption, bool) {
-	if p.option != nil {
-		return p.option, true
-	}
-	return nil, false
-}
-
-func (p *UserOptionServiceUpdateResponse) MustOption() *UserOption {
-	if p.option == nil {
-		panic("option in response does not exist")
-	}
-	return p.option
-}
-
-//
-// Replaces an existing property of type JSON with a new one.
-// Example request(for user with identifier `123` and option with identifier `456`):
-// [source]
-// ----
-// PUT /ovirt-engine/api/users/123/options/456
-// ----
-// Payload:
-// [source,xml]
-// ----
-// <user_option>
-//   <name>SomeName</name>
-//   <content>{"new" : "JSON"}</content>
-// </user_option>
-// ----
-// The result will be the following XML document:
-// [source,xml]
-// ----
-// <user_option href="/ovirt-engine/api/users/123/options/789" id="789">
-//   <name>SomeName</name>
-//   <content>{"new" : "JSON"}</content>
-//   <user href="/ovirt-engine/api/users/123" id="123"/>
-// </user_option>
-// ----
-//
-func (p *UserOptionService) Update() *UserOptionServiceUpdateRequest {
-	return &UserOptionServiceUpdateRequest{UserOptionService: p}
-}
-
-//
 // Service locator method, returns individual service on which the URI is dispatched.
 //
 func (op *UserOptionService) Service(path string) (Service, error) {
@@ -110120,6 +110258,9 @@ func (p *UserService) Remove() *UserServiceRemoveRequest {
 //    </user_options>
 // </user>
 // ----
+// IMPORTANT: Since version 4.4.5 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Please use the <<services/user_option, options>>
+// endpoint instead.
 //
 type UserServiceUpdateRequest struct {
 	UserService *UserService
@@ -110252,6 +110393,9 @@ func (p *UserServiceUpdateRequest) MustSend() *UserServiceUpdateResponse {
 //    </user_options>
 // </user>
 // ----
+// IMPORTANT: Since version 4.4.5 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Please use the <<services/user_option, options>>
+// endpoint instead.
 //
 type UserServiceUpdateResponse struct {
 	user *User
@@ -110291,6 +110435,9 @@ func (p *UserServiceUpdateResponse) MustUser() *User {
 //    </user_options>
 // </user>
 // ----
+// IMPORTANT: Since version 4.4.5 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Please use the <<services/user_option, options>>
+// endpoint instead.
 //
 func (p *UserService) Update() *UserServiceUpdateRequest {
 	return &UserServiceUpdateRequest{UserService: p}
