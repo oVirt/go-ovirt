@@ -47,7 +47,6 @@ func addCluster() {
 		}
 	}()
 
-
 	// Get the reference to the clusters service:
 	clustersService := conn.SystemService().ClustersService()
 
