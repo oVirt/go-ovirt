@@ -33,7 +33,7 @@ type NotFoundError struct {
 func CheckFault(response *http.Response) error {
 	resBytes, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		return fmt.Errorf("Failed to read response, reason: %s", err.Error())
+		return fmt.Errorf("failed to read response (%w)", err)
 	}
 	// Process empty response body
 	if len(resBytes) == 0 {
@@ -59,7 +59,7 @@ func CheckFault(response *http.Response) error {
 func CheckAction(response *http.Response) (*Action, error) {
 	resBytes, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to read response, reason: %s", err.Error())
+		return nil, fmt.Errorf("failed to read response (%w)", err)
 	}
 	// Process empty response body
 	if len(resBytes) == 0 {

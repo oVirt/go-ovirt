@@ -2412,6 +2412,7 @@ type Checkpoint struct {
 	id           *string
 	name         *string
 	parentId     *string
+	state        *CheckpointState
 	vm           *Vm
 }
 
@@ -2545,6 +2546,25 @@ func (p *Checkpoint) MustParentId() string {
 		panic("the parentId must not be nil, please use ParentId() function instead")
 	}
 	return *p.parentId
+}
+
+func (p *Checkpoint) SetState(attr CheckpointState) {
+	p.state = &attr
+}
+
+func (p *Checkpoint) State() (CheckpointState, bool) {
+	if p.state != nil {
+		return *p.state, true
+	}
+	var zero CheckpointState
+	return zero, false
+}
+
+func (p *Checkpoint) MustState() CheckpointState {
+	if p.state == nil {
+		panic("the state must not be nil, please use State() function instead")
+	}
+	return *p.state
 }
 
 func (p *Checkpoint) SetVm(attr *Vm) {
@@ -9559,6 +9579,144 @@ func (p *ExternalProvider) MustUsername() string {
 		panic("the username must not be nil, please use Username() function instead")
 	}
 	return *p.username
+}
+
+type ExternalTemplateImport struct {
+	Struct
+	cluster       *Cluster
+	cpuProfile    *CpuProfile
+	host          *Host
+	quota         *Quota
+	storageDomain *StorageDomain
+	template      *Template
+	url           *string
+}
+
+func (p *ExternalTemplateImport) SetCluster(attr *Cluster) {
+	p.cluster = attr
+}
+
+func (p *ExternalTemplateImport) Cluster() (*Cluster, bool) {
+	if p.cluster != nil {
+		return p.cluster, true
+	}
+	return nil, false
+}
+
+func (p *ExternalTemplateImport) MustCluster() *Cluster {
+	if p.cluster == nil {
+		panic("the cluster must not be nil, please use Cluster() function instead")
+	}
+	return p.cluster
+}
+
+func (p *ExternalTemplateImport) SetCpuProfile(attr *CpuProfile) {
+	p.cpuProfile = attr
+}
+
+func (p *ExternalTemplateImport) CpuProfile() (*CpuProfile, bool) {
+	if p.cpuProfile != nil {
+		return p.cpuProfile, true
+	}
+	return nil, false
+}
+
+func (p *ExternalTemplateImport) MustCpuProfile() *CpuProfile {
+	if p.cpuProfile == nil {
+		panic("the cpuProfile must not be nil, please use CpuProfile() function instead")
+	}
+	return p.cpuProfile
+}
+
+func (p *ExternalTemplateImport) SetHost(attr *Host) {
+	p.host = attr
+}
+
+func (p *ExternalTemplateImport) Host() (*Host, bool) {
+	if p.host != nil {
+		return p.host, true
+	}
+	return nil, false
+}
+
+func (p *ExternalTemplateImport) MustHost() *Host {
+	if p.host == nil {
+		panic("the host must not be nil, please use Host() function instead")
+	}
+	return p.host
+}
+
+func (p *ExternalTemplateImport) SetQuota(attr *Quota) {
+	p.quota = attr
+}
+
+func (p *ExternalTemplateImport) Quota() (*Quota, bool) {
+	if p.quota != nil {
+		return p.quota, true
+	}
+	return nil, false
+}
+
+func (p *ExternalTemplateImport) MustQuota() *Quota {
+	if p.quota == nil {
+		panic("the quota must not be nil, please use Quota() function instead")
+	}
+	return p.quota
+}
+
+func (p *ExternalTemplateImport) SetStorageDomain(attr *StorageDomain) {
+	p.storageDomain = attr
+}
+
+func (p *ExternalTemplateImport) StorageDomain() (*StorageDomain, bool) {
+	if p.storageDomain != nil {
+		return p.storageDomain, true
+	}
+	return nil, false
+}
+
+func (p *ExternalTemplateImport) MustStorageDomain() *StorageDomain {
+	if p.storageDomain == nil {
+		panic("the storageDomain must not be nil, please use StorageDomain() function instead")
+	}
+	return p.storageDomain
+}
+
+func (p *ExternalTemplateImport) SetTemplate(attr *Template) {
+	p.template = attr
+}
+
+func (p *ExternalTemplateImport) Template() (*Template, bool) {
+	if p.template != nil {
+		return p.template, true
+	}
+	return nil, false
+}
+
+func (p *ExternalTemplateImport) MustTemplate() *Template {
+	if p.template == nil {
+		panic("the template must not be nil, please use Template() function instead")
+	}
+	return p.template
+}
+
+func (p *ExternalTemplateImport) SetUrl(attr string) {
+	p.url = &attr
+}
+
+func (p *ExternalTemplateImport) Url() (string, bool) {
+	if p.url != nil {
+		return *p.url, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *ExternalTemplateImport) MustUrl() string {
+	if p.url == nil {
+		panic("the url must not be nil, please use Url() function instead")
+	}
+	return *p.url
 }
 
 type ExternalVmImport struct {
@@ -19857,6 +20015,7 @@ type MDevType struct {
 	Struct
 	availableInstances *int64
 	description        *string
+	humanReadableName  *string
 	name               *string
 }
 
@@ -19896,6 +20055,25 @@ func (p *MDevType) MustDescription() string {
 		panic("the description must not be nil, please use Description() function instead")
 	}
 	return *p.description
+}
+
+func (p *MDevType) SetHumanReadableName(attr string) {
+	p.humanReadableName = &attr
+}
+
+func (p *MDevType) HumanReadableName() (string, bool) {
+	if p.humanReadableName != nil {
+		return *p.humanReadableName, true
+	}
+	var zero string
+	return zero, false
+}
+
+func (p *MDevType) MustHumanReadableName() string {
+	if p.humanReadableName == nil {
+		panic("the humanReadableName must not be nil, please use HumanReadableName() function instead")
+	}
+	return *p.humanReadableName
 }
 
 func (p *MDevType) SetName(attr string) {
@@ -42850,6 +43028,30 @@ func (op *ExternalProviderSlice) SetSlice(slice []*ExternalProvider) {
 	op.slice = slice
 }
 
+type ExternalTemplateImportSlice struct {
+	href  *string
+	slice []*ExternalTemplateImport
+}
+
+func (op *ExternalTemplateImportSlice) Href() (string, bool) {
+	if op.href == nil {
+		return "", false
+	}
+	return *op.href, true
+}
+
+func (op *ExternalTemplateImportSlice) SetHref(href string) {
+	op.href = &href
+}
+
+func (op *ExternalTemplateImportSlice) Slice() []*ExternalTemplateImport {
+	return op.slice
+}
+
+func (op *ExternalTemplateImportSlice) SetSlice(slice []*ExternalTemplateImport) {
+	op.slice = slice
+}
+
 type ExternalVmImportSlice struct {
 	href  *string
 	slice []*ExternalVmImport
@@ -49376,6 +49578,15 @@ func (builder *CheckpointBuilder) ParentId(attr string) *CheckpointBuilder {
 	}
 
 	builder.checkpoint.SetParentId(attr)
+	return builder
+}
+
+func (builder *CheckpointBuilder) State(attr CheckpointState) *CheckpointBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.checkpoint.SetState(attr)
 	return builder
 }
 
@@ -56459,6 +56670,203 @@ func (builder *ExternalProviderBuilder) MustBuild() *ExternalProvider {
 		panic(fmt.Sprintf("Failed to build ExternalProvider instance, reason: %v", builder.err))
 	}
 	return builder.externalProvider
+}
+
+type ExternalTemplateImportBuilder struct {
+	externalTemplateImport *ExternalTemplateImport
+	err                    error
+}
+
+func NewExternalTemplateImportBuilder() *ExternalTemplateImportBuilder {
+	return &ExternalTemplateImportBuilder{externalTemplateImport: &ExternalTemplateImport{}, err: nil}
+}
+
+func (builder *ExternalTemplateImportBuilder) Cluster(attr *Cluster) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalTemplateImport.SetCluster(attr)
+	return builder
+}
+
+func (builder *ExternalTemplateImportBuilder) ClusterBuilder(attrBuilder *ClusterBuilder) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Cluster(attr)
+}
+
+func (builder *ExternalTemplateImportBuilder) CpuProfile(attr *CpuProfile) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalTemplateImport.SetCpuProfile(attr)
+	return builder
+}
+
+func (builder *ExternalTemplateImportBuilder) CpuProfileBuilder(attrBuilder *CpuProfileBuilder) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.CpuProfile(attr)
+}
+
+func (builder *ExternalTemplateImportBuilder) Host(attr *Host) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalTemplateImport.SetHost(attr)
+	return builder
+}
+
+func (builder *ExternalTemplateImportBuilder) HostBuilder(attrBuilder *HostBuilder) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Host(attr)
+}
+
+func (builder *ExternalTemplateImportBuilder) Quota(attr *Quota) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalTemplateImport.SetQuota(attr)
+	return builder
+}
+
+func (builder *ExternalTemplateImportBuilder) QuotaBuilder(attrBuilder *QuotaBuilder) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Quota(attr)
+}
+
+func (builder *ExternalTemplateImportBuilder) StorageDomain(attr *StorageDomain) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalTemplateImport.SetStorageDomain(attr)
+	return builder
+}
+
+func (builder *ExternalTemplateImportBuilder) StorageDomainBuilder(attrBuilder *StorageDomainBuilder) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.StorageDomain(attr)
+}
+
+func (builder *ExternalTemplateImportBuilder) Template(attr *Template) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalTemplateImport.SetTemplate(attr)
+	return builder
+}
+
+func (builder *ExternalTemplateImportBuilder) TemplateBuilder(attrBuilder *TemplateBuilder) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	if attrBuilder.err != nil {
+		builder.err = attrBuilder.err
+		return builder
+	}
+	attr, err := attrBuilder.Build()
+	if err != nil {
+		builder.err = err
+		return builder
+	}
+	return builder.Template(attr)
+}
+
+func (builder *ExternalTemplateImportBuilder) Url(attr string) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalTemplateImport.SetUrl(attr)
+	return builder
+}
+
+func (builder *ExternalTemplateImportBuilder) Href(href string) *ExternalTemplateImportBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.externalTemplateImport.SetHref(href)
+	return builder
+}
+
+func (builder *ExternalTemplateImportBuilder) Build() (*ExternalTemplateImport, error) {
+	if builder.err != nil {
+		return nil, builder.err
+	}
+	return builder.externalTemplateImport, nil
+}
+
+func (builder *ExternalTemplateImportBuilder) MustBuild() *ExternalTemplateImport {
+	if builder.err != nil {
+		panic(fmt.Sprintf("Failed to build ExternalTemplateImport instance, reason: %v", builder.err))
+	}
+	return builder.externalTemplateImport
 }
 
 type ExternalVmImportBuilder struct {
@@ -66216,6 +66624,15 @@ func (builder *MDevTypeBuilder) Description(attr string) *MDevTypeBuilder {
 	}
 
 	builder.mDevType.SetDescription(attr)
+	return builder
+}
+
+func (builder *MDevTypeBuilder) HumanReadableName(attr string) *MDevTypeBuilder {
+	if builder.err != nil {
+		return builder
+	}
+
+	builder.mDevType.SetHumanReadableName(attr)
 	return builder
 }
 
@@ -89395,10 +89812,12 @@ const (
 type BackupPhase string
 
 const (
+	BACKUPPHASE_FAILED       BackupPhase = "failed"
 	BACKUPPHASE_FINALIZING   BackupPhase = "finalizing"
 	BACKUPPHASE_INITIALIZING BackupPhase = "initializing"
 	BACKUPPHASE_READY        BackupPhase = "ready"
 	BACKUPPHASE_STARTING     BackupPhase = "starting"
+	BACKUPPHASE_SUCCEEDED    BackupPhase = "succeeded"
 )
 
 type BiosType string
@@ -89427,6 +89846,13 @@ const (
 	BOOTPROTOCOL_NONE               BootProtocol = "none"
 	BOOTPROTOCOL_POLY_DHCP_AUTOCONF BootProtocol = "poly_dhcp_autoconf"
 	BOOTPROTOCOL_STATIC             BootProtocol = "static"
+)
+
+type CheckpointState string
+
+const (
+	CHECKPOINTSTATE_CREATED CheckpointState = "created"
+	CHECKPOINTSTATE_INVALID CheckpointState = "invalid"
 )
 
 type CloudInitNetworkProtocol string
@@ -89495,6 +89921,7 @@ const (
 type DiskContentType string
 
 const (
+	DISKCONTENTTYPE_BACKUP_SCRATCH              DiskContentType = "backup_scratch"
 	DISKCONTENTTYPE_DATA                        DiskContentType = "data"
 	DISKCONTENTTYPE_HOSTED_ENGINE               DiskContentType = "hosted_engine"
 	DISKCONTENTTYPE_HOSTED_ENGINE_CONFIGURATION DiskContentType = "hosted_engine_configuration"

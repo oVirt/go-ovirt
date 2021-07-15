@@ -30127,6 +30127,231 @@ func (op *ExternalProviderService) String() string {
 }
 
 //
+// Provides capability to import external templates.
+// Currently supports OVA only.
+//
+type ExternalTemplateImportsService struct {
+	BaseService
+}
+
+func NewExternalTemplateImportsService(connection *Connection, path string) *ExternalTemplateImportsService {
+	var result ExternalTemplateImportsService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// This operation is used to import a template from external hypervisor.
+// For example import of a template OVA can be facilitated using the following request:
+// [source]
+// ----
+// POST /externaltemplateimports
+// ----
+// With request body of type <<types/external_template_import,ExternalTemplateImport>>, for example:
+// [source,xml]
+// ----
+// <external_template_import>
+//   <template>
+//     <name>my_template</name>
+//   </template>
+//   <cluster id="2b18aca2-4469-11eb-9449-482ae35a5f83" />
+//   <storage_domain id="8bb5ade5-e988-4000-8b93-dbfc6717fe50" />
+//   <url>ova:///mnt/ova/ova_template.ova</url>
+//   <host id="8bb5ade5-e988-4000-8b93-dbfc6717fe50" />
+// </external_template_import>
+// ----
+//
+type ExternalTemplateImportsServiceAddRequest struct {
+	ExternalTemplateImportsService *ExternalTemplateImportsService
+	header                         map[string]string
+	query                          map[string]string
+	import_                        *ExternalTemplateImport
+}
+
+func (p *ExternalTemplateImportsServiceAddRequest) Header(key, value string) *ExternalTemplateImportsServiceAddRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *ExternalTemplateImportsServiceAddRequest) Query(key, value string) *ExternalTemplateImportsServiceAddRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *ExternalTemplateImportsServiceAddRequest) Import(import_ *ExternalTemplateImport) *ExternalTemplateImportsServiceAddRequest {
+	p.import_ = import_
+	return p
+}
+
+func (p *ExternalTemplateImportsServiceAddRequest) Send() (*ExternalTemplateImportsServiceAddResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.ExternalTemplateImportsService.connection.URL(), p.ExternalTemplateImportsService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLExternalTemplateImportWriteOne(writer, p.import_, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.ExternalTemplateImportsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.ExternalTemplateImportsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.ExternalTemplateImportsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.ExternalTemplateImportsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.ExternalTemplateImportsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLExternalTemplateImportReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &ExternalTemplateImportsServiceAddResponse{import_: result}, nil
+}
+
+func (p *ExternalTemplateImportsServiceAddRequest) MustSend() *ExternalTemplateImportsServiceAddResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// This operation is used to import a template from external hypervisor.
+// For example import of a template OVA can be facilitated using the following request:
+// [source]
+// ----
+// POST /externaltemplateimports
+// ----
+// With request body of type <<types/external_template_import,ExternalTemplateImport>>, for example:
+// [source,xml]
+// ----
+// <external_template_import>
+//   <template>
+//     <name>my_template</name>
+//   </template>
+//   <cluster id="2b18aca2-4469-11eb-9449-482ae35a5f83" />
+//   <storage_domain id="8bb5ade5-e988-4000-8b93-dbfc6717fe50" />
+//   <url>ova:///mnt/ova/ova_template.ova</url>
+//   <host id="8bb5ade5-e988-4000-8b93-dbfc6717fe50" />
+// </external_template_import>
+// ----
+//
+type ExternalTemplateImportsServiceAddResponse struct {
+	import_ *ExternalTemplateImport
+}
+
+func (p *ExternalTemplateImportsServiceAddResponse) Import() (*ExternalTemplateImport, bool) {
+	if p.import_ != nil {
+		return p.import_, true
+	}
+	return nil, false
+}
+
+func (p *ExternalTemplateImportsServiceAddResponse) MustImport() *ExternalTemplateImport {
+	if p.import_ == nil {
+		panic("import_ in response does not exist")
+	}
+	return p.import_
+}
+
+//
+// This operation is used to import a template from external hypervisor.
+// For example import of a template OVA can be facilitated using the following request:
+// [source]
+// ----
+// POST /externaltemplateimports
+// ----
+// With request body of type <<types/external_template_import,ExternalTemplateImport>>, for example:
+// [source,xml]
+// ----
+// <external_template_import>
+//   <template>
+//     <name>my_template</name>
+//   </template>
+//   <cluster id="2b18aca2-4469-11eb-9449-482ae35a5f83" />
+//   <storage_domain id="8bb5ade5-e988-4000-8b93-dbfc6717fe50" />
+//   <url>ova:///mnt/ova/ova_template.ova</url>
+//   <host id="8bb5ade5-e988-4000-8b93-dbfc6717fe50" />
+// </external_template_import>
+// ----
+//
+func (p *ExternalTemplateImportsService) Add() *ExternalTemplateImportsServiceAddRequest {
+	return &ExternalTemplateImportsServiceAddRequest{ExternalTemplateImportsService: p}
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *ExternalTemplateImportsService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *ExternalTemplateImportsService) String() string {
+	return fmt.Sprintf("ExternalTemplateImportsService:%s", op.path)
+}
+
+//
 // Provides capability to import external virtual machines.
 //
 type ExternalVmImportsService struct {
@@ -77973,6 +78198,13 @@ func (op *SystemService) ExternalHostProvidersService() *ExternalHostProvidersSe
 }
 
 //
+// Reference to service facilitating import of external templates.
+//
+func (op *SystemService) ExternalTemplateImportsService() *ExternalTemplateImportsService {
+	return NewExternalTemplateImportsService(op.connection, fmt.Sprintf("%s/externaltemplateimports", op.path))
+}
+
+//
 // Reference to service facilitating import of external virtual machines.
 //
 func (op *SystemService) ExternalVmImportsService() *ExternalVmImportsService {
@@ -78219,6 +78451,12 @@ func (op *SystemService) Service(path string) (Service, error) {
 	}
 	if strings.HasPrefix(path, "externalhostproviders/") {
 		return op.ExternalHostProvidersService().Service(path[22:])
+	}
+	if path == "externaltemplateimports" {
+		return op.ExternalTemplateImportsService(), nil
+	}
+	if strings.HasPrefix(path, "externaltemplateimports/") {
+		return op.ExternalTemplateImportsService().Service(path[24:])
 	}
 	if path == "externalvmimports" {
 		return op.ExternalVmImportsService(), nil
@@ -83939,6 +84177,304 @@ func (op *TemplateWatchdogService) String() string {
 }
 
 //
+// A service managing a backup of a virtual machines.
+//
+type VmBackupService struct {
+	BaseService
+}
+
+func NewVmBackupService(connection *Connection, path string) *VmBackupService {
+	var result VmBackupService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+//
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+//
+type VmBackupServiceFinalizeRequest struct {
+	VmBackupService *VmBackupService
+	header          map[string]string
+	query           map[string]string
+}
+
+func (p *VmBackupServiceFinalizeRequest) Header(key, value string) *VmBackupServiceFinalizeRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupServiceFinalizeRequest) Query(key, value string) *VmBackupServiceFinalizeRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupServiceFinalizeRequest) Send() (*VmBackupServiceFinalizeResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/finalize", p.VmBackupService.connection.URL(), p.VmBackupService.path)
+	actionBuilder := NewActionBuilder()
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	_, errCheckAction := CheckAction(resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(VmBackupServiceFinalizeResponse), nil
+}
+
+func (p *VmBackupServiceFinalizeRequest) MustSend() *VmBackupServiceFinalizeResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+//
+type VmBackupServiceFinalizeResponse struct {
+}
+
+//
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+//
+func (p *VmBackupService) Finalize() *VmBackupServiceFinalizeRequest {
+	return &VmBackupServiceFinalizeRequest{VmBackupService: p}
+}
+
+//
+// Returns information about the virtual machine backup.
+//
+type VmBackupServiceGetRequest struct {
+	VmBackupService *VmBackupService
+	header          map[string]string
+	query           map[string]string
+	follow          *string
+}
+
+func (p *VmBackupServiceGetRequest) Header(key, value string) *VmBackupServiceGetRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Query(key, value string) *VmBackupServiceGetRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Follow(follow string) *VmBackupServiceGetRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Send() (*VmBackupServiceGetResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmBackupService.connection.URL(), p.VmBackupService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(resp)
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLBackupReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &VmBackupServiceGetResponse{backup: result}, nil
+}
+
+func (p *VmBackupServiceGetRequest) MustSend() *VmBackupServiceGetResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+//
+// Returns information about the virtual machine backup.
+//
+type VmBackupServiceGetResponse struct {
+	backup *Backup
+}
+
+func (p *VmBackupServiceGetResponse) Backup() (*Backup, bool) {
+	if p.backup != nil {
+		return p.backup, true
+	}
+	return nil, false
+}
+
+func (p *VmBackupServiceGetResponse) MustBackup() *Backup {
+	if p.backup == nil {
+		panic("backup in response does not exist")
+	}
+	return p.backup
+}
+
+//
+// Returns information about the virtual machine backup.
+//
+func (p *VmBackupService) Get() *VmBackupServiceGetRequest {
+	return &VmBackupServiceGetRequest{VmBackupService: p}
+}
+
+//
+// A reference to the service that lists the disks in backup.
+//
+func (op *VmBackupService) DisksService() *VmBackupDisksService {
+	return NewVmBackupDisksService(op.connection, fmt.Sprintf("%s/disks", op.path))
+}
+
+//
+// Service locator method, returns individual service on which the URI is dispatched.
+//
+func (op *VmBackupService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	if path == "disks" {
+		return op.DisksService(), nil
+	}
+	if strings.HasPrefix(path, "disks/") {
+		return op.DisksService().Service(path[6:])
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *VmBackupService) String() string {
+	return fmt.Sprintf("VmBackupService:%s", op.path)
+}
+
+//
 //
 type TemplateWatchdogsService struct {
 	BaseService
@@ -87266,304 +87802,6 @@ func (op *VmBackupDisksService) Service(path string) (Service, error) {
 
 func (op *VmBackupDisksService) String() string {
 	return fmt.Sprintf("VmBackupDisksService:%s", op.path)
-}
-
-//
-// A service managing a backup of a virtual machines.
-//
-type VmBackupService struct {
-	BaseService
-}
-
-func NewVmBackupService(connection *Connection, path string) *VmBackupService {
-	var result VmBackupService
-	result.connection = connection
-	result.path = path
-	return &result
-}
-
-//
-// Finalize the virtual machine backup entity.
-// End backup, unlock resources, and perform cleanups.
-//
-type VmBackupServiceFinalizeRequest struct {
-	VmBackupService *VmBackupService
-	header          map[string]string
-	query           map[string]string
-}
-
-func (p *VmBackupServiceFinalizeRequest) Header(key, value string) *VmBackupServiceFinalizeRequest {
-	if p.header == nil {
-		p.header = make(map[string]string)
-	}
-	p.header[key] = value
-	return p
-}
-
-func (p *VmBackupServiceFinalizeRequest) Query(key, value string) *VmBackupServiceFinalizeRequest {
-	if p.query == nil {
-		p.query = make(map[string]string)
-	}
-	p.query[key] = value
-	return p
-}
-
-func (p *VmBackupServiceFinalizeRequest) Send() (*VmBackupServiceFinalizeResponse, error) {
-	rawURL := fmt.Sprintf("%s%s/finalize", p.VmBackupService.connection.URL(), p.VmBackupService.path)
-	actionBuilder := NewActionBuilder()
-	action, err := actionBuilder.Build()
-	if err != nil {
-		return nil, err
-	}
-	values := make(url.Values)
-	if p.query != nil {
-		for k, v := range p.query {
-			values[k] = []string{v}
-		}
-	}
-	if len(values) > 0 {
-		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
-	}
-	var body bytes.Buffer
-	writer := NewXMLWriter(&body)
-	err = XMLActionWriteOne(writer, action, "")
-	writer.Flush()
-	req, err := http.NewRequest("POST", rawURL, &body)
-	if err != nil {
-		return nil, err
-	}
-
-	for hk, hv := range p.VmBackupService.connection.headers {
-		req.Header.Add(hk, hv)
-	}
-
-	if p.header != nil {
-		for hk, hv := range p.header {
-			req.Header.Add(hk, hv)
-		}
-	}
-
-	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
-	req.Header.Add("Version", "4")
-	req.Header.Add("Content-Type", "application/xml")
-	req.Header.Add("Accept", "application/xml")
-	// get OAuth access token
-	token, err := p.VmBackupService.connection.authenticate()
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
-	// Send the request and wait for the response
-	resp, err := p.VmBackupService.connection.client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if p.VmBackupService.connection.logFunc != nil {
-		dumpReq, err := httputil.DumpRequestOut(req, true)
-		if err != nil {
-			return nil, err
-		}
-		dumpResp, err := httputil.DumpResponse(resp, true)
-		if err != nil {
-			return nil, err
-		}
-		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
-	}
-	_, errCheckAction := CheckAction(resp)
-	if errCheckAction != nil {
-		return nil, errCheckAction
-	}
-	return new(VmBackupServiceFinalizeResponse), nil
-}
-
-func (p *VmBackupServiceFinalizeRequest) MustSend() *VmBackupServiceFinalizeResponse {
-	if v, err := p.Send(); err != nil {
-		panic(err)
-	} else {
-		return v
-	}
-}
-
-//
-// Finalize the virtual machine backup entity.
-// End backup, unlock resources, and perform cleanups.
-//
-type VmBackupServiceFinalizeResponse struct {
-}
-
-//
-// Finalize the virtual machine backup entity.
-// End backup, unlock resources, and perform cleanups.
-//
-func (p *VmBackupService) Finalize() *VmBackupServiceFinalizeRequest {
-	return &VmBackupServiceFinalizeRequest{VmBackupService: p}
-}
-
-//
-// Returns information about the virtual machine backup.
-//
-type VmBackupServiceGetRequest struct {
-	VmBackupService *VmBackupService
-	header          map[string]string
-	query           map[string]string
-	follow          *string
-}
-
-func (p *VmBackupServiceGetRequest) Header(key, value string) *VmBackupServiceGetRequest {
-	if p.header == nil {
-		p.header = make(map[string]string)
-	}
-	p.header[key] = value
-	return p
-}
-
-func (p *VmBackupServiceGetRequest) Query(key, value string) *VmBackupServiceGetRequest {
-	if p.query == nil {
-		p.query = make(map[string]string)
-	}
-	p.query[key] = value
-	return p
-}
-
-func (p *VmBackupServiceGetRequest) Follow(follow string) *VmBackupServiceGetRequest {
-	p.follow = &follow
-	return p
-}
-
-func (p *VmBackupServiceGetRequest) Send() (*VmBackupServiceGetResponse, error) {
-	rawURL := fmt.Sprintf("%s%s", p.VmBackupService.connection.URL(), p.VmBackupService.path)
-	values := make(url.Values)
-	if p.follow != nil {
-		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
-	}
-
-	if p.query != nil {
-		for k, v := range p.query {
-			values[k] = []string{v}
-		}
-	}
-	if len(values) > 0 {
-		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
-	}
-	req, err := http.NewRequest("GET", rawURL, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	for hk, hv := range p.VmBackupService.connection.headers {
-		req.Header.Add(hk, hv)
-	}
-
-	if p.header != nil {
-		for hk, hv := range p.header {
-			req.Header.Add(hk, hv)
-		}
-	}
-
-	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
-	req.Header.Add("Version", "4")
-	req.Header.Add("Content-Type", "application/xml")
-	req.Header.Add("Accept", "application/xml")
-	// get OAuth access token
-	token, err := p.VmBackupService.connection.authenticate()
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
-	// Send the request and wait for the response
-	resp, err := p.VmBackupService.connection.client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if p.VmBackupService.connection.logFunc != nil {
-		dumpReq, err := httputil.DumpRequestOut(req, true)
-		if err != nil {
-			return nil, err
-		}
-		dumpResp, err := httputil.DumpResponse(resp, true)
-		if err != nil {
-			return nil, err
-		}
-		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
-	}
-	if !Contains(resp.StatusCode, []int{200}) {
-		return nil, CheckFault(resp)
-	}
-	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
-	if errReadBody != nil {
-		return nil, errReadBody
-	}
-	reader := NewXMLReader(respBodyBytes)
-	result, err := XMLBackupReadOne(reader, nil, "")
-	if err != nil {
-		return nil, err
-	}
-	return &VmBackupServiceGetResponse{backup: result}, nil
-}
-
-func (p *VmBackupServiceGetRequest) MustSend() *VmBackupServiceGetResponse {
-	if v, err := p.Send(); err != nil {
-		panic(err)
-	} else {
-		return v
-	}
-}
-
-//
-// Returns information about the virtual machine backup.
-//
-type VmBackupServiceGetResponse struct {
-	backup *Backup
-}
-
-func (p *VmBackupServiceGetResponse) Backup() (*Backup, bool) {
-	if p.backup != nil {
-		return p.backup, true
-	}
-	return nil, false
-}
-
-func (p *VmBackupServiceGetResponse) MustBackup() *Backup {
-	if p.backup == nil {
-		panic("backup in response does not exist")
-	}
-	return p.backup
-}
-
-//
-// Returns information about the virtual machine backup.
-//
-func (p *VmBackupService) Get() *VmBackupServiceGetRequest {
-	return &VmBackupServiceGetRequest{VmBackupService: p}
-}
-
-//
-// A reference to the service that lists the disks in backup.
-//
-func (op *VmBackupService) DisksService() *VmBackupDisksService {
-	return NewVmBackupDisksService(op.connection, fmt.Sprintf("%s/disks", op.path))
-}
-
-//
-// Service locator method, returns individual service on which the URI is dispatched.
-//
-func (op *VmBackupService) Service(path string) (Service, error) {
-	if path == "" {
-		return op, nil
-	}
-	if path == "disks" {
-		return op.DisksService(), nil
-	}
-	if strings.HasPrefix(path, "disks/") {
-		return op.DisksService().Service(path[6:])
-	}
-	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
-}
-
-func (op *VmBackupService) String() string {
-	return fmt.Sprintf("VmBackupService:%s", op.path)
 }
 
 //

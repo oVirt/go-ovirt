@@ -69,9 +69,9 @@ func (c *Connection) URL() string {
 
 // Test tests the connectivity with the server using the system service.
 func (c *Connection) Test() error {
-	_, err  := c.SystemService().Get().Send()
-	if err != nil  {
-		return fmt.Errorf("Failed to validate the connection, '%s'", err)
+	_, err := c.SystemService().Get().Send()
+	if err != nil {
+		return fmt.Errorf("failed to validate the connection (%w)", err)
 	}
 	return nil
 }
@@ -105,7 +105,7 @@ func (c *Connection) FollowLink(object Href) (interface{}, error) {
 		prefix = prefix + "/"
 	}
 	if !strings.HasPrefix(href, prefix) {
-		return nil, fmt.Errorf("The URL '%v' isn't compatible with the base URL of the connection", href)
+		return nil, fmt.Errorf("the URL '%v' isn't compatible with the base URL of the connection", href)
 	}
 	path := href[len(prefix):]
 	service, err := NewSystemService(c, "").Service(path)
@@ -240,7 +240,7 @@ func (c *Connection) getSsoResponse(inputURL *url.URL, parameters map[string]str
 		}
 		if len(c.caFile) > 0 {
 			if _, err := os.Stat(c.caFile); os.IsNotExist(err) {
-				return nil, fmt.Errorf("The CA File '%s' doesn't exist", c.caFile)
+				return nil, fmt.Errorf("the CA File '%s' doesn't exist", c.caFile)
 			}
 			caCerts, err := ioutil.ReadFile(c.caFile)
 			if err != nil {
@@ -248,7 +248,7 @@ func (c *Connection) getSsoResponse(inputURL *url.URL, parameters map[string]str
 			}
 			pool, err := createCertPool(caCerts)
 			if err != nil {
-				return nil, fmt.Errorf("Failed to parse CA Certificate in file '%s'", c.caFile)
+				return nil, fmt.Errorf("failed to parse CA Certificate in file '%s'", c.caFile)
 			}
 			tlsConfig.RootCAs = pool
 		} else if len(c.caCert) > 0 {
@@ -298,10 +298,20 @@ func (c *Connection) getSsoResponse(inputURL *url.URL, parameters map[string]str
 	if err != nil {
 		return nil, err
 	}
+
+	if resp.StatusCode == 401 {
+		// Don't bother decoding, this will be a HTML message
+		return nil, &AuthError{
+			baseError: baseError{
+				Msg: fmt.Sprintf("authentication failed (response was: %v)", string(body)),
+			},
+		}
+	}
+
 	var jsonObj ssoResponseJSON
 	err = json.Unmarshal(body, &jsonObj)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to parse non-array sso with response %v", string(body))
+		return nil, fmt.Errorf("failed to parse non-array sso with response %v (%w)", string(body), err)
 	}
 	// Unmarshal successfully
 	if jsonObj.AccessToken != "" || jsonObj.SsoError != "" || jsonObj.SsoErrorCode != "" {
@@ -311,7 +321,7 @@ func (c *Connection) getSsoResponse(inputURL *url.URL, parameters map[string]str
 	var jsonObjList ssoResponseJSONParent
 	err = json.Unmarshal(body, &jsonObjList)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to parse array sso with response %v", string(body))
+		return nil, fmt.Errorf("failed to parse array sso with response %v (%w)", string(body), err)
 	}
 	if len(jsonObjList.children) > 0 {
 		jsonObj.AccessToken = jsonObjList.children[0].AccessToken
@@ -525,13 +535,13 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 
 	// Check parameters
 	if connBuilder.conn.url == nil {
-		return nil, errors.New("The URL must not be empty")
+		return nil, errors.New("the URL must not be empty")
 	}
 	if len(connBuilder.conn.username) == 0 {
-		return nil, errors.New("The Username must not be empty")
+		return nil, errors.New("the username must not be empty")
 	}
 	if len(connBuilder.conn.password) == 0 {
-		return nil, errors.New("The Password must not be empty")
+		return nil, errors.New("the password must not be empty")
 	}
 
 	// Construct http.Client
@@ -543,7 +553,7 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 		if len(connBuilder.conn.caFile) > 0 {
 			// Check if the CA File specified exists.
 			if _, err := os.Stat(connBuilder.conn.caFile); os.IsNotExist(err) {
-				return nil, fmt.Errorf("The ca file '%s' doesn't exist", connBuilder.conn.caFile)
+				return nil, fmt.Errorf("failed to check the CA file '%s' (%w)", connBuilder.conn.caFile, err)
 			}
 			caCerts, err := ioutil.ReadFile(connBuilder.conn.caFile)
 			if err != nil {
@@ -551,7 +561,7 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 			}
 			pool, err := createCertPool(caCerts)
 			if err != nil {
-				return nil, fmt.Errorf("Failed to parse CA Certificate in file '%s'", connBuilder.conn.caFile)
+				return nil, fmt.Errorf("failed to parse CA certificate(s) in file '%s' (%w)", connBuilder.conn.caFile, err)
 			}
 			tlsConfig.RootCAs = pool
 		} else if len(connBuilder.conn.caCert) > 0 {
@@ -577,7 +587,7 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 func createCertPool(caCerts []byte) (*x509.CertPool, error) {
 	pool := x509.NewCertPool()
 	if !pool.AppendCertsFromPEM(caCerts) {
-		return nil, fmt.Errorf("Failed to parse CA Certificate")
+		return nil, fmt.Errorf("failed to parse CA certificate(s)")
 	}
 	return pool, nil
 }
