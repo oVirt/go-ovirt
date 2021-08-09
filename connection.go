@@ -211,7 +211,7 @@ func (c *Connection) revokeAccessToken() error {
 
 	if ssoResp.SsoError != "" {
 		return &AuthError{
-			baseError{
+			baseError: baseError{
 				Msg: fmt.Sprintf("Error during SSO token revoke %s : %s", ssoResp.SsoErrorCode, ssoResp.SsoError),
 			},
 		}
