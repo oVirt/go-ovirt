@@ -41,14 +41,16 @@ type LogFunc func(format string, v ...interface{})
 // It is intended as the entry point for the SDK, and it provides access to the `system` service and, from there,
 // to the rest of the services provided by the API.
 type Connection struct {
-	url      *url.URL
-	username string
-	password string
-	token    string
-	insecure bool
-	caFile   string
-	caCert   []byte
-	headers  map[string]string
+	url       *url.URL
+	username  string
+	password  string
+	token     string
+	insecure  bool
+	tlsConfig *tls.Config
+	certPool  *x509.CertPool
+	caFile    string
+	caCert    []byte
+	headers   map[string]string
 	// Debug options
 	logFunc LogFunc
 
@@ -232,44 +234,6 @@ type ssoResponseJSON struct {
 
 // Execute a get request to the SSO server and return the response.
 func (c *Connection) getSsoResponse(inputURL *url.URL, parameters map[string]string) (*ssoResponseJSON, error) {
-	// Configure TLS parameters:
-	var tlsConfig *tls.Config
-	if inputURL.Scheme == "https" {
-		tlsConfig = &tls.Config{
-			InsecureSkipVerify: c.insecure,
-		}
-		if len(c.caFile) > 0 {
-			if _, err := os.Stat(c.caFile); os.IsNotExist(err) {
-				return nil, fmt.Errorf("the CA File '%s' doesn't exist", c.caFile)
-			}
-			caCerts, err := ioutil.ReadFile(c.caFile)
-			if err != nil {
-				return nil, err
-			}
-			pool, err := createCertPool(caCerts)
-			if err != nil {
-				return nil, fmt.Errorf("failed to parse CA Certificate in file '%s'", c.caFile)
-			}
-			tlsConfig.RootCAs = pool
-		} else if len(c.caCert) > 0 {
-			pool, err := createCertPool(c.caCert)
-			if err != nil {
-				return nil, err
-			}
-			tlsConfig.RootCAs = pool
-		}
-	}
-
-	c.client = &http.Client{
-		Timeout: c.timeout,
-		Transport: &http.Transport{
-			// Close the http connection after calling resp.Body.Close()
-			DisableKeepAlives:  true,
-			DisableCompression: !c.compress,
-			TLSClientConfig:    tlsConfig,
-		},
-	}
-
 	// POST request body:
 	formValues := make(url.Values)
 	for k1, v1 := range parameters {
@@ -474,6 +438,26 @@ func (connBuilder *ConnectionBuilder) CAFile(caFilePath string) *ConnectionBuild
 	return connBuilder
 }
 
+// TLSConfig sets a custom TLS configuration for the connection. This overrides any CA certificates that may have been
+// passed.
+func (connBuilder *ConnectionBuilder) TLSConfig(tlsConfig *tls.Config) *ConnectionBuilder {
+	if connBuilder.err != nil {
+		return connBuilder
+	}
+	connBuilder.conn.tlsConfig = tlsConfig
+	return connBuilder
+}
+
+// CertPool sets the base certificate pool for the connection.
+func (connBuilder *ConnectionBuilder) CertPool(certPool *x509.CertPool) *ConnectionBuilder {
+	// If already has errors, just return
+	if connBuilder.err != nil {
+		return connBuilder
+	}
+	connBuilder.conn.certPool = certPool
+	return connBuilder
+}
+
 // CACert sets the caCert field for `Connection` instance
 func (connBuilder *ConnectionBuilder) CACert(caCert []byte) *ConnectionBuilder {
 	// If already has errors, just return
@@ -544,32 +528,41 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 		return nil, errors.New("the password must not be empty")
 	}
 
-	// Construct http.Client
-	var tlsConfig *tls.Config
 	if connBuilder.conn.url.Scheme == "https" {
-		tlsConfig = &tls.Config{
-			InsecureSkipVerify: connBuilder.conn.insecure,
-		}
-		if len(connBuilder.conn.caFile) > 0 {
-			// Check if the CA File specified exists.
-			if _, err := os.Stat(connBuilder.conn.caFile); os.IsNotExist(err) {
-				return nil, fmt.Errorf("failed to check the CA file '%s' (%w)", connBuilder.conn.caFile, err)
+		if connBuilder.conn.tlsConfig == nil {
+			connBuilder.conn.tlsConfig = &tls.Config{
+				InsecureSkipVerify: connBuilder.conn.insecure,
 			}
-			caCerts, err := ioutil.ReadFile(connBuilder.conn.caFile)
-			if err != nil {
-				return nil, err
+			if !connBuilder.conn.insecure {
+				certPool := connBuilder.conn.certPool
+				var err error
+				if certPool == nil {
+					certPool, err = x509.SystemCertPool()
+					if err != nil {
+						// This happens when the system cert pool is not available.
+						// This is the case on Windows, see https://github.com/golang/go/issues/16736
+						certPool = x509.NewCertPool()
+					}
+				}
+				var caCerts []byte
+				if len(connBuilder.conn.caFile) > 0 {
+					// Check if the CA File specified exists.
+					if _, err := os.Stat(connBuilder.conn.caFile); os.IsNotExist(err) {
+						return nil, fmt.Errorf("failed to check the CA file '%s' (%w)", connBuilder.conn.caFile, err)
+					}
+					caCerts, err = ioutil.ReadFile(connBuilder.conn.caFile)
+					if err != nil {
+						return nil, err
+					}
+
+				} else {
+					caCerts = connBuilder.conn.caCert
+				}
+				if len(caCerts) > 0 && !certPool.AppendCertsFromPEM(caCerts) {
+					return nil, fmt.Errorf("failed to parse CA certificate(s)")
+				}
+				connBuilder.conn.tlsConfig.RootCAs = certPool
 			}
-			pool, err := createCertPool(caCerts)
-			if err != nil {
-				return nil, fmt.Errorf("failed to parse CA certificate(s) in file '%s' (%w)", connBuilder.conn.caFile, err)
-			}
-			tlsConfig.RootCAs = pool
-		} else if len(connBuilder.conn.caCert) > 0 {
-			pool, err := createCertPool(connBuilder.conn.caCert)
-			if err != nil {
-				return nil, err
-			}
-			tlsConfig.RootCAs = pool
 		}
 	}
 	connBuilder.conn.client = &http.Client{
@@ -578,16 +571,8 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 			// Close the http connection after calling resp.Body.Close()
 			DisableKeepAlives:  true,
 			DisableCompression: !connBuilder.conn.compress,
-			TLSClientConfig:    tlsConfig,
+			TLSClientConfig:    connBuilder.conn.tlsConfig,
 		},
 	}
 	return connBuilder.conn, nil
-}
-
-func createCertPool(caCerts []byte) (*x509.CertPool, error) {
-	pool := x509.NewCertPool()
-	if !pool.AppendCertsFromPEM(caCerts) {
-		return nil, fmt.Errorf("failed to parse CA certificate(s)")
-	}
-	return pool, nil
 }
