@@ -41,16 +41,18 @@ type LogFunc func(format string, v ...interface{})
 // It is intended as the entry point for the SDK, and it provides access to the `system` service and, from there,
 // to the rest of the services provided by the API.
 type Connection struct {
-	url       *url.URL
-	username  string
-	password  string
-	token     string
-	insecure  bool
-	tlsConfig *tls.Config
-	certPool  *x509.CertPool
-	caFile    string
-	caCert    []byte
-	headers   map[string]string
+	url                  *url.URL
+	username             string
+	password             string
+	token                string
+	insecure             bool
+	tlsConfig            *tls.Config
+	certPool             *x509.CertPool
+	caFile               string
+	caCert               []byte
+	headers              map[string]string
+	proxy                *url.URL
+	proxyFromEnvironment bool
 	// Debug options
 	logFunc LogFunc
 
@@ -510,6 +512,18 @@ func (connBuilder *ConnectionBuilder) Compress(compress bool) *ConnectionBuilder
 	return connBuilder
 }
 
+// Proxy sets the proxy server to the specified value.
+func (connBuilder *ConnectionBuilder) Proxy(proxy *url.URL) *ConnectionBuilder {
+	connBuilder.conn.proxy = proxy
+	return connBuilder
+}
+
+// ProxyFromEnvironment sets the proxy to come from the environment variables.
+func (connBuilder *ConnectionBuilder) ProxyFromEnvironment() *ConnectionBuilder {
+	connBuilder.conn.proxyFromEnvironment = true
+	return connBuilder
+}
+
 // Build constructs the `Connection` instance
 func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 	// If already has errors, just return
@@ -565,6 +579,14 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 			}
 		}
 	}
+	var proxy func(r *http.Request) (*url.URL, error)
+	if connBuilder.conn.proxyFromEnvironment {
+		proxy = http.ProxyFromEnvironment
+	} else if connBuilder.conn.proxy != nil {
+		proxy = func(r *http.Request) (*url.URL, error) {
+			return connBuilder.conn.proxy, nil
+		}
+	}
 	connBuilder.conn.client = &http.Client{
 		Timeout: connBuilder.conn.timeout,
 		Transport: &http.Transport{
@@ -572,6 +594,7 @@ func (connBuilder *ConnectionBuilder) Build() (*Connection, error) {
 			DisableKeepAlives:  true,
 			DisableCompression: !connBuilder.conn.compress,
 			TLSClientConfig:    connBuilder.conn.tlsConfig,
+			Proxy:              proxy,
 		},
 	}
 	return connBuilder.conn, nil
