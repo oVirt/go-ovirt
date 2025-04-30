@@ -32,6 +32,9 @@ func XMLAffinityGroupWriteOne(writer *XMLWriter, object *AffinityGroup, tag stri
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
+	if r, ok := object.Broken(); ok {
+		writer.WriteBool("broken", r)
+	}
 	if r, ok := object.Cluster(); ok {
 		XMLClusterWriteOne(writer, r, "cluster")
 	}
@@ -544,11 +547,17 @@ func XMLBackupWriteOne(writer *XMLWriter, object *Backup, tag string) error {
 	if r, ok := object.Host(); ok {
 		XMLHostWriteOne(writer, r, "host")
 	}
+	if r, ok := object.ModificationDate(); ok {
+		writer.WriteDate("modification_date", r)
+	}
 	if r, ok := object.Name(); ok {
 		writer.WriteCharacter("name", r)
 	}
 	if r, ok := object.Phase(); ok {
 		XMLBackupPhaseWriteOne(writer, r, "phase")
+	}
+	if r, ok := object.Snapshot(); ok {
+		XMLSnapshotWriteOne(writer, r, "snapshot")
 	}
 	if r, ok := object.ToCheckpointId(); ok {
 		writer.WriteCharacter("to_checkpoint_id", r)
@@ -1221,6 +1230,15 @@ func XMLClusterWriteOne(writer *XMLWriter, object *Cluster, tag string) error {
 	}
 	if r, ok := object.TunnelMigration(); ok {
 		writer.WriteBool("tunnel_migration", r)
+	}
+	if r, ok := object.UpgradeCorrelationId(); ok {
+		writer.WriteCharacter("upgrade_correlation_id", r)
+	}
+	if r, ok := object.UpgradeInProgress(); ok {
+		writer.WriteBool("upgrade_in_progress", r)
+	}
+	if r, ok := object.UpgradePercentComplete(); ok {
+		writer.WriteInt64("upgrade_percent_complete", r)
 	}
 	if r, ok := object.Version(); ok {
 		XMLVersionWriteOne(writer, r, "version")
@@ -2302,6 +2320,9 @@ func XMLDisplayWriteOne(writer *XMLWriter, object *Display, tag string) error {
 	if r, ok := object.DisconnectAction(); ok {
 		writer.WriteCharacter("disconnect_action", r)
 	}
+	if r, ok := object.DisconnectActionDelay(); ok {
+		writer.WriteInt64("disconnect_action_delay", r)
+	}
 	if r, ok := object.FileTransferEnabled(); ok {
 		writer.WriteBool("file_transfer_enabled", r)
 	}
@@ -2458,6 +2479,39 @@ func XMLDomainWriteMany(writer *XMLWriter, structSlice *DomainSlice, plural, sin
 	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
 		XMLDomainWriteOne(writer, o, singular)
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLDynamicCpuWriteOne(writer *XMLWriter, object *DynamicCpu, tag string) error {
+	if object == nil {
+		return fmt.Errorf("input object pointer is nil")
+	}
+	if tag == "" {
+		tag = "dynamic_cpu"
+	}
+	writer.WriteStart("", tag, nil)
+	if r, ok := object.CpuTune(); ok {
+		XMLCpuTuneWriteOne(writer, r, "cpu_tune")
+	}
+	if r, ok := object.Topology(); ok {
+		XMLCpuTopologyWriteOne(writer, r, "topology")
+	}
+	writer.WriteEnd(tag)
+	return nil
+}
+
+func XMLDynamicCpuWriteMany(writer *XMLWriter, structSlice *DynamicCpuSlice, plural, singular string) error {
+	if plural == "" {
+		plural = "dynamic_cpus"
+	}
+	if singular == "" {
+		singular = "dynamic_cpu"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, o := range structSlice.Slice() {
+		XMLDynamicCpuWriteOne(writer, o, singular)
 	}
 	writer.WriteEnd(plural)
 	return nil
@@ -3086,6 +3140,9 @@ func XMLExternalTemplateImportWriteOne(writer *XMLWriter, object *ExternalTempla
 		tag = "external_template_import"
 	}
 	writer.WriteStart("", tag, nil)
+	if r, ok := object.Clone(); ok {
+		writer.WriteBool("clone", r)
+	}
 	if r, ok := object.Cluster(); ok {
 		XMLClusterWriteOne(writer, r, "cluster")
 	}
@@ -4324,6 +4381,9 @@ func XMLHostWriteOne(writer *XMLWriter, object *Host, tag string) error {
 	if r, ok := object.Cpu(); ok {
 		XMLCpuWriteOne(writer, r, "cpu")
 	}
+	if r, ok := object.CpuUnits(); ok {
+		XMLHostCpuUnitWriteMany(writer, r, "cpu_units", "host_cpu_unit")
+	}
 	if r, ok := object.Description(); ok {
 		writer.WriteCharacter("description", r)
 	}
@@ -4398,6 +4458,9 @@ func XMLHostWriteOne(writer *XMLWriter, object *Host, tag string) error {
 	}
 	if r, ok := object.OverrideIptables(); ok {
 		writer.WriteBool("override_iptables", r)
+	}
+	if r, ok := object.OvnConfigured(); ok {
+		writer.WriteBool("ovn_configured", r)
 	}
 	if r, ok := object.Permissions(); ok {
 		XMLPermissionWriteMany(writer, r, "permissions", "permission")
@@ -4479,6 +4542,64 @@ func XMLHostWriteMany(writer *XMLWriter, structSlice *HostSlice, plural, singula
 	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
 		XMLHostWriteOne(writer, o, singular)
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLHostCpuUnitWriteOne(writer *XMLWriter, object *HostCpuUnit, tag string) error {
+	if object == nil {
+		return fmt.Errorf("input object pointer is nil")
+	}
+	if tag == "" {
+		tag = "host_cpu_unit"
+	}
+	var attrs map[string]string
+	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
+		attrs["id"] = r
+	}
+	writer.WriteStart("", tag, attrs)
+	if r, ok := object.Comment(); ok {
+		writer.WriteCharacter("comment", r)
+	}
+	if r, ok := object.CoreId(); ok {
+		writer.WriteInt64("core_id", r)
+	}
+	if r, ok := object.CpuId(); ok {
+		writer.WriteInt64("cpu_id", r)
+	}
+	if r, ok := object.Description(); ok {
+		writer.WriteCharacter("description", r)
+	}
+	if r, ok := object.Name(); ok {
+		writer.WriteCharacter("name", r)
+	}
+	if r, ok := object.RunsVdsm(); ok {
+		writer.WriteBool("runs_vdsm", r)
+	}
+	if r, ok := object.SocketId(); ok {
+		writer.WriteInt64("socket_id", r)
+	}
+	if r, ok := object.Vms(); ok {
+		XMLVmWriteMany(writer, r, "vms", "vm")
+	}
+	writer.WriteEnd(tag)
+	return nil
+}
+
+func XMLHostCpuUnitWriteMany(writer *XMLWriter, structSlice *HostCpuUnitSlice, plural, singular string) error {
+	if plural == "" {
+		plural = "host_cpu_units"
+	}
+	if singular == "" {
+		singular = "host_cpu_unit"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, o := range structSlice.Slice() {
+		XMLHostCpuUnitWriteOne(writer, o, singular)
 	}
 	writer.WriteEnd(plural)
 	return nil
@@ -5226,6 +5347,9 @@ func XMLInstanceTypeWriteOne(writer *XMLWriter, object *InstanceType, tag string
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
+	if r, ok := object.AutoPinningPolicy(); ok {
+		XMLAutoPinningPolicyWriteOne(writer, r, "auto_pinning_policy")
+	}
 	if r, ok := object.Bios(); ok {
 		XMLBiosWriteOne(writer, r, "bios")
 	}
@@ -5243,6 +5367,9 @@ func XMLInstanceTypeWriteOne(writer *XMLWriter, object *InstanceType, tag string
 	}
 	if r, ok := object.Cpu(); ok {
 		XMLCpuWriteOne(writer, r, "cpu")
+	}
+	if r, ok := object.CpuPinningPolicy(); ok {
+		XMLCpuPinningPolicyWriteOne(writer, r, "cpu_pinning_policy")
 	}
 	if r, ok := object.CpuProfile(); ok {
 		XMLCpuProfileWriteOne(writer, r, "cpu_profile")
@@ -5297,6 +5424,9 @@ func XMLInstanceTypeWriteOne(writer *XMLWriter, object *InstanceType, tag string
 	}
 	if r, ok := object.Lease(); ok {
 		XMLStorageDomainLeaseWriteOne(writer, r, "lease")
+	}
+	if r, ok := object.MediatedDevices(); ok {
+		XMLVmMediatedDeviceWriteMany(writer, r, "mediated_devices", "vm_mediated_device")
 	}
 	if r, ok := object.Memory(); ok {
 		writer.WriteInt64("memory", r)
@@ -5387,6 +5517,9 @@ func XMLInstanceTypeWriteOne(writer *XMLWriter, object *InstanceType, tag string
 	}
 	if r, ok := object.VirtioScsi(); ok {
 		XMLVirtioScsiWriteOne(writer, r, "virtio_scsi")
+	}
+	if r, ok := object.VirtioScsiMultiQueues(); ok {
+		writer.WriteInt64("virtio_scsi_multi_queues", r)
 	}
 	if r, ok := object.VirtioScsiMultiQueuesEnabled(); ok {
 		writer.WriteBool("virtio_scsi_multi_queues_enabled", r)
@@ -6271,8 +6404,14 @@ func XMLMigrationOptionsWriteOne(writer *XMLWriter, object *MigrationOptions, ta
 	if r, ok := object.Compressed(); ok {
 		XMLInheritableBooleanWriteOne(writer, r, "compressed")
 	}
+	if r, ok := object.CustomParallelMigrations(); ok {
+		writer.WriteInt64("custom_parallel_migrations", r)
+	}
 	if r, ok := object.Encrypted(); ok {
 		XMLInheritableBooleanWriteOne(writer, r, "encrypted")
+	}
+	if r, ok := object.ParallelMigrationsPolicy(); ok {
+		XMLParallelMigrationsPolicyWriteOne(writer, r, "parallel_migrations_policy")
 	}
 	if r, ok := object.Policy(); ok {
 		XMLMigrationPolicyWriteOne(writer, r, "policy")
@@ -7620,6 +7759,9 @@ func XMLOperatingSystemInfoWriteOne(writer *XMLWriter, object *OperatingSystemIn
 	}
 	if r, ok := object.SmallIcon(); ok {
 		XMLIconWriteOne(writer, r, "small_icon")
+	}
+	if r, ok := object.TpmSupport(); ok {
+		XMLTpmSupportWriteOne(writer, r, "tpm_support")
 	}
 	writer.WriteEnd(tag)
 	return nil
@@ -9308,6 +9450,9 @@ func XMLSnapshotWriteOne(writer *XMLWriter, object *Snapshot, tag string) error 
 	if r, ok := object.Applications(); ok {
 		XMLApplicationWriteMany(writer, r, "applications", "application")
 	}
+	if r, ok := object.AutoPinningPolicy(); ok {
+		XMLAutoPinningPolicyWriteOne(writer, r, "auto_pinning_policy")
+	}
 	if r, ok := object.Bios(); ok {
 		XMLBiosWriteOne(writer, r, "bios")
 	}
@@ -9325,6 +9470,9 @@ func XMLSnapshotWriteOne(writer *XMLWriter, object *Snapshot, tag string) error 
 	}
 	if r, ok := object.Cpu(); ok {
 		XMLCpuWriteOne(writer, r, "cpu")
+	}
+	if r, ok := object.CpuPinningPolicy(); ok {
+		XMLCpuPinningPolicyWriteOne(writer, r, "cpu_pinning_policy")
 	}
 	if r, ok := object.CpuProfile(); ok {
 		XMLCpuProfileWriteOne(writer, r, "cpu_profile")
@@ -9367,6 +9515,9 @@ func XMLSnapshotWriteOne(writer *XMLWriter, object *Snapshot, tag string) error 
 	}
 	if r, ok := object.Domain(); ok {
 		XMLDomainWriteOne(writer, r, "domain")
+	}
+	if r, ok := object.DynamicCpu(); ok {
+		XMLDynamicCpuWriteOne(writer, r, "dynamic_cpu")
 	}
 	if r, ok := object.ExternalHostProvider(); ok {
 		XMLExternalHostProviderWriteOne(writer, r, "external_host_provider")
@@ -9415,6 +9566,9 @@ func XMLSnapshotWriteOne(writer *XMLWriter, object *Snapshot, tag string) error 
 	}
 	if r, ok := object.Lease(); ok {
 		XMLStorageDomainLeaseWriteOne(writer, r, "lease")
+	}
+	if r, ok := object.MediatedDevices(); ok {
+		XMLVmMediatedDeviceWriteMany(writer, r, "mediated_devices", "vm_mediated_device")
 	}
 	if r, ok := object.Memory(); ok {
 		writer.WriteInt64("memory", r)
@@ -9559,6 +9713,9 @@ func XMLSnapshotWriteOne(writer *XMLWriter, object *Snapshot, tag string) error 
 	}
 	if r, ok := object.VirtioScsi(); ok {
 		XMLVirtioScsiWriteOne(writer, r, "virtio_scsi")
+	}
+	if r, ok := object.VirtioScsiMultiQueues(); ok {
+		writer.WriteInt64("virtio_scsi_multi_queues", r)
 	}
 	if r, ok := object.VirtioScsiMultiQueuesEnabled(); ok {
 		writer.WriteBool("virtio_scsi_multi_queues_enabled", r)
@@ -10416,6 +10573,9 @@ func XMLTemplateWriteOne(writer *XMLWriter, object *Template, tag string) error 
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
+	if r, ok := object.AutoPinningPolicy(); ok {
+		XMLAutoPinningPolicyWriteOne(writer, r, "auto_pinning_policy")
+	}
 	if r, ok := object.Bios(); ok {
 		XMLBiosWriteOne(writer, r, "bios")
 	}
@@ -10433,6 +10593,9 @@ func XMLTemplateWriteOne(writer *XMLWriter, object *Template, tag string) error 
 	}
 	if r, ok := object.Cpu(); ok {
 		XMLCpuWriteOne(writer, r, "cpu")
+	}
+	if r, ok := object.CpuPinningPolicy(); ok {
+		XMLCpuPinningPolicyWriteOne(writer, r, "cpu_pinning_policy")
 	}
 	if r, ok := object.CpuProfile(); ok {
 		XMLCpuProfileWriteOne(writer, r, "cpu_profile")
@@ -10487,6 +10650,9 @@ func XMLTemplateWriteOne(writer *XMLWriter, object *Template, tag string) error 
 	}
 	if r, ok := object.Lease(); ok {
 		XMLStorageDomainLeaseWriteOne(writer, r, "lease")
+	}
+	if r, ok := object.MediatedDevices(); ok {
+		XMLVmMediatedDeviceWriteMany(writer, r, "mediated_devices", "vm_mediated_device")
 	}
 	if r, ok := object.Memory(); ok {
 		writer.WriteInt64("memory", r)
@@ -10577,6 +10743,9 @@ func XMLTemplateWriteOne(writer *XMLWriter, object *Template, tag string) error 
 	}
 	if r, ok := object.VirtioScsi(); ok {
 		XMLVirtioScsiWriteOne(writer, r, "virtio_scsi")
+	}
+	if r, ok := object.VirtioScsiMultiQueues(); ok {
+		writer.WriteInt64("virtio_scsi_multi_queues", r)
 	}
 	if r, ok := object.VirtioScsiMultiQueuesEnabled(); ok {
 		writer.WriteBool("virtio_scsi_multi_queues_enabled", r)
@@ -11285,6 +11454,9 @@ func XMLVmWriteOne(writer *XMLWriter, object *Vm, tag string) error {
 	if r, ok := object.Applications(); ok {
 		XMLApplicationWriteMany(writer, r, "applications", "application")
 	}
+	if r, ok := object.AutoPinningPolicy(); ok {
+		XMLAutoPinningPolicyWriteOne(writer, r, "auto_pinning_policy")
+	}
 	if r, ok := object.Bios(); ok {
 		XMLBiosWriteOne(writer, r, "bios")
 	}
@@ -11302,6 +11474,9 @@ func XMLVmWriteOne(writer *XMLWriter, object *Vm, tag string) error {
 	}
 	if r, ok := object.Cpu(); ok {
 		XMLCpuWriteOne(writer, r, "cpu")
+	}
+	if r, ok := object.CpuPinningPolicy(); ok {
+		XMLCpuPinningPolicyWriteOne(writer, r, "cpu_pinning_policy")
 	}
 	if r, ok := object.CpuProfile(); ok {
 		XMLCpuProfileWriteOne(writer, r, "cpu_profile")
@@ -11338,6 +11513,9 @@ func XMLVmWriteOne(writer *XMLWriter, object *Vm, tag string) error {
 	}
 	if r, ok := object.Domain(); ok {
 		XMLDomainWriteOne(writer, r, "domain")
+	}
+	if r, ok := object.DynamicCpu(); ok {
+		XMLDynamicCpuWriteOne(writer, r, "dynamic_cpu")
 	}
 	if r, ok := object.ExternalHostProvider(); ok {
 		XMLExternalHostProviderWriteOne(writer, r, "external_host_provider")
@@ -11386,6 +11564,9 @@ func XMLVmWriteOne(writer *XMLWriter, object *Vm, tag string) error {
 	}
 	if r, ok := object.Lease(); ok {
 		XMLStorageDomainLeaseWriteOne(writer, r, "lease")
+	}
+	if r, ok := object.MediatedDevices(); ok {
+		XMLVmMediatedDeviceWriteMany(writer, r, "mediated_devices", "vm_mediated_device")
 	}
 	if r, ok := object.Memory(); ok {
 		writer.WriteInt64("memory", r)
@@ -11522,6 +11703,9 @@ func XMLVmWriteOne(writer *XMLWriter, object *Vm, tag string) error {
 	if r, ok := object.VirtioScsi(); ok {
 		XMLVirtioScsiWriteOne(writer, r, "virtio_scsi")
 	}
+	if r, ok := object.VirtioScsiMultiQueues(); ok {
+		writer.WriteInt64("virtio_scsi_multi_queues", r)
+	}
 	if r, ok := object.VirtioScsiMultiQueuesEnabled(); ok {
 		writer.WriteBool("virtio_scsi_multi_queues_enabled", r)
 	}
@@ -11565,6 +11749,9 @@ func XMLVmBaseWriteOne(writer *XMLWriter, object *VmBase, tag string) error {
 		attrs["id"] = r
 	}
 	writer.WriteStart("", tag, attrs)
+	if r, ok := object.AutoPinningPolicy(); ok {
+		XMLAutoPinningPolicyWriteOne(writer, r, "auto_pinning_policy")
+	}
 	if r, ok := object.Bios(); ok {
 		XMLBiosWriteOne(writer, r, "bios")
 	}
@@ -11579,6 +11766,9 @@ func XMLVmBaseWriteOne(writer *XMLWriter, object *VmBase, tag string) error {
 	}
 	if r, ok := object.Cpu(); ok {
 		XMLCpuWriteOne(writer, r, "cpu")
+	}
+	if r, ok := object.CpuPinningPolicy(); ok {
+		XMLCpuPinningPolicyWriteOne(writer, r, "cpu_pinning_policy")
 	}
 	if r, ok := object.CpuProfile(); ok {
 		XMLCpuProfileWriteOne(writer, r, "cpu_profile")
@@ -11703,6 +11893,9 @@ func XMLVmBaseWriteOne(writer *XMLWriter, object *VmBase, tag string) error {
 	if r, ok := object.VirtioScsi(); ok {
 		XMLVirtioScsiWriteOne(writer, r, "virtio_scsi")
 	}
+	if r, ok := object.VirtioScsiMultiQueues(); ok {
+		writer.WriteInt64("virtio_scsi_multi_queues", r)
+	}
 	if r, ok := object.VirtioScsiMultiQueuesEnabled(); ok {
 		writer.WriteBool("virtio_scsi_multi_queues_enabled", r)
 	}
@@ -11720,6 +11913,64 @@ func XMLVmBaseWriteMany(writer *XMLWriter, structSlice *VmBaseSlice, plural, sin
 	writer.WriteStart("", plural, nil)
 	for _, o := range structSlice.Slice() {
 		XMLVmBaseWriteOne(writer, o, singular)
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLVmMediatedDeviceWriteOne(writer *XMLWriter, object *VmMediatedDevice, tag string) error {
+	if object == nil {
+		return fmt.Errorf("input object pointer is nil")
+	}
+	if tag == "" {
+		tag = "vm_mediated_device"
+	}
+	var attrs map[string]string
+	if r, ok := object.Id(); ok {
+		if attrs == nil {
+			attrs = make(map[string]string)
+		}
+		attrs["id"] = r
+	}
+	writer.WriteStart("", tag, attrs)
+	if r, ok := object.Comment(); ok {
+		writer.WriteCharacter("comment", r)
+	}
+	if r, ok := object.Description(); ok {
+		writer.WriteCharacter("description", r)
+	}
+	if r, ok := object.InstanceType(); ok {
+		XMLInstanceTypeWriteOne(writer, r, "instance_type")
+	}
+	if r, ok := object.Name(); ok {
+		writer.WriteCharacter("name", r)
+	}
+	if r, ok := object.SpecParams(); ok {
+		XMLPropertyWriteMany(writer, r, "spec_params", "property")
+	}
+	if r, ok := object.Template(); ok {
+		XMLTemplateWriteOne(writer, r, "template")
+	}
+	if r, ok := object.Vm(); ok {
+		XMLVmWriteOne(writer, r, "vm")
+	}
+	if r, ok := object.Vms(); ok {
+		XMLVmWriteMany(writer, r, "vms", "vm")
+	}
+	writer.WriteEnd(tag)
+	return nil
+}
+
+func XMLVmMediatedDeviceWriteMany(writer *XMLWriter, structSlice *VmMediatedDeviceSlice, plural, singular string) error {
+	if plural == "" {
+		plural = "vm_mediated_devices"
+	}
+	if singular == "" {
+		singular = "vm_mediated_device"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, o := range structSlice.Slice() {
+		XMLVmMediatedDeviceWriteOne(writer, o, singular)
 	}
 	writer.WriteEnd(plural)
 	return nil
@@ -12303,6 +12554,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	if r, ok := object.ConnectivityTimeout(); ok {
 		writer.WriteInt64("connectivity_timeout", r)
 	}
+	if r, ok := object.CorrelationId(); ok {
+		writer.WriteCharacter("correlation_id", r)
+	}
 	if r, ok := object.DataCenter(); ok {
 		XMLDataCenterWriteOne(writer, r, "data_center")
 	}
@@ -12350,6 +12604,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	}
 	if r, ok := object.FixLayout(); ok {
 		writer.WriteBool("fix_layout", r)
+	}
+	if r, ok := object.Follow(); ok {
+		writer.WriteCharacter("follow", r)
 	}
 	if r, ok := object.Force(); ok {
 		writer.WriteBool("force", r)
@@ -12506,6 +12763,9 @@ func XMLActionWriteOne(writer *XMLWriter, object *Action, tag string) error {
 	}
 	if r, ok := object.UpgradeAction(); ok {
 		XMLClusterUpgradeActionWriteOne(writer, r, "upgrade_action")
+	}
+	if r, ok := object.UpgradePercentComplete(); ok {
+		writer.WriteInt64("upgrade_percent_complete", r)
 	}
 	if r, ok := object.UseCloudInit(); ok {
 		writer.WriteBool("use_cloud_init", r)
@@ -12893,6 +13153,28 @@ func XMLCpuModeWriteMany(writer *XMLWriter, enums []CpuMode, plural, singular st
 	}
 	if singular == "" {
 		singular = "cpu_mode"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLCpuPinningPolicyWriteOne(writer *XMLWriter, enum CpuPinningPolicy, tag string) {
+	if tag == "" {
+		tag = "cpu_pinning_policy"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLCpuPinningPolicyWriteMany(writer *XMLWriter, enums []CpuPinningPolicy, plural, singular string) error {
+	if plural == "" {
+		plural = "cpu_pinning_policies"
+	}
+	if singular == "" {
+		singular = "cpu_pinning_policy"
 	}
 	writer.WriteStart("", plural, nil)
 	for _, e := range enums {
@@ -14068,6 +14350,28 @@ func XMLOsTypeWriteMany(writer *XMLWriter, enums []OsType, plural, singular stri
 	return nil
 }
 
+func XMLParallelMigrationsPolicyWriteOne(writer *XMLWriter, enum ParallelMigrationsPolicy, tag string) {
+	if tag == "" {
+		tag = "parallel_migrations_policy"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLParallelMigrationsPolicyWriteMany(writer *XMLWriter, enums []ParallelMigrationsPolicy, plural, singular string) error {
+	if plural == "" {
+		plural = "parallel_migrations_policies"
+	}
+	if singular == "" {
+		singular = "parallel_migrations_policy"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
 func XMLPayloadEncodingWriteOne(writer *XMLWriter, enum PayloadEncoding, tag string) {
 	if tag == "" {
 		tag = "payload_encoding"
@@ -14697,6 +15001,28 @@ func XMLTemplateStatusWriteMany(writer *XMLWriter, enums []TemplateStatus, plura
 	}
 	if singular == "" {
 		singular = "template_status"
+	}
+	writer.WriteStart("", plural, nil)
+	for _, e := range enums {
+		writer.WriteCharacter(singular, string(e))
+	}
+	writer.WriteEnd(plural)
+	return nil
+}
+
+func XMLTpmSupportWriteOne(writer *XMLWriter, enum TpmSupport, tag string) {
+	if tag == "" {
+		tag = "tpm_support"
+	}
+	writer.WriteCharacter(tag, string(enum))
+}
+
+func XMLTpmSupportWriteMany(writer *XMLWriter, enums []TpmSupport, plural, singular string) error {
+	if plural == "" {
+		plural = "tpm_supports"
+	}
+	if singular == "" {
+		singular = "tpm_support"
 	}
 	writer.WriteStart("", plural, nil)
 	for _, e := range enums {

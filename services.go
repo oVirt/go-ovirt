@@ -1022,9 +1022,9 @@ func (p *AffinityGroupHostsService) List() *AffinityGroupHostsServiceListRequest
 	return &AffinityGroupHostsServiceListRequest{AffinityGroupHostsService: p}
 }
 
-// Access the service that manages the host assignment to this affinity group.
-func (op *AffinityGroupHostsService) HostService(id string) *AffinityGroupHostService {
-	return NewAffinityGroupHostService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+// Access the service that manages the host assignment to this affinity group by host id or name.
+func (op *AffinityGroupHostsService) HostService(idOrName string) *AffinityGroupHostService {
+	return NewAffinityGroupHostService(op.connection, fmt.Sprintf("%s/%s", op.path, idOrName))
 }
 
 // Service locator method, returns individual service on which the URI is dispatched.
@@ -9743,8 +9743,8 @@ func (op *AssignedVnicProfilesService) String() string {
 // Manages a single disk available in a storage domain attached to a data center.
 // IMPORTANT: Since version 4.2 of the engine this service is intended only to list disks available in the storage
 // domain, and to register unregistered disks. All the other operations, like copying a disk, moving a disk, etc, have
-// been deprecated and will be removed in the future. To perform those operations use the <<services/disks, service
-// that manages all the disks of the system>>, or the <<services/disk, service that manages an specific disk>>.
+// been deprecated and will be removed in the future. To perform those operations use the xref:services-disks[service that manages all the disks of the system]
+// or the xref:services-disk[service that manages a specific disk].
 type AttachedStorageDomainDiskService struct {
 	BaseService
 }
@@ -9758,7 +9758,7 @@ func NewAttachedStorageDomainDiskService(connection *Connection, path string) *A
 
 // Copies a disk to the specified storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To copy a disk use the <<services/disk/methods/copy, copy>>
+// compatibility. It will be removed in the future. To copy a disk use the xref:services-disk-methods-copy[copy]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceCopyRequest struct {
 	AttachedStorageDomainDiskService *AttachedStorageDomainDiskService
@@ -9879,14 +9879,14 @@ func (p *AttachedStorageDomainDiskServiceCopyRequest) MustSend() *AttachedStorag
 
 // Copies a disk to the specified storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To copy a disk use the <<services/disk/methods/copy, copy>>
+// compatibility. It will be removed in the future. To copy a disk use the xref:services-disk-methods-copy[copy]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceCopyResponse struct {
 }
 
 // Copies a disk to the specified storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To copy a disk use the <<services/disk/methods/copy, copy>>
+// compatibility. It will be removed in the future. To copy a disk use the xref:services-disk-methods-copy[copy]
 // operation of the service that manages that disk.
 func (p *AttachedStorageDomainDiskService) Copy() *AttachedStorageDomainDiskServiceCopyRequest {
 	return &AttachedStorageDomainDiskServiceCopyRequest{AttachedStorageDomainDiskService: p}
@@ -9894,7 +9894,7 @@ func (p *AttachedStorageDomainDiskService) Copy() *AttachedStorageDomainDiskServ
 
 // Exports a disk to an export storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To export a disk use the <<services/disk/methods/export, export>>
+// compatibility. It will be removed in the future. To export a disk use the xref:services-disk-methods-export[export]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceExportRequest struct {
 	AttachedStorageDomainDiskService *AttachedStorageDomainDiskService
@@ -10008,14 +10008,14 @@ func (p *AttachedStorageDomainDiskServiceExportRequest) MustSend() *AttachedStor
 
 // Exports a disk to an export storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To export a disk use the <<services/disk/methods/export, export>>
+// compatibility. It will be removed in the future. To export a disk use the xref:services-disk-methods-export[export]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceExportResponse struct {
 }
 
 // Exports a disk to an export storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To export a disk use the <<services/disk/methods/export, export>>
+// compatibility. It will be removed in the future. To export a disk use the xref:services-disk-methods-export[export]
 // operation of the service that manages that disk.
 func (p *AttachedStorageDomainDiskService) Export() *AttachedStorageDomainDiskServiceExportRequest {
 	return &AttachedStorageDomainDiskServiceExportRequest{AttachedStorageDomainDiskService: p}
@@ -10156,7 +10156,7 @@ func (p *AttachedStorageDomainDiskService) Get() *AttachedStorageDomainDiskServi
 
 // Moves a disk to another storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To move a disk use the <<services/disk/methods/move, move>>
+// compatibility. It will be removed in the future. To move a disk use the xref:services-disk-methods-move[move]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceMoveRequest struct {
 	AttachedStorageDomainDiskService *AttachedStorageDomainDiskService
@@ -10288,14 +10288,14 @@ func (p *AttachedStorageDomainDiskServiceMoveRequest) MustSend() *AttachedStorag
 
 // Moves a disk to another storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To move a disk use the <<services/disk/methods/move, move>>
+// compatibility. It will be removed in the future. To move a disk use the xref:services-disk-methods-move[move]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceMoveResponse struct {
 }
 
 // Moves a disk to another storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To move a disk use the <<services/disk/methods/move, move>>
+// compatibility. It will be removed in the future. To move a disk use the xref:services-disk-methods-move[move]
 // operation of the service that manages that disk.
 func (p *AttachedStorageDomainDiskService) Move() *AttachedStorageDomainDiskServiceMoveRequest {
 	return &AttachedStorageDomainDiskServiceMoveRequest{AttachedStorageDomainDiskService: p}
@@ -10416,7 +10416,7 @@ func (p *AttachedStorageDomainDiskService) Register() *AttachedStorageDomainDisk
 
 // Removes a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceRemoveRequest struct {
 	AttachedStorageDomainDiskService *AttachedStorageDomainDiskService
@@ -10513,14 +10513,14 @@ func (p *AttachedStorageDomainDiskServiceRemoveRequest) MustSend() *AttachedStor
 
 // Removes a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceRemoveResponse struct {
 }
 
 // Removes a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 func (p *AttachedStorageDomainDiskService) Remove() *AttachedStorageDomainDiskServiceRemoveRequest {
 	return &AttachedStorageDomainDiskServiceRemoveRequest{AttachedStorageDomainDiskService: p}
@@ -10528,7 +10528,7 @@ func (p *AttachedStorageDomainDiskService) Remove() *AttachedStorageDomainDiskSe
 
 // Sparsify the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceSparsifyRequest struct {
 	AttachedStorageDomainDiskService *AttachedStorageDomainDiskService
@@ -10635,14 +10635,14 @@ func (p *AttachedStorageDomainDiskServiceSparsifyRequest) MustSend() *AttachedSt
 
 // Sparsify the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceSparsifyResponse struct {
 }
 
 // Sparsify the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 func (p *AttachedStorageDomainDiskService) Sparsify() *AttachedStorageDomainDiskServiceSparsifyRequest {
 	return &AttachedStorageDomainDiskServiceSparsifyRequest{AttachedStorageDomainDiskService: p}
@@ -10651,7 +10651,7 @@ func (p *AttachedStorageDomainDiskService) Sparsify() *AttachedStorageDomainDisk
 // Updates the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
 // compatibility. It will be removed in the future. To update a disk use the
-// <<services/disk/methods/update, update>> operation of the service that manages that disk.
+// xref:services-disk-methods-update[update] operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceUpdateRequest struct {
 	AttachedStorageDomainDiskService *AttachedStorageDomainDiskService
 	header                           map[string]string
@@ -10766,7 +10766,7 @@ func (p *AttachedStorageDomainDiskServiceUpdateRequest) MustSend() *AttachedStor
 // Updates the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
 // compatibility. It will be removed in the future. To update a disk use the
-// <<services/disk/methods/update, update>> operation of the service that manages that disk.
+// xref:services-disk-methods-update[update] operation of the service that manages that disk.
 type AttachedStorageDomainDiskServiceUpdateResponse struct {
 	disk *Disk
 }
@@ -10788,7 +10788,7 @@ func (p *AttachedStorageDomainDiskServiceUpdateResponse) MustDisk() *Disk {
 // Updates the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
 // compatibility. It will be removed in the future. To update a disk use the
-// <<services/disk/methods/update, update>> operation of the service that manages that disk.
+// xref:services-disk-methods-update[update] operation of the service that manages that disk.
 func (p *AttachedStorageDomainDiskService) Update() *AttachedStorageDomainDiskServiceUpdateRequest {
 	return &AttachedStorageDomainDiskServiceUpdateRequest{AttachedStorageDomainDiskService: p}
 }
@@ -10840,9 +10840,9 @@ func NewAttachedStorageDomainDisksService(connection *Connection, path string) *
 
 // Adds or registers a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To add a new disk use the <<services/disks/methods/add, add>>
+// compatibility. It will be removed in the future. To add a new disk use the xref:services-disks-methods-add[add]
 // operation of the service that manages the disks of the system. To register an unregistered disk use the
-// <<services/attached_storage_domain_disk/methods/register, register>> operation of the service that manages
+// xref:services-attached_storage_domain_disk-methods-register[register] operation of the service that manages
 // that disk.
 type AttachedStorageDomainDisksServiceAddRequest struct {
 	AttachedStorageDomainDisksService *AttachedStorageDomainDisksService
@@ -10967,9 +10967,9 @@ func (p *AttachedStorageDomainDisksServiceAddRequest) MustSend() *AttachedStorag
 
 // Adds or registers a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To add a new disk use the <<services/disks/methods/add, add>>
+// compatibility. It will be removed in the future. To add a new disk use the xref:services-disks-methods-add[add]
 // operation of the service that manages the disks of the system. To register an unregistered disk use the
-// <<services/attached_storage_domain_disk/methods/register, register>> operation of the service that manages
+// xref:services-attached_storage_domain_disk-methods-register[register] operation of the service that manages
 // that disk.
 type AttachedStorageDomainDisksServiceAddResponse struct {
 	disk *Disk
@@ -10991,9 +10991,9 @@ func (p *AttachedStorageDomainDisksServiceAddResponse) MustDisk() *Disk {
 
 // Adds or registers a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To add a new disk use the <<services/disks/methods/add, add>>
+// compatibility. It will be removed in the future. To add a new disk use the xref:services-disks-methods-add[add]
 // operation of the service that manages the disks of the system. To register an unregistered disk use the
-// <<services/attached_storage_domain_disk/methods/register, register>> operation of the service that manages
+// xref:services-attached_storage_domain_disk-methods-register[register] operation of the service that manages
 // that disk.
 func (p *AttachedStorageDomainDisksService) Add() *AttachedStorageDomainDisksServiceAddRequest {
 	return &AttachedStorageDomainDisksServiceAddRequest{AttachedStorageDomainDisksService: p}
@@ -13627,7 +13627,7 @@ func NewClusterEnabledFeatureService(connection *Connection, path string) *Clust
 // ----
 // GET /ovirt-engine/api/clusters/123/enabledfeatures/456
 // ----
-// That will return a <<types/cluster_feature, ClusterFeature>> object containing the name:
+// That will return a xref:types-cluster_feature[ClusterFeature] object containing the name:
 // [source,xml]
 // ----
 // <cluster_feature id="456">
@@ -13750,7 +13750,7 @@ func (p *ClusterEnabledFeatureServiceGetRequest) MustSend() *ClusterEnabledFeatu
 // ----
 // GET /ovirt-engine/api/clusters/123/enabledfeatures/456
 // ----
-// That will return a <<types/cluster_feature, ClusterFeature>> object containing the name:
+// That will return a xref:types-cluster_feature[ClusterFeature] object containing the name:
 // [source,xml]
 // ----
 // <cluster_feature id="456">
@@ -13783,7 +13783,7 @@ func (p *ClusterEnabledFeatureServiceGetResponse) MustFeature() *ClusterFeature 
 // ----
 // GET /ovirt-engine/api/clusters/123/enabledfeatures/456
 // ----
-// That will return a <<types/cluster_feature, ClusterFeature>> object containing the name:
+// That will return a xref:types-cluster_feature[ClusterFeature] object containing the name:
 // [source,xml]
 // ----
 // <cluster_feature id="456">
@@ -14489,7 +14489,7 @@ func NewClusterFeatureService(connection *Connection, path string) *ClusterFeatu
 // ----
 // GET /ovirt-engine/api/clusterlevels/4.1/clusterfeatures/456
 // ----
-// That will return a <<types/cluster_feature, ClusterFeature>> object containing the name:
+// That will return a xref:types-cluster_feature[ClusterFeature] object containing the name:
 // [source,xml]
 // ----
 // <cluster_feature id="456">
@@ -14612,7 +14612,7 @@ func (p *ClusterFeatureServiceGetRequest) MustSend() *ClusterFeatureServiceGetRe
 // ----
 // GET /ovirt-engine/api/clusterlevels/4.1/clusterfeatures/456
 // ----
-// That will return a <<types/cluster_feature, ClusterFeature>> object containing the name:
+// That will return a xref:types-cluster_feature[ClusterFeature] object containing the name:
 // [source,xml]
 // ----
 // <cluster_feature id="456">
@@ -14645,7 +14645,7 @@ func (p *ClusterFeatureServiceGetResponse) MustFeature() *ClusterFeature {
 // ----
 // GET /ovirt-engine/api/clusterlevels/4.1/clusterfeatures/456
 // ----
-// That will return a <<types/cluster_feature, ClusterFeature>> object containing the name:
+// That will return a xref:types-cluster_feature[ClusterFeature] object containing the name:
 // [source,xml]
 // ----
 // <cluster_feature id="456">
@@ -14884,7 +14884,7 @@ func (op *ClusterFeaturesService) String() string {
 	return fmt.Sprintf("ClusterFeaturesService:%s", op.path)
 }
 
-// Provides information about a specific cluster level. See the <<services/cluster_levels,ClusterLevels>> service for
+// Provides information about a specific cluster level. See the xref:services-cluster_levels[ClusterLevels] service for
 // more information.
 type ClusterLevelService struct {
 	BaseService
@@ -14903,7 +14903,7 @@ func NewClusterLevelService(connection *Connection, path string) *ClusterLevelSe
 // ----
 // GET /ovirt-engine/api/clusterlevels/3.6
 // ----
-// That will return a <<types/cluster_level, ClusterLevel>> object containing the supported CPU types, and other
+// That will return a xref:types-cluster_level[ClusterLevel] object containing the supported CPU types, and other
 // information which describes the cluster level:
 // [source,xml]
 // ----
@@ -15041,7 +15041,7 @@ func (p *ClusterLevelServiceGetRequest) MustSend() *ClusterLevelServiceGetRespon
 // ----
 // GET /ovirt-engine/api/clusterlevels/3.6
 // ----
-// That will return a <<types/cluster_level, ClusterLevel>> object containing the supported CPU types, and other
+// That will return a xref:types-cluster_level[ClusterLevel] object containing the supported CPU types, and other
 // information which describes the cluster level:
 // [source,xml]
 // ----
@@ -15089,7 +15089,7 @@ func (p *ClusterLevelServiceGetResponse) MustLevel() *ClusterLevel {
 // ----
 // GET /ovirt-engine/api/clusterlevels/3.6
 // ----
-// That will return a <<types/cluster_level, ClusterLevel>> object containing the supported CPU types, and other
+// That will return a xref:types-cluster_level[ClusterLevel] object containing the supported CPU types, and other
 // information which describes the cluster level:
 // [source,xml]
 // ----
@@ -17201,9 +17201,9 @@ func (p *ClusterService) Update() *ClusterServiceUpdateRequest {
 	return &ClusterServiceUpdateRequest{ClusterService: p}
 }
 
-// Start or finish upgrade process for the cluster based on the action value. This action marks the cluster for
-// upgrade or clears the upgrade running flag on the cluster based on the action value which takes values of
-// start or stop.
+// Start, update or finish upgrade process for the cluster based on the action value. This action marks the
+// cluster for upgrade, updates the progress, or clears the upgrade running flag on the cluster based on the
+// action value which takes values of `start`, `stop` or `update_progress`.
 // [source]
 // ----
 // POST /ovirt-engine/api/clusters/123/upgrade
@@ -17219,12 +17219,28 @@ func (p *ClusterService) Update() *ClusterServiceUpdateRequest {
 //
 // </action>
 // ----
+// After starting the upgrade, use a request body like this to update the progress to 15%:
+// [source,xml]
+// ----
+// <action>
+//
+//	<upgrade_action>
+//	    update_progress
+//	</upgrade_action>
+//	<upgrade_percent_complete>
+//	    15
+//	</upgrade_percent_complete>
+//
+// </action>
+// ----
 type ClusterServiceUpgradeRequest struct {
-	ClusterService *ClusterService
-	header         map[string]string
-	query          map[string]string
-	async          *bool
-	upgradeAction  *ClusterUpgradeAction
+	ClusterService         *ClusterService
+	header                 map[string]string
+	query                  map[string]string
+	async                  *bool
+	correlationId          *string
+	upgradeAction          *ClusterUpgradeAction
+	upgradePercentComplete *int64
 }
 
 func (p *ClusterServiceUpgradeRequest) Header(key, value string) *ClusterServiceUpgradeRequest {
@@ -17248,8 +17264,18 @@ func (p *ClusterServiceUpgradeRequest) Async(async bool) *ClusterServiceUpgradeR
 	return p
 }
 
+func (p *ClusterServiceUpgradeRequest) CorrelationId(correlationId string) *ClusterServiceUpgradeRequest {
+	p.correlationId = &correlationId
+	return p
+}
+
 func (p *ClusterServiceUpgradeRequest) UpgradeAction(upgradeAction ClusterUpgradeAction) *ClusterServiceUpgradeRequest {
 	p.upgradeAction = &upgradeAction
+	return p
+}
+
+func (p *ClusterServiceUpgradeRequest) UpgradePercentComplete(upgradePercentComplete int64) *ClusterServiceUpgradeRequest {
+	p.upgradePercentComplete = &upgradePercentComplete
 	return p
 }
 
@@ -17259,8 +17285,14 @@ func (p *ClusterServiceUpgradeRequest) Send() (*ClusterServiceUpgradeResponse, e
 	if p.async != nil {
 		actionBuilder.Async(*p.async)
 	}
+	if p.correlationId != nil {
+		actionBuilder.CorrelationId(*p.correlationId)
+	}
 	if p.upgradeAction != nil {
 		actionBuilder.UpgradeAction(*p.upgradeAction)
+	}
+	if p.upgradePercentComplete != nil {
+		actionBuilder.UpgradePercentComplete(*p.upgradePercentComplete)
 	}
 	action, err := actionBuilder.Build()
 	if err != nil {
@@ -17340,9 +17372,9 @@ func (p *ClusterServiceUpgradeRequest) MustSend() *ClusterServiceUpgradeResponse
 	}
 }
 
-// Start or finish upgrade process for the cluster based on the action value. This action marks the cluster for
-// upgrade or clears the upgrade running flag on the cluster based on the action value which takes values of
-// start or stop.
+// Start, update or finish upgrade process for the cluster based on the action value. This action marks the
+// cluster for upgrade, updates the progress, or clears the upgrade running flag on the cluster based on the
+// action value which takes values of `start`, `stop` or `update_progress`.
 // [source]
 // ----
 // POST /ovirt-engine/api/clusters/123/upgrade
@@ -17358,12 +17390,26 @@ func (p *ClusterServiceUpgradeRequest) MustSend() *ClusterServiceUpgradeResponse
 //
 // </action>
 // ----
+// After starting the upgrade, use a request body like this to update the progress to 15%:
+// [source,xml]
+// ----
+// <action>
+//
+//	<upgrade_action>
+//	    update_progress
+//	</upgrade_action>
+//	<upgrade_percent_complete>
+//	    15
+//	</upgrade_percent_complete>
+//
+// </action>
+// ----
 type ClusterServiceUpgradeResponse struct {
 }
 
-// Start or finish upgrade process for the cluster based on the action value. This action marks the cluster for
-// upgrade or clears the upgrade running flag on the cluster based on the action value which takes values of
-// start or stop.
+// Start, update or finish upgrade process for the cluster based on the action value. This action marks the
+// cluster for upgrade, updates the progress, or clears the upgrade running flag on the cluster based on the
+// action value which takes values of `start`, `stop` or `update_progress`.
 // [source]
 // ----
 // POST /ovirt-engine/api/clusters/123/upgrade
@@ -17376,6 +17422,20 @@ type ClusterServiceUpgradeResponse struct {
 //	<upgrade_action>
 //	    start
 //	</upgrade_action>
+//
+// </action>
+// ----
+// After starting the upgrade, use a request body like this to update the progress to 15%:
+// [source,xml]
+// ----
+// <action>
+//
+//	<upgrade_action>
+//	    update_progress
+//	</upgrade_action>
+//	<upgrade_percent_complete>
+//	    15
+//	</upgrade_percent_complete>
 //
 // </action>
 // ----
@@ -21717,7 +21777,7 @@ func (op *DiskAttachmentService) String() string {
 }
 
 // This service manages the set of disks attached to a virtual machine. Each attached disk is represented by a
-// <<types/disk_attachment,DiskAttachment>>, containing the bootable flag, the disk interface and the reference to
+// xref:types-disk_attachment[DiskAttachment], containing the bootable flag, the disk interface and the reference to
 // the disk.
 type DiskAttachmentsService struct {
 	BaseService
@@ -21767,7 +21827,7 @@ func NewDiskAttachmentsService(connection *Connection, path string) *DiskAttachm
 // ----
 // POST /ovirt-engine/api/vms/345/diskattachments
 // ----
-// IMPORTANT: The server accepts requests that don't contain the `active` attribute, but the effect is
+// IMPORTANT: The server accepts requests that do not contain the `active` attribute, but the effect is
 // undefined. In some cases the disk will be automatically activated and in other cases it won't. To
 // avoid issues it is strongly recommended to always include the `active` attribute with the desired
 // value.
@@ -21919,7 +21979,7 @@ func (p *DiskAttachmentsServiceAddRequest) MustSend() *DiskAttachmentsServiceAdd
 // ----
 // POST /ovirt-engine/api/vms/345/diskattachments
 // ----
-// IMPORTANT: The server accepts requests that don't contain the `active` attribute, but the effect is
+// IMPORTANT: The server accepts requests that do not contain the `active` attribute, but the effect is
 // undefined. In some cases the disk will be automatically activated and in other cases it won't. To
 // avoid issues it is strongly recommended to always include the `active` attribute with the desired
 // value.
@@ -21978,7 +22038,7 @@ func (p *DiskAttachmentsServiceAddResponse) MustAttachment() *DiskAttachment {
 // ----
 // POST /ovirt-engine/api/vms/345/diskattachments
 // ----
-// IMPORTANT: The server accepts requests that don't contain the `active` attribute, but the effect is
+// IMPORTANT: The server accepts requests that do not contain the `active` attribute, but the effect is
 // undefined. In some cases the disk will be automatically activated and in other cases it won't. To
 // avoid issues it is strongly recommended to always include the `active` attribute with the desired
 // value.
@@ -23153,6 +23213,198 @@ func NewDiskService(connection *Connection, path string) *DiskService {
 	return &result
 }
 
+// Converts disk format and/or preallocation mode.
+// For example, to convert the disk format from preallocated-cow to a sparse-raw image,
+// send a request like the following:
+// [source]
+// ----
+// POST /ovirt-engine/api/disks/123/convert
+// ----
+// With the following request body:
+// [source,xml]
+// ----
+//
+//	<action>
+//	  <disk>
+//	    <sparse>true</sparse>
+//	    <format>raw</format>
+//	  </disk>
+//	</action>
+//
+// ----
+// Note: In order to sparsify a disk, two conversions might be needed if the disk is on a Block Storage Domain.
+// For example: If a disk is RAW, converting it to QCOW will result in a larger disk. In order to reduce the size,
+// it is possible to convert the disk again to QCOW and keep the same allocation policy.
+type DiskServiceConvertRequest struct {
+	DiskService *DiskService
+	header      map[string]string
+	query       map[string]string
+	disk        *Disk
+	follow      *string
+}
+
+func (p *DiskServiceConvertRequest) Header(key, value string) *DiskServiceConvertRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *DiskServiceConvertRequest) Query(key, value string) *DiskServiceConvertRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *DiskServiceConvertRequest) Disk(disk *Disk) *DiskServiceConvertRequest {
+	p.disk = disk
+	return p
+}
+
+func (p *DiskServiceConvertRequest) Follow(follow string) *DiskServiceConvertRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *DiskServiceConvertRequest) Send() (*DiskServiceConvertResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/convert", p.DiskService.connection.URL(), p.DiskService.path)
+	actionBuilder := NewActionBuilder()
+	actionBuilder.Disk(p.disk)
+	if p.follow != nil {
+		actionBuilder.Follow(*p.follow)
+	}
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.DiskService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.DiskService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.DiskService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.DiskService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.DiskService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	_, errCheckAction := CheckAction(respBodyBytes, resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(DiskServiceConvertResponse), nil
+}
+
+func (p *DiskServiceConvertRequest) MustSend() *DiskServiceConvertResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Converts disk format and/or preallocation mode.
+// For example, to convert the disk format from preallocated-cow to a sparse-raw image,
+// send a request like the following:
+// [source]
+// ----
+// POST /ovirt-engine/api/disks/123/convert
+// ----
+// With the following request body:
+// [source,xml]
+// ----
+//
+//	<action>
+//	  <disk>
+//	    <sparse>true</sparse>
+//	    <format>raw</format>
+//	  </disk>
+//	</action>
+//
+// ----
+// Note: In order to sparsify a disk, two conversions might be needed if the disk is on a Block Storage Domain.
+// For example: If a disk is RAW, converting it to QCOW will result in a larger disk. In order to reduce the size,
+// it is possible to convert the disk again to QCOW and keep the same allocation policy.
+type DiskServiceConvertResponse struct {
+}
+
+// Converts disk format and/or preallocation mode.
+// For example, to convert the disk format from preallocated-cow to a sparse-raw image,
+// send a request like the following:
+// [source]
+// ----
+// POST /ovirt-engine/api/disks/123/convert
+// ----
+// With the following request body:
+// [source,xml]
+// ----
+//
+//	<action>
+//	  <disk>
+//	    <sparse>true</sparse>
+//	    <format>raw</format>
+//	  </disk>
+//	</action>
+//
+// ----
+// Note: In order to sparsify a disk, two conversions might be needed if the disk is on a Block Storage Domain.
+// For example: If a disk is RAW, converting it to QCOW will result in a larger disk. In order to reduce the size,
+// it is possible to convert the disk again to QCOW and keep the same allocation policy.
+func (p *DiskService) Convert() *DiskServiceConvertRequest {
+	return &DiskServiceConvertRequest{DiskService: p}
+}
+
 // This operation copies a disk to the specified storage domain.
 // For example, a disk can be copied using the following request:
 // [source]
@@ -24065,7 +24317,7 @@ func (p *DiskService) Reduce() *DiskServiceReduceRequest {
 // Refreshes a direct LUN disk with up-to-date information from the storage.
 // Refreshing a direct LUN disk is useful when:
 //   - The LUN was added using the API without the host parameter, and therefore does not contain
-//     any information from the storage (see <<services/disks/methods/add, DisksService::add>>).
+//     any information from the storage (see xref:services-disks-methods-add[DisksService::add]).
 //   - New information about the LUN is available on the storage and you want to update the LUN with it.
 //
 // To refresh direct LUN disk `123` using host `456`, send the following request:
@@ -24195,7 +24447,7 @@ func (p *DiskServiceRefreshLunRequest) MustSend() *DiskServiceRefreshLunResponse
 // Refreshes a direct LUN disk with up-to-date information from the storage.
 // Refreshing a direct LUN disk is useful when:
 //   - The LUN was added using the API without the host parameter, and therefore does not contain
-//     any information from the storage (see <<services/disks/methods/add, DisksService::add>>).
+//     any information from the storage (see xref:services-disks-methods-add[DisksService::add]).
 //   - New information about the LUN is available on the storage and you want to update the LUN with it.
 //
 // To refresh direct LUN disk `123` using host `456`, send the following request:
@@ -24218,7 +24470,7 @@ type DiskServiceRefreshLunResponse struct {
 // Refreshes a direct LUN disk with up-to-date information from the storage.
 // Refreshing a direct LUN disk is useful when:
 //   - The LUN was added using the API without the host parameter, and therefore does not contain
-//     any information from the storage (see <<services/disks/methods/add, DisksService::add>>).
+//     any information from the storage (see xref:services-disks-methods-add[DisksService::add]).
 //   - New information about the LUN is available on the storage and you want to update the LUN with it.
 //
 // To refresh direct LUN disk `123` using host `456`, send the following request:
@@ -24481,7 +24733,8 @@ func (p *DiskService) Sparsify() *DiskServiceSparsifyRequest {
 // This operation allows updating the following floating disk properties:
 // * For Image disks: `provisioned_size`, `alias`, `description`, `wipe_after_delete`, `shareable`, `backup` and `disk_profile`.
 // * For LUN disks: `alias`, `description` and `shareable`.
-// * For Cinder and Managed Block disks: `provisioned_size`, `alias` and `description`.
+// * Cinder integration has been replaced by Managed Block Storage.
+// * For Managed Block disks: `provisioned_size`, `alias` and `description`.
 // * For VM attached disks, the `qcow_version` can also be updated.
 // For example, a disk's update can be done by using the following request:
 // [source]
@@ -24616,7 +24869,8 @@ func (p *DiskServiceUpdateRequest) MustSend() *DiskServiceUpdateResponse {
 // This operation allows updating the following floating disk properties:
 // * For Image disks: `provisioned_size`, `alias`, `description`, `wipe_after_delete`, `shareable`, `backup` and `disk_profile`.
 // * For LUN disks: `alias`, `description` and `shareable`.
-// * For Cinder and Managed Block disks: `provisioned_size`, `alias` and `description`.
+// * Cinder integration has been replaced by Managed Block Storage.
+// * For Managed Block disks: `provisioned_size`, `alias` and `description`.
 // * For VM attached disks, the `qcow_version` can also be updated.
 // For example, a disk's update can be done by using the following request:
 // [source]
@@ -24658,7 +24912,8 @@ func (p *DiskServiceUpdateResponse) MustDisk() *Disk {
 // This operation allows updating the following floating disk properties:
 // * For Image disks: `provisioned_size`, `alias`, `description`, `wipe_after_delete`, `shareable`, `backup` and `disk_profile`.
 // * For LUN disks: `alias`, `description` and `shareable`.
-// * For Cinder and Managed Block disks: `provisioned_size`, `alias` and `description`.
+// * Cinder integration has been replaced by Managed Block Storage.
+// * For Managed Block disks: `provisioned_size`, `alias` and `description`.
 // * For VM attached disks, the `qcow_version` can also be updated.
 // For example, a disk's update can be done by using the following request:
 // [source]
@@ -25017,6 +25272,7 @@ type DiskSnapshotsServiceListRequest struct {
 	query                map[string]string
 	follow               *string
 	includeActive        *bool
+	includeTemplate      *bool
 	max                  *int64
 }
 
@@ -25046,6 +25302,11 @@ func (p *DiskSnapshotsServiceListRequest) IncludeActive(includeActive bool) *Dis
 	return p
 }
 
+func (p *DiskSnapshotsServiceListRequest) IncludeTemplate(includeTemplate bool) *DiskSnapshotsServiceListRequest {
+	p.includeTemplate = &includeTemplate
+	return p
+}
+
 func (p *DiskSnapshotsServiceListRequest) Max(max int64) *DiskSnapshotsServiceListRequest {
 	p.max = &max
 	return p
@@ -25060,6 +25321,10 @@ func (p *DiskSnapshotsServiceListRequest) Send() (*DiskSnapshotsServiceListRespo
 
 	if p.includeActive != nil {
 		values["include_active"] = []string{fmt.Sprintf("%v", *p.includeActive)}
+	}
+
+	if p.includeTemplate != nil {
+		values["include_template"] = []string{fmt.Sprintf("%v", *p.includeTemplate)}
 	}
 
 	if p.max != nil {
@@ -25198,18 +25463,16 @@ func NewDisksService(connection *Connection, path string) *DisksService {
 }
 
 // Adds a new floating disk.
-// There are three types of disks that can be added - disk image, direct LUN and
-//
-//	https://wiki.openstack.org/wiki/Cinder[Cinder] disk.
-//
+// There are three types of disks that can be added - disk image, direct LUN and Managed Block disk.
+// link:https://wiki.openstack.org/wiki/Cinder[Cinder] integration has been replaced by Managed Block Storage.
 // *Adding a new image disk:*
-// When creating a new floating image <<types/disk,Disk>>, the API requires the `storage_domain`, `provisioned_size`
+// When creating a new floating image xref:types-disk[Disk], the API requires the `storage_domain`, `provisioned_size`
 // and `format` attributes.
-// Note that block storage domains (i.e., storage domains with the <<types/storage_type, storage type>> of iSCSI or
-// FCP) don't support the combination of the raw `format` with `sparse=true`, so `sparse=false` must be stated
+// Note that block storage domains (i.e. storage domains with the xref:types-storage_type[storage type] of iSCSI or
+// FCP) do not support the combination of the raw `format` with `sparse=true`, so `sparse=false` must be stated
 // explicitly.
 // To create a new floating image disk with specified `provisioned_size`, `format` and `name` on a storage domain
-// with an id `123`, send a request as follows:
+// with an id `123` and enabled for incremental backup, send a request as follows:
 // [source]
 // ----
 // POST /ovirt-engine/api/disks
@@ -25225,6 +25488,7 @@ func NewDisksService(connection *Connection, path string) *DisksService {
 //	<name>mydisk</name>
 //	<provisioned_size>1048576</provisioned_size>
 //	<format>cow</format>
+//	<backup>incremental</backup>
 //
 // </disk>
 // ----
@@ -25263,30 +25527,8 @@ func NewDisksService(connection *Connection, path string) *DisksService {
 // ----
 // To create a new floating direct LUN disk without using a host, remove the `host` element.
 // *Adding a new Cinder disk:*
-// To create a new floating Cinder disk, send a request as follows:
-// [source]
-// ----
-// POST /ovirt-engine/api/disks
-// ----
-// With a request body as follows:
-// [source,xml]
-// ----
-// <disk>
-//
-//	<openstack_volume_type>
-//	  <name>myceph</name>
-//	</openstack_volume_type>
-//	<storage_domains>
-//	  <storage_domain>
-//	    <name>cinderDomain</name>
-//	  </storage_domain>
-//	</storage_domains>
-//	<provisioned_size>1073741824</provisioned_size>
-//	<interface>virtio</interface>
-//	<format>raw</format>
-//
-// </disk>
-// ----
+// Cinder integration has been replaced by Managed Block Storage.
+// //TODO: Add an example for adding an MBS disk
 // *Adding a floating disks in order to upload disk snapshots:*
 // Since version 4.2 of the engine it is possible to upload disks with
 // snapshots. This request should be used to create the base image of the
@@ -25441,18 +25683,16 @@ func (p *DisksServiceAddRequest) MustSend() *DisksServiceAddResponse {
 }
 
 // Adds a new floating disk.
-// There are three types of disks that can be added - disk image, direct LUN and
-//
-//	https://wiki.openstack.org/wiki/Cinder[Cinder] disk.
-//
+// There are three types of disks that can be added - disk image, direct LUN and Managed Block disk.
+// link:https://wiki.openstack.org/wiki/Cinder[Cinder] integration has been replaced by Managed Block Storage.
 // *Adding a new image disk:*
-// When creating a new floating image <<types/disk,Disk>>, the API requires the `storage_domain`, `provisioned_size`
+// When creating a new floating image xref:types-disk[Disk], the API requires the `storage_domain`, `provisioned_size`
 // and `format` attributes.
-// Note that block storage domains (i.e., storage domains with the <<types/storage_type, storage type>> of iSCSI or
-// FCP) don't support the combination of the raw `format` with `sparse=true`, so `sparse=false` must be stated
+// Note that block storage domains (i.e. storage domains with the xref:types-storage_type[storage type] of iSCSI or
+// FCP) do not support the combination of the raw `format` with `sparse=true`, so `sparse=false` must be stated
 // explicitly.
 // To create a new floating image disk with specified `provisioned_size`, `format` and `name` on a storage domain
-// with an id `123`, send a request as follows:
+// with an id `123` and enabled for incremental backup, send a request as follows:
 // [source]
 // ----
 // POST /ovirt-engine/api/disks
@@ -25468,6 +25708,7 @@ func (p *DisksServiceAddRequest) MustSend() *DisksServiceAddResponse {
 //	<name>mydisk</name>
 //	<provisioned_size>1048576</provisioned_size>
 //	<format>cow</format>
+//	<backup>incremental</backup>
 //
 // </disk>
 // ----
@@ -25506,30 +25747,8 @@ func (p *DisksServiceAddRequest) MustSend() *DisksServiceAddResponse {
 // ----
 // To create a new floating direct LUN disk without using a host, remove the `host` element.
 // *Adding a new Cinder disk:*
-// To create a new floating Cinder disk, send a request as follows:
-// [source]
-// ----
-// POST /ovirt-engine/api/disks
-// ----
-// With a request body as follows:
-// [source,xml]
-// ----
-// <disk>
-//
-//	<openstack_volume_type>
-//	  <name>myceph</name>
-//	</openstack_volume_type>
-//	<storage_domains>
-//	  <storage_domain>
-//	    <name>cinderDomain</name>
-//	  </storage_domain>
-//	</storage_domains>
-//	<provisioned_size>1073741824</provisioned_size>
-//	<interface>virtio</interface>
-//	<format>raw</format>
-//
-// </disk>
-// ----
+// Cinder integration has been replaced by Managed Block Storage.
+// //TODO: Add an example for adding an MBS disk
 // *Adding a floating disks in order to upload disk snapshots:*
 // Since version 4.2 of the engine it is possible to upload disks with
 // snapshots. This request should be used to create the base image of the
@@ -25591,18 +25810,16 @@ func (p *DisksServiceAddResponse) MustDisk() *Disk {
 }
 
 // Adds a new floating disk.
-// There are three types of disks that can be added - disk image, direct LUN and
-//
-//	https://wiki.openstack.org/wiki/Cinder[Cinder] disk.
-//
+// There are three types of disks that can be added - disk image, direct LUN and Managed Block disk.
+// link:https://wiki.openstack.org/wiki/Cinder[Cinder] integration has been replaced by Managed Block Storage.
 // *Adding a new image disk:*
-// When creating a new floating image <<types/disk,Disk>>, the API requires the `storage_domain`, `provisioned_size`
+// When creating a new floating image xref:types-disk[Disk], the API requires the `storage_domain`, `provisioned_size`
 // and `format` attributes.
-// Note that block storage domains (i.e., storage domains with the <<types/storage_type, storage type>> of iSCSI or
-// FCP) don't support the combination of the raw `format` with `sparse=true`, so `sparse=false` must be stated
+// Note that block storage domains (i.e. storage domains with the xref:types-storage_type[storage type] of iSCSI or
+// FCP) do not support the combination of the raw `format` with `sparse=true`, so `sparse=false` must be stated
 // explicitly.
 // To create a new floating image disk with specified `provisioned_size`, `format` and `name` on a storage domain
-// with an id `123`, send a request as follows:
+// with an id `123` and enabled for incremental backup, send a request as follows:
 // [source]
 // ----
 // POST /ovirt-engine/api/disks
@@ -25618,6 +25835,7 @@ func (p *DisksServiceAddResponse) MustDisk() *Disk {
 //	<name>mydisk</name>
 //	<provisioned_size>1048576</provisioned_size>
 //	<format>cow</format>
+//	<backup>incremental</backup>
 //
 // </disk>
 // ----
@@ -25656,30 +25874,8 @@ func (p *DisksServiceAddResponse) MustDisk() *Disk {
 // ----
 // To create a new floating direct LUN disk without using a host, remove the `host` element.
 // *Adding a new Cinder disk:*
-// To create a new floating Cinder disk, send a request as follows:
-// [source]
-// ----
-// POST /ovirt-engine/api/disks
-// ----
-// With a request body as follows:
-// [source,xml]
-// ----
-// <disk>
-//
-//	<openstack_volume_type>
-//	  <name>myceph</name>
-//	</openstack_volume_type>
-//	<storage_domains>
-//	  <storage_domain>
-//	    <name>cinderDomain</name>
-//	  </storage_domain>
-//	</storage_domains>
-//	<provisioned_size>1073741824</provisioned_size>
-//	<interface>virtio</interface>
-//	<format>raw</format>
-//
-// </disk>
-// ----
+// Cinder integration has been replaced by Managed Block Storage.
+// //TODO: Add an example for adding an MBS disk
 // *Adding a floating disks in order to upload disk snapshots:*
 // Since version 4.2 of the engine it is possible to upload disks with
 // snapshots. This request should be used to create the base image of the
@@ -29168,7 +29364,7 @@ func NewExternalTemplateImportsService(connection *Connection, path string) *Ext
 // ----
 // POST /externaltemplateimports
 // ----
-// With request body of type <<types/external_template_import,ExternalTemplateImport>>, for example:
+// With request body of type xref:types-external_template_import[ExternalTemplateImport], for example:
 // [source,xml]
 // ----
 // <external_template_import>
@@ -29300,7 +29496,7 @@ func (p *ExternalTemplateImportsServiceAddRequest) MustSend() *ExternalTemplateI
 // ----
 // POST /externaltemplateimports
 // ----
-// With request body of type <<types/external_template_import,ExternalTemplateImport>>, for example:
+// With request body of type xref:types-external_template_import[ExternalTemplateImport], for example:
 // [source,xml]
 // ----
 // <external_template_import>
@@ -29339,7 +29535,7 @@ func (p *ExternalTemplateImportsServiceAddResponse) MustImport() *ExternalTempla
 // ----
 // POST /externaltemplateimports
 // ----
-// With request body of type <<types/external_template_import,ExternalTemplateImport>>, for example:
+// With request body of type xref:types-external_template_import[ExternalTemplateImport], for example:
 // [source,xml]
 // ----
 // <external_template_import>
@@ -29388,7 +29584,7 @@ func NewExternalVmImportsService(connection *Connection, path string) *ExternalV
 // ----
 // POST /externalvmimports
 // ----
-// With request body of type <<types/external_vm_import,ExternalVmImport>>, for example:
+// With request body of type xref:types-external_vm_import[ExternalVmImport], for example:
 // [source,xml]
 // ----
 // <external_vm_import>
@@ -29525,7 +29721,7 @@ func (p *ExternalVmImportsServiceAddRequest) MustSend() *ExternalVmImportsServic
 // ----
 // POST /externalvmimports
 // ----
-// With request body of type <<types/external_vm_import,ExternalVmImport>>, for example:
+// With request body of type xref:types-external_vm_import[ExternalVmImport], for example:
 // [source,xml]
 // ----
 // <external_vm_import>
@@ -29569,7 +29765,7 @@ func (p *ExternalVmImportsServiceAddResponse) MustImport() *ExternalVmImport {
 // ----
 // POST /externalvmimports
 // ----
-// With request body of type <<types/external_vm_import,ExternalVmImport>>, for example:
+// With request body of type xref:types-external_vm_import[ExternalVmImport], for example:
 // [source,xml]
 // ----
 // <external_vm_import>
@@ -31640,6 +31836,168 @@ func (op *FiltersService) String() string {
 	return fmt.Sprintf("FiltersService:%s", op.path)
 }
 
+type HostCpuUnitsService struct {
+	BaseService
+}
+
+func NewHostCpuUnitsService(connection *Connection, path string) *HostCpuUnitsService {
+	var result HostCpuUnitsService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+// Returns the List of all host's CPUs with detailed information
+// about the topology (socket, core) and with information
+// about the current CPU pinning.
+type HostCpuUnitsServiceListRequest struct {
+	HostCpuUnitsService *HostCpuUnitsService
+	header              map[string]string
+	query               map[string]string
+	follow              *string
+}
+
+func (p *HostCpuUnitsServiceListRequest) Header(key, value string) *HostCpuUnitsServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *HostCpuUnitsServiceListRequest) Query(key, value string) *HostCpuUnitsServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *HostCpuUnitsServiceListRequest) Follow(follow string) *HostCpuUnitsServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *HostCpuUnitsServiceListRequest) Send() (*HostCpuUnitsServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.HostCpuUnitsService.connection.URL(), p.HostCpuUnitsService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.HostCpuUnitsService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.HostCpuUnitsService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.HostCpuUnitsService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.HostCpuUnitsService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.HostCpuUnitsService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLHostCpuUnitReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &HostCpuUnitsServiceListResponse{cpuUnits: result}, nil
+}
+
+func (p *HostCpuUnitsServiceListRequest) MustSend() *HostCpuUnitsServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Returns the List of all host's CPUs with detailed information
+// about the topology (socket, core) and with information
+// about the current CPU pinning.
+type HostCpuUnitsServiceListResponse struct {
+	cpuUnits *HostCpuUnitSlice
+}
+
+func (p *HostCpuUnitsServiceListResponse) CpuUnits() (*HostCpuUnitSlice, bool) {
+	if p.cpuUnits != nil {
+		return p.cpuUnits, true
+	}
+	return nil, false
+}
+
+func (p *HostCpuUnitsServiceListResponse) MustCpuUnits() *HostCpuUnitSlice {
+	if p.cpuUnits == nil {
+		panic("cpuUnits in response does not exist")
+	}
+	return p.cpuUnits
+}
+
+// Returns the List of all host's CPUs with detailed information
+// about the topology (socket, core) and with information
+// about the current CPU pinning.
+func (p *HostCpuUnitsService) List() *HostCpuUnitsServiceListRequest {
+	return &HostCpuUnitsServiceListRequest{HostCpuUnitsService: p}
+}
+
+// Service locator method, returns individual service on which the URI is dispatched.
+func (op *HostCpuUnitsService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *HostCpuUnitsService) String() string {
+	return fmt.Sprintf("HostCpuUnitsService:%s", op.path)
+}
+
 // A service to access a particular device of a host.
 type HostDeviceService struct {
 	BaseService
@@ -33569,10 +33927,10 @@ func (p *HostService) Approve() *HostServiceApproveRequest {
 // <action/>
 // ----
 // IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
-// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// the xref:services-host-methods-setup_networks[setupnetworks] request, in which case the new
 // configuration is automatically saved in the {hypervisor-name} upon completing the setup and
 // re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
-// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
+// waiting for a separate xref:services-host-methods-commit_net_config[commitnetconfig] request.
 type HostServiceCommitNetConfigRequest struct {
 	HostService *HostService
 	header      map[string]string
@@ -33702,10 +34060,10 @@ func (p *HostServiceCommitNetConfigRequest) MustSend() *HostServiceCommitNetConf
 // <action/>
 // ----
 // IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
-// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// the xref:services-host-methods-setup_networks[setupnetworks] request, in which case the new
 // configuration is automatically saved in the {hypervisor-name} upon completing the setup and
 // re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
-// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
+// waiting for a separate xref:services-host-methods-commit_net_config[commitnetconfig] request.
 type HostServiceCommitNetConfigResponse struct {
 }
 
@@ -33726,10 +34084,10 @@ type HostServiceCommitNetConfigResponse struct {
 // <action/>
 // ----
 // IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
-// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// the xref:services-host-methods-setup_networks[setupnetworks] request, in which case the new
 // configuration is automatically saved in the {hypervisor-name} upon completing the setup and
 // re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
-// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
+// waiting for a separate xref:services-host-methods-commit_net_config[commitnetconfig] request.
 func (p *HostService) CommitNetConfig() *HostServiceCommitNetConfigRequest {
 	return &HostServiceCommitNetConfigRequest{HostService: p}
 }
@@ -34084,6 +34442,9 @@ func (p *HostService) Deactivate() *HostServiceDeactivateRequest {
 //
 // </discovered_targets>
 // ----
+// IMPORTANT: When using this method to discover iscsi targets, you can use an FQDN or an
+// IP address, but you must use the iscsi details from the discovered targets results to log in
+// using the  iscsilogin method.
 type HostServiceDiscoverIscsiRequest struct {
 	HostService *HostService
 	header      map[string]string
@@ -34237,6 +34598,9 @@ func (p *HostServiceDiscoverIscsiRequest) MustSend() *HostServiceDiscoverIscsiRe
 //
 // </discovered_targets>
 // ----
+// IMPORTANT: When using this method to discover iscsi targets, you can use an FQDN or an
+// IP address, but you must use the iscsi details from the discovered targets results to log in
+// using the  iscsilogin method.
 type HostServiceDiscoverIscsiResponse struct {
 	discoveredTargets *IscsiDetailsSlice
 }
@@ -34288,6 +34652,9 @@ func (p *HostServiceDiscoverIscsiResponse) MustDiscoveredTargets() *IscsiDetails
 //
 // </discovered_targets>
 // ----
+// IMPORTANT: When using this method to discover iscsi targets, you can use an FQDN or an
+// IP address, but you must use the iscsi details from the discovered targets results to log in
+// using the  iscsilogin method.
 func (p *HostService) DiscoverIscsi() *HostServiceDiscoverIscsiRequest {
 	return &HostServiceDiscoverIscsiRequest{HostService: p}
 }
@@ -35496,6 +35863,8 @@ func (p *HostService) IscsiDiscover() *HostServiceIscsiDiscoverRequest {
 }
 
 // Login to iSCSI targets on the host, using the target details.
+// IMPORTANT: When using this method to log in, you must use the iscsi details from the
+// discovered targets results in the discoveriscsi method.
 type HostServiceIscsiLoginRequest struct {
 	HostService *HostService
 	header      map[string]string
@@ -35616,10 +35985,14 @@ func (p *HostServiceIscsiLoginRequest) MustSend() *HostServiceIscsiLoginResponse
 }
 
 // Login to iSCSI targets on the host, using the target details.
+// IMPORTANT: When using this method to log in, you must use the iscsi details from the
+// discovered targets results in the discoveriscsi method.
 type HostServiceIscsiLoginResponse struct {
 }
 
 // Login to iSCSI targets on the host, using the target details.
+// IMPORTANT: When using this method to log in, you must use the iscsi details from the
+// discovered targets results in the discoveriscsi method.
 func (p *HostService) IscsiLogin() *HostServiceIscsiLoginRequest {
 	return &HostServiceIscsiLoginRequest{HostService: p}
 }
@@ -36065,12 +36438,12 @@ func (p *HostService) Remove() *HostServiceRemoveRequest {
 // host_service.commit_net_config()
 // ----
 // IMPORTANT: To make sure that the network configuration has been saved in the host, and that it will be applied
-// when the host is rebooted, remember to call <<services/host/methods/commit_net_config, commitnetconfig>>.
+// when the host is rebooted, remember to call xref:services-host-methods-commit_net_config[commitnetconfig].
 // IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
-// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// the xref:services-host-methods-setup_networks[setupnetworks] request, in which case the new
 // configuration is automatically saved in the {hypervisor-name} upon completing the setup and
 // re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
-// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
+// waiting for a separate xref:services-host-methods-commit_net_config[commitnetconfig] request.
 type HostServiceSetupNetworksRequest struct {
 	HostService                    *HostService
 	header                         map[string]string
@@ -36469,12 +36842,12 @@ func (p *HostServiceSetupNetworksRequest) MustSend() *HostServiceSetupNetworksRe
 // host_service.commit_net_config()
 // ----
 // IMPORTANT: To make sure that the network configuration has been saved in the host, and that it will be applied
-// when the host is rebooted, remember to call <<services/host/methods/commit_net_config, commitnetconfig>>.
+// when the host is rebooted, remember to call xref:services-host-methods-commit_net_config[commitnetconfig].
 // IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
-// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// the xref:services-host-methods-setup_networks[setupnetworks] request, in which case the new
 // configuration is automatically saved in the {hypervisor-name} upon completing the setup and
 // re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
-// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
+// waiting for a separate xref:services-host-methods-commit_net_config[commitnetconfig] request.
 type HostServiceSetupNetworksResponse struct {
 }
 
@@ -36632,12 +37005,12 @@ type HostServiceSetupNetworksResponse struct {
 // host_service.commit_net_config()
 // ----
 // IMPORTANT: To make sure that the network configuration has been saved in the host, and that it will be applied
-// when the host is rebooted, remember to call <<services/host/methods/commit_net_config, commitnetconfig>>.
+// when the host is rebooted, remember to call xref:services-host-methods-commit_net_config[commitnetconfig].
 // IMPORTANT: Since {engine-name} 4.3, it is possible to also specify `commit_on_success` in
-// the <<services/host/methods/setup_networks, setupnetworks>> request, in which case the new
+// the xref:services-host-methods-setup_networks[setupnetworks] request, in which case the new
 // configuration is automatically saved in the {hypervisor-name} upon completing the setup and
 // re-establishing connectivity between the {hypervisor-name} and {engine-name}, and without
-// waiting for a separate <<services/host/methods/commit_net_config, commitnetconfig>> request.
+// waiting for a separate xref:services-host-methods-commit_net_config[commitnetconfig] request.
 func (p *HostService) SetupNetworks() *HostServiceSetupNetworksRequest {
 	return &HostServiceSetupNetworksRequest{HostService: p}
 }
@@ -37285,7 +37658,7 @@ func (p *HostService) Upgrade() *HostServiceUpgradeRequest {
 // Check if there are upgrades available for the host. If there are upgrades available an icon will be displayed
 // next to host status icon in the Administration Portal. Audit log messages are also added to indicate the
 // availability of upgrades. The upgrade can be started from the webadmin or by using the
-// <<services/host/methods/upgrade, upgrade>> host action.
+// xref:services-host-methods-upgrade[upgrade] host action.
 type HostServiceUpgradeCheckRequest struct {
 	HostService *HostService
 	header      map[string]string
@@ -37392,14 +37765,14 @@ func (p *HostServiceUpgradeCheckRequest) MustSend() *HostServiceUpgradeCheckResp
 // Check if there are upgrades available for the host. If there are upgrades available an icon will be displayed
 // next to host status icon in the Administration Portal. Audit log messages are also added to indicate the
 // availability of upgrades. The upgrade can be started from the webadmin or by using the
-// <<services/host/methods/upgrade, upgrade>> host action.
+// xref:services-host-methods-upgrade[upgrade] host action.
 type HostServiceUpgradeCheckResponse struct {
 }
 
 // Check if there are upgrades available for the host. If there are upgrades available an icon will be displayed
 // next to host status icon in the Administration Portal. Audit log messages are also added to indicate the
 // availability of upgrades. The upgrade can be started from the webadmin or by using the
-// <<services/host/methods/upgrade, upgrade>> host action.
+// xref:services-host-methods-upgrade[upgrade] host action.
 func (p *HostService) UpgradeCheck() *HostServiceUpgradeCheckRequest {
 	return &HostServiceUpgradeCheckRequest{HostService: p}
 }
@@ -38393,6 +38766,13 @@ func (op *HostService) AffinityLabelsService() *AssignedAffinityLabelsService {
 	return NewAssignedAffinityLabelsService(op.connection, fmt.Sprintf("%s/affinitylabels", op.path))
 }
 
+// A reference to the list of all host's CPUs with detailed information
+// about the topology (socket, core) and with information
+// about the current CPU pinning.
+func (op *HostService) CpuUnitsService() *HostCpuUnitsService {
+	return NewHostCpuUnitsService(op.connection, fmt.Sprintf("%s/cpuunits", op.path))
+}
+
 // A reference to the host devices service. Use this service to view the devices of the host object.
 func (op *HostService) DevicesService() *HostDevicesService {
 	return NewHostDevicesService(op.connection, fmt.Sprintf("%s/devices", op.path))
@@ -38476,6 +38856,12 @@ func (op *HostService) Service(path string) (Service, error) {
 	}
 	if strings.HasPrefix(path, "affinitylabels/") {
 		return op.AffinityLabelsService().Service(path[15:])
+	}
+	if path == "cpuunits" {
+		return op.CpuUnitsService(), nil
+	}
+	if strings.HasPrefix(path, "cpuunits/") {
+		return op.CpuUnitsService().Service(path[9:])
 	}
 	if path == "devices" {
 		return op.DevicesService(), nil
@@ -40545,8 +40931,8 @@ func (op *ImageService) String() string {
 }
 
 // This service provides a mechanism to control an image transfer. The client will have
-// to create a transfer by using <<services/image_transfers/methods/add, add>>
-// of the <<services/image_transfers>> service, stating the image to transfer
+// to create a transfer by using xref:services-image_transfers-methods-add[add]
+// of the xref:services-image_transfers[image transfers] service, stating the image to transfer
 // data to/from.
 // After doing that, the transfer is managed by this service.
 // *Using oVirt's Python's SDK:*
@@ -40582,7 +40968,7 @@ func (op *ImageService) String() string {
 // )
 // ----
 // If the user wishes to download a disk rather than upload, he/she should specify
-// `download` as the <<types/image_transfer_direction, direction>> attribute of the transfer.
+// `download` as the xref:types-image_transfer_direction[direction] attribute of the transfer.
 // This will grant a read permission from the image, instead of a write permission.
 // E.g:
 // [source,python]
@@ -40602,10 +40988,10 @@ func (op *ImageService) String() string {
 // Transfers have phases, which govern the flow of the upload/download.
 // A client implementing such a flow should poll/check the transfer's phase and
 // act accordingly. All the possible phases can be found in
-// <<types/image_transfer_phase, ImageTransferPhase>>.
-// After adding a new transfer, its phase will be <<types/image_transfer_phase, initializing>>.
+// xref:types-image_transfer_phase[ImageTransferPhase].
+// After adding a new transfer, its phase will be xref:types-image_transfer_phase[initializing].
 // The client will have to poll on the transfer's phase until it changes.
-// When the phase becomes <<types/image_transfer_phase, transferring>>,
+// When the phase becomes xref:types-image_transfer_phase[transferring],
 // the session is ready to start the transfer.
 // For example:
 // [source,python]
@@ -40617,124 +41003,8 @@ func (op *ImageService) String() string {
 //	transfer = transfer_service.get()
 //
 // ----
-// At that stage, if the transfer's phase is <<types/image_transfer_phase, paused_system>>, then the session was
-// not successfully established. One possible reason for that is that the ovirt-imageio-daemon is not running
-// in the host that was selected for transfer.
-// The transfer can be resumed by calling <<services/image_transfer/methods/resume, resume>>
-// of the service that manages it.
-// If the session was successfully established - the returned transfer entity will
-// contain the <<types/image_transfer, transfer_url>> and <<types/image_transfer, proxy_url>> attributes,
-// which the client needs to use in order to transfer the required data. The client can choose whatever
-// technique and tool for sending the HTTPS request with the image's data.
-//   - `transfer_url` is the address of an imageio server running on one of the hypervisors.
-//   - `proxy_url` is the address of an imageio proxy server that can be used if
-//     you cannot access transfer_url.
-//
-// To transfer the image, it is recommended to use the imageio client python library.
-// [source,python]
-// ----
-// from ovirt_imageio import client
-// # Upload qcow2 image to virtual disk:
-// client.upload("disk.qcow2", transfer.transfer_url)
-// # Download virtual disk to qcow2 image:
-// client.download(transfer.transfer_url, "disk.qcow2")
-// ----
-// You can also upload and download using imageio REST API. For more info
-// on this, see imageio API documentation:
-//
-//	http://ovirt.github.io/ovirt-imageio/images.html
-//
-// When finishing the transfer, the user should call
-// <<services/image_transfer/methods/finalize, finalize>>. This will make the
-// final adjustments and verifications for finishing the transfer process.
-// For example:
-// [source,python]
-// ----
-// transfer_service.finalize()
-// ----
-// In case of an error, the transfer's phase will be changed to
-// <<types/image_transfer_phase, finished_failure>>, and
-// the disk's status will be changed to `Illegal`. Otherwise it will be changed to
-// <<types/image_transfer_phase, finished_success>>, and the disk will be ready
-// to be used. In both cases, the transfer entity will be removed shortly after.
-// *Using HTTP and cURL calls:*
-// - For upload, create a new disk first:
-// * Specify 'initial_size' and 'provisioned_size' in bytes.
-// * 'initial_size' must be bigger or the same as the size of the uploaded data.
-// [source]
-// ----
-// POST /ovirt-engine/api/disks
-// ----
-// With a request body as follows:
-// [source,xml]
-// ----
-// <disk>
-//
-//	<storage_domains>
-//	  <storage_domain id="123"/>
-//	</storage_domains>
-//	<alias>mydisk</alias>
-//	<initial_size>1073741824</initial_size>
-//	<provisioned_size>1073741824</provisioned_size>
-//	<format>raw</format>
-//
-// </disk>
-// ----
-// - Create a new image transfer for downloading/uploading a `disk` with id `456`:
-// [source]
-// ----
-// POST /ovirt-engine/api/imagetransfers
-// ----
-// With a request body as follows:
-// [source,xml]
-// ----
-// <image_transfer>
-//
-//	<disk id="456"/>
-//	<direction>upload|download</direction>
-//
-// </image_transfer>
-// ----
-// Will respond:
-// [source,xml]
-// ----
-// <image_transfer id="123">
-//
-//	<direction>download|upload</direction>
-//	<phase>initializing|transferring</phase>
-//	<proxy_url>https://proxy_fqdn:54323/images/41c732d4-2210-4e7b-9e5c-4e2805baadbb</proxy_url>
-//	<transfer_url>https://daemon_fqdn:54322/images/41c732d4-2210-4e7b-9e5c-4e2805baadbb</transfer_url>
-//	...
-//
-// </image_transfer>
-// ----
-// Note: If the phase is 'initializing', poll the `image_transfer` till its phase changes to 'transferring'.
-//   - Use the 'transfer_url' or 'proxy_url' to invoke a curl command:
-//   - use 'transfer_url' for transferring directly from/to ovirt-imageio-daemon,
-//     or, use 'proxy_url' for transferring from/to ovirt-imageio-proxy.
-//     Note: using the proxy would mitigate scenarios where there's no direct connectivity
-//     to the daemon machine, e.g. vdsm machines are on a different network than the engine.
-//
-// -- Download:
-// [source,shell]
-// ----
-// $ curl --cacert /etc/pki/ovirt-engine/ca.pem https://daemon_fqdn:54322/images/41c732d4-2210-4e7b-9e5c-4e2805baadbb -o <output_file>
-// ----
-// -- Upload:
-// [source,shell]
-// ----
-// $ curl --cacert /etc/pki/ovirt-engine/ca.pem --upload-file <file_to_upload> -X PUT https://daemon_fqdn:54322/images/41c732d4-2210-4e7b-9e5c-4e2805baadbb
-// ----
-// - Finalize the image transfer by invoking the action:
-// [source]
-// ----
-// POST /ovirt-engine/api/imagetransfers/123/finalize
-// ----
-// With a request body as follows:
-// [source,xml]
-// ----
-// <action />
-// ----
+// At that stage, if the phase of the transfer is xref:types-image_transfer_phase[paused_system], the session was
+// not successfully established. This can happen if ovirt-imageio is not running in the selected host.
 type ImageTransferService struct {
 	BaseService
 }
@@ -41505,7 +41775,7 @@ func (op *ImageTransferService) String() string {
 }
 
 // This service manages image transfers, for performing Image I/O API in {product-name}.
-// Please refer to <<services/image_transfer, image transfer>> for further
+// Please refer to xref:services-image_transfer[image transfer] for further
 // documentation.
 type ImageTransfersService struct {
 	BaseService
@@ -49807,7 +50077,7 @@ func (op *NetworkFilterService) String() string {
 
 // Represents a readonly network filters sub-collection.
 // The network filter enables to filter packets send to/from the VM's nic according to defined rules.
-// For more information please refer to <<services/network_filter,NetworkFilter>> service documentation
+// For more information please refer to xref:services-network_filter[NetworkFilter] service documentation
 // Network filters are supported in different versions, starting from version 3.0.
 // A network filter is defined for each vnic profile.
 // A vnic profile is defined for a specific network.
@@ -50888,9 +51158,9 @@ func (p *NetworkService) Get() *NetworkServiceGetRequest {
 // DELETE /ovirt-engine/api/datacenters/123/networks/456
 // ----
 // NOTE: To remove an external logical network, the network has to be removed directly from its provider by
-// https://developer.openstack.org/api-ref/network[OpenStack Networking API].
+// link:https://developer.openstack.org/api-ref/network[OpenStack Networking API].
 // The entity representing the external network inside {product-name} is removed automatically,
-// if <<types/open_stack_network_provider/attributes/auto_sync,`auto_sync`>> is enabled for the provider,
+// if xref:types-open_stack_network_provider-attributes-auto_sync[`auto_sync`] is enabled for the provider,
 // otherwise the entity has to be removed using this method.
 type NetworkServiceRemoveRequest struct {
 	NetworkService *NetworkService
@@ -51010,9 +51280,9 @@ func (p *NetworkServiceRemoveRequest) MustSend() *NetworkServiceRemoveResponse {
 // DELETE /ovirt-engine/api/datacenters/123/networks/456
 // ----
 // NOTE: To remove an external logical network, the network has to be removed directly from its provider by
-// https://developer.openstack.org/api-ref/network[OpenStack Networking API].
+// link:https://developer.openstack.org/api-ref/network[OpenStack Networking API].
 // The entity representing the external network inside {product-name} is removed automatically,
-// if <<types/open_stack_network_provider/attributes/auto_sync,`auto_sync`>> is enabled for the provider,
+// if xref:types-open_stack_network_provider-attributes-auto_sync[`auto_sync`] is enabled for the provider,
 // otherwise the entity has to be removed using this method.
 type NetworkServiceRemoveResponse struct {
 }
@@ -51032,9 +51302,9 @@ type NetworkServiceRemoveResponse struct {
 // DELETE /ovirt-engine/api/datacenters/123/networks/456
 // ----
 // NOTE: To remove an external logical network, the network has to be removed directly from its provider by
-// https://developer.openstack.org/api-ref/network[OpenStack Networking API].
+// link:https://developer.openstack.org/api-ref/network[OpenStack Networking API].
 // The entity representing the external network inside {product-name} is removed automatically,
-// if <<types/open_stack_network_provider/attributes/auto_sync,`auto_sync`>> is enabled for the provider,
+// if xref:types-open_stack_network_provider-attributes-auto_sync[`auto_sync`] is enabled for the provider,
 // otherwise the entity has to be removed using this method.
 func (p *NetworkService) Remove() *NetworkServiceRemoveRequest {
 	return &NetworkServiceRemoveRequest{NetworkService: p}
@@ -53635,7 +53905,7 @@ func NewPermitsService(connection *Connection, path string) *PermitsService {
 	return &result
 }
 
-// Adds a permit to the role. The permit name can be retrieved from the <<services/cluster_levels>> service.
+// Adds a permit to the role. The permit name can be retrieved from the xref:services-cluster_levels[cluster_levels] service.
 // For example to assign a permit `create_vm` to the role with id `123` send a request like this:
 // ....
 // POST /ovirt-engine/api/roles/123/permits
@@ -53760,7 +54030,7 @@ func (p *PermitsServiceAddRequest) MustSend() *PermitsServiceAddResponse {
 	}
 }
 
-// Adds a permit to the role. The permit name can be retrieved from the <<services/cluster_levels>> service.
+// Adds a permit to the role. The permit name can be retrieved from the xref:services-cluster_levels[cluster_levels] service.
 // For example to assign a permit `create_vm` to the role with id `123` send a request like this:
 // ....
 // POST /ovirt-engine/api/roles/123/permits
@@ -53792,7 +54062,7 @@ func (p *PermitsServiceAddResponse) MustPermit() *Permit {
 	return p.permit
 }
 
-// Adds a permit to the role. The permit name can be retrieved from the <<services/cluster_levels>> service.
+// Adds a permit to the role. The permit name can be retrieved from the xref:services-cluster_levels[cluster_levels] service.
 // For example to assign a permit `create_vm` to the role with id `123` send a request like this:
 // ....
 // POST /ovirt-engine/api/roles/123/permits
@@ -57500,7 +57770,7 @@ func (p *RoleService) Remove() *RoleServiceRemoveRequest {
 
 // Updates a role. You are allowed to update `name`, `description` and `administrative` attributes after role is
 // created. Within this endpoint you can't add or remove roles permits you need to use
-// <<services/permits, service>> that manages permits of role.
+// xref:services-permits[service] that manages permits of role.
 // For example to update role's `name`, `description` and `administrative` attributes send a request like this:
 // [source]
 // ----
@@ -57640,7 +57910,7 @@ func (p *RoleServiceUpdateRequest) MustSend() *RoleServiceUpdateResponse {
 
 // Updates a role. You are allowed to update `name`, `description` and `administrative` attributes after role is
 // created. Within this endpoint you can't add or remove roles permits you need to use
-// <<services/permits, service>> that manages permits of role.
+// xref:services-permits[service] that manages permits of role.
 // For example to update role's `name`, `description` and `administrative` attributes send a request like this:
 // [source]
 // ----
@@ -57677,7 +57947,7 @@ func (p *RoleServiceUpdateResponse) MustRole() *Role {
 
 // Updates a role. You are allowed to update `name`, `description` and `administrative` attributes after role is
 // created. Within this endpoint you can't add or remove roles permits you need to use
-// <<services/permits, service>> that manages permits of role.
+// xref:services-permits[service] that manages permits of role.
 // For example to update role's `name`, `description` and `administrative` attributes send a request like this:
 // [source]
 // ----
@@ -60924,8 +61194,8 @@ func NewSnapshotsService(connection *Connection, path string) *SnapshotsService 
 // ----
 // [IMPORTANT]
 // ====
-// When a snapshot is created the default value for the <<types/snapshot/attributes/persist_memorystate,
-// persist_memorystate>> attribute is `true`. That means that the content of the memory of the virtual
+// When a snapshot is created, the default value for the
+// xref:types-snapshot-attributes-persist_memorystate[persist_memorystate] attribute is `true`. That means that the content of the memory of the virtual
 // machine will be included in the snapshot, and it also means that the virtual machine will be paused
 // for a longer time. That can negatively affect applications that are very sensitive to timing (NTP
 // servers, for example). In those cases make sure that you set the attribute to `false`:
@@ -61091,8 +61361,8 @@ func (p *SnapshotsServiceAddRequest) MustSend() *SnapshotsServiceAddResponse {
 // ----
 // [IMPORTANT]
 // ====
-// When a snapshot is created the default value for the <<types/snapshot/attributes/persist_memorystate,
-// persist_memorystate>> attribute is `true`. That means that the content of the memory of the virtual
+// When a snapshot is created, the default value for the
+// xref:types-snapshot-attributes-persist_memorystate[persist_memorystate] attribute is `true`. That means that the content of the memory of the virtual
 // machine will be included in the snapshot, and it also means that the virtual machine will be paused
 // for a longer time. That can negatively affect applications that are very sensitive to timing (NTP
 // servers, for example). In those cases make sure that you set the attribute to `false`:
@@ -61165,8 +61435,8 @@ func (p *SnapshotsServiceAddResponse) MustSnapshot() *Snapshot {
 // ----
 // [IMPORTANT]
 // ====
-// When a snapshot is created the default value for the <<types/snapshot/attributes/persist_memorystate,
-// persist_memorystate>> attribute is `true`. That means that the content of the memory of the virtual
+// When a snapshot is created, the default value for the
+// xref:types-snapshot-attributes-persist_memorystate[persist_memorystate] attribute is `true`. That means that the content of the memory of the virtual
 // machine will be included in the snapshot, and it also means that the virtual machine will be paused
 // for a longer time. That can negatively affect applications that are very sensitive to timing (NTP
 // servers, for example). In those cases make sure that you set the attribute to `false`:
@@ -63141,8 +63411,9 @@ func (op *StorageDomainContentDisksService) String() string {
 // Manages a single disk available in a storage domain.
 // IMPORTANT: Since version 4.2 of the engine this service is intended only to list disks available in the storage
 // domain, and to register unregistered disks. All the other operations, like copying a disk, moving a disk, etc, have
-// been deprecated and will be removed in the future. To perform those operations use the <<services/disks, service
-// that manages all the disks of the system>>, or the <<services/disk, service that manages an specific disk>>.
+// been deprecated and will be removed in the future. To perform those operations
+// use the xref:services-disks[service that manages all the disks of the system]
+// or the xref:services-disk[service that manages a specific disk].
 type StorageDomainDiskService struct {
 	BaseService
 }
@@ -63156,7 +63427,7 @@ func NewStorageDomainDiskService(connection *Connection, path string) *StorageDo
 
 // Copies a disk to the specified storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To copy a disk use the <<services/disk/methods/copy, copy>>
+// compatibility. It will be removed in the future. To copy a disk use the xref:services-disk-methods-copy[copy]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceCopyRequest struct {
 	StorageDomainDiskService *StorageDomainDiskService
@@ -63277,14 +63548,14 @@ func (p *StorageDomainDiskServiceCopyRequest) MustSend() *StorageDomainDiskServi
 
 // Copies a disk to the specified storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To copy a disk use the <<services/disk/methods/copy, copy>>
+// compatibility. It will be removed in the future. To copy a disk use the xref:services-disk-methods-copy[copy]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceCopyResponse struct {
 }
 
 // Copies a disk to the specified storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To copy a disk use the <<services/disk/methods/copy, copy>>
+// compatibility. It will be removed in the future. To copy a disk use the xref:services-disk-methods-copy[copy]
 // operation of the service that manages that disk.
 func (p *StorageDomainDiskService) Copy() *StorageDomainDiskServiceCopyRequest {
 	return &StorageDomainDiskServiceCopyRequest{StorageDomainDiskService: p}
@@ -63292,7 +63563,7 @@ func (p *StorageDomainDiskService) Copy() *StorageDomainDiskServiceCopyRequest {
 
 // Exports a disk to an export storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To export a disk use the <<services/disk/methods/export, export>>
+// compatibility. It will be removed in the future. To export a disk use the xref:services-disk-methods-export[export]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceExportRequest struct {
 	StorageDomainDiskService *StorageDomainDiskService
@@ -63406,14 +63677,14 @@ func (p *StorageDomainDiskServiceExportRequest) MustSend() *StorageDomainDiskSer
 
 // Exports a disk to an export storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To export a disk use the <<services/disk/methods/export, export>>
+// compatibility. It will be removed in the future. To export a disk use the xref:services-disk-methods-export[export]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceExportResponse struct {
 }
 
 // Exports a disk to an export storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To export a disk use the <<services/disk/methods/export, export>>
+// compatibility. It will be removed in the future. To export a disk use the xref:services-disk-methods-export[export]
 // operation of the service that manages that disk.
 func (p *StorageDomainDiskService) Export() *StorageDomainDiskServiceExportRequest {
 	return &StorageDomainDiskServiceExportRequest{StorageDomainDiskService: p}
@@ -63554,7 +63825,7 @@ func (p *StorageDomainDiskService) Get() *StorageDomainDiskServiceGetRequest {
 
 // Moves a disk to another storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To move a disk use the <<services/disk/methods/move, move>>
+// compatibility. It will be removed in the future. To move a disk use the xref:services-disk-methods-move[move]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceMoveRequest struct {
 	StorageDomainDiskService *StorageDomainDiskService
@@ -63686,14 +63957,14 @@ func (p *StorageDomainDiskServiceMoveRequest) MustSend() *StorageDomainDiskServi
 
 // Moves a disk to another storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To move a disk use the <<services/disk/methods/move, move>>
+// compatibility. It will be removed in the future. To move a disk use the xref:services-disk-methods-move[move]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceMoveResponse struct {
 }
 
 // Moves a disk to another storage domain.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To move a disk use the <<services/disk/methods/move, move>>
+// compatibility. It will be removed in the future. To move a disk use the xref:services-disk-methods-move[move]
 // operation of the service that manages that disk.
 func (p *StorageDomainDiskService) Move() *StorageDomainDiskServiceMoveRequest {
 	return &StorageDomainDiskServiceMoveRequest{StorageDomainDiskService: p}
@@ -63832,7 +64103,7 @@ func (p *StorageDomainDiskService) Reduce() *StorageDomainDiskServiceReduceReque
 
 // Removes a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceRemoveRequest struct {
 	StorageDomainDiskService *StorageDomainDiskService
@@ -63929,14 +64200,14 @@ func (p *StorageDomainDiskServiceRemoveRequest) MustSend() *StorageDomainDiskSer
 
 // Removes a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceRemoveResponse struct {
 }
 
 // Removes a disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 func (p *StorageDomainDiskService) Remove() *StorageDomainDiskServiceRemoveRequest {
 	return &StorageDomainDiskServiceRemoveRequest{StorageDomainDiskService: p}
@@ -63944,7 +64215,7 @@ func (p *StorageDomainDiskService) Remove() *StorageDomainDiskServiceRemoveReque
 
 // Sparsify the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceSparsifyRequest struct {
 	StorageDomainDiskService *StorageDomainDiskService
@@ -64051,14 +64322,14 @@ func (p *StorageDomainDiskServiceSparsifyRequest) MustSend() *StorageDomainDiskS
 
 // Sparsify the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 type StorageDomainDiskServiceSparsifyResponse struct {
 }
 
 // Sparsify the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To remove a disk use the <<services/disk/methods/remove, remove>>
+// compatibility. It will be removed in the future. To remove a disk use the xref:services-disk-methods-remove[remove]
 // operation of the service that manages that disk.
 func (p *StorageDomainDiskService) Sparsify() *StorageDomainDiskServiceSparsifyRequest {
 	return &StorageDomainDiskServiceSparsifyRequest{StorageDomainDiskService: p}
@@ -64067,7 +64338,7 @@ func (p *StorageDomainDiskService) Sparsify() *StorageDomainDiskServiceSparsifyR
 // Updates the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
 // compatibility. It will be removed in the future. To update a disk use the
-// <<services/disk/methods/update, update>> operation of the service that manages that disk.
+// xref:services-disk-methods-update[update] operation of the service that manages that disk.
 type StorageDomainDiskServiceUpdateRequest struct {
 	StorageDomainDiskService *StorageDomainDiskService
 	header                   map[string]string
@@ -64182,7 +64453,7 @@ func (p *StorageDomainDiskServiceUpdateRequest) MustSend() *StorageDomainDiskSer
 // Updates the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
 // compatibility. It will be removed in the future. To update a disk use the
-// <<services/disk/methods/update, update>> operation of the service that manages that disk.
+// xref:services-disk-methods-update[update] operation of the service that manages that disk.
 type StorageDomainDiskServiceUpdateResponse struct {
 	disk *Disk
 }
@@ -64204,7 +64475,7 @@ func (p *StorageDomainDiskServiceUpdateResponse) MustDisk() *Disk {
 // Updates the disk.
 // IMPORTANT: Since version 4.2 of the engine this operation is deprecated, and preserved only for backwards
 // compatibility. It will be removed in the future. To update a disk use the
-// <<services/disk/methods/update, update>> operation of the service that manages that disk.
+// xref:services-disk-methods-update[update] operation of the service that manages that disk.
 func (p *StorageDomainDiskService) Update() *StorageDomainDiskServiceUpdateRequest {
 	return &StorageDomainDiskServiceUpdateRequest{StorageDomainDiskService: p}
 }
@@ -64256,9 +64527,9 @@ func NewStorageDomainDisksService(connection *Connection, path string) *StorageD
 
 // Adds or registers a disk.
 // IMPORTANT: Since version 4.2 of the {engine-name} this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To add a new disk use the <<services/disks/methods/add, add>>
+// compatibility. It will be removed in the future. To add a new disk use the xref:services-disks-methods-add[add]
 // operation of the service that manages the disks of the system. To register an unregistered disk use the
-// <<services/attached_storage_domain_disk/methods/register, register>> operation of the service that manages
+// xref:services-attached_storage_domain_disk-methods-register[register] operation of the service that manages
 // that disk.
 type StorageDomainDisksServiceAddRequest struct {
 	StorageDomainDisksService *StorageDomainDisksService
@@ -64383,9 +64654,9 @@ func (p *StorageDomainDisksServiceAddRequest) MustSend() *StorageDomainDisksServ
 
 // Adds or registers a disk.
 // IMPORTANT: Since version 4.2 of the {engine-name} this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To add a new disk use the <<services/disks/methods/add, add>>
+// compatibility. It will be removed in the future. To add a new disk use the xref:services-disks-methods-add[add]
 // operation of the service that manages the disks of the system. To register an unregistered disk use the
-// <<services/attached_storage_domain_disk/methods/register, register>> operation of the service that manages
+// xref:services-attached_storage_domain_disk-methods-register[register] operation of the service that manages
 // that disk.
 type StorageDomainDisksServiceAddResponse struct {
 	disk *Disk
@@ -64407,9 +64678,9 @@ func (p *StorageDomainDisksServiceAddResponse) MustDisk() *Disk {
 
 // Adds or registers a disk.
 // IMPORTANT: Since version 4.2 of the {engine-name} this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. To add a new disk use the <<services/disks/methods/add, add>>
+// compatibility. It will be removed in the future. To add a new disk use the xref:services-disks-methods-add[add]
 // operation of the service that manages the disks of the system. To register an unregistered disk use the
-// <<services/attached_storage_domain_disk/methods/register, register>> operation of the service that manages
+// xref:services-attached_storage_domain_disk-methods-register[register] operation of the service that manages
 // that disk.
 func (p *StorageDomainDisksService) Add() *StorageDomainDisksServiceAddRequest {
 	return &StorageDomainDisksServiceAddRequest{StorageDomainDisksService: p}
@@ -65497,7 +65768,7 @@ func (p *StorageDomainService) IsAttached() *StorageDomainServiceIsAttachedReque
 // ----
 //
 //	Note that this operation is only applicable to block storage domains (i.e., storage domains with the
-//	<<types/storage_type, storage type> of iSCSI or FCP).
+//	xref:types-storage_type[storage type] of iSCSI or FCP).
 type StorageDomainServiceReduceLunsRequest struct {
 	StorageDomainService *StorageDomainService
 	header               map[string]string
@@ -65638,7 +65909,7 @@ func (p *StorageDomainServiceReduceLunsRequest) MustSend() *StorageDomainService
 // ----
 //
 //	Note that this operation is only applicable to block storage domains (i.e., storage domains with the
-//	<<types/storage_type, storage type> of iSCSI or FCP).
+//	xref:types-storage_type[storage type] of iSCSI or FCP).
 type StorageDomainServiceReduceLunsResponse struct {
 }
 
@@ -65664,7 +65935,7 @@ type StorageDomainServiceReduceLunsResponse struct {
 // ----
 //
 //	Note that this operation is only applicable to block storage domains (i.e., storage domains with the
-//	<<types/storage_type, storage type> of iSCSI or FCP).
+//	xref:types-storage_type[storage type] of iSCSI or FCP).
 func (p *StorageDomainService) ReduceLuns() *StorageDomainServiceReduceLunsRequest {
 	return &StorageDomainServiceReduceLunsRequest{StorageDomainService: p}
 }
@@ -66034,7 +66305,7 @@ func (p *StorageDomainService) Remove() *StorageDomainServiceRemoveRequest {
 }
 
 // Updates a storage domain.
-// Not all of the <<types/storage_domain,StorageDomain>>'s attributes are updatable after creation. Those that can be
+// Not all of the xref:types-storage_domain[StorageDomain]'s attributes are updatable after creation. Those that can be
 // updated are: `name`, `description`, `comment`, `warning_low_space_indicator`, `critical_space_action_blocker` and
 // `wipe_after_delete.` (Note that changing the `wipe_after_delete` attribute will not change the wipe after delete
 // property of disks that already exist).
@@ -66176,7 +66447,7 @@ func (p *StorageDomainServiceUpdateRequest) MustSend() *StorageDomainServiceUpda
 }
 
 // Updates a storage domain.
-// Not all of the <<types/storage_domain,StorageDomain>>'s attributes are updatable after creation. Those that can be
+// Not all of the xref:types-storage_domain[StorageDomain]'s attributes are updatable after creation. Those that can be
 // updated are: `name`, `description`, `comment`, `warning_low_space_indicator`, `critical_space_action_blocker` and
 // `wipe_after_delete.` (Note that changing the `wipe_after_delete` attribute will not change the wipe after delete
 // property of disks that already exist).
@@ -66215,7 +66486,7 @@ func (p *StorageDomainServiceUpdateResponse) MustStorageDomain() *StorageDomain 
 }
 
 // Updates a storage domain.
-// Not all of the <<types/storage_domain,StorageDomain>>'s attributes are updatable after creation. Those that can be
+// Not all of the xref:types-storage_domain[StorageDomain]'s attributes are updatable after creation. Those that can be
 // updated are: `name`, `description`, `comment`, `warning_low_space_indicator`, `critical_space_action_blocker` and
 // `wipe_after_delete.` (Note that changing the `wipe_after_delete` attribute will not change the wipe after delete
 // property of disks that already exist).
@@ -68566,8 +68837,8 @@ func (op *StorageDomainVmService) String() string {
 // </vms>
 // ----
 // Virtual machines and templates in these collections have a similar representation to their counterparts in the
-// top-level <<types/vm, Vm>> and <<types/template, Template>> collections, except they also contain a
-// <<types/storage_domain, StorageDomain>> reference and an <<services/storage_domain_vm/methods/import, import>>
+// top-level xref:types-vm[Vm] and xref:types-template[Template] collections, except they also contain a
+// xref:types-storage_domain[StorageDomain] reference and an xref:services-storage_domain_vm-methods-import[import]
 // action.
 type StorageDomainVmsService struct {
 	BaseService
@@ -68769,7 +69040,7 @@ func NewStorageDomainsService(connection *Connection, path string) *StorageDomai
 }
 
 // Adds a new storage domain.
-// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host`, and `storage`
+// Creation of a new xref:types-storage_domain[StorageDomain] requires the `name`, `type`, `host`, and `storage`
 // attributes. Identify the `host` attribute with the `id` or `name` attributes. In {product-name} 3.6 and
 // later you can enable the wipe after delete option by default on the storage domain. To configure this, specify
 // `wipe_after_delete` in the POST request. This option can be edited after the domain is created, but doing so will
@@ -68948,7 +69219,7 @@ func (p *StorageDomainsServiceAddRequest) MustSend() *StorageDomainsServiceAddRe
 }
 
 // Adds a new storage domain.
-// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host`, and `storage`
+// Creation of a new xref:types-storage_domain[StorageDomain] requires the `name`, `type`, `host`, and `storage`
 // attributes. Identify the `host` attribute with the `id` or `name` attributes. In {product-name} 3.6 and
 // later you can enable the wipe after delete option by default on the storage domain. To configure this, specify
 // `wipe_after_delete` in the POST request. This option can be edited after the domain is created, but doing so will
@@ -69034,7 +69305,7 @@ func (p *StorageDomainsServiceAddResponse) MustStorageDomain() *StorageDomain {
 }
 
 // Adds a new storage domain.
-// Creation of a new <<types/storage_domain,StorageDomain>> requires the `name`, `type`, `host`, and `storage`
+// Creation of a new xref:types-storage_domain[StorageDomain] requires the `name`, `type`, `host`, and `storage`
 // attributes. Identify the `host` attribute with the `id` or `name` attributes. In {product-name} 3.6 and
 // later you can enable the wipe after delete option by default on the storage domain. To configure this, specify
 // `wipe_after_delete` in the POST request. This option can be edited after the domain is created, but doing so will
@@ -73332,34 +73603,43 @@ func NewSystemOptionService(connection *Connection, path string) *SystemOptionSe
 }
 
 // Get the values of specific configuration option.
-// For example to retrieve the values of configuration option `MigrationPoliciesSupported` send a request like this:
+// For example to retrieve the values of configuration option `MigrationPolicies` send a request like this:
 // [source]
 // ----
-// GET /ovirt-engine/api/options/MigrationPoliciesSupported
+// GET /ovirt-engine/api/options/MigrationPolicies
 // ----
 // The response to that request will be the following:
 // [source,xml]
 // ----
-// <system_option href="/ovirt-engine/api/options/MigrationPoliciesSupported" id="MigrationPoliciesSupported">
+// <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+// <system_option href="/ovirt-engine/api/options/MigrationPolicies" id="MigrationPolicies">
 //
-//	<name>MigrationPoliciesSupported</name>
+//	<name>MigrationPolicies</name>
 //	<values>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.0</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.1</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.2</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>false</value>
-//	    <version>3.6</version>
-//	  </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.2</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.3</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.4</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.5</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.6</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.7</version>
+//	    </system_option_value>
 //	</values>
 //
 // </system_option>
@@ -73483,34 +73763,43 @@ func (p *SystemOptionServiceGetRequest) MustSend() *SystemOptionServiceGetRespon
 }
 
 // Get the values of specific configuration option.
-// For example to retrieve the values of configuration option `MigrationPoliciesSupported` send a request like this:
+// For example to retrieve the values of configuration option `MigrationPolicies` send a request like this:
 // [source]
 // ----
-// GET /ovirt-engine/api/options/MigrationPoliciesSupported
+// GET /ovirt-engine/api/options/MigrationPolicies
 // ----
 // The response to that request will be the following:
 // [source,xml]
 // ----
-// <system_option href="/ovirt-engine/api/options/MigrationPoliciesSupported" id="MigrationPoliciesSupported">
+// <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+// <system_option href="/ovirt-engine/api/options/MigrationPolicies" id="MigrationPolicies">
 //
-//	<name>MigrationPoliciesSupported</name>
+//	<name>MigrationPolicies</name>
 //	<values>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.0</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.1</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.2</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>false</value>
-//	    <version>3.6</version>
-//	  </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.2</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.3</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.4</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.5</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.6</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.7</version>
+//	    </system_option_value>
 //	</values>
 //
 // </system_option>
@@ -73544,34 +73833,43 @@ func (p *SystemOptionServiceGetResponse) MustOption() *SystemOption {
 }
 
 // Get the values of specific configuration option.
-// For example to retrieve the values of configuration option `MigrationPoliciesSupported` send a request like this:
+// For example to retrieve the values of configuration option `MigrationPolicies` send a request like this:
 // [source]
 // ----
-// GET /ovirt-engine/api/options/MigrationPoliciesSupported
+// GET /ovirt-engine/api/options/MigrationPolicies
 // ----
 // The response to that request will be the following:
 // [source,xml]
 // ----
-// <system_option href="/ovirt-engine/api/options/MigrationPoliciesSupported" id="MigrationPoliciesSupported">
+// <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+// <system_option href="/ovirt-engine/api/options/MigrationPolicies" id="MigrationPolicies">
 //
-//	<name>MigrationPoliciesSupported</name>
+//	<name>MigrationPolicies</name>
 //	<values>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.0</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.1</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>true</value>
-//	    <version>4.2</version>
-//	  </system_option_value>
-//	  <system_option_value>
-//	    <value>false</value>
-//	    <version>3.6</version>
-//	  </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.2</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.3</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.4</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.5</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.6</version>
+//	    </system_option_value>
+//	    <system_option_value>
+//	        <value>[{"id":{"uuid":"80554327-0569-496b-bdeb-fcbbf52b827b"},...}]</value>
+//	        <version>4.7</version>
+//	    </system_option_value>
 //	</values>
 //
 // </system_option>
@@ -77979,7 +78277,7 @@ func (op *TemplateDiskAttachmentService) String() string {
 }
 
 // This service manages the set of disks attached to a template. Each attached disk is represented by a
-// <<types/disk_attachment,DiskAttachment>>.
+// xref:types-disk_attachment[DiskAttachment].
 type TemplateDiskAttachmentsService struct {
 	BaseService
 }
@@ -79444,6 +79742,829 @@ func (op *TemplateGraphicsConsolesService) String() string {
 	return fmt.Sprintf("TemplateGraphicsConsolesService:%s", op.path)
 }
 
+type TemplateMediatedDeviceService struct {
+	BaseService
+}
+
+func NewTemplateMediatedDeviceService(connection *Connection, path string) *TemplateMediatedDeviceService {
+	var result TemplateMediatedDeviceService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+// Gets mediated device configuration of the template.
+type TemplateMediatedDeviceServiceGetRequest struct {
+	TemplateMediatedDeviceService *TemplateMediatedDeviceService
+	header                        map[string]string
+	query                         map[string]string
+	follow                        *string
+}
+
+func (p *TemplateMediatedDeviceServiceGetRequest) Header(key, value string) *TemplateMediatedDeviceServiceGetRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceGetRequest) Query(key, value string) *TemplateMediatedDeviceServiceGetRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceGetRequest) Follow(follow string) *TemplateMediatedDeviceServiceGetRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceGetRequest) Send() (*TemplateMediatedDeviceServiceGetResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.TemplateMediatedDeviceService.connection.URL(), p.TemplateMediatedDeviceService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.TemplateMediatedDeviceService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.TemplateMediatedDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.TemplateMediatedDeviceService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.TemplateMediatedDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.TemplateMediatedDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLVmMediatedDeviceReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &TemplateMediatedDeviceServiceGetResponse{device: result}, nil
+}
+
+func (p *TemplateMediatedDeviceServiceGetRequest) MustSend() *TemplateMediatedDeviceServiceGetResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Gets mediated device configuration of the template.
+type TemplateMediatedDeviceServiceGetResponse struct {
+	device *VmMediatedDevice
+}
+
+func (p *TemplateMediatedDeviceServiceGetResponse) Device() (*VmMediatedDevice, bool) {
+	if p.device != nil {
+		return p.device, true
+	}
+	return nil, false
+}
+
+func (p *TemplateMediatedDeviceServiceGetResponse) MustDevice() *VmMediatedDevice {
+	if p.device == nil {
+		panic("device in response does not exist")
+	}
+	return p.device
+}
+
+// Gets mediated device configuration of the template.
+func (p *TemplateMediatedDeviceService) Get() *TemplateMediatedDeviceServiceGetRequest {
+	return &TemplateMediatedDeviceServiceGetRequest{TemplateMediatedDeviceService: p}
+}
+
+// Remove the mediated device from the template.
+type TemplateMediatedDeviceServiceRemoveRequest struct {
+	TemplateMediatedDeviceService *TemplateMediatedDeviceService
+	header                        map[string]string
+	query                         map[string]string
+	async                         *bool
+}
+
+func (p *TemplateMediatedDeviceServiceRemoveRequest) Header(key, value string) *TemplateMediatedDeviceServiceRemoveRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceRemoveRequest) Query(key, value string) *TemplateMediatedDeviceServiceRemoveRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceRemoveRequest) Async(async bool) *TemplateMediatedDeviceServiceRemoveRequest {
+	p.async = &async
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceRemoveRequest) Send() (*TemplateMediatedDeviceServiceRemoveResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.TemplateMediatedDeviceService.connection.URL(), p.TemplateMediatedDeviceService.path)
+	values := make(url.Values)
+	if p.async != nil {
+		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("DELETE", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.TemplateMediatedDeviceService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.TemplateMediatedDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.TemplateMediatedDeviceService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.TemplateMediatedDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.TemplateMediatedDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	return new(TemplateMediatedDeviceServiceRemoveResponse), nil
+}
+
+func (p *TemplateMediatedDeviceServiceRemoveRequest) MustSend() *TemplateMediatedDeviceServiceRemoveResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Remove the mediated device from the template.
+type TemplateMediatedDeviceServiceRemoveResponse struct {
+}
+
+// Remove the mediated device from the template.
+func (p *TemplateMediatedDeviceService) Remove() *TemplateMediatedDeviceServiceRemoveRequest {
+	return &TemplateMediatedDeviceServiceRemoveRequest{TemplateMediatedDeviceService: p}
+}
+
+// Updates the information about the mediated device.
+// You can update the information using `specParams` element.
+// For example, to update a mediated device, send a request like this:
+// [source]
+// ----
+// PUT /ovirt-engine/api/templates/123/mediateddevices/00000000-0000-0000-0000-000000000000
+// <vm_mediated_device>
+//
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+// with response body:
+// [source,xml]
+// ----
+// <vm_mediated_device href="/ovirt-engine/api/templates/123/mediateddevices/00000000-0000-0000-0000-000000000000" id="00000000-0000-0000-0000-000000000000">
+//
+//	<template href="/ovirt-engine/api/templates/123" id="123"/>
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+type TemplateMediatedDeviceServiceUpdateRequest struct {
+	TemplateMediatedDeviceService *TemplateMediatedDeviceService
+	header                        map[string]string
+	query                         map[string]string
+	async                         *bool
+	devices                       *VmMediatedDevice
+}
+
+func (p *TemplateMediatedDeviceServiceUpdateRequest) Header(key, value string) *TemplateMediatedDeviceServiceUpdateRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceUpdateRequest) Query(key, value string) *TemplateMediatedDeviceServiceUpdateRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceUpdateRequest) Async(async bool) *TemplateMediatedDeviceServiceUpdateRequest {
+	p.async = &async
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceUpdateRequest) Devices(devices *VmMediatedDevice) *TemplateMediatedDeviceServiceUpdateRequest {
+	p.devices = devices
+	return p
+}
+
+func (p *TemplateMediatedDeviceServiceUpdateRequest) Send() (*TemplateMediatedDeviceServiceUpdateResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.TemplateMediatedDeviceService.connection.URL(), p.TemplateMediatedDeviceService.path)
+	values := make(url.Values)
+	if p.async != nil {
+		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLVmMediatedDeviceWriteOne(writer, p.devices, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("PUT", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.TemplateMediatedDeviceService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.TemplateMediatedDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.TemplateMediatedDeviceService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.TemplateMediatedDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.TemplateMediatedDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLVmMediatedDeviceReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &TemplateMediatedDeviceServiceUpdateResponse{devices: result}, nil
+}
+
+func (p *TemplateMediatedDeviceServiceUpdateRequest) MustSend() *TemplateMediatedDeviceServiceUpdateResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Updates the information about the mediated device.
+// You can update the information using `specParams` element.
+// For example, to update a mediated device, send a request like this:
+// [source]
+// ----
+// PUT /ovirt-engine/api/templates/123/mediateddevices/00000000-0000-0000-0000-000000000000
+// <vm_mediated_device>
+//
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+// with response body:
+// [source,xml]
+// ----
+// <vm_mediated_device href="/ovirt-engine/api/templates/123/mediateddevices/00000000-0000-0000-0000-000000000000" id="00000000-0000-0000-0000-000000000000">
+//
+//	<template href="/ovirt-engine/api/templates/123" id="123"/>
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+type TemplateMediatedDeviceServiceUpdateResponse struct {
+	devices *VmMediatedDevice
+}
+
+func (p *TemplateMediatedDeviceServiceUpdateResponse) Devices() (*VmMediatedDevice, bool) {
+	if p.devices != nil {
+		return p.devices, true
+	}
+	return nil, false
+}
+
+func (p *TemplateMediatedDeviceServiceUpdateResponse) MustDevices() *VmMediatedDevice {
+	if p.devices == nil {
+		panic("devices in response does not exist")
+	}
+	return p.devices
+}
+
+// Updates the information about the mediated device.
+// You can update the information using `specParams` element.
+// For example, to update a mediated device, send a request like this:
+// [source]
+// ----
+// PUT /ovirt-engine/api/templates/123/mediateddevices/00000000-0000-0000-0000-000000000000
+// <vm_mediated_device>
+//
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+// with response body:
+// [source,xml]
+// ----
+// <vm_mediated_device href="/ovirt-engine/api/templates/123/mediateddevices/00000000-0000-0000-0000-000000000000" id="00000000-0000-0000-0000-000000000000">
+//
+//	<template href="/ovirt-engine/api/templates/123" id="123"/>
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+func (p *TemplateMediatedDeviceService) Update() *TemplateMediatedDeviceServiceUpdateRequest {
+	return &TemplateMediatedDeviceServiceUpdateRequest{TemplateMediatedDeviceService: p}
+}
+
+// Service locator method, returns individual service on which the URI is dispatched.
+func (op *TemplateMediatedDeviceService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *TemplateMediatedDeviceService) String() string {
+	return fmt.Sprintf("TemplateMediatedDeviceService:%s", op.path)
+}
+
+// A service that manages mediated devices of a template.
+type TemplateMediatedDevicesService struct {
+	BaseService
+}
+
+func NewTemplateMediatedDevicesService(connection *Connection, path string) *TemplateMediatedDevicesService {
+	var result TemplateMediatedDevicesService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+// Add new mediated device to the template.
+type TemplateMediatedDevicesServiceAddRequest struct {
+	TemplateMediatedDevicesService *TemplateMediatedDevicesService
+	header                         map[string]string
+	query                          map[string]string
+	device                         *VmMediatedDevice
+}
+
+func (p *TemplateMediatedDevicesServiceAddRequest) Header(key, value string) *TemplateMediatedDevicesServiceAddRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDevicesServiceAddRequest) Query(key, value string) *TemplateMediatedDevicesServiceAddRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDevicesServiceAddRequest) Device(device *VmMediatedDevice) *TemplateMediatedDevicesServiceAddRequest {
+	p.device = device
+	return p
+}
+
+func (p *TemplateMediatedDevicesServiceAddRequest) Send() (*TemplateMediatedDevicesServiceAddResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.TemplateMediatedDevicesService.connection.URL(), p.TemplateMediatedDevicesService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLVmMediatedDeviceWriteOne(writer, p.device, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.TemplateMediatedDevicesService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.TemplateMediatedDevicesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.TemplateMediatedDevicesService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.TemplateMediatedDevicesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.TemplateMediatedDevicesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLVmMediatedDeviceReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &TemplateMediatedDevicesServiceAddResponse{device: result}, nil
+}
+
+func (p *TemplateMediatedDevicesServiceAddRequest) MustSend() *TemplateMediatedDevicesServiceAddResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Add new mediated device to the template.
+type TemplateMediatedDevicesServiceAddResponse struct {
+	device *VmMediatedDevice
+}
+
+func (p *TemplateMediatedDevicesServiceAddResponse) Device() (*VmMediatedDevice, bool) {
+	if p.device != nil {
+		return p.device, true
+	}
+	return nil, false
+}
+
+func (p *TemplateMediatedDevicesServiceAddResponse) MustDevice() *VmMediatedDevice {
+	if p.device == nil {
+		panic("device in response does not exist")
+	}
+	return p.device
+}
+
+// Add new mediated device to the template.
+func (p *TemplateMediatedDevicesService) Add() *TemplateMediatedDevicesServiceAddRequest {
+	return &TemplateMediatedDevicesServiceAddRequest{TemplateMediatedDevicesService: p}
+}
+
+// Lists all the configured mediated devices of the template.
+// The order of the returned list of mediated devices isn't guaranteed.
+type TemplateMediatedDevicesServiceListRequest struct {
+	TemplateMediatedDevicesService *TemplateMediatedDevicesService
+	header                         map[string]string
+	query                          map[string]string
+	follow                         *string
+	max                            *int64
+}
+
+func (p *TemplateMediatedDevicesServiceListRequest) Header(key, value string) *TemplateMediatedDevicesServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDevicesServiceListRequest) Query(key, value string) *TemplateMediatedDevicesServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *TemplateMediatedDevicesServiceListRequest) Follow(follow string) *TemplateMediatedDevicesServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *TemplateMediatedDevicesServiceListRequest) Max(max int64) *TemplateMediatedDevicesServiceListRequest {
+	p.max = &max
+	return p
+}
+
+func (p *TemplateMediatedDevicesServiceListRequest) Send() (*TemplateMediatedDevicesServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.TemplateMediatedDevicesService.connection.URL(), p.TemplateMediatedDevicesService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.max != nil {
+		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.TemplateMediatedDevicesService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.TemplateMediatedDevicesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.TemplateMediatedDevicesService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.TemplateMediatedDevicesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.TemplateMediatedDevicesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLVmMediatedDeviceReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &TemplateMediatedDevicesServiceListResponse{devices: result}, nil
+}
+
+func (p *TemplateMediatedDevicesServiceListRequest) MustSend() *TemplateMediatedDevicesServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Lists all the configured mediated devices of the template.
+// The order of the returned list of mediated devices isn't guaranteed.
+type TemplateMediatedDevicesServiceListResponse struct {
+	devices *VmMediatedDeviceSlice
+}
+
+func (p *TemplateMediatedDevicesServiceListResponse) Devices() (*VmMediatedDeviceSlice, bool) {
+	if p.devices != nil {
+		return p.devices, true
+	}
+	return nil, false
+}
+
+func (p *TemplateMediatedDevicesServiceListResponse) MustDevices() *VmMediatedDeviceSlice {
+	if p.devices == nil {
+		panic("devices in response does not exist")
+	}
+	return p.devices
+}
+
+// Lists all the configured mediated devices of the template.
+// The order of the returned list of mediated devices isn't guaranteed.
+func (p *TemplateMediatedDevicesService) List() *TemplateMediatedDevicesServiceListRequest {
+	return &TemplateMediatedDevicesServiceListRequest{TemplateMediatedDevicesService: p}
+}
+
+// Returns a reference to the service that manages a mediated device of a template.
+func (op *TemplateMediatedDevicesService) DeviceService(id string) *TemplateMediatedDeviceService {
+	return NewTemplateMediatedDeviceService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+}
+
+// Service locator method, returns individual service on which the URI is dispatched.
+func (op *TemplateMediatedDevicesService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	index := strings.Index(path, "/")
+	if index == -1 {
+		return op.DeviceService(path), nil
+	}
+	return op.DeviceService(path[:index]).Service(path[index+1:])
+}
+
+func (op *TemplateMediatedDevicesService) String() string {
+	return fmt.Sprintf("TemplateMediatedDevicesService:%s", op.path)
+}
+
 type TemplateNicService struct {
 	BaseService
 }
@@ -80194,6 +81315,25 @@ func NewTemplateService(connection *Connection, path string) *TemplateService {
 //
 // </action>
 // ----
+// Since version 4.2 of the engine it is also possible to export a template as a virtual appliance (OVA).
+// For example, to export template `123` as an OVA file named `myvm.ova` that is placed in the directory `/home/ovirt/` on host `myhost`:
+// [source]
+// ----
+// POST /ovirt-engine/api/templates/123/export
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//
+//	<host>
+//	  <name>myhost</name>
+//	</host>
+//	<directory>/home/ovirt</directory>
+//	<filename>myvm.ova</filename>
+//
+// </action>
+// ----
 type TemplateServiceExportRequest struct {
 	TemplateService *TemplateService
 	header          map[string]string
@@ -80329,6 +81469,25 @@ func (p *TemplateServiceExportRequest) MustSend() *TemplateServiceExportResponse
 //
 // </action>
 // ----
+// Since version 4.2 of the engine it is also possible to export a template as a virtual appliance (OVA).
+// For example, to export template `123` as an OVA file named `myvm.ova` that is placed in the directory `/home/ovirt/` on host `myhost`:
+// [source]
+// ----
+// POST /ovirt-engine/api/templates/123/export
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//
+//	<host>
+//	  <name>myhost</name>
+//	</host>
+//	<directory>/home/ovirt</directory>
+//	<filename>myvm.ova</filename>
+//
+// </action>
+// ----
 type TemplateServiceExportResponse struct {
 }
 
@@ -80345,6 +81504,25 @@ type TemplateServiceExportResponse struct {
 //
 //	<storage_domain id="456"/>
 //	<exclusive>true<exclusive/>
+//
+// </action>
+// ----
+// Since version 4.2 of the engine it is also possible to export a template as a virtual appliance (OVA).
+// For example, to export template `123` as an OVA file named `myvm.ova` that is placed in the directory `/home/ovirt/` on host `myhost`:
+// [source]
+// ----
+// POST /ovirt-engine/api/templates/123/export
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <action>
+//
+//	<host>
+//	  <name>myhost</name>
+//	</host>
+//	<directory>/home/ovirt</directory>
+//	<filename>myvm.ova</filename>
 //
 // </action>
 // ----
@@ -81149,6 +82327,11 @@ func (op *TemplateService) GraphicsConsolesService() *TemplateGraphicsConsolesSe
 	return NewTemplateGraphicsConsolesService(op.connection, fmt.Sprintf("%s/graphicsconsoles", op.path))
 }
 
+// Reference to the service that manages mediated devices associated with the template.
+func (op *TemplateService) MediatedDevicesService() *TemplateMediatedDevicesService {
+	return NewTemplateMediatedDevicesService(op.connection, fmt.Sprintf("%s/mediateddevices", op.path))
+}
+
 // Returns a reference to the service that manages the NICs that are associated with the template.
 func (op *TemplateService) NicsService() *TemplateNicsService {
 	return NewTemplateNicsService(op.connection, fmt.Sprintf("%s/nics", op.path))
@@ -81191,6 +82374,12 @@ func (op *TemplateService) Service(path string) (Service, error) {
 	}
 	if strings.HasPrefix(path, "graphicsconsoles/") {
 		return op.GraphicsConsolesService().Service(path[17:])
+	}
+	if path == "mediateddevices" {
+		return op.MediatedDevicesService(), nil
+	}
+	if strings.HasPrefix(path, "mediateddevices/") {
+		return op.MediatedDevicesService().Service(path[16:])
 	}
 	if path == "nics" {
 		return op.NicsService(), nil
@@ -81632,290 +82821,6 @@ func (op *TemplateWatchdogService) String() string {
 	return fmt.Sprintf("TemplateWatchdogService:%s", op.path)
 }
 
-// A service managing a backup of a virtual machines.
-type VmBackupService struct {
-	BaseService
-}
-
-func NewVmBackupService(connection *Connection, path string) *VmBackupService {
-	var result VmBackupService
-	result.connection = connection
-	result.path = path
-	return &result
-}
-
-// Finalize the virtual machine backup entity.
-// End backup, unlock resources, and perform cleanups.
-type VmBackupServiceFinalizeRequest struct {
-	VmBackupService *VmBackupService
-	header          map[string]string
-	query           map[string]string
-}
-
-func (p *VmBackupServiceFinalizeRequest) Header(key, value string) *VmBackupServiceFinalizeRequest {
-	if p.header == nil {
-		p.header = make(map[string]string)
-	}
-	p.header[key] = value
-	return p
-}
-
-func (p *VmBackupServiceFinalizeRequest) Query(key, value string) *VmBackupServiceFinalizeRequest {
-	if p.query == nil {
-		p.query = make(map[string]string)
-	}
-	p.query[key] = value
-	return p
-}
-
-func (p *VmBackupServiceFinalizeRequest) Send() (*VmBackupServiceFinalizeResponse, error) {
-	rawURL := fmt.Sprintf("%s%s/finalize", p.VmBackupService.connection.URL(), p.VmBackupService.path)
-	actionBuilder := NewActionBuilder()
-	action, err := actionBuilder.Build()
-	if err != nil {
-		return nil, err
-	}
-	values := make(url.Values)
-	if p.query != nil {
-		for k, v := range p.query {
-			values[k] = []string{v}
-		}
-	}
-	if len(values) > 0 {
-		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
-	}
-	var body bytes.Buffer
-	writer := NewXMLWriter(&body)
-	err = XMLActionWriteOne(writer, action, "")
-	writer.Flush()
-	req, err := http.NewRequest("POST", rawURL, &body)
-	if err != nil {
-		return nil, err
-	}
-
-	for hk, hv := range p.VmBackupService.connection.headers {
-		req.Header.Add(hk, hv)
-	}
-
-	if p.header != nil {
-		for hk, hv := range p.header {
-			req.Header.Add(hk, hv)
-		}
-	}
-
-	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
-	req.Header.Add("Version", "4")
-	req.Header.Add("Content-Type", "application/xml")
-	req.Header.Add("Accept", "application/xml")
-	// get OAuth access token
-	token, err := p.VmBackupService.connection.authenticate()
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
-	// Send the request and wait for the response
-	resp, err := p.VmBackupService.connection.client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if p.VmBackupService.connection.logFunc != nil {
-		dumpReq, err := httputil.DumpRequestOut(req, true)
-		if err != nil {
-			return nil, err
-		}
-		dumpResp, err := httputil.DumpResponse(resp, true)
-		if err != nil {
-			return nil, err
-		}
-		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
-	}
-	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
-	if errReadBody != nil {
-		return nil, errReadBody
-	}
-	_, errCheckAction := CheckAction(respBodyBytes, resp)
-	if errCheckAction != nil {
-		return nil, errCheckAction
-	}
-	return new(VmBackupServiceFinalizeResponse), nil
-}
-
-func (p *VmBackupServiceFinalizeRequest) MustSend() *VmBackupServiceFinalizeResponse {
-	if v, err := p.Send(); err != nil {
-		panic(err)
-	} else {
-		return v
-	}
-}
-
-// Finalize the virtual machine backup entity.
-// End backup, unlock resources, and perform cleanups.
-type VmBackupServiceFinalizeResponse struct {
-}
-
-// Finalize the virtual machine backup entity.
-// End backup, unlock resources, and perform cleanups.
-func (p *VmBackupService) Finalize() *VmBackupServiceFinalizeRequest {
-	return &VmBackupServiceFinalizeRequest{VmBackupService: p}
-}
-
-// Returns information about the virtual machine backup.
-type VmBackupServiceGetRequest struct {
-	VmBackupService *VmBackupService
-	header          map[string]string
-	query           map[string]string
-	follow          *string
-}
-
-func (p *VmBackupServiceGetRequest) Header(key, value string) *VmBackupServiceGetRequest {
-	if p.header == nil {
-		p.header = make(map[string]string)
-	}
-	p.header[key] = value
-	return p
-}
-
-func (p *VmBackupServiceGetRequest) Query(key, value string) *VmBackupServiceGetRequest {
-	if p.query == nil {
-		p.query = make(map[string]string)
-	}
-	p.query[key] = value
-	return p
-}
-
-func (p *VmBackupServiceGetRequest) Follow(follow string) *VmBackupServiceGetRequest {
-	p.follow = &follow
-	return p
-}
-
-func (p *VmBackupServiceGetRequest) Send() (*VmBackupServiceGetResponse, error) {
-	rawURL := fmt.Sprintf("%s%s", p.VmBackupService.connection.URL(), p.VmBackupService.path)
-	values := make(url.Values)
-	if p.follow != nil {
-		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
-	}
-
-	if p.query != nil {
-		for k, v := range p.query {
-			values[k] = []string{v}
-		}
-	}
-	if len(values) > 0 {
-		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
-	}
-	req, err := http.NewRequest("GET", rawURL, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	for hk, hv := range p.VmBackupService.connection.headers {
-		req.Header.Add(hk, hv)
-	}
-
-	if p.header != nil {
-		for hk, hv := range p.header {
-			req.Header.Add(hk, hv)
-		}
-	}
-
-	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
-	req.Header.Add("Version", "4")
-	req.Header.Add("Content-Type", "application/xml")
-	req.Header.Add("Accept", "application/xml")
-	// get OAuth access token
-	token, err := p.VmBackupService.connection.authenticate()
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
-	// Send the request and wait for the response
-	resp, err := p.VmBackupService.connection.client.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-	if p.VmBackupService.connection.logFunc != nil {
-		dumpReq, err := httputil.DumpRequestOut(req, true)
-		if err != nil {
-			return nil, err
-		}
-		dumpResp, err := httputil.DumpResponse(resp, true)
-		if err != nil {
-			return nil, err
-		}
-		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
-	}
-	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
-	if errReadBody != nil {
-		return nil, errReadBody
-	}
-	if !Contains(resp.StatusCode, []int{200}) {
-		return nil, CheckFault(respBodyBytes, resp)
-	}
-	reader := NewXMLReader(respBodyBytes)
-	result, err := XMLBackupReadOne(reader, nil, "")
-	if err != nil {
-		return nil, err
-	}
-	return &VmBackupServiceGetResponse{backup: result}, nil
-}
-
-func (p *VmBackupServiceGetRequest) MustSend() *VmBackupServiceGetResponse {
-	if v, err := p.Send(); err != nil {
-		panic(err)
-	} else {
-		return v
-	}
-}
-
-// Returns information about the virtual machine backup.
-type VmBackupServiceGetResponse struct {
-	backup *Backup
-}
-
-func (p *VmBackupServiceGetResponse) Backup() (*Backup, bool) {
-	if p.backup != nil {
-		return p.backup, true
-	}
-	return nil, false
-}
-
-func (p *VmBackupServiceGetResponse) MustBackup() *Backup {
-	if p.backup == nil {
-		panic("backup in response does not exist")
-	}
-	return p.backup
-}
-
-// Returns information about the virtual machine backup.
-func (p *VmBackupService) Get() *VmBackupServiceGetRequest {
-	return &VmBackupServiceGetRequest{VmBackupService: p}
-}
-
-// A reference to the service that lists the disks in backup.
-func (op *VmBackupService) DisksService() *VmBackupDisksService {
-	return NewVmBackupDisksService(op.connection, fmt.Sprintf("%s/disks", op.path))
-}
-
-// Service locator method, returns individual service on which the URI is dispatched.
-func (op *VmBackupService) Service(path string) (Service, error) {
-	if path == "" {
-		return op, nil
-	}
-	if path == "disks" {
-		return op.DisksService(), nil
-	}
-	if strings.HasPrefix(path, "disks/") {
-		return op.DisksService().Service(path[6:])
-	}
-	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
-}
-
-func (op *VmBackupService) String() string {
-	return fmt.Sprintf("VmBackupService:%s", op.path)
-}
-
 type TemplateWatchdogsService struct {
 	BaseService
 }
@@ -82277,7 +83182,7 @@ func NewTemplatesService(connection *Connection, path string) *TemplatesService 
 // original virtual machine. To do so use the `vm.disk_attachments` attribute, specifying the identifier of the disk
 // of the original virtual machine and the characteristics that you want to change. For example, if the original
 // virtual machine has a disk with the identifier `456`, and, for that disk, you want to change the name to `mydisk`
-// the format to <<types/disk_format, _Copy On Write_>> and make it <<types/disk, sparse>>, send a request body like
+// the format to xref:types-disk_format[_Copy On Write_] and make it xref:types-disk[sparse], send a request body like
 // this:
 // [source,xml]
 // ----
@@ -82529,7 +83434,7 @@ func (p *TemplatesServiceAddRequest) MustSend() *TemplatesServiceAddResponse {
 // original virtual machine. To do so use the `vm.disk_attachments` attribute, specifying the identifier of the disk
 // of the original virtual machine and the characteristics that you want to change. For example, if the original
 // virtual machine has a disk with the identifier `456`, and, for that disk, you want to change the name to `mydisk`
-// the format to <<types/disk_format, _Copy On Write_>> and make it <<types/disk, sparse>>, send a request body like
+// the format to xref:types-disk_format[_Copy On Write_] and make it xref:types-disk[sparse], send a request body like
 // this:
 // [source,xml]
 // ----
@@ -82668,7 +83573,7 @@ func (p *TemplatesServiceAddResponse) MustTemplate() *Template {
 // original virtual machine. To do so use the `vm.disk_attachments` attribute, specifying the identifier of the disk
 // of the original virtual machine and the characteristics that you want to change. For example, if the original
 // virtual machine has a disk with the identifier `456`, and, for that disk, you want to change the name to `mydisk`
-// the format to <<types/disk_format, _Copy On Write_>> and make it <<types/disk, sparse>>, send a request body like
+// the format to xref:types-disk_format[_Copy On Write_] and make it xref:types-disk[sparse], send a request body like
 // this:
 // [source,xml]
 // ----
@@ -85134,6 +86039,323 @@ func (op *VmBackupDisksService) String() string {
 	return fmt.Sprintf("VmBackupDisksService:%s", op.path)
 }
 
+// A service managing a backup of a virtual machines.
+type VmBackupService struct {
+	BaseService
+}
+
+func NewVmBackupService(connection *Connection, path string) *VmBackupService {
+	var result VmBackupService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+// To finalize a virtual machine with an id '123' and a backup with an id '456'
+// send a request as follows:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups/456/finalize
+// ----
+// With a request body as follows:
+// [source,xml]
+// ----
+// <action />
+// ----
+type VmBackupServiceFinalizeRequest struct {
+	VmBackupService *VmBackupService
+	header          map[string]string
+	query           map[string]string
+}
+
+func (p *VmBackupServiceFinalizeRequest) Header(key, value string) *VmBackupServiceFinalizeRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupServiceFinalizeRequest) Query(key, value string) *VmBackupServiceFinalizeRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupServiceFinalizeRequest) Send() (*VmBackupServiceFinalizeResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/finalize", p.VmBackupService.connection.URL(), p.VmBackupService.path)
+	actionBuilder := NewActionBuilder()
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	_, errCheckAction := CheckAction(respBodyBytes, resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(VmBackupServiceFinalizeResponse), nil
+}
+
+func (p *VmBackupServiceFinalizeRequest) MustSend() *VmBackupServiceFinalizeResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+// To finalize a virtual machine with an id '123' and a backup with an id '456'
+// send a request as follows:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups/456/finalize
+// ----
+// With a request body as follows:
+// [source,xml]
+// ----
+// <action />
+// ----
+type VmBackupServiceFinalizeResponse struct {
+}
+
+// Finalize the virtual machine backup entity.
+// End backup, unlock resources, and perform cleanups.
+// To finalize a virtual machine with an id '123' and a backup with an id '456'
+// send a request as follows:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups/456/finalize
+// ----
+// With a request body as follows:
+// [source,xml]
+// ----
+// <action />
+// ----
+func (p *VmBackupService) Finalize() *VmBackupServiceFinalizeRequest {
+	return &VmBackupServiceFinalizeRequest{VmBackupService: p}
+}
+
+// Returns information about the virtual machine backup.
+type VmBackupServiceGetRequest struct {
+	VmBackupService *VmBackupService
+	header          map[string]string
+	query           map[string]string
+	follow          *string
+}
+
+func (p *VmBackupServiceGetRequest) Header(key, value string) *VmBackupServiceGetRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Query(key, value string) *VmBackupServiceGetRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Follow(follow string) *VmBackupServiceGetRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *VmBackupServiceGetRequest) Send() (*VmBackupServiceGetResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmBackupService.connection.URL(), p.VmBackupService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmBackupService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmBackupService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmBackupService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmBackupService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmBackupService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLBackupReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &VmBackupServiceGetResponse{backup: result}, nil
+}
+
+func (p *VmBackupServiceGetRequest) MustSend() *VmBackupServiceGetResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Returns information about the virtual machine backup.
+type VmBackupServiceGetResponse struct {
+	backup *Backup
+}
+
+func (p *VmBackupServiceGetResponse) Backup() (*Backup, bool) {
+	if p.backup != nil {
+		return p.backup, true
+	}
+	return nil, false
+}
+
+func (p *VmBackupServiceGetResponse) MustBackup() *Backup {
+	if p.backup == nil {
+		panic("backup in response does not exist")
+	}
+	return p.backup
+}
+
+// Returns information about the virtual machine backup.
+func (p *VmBackupService) Get() *VmBackupServiceGetRequest {
+	return &VmBackupServiceGetRequest{VmBackupService: p}
+}
+
+// A reference to the service that lists the disks in backup.
+func (op *VmBackupService) DisksService() *VmBackupDisksService {
+	return NewVmBackupDisksService(op.connection, fmt.Sprintf("%s/disks", op.path))
+}
+
+// Service locator method, returns individual service on which the URI is dispatched.
+func (op *VmBackupService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	if path == "disks" {
+		return op.DisksService(), nil
+	}
+	if strings.HasPrefix(path, "disks/") {
+		return op.DisksService().Service(path[6:])
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *VmBackupService) String() string {
+	return fmt.Sprintf("VmBackupService:%s", op.path)
+}
+
 // Lists the backups of a virtual machine.
 type VmBackupsService struct {
 	BaseService
@@ -85183,12 +86405,31 @@ func NewVmBackupsService(connection *Connection, path string) *VmBackupsService 
 //
 // </backup>
 // ----
+// To provide the ID of the created backup, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <backup id="backup-uuid">
+//
+//	<from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//	<disks>
+//	    <disk id="disk-uuid" />
+//	    ...
+//	</disks>
+//
+// </backup>
+// ----
 type VmBackupsServiceAddRequest struct {
 	VmBackupsService   *VmBackupsService
 	header             map[string]string
 	query              map[string]string
 	backup             *Backup
 	requireConsistency *bool
+	useActive          *bool
 }
 
 func (p *VmBackupsServiceAddRequest) Header(key, value string) *VmBackupsServiceAddRequest {
@@ -85217,11 +86458,20 @@ func (p *VmBackupsServiceAddRequest) RequireConsistency(requireConsistency bool)
 	return p
 }
 
+func (p *VmBackupsServiceAddRequest) UseActive(useActive bool) *VmBackupsServiceAddRequest {
+	p.useActive = &useActive
+	return p
+}
+
 func (p *VmBackupsServiceAddRequest) Send() (*VmBackupsServiceAddResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.VmBackupsService.connection.URL(), p.VmBackupsService.path)
 	values := make(url.Values)
 	if p.requireConsistency != nil {
 		values["require_consistency"] = []string{fmt.Sprintf("%v", *p.requireConsistency)}
+	}
+
+	if p.useActive != nil {
+		values["use_active"] = []string{fmt.Sprintf("%v", *p.useActive)}
 	}
 
 	if p.query != nil {
@@ -85341,6 +86591,24 @@ func (p *VmBackupsServiceAddRequest) MustSend() *VmBackupsServiceAddResponse {
 //
 // </backup>
 // ----
+// To provide the ID of the created backup, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <backup id="backup-uuid">
+//
+//	<from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//	<disks>
+//	    <disk id="disk-uuid" />
+//	    ...
+//	</disks>
+//
+// </backup>
+// ----
 type VmBackupsServiceAddResponse struct {
 	backup *Backup
 }
@@ -85393,6 +86661,24 @@ func (p *VmBackupsServiceAddResponse) MustBackup() *Backup {
 //	</disks>
 //	<status>initializing</status>
 //	<creation_date>
+//
+// </backup>
+// ----
+// To provide the ID of the created backup, send a request like this:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/backups
+// ----
+// With a request body like this:
+// [source,xml]
+// ----
+// <backup id="backup-uuid">
+//
+//	<from_checkpoint_id>previous-checkpoint-uuid</from_checkpoint_id>
+//	<disks>
+//	    <disk id="disk-uuid" />
+//	    ...
+//	</disks>
 //
 // </backup>
 // ----
@@ -85812,7 +87098,7 @@ func (p *VmCdromService) Get() *VmCdromServiceGetRequest {
 // </cdrom>
 // ----
 // By default the above operations change permanently the disk that will be visible to the virtual machine
-// after the next boot, but they don't have any effect on the currently running virtual machine. If you want
+// after the next boot, but they do not have any effect on the currently running virtual machine. If you want
 // to change the disk that is visible to the current running virtual machine, add the `current=true` parameter.
 // For example, to eject the current disk send a request like this:
 // [source]
@@ -85979,7 +87265,7 @@ func (p *VmCdromServiceUpdateRequest) MustSend() *VmCdromServiceUpdateResponse {
 // </cdrom>
 // ----
 // By default the above operations change permanently the disk that will be visible to the virtual machine
-// after the next boot, but they don't have any effect on the currently running virtual machine. If you want
+// after the next boot, but they do not have any effect on the currently running virtual machine. If you want
 // to change the disk that is visible to the current running virtual machine, add the `current=true` parameter.
 // For example, to eject the current disk send a request like this:
 // [source]
@@ -86043,7 +87329,7 @@ func (p *VmCdromServiceUpdateResponse) MustCdrom() *Cdrom {
 // </cdrom>
 // ----
 // By default the above operations change permanently the disk that will be visible to the virtual machine
-// after the next boot, but they don't have any effect on the currently running virtual machine. If you want
+// after the next boot, but they do not have any effect on the currently running virtual machine. If you want
 // to change the disk that is visible to the current running virtual machine, add the `current=true` parameter.
 // For example, to eject the current disk send a request like this:
 // [source]
@@ -86080,7 +87366,7 @@ func (op *VmCdromService) String() string {
 // Manages the CDROM devices of a virtual machine.
 // Currently virtual machines have exactly one CDROM device. No new devices can be added, and the existing one can't
 // be removed, thus there are no `add` or `remove` methods. Changing and ejecting CDROM disks is done with the
-// <<services/vm_cdrom/methods/update, update>> method of the <<services/vm_cdrom, service>> that manages the
+// xref:services-vm_cdrom-methods-update[update] method of the xref:services-vm_cdrom[service] that manages the
 // CDROM device.
 type VmCdromsService struct {
 	BaseService
@@ -87024,6 +88310,11 @@ func NewVmCheckpointsService(connection *Connection, path string) *VmCheckpoints
 }
 
 // The list of virtual machine checkpoints.
+// To get a list of checkpoints for a virtual machine with an id '123', send a request as follows:
+// [source]
+// ----
+// GET /ovirt-engine/api/vms/123/checkpoints
+// ----
 type VmCheckpointsServiceListRequest struct {
 	VmCheckpointsService *VmCheckpointsService
 	header               map[string]string
@@ -87143,6 +88434,11 @@ func (p *VmCheckpointsServiceListRequest) MustSend() *VmCheckpointsServiceListRe
 }
 
 // The list of virtual machine checkpoints.
+// To get a list of checkpoints for a virtual machine with an id '123', send a request as follows:
+// [source]
+// ----
+// GET /ovirt-engine/api/vms/123/checkpoints
+// ----
 type VmCheckpointsServiceListResponse struct {
 	checkpoints *CheckpointSlice
 }
@@ -87162,6 +88458,11 @@ func (p *VmCheckpointsServiceListResponse) MustCheckpoints() *CheckpointSlice {
 }
 
 // The list of virtual machine checkpoints.
+// To get a list of checkpoints for a virtual machine with an id '123', send a request as follows:
+// [source]
+// ----
+// GET /ovirt-engine/api/vms/123/checkpoints
+// ----
 func (p *VmCheckpointsService) List() *VmCheckpointsServiceListRequest {
 	return &VmCheckpointsServiceListRequest{VmCheckpointsService: p}
 }
@@ -87955,8 +89256,7 @@ func (p *VmDiskService) Reduce() *VmDiskServiceReduceRequest {
 
 // Detach the disk from the virtual machine.
 // NOTE: In version 3 of the API this used to also remove the disk completely from the system, but starting with
-// version 4 it doesn't. If you need to remove it completely use the <<services/disk/methods/remove,remove
-// method of the top level disk service>>.
+// version 4 it doesn't. If you need to remove it completely use the xref:services-disk-methods-remove[remove method of the top level disk service].
 type VmDiskServiceRemoveRequest struct {
 	VmDiskService *VmDiskService
 	header        map[string]string
@@ -88062,15 +89362,13 @@ func (p *VmDiskServiceRemoveRequest) MustSend() *VmDiskServiceRemoveResponse {
 
 // Detach the disk from the virtual machine.
 // NOTE: In version 3 of the API this used to also remove the disk completely from the system, but starting with
-// version 4 it doesn't. If you need to remove it completely use the <<services/disk/methods/remove,remove
-// method of the top level disk service>>.
+// version 4 it doesn't. If you need to remove it completely use the xref:services-disk-methods-remove[remove method of the top level disk service].
 type VmDiskServiceRemoveResponse struct {
 }
 
 // Detach the disk from the virtual machine.
 // NOTE: In version 3 of the API this used to also remove the disk completely from the system, but starting with
-// version 4 it doesn't. If you need to remove it completely use the <<services/disk/methods/remove,remove
-// method of the top level disk service>>.
+// version 4 it doesn't. If you need to remove it completely use the xref:services-disk-methods-remove[remove method of the top level disk service].
 func (p *VmDiskService) Remove() *VmDiskServiceRemoveRequest {
 	return &VmDiskServiceRemoveRequest{VmDiskService: p}
 }
@@ -90248,7 +91546,7 @@ func NewVmHostDevicesService(connection *Connection, path string) *VmHostDevices
 // ----
 // POST /ovirt-engine/api/vms/123/hostdevices
 // ----
-// With request body of type <<types/host_device,HostDevice>>, for example
+// With request body of type xref:types-host_device[HostDevice], for example
 // [source,xml]
 // ----
 // <host_device id="123" />
@@ -90257,7 +91555,7 @@ func NewVmHostDevicesService(connection *Connection, path string) *VmHostDevices
 // to *exactly* one host. The device ID is then taken relative to this host.
 // NOTE: Attachment of a PCI device that is part of a bigger IOMMU group will result in attachment of the remaining
 // devices from that IOMMU group as "placeholders". These devices are then identified using the `placeholder`
-// attribute of the <<types/host_device,HostDevice>> type set to `true`.
+// attribute of the xref:types-host_device[HostDevice] type set to `true`.
 // In case you want attach a device that already serves as an IOMMU placeholder, simply issue an explicit Add operation
 // for it, and its `placeholder` flag will be cleared, and the device will be accessible to the virtual machine.
 type VmHostDevicesServiceAddRequest struct {
@@ -90377,7 +91675,7 @@ func (p *VmHostDevicesServiceAddRequest) MustSend() *VmHostDevicesServiceAddResp
 // ----
 // POST /ovirt-engine/api/vms/123/hostdevices
 // ----
-// With request body of type <<types/host_device,HostDevice>>, for example
+// With request body of type xref:types-host_device[HostDevice], for example
 // [source,xml]
 // ----
 // <host_device id="123" />
@@ -90386,7 +91684,7 @@ func (p *VmHostDevicesServiceAddRequest) MustSend() *VmHostDevicesServiceAddResp
 // to *exactly* one host. The device ID is then taken relative to this host.
 // NOTE: Attachment of a PCI device that is part of a bigger IOMMU group will result in attachment of the remaining
 // devices from that IOMMU group as "placeholders". These devices are then identified using the `placeholder`
-// attribute of the <<types/host_device,HostDevice>> type set to `true`.
+// attribute of the xref:types-host_device[HostDevice] type set to `true`.
 // In case you want attach a device that already serves as an IOMMU placeholder, simply issue an explicit Add operation
 // for it, and its `placeholder` flag will be cleared, and the device will be accessible to the virtual machine.
 type VmHostDevicesServiceAddResponse struct {
@@ -90413,7 +91711,7 @@ func (p *VmHostDevicesServiceAddResponse) MustDevice() *HostDevice {
 // ----
 // POST /ovirt-engine/api/vms/123/hostdevices
 // ----
-// With request body of type <<types/host_device,HostDevice>>, for example
+// With request body of type xref:types-host_device[HostDevice], for example
 // [source,xml]
 // ----
 // <host_device id="123" />
@@ -90422,7 +91720,7 @@ func (p *VmHostDevicesServiceAddResponse) MustDevice() *HostDevice {
 // to *exactly* one host. The device ID is then taken relative to this host.
 // NOTE: Attachment of a PCI device that is part of a bigger IOMMU group will result in attachment of the remaining
 // devices from that IOMMU group as "placeholders". These devices are then identified using the `placeholder`
-// attribute of the <<types/host_device,HostDevice>> type set to `true`.
+// attribute of the xref:types-host_device[HostDevice] type set to `true`.
 // In case you want attach a device that already serves as an IOMMU placeholder, simply issue an explicit Add operation
 // for it, and its `placeholder` flag will be cleared, and the device will be accessible to the virtual machine.
 func (p *VmHostDevicesService) Add() *VmHostDevicesServiceAddRequest {
@@ -90594,6 +91892,829 @@ func (op *VmHostDevicesService) Service(path string) (Service, error) {
 
 func (op *VmHostDevicesService) String() string {
 	return fmt.Sprintf("VmHostDevicesService:%s", op.path)
+}
+
+type VmMediatedDeviceService struct {
+	BaseService
+}
+
+func NewVmMediatedDeviceService(connection *Connection, path string) *VmMediatedDeviceService {
+	var result VmMediatedDeviceService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+// Retrieves the configuration of mediated devices in the virtual machine.
+type VmMediatedDeviceServiceGetRequest struct {
+	VmMediatedDeviceService *VmMediatedDeviceService
+	header                  map[string]string
+	query                   map[string]string
+	follow                  *string
+}
+
+func (p *VmMediatedDeviceServiceGetRequest) Header(key, value string) *VmMediatedDeviceServiceGetRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmMediatedDeviceServiceGetRequest) Query(key, value string) *VmMediatedDeviceServiceGetRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmMediatedDeviceServiceGetRequest) Follow(follow string) *VmMediatedDeviceServiceGetRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *VmMediatedDeviceServiceGetRequest) Send() (*VmMediatedDeviceServiceGetResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmMediatedDeviceService.connection.URL(), p.VmMediatedDeviceService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmMediatedDeviceService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmMediatedDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmMediatedDeviceService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmMediatedDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmMediatedDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLVmMediatedDeviceReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &VmMediatedDeviceServiceGetResponse{device: result}, nil
+}
+
+func (p *VmMediatedDeviceServiceGetRequest) MustSend() *VmMediatedDeviceServiceGetResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Retrieves the configuration of mediated devices in the virtual machine.
+type VmMediatedDeviceServiceGetResponse struct {
+	device *VmMediatedDevice
+}
+
+func (p *VmMediatedDeviceServiceGetResponse) Device() (*VmMediatedDevice, bool) {
+	if p.device != nil {
+		return p.device, true
+	}
+	return nil, false
+}
+
+func (p *VmMediatedDeviceServiceGetResponse) MustDevice() *VmMediatedDevice {
+	if p.device == nil {
+		panic("device in response does not exist")
+	}
+	return p.device
+}
+
+// Retrieves the configuration of mediated devices in the virtual machine.
+func (p *VmMediatedDeviceService) Get() *VmMediatedDeviceServiceGetRequest {
+	return &VmMediatedDeviceServiceGetRequest{VmMediatedDeviceService: p}
+}
+
+// Remove the mediated device from the virtual machine.
+type VmMediatedDeviceServiceRemoveRequest struct {
+	VmMediatedDeviceService *VmMediatedDeviceService
+	header                  map[string]string
+	query                   map[string]string
+	async                   *bool
+}
+
+func (p *VmMediatedDeviceServiceRemoveRequest) Header(key, value string) *VmMediatedDeviceServiceRemoveRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmMediatedDeviceServiceRemoveRequest) Query(key, value string) *VmMediatedDeviceServiceRemoveRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmMediatedDeviceServiceRemoveRequest) Async(async bool) *VmMediatedDeviceServiceRemoveRequest {
+	p.async = &async
+	return p
+}
+
+func (p *VmMediatedDeviceServiceRemoveRequest) Send() (*VmMediatedDeviceServiceRemoveResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmMediatedDeviceService.connection.URL(), p.VmMediatedDeviceService.path)
+	values := make(url.Values)
+	if p.async != nil {
+		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("DELETE", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmMediatedDeviceService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmMediatedDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmMediatedDeviceService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmMediatedDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmMediatedDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	return new(VmMediatedDeviceServiceRemoveResponse), nil
+}
+
+func (p *VmMediatedDeviceServiceRemoveRequest) MustSend() *VmMediatedDeviceServiceRemoveResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Remove the mediated device from the virtual machine.
+type VmMediatedDeviceServiceRemoveResponse struct {
+}
+
+// Remove the mediated device from the virtual machine.
+func (p *VmMediatedDeviceService) Remove() *VmMediatedDeviceServiceRemoveRequest {
+	return &VmMediatedDeviceServiceRemoveRequest{VmMediatedDeviceService: p}
+}
+
+// Updates the information about the mediated device.
+// You can update the information using `specParams` element.
+// For example, to update a mediated device, send a request like this:
+// [source]
+// ----
+// PUT /ovirt-engine/api/vms/123/mediateddevices/00000000-0000-0000-0000-000000000000
+// <vm_mediated_device>
+//
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+// with response body:
+// [source,xml]
+// ----
+// <vm_mediated_device href="/ovirt-engine/api/vms/123/mediateddevices/00000000-0000-0000-0000-000000000000" id="00000000-0000-0000-0000-000000000000">
+//
+//	<vm href="/ovirt-engine/api/vms/123" id="123"/>
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+type VmMediatedDeviceServiceUpdateRequest struct {
+	VmMediatedDeviceService *VmMediatedDeviceService
+	header                  map[string]string
+	query                   map[string]string
+	async                   *bool
+	device                  *VmMediatedDevice
+}
+
+func (p *VmMediatedDeviceServiceUpdateRequest) Header(key, value string) *VmMediatedDeviceServiceUpdateRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmMediatedDeviceServiceUpdateRequest) Query(key, value string) *VmMediatedDeviceServiceUpdateRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmMediatedDeviceServiceUpdateRequest) Async(async bool) *VmMediatedDeviceServiceUpdateRequest {
+	p.async = &async
+	return p
+}
+
+func (p *VmMediatedDeviceServiceUpdateRequest) Device(device *VmMediatedDevice) *VmMediatedDeviceServiceUpdateRequest {
+	p.device = device
+	return p
+}
+
+func (p *VmMediatedDeviceServiceUpdateRequest) Send() (*VmMediatedDeviceServiceUpdateResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmMediatedDeviceService.connection.URL(), p.VmMediatedDeviceService.path)
+	values := make(url.Values)
+	if p.async != nil {
+		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLVmMediatedDeviceWriteOne(writer, p.device, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("PUT", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmMediatedDeviceService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmMediatedDeviceService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmMediatedDeviceService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmMediatedDeviceService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmMediatedDeviceService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLVmMediatedDeviceReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &VmMediatedDeviceServiceUpdateResponse{device: result}, nil
+}
+
+func (p *VmMediatedDeviceServiceUpdateRequest) MustSend() *VmMediatedDeviceServiceUpdateResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Updates the information about the mediated device.
+// You can update the information using `specParams` element.
+// For example, to update a mediated device, send a request like this:
+// [source]
+// ----
+// PUT /ovirt-engine/api/vms/123/mediateddevices/00000000-0000-0000-0000-000000000000
+// <vm_mediated_device>
+//
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+// with response body:
+// [source,xml]
+// ----
+// <vm_mediated_device href="/ovirt-engine/api/vms/123/mediateddevices/00000000-0000-0000-0000-000000000000" id="00000000-0000-0000-0000-000000000000">
+//
+//	<vm href="/ovirt-engine/api/vms/123" id="123"/>
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+type VmMediatedDeviceServiceUpdateResponse struct {
+	device *VmMediatedDevice
+}
+
+func (p *VmMediatedDeviceServiceUpdateResponse) Device() (*VmMediatedDevice, bool) {
+	if p.device != nil {
+		return p.device, true
+	}
+	return nil, false
+}
+
+func (p *VmMediatedDeviceServiceUpdateResponse) MustDevice() *VmMediatedDevice {
+	if p.device == nil {
+		panic("device in response does not exist")
+	}
+	return p.device
+}
+
+// Updates the information about the mediated device.
+// You can update the information using `specParams` element.
+// For example, to update a mediated device, send a request like this:
+// [source]
+// ----
+// PUT /ovirt-engine/api/vms/123/mediateddevices/00000000-0000-0000-0000-000000000000
+// <vm_mediated_device>
+//
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+// with response body:
+// [source,xml]
+// ----
+// <vm_mediated_device href="/ovirt-engine/api/vms/123/mediateddevices/00000000-0000-0000-0000-000000000000" id="00000000-0000-0000-0000-000000000000">
+//
+//	<vm href="/ovirt-engine/api/vms/123" id="123"/>
+//	<spec_params>
+//	  <property>
+//	    <name>mdevType</name>
+//	    <value>nvidia-11</value>
+//	  </property>
+//	</spec_params>
+//
+// </vm_mediated_device>
+// ----
+func (p *VmMediatedDeviceService) Update() *VmMediatedDeviceServiceUpdateRequest {
+	return &VmMediatedDeviceServiceUpdateRequest{VmMediatedDeviceService: p}
+}
+
+// Service locator method, returns individual service on which the URI is dispatched.
+func (op *VmMediatedDeviceService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	return nil, fmt.Errorf("The path <%s> doesn't correspond to any service", path)
+}
+
+func (op *VmMediatedDeviceService) String() string {
+	return fmt.Sprintf("VmMediatedDeviceService:%s", op.path)
+}
+
+// A service that manages mediated devices of a VM.
+type VmMediatedDevicesService struct {
+	BaseService
+}
+
+func NewVmMediatedDevicesService(connection *Connection, path string) *VmMediatedDevicesService {
+	var result VmMediatedDevicesService
+	result.connection = connection
+	result.path = path
+	return &result
+}
+
+// Add a new mediated device to the virtual machine.
+type VmMediatedDevicesServiceAddRequest struct {
+	VmMediatedDevicesService *VmMediatedDevicesService
+	header                   map[string]string
+	query                    map[string]string
+	device                   *VmMediatedDevice
+}
+
+func (p *VmMediatedDevicesServiceAddRequest) Header(key, value string) *VmMediatedDevicesServiceAddRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmMediatedDevicesServiceAddRequest) Query(key, value string) *VmMediatedDevicesServiceAddRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmMediatedDevicesServiceAddRequest) Device(device *VmMediatedDevice) *VmMediatedDevicesServiceAddRequest {
+	p.device = device
+	return p
+}
+
+func (p *VmMediatedDevicesServiceAddRequest) Send() (*VmMediatedDevicesServiceAddResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmMediatedDevicesService.connection.URL(), p.VmMediatedDevicesService.path)
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err := XMLVmMediatedDeviceWriteOne(writer, p.device, "")
+	if err != nil {
+		return nil, err
+	}
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmMediatedDevicesService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmMediatedDevicesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmMediatedDevicesService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmMediatedDevicesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmMediatedDevicesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200, 201, 202}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLVmMediatedDeviceReadOne(reader, nil, "")
+	if err != nil {
+		return nil, err
+	}
+	return &VmMediatedDevicesServiceAddResponse{device: result}, nil
+}
+
+func (p *VmMediatedDevicesServiceAddRequest) MustSend() *VmMediatedDevicesServiceAddResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Add a new mediated device to the virtual machine.
+type VmMediatedDevicesServiceAddResponse struct {
+	device *VmMediatedDevice
+}
+
+func (p *VmMediatedDevicesServiceAddResponse) Device() (*VmMediatedDevice, bool) {
+	if p.device != nil {
+		return p.device, true
+	}
+	return nil, false
+}
+
+func (p *VmMediatedDevicesServiceAddResponse) MustDevice() *VmMediatedDevice {
+	if p.device == nil {
+		panic("device in response does not exist")
+	}
+	return p.device
+}
+
+// Add a new mediated device to the virtual machine.
+func (p *VmMediatedDevicesService) Add() *VmMediatedDevicesServiceAddRequest {
+	return &VmMediatedDevicesServiceAddRequest{VmMediatedDevicesService: p}
+}
+
+// Lists all the configured mediated devices of the virtual machine.
+// The order of the returned list of mediated devices is not guaranteed.
+type VmMediatedDevicesServiceListRequest struct {
+	VmMediatedDevicesService *VmMediatedDevicesService
+	header                   map[string]string
+	query                    map[string]string
+	follow                   *string
+	max                      *int64
+}
+
+func (p *VmMediatedDevicesServiceListRequest) Header(key, value string) *VmMediatedDevicesServiceListRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmMediatedDevicesServiceListRequest) Query(key, value string) *VmMediatedDevicesServiceListRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmMediatedDevicesServiceListRequest) Follow(follow string) *VmMediatedDevicesServiceListRequest {
+	p.follow = &follow
+	return p
+}
+
+func (p *VmMediatedDevicesServiceListRequest) Max(max int64) *VmMediatedDevicesServiceListRequest {
+	p.max = &max
+	return p
+}
+
+func (p *VmMediatedDevicesServiceListRequest) Send() (*VmMediatedDevicesServiceListResponse, error) {
+	rawURL := fmt.Sprintf("%s%s", p.VmMediatedDevicesService.connection.URL(), p.VmMediatedDevicesService.path)
+	values := make(url.Values)
+	if p.follow != nil {
+		values["follow"] = []string{fmt.Sprintf("%v", *p.follow)}
+	}
+
+	if p.max != nil {
+		values["max"] = []string{fmt.Sprintf("%v", *p.max)}
+	}
+
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	req, err := http.NewRequest("GET", rawURL, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmMediatedDevicesService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmMediatedDevicesService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmMediatedDevicesService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmMediatedDevicesService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmMediatedDevicesService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	if !Contains(resp.StatusCode, []int{200}) {
+		return nil, CheckFault(respBodyBytes, resp)
+	}
+	reader := NewXMLReader(respBodyBytes)
+	result, err := XMLVmMediatedDeviceReadMany(reader, nil)
+	if err != nil {
+		return nil, err
+	}
+	return &VmMediatedDevicesServiceListResponse{devices: result}, nil
+}
+
+func (p *VmMediatedDevicesServiceListRequest) MustSend() *VmMediatedDevicesServiceListResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Lists all the configured mediated devices of the virtual machine.
+// The order of the returned list of mediated devices is not guaranteed.
+type VmMediatedDevicesServiceListResponse struct {
+	devices *VmMediatedDeviceSlice
+}
+
+func (p *VmMediatedDevicesServiceListResponse) Devices() (*VmMediatedDeviceSlice, bool) {
+	if p.devices != nil {
+		return p.devices, true
+	}
+	return nil, false
+}
+
+func (p *VmMediatedDevicesServiceListResponse) MustDevices() *VmMediatedDeviceSlice {
+	if p.devices == nil {
+		panic("devices in response does not exist")
+	}
+	return p.devices
+}
+
+// Lists all the configured mediated devices of the virtual machine.
+// The order of the returned list of mediated devices is not guaranteed.
+func (p *VmMediatedDevicesService) List() *VmMediatedDevicesServiceListRequest {
+	return &VmMediatedDevicesServiceListRequest{VmMediatedDevicesService: p}
+}
+
+// Returns a reference to the service that manages a mediated device of a virtual machine.
+func (op *VmMediatedDevicesService) DeviceService(id string) *VmMediatedDeviceService {
+	return NewVmMediatedDeviceService(op.connection, fmt.Sprintf("%s/%s", op.path, id))
+}
+
+// Service locator method, returns individual service on which the URI is dispatched.
+func (op *VmMediatedDevicesService) Service(path string) (Service, error) {
+	if path == "" {
+		return op, nil
+	}
+	index := strings.Index(path, "/")
+	if index == -1 {
+		return op.DeviceService(path), nil
+	}
+	return op.DeviceService(path[:index]).Service(path[index+1:])
+}
+
+func (op *VmMediatedDevicesService) String() string {
+	return fmt.Sprintf("VmMediatedDevicesService:%s", op.path)
 }
 
 type VmNicService struct {
@@ -91355,7 +93476,7 @@ func (p *VmNicService) Update() *VmNicServiceUpdateRequest {
 }
 
 // Reference to the service that manages the network filter parameters of the NIC.
-// A single top-level network filter may assigned to the NIC by the NIC's <<types/vnic_profile,vNIC Profile>>.
+// A single top-level network filter may assigned to the NIC by the NIC's xref:types-vnic_profile[vNIC Profile].
 func (op *VmNicService) NetworkFilterParametersService() *NicNetworkFilterParametersService {
 	return NewNicNetworkFilterParametersService(op.connection, fmt.Sprintf("%s/networkfilterparameters", op.path))
 }
@@ -93260,6 +95381,7 @@ type VmPoolServiceUpdateRequest struct {
 	query         map[string]string
 	async         *bool
 	pool          *VmPool
+	seal          *bool
 }
 
 func (p *VmPoolServiceUpdateRequest) Header(key, value string) *VmPoolServiceUpdateRequest {
@@ -93288,11 +95410,20 @@ func (p *VmPoolServiceUpdateRequest) Pool(pool *VmPool) *VmPoolServiceUpdateRequ
 	return p
 }
 
+func (p *VmPoolServiceUpdateRequest) Seal(seal bool) *VmPoolServiceUpdateRequest {
+	p.seal = &seal
+	return p
+}
+
 func (p *VmPoolServiceUpdateRequest) Send() (*VmPoolServiceUpdateResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.VmPoolService.connection.URL(), p.VmPoolService.path)
 	values := make(url.Values)
 	if p.async != nil {
 		values["async"] = []string{fmt.Sprintf("%v", *p.async)}
+	}
+
+	if p.seal != nil {
+		values["seal"] = []string{fmt.Sprintf("%v", *p.seal)}
 	}
 
 	if p.query != nil {
@@ -93495,6 +95626,7 @@ type VmPoolsServiceAddRequest struct {
 	header         map[string]string
 	query          map[string]string
 	pool           *VmPool
+	seal           *bool
 }
 
 func (p *VmPoolsServiceAddRequest) Header(key, value string) *VmPoolsServiceAddRequest {
@@ -93518,9 +95650,18 @@ func (p *VmPoolsServiceAddRequest) Pool(pool *VmPool) *VmPoolsServiceAddRequest 
 	return p
 }
 
+func (p *VmPoolsServiceAddRequest) Seal(seal bool) *VmPoolsServiceAddRequest {
+	p.seal = &seal
+	return p
+}
+
 func (p *VmPoolsServiceAddRequest) Send() (*VmPoolsServiceAddResponse, error) {
 	rawURL := fmt.Sprintf("%s%s", p.VmPoolsService.connection.URL(), p.VmPoolsService.path)
 	values := make(url.Values)
+	if p.seal != nil {
+		values["seal"] = []string{fmt.Sprintf("%v", *p.seal)}
+	}
+
 	if p.query != nil {
 		for k, v := range p.query {
 			values[k] = []string{v}
@@ -94249,6 +96390,8 @@ func NewVmService(connection *Connection, path string) *VmService {
 }
 
 // Apply an automatic CPU and NUMA configuration on the VM.
+// IMPORTANT: Since version 4.5 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Instead please use PUT followed by xref:services-vm-methods-update[update operation].
 // An example for a request:
 // [source]
 // ----
@@ -94385,6 +96528,8 @@ func (p *VmServiceAutoPinCpuAndNumaNodesRequest) MustSend() *VmServiceAutoPinCpu
 }
 
 // Apply an automatic CPU and NUMA configuration on the VM.
+// IMPORTANT: Since version 4.5 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Instead please use PUT followed by xref:services-vm-methods-update[update operation].
 // An example for a request:
 // [source]
 // ----
@@ -94403,6 +96548,8 @@ type VmServiceAutoPinCpuAndNumaNodesResponse struct {
 }
 
 // Apply an automatic CPU and NUMA configuration on the VM.
+// IMPORTANT: Since version 4.5 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Instead please use PUT followed by xref:services-vm-methods-update[update operation].
 // An example for a request:
 // [source]
 // ----
@@ -94716,7 +96863,7 @@ func (p *VmService) Clone() *VmServiceCloneRequest {
 }
 
 // Permanently restores the virtual machine to the state of the previewed snapshot.
-// See the <<services/vm/methods/preview_snapshot, preview_snapshot>> operation for details.
+// See the xref:services-vm-methods-preview_snapshot[preview_snapshot] operation for details.
 type VmServiceCommitSnapshotRequest struct {
 	VmService *VmService
 	header    map[string]string
@@ -94830,12 +96977,12 @@ func (p *VmServiceCommitSnapshotRequest) MustSend() *VmServiceCommitSnapshotResp
 }
 
 // Permanently restores the virtual machine to the state of the previewed snapshot.
-// See the <<services/vm/methods/preview_snapshot, preview_snapshot>> operation for details.
+// See the xref:services-vm-methods-preview_snapshot[preview_snapshot] operation for details.
 type VmServiceCommitSnapshotResponse struct {
 }
 
 // Permanently restores the virtual machine to the state of the previewed snapshot.
-// See the <<services/vm/methods/preview_snapshot, preview_snapshot>> operation for details.
+// See the xref:services-vm-methods-preview_snapshot[preview_snapshot] operation for details.
 func (p *VmService) CommitSnapshot() *VmServiceCommitSnapshotRequest {
 	return &VmServiceCommitSnapshotRequest{VmService: p}
 }
@@ -96123,8 +98270,8 @@ func (p *VmService) Migrate() *VmServiceMigrateRequest {
 // Temporarily restores the virtual machine to the state of a snapshot.
 // The snapshot is indicated with the `snapshot.id` parameter. It is restored temporarily, so that the content can
 // be inspected. Once that inspection is finished, the state of the virtual machine can be made permanent, using the
-// <<services/vm/methods/commit_snapshot, commit_snapshot>> method, or discarded using the
-// <<services/vm/methods/undo_snapshot, undo_snapshot>> method.
+// xref:services-vm-methods-commit_snapshot[commit_snapshot] method, or discarded using the
+// xref:services-vm-methods-undo_snapshot[undo_snapshot] method.
 type VmServicePreviewSnapshotRequest struct {
 	VmService     *VmService
 	header        map[string]string
@@ -96285,16 +98432,16 @@ func (p *VmServicePreviewSnapshotRequest) MustSend() *VmServicePreviewSnapshotRe
 // Temporarily restores the virtual machine to the state of a snapshot.
 // The snapshot is indicated with the `snapshot.id` parameter. It is restored temporarily, so that the content can
 // be inspected. Once that inspection is finished, the state of the virtual machine can be made permanent, using the
-// <<services/vm/methods/commit_snapshot, commit_snapshot>> method, or discarded using the
-// <<services/vm/methods/undo_snapshot, undo_snapshot>> method.
+// xref:services-vm-methods-commit_snapshot[commit_snapshot] method, or discarded using the
+// xref:services-vm-methods-undo_snapshot[undo_snapshot] method.
 type VmServicePreviewSnapshotResponse struct {
 }
 
 // Temporarily restores the virtual machine to the state of a snapshot.
 // The snapshot is indicated with the `snapshot.id` parameter. It is restored temporarily, so that the content can
 // be inspected. Once that inspection is finished, the state of the virtual machine can be made permanent, using the
-// <<services/vm/methods/commit_snapshot, commit_snapshot>> method, or discarded using the
-// <<services/vm/methods/undo_snapshot, undo_snapshot>> method.
+// xref:services-vm-methods-commit_snapshot[commit_snapshot] method, or discarded using the
+// xref:services-vm-methods-undo_snapshot[undo_snapshot] method.
 func (p *VmService) PreviewSnapshot() *VmServicePreviewSnapshotRequest {
 	return &VmServicePreviewSnapshotRequest{VmService: p}
 }
@@ -96925,6 +99072,152 @@ type VmServiceResetResponse struct {
 // ----
 func (p *VmService) Reset() *VmServiceResetRequest {
 	return &VmServiceResetRequest{VmService: p}
+}
+
+// Captures screenshot of the current state of the VM.
+// For example:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/screenshot
+// ----
+// The screenshot action does not take any action specific parameters; therefore, the request body should contain an
+// empty `action`:
+// [source,xml]
+// ----
+// <action/>
+// ----
+type VmServiceScreenshotRequest struct {
+	VmService *VmService
+	header    map[string]string
+	query     map[string]string
+}
+
+func (p *VmServiceScreenshotRequest) Header(key, value string) *VmServiceScreenshotRequest {
+	if p.header == nil {
+		p.header = make(map[string]string)
+	}
+	p.header[key] = value
+	return p
+}
+
+func (p *VmServiceScreenshotRequest) Query(key, value string) *VmServiceScreenshotRequest {
+	if p.query == nil {
+		p.query = make(map[string]string)
+	}
+	p.query[key] = value
+	return p
+}
+
+func (p *VmServiceScreenshotRequest) Send() (*VmServiceScreenshotResponse, error) {
+	rawURL := fmt.Sprintf("%s%s/screenshot", p.VmService.connection.URL(), p.VmService.path)
+	actionBuilder := NewActionBuilder()
+	action, err := actionBuilder.Build()
+	if err != nil {
+		return nil, err
+	}
+	values := make(url.Values)
+	if p.query != nil {
+		for k, v := range p.query {
+			values[k] = []string{v}
+		}
+	}
+	if len(values) > 0 {
+		rawURL = fmt.Sprintf("%s?%s", rawURL, values.Encode())
+	}
+	var body bytes.Buffer
+	writer := NewXMLWriter(&body)
+	err = XMLActionWriteOne(writer, action, "")
+	writer.Flush()
+	req, err := http.NewRequest("POST", rawURL, &body)
+	if err != nil {
+		return nil, err
+	}
+
+	for hk, hv := range p.VmService.connection.headers {
+		req.Header.Add(hk, hv)
+	}
+
+	if p.header != nil {
+		for hk, hv := range p.header {
+			req.Header.Add(hk, hv)
+		}
+	}
+
+	req.Header.Add("User-Agent", fmt.Sprintf("GoSDK/%s", SDK_VERSION))
+	req.Header.Add("Version", "4")
+	req.Header.Add("Content-Type", "application/xml")
+	req.Header.Add("Accept", "application/xml")
+	// get OAuth access token
+	token, err := p.VmService.connection.authenticate()
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", token))
+	// Send the request and wait for the response
+	resp, err := p.VmService.connection.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if p.VmService.connection.logFunc != nil {
+		dumpReq, err := httputil.DumpRequestOut(req, true)
+		if err != nil {
+			return nil, err
+		}
+		dumpResp, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return nil, err
+		}
+		p.VmService.connection.logFunc("<<<<<<Request:\n%sResponse:\n%s>>>>>>\n", string(dumpReq), string(dumpResp))
+	}
+	respBodyBytes, errReadBody := ioutil.ReadAll(resp.Body)
+	if errReadBody != nil {
+		return nil, errReadBody
+	}
+	_, errCheckAction := CheckAction(respBodyBytes, resp)
+	if errCheckAction != nil {
+		return nil, errCheckAction
+	}
+	return new(VmServiceScreenshotResponse), nil
+}
+
+func (p *VmServiceScreenshotRequest) MustSend() *VmServiceScreenshotResponse {
+	if v, err := p.Send(); err != nil {
+		panic(err)
+	} else {
+		return v
+	}
+}
+
+// Captures screenshot of the current state of the VM.
+// For example:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/screenshot
+// ----
+// The screenshot action does not take any action specific parameters; therefore, the request body should contain an
+// empty `action`:
+// [source,xml]
+// ----
+// <action/>
+// ----
+type VmServiceScreenshotResponse struct {
+}
+
+// Captures screenshot of the current state of the VM.
+// For example:
+// [source]
+// ----
+// POST /ovirt-engine/api/vms/123/screenshot
+// ----
+// The screenshot action does not take any action specific parameters; therefore, the request body should contain an
+// empty `action`:
+// [source,xml]
+// ----
+// <action/>
+// ----
+func (p *VmService) Screenshot() *VmServiceScreenshotRequest {
+	return &VmServiceScreenshotRequest{VmService: p}
 }
 
 // This operation sends a shutdown request to a virtual machine.
@@ -97935,8 +100228,8 @@ func (p *VmService) ThawFilesystems() *VmServiceThawFilesystemsRequest {
 // VNC and SPICE, then the authentication token will only be valid for
 // the SPICE protocol.
 // In order to obtain an authentication token for a specific protocol, for
-// example for VNC, use the `ticket` method of the <<services/vm_graphics_console,
-// service>>, which manages the graphics consoles of the virtual machine, by sending
+// example for VNC, use the `ticket` method of the
+// xref:services-vm_graphics_console[service], which manages the graphics consoles of the virtual machine, by sending
 // a request:
 // [source]
 // ----
@@ -98090,8 +100383,8 @@ func (p *VmServiceTicketRequest) MustSend() *VmServiceTicketResponse {
 // VNC and SPICE, then the authentication token will only be valid for
 // the SPICE protocol.
 // In order to obtain an authentication token for a specific protocol, for
-// example for VNC, use the `ticket` method of the <<services/vm_graphics_console,
-// service>>, which manages the graphics consoles of the virtual machine, by sending
+// example for VNC, use the `ticket` method of the
+// xref:services-vm_graphics_console[service], which manages the graphics consoles of the virtual machine, by sending
 // a request:
 // [source]
 // ----
@@ -98143,8 +100436,8 @@ func (p *VmServiceTicketResponse) MustTicket() *Ticket {
 // VNC and SPICE, then the authentication token will only be valid for
 // the SPICE protocol.
 // In order to obtain an authentication token for a specific protocol, for
-// example for VNC, use the `ticket` method of the <<services/vm_graphics_console,
-// service>>, which manages the graphics consoles of the virtual machine, by sending
+// example for VNC, use the `ticket` method of the
+// xref:services-vm_graphics_console[service], which manages the graphics consoles of the virtual machine, by sending
 // a request:
 // [source]
 // ----
@@ -98475,7 +100768,7 @@ func (p *VmService) ExportToPathOnHost() *VmServiceExportToPathOnHostRequest {
 }
 
 // Restores the virtual machine to the state it had before previewing the snapshot.
-// See the <<services/vm/methods/preview_snapshot, preview_snapshot>> operation for details.
+// See the xref:services-vm-methods-preview_snapshot[preview_snapshot] operation for details.
 type VmServiceUndoSnapshotRequest struct {
 	VmService *VmService
 	header    map[string]string
@@ -98589,12 +100882,12 @@ func (p *VmServiceUndoSnapshotRequest) MustSend() *VmServiceUndoSnapshotResponse
 }
 
 // Restores the virtual machine to the state it had before previewing the snapshot.
-// See the <<services/vm/methods/preview_snapshot, preview_snapshot>> operation for details.
+// See the xref:services-vm-methods-preview_snapshot[preview_snapshot] operation for details.
 type VmServiceUndoSnapshotResponse struct {
 }
 
 // Restores the virtual machine to the state it had before previewing the snapshot.
-// See the <<services/vm/methods/preview_snapshot, preview_snapshot>> operation for details.
+// See the xref:services-vm-methods-preview_snapshot[preview_snapshot] operation for details.
 func (p *VmService) UndoSnapshot() *VmServiceUndoSnapshotRequest {
 	return &VmServiceUndoSnapshotRequest{VmService: p}
 }
@@ -98797,6 +101090,11 @@ func (op *VmService) KatelloErrataService() *KatelloErrataService {
 	return NewKatelloErrataService(op.connection, fmt.Sprintf("%s/katelloerrata", op.path))
 }
 
+// Reference to the service that manages mediated devices associated with the VM.
+func (op *VmService) MediatedDevicesService() *VmMediatedDevicesService {
+	return NewVmMediatedDevicesService(op.connection, fmt.Sprintf("%s/mediateddevices", op.path))
+}
+
 func (op *VmService) NicsService() *VmNicsService {
 	return NewVmNicsService(op.connection, fmt.Sprintf("%s/nics", op.path))
 }
@@ -98892,6 +101190,12 @@ func (op *VmService) Service(path string) (Service, error) {
 	}
 	if strings.HasPrefix(path, "katelloerrata/") {
 		return op.KatelloErrataService().Service(path[14:])
+	}
+	if path == "mediateddevices" {
+		return op.MediatedDevicesService(), nil
+	}
+	if strings.HasPrefix(path, "mediateddevices/") {
+		return op.MediatedDevicesService().Service(path[16:])
 	}
 	if path == "nics" {
 		return op.NicsService(), nil
@@ -100374,7 +102678,7 @@ func NewVmsService(connection *Connection, path string) *VmsService {
 // </vm>
 // ----
 // In order to boot from CDROM, you first need to insert a disk, as described in the
-// <<services/vm_cdrom, CDROM service>>. Then booting from that CDROM can be specified using the `os.boot.devices`
+// xref:services-vm_cdrom[CDROM service]. Then booting from that CDROM can be specified using the `os.boot.devices`
 // attribute:
 // [source,xml]
 // ----
@@ -100400,6 +102704,7 @@ type VmsServiceAddRequest struct {
 	clone             *bool
 	clonePermissions  *bool
 	filter            *bool
+	seal              *bool
 	vm                *Vm
 }
 
@@ -100439,6 +102744,11 @@ func (p *VmsServiceAddRequest) Filter(filter bool) *VmsServiceAddRequest {
 	return p
 }
 
+func (p *VmsServiceAddRequest) Seal(seal bool) *VmsServiceAddRequest {
+	p.seal = &seal
+	return p
+}
+
 func (p *VmsServiceAddRequest) Vm(vm *Vm) *VmsServiceAddRequest {
 	p.vm = vm
 	return p
@@ -100461,6 +102771,10 @@ func (p *VmsServiceAddRequest) Send() (*VmsServiceAddResponse, error) {
 
 	if p.filter != nil {
 		values["filter"] = []string{fmt.Sprintf("%v", *p.filter)}
+	}
+
+	if p.seal != nil {
+		values["seal"] = []string{fmt.Sprintf("%v", *p.seal)}
 	}
 
 	if p.query != nil {
@@ -100676,7 +102990,7 @@ func (p *VmsServiceAddRequest) MustSend() *VmsServiceAddResponse {
 // </vm>
 // ----
 // In order to boot from CDROM, you first need to insert a disk, as described in the
-// <<services/vm_cdrom, CDROM service>>. Then booting from that CDROM can be specified using the `os.boot.devices`
+// xref:services-vm_cdrom[CDROM service]. Then booting from that CDROM can be specified using the `os.boot.devices`
 // attribute:
 // [source,xml]
 // ----
@@ -100845,7 +103159,7 @@ func (p *VmsServiceAddResponse) MustVm() *Vm {
 // </vm>
 // ----
 // In order to boot from CDROM, you first need to insert a disk, as described in the
-// <<services/vm_cdrom, CDROM service>>. Then booting from that CDROM can be specified using the `os.boot.devices`
+// xref:services-vm_cdrom[CDROM service]. Then booting from that CDROM can be specified using the `os.boot.devices`
 // attribute:
 // [source,xml]
 // ----
@@ -100876,6 +103190,7 @@ type VmsServiceAddFromConfigurationRequest struct {
 	clone             *bool
 	clonePermissions  *bool
 	filter            *bool
+	seal              *bool
 	vm                *Vm
 }
 
@@ -100915,6 +103230,11 @@ func (p *VmsServiceAddFromConfigurationRequest) Filter(filter bool) *VmsServiceA
 	return p
 }
 
+func (p *VmsServiceAddFromConfigurationRequest) Seal(seal bool) *VmsServiceAddFromConfigurationRequest {
+	p.seal = &seal
+	return p
+}
+
 func (p *VmsServiceAddFromConfigurationRequest) Vm(vm *Vm) *VmsServiceAddFromConfigurationRequest {
 	p.vm = vm
 	return p
@@ -100934,6 +103254,9 @@ func (p *VmsServiceAddFromConfigurationRequest) Send() (*VmsServiceAddFromConfig
 	}
 	if p.filter != nil {
 		actionBuilder.Filter(*p.filter)
+	}
+	if p.seal != nil {
+		actionBuilder.Seal(*p.seal)
 	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -101048,6 +103371,7 @@ type VmsServiceAddFromScratchRequest struct {
 	clone             *bool
 	clonePermissions  *bool
 	filter            *bool
+	seal              *bool
 	vm                *Vm
 }
 
@@ -101087,6 +103411,11 @@ func (p *VmsServiceAddFromScratchRequest) Filter(filter bool) *VmsServiceAddFrom
 	return p
 }
 
+func (p *VmsServiceAddFromScratchRequest) Seal(seal bool) *VmsServiceAddFromScratchRequest {
+	p.seal = &seal
+	return p
+}
+
 func (p *VmsServiceAddFromScratchRequest) Vm(vm *Vm) *VmsServiceAddFromScratchRequest {
 	p.vm = vm
 	return p
@@ -101106,6 +103435,9 @@ func (p *VmsServiceAddFromScratchRequest) Send() (*VmsServiceAddFromScratchRespo
 	}
 	if p.filter != nil {
 		actionBuilder.Filter(*p.filter)
+	}
+	if p.seal != nil {
+		actionBuilder.Seal(*p.seal)
 	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -101220,6 +103552,7 @@ type VmsServiceAddFromSnapshotRequest struct {
 	clone             *bool
 	clonePermissions  *bool
 	filter            *bool
+	seal              *bool
 	vm                *Vm
 }
 
@@ -101259,6 +103592,11 @@ func (p *VmsServiceAddFromSnapshotRequest) Filter(filter bool) *VmsServiceAddFro
 	return p
 }
 
+func (p *VmsServiceAddFromSnapshotRequest) Seal(seal bool) *VmsServiceAddFromSnapshotRequest {
+	p.seal = &seal
+	return p
+}
+
 func (p *VmsServiceAddFromSnapshotRequest) Vm(vm *Vm) *VmsServiceAddFromSnapshotRequest {
 	p.vm = vm
 	return p
@@ -101278,6 +103616,9 @@ func (p *VmsServiceAddFromSnapshotRequest) Send() (*VmsServiceAddFromSnapshotRes
 	}
 	if p.filter != nil {
 		actionBuilder.Filter(*p.filter)
+	}
+	if p.seal != nil {
+		actionBuilder.Seal(*p.seal)
 	}
 	actionBuilder.Vm(p.vm)
 	action, err := actionBuilder.Build()
@@ -102061,7 +104402,7 @@ func NewVnicProfilesService(connection *Connection, path string) *VnicProfilesSe
 // ----
 // Please note that there is a default network filter to each VNIC profile.
 // For more details of how the default network filter is calculated please refer to
-// the documentation in <<services/network_filters,NetworkFilters>>.
+// the documentation in xref:services-network_filters[NetworkFilters].
 // NOTE: The automatically created vNIC profile for the external network will be without network filter.
 // The output of creating a new VNIC profile depends in the  body  arguments that were given.
 // In case no network filter was given, the default network filter will be configured. For example:
@@ -102234,7 +104575,7 @@ func (p *VnicProfilesServiceAddRequest) MustSend() *VnicProfilesServiceAddRespon
 // ----
 // Please note that there is a default network filter to each VNIC profile.
 // For more details of how the default network filter is calculated please refer to
-// the documentation in <<services/network_filters,NetworkFilters>>.
+// the documentation in xref:services-network_filters[NetworkFilters].
 // NOTE: The automatically created vNIC profile for the external network will be without network filter.
 // The output of creating a new VNIC profile depends in the  body  arguments that were given.
 // In case no network filter was given, the default network filter will be configured. For example:
@@ -102314,7 +104655,7 @@ func (p *VnicProfilesServiceAddResponse) MustProfile() *VnicProfile {
 // ----
 // Please note that there is a default network filter to each VNIC profile.
 // For more details of how the default network filter is calculated please refer to
-// the documentation in <<services/network_filters,NetworkFilters>>.
+// the documentation in xref:services-network_filters[NetworkFilters].
 // NOTE: The automatically created vNIC profile for the external network will be without network filter.
 // The output of creating a new VNIC profile depends in the  body  arguments that were given.
 // In case no network filter was given, the default network filter will be configured. For example:
@@ -104577,7 +106918,7 @@ func (op *DomainsService) String() string {
 }
 
 // Manages a group of users. Use this service to either get groups details or remove groups. In order
-// to add new groups please use <<services/groups, service>> that manages the collection of groups.
+// to add new groups please use xref:services-groups[service] that manages the collection of groups.
 type GroupService struct {
 	BaseService
 }
@@ -105667,6 +108008,9 @@ func (p *SshPublicKeyService) Remove() *SshPublicKeyServiceRemoveRequest {
 	return &SshPublicKeyServiceRemoveRequest{SshPublicKeyService: p}
 }
 
+// Replaces the key with a new resource.
+// IMPORTANT: Since version 4.4.8 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Instead please use DELETE followed by xref:services-ssh_public_keys-methods-add[add operation].
 type SshPublicKeyServiceUpdateRequest struct {
 	SshPublicKeyService *SshPublicKeyService
 	header              map[string]string
@@ -105788,6 +108132,9 @@ func (p *SshPublicKeyServiceUpdateRequest) MustSend() *SshPublicKeyServiceUpdate
 	}
 }
 
+// Replaces the key with a new resource.
+// IMPORTANT: Since version 4.4.8 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Instead please use DELETE followed by xref:services-ssh_public_keys-methods-add[add operation].
 type SshPublicKeyServiceUpdateResponse struct {
 	key *SshPublicKey
 }
@@ -105806,6 +108153,9 @@ func (p *SshPublicKeyServiceUpdateResponse) MustKey() *SshPublicKey {
 	return p.key
 }
 
+// Replaces the key with a new resource.
+// IMPORTANT: Since version 4.4.8 of the engine this operation is deprecated, and preserved only for backwards
+// compatibility. It will be removed in the future. Instead please use DELETE followed by xref:services-ssh_public_keys-methods-add[add operation].
 func (p *SshPublicKeyService) Update() *SshPublicKeyServiceUpdateRequest {
 	return &SshPublicKeyServiceUpdateRequest{SshPublicKeyService: p}
 }
@@ -106947,7 +109297,7 @@ func (op *UserOptionsService) String() string {
 // A service to manage a user in the system.
 // Use this service to either get users details or remove users.
 // In order to add new users please use
-// <<services/users>>.
+// xref:services-users[users].
 type UserService struct {
 	BaseService
 }
@@ -107320,7 +109670,7 @@ func (p *UserService) Remove() *UserServiceRemoveRequest {
 // </user>
 // ----
 // IMPORTANT: Since version 4.4.5 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. Please use the <<services/user_option, options>>
+// compatibility. It will be removed in the future. Please use the xref:services-user_option[options]
 // endpoint instead.
 type UserServiceUpdateRequest struct {
 	UserService *UserService
@@ -107455,7 +109805,7 @@ func (p *UserServiceUpdateRequest) MustSend() *UserServiceUpdateResponse {
 // </user>
 // ----
 // IMPORTANT: Since version 4.4.5 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. Please use the <<services/user_option, options>>
+// compatibility. It will be removed in the future. Please use the xref:services-user_option[options]
 // endpoint instead.
 type UserServiceUpdateResponse struct {
 	user *User
@@ -107497,7 +109847,7 @@ func (p *UserServiceUpdateResponse) MustUser() *User {
 // </user>
 // ----
 // IMPORTANT: Since version 4.4.5 of the engine this operation is deprecated, and preserved only for backwards
-// compatibility. It will be removed in the future. Please use the <<services/user_option, options>>
+// compatibility. It will be removed in the future. Please use the xref:services-user_option[options]
 // endpoint instead.
 func (p *UserService) Update() *UserServiceUpdateRequest {
 	return &UserServiceUpdateRequest{UserService: p}
@@ -107618,7 +109968,7 @@ func NewUsersService(connection *Connection, path string) *UsersService {
 // </user>
 // ----
 // In case you are working with Active Directory you have to pass user principal name (UPN) as `username`, followed
-// by authorization provider name. Due to https://bugzilla.redhat.com/1147900[bug 1147900] you need to provide
+// by authorization provider name. Due to link:https://bugzilla.redhat.com/1147900[bug 1147900] you need to provide
 // also `principal` parameter set to UPN of the user.
 // For example, to add the user with UPN `myuser@mysubdomain.mydomain.com` from the `myextension-authz`
 // authorization provider send a request body like this:
@@ -107765,7 +110115,7 @@ func (p *UsersServiceAddRequest) MustSend() *UsersServiceAddResponse {
 // </user>
 // ----
 // In case you are working with Active Directory you have to pass user principal name (UPN) as `username`, followed
-// by authorization provider name. Due to https://bugzilla.redhat.com/1147900[bug 1147900] you need to provide
+// by authorization provider name. Due to link:https://bugzilla.redhat.com/1147900[bug 1147900] you need to provide
 // also `principal` parameter set to UPN of the user.
 // For example, to add the user with UPN `myuser@mysubdomain.mydomain.com` from the `myextension-authz`
 // authorization provider send a request body like this:
@@ -107819,7 +110169,7 @@ func (p *UsersServiceAddResponse) MustUser() *User {
 // </user>
 // ----
 // In case you are working with Active Directory you have to pass user principal name (UPN) as `username`, followed
-// by authorization provider name. Due to https://bugzilla.redhat.com/1147900[bug 1147900] you need to provide
+// by authorization provider name. Due to link:https://bugzilla.redhat.com/1147900[bug 1147900] you need to provide
 // also `principal` parameter set to UPN of the user.
 // For example, to add the user with UPN `myuser@mysubdomain.mydomain.com` from the `myextension-authz`
 // authorization provider send a request body like this:
@@ -109768,8 +112118,8 @@ func (op *ExternalHostGroupsService) String() string {
 }
 
 // Represents an external host provider, such as Foreman or Satellite.
-// See https://www.theforeman.org/ for more details on Foreman.
-// See https://access.redhat.com/products/red-hat-satellite for more details on Red Hat Satellite.
+// See link:https://www.theforeman.org/[Foreman documentation] for details.
+// See link:https://access.redhat.com/products/red-hat-satellite[Satellite documentation] for details.
 type ExternalHostProviderService struct {
 	BaseService
 }
@@ -111982,7 +114332,7 @@ func (p *GlusterBrickService) Get() *GlusterBrickServiceGetRequest {
 // Removes a brick.
 // Removes a brick from the underlying gluster volume and deletes entries from database. This can be used only when
 // removing a single brick without data migration. To remove multiple bricks and with data migration, use
-// <<services/gluster_bricks/methods/migrate, migrate>> instead.
+// xref:services-gluster_bricks-methods-migrate[migrate] instead.
 // For example, to delete brick `234` from gluster volume `123`, send a request like this:
 // [source]
 // ----
@@ -112094,7 +114444,7 @@ func (p *GlusterBrickServiceRemoveRequest) MustSend() *GlusterBrickServiceRemove
 // Removes a brick.
 // Removes a brick from the underlying gluster volume and deletes entries from database. This can be used only when
 // removing a single brick without data migration. To remove multiple bricks and with data migration, use
-// <<services/gluster_bricks/methods/migrate, migrate>> instead.
+// xref:services-gluster_bricks-methods-migrate[migrate] instead.
 // For example, to delete brick `234` from gluster volume `123`, send a request like this:
 // [source]
 // ----
@@ -112106,7 +114456,7 @@ type GlusterBrickServiceRemoveResponse struct {
 // Removes a brick.
 // Removes a brick from the underlying gluster volume and deletes entries from database. This can be used only when
 // removing a single brick without data migration. To remove multiple bricks and with data migration, use
-// <<services/gluster_bricks/methods/migrate, migrate>> instead.
+// xref:services-gluster_bricks-methods-migrate[migrate] instead.
 // For example, to delete brick `234` from gluster volume `123`, send a request like this:
 // [source]
 // ----
@@ -112118,8 +114468,8 @@ func (p *GlusterBrickService) Remove() *GlusterBrickServiceRemoveRequest {
 
 // Replaces this brick with a new one.
 // IMPORTANT: This operation has been deprecated since version 3.5 of the engine and will be removed in the future.
-// Use <<services/gluster_bricks/methods/add, add brick(s)>> and
-// <<services/gluster_bricks/methods/migrate, migrate brick(s)>> instead.
+// Use xref:services-gluster_bricks-methods-add[add brick(s)] and
+// xref:services-gluster_bricks-methods-migrate[migrate brick(s)] instead.
 type GlusterBrickServiceReplaceRequest struct {
 	GlusterBrickService *GlusterBrickService
 	header              map[string]string
@@ -112243,15 +114593,15 @@ func (p *GlusterBrickServiceReplaceRequest) MustSend() *GlusterBrickServiceRepla
 
 // Replaces this brick with a new one.
 // IMPORTANT: This operation has been deprecated since version 3.5 of the engine and will be removed in the future.
-// Use <<services/gluster_bricks/methods/add, add brick(s)>> and
-// <<services/gluster_bricks/methods/migrate, migrate brick(s)>> instead.
+// Use xref:services-gluster_bricks-methods-add[add brick(s)] and
+// xref:services-gluster_bricks-methods-migrate[migrate brick(s)] instead.
 type GlusterBrickServiceReplaceResponse struct {
 }
 
 // Replaces this brick with a new one.
 // IMPORTANT: This operation has been deprecated since version 3.5 of the engine and will be removed in the future.
-// Use <<services/gluster_bricks/methods/add, add brick(s)>> and
-// <<services/gluster_bricks/methods/migrate, migrate brick(s)>> instead.
+// Use xref:services-gluster_bricks-methods-add[add brick(s)] and
+// xref:services-gluster_bricks-methods-migrate[migrate brick(s)] instead.
 func (p *GlusterBrickService) Replace() *GlusterBrickServiceReplaceRequest {
 	return &GlusterBrickServiceReplaceRequest{GlusterBrickService: p}
 }
@@ -112938,8 +115288,8 @@ func (p *GlusterBricksService) List() *GlusterBricksServiceListRequest {
 // Start migration of data prior to removing bricks.
 // Removing bricks is a two-step process, where the data on bricks to be removed, is first migrated to remaining
 // bricks. Once migration is completed the removal of bricks is confirmed via the API
-// <<services/gluster_bricks/methods/remove, remove>>. If at any point, the action needs to be cancelled
-// <<services/gluster_bricks/methods/stop_migrate, stopmigrate>> has to be called.
+// xref:services-gluster_bricks-methods-remove[remove]. If at any point, the action needs to be cancelled
+// xref:services-gluster_bricks-methods-stop_migrate[stopmigrate] has to be called.
 // For instance, to delete a brick from a gluster volume with id `123`, send a request:
 // [source]
 // ----
@@ -112959,7 +115309,7 @@ func (p *GlusterBricksService) List() *GlusterBricksServiceListRequest {
 // </action>
 // ----
 // The migration process can be tracked from the job id returned from the API using
-// <<services/job/methods/get, job>> and steps in job using <<services/step/methods/get, step>>
+// xref:services-job-methods-get[job] and steps in job using xref:services-step-methods-get[step]
 type GlusterBricksServiceMigrateRequest struct {
 	GlusterBricksService *GlusterBricksService
 	header               map[string]string
@@ -113090,8 +115440,8 @@ func (p *GlusterBricksServiceMigrateRequest) MustSend() *GlusterBricksServiceMig
 // Start migration of data prior to removing bricks.
 // Removing bricks is a two-step process, where the data on bricks to be removed, is first migrated to remaining
 // bricks. Once migration is completed the removal of bricks is confirmed via the API
-// <<services/gluster_bricks/methods/remove, remove>>. If at any point, the action needs to be cancelled
-// <<services/gluster_bricks/methods/stop_migrate, stopmigrate>> has to be called.
+// xref:services-gluster_bricks-methods-remove[remove]. If at any point, the action needs to be cancelled
+// xref:services-gluster_bricks-methods-stop_migrate[stopmigrate] has to be called.
 // For instance, to delete a brick from a gluster volume with id `123`, send a request:
 // [source]
 // ----
@@ -113111,15 +115461,15 @@ func (p *GlusterBricksServiceMigrateRequest) MustSend() *GlusterBricksServiceMig
 // </action>
 // ----
 // The migration process can be tracked from the job id returned from the API using
-// <<services/job/methods/get, job>> and steps in job using <<services/step/methods/get, step>>
+// xref:services-job-methods-get[job] and steps in job using xref:services-step-methods-get[step]
 type GlusterBricksServiceMigrateResponse struct {
 }
 
 // Start migration of data prior to removing bricks.
 // Removing bricks is a two-step process, where the data on bricks to be removed, is first migrated to remaining
 // bricks. Once migration is completed the removal of bricks is confirmed via the API
-// <<services/gluster_bricks/methods/remove, remove>>. If at any point, the action needs to be cancelled
-// <<services/gluster_bricks/methods/stop_migrate, stopmigrate>> has to be called.
+// xref:services-gluster_bricks-methods-remove[remove]. If at any point, the action needs to be cancelled
+// xref:services-gluster_bricks-methods-stop_migrate[stopmigrate] has to be called.
 // For instance, to delete a brick from a gluster volume with id `123`, send a request:
 // [source]
 // ----
@@ -113139,14 +115489,14 @@ type GlusterBricksServiceMigrateResponse struct {
 // </action>
 // ----
 // The migration process can be tracked from the job id returned from the API using
-// <<services/job/methods/get, job>> and steps in job using <<services/step/methods/get, step>>
+// xref:services-job-methods-get[job] and steps in job using xref:services-step-methods-get[step]
 func (p *GlusterBricksService) Migrate() *GlusterBricksServiceMigrateRequest {
 	return &GlusterBricksServiceMigrateRequest{GlusterBricksService: p}
 }
 
 // Removes bricks from gluster volume.
 // The recommended way to remove bricks without data loss is to first migrate the data using
-// <<services/gluster_bricks/methods/stop_migrate, stopmigrate>> and then removing them. If migrate was not called on
+// xref:services-gluster_bricks-methods-stop_migrate[stopmigrate] and then removing them. If migrate was not called on
 // bricks prior to remove, the bricks are removed without data migration which may lead to data loss.
 // For example, to delete the bricks from gluster volume `123`, send a request like this:
 // [source]
@@ -113293,7 +115643,7 @@ func (p *GlusterBricksServiceRemoveRequest) MustSend() *GlusterBricksServiceRemo
 
 // Removes bricks from gluster volume.
 // The recommended way to remove bricks without data loss is to first migrate the data using
-// <<services/gluster_bricks/methods/stop_migrate, stopmigrate>> and then removing them. If migrate was not called on
+// xref:services-gluster_bricks-methods-stop_migrate[stopmigrate] and then removing them. If migrate was not called on
 // bricks prior to remove, the bricks are removed without data migration which may lead to data loss.
 // For example, to delete the bricks from gluster volume `123`, send a request like this:
 // [source]
@@ -113316,7 +115666,7 @@ type GlusterBricksServiceRemoveResponse struct {
 
 // Removes bricks from gluster volume.
 // The recommended way to remove bricks without data loss is to first migrate the data using
-// <<services/gluster_bricks/methods/stop_migrate, stopmigrate>> and then removing them. If migrate was not called on
+// xref:services-gluster_bricks-methods-stop_migrate[stopmigrate] and then removing them. If migrate was not called on
 // bricks prior to remove, the bricks are removed without data migration which may lead to data loss.
 // For example, to delete the bricks from gluster volume `123`, send a request like this:
 // [source]
@@ -120525,6 +122875,7 @@ func (op *OpenstackSubnetsService) String() string {
 	return fmt.Sprintf("OpenstackSubnetsService:%s", op.path)
 }
 
+// Openstack Volume (Cinder) integration has been replaced by Managed Block Storage.
 type OpenstackVolumeAuthenticationKeyService struct {
 	BaseService
 }
@@ -120924,6 +123275,7 @@ func (op *OpenstackVolumeAuthenticationKeyService) String() string {
 	return fmt.Sprintf("OpenstackVolumeAuthenticationKeyService:%s", op.path)
 }
 
+// Openstack Volume (Cinder) integration has been replaced by Managed Block Storage.
 type OpenstackVolumeAuthenticationKeysService struct {
 	BaseService
 }
@@ -121237,6 +123589,7 @@ func (op *OpenstackVolumeAuthenticationKeysService) String() string {
 	return fmt.Sprintf("OpenstackVolumeAuthenticationKeysService:%s", op.path)
 }
 
+// Openstack Volume (Cinder) integration has been replaced by Managed Block Storage.
 type OpenstackVolumeProviderService struct {
 	BaseService
 }
@@ -121952,6 +124305,7 @@ func (op *OpenstackVolumeProviderService) String() string {
 	return fmt.Sprintf("OpenstackVolumeProviderService:%s", op.path)
 }
 
+// Openstack Volume (Cinder) integration has been replaced by Managed Block Storage.
 type OpenstackVolumeProvidersService struct {
 	BaseService
 }
@@ -122341,6 +124695,7 @@ func (op *OpenstackVolumeProvidersService) String() string {
 	return fmt.Sprintf("OpenstackVolumeProvidersService:%s", op.path)
 }
 
+// Openstack Volume (Cinder) integration has been replaced by Managed Block Storage.
 type OpenstackVolumeTypeService struct {
 	BaseService
 }
@@ -122494,6 +124849,7 @@ func (op *OpenstackVolumeTypeService) String() string {
 	return fmt.Sprintf("OpenstackVolumeTypeService:%s", op.path)
 }
 
+// Openstack Volume (Cinder) integration has been replaced by Managed Block Storage.
 type OpenstackVolumeTypesService struct {
 	BaseService
 }

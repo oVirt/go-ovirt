@@ -19,7 +19,7 @@ package examples
 
 import (
 	"fmt"
-	ovirtsdk4 "github.com/ovirt/go-ovirt"
+	ovirtsdk4 "github.com/ovirt/go-ovirt/v4"
 	"time"
 )
 

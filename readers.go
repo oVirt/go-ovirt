@@ -62,6 +62,12 @@ func XMLAffinityGroupReadOne(reader *XMLReader, start *xml.StartElement, expecte
 		switch t := t.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
+			case "broken":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Broken(v)
 			case "cluster":
 				v, err := XMLClusterReadOne(reader, &t, "cluster")
 				if err != nil {
@@ -1662,6 +1668,12 @@ func XMLBackupReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.Host(v)
+			case "modification_date":
+				v, err := reader.ReadTime(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.ModificationDate(v)
 			case "name":
 				v, err := reader.ReadString(&t)
 				if err != nil {
@@ -1675,6 +1687,12 @@ func XMLBackupReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.Phase(v)
+			case "snapshot":
+				v, err := XMLSnapshotReadOne(reader, &t, "snapshot")
+				if err != nil {
+					return nil, err
+				}
+				builder.Snapshot(v)
 			case "to_checkpoint_id":
 				v, err := reader.ReadString(&t)
 				if err != nil {
@@ -3751,6 +3769,24 @@ func XMLClusterReadOne(reader *XMLReader, start *xml.StartElement, expectedTag s
 					return nil, err
 				}
 				builder.TunnelMigration(v)
+			case "upgrade_correlation_id":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.UpgradeCorrelationId(v)
+			case "upgrade_in_progress":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.UpgradeInProgress(v)
+			case "upgrade_percent_complete":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.UpgradePercentComplete(v)
 			case "version":
 				v, err := XMLVersionReadOne(reader, &t, "version")
 				if err != nil {
@@ -7068,6 +7104,12 @@ func XMLDisplayReadOne(reader *XMLReader, start *xml.StartElement, expectedTag s
 					return nil, err
 				}
 				builder.DisconnectAction(v)
+			case "disconnect_action_delay":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.DisconnectActionDelay(v)
 			case "file_transfer_enabled":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -7590,6 +7632,128 @@ func XMLDomainReadMany(reader *XMLReader, start *xml.StartElement) (*DomainSlice
 			switch t.Name.Local {
 			case "domain":
 				one, err := XMLDomainReadOne(reader, &t, "domain")
+				if err != nil {
+					return nil, err
+				}
+				if one != nil {
+					result.slice = append(result.slice, one)
+				}
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return &result, nil
+}
+
+func XMLDynamicCpuReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string) (*DynamicCpu, error) {
+	builder := NewDynamicCpuBuilder()
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	if expectedTag == "" {
+		expectedTag = "dynamic_cpu"
+	}
+	if start.Name.Local != expectedTag {
+		return nil, XMLTagNotMatchError{start.Name.Local, expectedTag}
+	}
+	var links []Link
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "cpu_tune":
+				v, err := XMLCpuTuneReadOne(reader, &t, "cpu_tune")
+				if err != nil {
+					return nil, err
+				}
+				builder.CpuTune(v)
+			case "topology":
+				v, err := XMLCpuTopologyReadOne(reader, &t, "topology")
+				if err != nil {
+					return nil, err
+				}
+				builder.Topology(v)
+			case "link":
+				var rel, href string
+				for _, attr := range t.Attr {
+					name := attr.Name.Local
+					value := attr.Value
+					switch name {
+					case "href":
+						href = value
+					case "rel":
+						rel = value
+					}
+				}
+				if rel != "" && href != "" {
+					links = append(links, Link{&href, &rel})
+				}
+				// <link> just has attributes, so must skip manually
+				reader.Skip()
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	one, err := builder.Build()
+	if err != nil {
+		return nil, err
+	}
+	for _, link := range links {
+		switch *link.rel {
+		} // end of switch
+	} // end of for-links
+	return one, nil
+}
+
+func XMLDynamicCpuReadMany(reader *XMLReader, start *xml.StartElement) (*DynamicCpuSlice, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var result DynamicCpuSlice
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "dynamic_cpu":
+				one, err := XMLDynamicCpuReadOne(reader, &t, "dynamic_cpu")
 				if err != nil {
 					return nil, err
 				}
@@ -9486,6 +9650,12 @@ func XMLExternalTemplateImportReadOne(reader *XMLReader, start *xml.StartElement
 		switch t := t.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
+			case "clone":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Clone(v)
 			case "cluster":
 				v, err := XMLClusterReadOne(reader, &t, "cluster")
 				if err != nil {
@@ -13213,6 +13383,12 @@ func XMLHostReadOne(reader *XMLReader, start *xml.StartElement, expectedTag stri
 					return nil, err
 				}
 				builder.Cpu(v)
+			case "cpu_units":
+				v, err := XMLHostCpuUnitReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.CpuUnits(v)
 			case "description":
 				v, err := reader.ReadString(&t)
 				if err != nil {
@@ -13365,6 +13541,12 @@ func XMLHostReadOne(reader *XMLReader, start *xml.StartElement, expectedTag stri
 					return nil, err
 				}
 				builder.OverrideIptables(v)
+			case "ovn_configured":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.OvnConfigured(v)
 			case "permissions":
 				v, err := XMLPermissionReadMany(reader, &t)
 				if err != nil {
@@ -13541,6 +13723,11 @@ func XMLHostReadOne(reader *XMLReader, start *xml.StartElement, expectedTag stri
 				one.agents = new(AgentSlice)
 			}
 			one.agents.href = link.href
+		case "cpuunits":
+			if one.cpuUnits == nil {
+				one.cpuUnits = new(HostCpuUnitSlice)
+			}
+			one.cpuUnits.href = link.href
 		case "devices":
 			if one.devices == nil {
 				one.devices = new(HostDeviceSlice)
@@ -13638,6 +13825,180 @@ func XMLHostReadMany(reader *XMLReader, start *xml.StartElement) (*HostSlice, er
 			switch t.Name.Local {
 			case "host":
 				one, err := XMLHostReadOne(reader, &t, "host")
+				if err != nil {
+					return nil, err
+				}
+				if one != nil {
+					result.slice = append(result.slice, one)
+				}
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return &result, nil
+}
+
+func XMLHostCpuUnitReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string) (*HostCpuUnit, error) {
+	builder := NewHostCpuUnitBuilder()
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	if expectedTag == "" {
+		expectedTag = "host_cpu_unit"
+	}
+	if start.Name.Local != expectedTag {
+		return nil, XMLTagNotMatchError{start.Name.Local, expectedTag}
+	}
+	// Process the attributes
+	for _, attr := range start.Attr {
+		name := attr.Name.Local
+		value := attr.Value
+		switch name {
+		case "id":
+			builder.Id(value)
+		case "href":
+			builder.Href(value)
+		}
+	}
+	var links []Link
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "comment":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Comment(v)
+			case "core_id":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.CoreId(v)
+			case "cpu_id":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.CpuId(v)
+			case "description":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Description(v)
+			case "name":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Name(v)
+			case "runs_vdsm":
+				v, err := reader.ReadBool(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.RunsVdsm(v)
+			case "socket_id":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.SocketId(v)
+			case "vms":
+				v, err := XMLVmReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Vms(v)
+			case "link":
+				var rel, href string
+				for _, attr := range t.Attr {
+					name := attr.Name.Local
+					value := attr.Value
+					switch name {
+					case "href":
+						href = value
+					case "rel":
+						rel = value
+					}
+				}
+				if rel != "" && href != "" {
+					links = append(links, Link{&href, &rel})
+				}
+				// <link> just has attributes, so must skip manually
+				reader.Skip()
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	one, err := builder.Build()
+	if err != nil {
+		return nil, err
+	}
+	for _, link := range links {
+		switch *link.rel {
+		case "vms":
+			if one.vms == nil {
+				one.vms = new(VmSlice)
+			}
+			one.vms.href = link.href
+		} // end of switch
+	} // end of for-links
+	return one, nil
+}
+
+func XMLHostCpuUnitReadMany(reader *XMLReader, start *xml.StartElement) (*HostCpuUnitSlice, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var result HostCpuUnitSlice
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "host_cpu_unit":
+				one, err := XMLHostCpuUnitReadOne(reader, &t, "host_cpu_unit")
 				if err != nil {
 					return nil, err
 				}
@@ -15767,6 +16128,13 @@ func XMLInstanceTypeReadOne(reader *XMLReader, start *xml.StartElement, expected
 		switch t := t.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
+			case "auto_pinning_policy":
+				vp, err := XMLAutoPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.AutoPinningPolicy(v)
 			case "bios":
 				v, err := XMLBiosReadOne(reader, &t, "bios")
 				if err != nil {
@@ -15803,6 +16171,13 @@ func XMLInstanceTypeReadOne(reader *XMLReader, start *xml.StartElement, expected
 					return nil, err
 				}
 				builder.Cpu(v)
+			case "cpu_pinning_policy":
+				vp, err := XMLCpuPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.CpuPinningPolicy(v)
 			case "cpu_profile":
 				v, err := XMLCpuProfileReadOne(reader, &t, "cpu_profile")
 				if err != nil {
@@ -15911,6 +16286,12 @@ func XMLInstanceTypeReadOne(reader *XMLReader, start *xml.StartElement, expected
 					return nil, err
 				}
 				builder.Lease(v)
+			case "mediated_devices":
+				v, err := XMLVmMediatedDeviceReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.MediatedDevices(v)
 			case "memory":
 				v, err := reader.ReadInt64(&t)
 				if err != nil {
@@ -16094,6 +16475,12 @@ func XMLInstanceTypeReadOne(reader *XMLReader, start *xml.StartElement, expected
 					return nil, err
 				}
 				builder.VirtioScsi(v)
+			case "virtio_scsi_multi_queues":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.VirtioScsiMultiQueues(v)
 			case "virtio_scsi_multi_queues_enabled":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -16157,6 +16544,11 @@ func XMLInstanceTypeReadOne(reader *XMLReader, start *xml.StartElement, expected
 				one.graphicsConsoles = new(GraphicsConsoleSlice)
 			}
 			one.graphicsConsoles.href = link.href
+		case "mediateddevices":
+			if one.mediatedDevices == nil {
+				one.mediatedDevices = new(VmMediatedDeviceSlice)
+			}
+			one.mediatedDevices.href = link.href
 		case "nics":
 			if one.nics == nil {
 				one.nics = new(NicSlice)
@@ -18929,6 +19321,12 @@ func XMLMigrationOptionsReadOne(reader *XMLReader, start *xml.StartElement, expe
 					return nil, err
 				}
 				builder.Compressed(v)
+			case "custom_parallel_migrations":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.CustomParallelMigrations(v)
 			case "encrypted":
 				vp, err := XMLInheritableBooleanReadOne(reader, &t)
 				v := *vp
@@ -18936,6 +19334,13 @@ func XMLMigrationOptionsReadOne(reader *XMLReader, start *xml.StartElement, expe
 					return nil, err
 				}
 				builder.Encrypted(v)
+			case "parallel_migrations_policy":
+				vp, err := XMLParallelMigrationsPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.ParallelMigrationsPolicy(v)
 			case "policy":
 				v, err := XMLMigrationPolicyReadOne(reader, &t, "policy")
 				if err != nil {
@@ -22973,6 +23378,13 @@ func XMLOperatingSystemInfoReadOne(reader *XMLReader, start *xml.StartElement, e
 					return nil, err
 				}
 				builder.SmallIcon(v)
+			case "tpm_support":
+				vp, err := XMLTpmSupportReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.TpmSupport(v)
 			case "link":
 				var rel, href string
 				for _, attr := range t.Attr {
@@ -28500,6 +28912,13 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.Applications(v)
+			case "auto_pinning_policy":
+				vp, err := XMLAutoPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.AutoPinningPolicy(v)
 			case "bios":
 				v, err := XMLBiosReadOne(reader, &t, "bios")
 				if err != nil {
@@ -28536,6 +28955,13 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.Cpu(v)
+			case "cpu_pinning_policy":
+				vp, err := XMLCpuPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.CpuPinningPolicy(v)
 			case "cpu_profile":
 				v, err := XMLCpuProfileReadOne(reader, &t, "cpu_profile")
 				if err != nil {
@@ -28620,6 +29046,12 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.Domain(v)
+			case "dynamic_cpu":
+				v, err := XMLDynamicCpuReadOne(reader, &t, "dynamic_cpu")
+				if err != nil {
+					return nil, err
+				}
+				builder.DynamicCpu(v)
 			case "external_host_provider":
 				v, err := XMLExternalHostProviderReadOne(reader, &t, "external_host_provider")
 				if err != nil {
@@ -28716,6 +29148,12 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.Lease(v)
+			case "mediated_devices":
+				v, err := XMLVmMediatedDeviceReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.MediatedDevices(v)
 			case "memory":
 				v, err := reader.ReadInt64(&t)
 				if err != nil {
@@ -29010,6 +29448,12 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.VirtioScsi(v)
+			case "virtio_scsi_multi_queues":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.VirtioScsiMultiQueues(v)
 			case "virtio_scsi_multi_queues_enabled":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -29109,6 +29553,11 @@ func XMLSnapshotReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 				one.katelloErrata = new(KatelloErratumSlice)
 			}
 			one.katelloErrata.href = link.href
+		case "mediateddevices":
+			if one.mediatedDevices == nil {
+				one.mediatedDevices = new(VmMediatedDeviceSlice)
+			}
+			one.mediatedDevices.href = link.href
 		case "nics":
 			if one.nics == nil {
 				one.nics = new(NicSlice)
@@ -31691,6 +32140,13 @@ func XMLTemplateReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 		switch t := t.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
+			case "auto_pinning_policy":
+				vp, err := XMLAutoPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.AutoPinningPolicy(v)
 			case "bios":
 				v, err := XMLBiosReadOne(reader, &t, "bios")
 				if err != nil {
@@ -31727,6 +32183,13 @@ func XMLTemplateReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.Cpu(v)
+			case "cpu_pinning_policy":
+				vp, err := XMLCpuPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.CpuPinningPolicy(v)
 			case "cpu_profile":
 				v, err := XMLCpuProfileReadOne(reader, &t, "cpu_profile")
 				if err != nil {
@@ -31835,6 +32298,12 @@ func XMLTemplateReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.Lease(v)
+			case "mediated_devices":
+				v, err := XMLVmMediatedDeviceReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.MediatedDevices(v)
 			case "memory":
 				v, err := reader.ReadInt64(&t)
 				if err != nil {
@@ -32018,6 +32487,12 @@ func XMLTemplateReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 					return nil, err
 				}
 				builder.VirtioScsi(v)
+			case "virtio_scsi_multi_queues":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.VirtioScsiMultiQueues(v)
 			case "virtio_scsi_multi_queues_enabled":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -32081,6 +32556,11 @@ func XMLTemplateReadOne(reader *XMLReader, start *xml.StartElement, expectedTag 
 				one.graphicsConsoles = new(GraphicsConsoleSlice)
 			}
 			one.graphicsConsoles.href = link.href
+		case "mediateddevices":
+			if one.mediatedDevices == nil {
+				one.mediatedDevices = new(VmMediatedDeviceSlice)
+			}
+			one.mediatedDevices.href = link.href
 		case "nics":
 			if one.nics == nil {
 				one.nics = new(NicSlice)
@@ -34344,6 +34824,13 @@ func XMLVmReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string
 					return nil, err
 				}
 				builder.Applications(v)
+			case "auto_pinning_policy":
+				vp, err := XMLAutoPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.AutoPinningPolicy(v)
 			case "bios":
 				v, err := XMLBiosReadOne(reader, &t, "bios")
 				if err != nil {
@@ -34380,6 +34867,13 @@ func XMLVmReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string
 					return nil, err
 				}
 				builder.Cpu(v)
+			case "cpu_pinning_policy":
+				vp, err := XMLCpuPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.CpuPinningPolicy(v)
 			case "cpu_profile":
 				v, err := XMLCpuProfileReadOne(reader, &t, "cpu_profile")
 				if err != nil {
@@ -34452,6 +34946,12 @@ func XMLVmReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string
 					return nil, err
 				}
 				builder.Domain(v)
+			case "dynamic_cpu":
+				v, err := XMLDynamicCpuReadOne(reader, &t, "dynamic_cpu")
+				if err != nil {
+					return nil, err
+				}
+				builder.DynamicCpu(v)
 			case "external_host_provider":
 				v, err := XMLExternalHostProviderReadOne(reader, &t, "external_host_provider")
 				if err != nil {
@@ -34548,6 +35048,12 @@ func XMLVmReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string
 					return nil, err
 				}
 				builder.Lease(v)
+			case "mediated_devices":
+				v, err := XMLVmMediatedDeviceReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.MediatedDevices(v)
 			case "memory":
 				v, err := reader.ReadInt64(&t)
 				if err != nil {
@@ -34822,6 +35328,12 @@ func XMLVmReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string
 					return nil, err
 				}
 				builder.VirtioScsi(v)
+			case "virtio_scsi_multi_queues":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.VirtioScsiMultiQueues(v)
 			case "virtio_scsi_multi_queues_enabled":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -34910,6 +35422,11 @@ func XMLVmReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string
 				one.katelloErrata = new(KatelloErratumSlice)
 			}
 			one.katelloErrata.href = link.href
+		case "mediateddevices":
+			if one.mediatedDevices == nil {
+				one.mediatedDevices = new(VmMediatedDeviceSlice)
+			}
+			one.mediatedDevices.href = link.href
 		case "nics":
 			if one.nics == nil {
 				one.nics = new(NicSlice)
@@ -35046,6 +35563,13 @@ func XMLVmBaseReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 		switch t := t.(type) {
 		case xml.StartElement:
 			switch t.Name.Local {
+			case "auto_pinning_policy":
+				vp, err := XMLAutoPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.AutoPinningPolicy(v)
 			case "bios":
 				v, err := XMLBiosReadOne(reader, &t, "bios")
 				if err != nil {
@@ -35076,6 +35600,13 @@ func XMLVmBaseReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.Cpu(v)
+			case "cpu_pinning_policy":
+				vp, err := XMLCpuPinningPolicyReadOne(reader, &t)
+				v := *vp
+				if err != nil {
+					return nil, err
+				}
+				builder.CpuPinningPolicy(v)
 			case "cpu_profile":
 				v, err := XMLCpuProfileReadOne(reader, &t, "cpu_profile")
 				if err != nil {
@@ -35324,6 +35855,12 @@ func XMLVmBaseReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.VirtioScsi(v)
+			case "virtio_scsi_multi_queues":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.VirtioScsiMultiQueues(v)
 			case "virtio_scsi_multi_queues_enabled":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -35392,6 +35929,180 @@ func XMLVmBaseReadMany(reader *XMLReader, start *xml.StartElement) (*VmBaseSlice
 			switch t.Name.Local {
 			case "vm_base":
 				one, err := XMLVmBaseReadOne(reader, &t, "vm_base")
+				if err != nil {
+					return nil, err
+				}
+				if one != nil {
+					result.slice = append(result.slice, one)
+				}
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return &result, nil
+}
+
+func XMLVmMediatedDeviceReadOne(reader *XMLReader, start *xml.StartElement, expectedTag string) (*VmMediatedDevice, error) {
+	builder := NewVmMediatedDeviceBuilder()
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	if expectedTag == "" {
+		expectedTag = "vm_mediated_device"
+	}
+	if start.Name.Local != expectedTag {
+		return nil, XMLTagNotMatchError{start.Name.Local, expectedTag}
+	}
+	// Process the attributes
+	for _, attr := range start.Attr {
+		name := attr.Name.Local
+		value := attr.Value
+		switch name {
+		case "id":
+			builder.Id(value)
+		case "href":
+			builder.Href(value)
+		}
+	}
+	var links []Link
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "comment":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Comment(v)
+			case "description":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Description(v)
+			case "instance_type":
+				v, err := XMLInstanceTypeReadOne(reader, &t, "instance_type")
+				if err != nil {
+					return nil, err
+				}
+				builder.InstanceType(v)
+			case "name":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Name(v)
+			case "spec_params":
+				v, err := XMLPropertyReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.SpecParams(v)
+			case "template":
+				v, err := XMLTemplateReadOne(reader, &t, "template")
+				if err != nil {
+					return nil, err
+				}
+				builder.Template(v)
+			case "vm":
+				v, err := XMLVmReadOne(reader, &t, "vm")
+				if err != nil {
+					return nil, err
+				}
+				builder.Vm(v)
+			case "vms":
+				v, err := XMLVmReadMany(reader, &t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Vms(v)
+			case "link":
+				var rel, href string
+				for _, attr := range t.Attr {
+					name := attr.Name.Local
+					value := attr.Value
+					switch name {
+					case "href":
+						href = value
+					case "rel":
+						rel = value
+					}
+				}
+				if rel != "" && href != "" {
+					links = append(links, Link{&href, &rel})
+				}
+				// <link> just has attributes, so must skip manually
+				reader.Skip()
+			default:
+				reader.Skip()
+			}
+		case xml.EndElement:
+			depth--
+		}
+	}
+	one, err := builder.Build()
+	if err != nil {
+		return nil, err
+	}
+	for _, link := range links {
+		switch *link.rel {
+		case "vms":
+			if one.vms == nil {
+				one.vms = new(VmSlice)
+			}
+			one.vms.href = link.href
+		} // end of switch
+	} // end of for-links
+	return one, nil
+}
+
+func XMLVmMediatedDeviceReadMany(reader *XMLReader, start *xml.StartElement) (*VmMediatedDeviceSlice, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var result VmMediatedDeviceSlice
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			switch t.Name.Local {
+			case "vm_mediated_device":
+				one, err := XMLVmMediatedDeviceReadOne(reader, &t, "vm_mediated_device")
 				if err != nil {
 					return nil, err
 				}
@@ -37204,6 +37915,12 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.ConnectivityTimeout(v)
+			case "correlation_id":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.CorrelationId(v)
 			case "data_center":
 				v, err := XMLDataCenterReadOne(reader, &t, "data_center")
 				if err != nil {
@@ -37300,6 +38017,12 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.FixLayout(v)
+			case "follow":
+				v, err := reader.ReadString(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.Follow(v)
 			case "force":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -37613,6 +38336,12 @@ func XMLActionReadOne(reader *XMLReader, start *xml.StartElement, expectedTag st
 					return nil, err
 				}
 				builder.UpgradeAction(v)
+			case "upgrade_percent_complete":
+				v, err := reader.ReadInt64(&t)
+				if err != nil {
+					return nil, err
+				}
+				builder.UpgradePercentComplete(v)
 			case "use_cloud_init":
 				v, err := reader.ReadBool(&t)
 				if err != nil {
@@ -38628,6 +39357,62 @@ func XMLCpuModeReadMany(reader *XMLReader, start *xml.StartElement) ([]CpuMode, 
 				return nil, err
 			}
 			results = append(results, CpuMode(one))
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return results, nil
+}
+
+func XMLCpuPinningPolicyReadOne(reader *XMLReader, start *xml.StartElement) (*CpuPinningPolicy, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	s, err := reader.ReadString(start)
+	if err != nil {
+		return nil, err
+	}
+	result := new(CpuPinningPolicy)
+	*result = CpuPinningPolicy(s)
+	return result, nil
+}
+
+func XMLCpuPinningPolicyReadMany(reader *XMLReader, start *xml.StartElement) ([]CpuPinningPolicy, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var results []CpuPinningPolicy
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			one, err := reader.ReadString(&t)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, CpuPinningPolicy(one))
 		case xml.EndElement:
 			depth--
 		}
@@ -41603,6 +42388,62 @@ func XMLOsTypeReadMany(reader *XMLReader, start *xml.StartElement) ([]OsType, er
 	return results, nil
 }
 
+func XMLParallelMigrationsPolicyReadOne(reader *XMLReader, start *xml.StartElement) (*ParallelMigrationsPolicy, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	s, err := reader.ReadString(start)
+	if err != nil {
+		return nil, err
+	}
+	result := new(ParallelMigrationsPolicy)
+	*result = ParallelMigrationsPolicy(s)
+	return result, nil
+}
+
+func XMLParallelMigrationsPolicyReadMany(reader *XMLReader, start *xml.StartElement) ([]ParallelMigrationsPolicy, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var results []ParallelMigrationsPolicy
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			one, err := reader.ReadString(&t)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, ParallelMigrationsPolicy(one))
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return results, nil
+}
+
 func XMLPayloadEncodingReadOne(reader *XMLReader, start *xml.StartElement) (*PayloadEncoding, error) {
 	if start == nil {
 		st, err := reader.FindStartElement()
@@ -43220,6 +44061,62 @@ func XMLTemplateStatusReadMany(reader *XMLReader, start *xml.StartElement) ([]Te
 				return nil, err
 			}
 			results = append(results, TemplateStatus(one))
+		case xml.EndElement:
+			depth--
+		}
+	}
+	return results, nil
+}
+
+func XMLTpmSupportReadOne(reader *XMLReader, start *xml.StartElement) (*TpmSupport, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	s, err := reader.ReadString(start)
+	if err != nil {
+		return nil, err
+	}
+	result := new(TpmSupport)
+	*result = TpmSupport(s)
+	return result, nil
+}
+
+func XMLTpmSupportReadMany(reader *XMLReader, start *xml.StartElement) ([]TpmSupport, error) {
+	if start == nil {
+		st, err := reader.FindStartElement()
+		if err != nil {
+			if err == io.EOF {
+				return nil, nil
+			}
+			return nil, err
+		}
+		start = st
+	}
+	var results []TpmSupport
+	depth := 1
+	for depth > 0 {
+		t, err := reader.Next()
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		t = xml.CopyToken(t)
+		switch t := t.(type) {
+		case xml.StartElement:
+			one, err := reader.ReadString(&t)
+			if err != nil {
+				return nil, err
+			}
+			results = append(results, TpmSupport(one))
 		case xml.EndElement:
 			depth--
 		}

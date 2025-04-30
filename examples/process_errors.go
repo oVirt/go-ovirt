@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	ovirtsdk4 "github.com/ovirt/go-ovirt"
+	ovirtsdk4 "github.com/ovirt/go-ovirt/v4"
 )
 
 func processAuthError() {

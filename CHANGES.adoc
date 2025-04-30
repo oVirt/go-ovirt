@@ -2,6 +2,15 @@
 
 This document describes the relevant changes between releases of the SDK.
 
+== UNRELEASED
+
+Update to model 4.6.0 and metamodel 1.3.10
+
+New features:
+
+* Go module compatible import path
+  https://github.com/oVirt/ovirt-engine-sdk-go/pull/244[GitHub-244]
+
 
 == 4.4.3 / Apr 19 2021
 
@@ -247,7 +256,7 @@ The notable changes includes:
 
 * Update metamodel to 4.3.20
 
-* Change import path to `github.com/ovirt/go-ovirt`
+* Change import path to `github.com/ovirt/go-ovirt/v4`
 
 * Use https://developer.github.com/v3/guides/managing-deploy-keys/[Github deploy keys] as the credentials to deploy the auto-generated codes
 
