@@ -1,5 +1,7 @@
 //
-// Copyright (c) 2020 Douglas Schilling Landgraf <dougsland@redhat.com>
+// The oVirt Project - oVirt Engine Go SDK
+//
+// Copyright (c) oVirt Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,10 +23,11 @@ import (
 	"strconv"
 	"time"
 
-	ovirtsdk4 "github.com/ovirt/go-ovirt/v4"
-	"github.com/pkg/errors"
 	"os"
 	"strings"
+
+	ovirtsdk4 "github.com/ovirt/go-ovirt/v4"
+	"github.com/pkg/errors"
 )
 
 type engineVersion struct {

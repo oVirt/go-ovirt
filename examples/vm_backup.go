@@ -1,5 +1,7 @@
 //
-// Copyright (c) 2020 huihui <huihui.fu@cs2c.com.cn>.
+// The oVirt Project - oVirt Engine Go SDK
+//
+// Copyright (c) oVirt Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,9 +20,10 @@ package examples
 
 import (
 	"fmt"
-	uuid "github.com/satori/go.uuid"
 	"os"
 	"time"
+
+	uuid "github.com/satori/go.uuid"
 
 	ovirtsdk4 "github.com/ovirt/go-ovirt/v4"
 )

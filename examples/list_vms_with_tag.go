@@ -1,6 +1,10 @@
 //
-// Copyright (c) 2017 Joey <majunjiev@gmail.com>.
-// Copyright (c) 2020 Douglas Schilling Landgraf <dougsland@redhat.com>.
+// The oVirt Project - oVirt Engine Go SDK
+//
+// Copyright (c) oVirt Authors
+// The oVirt Project - oVirt Engine Go SDK
+//
+// Copyright (c) oVirt Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
