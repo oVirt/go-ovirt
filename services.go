@@ -6818,6 +6818,9 @@ func (p *AssignedPermissionsServiceAddClusterPermissionRequest) Send() (*Assigne
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -6954,6 +6957,9 @@ func (p *AssignedPermissionsServiceAddDataCenterPermissionRequest) Send() (*Assi
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -7090,6 +7096,9 @@ func (p *AssignedPermissionsServiceAddGroupLevelRequest) Send() (*AssignedPermis
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -7226,6 +7235,9 @@ func (p *AssignedPermissionsServiceAddHostPermissionRequest) Send() (*AssignedPe
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -7558,6 +7570,9 @@ func (p *AssignedPermissionsServiceAddStorageDomainPermissionRequest) Send() (*A
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -7694,6 +7709,9 @@ func (p *AssignedPermissionsServiceAddTemplatePermissionRequest) Send() (*Assign
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -7830,6 +7848,9 @@ func (p *AssignedPermissionsServiceAddUserLevelRequest) Send() (*AssignedPermiss
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -7966,6 +7987,9 @@ func (p *AssignedPermissionsServiceAddVmPermissionRequest) Send() (*AssignedPerm
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -8102,6 +8126,9 @@ func (p *AssignedPermissionsServiceAddVmPoolPermissionRequest) Send() (*Assigned
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -9771,6 +9798,9 @@ func (p *AttachedStorageDomainDiskServiceCopyRequest) Send() (*AttachedStorageDo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -9900,6 +9930,9 @@ func (p *AttachedStorageDomainDiskServiceExportRequest) Send() (*AttachedStorage
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -10180,6 +10213,9 @@ func (p *AttachedStorageDomainDiskServiceMoveRequest) Send() (*AttachedStorageDo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -10299,6 +10335,9 @@ func (p *AttachedStorageDomainDiskServiceRegisterRequest) Send() (*AttachedStora
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -10527,6 +10566,9 @@ func (p *AttachedStorageDomainDiskServiceSparsifyRequest) Send() (*AttachedStora
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -11190,6 +11232,9 @@ func (p *AttachedStorageDomainServiceActivateRequest) Send() (*AttachedStorageDo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -11351,6 +11396,9 @@ func (p *AttachedStorageDomainServiceDeactivateRequest) Send() (*AttachedStorage
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -16387,6 +16435,9 @@ func (p *ClusterServiceRefreshGlusterHealStatusRequest) Send() (*ClusterServiceR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -16640,6 +16691,9 @@ func (p *ClusterServiceResetEmulatedMachineRequest) Send() (*ClusterServiceReset
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -16767,6 +16821,9 @@ func (p *ClusterServiceSyncAllNetworksRequest) Send() (*ClusterServiceSyncAllNet
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -17149,6 +17206,9 @@ func (p *ClusterServiceUpgradeRequest) Send() (*ClusterServiceUpgradeResponse, e
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -17907,6 +17967,9 @@ func (p *CopyableServiceCopyRequest) Send() (*CopyableServiceCopyResponse, error
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -19540,6 +19603,9 @@ func (p *DataCenterServiceCleanFinishedTasksRequest) Send() (*DataCenterServiceC
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -20098,6 +20164,9 @@ func (p *DataCenterServiceSetMasterRequest) Send() (*DataCenterServiceSetMasterR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -21979,6 +22048,9 @@ func (p *DiskAttachmentsServiceAddProvidingDiskIdRequest) Send() (*DiskAttachmen
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -22112,6 +22184,9 @@ func (p *DiskAttachmentsServiceAddSignature1Request) Send() (*DiskAttachmentsSer
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -23039,6 +23114,9 @@ func (p *DiskServiceConvertRequest) Send() (*DiskServiceConvertResponse, error) 
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -23263,6 +23341,9 @@ func (p *DiskServiceCopyRequest) Send() (*DiskServiceCopyResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -23455,6 +23536,9 @@ func (p *DiskServiceExportRequest) Send() (*DiskServiceExportResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -23779,6 +23863,9 @@ func (p *DiskServiceMoveRequest) Send() (*DiskServiceMoveResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -23962,6 +24049,9 @@ func (p *DiskServiceReduceRequest) Send() (*DiskServiceReduceResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -24105,6 +24195,9 @@ func (p *DiskServiceRefreshLunRequest) Send() (*DiskServiceRefreshLunResponse, e
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -24369,6 +24462,9 @@ func (p *DiskServiceSparsifyRequest) Send() (*DiskServiceSparsifyResponse, error
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -25913,6 +26009,9 @@ func (p *DisksServiceAddLunRequest) Send() (*DisksServiceAddLunResponse, error) 
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -26049,6 +26148,9 @@ func (p *DisksServiceAddOnStorageDomainRequest) Send() (*DisksServiceAddOnStorag
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -27871,6 +27973,9 @@ func (p *EventsServiceUndeleteRequest) Send() (*EventsServiceUndeleteResponse, e
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -28770,6 +28875,9 @@ func (p *ExternalProviderServiceImportCertificatesRequest) Send() (*ExternalProv
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -28896,6 +29004,9 @@ func (p *ExternalProviderServiceTestConnectivityRequest) Send() (*ExternalProvid
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -32561,6 +32672,9 @@ func (p *HostNicServiceUpdateVirtualFunctionsConfigurationRequest) Send() (*Host
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -33311,6 +33425,9 @@ func (p *HostServiceActivateRequest) Send() (*HostServiceActivateResponse, error
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -33466,6 +33583,9 @@ func (p *HostServiceApproveRequest) Send() (*HostServiceApproveResponse, error) 
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -33608,6 +33728,9 @@ func (p *HostServiceCommitNetConfigRequest) Send() (*HostServiceCommitNetConfigR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -33787,6 +33910,9 @@ func (p *HostServiceCopyHostNetworksRequest) Send() (*HostServiceCopyHostNetwork
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -33955,6 +34081,9 @@ func (p *HostServiceDeactivateRequest) Send() (*HostServiceDeactivateResponse, e
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -34116,6 +34245,9 @@ func (p *HostServiceDiscoverIscsiRequest) Send() (*HostServiceDiscoverIscsiRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -34319,6 +34451,9 @@ func (p *HostServiceEnrollCertificateRequest) Send() (*HostServiceEnrollCertific
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -34484,6 +34619,9 @@ func (p *HostServiceFenceRequest) Send() (*HostServiceFenceResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -34675,6 +34813,9 @@ func (p *HostServiceForceSelectSpmRequest) Send() (*HostServiceForceSelectSpmRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -35086,6 +35227,9 @@ func (p *HostServiceInstallRequest) Send() (*HostServiceInstallResponse, error) 
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -35323,6 +35467,9 @@ func (p *HostServiceIscsiDiscoverRequest) Send() (*HostServiceIscsiDiscoverRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -35506,6 +35653,9 @@ func (p *HostServiceIscsiLoginRequest) Send() (*HostServiceIscsiLoginResponse, e
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -35632,6 +35782,9 @@ func (p *HostServiceRefreshRequest) Send() (*HostServiceRefreshResponse, error) 
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -36204,6 +36357,9 @@ func (p *HostServiceSetupNetworksRequest) Send() (*HostServiceSetupNetworksRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -36645,6 +36801,9 @@ func (p *HostServiceSyncAllNetworksRequest) Send() (*HostServiceSyncAllNetworksR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -36789,6 +36948,9 @@ func (p *HostServiceUnregisteredStorageDomainsDiscoverRequest) Send() (*HostServ
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -37144,6 +37306,9 @@ func (p *HostServiceUpgradeRequest) Send() (*HostServiceUpgradeResponse, error) 
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -37260,6 +37425,9 @@ func (p *HostServiceUpgradeCheckRequest) Send() (*HostServiceUpgradeCheckRespons
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -37419,6 +37587,9 @@ func (p *HostServiceApproveUsingRootPasswordRequest) Send() (*HostServiceApprove
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -37608,6 +37779,9 @@ func (p *HostServiceInstallUsingRootPasswordRequest) Send() (*HostServiceInstall
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -37739,6 +37913,9 @@ func (p *HostServiceUpdateUsingRootPasswordRequest) Send() (*HostServiceUpdateUs
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -37910,6 +38087,9 @@ func (p *HostServiceApproveUsingSshRequest) Send() (*HostServiceApproveUsingSshR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -38103,6 +38283,9 @@ func (p *HostServiceInstallUsingSshRequest) Send() (*HostServiceInstallUsingSshR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -38234,6 +38417,9 @@ func (p *HostServiceUpdateUsingSshRequest) Send() (*HostServiceUpdateUsingSshRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -39415,6 +39601,9 @@ func (p *HostsServiceAddUsingRootPasswordRequest) Send() (*HostsServiceAddUsingR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -39587,6 +39776,9 @@ func (p *HostsServiceAddUsingSshRequest) Send() (*HostsServiceAddUsingSshRespons
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -40351,6 +40543,9 @@ func (p *ImageServiceImportRequest) Send() (*ImageServiceImportResponse, error) 
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -40578,6 +40773,9 @@ func (p *ImageTransferServiceCancelRequest) Send() (*ImageTransferServiceCancelR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -40691,6 +40889,9 @@ func (p *ImageTransferServiceExtendRequest) Send() (*ImageTransferServiceExtendR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -40808,6 +41009,9 @@ func (p *ImageTransferServiceFinalizeRequest) Send() (*ImageTransferServiceFinal
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -41062,6 +41266,9 @@ func (p *ImageTransferServicePauseRequest) Send() (*ImageTransferServicePauseRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -41186,6 +41393,9 @@ func (p *ImageTransferServiceResumeRequest) Send() (*ImageTransferServiceResumeR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -41588,6 +41798,9 @@ func (p *ImageTransfersServiceAddForDiskRequest) Send() (*ImageTransfersServiceA
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -41721,6 +41934,9 @@ func (p *ImageTransfersServiceAddForImageRequest) Send() (*ImageTransfersService
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -41854,6 +42070,9 @@ func (p *ImageTransfersServiceAddForSnapshotRequest) Send() (*ImageTransfersServ
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -46388,6 +46607,9 @@ func (p *JobServiceClearRequest) Send() (*JobServiceClearResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -46557,6 +46779,9 @@ func (p *JobServiceEndRequest) Send() (*JobServiceEndResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -48529,6 +48754,9 @@ func (p *MoveableServiceMoveRequest) Send() (*MoveableServiceMoveResponse, error
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -60255,6 +60483,9 @@ func (p *SnapshotServiceRestoreRequest) Send() (*SnapshotServiceRestoreResponse,
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -61434,6 +61665,9 @@ func (p *StepServiceEndRequest) Send() (*StepServiceEndResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -62680,6 +62914,9 @@ func (p *StorageDomainDiskServiceCopyRequest) Send() (*StorageDomainDiskServiceC
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -62809,6 +63046,9 @@ func (p *StorageDomainDiskServiceExportRequest) Send() (*StorageDomainDiskServic
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -63089,6 +63329,9 @@ func (p *StorageDomainDiskServiceMoveRequest) Send() (*StorageDomainDiskServiceM
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -63220,6 +63463,9 @@ func (p *StorageDomainDiskServiceReduceRequest) Send() (*StorageDomainDiskServic
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -63454,6 +63700,9 @@ func (p *StorageDomainDiskServiceSparsifyRequest) Send() (*StorageDomainDiskServ
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -64850,6 +65099,9 @@ func (p *StorageDomainServiceIsAttachedRequest) Send() (*StorageDomainServiceIsA
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -65019,6 +65271,9 @@ func (p *StorageDomainServiceReduceLunsRequest) Send() (*StorageDomainServiceRed
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -65215,6 +65470,9 @@ func (p *StorageDomainServiceRefreshLunsRequest) Send() (*StorageDomainServiceRe
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -65751,6 +66009,9 @@ func (p *StorageDomainServiceUpdateOvfStoreRequest) Send() (*StorageDomainServic
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -66209,6 +66470,9 @@ func (p *StorageDomainTemplateServiceImportRequest) Send() (*StorageDomainTempla
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -66435,6 +66699,9 @@ func (p *StorageDomainTemplateServiceRegisterRequest) Send() (*StorageDomainTemp
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -67449,6 +67716,9 @@ func (p *StorageDomainVmServiceImportRequest) Send() (*StorageDomainVmServiceImp
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -67743,6 +68013,9 @@ func (p *StorageDomainVmServiceRegisterRequest) Send() (*StorageDomainVmServiceR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -68568,6 +68841,9 @@ func (p *StorageDomainsServiceAddBlockDomainRequest) Send() (*StorageDomainsServ
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -68704,6 +68980,9 @@ func (p *StorageDomainsServiceAddByPathRequest) Send() (*StorageDomainsServiceAd
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -68840,6 +69119,9 @@ func (p *StorageDomainsServiceAddDirectLunRequest) Send() (*StorageDomainsServic
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -68976,6 +69258,9 @@ func (p *StorageDomainsServiceAddGlusterOrPostfsRequest) Send() (*StorageDomains
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -69291,6 +69576,9 @@ func (p *StorageDomainsServiceAddLocalRequest) Send() (*StorageDomainsServiceAdd
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -70418,6 +70706,9 @@ func (p *StorageServerConnectionServiceUpdateGlusterfsRequest) Send() (*StorageS
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -70572,6 +70863,9 @@ func (p *StorageServerConnectionServiceUpdateIscsiRequest) Send() (*StorageServe
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -70726,6 +71020,9 @@ func (p *StorageServerConnectionServiceUpdateLocalRequest) Send() (*StorageServe
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -70880,6 +71177,9 @@ func (p *StorageServerConnectionServiceUpdateNfsRequest) Send() (*StorageServerC
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -71394,6 +71694,9 @@ func (p *StorageServerConnectionServiceUpdateVfsRequest) Send() (*StorageServerC
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -71743,6 +72046,9 @@ func (p *StorageServerConnectionsServiceAddGlusterfsRequest) Send() (*StorageSer
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -71879,6 +72185,9 @@ func (p *StorageServerConnectionsServiceAddIscsiRequest) Send() (*StorageServerC
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -72161,6 +72470,9 @@ func (p *StorageServerConnectionsServiceAddLocalRequest) Send() (*StorageServerC
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -72297,6 +72609,9 @@ func (p *StorageServerConnectionsServiceAddNfsRequest) Send() (*StorageServerCon
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -72433,6 +72748,9 @@ func (p *StorageServerConnectionsServiceAddVfsRequest) Send() (*StorageServerCon
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -73382,6 +73700,9 @@ func (p *SystemPermissionsServiceAddClusterPermissionRequest) Send() (*SystemPer
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -73518,6 +73839,9 @@ func (p *SystemPermissionsServiceAddDataCenterPermissionRequest) Send() (*System
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -73654,6 +73978,9 @@ func (p *SystemPermissionsServiceAddGroupLevelRequest) Send() (*SystemPermission
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -73790,6 +74117,9 @@ func (p *SystemPermissionsServiceAddHostPermissionRequest) Send() (*SystemPermis
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -74122,6 +74452,9 @@ func (p *SystemPermissionsServiceAddStorageDomainPermissionRequest) Send() (*Sys
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -74258,6 +74591,9 @@ func (p *SystemPermissionsServiceAddTemplatePermissionRequest) Send() (*SystemPe
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -74394,6 +74730,9 @@ func (p *SystemPermissionsServiceAddUserLevelRequest) Send() (*SystemPermissions
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -74530,6 +74869,9 @@ func (p *SystemPermissionsServiceAddVmPermissionRequest) Send() (*SystemPermissi
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -74666,6 +75008,9 @@ func (p *SystemPermissionsServiceAddVmPoolPermissionRequest) Send() (*SystemPerm
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -75188,6 +75533,9 @@ func (p *SystemServiceReloadConfigurationsRequest) Send() (*SystemServiceReloadC
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -77589,6 +77937,9 @@ func (p *TemplateDiskServiceCopyRequest) Send() (*TemplateDiskServiceCopyRespons
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -77726,6 +78077,9 @@ func (p *TemplateDiskServiceExportRequest) Send() (*TemplateDiskServiceExportRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -85368,6 +85722,9 @@ func (p *TemplateServiceExportRequest) Send() (*TemplateServiceExportResponse, e
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -85822,6 +86179,9 @@ func (p *TemplateServiceExportToExportDomainRequest) Send() (*TemplateServiceExp
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -85976,6 +86336,9 @@ func (p *TemplateServiceExportToPathOnHostRequest) Send() (*TemplateServiceExpor
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -87665,6 +88028,9 @@ func (p *TemplatesServiceAddFromConfigurationRequest) Send() (*TemplatesServiceA
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -87819,6 +88185,9 @@ func (p *TemplatesServiceAddFromVmRequest) Send() (*TemplatesServiceAddFromVmRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -87973,6 +88342,9 @@ func (p *TemplatesServiceAddFromVmSnapshotRequest) Send() (*TemplatesServiceAddF
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -90036,6 +90408,9 @@ func (p *VmBackupServiceFinalizeRequest) Send() (*VmBackupServiceFinalizeRespons
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -92437,6 +92812,9 @@ func (p *VmDiskServiceActivateRequest) Send() (*VmDiskServiceActivateResponse, e
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -92556,6 +92934,9 @@ func (p *VmDiskServiceDeactivateRequest) Send() (*VmDiskServiceDeactivateRespons
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -92684,6 +93065,9 @@ func (p *VmDiskServiceExportRequest) Send() (*VmDiskServiceExportResponse, error
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -92942,6 +93326,9 @@ func (p *VmDiskServiceMoveRequest) Send() (*VmDiskServiceMoveResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -93065,6 +93452,9 @@ func (p *VmDiskServiceReduceRequest) Send() (*VmDiskServiceReduceResponse, error
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -93968,6 +94358,9 @@ func (p *VmGraphicsConsoleServiceProxyTicketRequest) Send() (*VmGraphicsConsoleS
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -94158,6 +94551,9 @@ func (p *VmGraphicsConsoleServiceRemoteViewerConnectionFileRequest) Send() (*VmG
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -94549,6 +94945,9 @@ func (p *VmGraphicsConsoleServiceTicketRequest) Send() (*VmGraphicsConsoleServic
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -96660,6 +97059,9 @@ func (p *VmNicServiceActivateRequest) Send() (*VmNicServiceActivateResponse, err
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -96779,6 +97181,9 @@ func (p *VmNicServiceDeactivateRequest) Send() (*VmNicServiceDeactivateResponse,
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -98765,6 +99170,9 @@ func (p *VmPoolServiceAllocateVmRequest) Send() (*VmPoolServiceAllocateVmRespons
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -100279,6 +100687,9 @@ func (p *VmServiceAutoPinCpuAndNumaNodesRequest) Send() (*VmServiceAutoPinCpuAnd
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -100437,6 +100848,9 @@ func (p *VmServiceCancelMigrationRequest) Send() (*VmServiceCancelMigrationRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -100597,6 +101011,9 @@ func (p *VmServiceCloneRequest) Send() (*VmServiceCloneResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -100718,6 +101135,9 @@ func (p *VmServiceCommitSnapshotRequest) Send() (*VmServiceCommitSnapshotRespons
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -100850,6 +101270,9 @@ func (p *VmServiceDetachRequest) Send() (*VmServiceDetachResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -101048,6 +101471,9 @@ func (p *VmServiceExportRequest) Send() (*VmServiceExportResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -101250,6 +101676,9 @@ func (p *VmServiceFreezeFilesystemsRequest) Send() (*VmServiceFreezeFilesystemsR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -101577,6 +102006,9 @@ func (p *VmServiceLogonRequest) Send() (*VmServiceLogonResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -101744,6 +102176,9 @@ func (p *VmServiceMaintenanceRequest) Send() (*VmServiceMaintenanceResponse, err
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -101934,6 +102369,9 @@ func (p *VmServiceMigrateRequest) Send() (*VmServiceMigrateResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -102129,6 +102567,9 @@ func (p *VmServicePreviewSnapshotRequest) Send() (*VmServicePreviewSnapshotRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -102290,6 +102731,9 @@ func (p *VmServiceRebootRequest) Send() (*VmServiceRebootResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -102600,6 +103044,9 @@ func (p *VmServiceReorderMacAddressesRequest) Send() (*VmServiceReorderMacAddres
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -102729,6 +103176,9 @@ func (p *VmServiceResetRequest) Send() (*VmServiceResetResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -102869,6 +103319,9 @@ func (p *VmServiceScreenshotRequest) Send() (*VmServiceScreenshotResponse, error
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -103049,6 +103502,9 @@ func (p *VmServiceShutdownRequest) Send() (*VmServiceShutdownResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -103311,6 +103767,9 @@ func (p *VmServiceStartRequest) Send() (*VmServiceStartResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -103493,6 +103952,9 @@ func (p *VmServiceStopRequest) Send() (*VmServiceStopResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -103669,6 +104131,9 @@ func (p *VmServiceSuspendRequest) Send() (*VmServiceSuspendResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -103821,6 +104286,9 @@ func (p *VmServiceThawFilesystemsRequest) Send() (*VmServiceThawFilesystemsRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -104001,6 +104469,9 @@ func (p *VmServiceTicketRequest) Send() (*VmServiceTicketResponse, error) {
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -104226,6 +104697,9 @@ func (p *VmServiceExportToExportDomainRequest) Send() (*VmServiceExportToExportD
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -104398,6 +104872,9 @@ func (p *VmServiceExportToPathOnHostRequest) Send() (*VmServiceExportToPathOnHos
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -104521,6 +104998,9 @@ func (p *VmServiceUndoSnapshotRequest) Send() (*VmServiceUndoSnapshotResponse, e
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -106947,6 +107427,9 @@ func (p *VmsServiceAddFromConfigurationRequest) Send() (*VmsServiceAddFromConfig
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -107128,6 +107611,9 @@ func (p *VmsServiceAddFromScratchRequest) Send() (*VmsServiceAddFromScratchRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -107309,6 +107795,9 @@ func (p *VmsServiceAddFromSnapshotRequest) Send() (*VmsServiceAddFromSnapshotRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -111011,6 +111500,9 @@ func (p *ExternalHostProviderServiceImportCertificatesRequest) Send() (*External
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -111247,6 +111739,9 @@ func (p *ExternalHostProviderServiceTestConnectivityRequest) Send() (*ExternalHo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -113141,6 +113636,9 @@ func (p *GlusterBrickServiceReplaceRequest) Send() (*GlusterBrickServiceReplaceR
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -113337,6 +113835,9 @@ func (p *GlusterBricksServiceActivateRequest) Send() (*GlusterBricksServiceActiv
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -113967,6 +114468,9 @@ func (p *GlusterBricksServiceMigrateRequest) Send() (*GlusterBricksServiceMigrat
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -114353,6 +114857,9 @@ func (p *GlusterBricksServiceStopMigrateRequest) Send() (*GlusterBricksServiceSt
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -114542,6 +115049,9 @@ func (p *GlusterHookServiceDisableRequest) Send() (*GlusterHookServiceDisableRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -114667,6 +115177,9 @@ func (p *GlusterHookServiceEnableRequest) Send() (*GlusterHookServiceEnableRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -115056,6 +115569,9 @@ func (p *GlusterHookServiceResolveRequest) Send() (*GlusterHookServiceResolveRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -115628,6 +116144,9 @@ func (p *GlusterVolumeServiceGetProfileStatisticsRequest) Send() (*GlusterVolume
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -115802,6 +116321,9 @@ func (p *GlusterVolumeServiceRebalanceRequest) Send() (*GlusterVolumeServiceReba
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -116070,6 +116592,9 @@ func (p *GlusterVolumeServiceResetAllOptionsRequest) Send() (*GlusterVolumeServi
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -116231,6 +116756,9 @@ func (p *GlusterVolumeServiceResetOptionRequest) Send() (*GlusterVolumeServiceRe
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -116399,6 +116927,9 @@ func (p *GlusterVolumeServiceSetOptionRequest) Send() (*GlusterVolumeServiceSetO
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -116561,6 +117092,9 @@ func (p *GlusterVolumeServiceStartRequest) Send() (*GlusterVolumeServiceStartRes
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -116697,6 +117231,9 @@ func (p *GlusterVolumeServiceStartProfileRequest) Send() (*GlusterVolumeServiceS
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -116841,6 +117378,9 @@ func (p *GlusterVolumeServiceStopRequest) Send() (*GlusterVolumeServiceStopRespo
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -116977,6 +117517,9 @@ func (p *GlusterVolumeServiceStopProfileRequest) Send() (*GlusterVolumeServiceSt
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -117112,6 +117655,9 @@ func (p *GlusterVolumeServiceStopRebalanceRequest) Send() (*GlusterVolumeService
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -117864,6 +118410,9 @@ func (p *OpenstackImageProviderServiceImportCertificatesRequest) Send() (*Openst
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -118100,6 +118649,9 @@ func (p *OpenstackImageProviderServiceTestConnectivityRequest) Send() (*Openstac
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -118928,6 +119480,9 @@ func (p *OpenstackImageServiceImportRequest) Send() (*OpenstackImageServiceImpor
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -119439,6 +119994,9 @@ func (p *OpenstackNetworkProviderServiceImportCertificatesRequest) Send() (*Open
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -119690,6 +120248,9 @@ func (p *OpenstackNetworkProviderServiceTestConnectivityRequest) Send() (*Openst
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -120528,6 +121089,9 @@ func (p *OpenstackNetworkServiceImportRequest) Send() (*OpenstackNetworkServiceI
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -122286,6 +122850,9 @@ func (p *OpenstackVolumeProviderServiceImportCertificatesRequest) Send() (*Opens
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
@@ -122532,6 +123099,9 @@ func (p *OpenstackVolumeProviderServiceTestConnectivityRequest) Send() (*Opensta
 	var body bytes.Buffer
 	writer := NewXMLWriter(&body)
 	err = XMLActionWriteOne(writer, action, "")
+	if err != nil {
+		return nil, err
+	}
 	writer.Flush()
 	req, err := http.NewRequest("POST", rawURL, &body)
 	if err != nil {
